@@ -19,6 +19,9 @@ function stateOf(room) {
     if (op.type === 'fill') data.fills[op.regionId] = op.color;
     else if (op.type === 'stroke') data.strokes.push(op.stroke);
     else if (op.type === 'sticker') data.stickers.push(op.sticker);
+    else if (op.type === 'sticker-update') {
+      if (data.stickers[op.index]) data.stickers[op.index] = op.sticker;
+    } else if (op.type === 'sticker-remove') data.stickers.splice(op.index, 1);
     else if (op.type === 'glitter') {
       data.glitter = data.glitter.filter((g) => g !== op.regionId);
       if (op.on) data.glitter.push(op.regionId);
@@ -127,6 +130,14 @@ export function registerCollab(io, socket) {
       const s = sanitizeArtworkData(room.manifest, { stickers: [op.sticker] }).stickers[0];
       if (!s) return;
       clean.sticker = s;
+    } else if (op.type === 'sticker-update' || op.type === 'sticker-remove') {
+      if (!Number.isInteger(op.index) || op.index < 0 || op.index > 200) return;
+      clean.index = op.index;
+      if (op.type === 'sticker-update') {
+        const s = sanitizeArtworkData(room.manifest, { stickers: [op.sticker] }).stickers[0];
+        if (!s) return;
+        clean.sticker = s;
+      }
     } else if (op.type !== 'clear') return;
     room.ops.push(clean);
     socket.to(channel(room)).emit('collab:op', clean);

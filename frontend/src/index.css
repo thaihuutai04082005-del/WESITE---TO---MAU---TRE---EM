@@ -1,0 +1,346 @@
+@import 'tailwindcss';
+
+/* ===== Design system (Mục 15.3): tông xanh biển & trắng ===== */
+@theme {
+  --color-primary: #2b9bf4;
+  --color-primary-dark: #0b6fb8;
+  --color-primary-light: #eaf6ff;
+  --color-ink: #1b2a38;
+  --color-muted: #5e7a8c;
+  --color-line: #d6eaf8;
+  --color-coral: #ff8a65;
+  --color-sun: #ffc94d;
+  --color-mint: #4cd787;
+  --color-danger: #e5484d;
+
+  --color-rank-bronze: #b08d57;
+  --color-rank-silver: #c0c0c0;
+  --color-rank-gold: #ffd700;
+  --color-rank-platinum: #b9f2ff;
+  --color-rank-diamond: #7de2ff;
+  --color-card-c: #a8b8c4;
+  --color-card-b: #5dade2;
+  --color-card-a: #7d5fff;
+  --color-card-s: #ff5f7e;
+
+  --font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --shadow-soft: 0 6px 24px -8px rgb(43 155 244 / 0.25);
+  --shadow-pop: 0 10px 30px -10px rgb(11 111 184 / 0.45);
+}
+
+html,
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ===== Thành phần dùng chung ===== */
+@utility btn {
+  @apply inline-flex min-h-11 min-w-11 cursor-pointer select-none items-center justify-center gap-2 rounded-2xl px-5 font-display text-lg font-bold transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-primary text-white shadow-soft hover:bg-primary-dark;
+}
+@utility btn-coral {
+  @apply btn bg-coral text-white shadow-soft hover:brightness-95;
+}
+@utility btn-ghost {
+  @apply btn border-2 border-line bg-white text-ink hover:border-primary hover:text-primary;
+}
+@utility btn-danger {
+  @apply btn bg-danger text-white hover:brightness-95;
+}
+@utility card {
+  @apply rounded-[var(--radius-card)] border border-line bg-white shadow-soft;
+}
+@utility input {
+  @apply min-h-12 w-full rounded-2xl border-2 border-line bg-white px-4 text-lg outline-none transition focus:border-primary;
+}
+@utility label {
+  @apply mb-1 block font-bold text-ink;
+}
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-full bg-primary-light px-3 py-1 text-sm font-bold text-primary-dark;
+}
+@utility page {
+  @apply mx-auto w-full max-w-6xl px-4 pb-28 pt-4 md:pb-10;
+}
+@utility page-title {
+  @apply font-display text-3xl font-extrabold text-ink md:text-4xl;
+}
+
+/* ===== Tranh SVG vùng tô ===== */
+.picture-svg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.picture-svg .region {
+  cursor: pointer;
+  transition: fill 0.18s ease;
+}
+.picture-svg.no-pointer .region {
+  cursor: inherit;
+}
+.picture-svg .region.hint {
+  animation: hint-pulse 1.2s ease-in-out infinite;
+}
+@keyframes hint-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Hiệu ứng lấp lánh/nhũ trên vùng */
+.glitter-overlay {
+  pointer-events: none;
+  animation: glitter-shimmer 1.8s ease-in-out infinite;
+}
+@keyframes glitter-shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== Tranh sống (Animated Reveal) ===== */
+.reveal #subject {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.reveal #subject.anim-bounce {
+  animation: a-bounce 1.1s ease-in-out infinite;
+}
+.reveal #subject.anim-drive {
+  animation: a-drive 1.6s ease-in-out infinite;
+}
+.reveal #subject.anim-sway {
+  animation: a-sway 2.2s ease-in-out infinite;
+}
+.reveal #subject.anim-float {
+  animation: a-float 2s ease-in-out infinite;
+}
+.reveal #subject.anim-wiggle {
+  animation: a-wiggle 1.4s ease-in-out infinite;
+}
+.reveal #subject.anim-fly {
+  animation: a-fly 2.4s ease-in-out infinite;
+}
+.reveal #subject.anim-bob {
+  animation: a-bob 2.4s ease-in-out infinite;
+}
+@keyframes a-bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  15% {
+    transform: translateY(0) scale(1.06, 0.94);
+  }
+  45% {
+    transform: translateY(-9%) scale(0.97, 1.04);
+  }
+  75% {
+    transform: translateY(0) scale(1.03, 0.97);
+  }
+}
+@keyframes a-drive {
+  0%,
+  100% {
+    transform: translateX(-4%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(4%) rotate(0deg);
+  }
+  75% {
+    transform: translateX(0) rotate(1deg);
+  }
+}
+@keyframes a-sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes a-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6%) rotate(2deg);
+  }
+}
+@keyframes a-wiggle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.04, 0.97);
+  }
+  60% {
+    transform: scale(0.98, 1.03);
+  }
+}
+@keyframes a-fly {
+  0%,
+  100% {
+    transform: translate(-3%, 2%) rotate(2deg);
+  }
+  50% {
+    transform: translate(3%, -5%) rotate(-3deg);
+  }
+}
+@keyframes a-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(3%) rotate(2deg);
+  }
+}
+
+/* ===== Hoạt hình chung ===== */
+@keyframes pop-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-pop {
+  animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes float-up {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.animate-float-up {
+  animation: float-up 0.4s ease-out both;
+}
+
+/* Confetti */
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation: confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+/* Gacha: lật thẻ */
+.gacha-card {
+  perspective: 1000px;
+}
+.gacha-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.gacha-card.flipped .gacha-card-inner {
+  transform: rotateY(180deg);
+}
+.gacha-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 20px;
+}
+.gacha-back-face {
+  transform: rotateY(180deg);
+}
+@keyframes gacha-shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-4deg) scale(1.03);
+  }
+  75% {
+    transform: rotate(4deg) scale(1.03);
+  }
+}
+.gacha-shake {
+  animation: gacha-shake 0.25s ease-in-out 4;
+}
+.rarity-glow-S {
+  box-shadow: 0 0 0 4px #ff5f7e, 0 0 40px 8px rgb(255 215 0 / 0.8);
+}
+.rarity-glow-A {
+  box-shadow: 0 0 0 4px #7d5fff, 0 0 30px 6px rgb(125 95 255 / 0.6);
+}
+.rarity-glow-B {
+  box-shadow: 0 0 0 4px #5dade2, 0 0 20px 4px rgb(93 173 226 / 0.5);
+}
+.rarity-glow-C {
+  box-shadow: 0 0 0 4px #a8b8c4;
+}
+.card-s-bg {
+  background: linear-gradient(135deg, #ffe57f, #ffd700 30%, #ff5f7e 70%, #ffb3c1);
+}
+
+/* Flipbook: lật trang */
+.flip-stage {
+  perspective: 2000px;
+}
+.flip-page {
+  transform-origin: left center;
+  transition: transform 0.7s ease-in-out;
+  backface-visibility: hidden;
+}
+.flip-page.turned {
+  transform: rotateY(-180deg);
+}
+
+/* Không cuộn trang khi đang vẽ trên thiết bị cảm ứng */
+.touch-none-all,
+.touch-none-all * {
+  touch-action: none;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

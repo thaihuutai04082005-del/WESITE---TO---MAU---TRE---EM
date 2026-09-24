@@ -1,0 +1,56 @@
+// Bộ icon SVG nét tròn, dễ nhìn cho trẻ nhỏ.
+const P = {
+  bucket: 'M5 11l7-7 7 7-7 7zM19 11c1 2 2 3.5 2 5a2 2 0 01-4 0c0-1.5 1-3 2-5zM3 21h18',
+  brush: 'M14 4l6 6-8 8H6v-6zM4 20c2 0 3-1 3-3',
+  eraser: 'M16 3l5 5-11 11H5l-3-3zM9 9l6 6M13 21h8',
+  sticker: 'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7z',
+  sparkle: 'M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z',
+  hand: 'M8 13V5a1.5 1.5 0 013 0v6M11 11V4a1.5 1.5 0 013 0v7M14 11V5.5a1.5 1.5 0 013 0V14c0 4-2.5 7-6 7-2.5 0-4-1.2-5.5-3.5L3.5 14a1.5 1.5 0 012.5-1.7L8 15',
+  undo: 'M9 14L4 9l5-5M4 9h10a6 6 0 010 12h-3',
+  redo: 'M15 14l5-5-5-5M20 9H10a6 6 0 000 12h3',
+  zoomIn: 'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5M11 8v6M8 11h6',
+  zoomOut: 'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5M8 11h6',
+  expand: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
+  trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',
+  check: 'M4 12l5 5L20 6',
+  download: 'M12 4v11M7 10l5 5 5-5M4 20h16',
+  print: 'M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z',
+  save: 'M5 3h11l4 4v14H5zM8 3v5h7V3M8 21v-7h8v7',
+  heart: 'M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z',
+  palette: 'M12 3a9 9 0 100 18c1.2 0 2-.8 2-2 0-1.4-1-1.8-1-3 0-1 .8-2 2-2h2a4 4 0 004-4c0-4-4-7-9-7zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01',
+  home: 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10',
+  history: 'M3 12a9 9 0 109-9 9 9 0 00-7 3.3M3 4v4h4M12 7v5l3 3',
+  trophy: 'M8 4h8v5a4 4 0 01-8 0zM8 6H4a3 3 0 003 4M16 6h4a3 3 0 01-3 4M12 13v4M8 21h8M9 17h6',
+  gift: 'M4 11h16v10H4zM3 7h18v4H3zM12 7v14M12 7s-1-4-4-4-2 4 0 4M12 7s1-4 4-4 2 4 0 4',
+  shop: 'M4 8h16l-1 12H5zM9 8V6a3 3 0 016 0v2',
+  users: 'M9 11a4 4 0 100-8 4 4 0 000 8zM2 21a7 7 0 0114 0M17 11a3 3 0 100-6M22 21a6 6 0 00-5-6',
+  book: 'M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 21V5M8 7h7',
+  star: 'M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6L3.4 9.3l6-.7z',
+  target: 'M12 21a9 9 0 100-18 9 9 0 000 18zM12 16a4 4 0 100-8 4 4 0 000 8zM12 12h.01',
+  user: 'M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0',
+  bell: 'M6 16V11a6 6 0 0112 0v5l2 2H4zM10 21h4',
+  logout: 'M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10',
+  back: 'M15 5l-7 7 7 7',
+  close: 'M6 6l12 12M18 6L6 18',
+  plus: 'M12 5v14M5 12h14',
+  copy: 'M9 9h11v11H9zM5 15H4V4h11v1',
+  share: 'M18 8a3 3 0 100-6 3 3 0 000 6zM6 15a3 3 0 100-6 3 3 0 000 6zM18 22a3 3 0 100-6 3 3 0 000 6zM8.6 13.5l6.8 4M15.4 6.5l-6.8 4',
+  swap: 'M7 7h13l-4-4M17 17H4l4 4',
+  play: 'M7 4l13 8-13 8z',
+  up: 'M12 19V5M5 12l7-7 7 7',
+  down: 'M12 5v14M19 12l-7 7-7-7',
+  globe: 'M12 21a9 9 0 100-18 9 9 0 000 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+  ruby: 'M6 3h12l4 6-10 12L2 9zM2 9h20M9 3l3 18M15 3l-3 18',
+  lock: 'M6 11h12v10H6zM8 11V7a4 4 0 018 0v4',
+  eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z',
+  edit: 'M4 20h4L19 9l-4-4L4 16zM14 6l4 4',
+  menu: 'M4 6h16M4 12h16M4 18h16',
+};
+
+export default function Icon({ name, size = 24, className = '', strokeWidth = 2.2 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d={P[name] || P.star} />
+    </svg>
+  );
+}
