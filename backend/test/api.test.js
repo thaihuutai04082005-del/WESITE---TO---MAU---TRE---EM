@@ -30,7 +30,10 @@ before(async () => {
   base = `http://127.0.0.1:${server.address().port}`;
 });
 
+const openSockets = [];
+
 after(async () => {
+  openSockets.forEach((s) => s.close());
   (await import('../src/services/realtime.js')).getIo()?.close();
   server.closeAllConnections();
   server.close();
@@ -229,7 +232,8 @@ test('Flipbook: chỉ nhận tranh Sáng tạo đã xong, xuất PDF, chia sẻ'
 
 function connect(token) {
   return new Promise((resolve, reject) => {
-    const s = ioc(base, { auth: { token }, transports: ['websocket'], forceNew: true });
+    const s = ioc(base, { auth: { token }, transports: ['websocket'], forceNew: true, reconnection: false });
+    openSockets.push(s);
     s.on('connect', () => resolve(s));
     s.on('connect_error', reject);
   });
@@ -258,7 +262,8 @@ test('Đấu trường: phòng riêng chỉ bạn bè vào, chấm điểm, thư
   await new Promise((r) => setTimeout(r, 3100)); // đếm ngược 3 giây trước khi bắt đầu
   for (let i = 0; i < 8; i++) sg.emit('arena:action');
   const resH = once(sh, 'arena:results');
-  const half = Object.fromEntries(pic.regions.slice(0, 6).map((r, i) => [r.id, ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF', '#FF9F43'][i]]));
+  // Chỉ tô vài vùng nhỏ (bỏ nền trời/đất) để độ phủ < 90% — tránh bị gắn cờ "hoàn thành quá nhanh".
+  const half = Object.fromEntries(pic.regions.filter((r) => r.area > 0 && r.area < 15000).slice(0, 6).map((r, i) => [r.id, ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF', '#FF9F43'][i]]));
   await emit(sg, 'arena:submit', { data: { fills: half } });
   await emit(sh, 'arena:submit', { data: { fills: { [pic.regions[pic.regions.length - 1].id]: '#000000' } } });
   const results = await resH;

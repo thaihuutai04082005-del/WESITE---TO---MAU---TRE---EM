@@ -79,7 +79,7 @@ function validateManifest(m) {
 
 function sanitizeSvg(svg) {
   const s = str(svg, { min: 20, max: 500000, name: 'svg' });
-  if (!/^<svg[\s>]/.test(s) || /<script|on[a-z]+\s*=|javascript:|<foreignObject|xlink:href\s*=\s*["']?(?!#)/i.test(s)) throw badRequest('unsafe_svg');
+  if (!/^<svg[\s>]/.test(s) || /<script|\son[a-z]+\s*=|javascript:|<foreignObject|href\s*=\s*["'](?!#)/i.test(s)) throw badRequest('unsafe_svg');
   return s;
 }
 
