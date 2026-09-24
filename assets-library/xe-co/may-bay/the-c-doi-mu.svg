@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="may-bay--the-c-doi-mu">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="510,20 522.9,43.7 546,29.6 545.4,56.6 572.4,56 558.3,79.1 582,92 558.3,104.9 572.4,128 545.4,127.4 546,154.4 522.9,140.3 510,164 497.1,140.3 474,154.4 474.6,127.4 447.6,128 461.7,104.9 438,92 461.7,79.1 447.6,56 474.6,56.6 474,29.6 497.1,43.7" id="r-tia-nang" data-region="tia-nang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="92" rx="42" ry="42" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 57.5 128.8 Q 35 128.8 41 110 Q 36.5 83.8 68.8 83.8 Q 76.3 59 104 65 Q 123.5 44 146 68.8 Q 179 63.5 174.5 96.5 Q 188 128.8 162.5 128.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 288 85 Q 270 85 274.8 70 Q 271.2 49 297 49 Q 303 29.2 325.2 34 Q 340.8 17.2 358.8 37 Q 385.2 32.8 381.6 59.2 Q 392.4 85 372 85 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-fly">
+<polygon points="120,300 150,212 192,212 205,300" id="r-duoi-dung" data-region="duoi-dung" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="330,300 372,300 338,250 312,250" id="r-canh-sau" data-region="canh-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 120 300 Q 110 330 140 345 L 420 345 Q 490 340 495 312 Q 490 280 420 275 L 160 275 Q 125 280 120 300 Z" id="r-than-may-bay" data-region="than-may-bay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="255,320 350,320 305,415 252,415" id="r-canh" data-region="canh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="190" cy="300" rx="11" ry="11" id="r-cua-so-1" data-region="cua-so-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="225" cy="300" rx="11" ry="11" id="r-cua-so-2" data-region="cua-so-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="260" cy="300" rx="11" ry="11" id="r-cua-so-3" data-region="cua-so-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="295" cy="300" rx="11" ry="11" id="r-cua-so-4" data-region="cua-so-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 440 284 Q 468 288 480 304 L 440 304 Z" id="r-kinh-lai" data-region="kinh-lai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="502" cy="286" rx="6" ry="22" id="r-canh-quat-tren" data-region="canh-quat-tren" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="502" cy="338" rx="6" ry="22" id="r-canh-quat-duoi" data-region="canh-quat-duoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="496" cy="312" rx="11" ry="11" id="r-mui-may-bay" data-region="mui-may-bay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="393.3" cy="312" r="3.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="416.7" cy="312" r="3.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="394.4" cy="310.7" r="1.2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="417.8" cy="310.7" r="1.2" fill="#FFFFFF"/></g>
+<ellipse cx="384.3" cy="321" rx="5" ry="3.2" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="425.7" cy="321" rx="5" ry="3.2" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 398.3 325.5 Q 405 332.7 411.8 325.5" fill="none" stroke="#1B2A38" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="301.2,282.8 330,212.4 358.8,282.8" id="r-mu-tiec" data-region="mu-tiec" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="312.4,255.6 347.6,255.6 341.2,239.6 318.8,239.6" id="r-soc-mu" data-region="soc-mu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="330" cy="210.8" rx="8.8" ry="8.8" id="r-bong-mu" data-region="bong-mu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

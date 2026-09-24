@@ -1,0 +1,17 @@
+{
+  "name": "coloring-web-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Web tô màu cho trẻ em — hệ sinh thái sáng tạo, giáo dục, giải trí",
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "gen:pictures": "node assets-library/generator/build.mjs",
+    "seed": "npm run seed -w backend",
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "test": "npm test -w backend"
+  }
+}

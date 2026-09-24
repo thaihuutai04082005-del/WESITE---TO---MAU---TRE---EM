@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản trị kho tranh — Bé Tô Màu</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Quản trị kho tranh</h1>
+      <span id="who"></span>
+      <button id="logout" hidden>Đăng xuất</button>
+    </header>
+
+    <main>
+      <section id="login-view" class="card narrow">
+        <h2>Đăng nhập quản trị</h2>
+        <form id="login-form">
+          <label>Tên đăng nhập <input name="username" required autocomplete="username" /></label>
+          <label>Mật khẩu <input name="password" type="password" required autocomplete="current-password" /></label>
+          <button type="submit">Đăng nhập</button>
+          <p class="error" id="login-error"></p>
+        </form>
+      </section>
+
+      <div id="app-view" hidden>
+        <section class="card">
+          <h2>Tổng quan</h2>
+          <div id="stats" class="stats"></div>
+        </section>
+
+        <div class="cols">
+          <section class="card">
+            <h2>Cấu trúc 3 tầng</h2>
+            <div id="tree"></div>
+            <details>
+              <summary>Thêm chủ đề</summary>
+              <form id="theme-form" class="inline">
+                <input name="slug" placeholder="slug (vd: bien-ca)" required pattern="[a-z0-9]+(-[a-z0-9]+)*" />
+                <input name="nameVi" placeholder="Tên tiếng Việt" required />
+                <input name="nameEn" placeholder="English name" required />
+                <button>Thêm</button>
+              </form>
+            </details>
+            <details>
+              <summary>Thêm đối tượng</summary>
+              <form id="object-form" class="inline">
+                <select name="themeId" id="theme-select" required></select>
+                <input name="slug" placeholder="slug (vd: ca-heo)" required pattern="[a-z0-9]+(-[a-z0-9]+)*" />
+                <input name="nameVi" placeholder="Tên tiếng Việt" required />
+                <input name="nameEn" placeholder="English name" required />
+                <button>Thêm</button>
+              </form>
+            </details>
+          </section>
+
+          <section class="card">
+            <h2>Tải tranh mới</h2>
+            <form id="picture-form">
+              <label>Đối tượng <select name="objectId" id="object-select" required></select></label>
+              <div class="row">
+                <label>Slug biến thể <input name="variantSlug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="vd: vui-ve" /></label>
+                <label>Hoạt hình
+                  <select name="animation">
+                    <option value="bounce">bounce (động vật)</option>
+                    <option value="drive">drive (xe cộ)</option>
+                    <option value="sway">sway (cây, hoa)</option>
+                    <option value="float">float (trái cây)</option>
+                    <option value="wiggle">wiggle (nhà cửa)</option>
+                    <option value="fly">fly (bay)</option>
+                    <option value="bob">bob (nổi trên nước)</option>
+                  </select>
+                </label>
+              </div>
+              <div class="row">
+                <label>Tên biến thể (VI) <input name="variantNameVi" required placeholder="vui vẻ" /></label>
+                <label>Variant name (EN) <input name="variantNameEn" required placeholder="happy" /></label>
+              </div>
+              <div class="row">
+                <label class="check"><input type="checkbox" name="isCard" id="is-card" /> Là tranh thẻ Gacha</label>
+                <label>Độ hiếm
+                  <select name="rarity" id="rarity" disabled>
+                    <option>C</option><option>B</option><option>A</option><option>S</option>
+                  </select>
+                </label>
+              </div>
+              <label>File SVG (line-art, mỗi vùng tô là 1 hình khép kín) <input type="file" id="svg-file" accept=".svg,image/svg+xml" required /></label>
+              <p class="hint">Hệ thống tự nhận vùng (path/rect/circle/ellipse/polygon), đưa về khung 600×600 và thêm vùng nền nếu chưa có. Chạm vào một vùng để đặt màu gợi ý (chế độ Tô theo mẫu).</p>
+              <div class="editor">
+                <div id="svg-preview" class="preview"></div>
+                <div class="side">
+                  <div>Vùng đang chọn: <b id="sel-id">—</b></div>
+                  <label>Màu gợi ý <input type="color" id="sel-color" value="#ff5f7e" disabled /></label>
+                  <label class="check"><input type="checkbox" id="show-labels" checked /> Hiện số</label>
+                  <div id="region-count"></div>
+                  <ol id="palette"></ol>
+                </div>
+              </div>
+              <button type="submit" id="upload-btn" disabled>Lưu tranh vào kho</button>
+              <p class="error" id="upload-error"></p>
+              <p class="ok" id="upload-ok"></p>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
