@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="o-to--troi-mua">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 73.5 123.8 Q 45 123.8 52.6 100 Q 46.9 66.8 87.8 66.8 Q 97.3 35.4 132.4 43 Q 157.1 16.4 185.6 47.8 Q 227.4 41.1 221.7 82.9 Q 238.8 123.8 206.5 123.8 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 393.5 113.8 Q 365 113.8 372.6 90 Q 366.9 56.8 407.8 56.8 Q 417.3 25.4 452.4 33 Q 477.1 6.4 505.6 37.8 Q 547.4 31.1 541.7 72.9 Q 558.8 113.8 526.5 113.8 Z" id="r-may-mua-2" data-region="may-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="480" cy="535" rx="70" ry="16" id="r-vung-nuoc" data-region="vung-nuoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-drive">
+<path d="M 130 430 L 130 380 Q 135 350 170 345 L 220 340 L 260 280 Q 270 268 290 268 L 380 268 Q 400 268 412 282 L 450 335 L 480 342 Q 500 348 500 372 L 500 430 Q 500 440 490 440 L 140 440 Q 130 440 130 430 Z" id="r-than-xe" data-region="than-xe" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 300 285 L 300 338 L 238 338 L 268 294 Q 274 285 285 285 Z" id="r-kinh-sau" data-region="kinh-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 318 285 L 378 285 Q 390 285 398 296 L 428 338 L 318 338 Z" id="r-kinh-truoc" data-region="kinh-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 309 285 L 309 430" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="320" y="356" width="26" height="8" rx="4" id="r-tay-nam" data-region="tay-nam" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="488" cy="372" rx="10" ry="14" id="r-den-truoc" data-region="den-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="128" y="366" width="12" height="24" rx="4" id="r-den-sau" data-region="den-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="418" width="40" height="16" rx="7" id="r-can-truoc" data-region="can-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="120" y="418" width="40" height="16" rx="7" id="r-can-sau" data-region="can-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="205" cy="440" rx="42" ry="42" id="r-banh-sau" data-region="banh-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="205" cy="440" rx="18" ry="18" id="r-mam-sau" data-region="mam-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="420" cy="440" rx="42" ry="42" id="r-banh-truoc" data-region="banh-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="420" cy="440" rx="18" ry="18" id="r-mam-truoc" data-region="mam-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="359" cy="308" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="385" cy="308" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="360.3" cy="306.5" r="1.3" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="386.3" cy="306.5" r="1.3" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><path d="M 355 298 Q 359 295 363 298" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 381 298 Q 385 295 389 298" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="372" cy="326" rx="4.5" ry="5.5" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="349" cy="318" rx="5.5" ry="3.5" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="395" cy="318" rx="5.5" ry="3.5" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<path d="M 70 174 Q 82 192 80 198 Q 70 210 60 198 Q 58 192 70 174 Z" id="r-giot-mua-1" data-region="giot-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 130 214 Q 142 232 140 238 Q 130 250 120 238 Q 118 232 130 214 Z" id="r-giot-mua-2" data-region="giot-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 200 169 Q 212 187 210 193 Q 200 205 190 193 Q 188 187 200 169 Z" id="r-giot-mua-3" data-region="giot-mua-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 400 164 Q 412 182 410 188 Q 400 200 390 188 Q 388 182 400 164 Z" id="r-giot-mua-4" data-region="giot-mua-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 470 209 Q 482 227 480 233 Q 470 245 460 233 Q 458 227 470 209 Z" id="r-giot-mua-5" data-region="giot-mua-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 540 169 Q 552 187 550 193 Q 540 205 530 193 Q 528 187 540 169 Z" id="r-giot-mua-6" data-region="giot-mua-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 100 284 Q 112 302 110 308 Q 100 320 90 308 Q 88 302 100 284 Z" id="r-giot-mua-7" data-region="giot-mua-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 510 294 Q 522 312 520 318 Q 510 330 500 318 Q 498 312 510 294 Z" id="r-giot-mua-8" data-region="giot-mua-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>
