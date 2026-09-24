@@ -6,7 +6,8 @@ const procs = [
   ['api', ['run', 'dev', '-w', 'backend']],
   ['web', ['run', 'dev', '-w', 'frontend']],
 ].map(([name, args]) => {
-  const p = spawn(npm, args, { stdio: ['inherit', 'pipe', 'pipe'] });
+  // Windows: Node ≥ 20.12 bắt buộc bật shell khi chạy file .cmd.
+  const p = spawn(npm, args, { stdio: ['inherit', 'pipe', 'pipe'], shell: process.platform === 'win32' });
   const tag = (chunk) => chunk.toString().split('\n').filter(Boolean).map((l) => `[${name}] ${l}`).join('\n') + '\n';
   p.stdout.on('data', (c) => process.stdout.write(tag(c)));
   p.stderr.on('data', (c) => process.stderr.write(tag(c)));
