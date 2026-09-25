@@ -49,6 +49,7 @@ const P = {
   mountain: 'M2 20L9 8l4 6 3-4 6 10zM9 8V3l4 1.5L9 6',
   arrow: 'M5 12h14M13 6l6 6-6 6',
   chevronDown: 'M6 9l6 6 6-6',
+  bulb: 'M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z',
 };
 
 export default function Icon({ name, size = 24, className = '', strokeWidth = 2.2 }) {

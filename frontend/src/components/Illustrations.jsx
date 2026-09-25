@@ -51,23 +51,36 @@ export function TrophyArt() {
   );
 }
 
-/** Tô cùng nhau: linh vật thỏ + tờ giấy vẽ hoa. */
+/** Tô cùng nhau: 3 bạn (mèo, gấu, thỏ) cùng tô chung 1 bức tranh — nhìn là biết hoạt động nhóm. */
 export function TogetherArt() {
+  const heart = (x, y, s, c) => (
+    <path
+      d={`M${x} ${y + 7 * s} C${x - 11 * s} ${y - 1 * s} ${x - 7 * s} ${y - 10 * s} ${x} ${y - 4 * s} C${x + 7 * s} ${y - 10 * s} ${x + 11 * s} ${y - 1 * s} ${x} ${y + 7 * s} Z`}
+      fill={c}
+      stroke={INK}
+      strokeWidth="1.8"
+    />
+  );
   return (
-    <div className="relative h-full w-full">
-      <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <g transform="rotate(8 80 115)">
-          <rect x="18" y="88" width="120" height="54" rx="6" fill="#FFFFFF" stroke={INK} strokeWidth="2.5" />
-          {[0, 72, 144, 216, 288].map((a) => (
-            <circle key={a} cx={62 + 9 * Math.cos(((a - 90) * Math.PI) / 180)} cy={114 + 9 * Math.sin(((a - 90) * Math.PI) / 180)} r="7" fill="#FF9EC0" stroke={INK} strokeWidth="1.8" />
-          ))}
-          <circle cx="62" cy="114" r="5" fill="#FFD54F" stroke={INK} strokeWidth="1.8" />
-          <path d="M40 132 Q60 124 88 134" fill="none" stroke="#4CAF50" strokeWidth="3" strokeLinecap="round" />
-        </g>
-        <Crayon x={120} y={80} rot={-58} color="#4CD787" />
-      </svg>
-      <img src="/mascots/tho.svg" alt="" className="absolute bottom-2 right-[14%] h-[88%] drop-shadow-sm" draggable={false} />
-    </div>
+    <svg viewBox="0 0 176 150" className="h-full w-full" aria-hidden="true">
+      {heart(10, 26, 1, '#FF7AA2')}
+      {heart(168, 30, 0.9, '#FF9EC0')}
+      {/* 3 bạn đứng sát nhau sau tờ tranh chung */}
+      <image href="/mascots/meo.svg" x="-4" y="12" width="74" height="100" preserveAspectRatio="xMidYMax meet" />
+      <image href="/mascots/tho.svg" x="110" y="2" width="70" height="110" preserveAspectRatio="xMidYMax meet" />
+      <image href="/mascots/gau.svg" x="44" y="4" width="86" height="110" preserveAspectRatio="xMidYMax meet" />
+      {/* Tờ tranh chung: cầu vồng đang được tô bởi 3 màu khác nhau */}
+      <g transform="rotate(-3 88 122)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        <rect x="6" y="96" width="164" height="50" rx="8" fill="#FFFFFF" />
+        <path d="M40 138 A48 30 0 0 1 136 138" fill="none" stroke="#FF7AA2" strokeWidth="9" />
+        <path d="M54 138 A34 22 0 0 1 122 138" fill="none" stroke="#FFD54F" strokeWidth="9" />
+        <path d="M68 138 A20 14 0 0 1 108 138" fill="none" stroke="#E3F0FF" strokeWidth="9" />
+        <path d="M40 138 A48 30 0 0 1 136 138 M54 138 A34 22 0 0 1 122 138 M68 138 A20 14 0 0 1 108 138" fill="none" stroke={INK} strokeWidth="1.2" opacity="0.35" />
+      </g>
+      <Crayon x={16} y={110} rot={-32} color="#FF7AA2" />
+      <Crayon x={84} y={96} rot={62} color="#FFD54F" />
+      <Crayon x={166} y={102} rot={200} color="#4FA3E0" />
+    </svg>
   );
 }
 
@@ -99,23 +112,42 @@ export function GachaArt() {
   );
 }
 
-/** Truyện tranh: cuốn sách mở có tranh + linh vật gấu. */
-export function BookArt() {
+/** Truyện tranh: cuốn truyện mở — trang trái là tranh chú gấu, trang phải là lời thoại & chú thích. */
+export function BookArt({ bubble = 'Xin chào!' }) {
   return (
-    <div className="relative h-full w-full">
-      <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-          <path d="M20 58 Q55 46 88 60 L88 138 Q55 124 20 136 Z" fill="#FFFFFF" />
-          <path d="M156 58 Q121 46 88 60 L88 138 Q121 124 156 136 Z" fill="#FFFFFF" />
-          <path d="M28 66 Q54 58 80 68 L80 104 Q54 96 28 102 Z" fill="#BDE6FF" />
-          <circle cx="44" cy="76" r="7" fill="#FFD54F" />
-          <path d="M28 102 L44 88 L56 98 L66 90 L80 104 Q54 96 28 102 Z" fill="#8BD17C" />
-          <path d="M96 70 Q122 62 146 70 M96 82 Q122 74 146 82 M96 94 Q122 86 140 94" fill="none" strokeWidth="2" stroke="#8FA8BF" />
-          <path d="M16 136 Q55 126 88 142 Q121 126 160 136 L160 144 Q121 134 88 148 Q55 134 16 144 Z" fill="#FF8A65" />
-        </g>
-      </svg>
-      <img src="/mascots/gau.svg" alt="" className="absolute bottom-2 right-[12%] h-[78%] drop-shadow-sm" draggable={false} />
-    </div>
+    <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
+      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        {/* bìa + gáy sách */}
+        <path d="M8 40 Q60 26 110 42 Q160 26 212 40 L212 146 Q160 134 110 148 Q60 134 8 146 Z" fill="#FF8A65" />
+        {/* hai trang giấy */}
+        <path d="M16 34 Q62 22 110 38 L110 140 Q62 128 16 140 Z" fill="#FFFDF6" />
+        <path d="M204 34 Q158 22 110 38 L110 140 Q158 128 204 140 Z" fill="#FFFDF6" />
+        {/* dải đánh dấu trang */}
+        <path d="M184 27 L184 58 L191 51 L198 58 L198 25" fill="#FF5F7E" strokeWidth="2" />
+        {/* trang trái: khung tranh có chú gấu */}
+        <rect x="26" y="42" width="76" height="72" rx="6" fill="#BDE6FF" />
+        <path d="M26 98 Q50 90 72 98 T102 96 L102 108 Q102 114 96 114 L32 114 Q26 114 26 108 Z" fill="#8BD17C" strokeWidth="2" />
+        <circle cx="90" cy="54" r="6" fill="#FFD54F" strokeWidth="2" />
+      </g>
+      <image href="/mascots/gau.svg" x="36" y="47" width="52" height="66" preserveAspectRatio="xMidYMax meet" />
+      <g stroke="#8FA8BF" strokeWidth="2.5" strokeLinecap="round">
+        <path d="M30 124 H96" />
+        <path d="M30 131 H78" />
+      </g>
+      {/* trang phải: bong bóng lời thoại chỉ về chú gấu + chú thích */}
+      <g stroke={INK} strokeWidth="2.2" strokeLinejoin="round">
+        <path d="M122 46 H192 Q198 46 198 52 V76 Q198 82 192 82 H132 L118 92 L124 80 Q118 80 118 74 V52 Q118 46 122 46 Z" fill="#FFFFFF" />
+      </g>
+      <text x="158" y="69" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Baloo 2, Nunito, sans-serif" fill={INK}>
+        {bubble}
+      </text>
+      <g stroke="#8FA8BF" strokeWidth="2.5" strokeLinecap="round">
+        <path d="M122 100 H196" />
+        <path d="M122 110 H190" />
+        <path d="M122 120 H172" />
+      </g>
+      <circle cx="194" cy="128" r="6" fill="#FFD54F" stroke={INK} strokeWidth="1.8" />
+    </svg>
   );
 }
 
