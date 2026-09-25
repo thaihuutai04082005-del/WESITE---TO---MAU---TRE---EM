@@ -78,7 +78,7 @@ function HomeCard({ card, onInfo }) {
         </span>
         <span className="whitespace-nowrap font-display text-[26px] font-extrabold leading-[1.1] text-ink">{t(`nav.${card.key}`)}</span>
       </div>
-      <div className="pointer-events-none relative -my-2 mr-9">
+      <div className="pointer-events-none relative -my-2 mr-12">
         <div className="absolute inset-0 transition duration-300 group-hover:scale-105">
           <Art bubble={t('home.bookBubble')} />
         </div>

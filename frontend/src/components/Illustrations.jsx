@@ -66,10 +66,8 @@ export function TogetherArt() {
         <path d="M56 136 A26 16 0 0 1 108 136" fill="none" stroke="#FFD54F" strokeWidth="8" />
         <path d="M68 136 A14 9 0 0 1 96 136" fill="none" stroke="#4FA3E0" strokeWidth="8" />
       </g>
-      {/* Mỗi bạn cầm 1 cây bút, màu trùng dải cầu vồng đang tô */}
-      <Crayon x={34.5} y={93.2} rot={62} scale={0.62} color="#FF7AA2" />
+      {/* 1 cây bút tượng trưng: gấu đang tô dải cầu vồng */}
       <Crayon x={66.5} y={85.2} rot={62} scale={0.62} color="#FFD54F" />
-      <Crayon x={102.5} y={91.2} rot={62} scale={0.62} color="#4FA3E0" />
     </svg>
   );
 }
