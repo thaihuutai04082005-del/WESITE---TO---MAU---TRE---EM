@@ -74,7 +74,8 @@
     "missions": "nhiệm vụ",
     "rank": "Hạng",
     "continue": "Tô tiếp tranh dang dở",
-    "subtitle": "Cùng khám phá thế giới màu sắc nhé!"
+    "subtitle": "Cùng khám phá thế giới màu sắc nhé!",
+    "bookBubble": "Xin chào!"
   },
   "auth": {
     "login": "Đăng nhập",
@@ -612,5 +613,72 @@
     "empty": "Tranh còn trống, hãy tô thêm nhé.",
     "payload_too_large": "Dữ liệu quá lớn.",
     "admin_only": "Chỉ dành cho quản trị viên."
+  },
+  "guide": {
+    "label": "Hướng dẫn",
+    "open": "Hướng dẫn: {{name}}",
+    "tip": "Mẹo nhỏ:",
+    "gotIt": "Đã hiểu",
+    "start": "Bắt đầu",
+    "color": {
+      "intro": "Chọn một bức tranh thật đẹp rồi tô theo cách bé thích.",
+      "steps": [
+        "Chọn chủ đề (Động vật, Xe cộ…), rồi chọn con vật hoặc đồ vật, rồi chọn kiểu dáng bé thích.",
+        "Chọn cách tô: \"Tô theo mẫu\" có tranh mẫu và số gợi ý cho từng vùng; \"Sáng tạo\" thì tô màu gì cũng được.",
+        "Chọn màu rồi chạm vào một vùng để đổ màu. Muốn vẽ thêm thì dùng Cọ vẽ, Sticker hoặc Lấp lánh.",
+        "Bấm \"Hoàn thành\" để xem tranh chuyển động, rồi tải về hoặc in ra."
+      ],
+      "tip": "Tranh đang tô dở được tự động lưu trong Lịch sử, bé có thể quay lại tô tiếp bất cứ lúc nào."
+    },
+    "arena": {
+      "intro": "Thi tô tranh cùng tối đa 10 bạn, máy chấm điểm tự động và công bằng.",
+      "steps": [
+        "Bấm \"Tìm trận\" để ghép với các bạn cùng trình độ, hoặc \"Tạo phòng\" rồi gửi mã cho bạn bè.",
+        "Khi trận bắt đầu, cả phòng cùng tô một bức tranh ở chế độ Sáng tạo trước khi hết giờ.",
+        "Tô xong thì bấm \"Nộp bài\" và chờ các bạn khác.",
+        "Xem điểm theo 6 tiêu chí. Bạn đứng Top 3 được cộng Điểm Rank và Điểm Gacha."
+      ],
+      "tip": "Tô gọn trong nét, phối màu hài hoà và thật khác biệt để được điểm cao!"
+    },
+    "together": {
+      "intro": "2–4 bạn cùng tô chung một bức tranh và thấy màu của nhau ngay lập tức.",
+      "steps": [
+        "Bấm \"Tạo phòng mới\" và chọn bức tranh muốn tô cùng.",
+        "Gửi mã phòng cho bạn bè. Chỉ ai có mã mới vào được phòng.",
+        "Mọi người cùng tô, mỗi bạn có một con trỏ màu riêng hiện trên tranh.",
+        "Bấm \"Lưu tranh chung\" để lưu bức tranh vào Lịch sử của cả nhóm."
+      ],
+      "tip": "Nút Hoàn tác chỉ xoá nét vừa tô của chính bé, không xoá của bạn khác."
+    },
+    "gacha": {
+      "intro": "Dùng Điểm Gacha để bóc thẻ tranh hiếm và sưu tầm.",
+      "steps": [
+        "Lọt Top 3 ở Đấu trường để nhận Điểm Gacha.",
+        "Cứ 50 Điểm Gacha được bóc 1 thẻ. Điểm dư được giữ lại cho lần sau.",
+        "Thẻ có 4 cấp S, A, B, C. Mỗi thẻ là một bức tranh hiếm mà bé được mở khoá để tô.",
+        "Có thể tặng hoặc đổi thẻ với bạn bè, tối đa 3 lần mỗi ngày."
+      ],
+      "tip": "Bóc thẻ không làm tụt hạng và không bao giờ phải dùng tiền thật."
+    },
+    "storybooks": {
+      "intro": "Gom những bức tranh Sáng tạo thành một cuốn truyện của riêng bé.",
+      "steps": [
+        "Bấm \"Tạo truyện mới\" và đặt tên cho cuốn truyện.",
+        "Chọn các tranh Sáng tạo đã hoàn thành để làm từng trang.",
+        "Sắp xếp thứ tự trang và viết lời thoại, chú thích cho từng trang.",
+        "Xem truyện lật trang, tải về dạng PDF hoặc chia sẻ cho bố mẹ, ông bà."
+      ],
+      "tip": "Cần ít nhất 2 trang để hoàn thành một cuốn truyện."
+    },
+    "missions": {
+      "intro": "Làm nhiệm vụ để lên cấp, nhận Ruby và xem Hạng Đấu trường.",
+      "steps": [
+        "Mỗi cấp có 3 nhiệm vụ, ví dụ: tô xong tranh, đăng nhập nhiều ngày, thử chủ đề mới.",
+        "Hoàn thành mỗi nhiệm vụ là nhận Ruby ngay.",
+        "Xong cả 3 nhiệm vụ thì lên cấp mới, có bộ nhiệm vụ mới.",
+        "Dùng Ruby mua skin cọ vẽ và khung tranh trong Shop."
+      ],
+      "tip": "Thắng Đấu trường để lên Hạng. Điểm Hạng không bao giờ bị trừ."
+    }
   }
 }

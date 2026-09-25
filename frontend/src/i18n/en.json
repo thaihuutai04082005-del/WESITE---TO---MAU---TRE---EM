@@ -74,7 +74,8 @@
     "missions": "missions",
     "rank": "Rank",
     "continue": "Keep coloring",
-    "subtitle": "Let's explore the world of colors!"
+    "subtitle": "Let's explore the world of colors!",
+    "bookBubble": "Hello!"
   },
   "auth": {
     "login": "Log in",
@@ -612,5 +613,72 @@
     "empty": "The picture is still empty — color some more!",
     "payload_too_large": "That's too much data.",
     "admin_only": "Admins only."
+  },
+  "guide": {
+    "label": "How it works",
+    "open": "How to use: {{name}}",
+    "tip": "Tip:",
+    "gotIt": "Got it",
+    "start": "Let's go",
+    "color": {
+      "intro": "Pick a lovely picture and color it your way.",
+      "steps": [
+        "Pick a theme (Animals, Vehicles…), then a subject, then the pose you like.",
+        "Pick a mode: \"Paint by number\" has a sample and numbers for each area; \"Free coloring\" lets you use any colors.",
+        "Pick a color and tap an area to fill it. Use Brush, Stickers or Glitter to add more.",
+        "Tap \"Finish\" to see your picture come to life, then download or print it."
+      ],
+      "tip": "Unfinished pictures are saved automatically in History, so you can continue any time."
+    },
+    "arena": {
+      "intro": "Color against up to 10 kids with fair, automatic scoring.",
+      "steps": [
+        "Tap \"Find a match\" to play kids at your level, or \"Create room\" and send the code to friends.",
+        "When the match starts, everyone colors the same picture in Free mode before time runs out.",
+        "Tap \"Submit\" when you're done and wait for the others.",
+        "See your scores in 6 categories. The top 3 earn Rank points and Gacha points."
+      ],
+      "tip": "Stay inside the lines, choose harmonious colors and be unique to score high!"
+    },
+    "together": {
+      "intro": "2–4 kids color one picture together and see each other's colors instantly.",
+      "steps": [
+        "Tap \"New room\" and pick the picture to color together.",
+        "Send the room code to your friends. Only people with the code can join.",
+        "Color together. Each friend has their own colored pointer on the picture.",
+        "Tap \"Save picture\" to save it to everyone's History."
+      ],
+      "tip": "Undo only removes your own last stroke, never a friend's."
+    },
+    "gacha": {
+      "intro": "Use Gacha points to open rare picture cards and collect them.",
+      "steps": [
+        "Place in the Arena top 3 to earn Gacha points.",
+        "Every 50 Gacha points = 1 card. Leftover points are kept.",
+        "Cards come in S, A, B and C. Each card is a rare picture you unlock to color.",
+        "Gift or swap cards with friends, up to 3 times a day."
+      ],
+      "tip": "Opening cards never lowers your rank and never uses real money."
+    },
+    "storybooks": {
+      "intro": "Turn your Free coloring pictures into your very own storybook.",
+      "steps": [
+        "Tap \"New storybook\" and give it a title.",
+        "Pick finished Free coloring pictures as pages.",
+        "Arrange the pages and write a line or caption for each one.",
+        "Flip through it, download a PDF or share it with your family."
+      ],
+      "tip": "A storybook needs at least 2 pages to be finished."
+    },
+    "missions": {
+      "intro": "Complete missions to level up, earn Ruby and see your Arena rank.",
+      "steps": [
+        "Each level has 3 missions, like finishing a picture, logging in several days or trying a new theme.",
+        "You get Ruby right away for each mission you complete.",
+        "Finish all 3 to reach the next level with new missions.",
+        "Spend Ruby on brush skins and frames in the Shop."
+      ],
+      "tip": "Win in the Arena to rank up. Rank points never go down."
+    }
   }
 }

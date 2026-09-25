@@ -7,6 +7,7 @@ import PictureView from '../../components/PictureView/PictureView';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
 import { PlanBadge } from '../Payment/Plans';
+import ModeGuide from '../../components/ModeGuide';
 import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
 import { ColorArt, TrophyArt, TogetherArt, GachaArt, BookArt, MissionArt, SunCloud } from '../../components/Illustrations';
 
@@ -61,31 +62,43 @@ const HOME_CARDS = [
   { to: '/missions', key: 'missions', icon: 'target', Art: MissionArt, bg: 'linear-gradient(135deg,#DDF4FF 0%,#B4E4FF 100%)', accent: '#138FA8' },
 ];
 
-function HomeCard({ card }) {
+function HomeCard({ card, onInfo }) {
   const { t } = useTranslation();
   const { Art } = card;
   return (
-    <Link
-      to={card.to}
-      className="group relative grid min-h-44 grid-cols-[auto_minmax(0,1fr)] overflow-hidden rounded-[28px] p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-pop"
+    <div
+      className="group relative grid min-h-44 grid-cols-[auto_minmax(0,1fr)] gap-3 overflow-hidden rounded-[28px] p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-pop"
       style={{ background: card.bg }}
-      data-testid={`tile-${card.key}`}
     >
-      <div className="relative z-10 flex flex-col justify-between gap-3">
+      {/* Cả ô là 1 liên kết; nút "i" nằm trên cùng, tách riêng để không lồng nút trong liên kết. */}
+      <Link to={card.to} className="absolute inset-0 z-0 rounded-[28px]" aria-label={t(`nav.${card.key}`)} data-testid={`tile-${card.key}`} />
+      <div className="pointer-events-none relative z-10 flex flex-col justify-between gap-3">
         <span style={{ color: card.accent }}>
           <Icon name={card.icon} size={44} strokeWidth={2.6} />
         </span>
         <span className="whitespace-nowrap font-display text-[26px] font-extrabold leading-[1.1] text-ink">{t(`nav.${card.key}`)}</span>
       </div>
-      <div className="relative -my-2 -mr-2">
+      <div className="pointer-events-none relative -my-2 mr-9">
         <div className="absolute inset-0 transition duration-300 group-hover:scale-105">
-          <Art />
+          <Art bubble={t('home.bookBubble')} />
         </div>
       </div>
-      <span className="absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-soft transition group-hover:translate-x-1" style={{ color: card.accent }}>
+      <button
+        type="button"
+        onClick={() => onInfo(card)}
+        className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/75 font-display text-xl font-extrabold italic shadow-soft backdrop-blur transition hover:scale-110 hover:bg-white focus-visible:outline-none focus-visible:ring-4"
+        style={{ color: card.accent, '--tw-ring-color': `${card.accent}55` }}
+        aria-label={t('guide.open', { name: t(`nav.${card.key}`) })}
+        title={t('guide.open', { name: t(`nav.${card.key}`) })}
+        data-testid={`info-${card.key}`}
+      >
+        <span className="leading-none">i</span>
+        <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white" style={{ background: card.accent }} aria-hidden="true" />
+      </button>
+      <span className="pointer-events-none absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-soft transition group-hover:translate-x-1" style={{ color: card.accent }}>
         <Icon name="arrow" size={22} strokeWidth={3} />
       </span>
-    </Link>
+    </div>
   );
 }
 
@@ -95,6 +108,7 @@ function Dashboard() {
   const plan = useAuth((s) => s.plan);
   const [prog, setProg] = useState(null);
   const [drafts, setDrafts] = useState([]);
+  const [guide, setGuide] = useState(null);
   useEffect(() => {
     api.get('/progression').then(setProg).catch(() => {});
     api.get('/artworks?status=in_progress').then((r) => setDrafts(r.artworks.slice(0, 4))).catch(() => {});
@@ -143,9 +157,11 @@ function Dashboard() {
         {/* 6 thẻ chức năng */}
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {HOME_CARDS.map((c) => (
-            <HomeCard key={c.key} card={c} />
+            <HomeCard key={c.key} card={c} onInfo={setGuide} />
           ))}
         </section>
+
+        <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
         {/* Cấp độ & Rank */}
         {prog && (
