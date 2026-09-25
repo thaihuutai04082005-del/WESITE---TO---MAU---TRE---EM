@@ -86,7 +86,7 @@ function HomeCard({ card, onInfo }) {
       <button
         type="button"
         onClick={() => onInfo(card)}
-        className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/75 font-display text-xl font-extrabold italic shadow-soft backdrop-blur transition hover:scale-110 hover:bg-white focus-visible:outline-none focus-visible:ring-4"
+        className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/75 font-display text-xl font-extrabold not-italic shadow-soft backdrop-blur transition hover:scale-110 hover:bg-white focus-visible:outline-none focus-visible:ring-4"
         style={{ color: card.accent, '--tw-ring-color': `${card.accent}55` }}
         aria-label={t('guide.open', { name: t(`nav.${card.key}`) })}
         title={t('guide.open', { name: t(`nav.${card.key}`) })}
