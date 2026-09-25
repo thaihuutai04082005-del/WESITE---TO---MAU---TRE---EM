@@ -93,7 +93,6 @@ function HomeCard({ card, onInfo }) {
         data-testid={`info-${card.key}`}
       >
         <span className="leading-none">i</span>
-        <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white" style={{ background: card.accent }} aria-hidden="true" />
       </button>
       <span className="pointer-events-none absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-soft transition group-hover:translate-x-1" style={{ color: card.accent }}>
         <Icon name="arrow" size={22} strokeWidth={3} />

@@ -1,9 +1,9 @@
 // Hình minh hoạ cho các thẻ ở trang chính — vẽ bằng SVG, ghép với linh vật lấy từ kho tranh (/mascots).
 const INK = '#1B2A38';
 
-function Crayon({ x, y, rot, color }) {
+function Crayon({ x, y, rot, color, scale = 1 }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${rot})`} stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${scale})`} stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
       <rect x="0" y="0" width="46" height="13" rx="4" fill={color} />
       <polygon points="46,0 60,6.5 46,13" fill={color} />
       <rect x="10" y="0" width="7" height="13" fill="#FFFFFF" opacity="0.55" stroke="none" />
@@ -66,6 +66,10 @@ export function TogetherArt() {
         <path d="M56 136 A26 16 0 0 1 108 136" fill="none" stroke="#FFD54F" strokeWidth="8" />
         <path d="M68 136 A14 9 0 0 1 96 136" fill="none" stroke="#4FA3E0" strokeWidth="8" />
       </g>
+      {/* Mỗi bạn cầm 1 cây bút, màu trùng dải cầu vồng đang tô */}
+      <Crayon x={34.5} y={93.2} rot={62} scale={0.62} color="#FF7AA2" />
+      <Crayon x={66.5} y={85.2} rot={62} scale={0.62} color="#FFD54F" />
+      <Crayon x={102.5} y={91.2} rot={62} scale={0.62} color="#4FA3E0" />
     </svg>
   );
 }
