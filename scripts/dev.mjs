@@ -6,8 +6,9 @@ const procs = [
   ['api', ['run', 'dev', '-w', 'backend']],
   ['web', ['run', 'dev', '-w', 'frontend']],
 ].map(([name, args]) => {
-  // Windows: Node ≥ 20.12 bắt buộc bật shell khi chạy file .cmd.
-  const p = spawn(npm, args, { stdio: ['inherit', 'pipe', 'pipe'], shell: process.platform === 'win32' });
+  // Windows: Node ≥ 20.12 bắt buộc bật shell khi chạy file .cmd; truyền cả câu lệnh để tránh cảnh báo DEP0190.
+  const opts = { stdio: ['inherit', 'pipe', 'pipe'] };
+  const p = process.platform === 'win32' ? spawn(`${npm} ${args.join(' ')}`, { ...opts, shell: true }) : spawn(npm, args, opts);
   const tag = (chunk) => chunk.toString().split('\n').filter(Boolean).map((l) => `[${name}] ${l}`).join('\n') + '\n';
   p.stdout.on('data', (c) => process.stdout.write(tag(c)));
   p.stderr.on('data', (c) => process.stderr.write(tag(c)));
