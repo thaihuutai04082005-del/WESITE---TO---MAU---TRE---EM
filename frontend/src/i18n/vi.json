@@ -1,5 +1,7 @@
 {
-  "app": { "name": "Bé Tô Màu" },
+  "app": {
+    "name": "Bé Tô Màu"
+  },
   "common": {
     "loading": "Đang tải…",
     "back": "Quay lại",
@@ -40,12 +42,30 @@
     "subtitle": "Hàng trăm bức tranh dễ thương, đấu trường sáng tạo hàng tuần, sưu tầm thẻ tranh hiếm và đóng cuốn truyện của riêng bé.",
     "cta": "Đăng ký miễn phí",
     "features": {
-      "creative": { "title": "Hai chế độ tô", "text": "Tô theo mẫu để học màu sắc, hoặc Sáng tạo tự do theo ý thích." },
-      "arena": { "title": "Đấu trường sáng tạo", "text": "Thi tô cùng 10 bạn, chấm điểm tự động và minh bạch." },
-      "gacha": { "title": "Sưu tầm thẻ tranh hiếm", "text": "Thắng giải để bóc thẻ S/A/B/C — không cần trả tiền." },
-      "together": { "title": "Tô cùng nhau", "text": "Rủ bạn bè cùng tô một bức tranh theo thời gian thực." },
-      "storybook": { "title": "Đóng truyện tranh", "text": "Gom tranh của bé thành cuốn truyện lật trang, tải PDF." },
-      "safe": { "title": "An toàn cho bé", "text": "Xác minh phụ huynh bằng mã OTP, kết bạn và vào phòng chỉ qua mã riêng." }
+      "creative": {
+        "title": "Hai chế độ tô",
+        "text": "Tô theo mẫu để học màu sắc, hoặc Sáng tạo tự do theo ý thích."
+      },
+      "arena": {
+        "title": "Đấu trường sáng tạo",
+        "text": "Thi tô cùng 10 bạn, chấm điểm tự động và minh bạch."
+      },
+      "gacha": {
+        "title": "Sưu tầm thẻ tranh hiếm",
+        "text": "Thắng giải để bóc thẻ S/A/B/C — không cần trả tiền."
+      },
+      "together": {
+        "title": "Tô cùng nhau",
+        "text": "Rủ bạn bè cùng tô một bức tranh theo thời gian thực."
+      },
+      "storybook": {
+        "title": "Đóng truyện tranh",
+        "text": "Gom tranh của bé thành cuốn truyện lật trang, tải PDF."
+      },
+      "safe": {
+        "title": "An toàn cho bé",
+        "text": "Xác minh phụ huynh bằng mã OTP, kết bạn và vào phòng chỉ qua mã riêng."
+      }
     }
   },
   "home": {
@@ -53,7 +73,8 @@
     "level": "Cấp {{level}}",
     "missions": "nhiệm vụ",
     "rank": "Hạng",
-    "continue": "Tô tiếp tranh dang dở"
+    "continue": "Tô tiếp tranh dang dở",
+    "subtitle": "Cùng khám phá thế giới màu sắc nhé!"
   },
   "auth": {
     "login": "Đăng nhập",
@@ -72,7 +93,10 @@
     "captchaRefresh": "Đổi mã khác",
     "guardian": "Liên hệ của phụ huynh",
     "guardianHint": "Chỉ dùng để khôi phục mật khẩu. Hệ thống sẽ gửi mã OTP để phụ huynh xác nhận.",
-    "contact": { "phone": "Số điện thoại", "email": "Email (Gmail)" },
+    "contact": {
+      "phone": "Số điện thoại",
+      "email": "Email (Gmail)"
+    },
     "otpTitle": "Nhập mã xác nhận",
     "otpSent": "Mã gồm 6 số đã được gửi tới {{to}}.",
     "otpCode": "Mã OTP",
@@ -130,8 +154,14 @@
   },
   "mode": {
     "pick": "Bé muốn tô theo cách nào?",
-    "template": { "title": "Tô theo mẫu", "text": "Có tranh mẫu và số gợi ý cho từng vùng." },
-    "free": { "title": "Sáng tạo", "text": "Tự do chọn màu theo ý thích — được tính ở Đấu trường." }
+    "template": {
+      "title": "Tô theo mẫu",
+      "text": "Có tranh mẫu và số gợi ý cho từng vùng."
+    },
+    "free": {
+      "title": "Sáng tạo",
+      "text": "Tự do chọn màu theo ý thích — được tính ở Đấu trường."
+    }
   },
   "coloring": {
     "reference": "Tranh mẫu",
@@ -145,7 +175,12 @@
     "complete": "Hoàn thành",
     "download": "Tải về",
     "print": "In tranh",
-    "saveState": { "saved": "Đã lưu", "saving": "Đang lưu…", "dirty": "Chưa lưu", "error": "Lưu lỗi" },
+    "saveState": {
+      "saved": "Đã lưu",
+      "saving": "Đang lưu…",
+      "dirty": "Chưa lưu",
+      "error": "Lưu lỗi"
+    },
     "clearTitle": "Xoá hết để tô lại?",
     "clearText": "Tất cả màu, nét vẽ và sticker sẽ bị xoá. Bé có thể bấm Hoàn tác để lấy lại.",
     "clearConfirm": "Xoá hết"
@@ -174,9 +209,21 @@
   "history": {
     "title": "Lịch sử tô",
     "retention": "Tranh hoàn thành được lưu mãi mãi. Tranh đang dở sẽ tự xoá nếu 30 ngày không mở lại (có báo trước).",
-    "filter": { "all": "Tất cả", "in_progress": "Đang dở", "completed": "Hoàn thành" },
-    "status": { "in_progress": "Đang dở", "completed": "Hoàn thành" },
-    "mode": { "template": "Theo mẫu", "free": "Sáng tạo", "arena": "Đấu trường", "collab": "Tô cùng nhau" },
+    "filter": {
+      "all": "Tất cả",
+      "in_progress": "Đang dở",
+      "completed": "Hoàn thành"
+    },
+    "status": {
+      "in_progress": "Đang dở",
+      "completed": "Hoàn thành"
+    },
+    "mode": {
+      "template": "Theo mẫu",
+      "free": "Sáng tạo",
+      "arena": "Đấu trường",
+      "collab": "Tô cùng nhau"
+    },
     "empty": "Bé chưa tô tranh nào.",
     "noPreview": "Chưa tô",
     "edit": "Chỉnh sửa",
@@ -196,7 +243,10 @@
     "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế. Gói Năm rẻ hơn ~15% so với 12 tháng lẻ.",
     "payTitle": "Thanh toán {{plan}}",
     "payNow": "Thanh toán",
-    "provider": { "momo": "Ví MoMo", "paypal": "PayPal (thẻ quốc tế)" },
+    "provider": {
+      "momo": "Ví MoMo",
+      "paypal": "PayPal (thẻ quốc tế)"
+    },
     "mockNotice": "Cổng thanh toán chưa được cấu hình trên máy chủ này. Đây là giao dịch THỬ NGHIỆM, không trừ tiền thật.",
     "mockConfirm": "Xác nhận thanh toán thử",
     "success": "Nâng cấp thành công! Chúc bé tô thật vui.",
@@ -205,9 +255,36 @@
       "month": "Gói Tháng · còn {{n}}/{{limit}} lượt",
       "year": "Gói Năm · đến {{date}}"
     },
-    "free": { "name": "Free", "per": "", "limit": "1 tranh mỗi ngày", "perks": ["Toàn bộ chủ đề & 2 chế độ tô", "Đấu trường, Gacha, Tô cùng nhau", "Lưu lịch sử & tải PNG"] },
-    "month": { "name": "Gói Tháng", "per": "/tháng", "limit": "100 tranh mỗi tháng (~3 tranh/ngày)", "perks": ["Mọi quyền lợi gói Free", "Tô nhiều tranh hơn mỗi ngày", "Hỗ trợ ưu tiên"] },
-    "year": { "name": "Gói Năm", "per": "/năm", "limit": "Không giới hạn số tranh", "perks": ["Mọi quyền lợi gói Tháng", "Tô không giới hạn", "Tiết kiệm gần 2 tháng"] }
+    "free": {
+      "name": "Free",
+      "per": "",
+      "limit": "1 tranh mỗi ngày",
+      "perks": [
+        "Toàn bộ chủ đề & 2 chế độ tô",
+        "Đấu trường, Gacha, Tô cùng nhau",
+        "Lưu lịch sử & tải PNG"
+      ]
+    },
+    "month": {
+      "name": "Gói Tháng",
+      "per": "/tháng",
+      "limit": "100 tranh mỗi tháng (~3 tranh/ngày)",
+      "perks": [
+        "Mọi quyền lợi gói Free",
+        "Tô nhiều tranh hơn mỗi ngày",
+        "Hỗ trợ ưu tiên"
+      ]
+    },
+    "year": {
+      "name": "Gói Năm",
+      "per": "/năm",
+      "limit": "Không giới hạn số tranh",
+      "perks": [
+        "Mọi quyền lợi gói Tháng",
+        "Tô không giới hạn",
+        "Tiết kiệm gần 2 tháng"
+      ]
+    }
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",
@@ -223,15 +300,31 @@
   },
   "missions": {
     "title": "Nhiệm vụ & Thành tích",
-    "cards": { "level": "Cấp độ", "rank": "Hạng đấu", "gacha": "Điểm Gacha" },
+    "cards": {
+      "level": "Cấp độ",
+      "rank": "Hạng đấu",
+      "gacha": "Điểm Gacha"
+    },
     "levelMissions": "Nhiệm vụ cấp {{level}}",
     "maxed": "Bé đã hoàn thành toàn bộ 20 cấp! Nhiệm vụ mới sẽ sớm ra mắt.",
     "hint": "Mỗi nhiệm vụ xong nhận Ruby ngay. Xong cả 3 nhiệm vụ để lên cấp tiếp theo.",
-    "difficulty": { "easy": "Dễ", "medium": "Trung bình", "hard": "Khó" },
+    "difficulty": {
+      "easy": "Dễ",
+      "medium": "Trung bình",
+      "hard": "Khó"
+    },
     "rankTitle": "Hạng Đấu trường",
     "rankHint": "Thắng Top 3 ở Đấu trường để tích Điểm Rank. Điểm Rank không bao giờ bị trừ."
   },
-  "rank": { "bronze": "Đồng", "silver": "Bạc", "gold": "Vàng", "platinum": "Bạch Kim", "diamond": "Kim Cương" },
+  "rank": {
+    "bronze": "Đồng",
+    "silver": "Bạc",
+    "gold": "Vàng",
+    "platinum": "Bạch Kim",
+    "diamond": "Kim Cương",
+    "pts": "điểm",
+    "points": "điểm"
+  },
   "popup": {
     "missionDone": "Hoàn thành nhiệm vụ!",
     "levelUp": "Lên cấp {{level}}!",
@@ -310,7 +403,12 @@
     "collection": "Bộ sưu tập",
     "empty": "Chưa có thẻ nào. Thi Đấu trường để nhận Điểm Gacha nhé!",
     "colorThis": "Tô tranh này",
-    "rarity": { "S": "Siêu hiếm", "A": "Hiếm", "B": "Thường", "C": "Phổ biến" }
+    "rarity": {
+      "S": "Siêu hiếm",
+      "A": "Hiếm",
+      "B": "Thường",
+      "C": "Phổ biến"
+    }
   },
   "shop": {
     "title": "Shop",
@@ -328,7 +426,9 @@
     "confirmTitle": "Mua vật phẩm?",
     "confirmText": "Mua {{name}} với giá {{price}} Ruby?"
   },
-  "frames": { "none": "Không khung" },
+  "frames": {
+    "none": "Không khung"
+  },
   "friends": {
     "title": "Bạn bè",
     "myCode": "Mã kết bạn của bé",
@@ -348,7 +448,10 @@
     "title": "Tặng & đổi thẻ",
     "with": "Tặng/đổi thẻ với {{name}}",
     "limit": "Hôm nay đã dùng {{used}}/{{limit}} lượt.",
-    "kind": { "gift": "Tặng", "exchange": "Đổi" },
+    "kind": {
+      "gift": "Tặng",
+      "exchange": "Đổi"
+    },
     "pickMine": "Chọn thẻ của bé",
     "pickTheirs": "Chọn thẻ muốn đổi của {{name}}",
     "noCards": "Bé chưa có thẻ nào để tặng.",
@@ -368,7 +471,13 @@
     "confirmAcceptTitle": "Xác nhận nhận thẻ",
     "confirmAcceptGift": "{{name}} muốn tặng bé thẻ “{{card}}”. Đồng ý nhận?",
     "confirmAcceptExchange": "{{name}} muốn đổi thẻ “{{theirs}}” lấy thẻ “{{mine}}” của bé. Đồng ý đổi?",
-    "status": { "accepted": "Thành công", "declined": "Bị từ chối", "cancelled": "Đã huỷ", "failed": "Không hợp lệ", "pending": "Đang chờ" }
+    "status": {
+      "accepted": "Thành công",
+      "declined": "Bị từ chối",
+      "cancelled": "Đã huỷ",
+      "failed": "Không hợp lệ",
+      "pending": "Đang chờ"
+    }
   },
   "together": {
     "title": "Tô cùng nhau",

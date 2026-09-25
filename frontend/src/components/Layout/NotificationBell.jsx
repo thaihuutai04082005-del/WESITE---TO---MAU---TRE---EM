@@ -28,7 +28,7 @@ export default function NotificationBell() {
 
   return (
     <div className="relative">
-      <button type="button" onClick={toggle} className="btn-ghost relative min-h-11 px-3" aria-label={t('nav.notifications')}>
+      <button type="button" onClick={toggle} className="btn-ghost relative min-h-11 px-2.5 sm:px-3" aria-label={t('nav.notifications')}>
         <Icon name="bell" size={20} />
         {unread > 0 && <span className="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-coral px-1 text-xs font-extrabold text-white">{unread}</span>}
       </button>

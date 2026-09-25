@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="179.9 164 296.3 340"><g id="subject" class="subject anim-bounce">
+<path d="M 385 420 Q 450 400 455 340 Q 470 345 468 360 Q 462 420 390 445 Z" id="r-duoi" data-region="duoi" class="region" fill="#C68B59" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="412" rx="92" ry="75" id="r-than" data-region="than" class="region" fill="#C68B59" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="345" cy="392" rx="28" ry="22" id="r-dom-than" data-region="dom-than" class="region" fill="#8B5A2B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="430" rx="50" ry="42" id="r-bung" data-region="bung" class="region" fill="#F3D9B1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="262" cy="480" rx="26" ry="16" id="r-chan-trai" data-region="chan-trai" class="region" fill="#F3D9B1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="338" cy="480" rx="26" ry="16" id="r-chan-phai" data-region="chan-phai" class="region" fill="#F3D9B1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="250" rx="85" ry="78" id="r-dau" data-region="dau" class="region" fill="#C68B59" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 232 205 C 190 200 175 270 200 310 C 215 325 240 300 242 270 Z" id="r-tai-trai" data-region="tai-trai" class="region" fill="#8B5A2B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 368 205 C 410 200 425 270 400 310 C 385 325 360 300 358 270 Z" id="r-tai-phai" data-region="tai-phai" class="region" fill="#8B5A2B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="328" cy="240" rx="22" ry="20" id="r-dom-mat" data-region="dom-mat" class="region" fill="#8B5A2B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="285" rx="38" ry="26" id="r-mom" data-region="mom" class="region" fill="#F3D9B1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="263" rx="13" ry="9" id="r-mui" data-region="mui" class="region" fill="#3B2A20" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="274" cy="242" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="326" cy="242" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="276.5" cy="239" r="2.6" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="328.5" cy="239" r="2.6" fill="#FFFFFF"/></g>
+<ellipse cx="254" cy="262" rx="11" ry="7" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="346" cy="262" rx="11" ry="7" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 285 272 Q 300 288 315 272" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></svg>

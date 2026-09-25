@@ -17,8 +17,10 @@ export default function LanguageSwitch() {
     if (user) updateProfile({ language: next }).catch(() => {});
   };
   return (
-    <button type="button" onClick={change} className="btn-ghost min-h-11 gap-1 px-3 text-base" aria-label={t('nav.language')} data-testid="lang-switch">
-      <Icon name="globe" size={20} />
+    <button type="button" onClick={change} className="btn-ghost min-h-11 min-w-11 gap-1 rounded-full px-2 text-base sm:px-3" aria-label={t('nav.language')} data-testid="lang-switch">
+      <span className="hidden sm:inline">
+        <Icon name="globe" size={20} />
+      </span>
       {i18n.language.toUpperCase()}
     </button>
   );
