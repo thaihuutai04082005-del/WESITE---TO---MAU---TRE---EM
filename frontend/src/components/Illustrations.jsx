@@ -1,9 +1,9 @@
 // Hình minh hoạ cho các thẻ ở trang chính — vẽ bằng SVG, ghép với linh vật lấy từ kho tranh (/mascots).
 const INK = '#1B2A38';
 
-function Crayon({ x, y, rot, color }) {
+function Crayon({ x, y, rot, color, scale = 1 }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${rot})`} stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${scale})`} stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
       <rect x="0" y="0" width="46" height="13" rx="4" fill={color} />
       <polygon points="46,0 60,6.5 46,13" fill={color} />
       <rect x="10" y="0" width="7" height="13" fill="#FFFFFF" opacity="0.55" stroke="none" />
@@ -11,25 +11,26 @@ function Crayon({ x, y, rot, color }) {
   );
 }
 
-/** Tô màu: tờ giấy có hình gấu + bút sáp + linh vật mèo cầm bút. */
+/** Tô màu: tờ giấy có bông hoa đang tô dở + 1 cây bút sáp + mèo ngồi bên cạnh — bố cục gọn, không đè chéo. */
 export function ColorArt() {
+  const petal = (k) => {
+    const a = ((k * 72 - 90) * Math.PI) / 180;
+    return { cx: 60 + 15 * Math.cos(a), cy: 70 + 15 * Math.sin(a) };
+  };
   return (
-    <div className="relative h-full w-full">
-      <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <g transform="rotate(-8 90 110)">
-          <rect x="30" y="78" width="120" height="62" rx="6" fill="#FFFFFF" stroke={INK} strokeWidth="2.5" />
-          <circle cx="90" cy="110" r="18" fill="#FFE0B5" stroke={INK} strokeWidth="2" />
-          <circle cx="76" cy="95" r="6" fill="#FFE0B5" stroke={INK} strokeWidth="2" />
-          <circle cx="104" cy="95" r="6" fill="#FFE0B5" stroke={INK} strokeWidth="2" />
-          <circle cx="84" cy="108" r="2" fill={INK} />
-          <circle cx="96" cy="108" r="2" fill={INK} />
-          <path d="M85 116 Q90 121 95 116" fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" />
-        </g>
-        <Crayon x={8} y={112} rot={-18} color="#FF5F7E" />
-        <Crayon x={128} y={124} rot={10} color="#4FA3E0" />
-      </svg>
-      <img src="/mascots/meo.svg" alt="" className="absolute bottom-2 right-[14%] h-[80%] drop-shadow-sm" draggable={false} />
-    </div>
+    <svg viewBox="0 0 200 150" className="h-full w-full" aria-hidden="true">
+      <g transform="rotate(-4 62 88)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        <rect x="12" y="34" width="100" height="104" rx="8" fill="#FFFFFF" />
+        <path d="M60 84 V124" fill="none" stroke="#4CAF50" strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M60 108 Q76 98 84 104 Q74 116 60 112 Z" fill="#8BD17C" strokeWidth="2" />
+        {[0, 1, 2, 3, 4].map((k) => (
+          <circle key={k} {...petal(k)} r="11" fill={k < 3 ? '#FF9EC0' : '#FFFFFF'} strokeWidth="2" />
+        ))}
+        <circle cx="60" cy="70" r="8" fill="#FFD54F" strokeWidth="2" />
+      </g>
+      <Crayon x={18} y={134} rot={-4} color="#FF7AA2" />
+      <image href="/mascots/meo.svg" x="102" y="18" width="96" height="124" preserveAspectRatio="xMidYMax meet" />
+    </svg>
   );
 }
 
@@ -51,35 +52,22 @@ export function TrophyArt() {
   );
 }
 
-/** Tô cùng nhau: 3 bạn (mèo, gấu, thỏ) cùng tô chung 1 bức tranh — nhìn là biết hoạt động nhóm. */
+/** Tô cùng nhau: 3 bạn đứng thẳng hàng sau cùng một tờ tranh cầu vồng — gọn, dễ nhìn, thấy ngay là nhóm. */
 export function TogetherArt() {
-  const heart = (x, y, s, c) => (
-    <path
-      d={`M${x} ${y + 7 * s} C${x - 11 * s} ${y - 1 * s} ${x - 7 * s} ${y - 10 * s} ${x} ${y - 4 * s} C${x + 7 * s} ${y - 10 * s} ${x + 11 * s} ${y - 1 * s} ${x} ${y + 7 * s} Z`}
-      fill={c}
-      stroke={INK}
-      strokeWidth="1.8"
-    />
-  );
   return (
-    <svg viewBox="0 0 176 150" className="h-full w-full" aria-hidden="true">
-      {heart(10, 26, 1, '#FF7AA2')}
-      {heart(168, 30, 0.9, '#FF9EC0')}
-      {/* 3 bạn đứng sát nhau sau tờ tranh chung */}
-      <image href="/mascots/meo.svg" x="-4" y="12" width="74" height="100" preserveAspectRatio="xMidYMax meet" />
-      <image href="/mascots/tho.svg" x="110" y="2" width="70" height="110" preserveAspectRatio="xMidYMax meet" />
-      <image href="/mascots/gau.svg" x="44" y="4" width="86" height="110" preserveAspectRatio="xMidYMax meet" />
-      {/* Tờ tranh chung: cầu vồng đang được tô bởi 3 màu khác nhau */}
-      <g transform="rotate(-3 88 122)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <rect x="6" y="96" width="164" height="50" rx="8" fill="#FFFFFF" />
-        <path d="M40 138 A48 30 0 0 1 136 138" fill="none" stroke="#FF7AA2" strokeWidth="9" />
-        <path d="M54 138 A34 22 0 0 1 122 138" fill="none" stroke="#FFD54F" strokeWidth="9" />
-        <path d="M68 138 A20 14 0 0 1 108 138" fill="none" stroke="#E3F0FF" strokeWidth="9" />
-        <path d="M40 138 A48 30 0 0 1 136 138 M54 138 A34 22 0 0 1 122 138 M68 138 A20 14 0 0 1 108 138" fill="none" stroke={INK} strokeWidth="1.2" opacity="0.35" />
+    <svg viewBox="0 0 164 150" className="h-full w-full" aria-hidden="true">
+      <path d="M82 22 C74 16 76 6 82 11 C88 6 90 16 82 22 Z" fill="#FF7AA2" stroke={INK} strokeWidth="1.8" strokeLinejoin="round" />
+      <image href="/mascots/meo.svg" x="0" y="32" width="58" height="80" preserveAspectRatio="xMidYMax meet" />
+      <image href="/mascots/gau.svg" x="51" y="26" width="62" height="86" preserveAspectRatio="xMidYMax meet" />
+      <image href="/mascots/tho.svg" x="108" y="12" width="56" height="100" preserveAspectRatio="xMidYMax meet" />
+      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        <rect x="6" y="100" width="152" height="44" rx="10" fill="#FFFFFF" />
+        <path d="M44 136 A38 24 0 0 1 120 136" fill="none" stroke="#FF7AA2" strokeWidth="8" />
+        <path d="M56 136 A26 16 0 0 1 108 136" fill="none" stroke="#FFD54F" strokeWidth="8" />
+        <path d="M68 136 A14 9 0 0 1 96 136" fill="none" stroke="#4FA3E0" strokeWidth="8" />
       </g>
-      <Crayon x={16} y={110} rot={-32} color="#FF7AA2" />
-      <Crayon x={84} y={96} rot={62} color="#FFD54F" />
-      <Crayon x={166} y={102} rot={200} color="#4FA3E0" />
+      {/* 1 cây bút tượng trưng: gấu đang tô dải cầu vồng */}
+      <Crayon x={66.5} y={85.2} rot={62} scale={0.62} color="#FFD54F" />
     </svg>
   );
 }

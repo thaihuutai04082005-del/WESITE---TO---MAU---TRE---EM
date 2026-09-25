@@ -78,7 +78,7 @@ function HomeCard({ card, onInfo }) {
         </span>
         <span className="whitespace-nowrap font-display text-[26px] font-extrabold leading-[1.1] text-ink">{t(`nav.${card.key}`)}</span>
       </div>
-      <div className="pointer-events-none relative -my-2 mr-9">
+      <div className="pointer-events-none relative -my-2 mr-12">
         <div className="absolute inset-0 transition duration-300 group-hover:scale-105">
           <Art bubble={t('home.bookBubble')} />
         </div>
@@ -86,14 +86,13 @@ function HomeCard({ card, onInfo }) {
       <button
         type="button"
         onClick={() => onInfo(card)}
-        className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/75 font-display text-xl font-extrabold italic shadow-soft backdrop-blur transition hover:scale-110 hover:bg-white focus-visible:outline-none focus-visible:ring-4"
+        className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/75 font-display text-xl font-extrabold not-italic shadow-soft backdrop-blur transition hover:scale-110 hover:bg-white focus-visible:outline-none focus-visible:ring-4"
         style={{ color: card.accent, '--tw-ring-color': `${card.accent}55` }}
         aria-label={t('guide.open', { name: t(`nav.${card.key}`) })}
         title={t('guide.open', { name: t(`nav.${card.key}`) })}
         data-testid={`info-${card.key}`}
       >
         <span className="leading-none">i</span>
-        <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-white" style={{ background: card.accent }} aria-hidden="true" />
       </button>
       <span className="pointer-events-none absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-soft transition group-hover:translate-x-1" style={{ color: card.accent }}>
         <Icon name="arrow" size={22} strokeWidth={3} />
