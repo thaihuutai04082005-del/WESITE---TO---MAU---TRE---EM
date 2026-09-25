@@ -1,16 +1,6 @@
 // Hình minh hoạ cho các thẻ ở trang chính — vẽ bằng SVG, ghép với linh vật lấy từ kho tranh (/mascots).
 const INK = '#1B2A38';
 
-function Sparkles({ color = '#FFC94D', x = 0, y = 0 }) {
-  return (
-    <g transform={`translate(${x} ${y})`} stroke={color} strokeWidth="5" strokeLinecap="round">
-      <path d="M0 0 L10 6" />
-      <path d="M-4 16 L8 16" />
-      <path d="M0 32 L10 26" />
-    </g>
-  );
-}
-
 function Crayon({ x, y, rot, color }) {
   return (
     <g transform={`translate(${x} ${y}) rotate(${rot})`} stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
@@ -26,7 +16,6 @@ export function ColorArt() {
   return (
     <div className="relative h-full w-full">
       <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <Sparkles x="96" y="18" />
         <g transform="rotate(-8 90 110)">
           <rect x="30" y="78" width="120" height="62" rx="6" fill="#FFFFFF" stroke={INK} strokeWidth="2.5" />
           <circle cx="90" cy="110" r="18" fill="#FFE0B5" stroke={INK} strokeWidth="2" />
@@ -48,10 +37,6 @@ export function ColorArt() {
 export function TrophyArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <Sparkles x="40" y="40" />
-      <g transform="translate(200 40) scale(-1 1)">
-        <Sparkles />
-      </g>
       <g stroke={INK} strokeWidth="3" strokeLinejoin="round">
         <path d="M78 34 Q50 34 52 58 Q55 80 84 82" fill="none" stroke="#E6A817" strokeWidth="9" strokeLinecap="round" />
         <path d="M142 34 Q170 34 168 58 Q165 80 136 82" fill="none" stroke="#E6A817" strokeWidth="9" strokeLinecap="round" />
@@ -71,7 +56,6 @@ export function TogetherArt() {
   return (
     <div className="relative h-full w-full">
       <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <Sparkles x="60" y="24" />
         <g transform="rotate(8 80 115)">
           <rect x="18" y="88" width="120" height="54" rx="6" fill="#FFFFFF" stroke={INK} strokeWidth="2.5" />
           {[0, 72, 144, 216, 288].map((a) => (
@@ -102,10 +86,6 @@ export function GachaArt() {
   );
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <g stroke="#FF7AA2" strokeWidth="5" strokeLinecap="round">
-        <path d="M14 70 L26 74" />
-        <path d="M16 90 L28 86" />
-      </g>
       {card(46, -18, '#FF7AA2', 'star')}
       {card(86, -4, '#4FA3E0', '?')}
       {card(126, 12, '#5DADE2', '?')}
@@ -124,7 +104,6 @@ export function BookArt() {
   return (
     <div className="relative h-full w-full">
       <svg viewBox="0 0 220 150" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <Sparkles x="30" y="30" />
         <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
           <path d="M20 58 Q55 46 88 60 L88 138 Q55 124 20 136 Z" fill="#FFFFFF" />
           <path d="M156 58 Q121 46 88 60 L88 138 Q121 124 156 136 Z" fill="#FFFFFF" />
@@ -144,10 +123,6 @@ export function BookArt() {
 export function MissionArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <g stroke="#7DE2FF" strokeWidth="5" strokeLinecap="round">
-        <path d="M188 40 L198 34" />
-        <path d="M190 58 L202 58" />
-      </g>
       <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
         <g transform="rotate(-12 80 108)">
           <rect x="44" y="66" width="72" height="82" rx="8" fill="#FFFFFF" />
