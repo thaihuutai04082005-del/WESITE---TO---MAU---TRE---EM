@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="202 132 271.6 370"><g id="subject" class="subject anim-bounce">
+<path d="M 380 440 C 470 440 485 350 445 318 C 434 310 420 322 428 334 C 452 366 440 418 380 418 Z" id="r-duoi" data-region="duoi" class="region" fill="#F4A340" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="410" rx="90" ry="75" id="r-than" data-region="than" class="region" fill="#F4A340" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="425" rx="52" ry="48" id="r-bung" data-region="bung" class="region" fill="#FFE0B5" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="262" cy="478" rx="26" ry="16" id="r-chan-trai" data-region="chan-trai" class="region" fill="#FFE0B5" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="338" cy="478" rx="26" ry="16" id="r-chan-phai" data-region="chan-phai" class="region" fill="#FFE0B5" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="226,222 236,140 288,188" id="r-tai-trai" data-region="tai-trai" class="region" fill="#F4A340" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="240,204 245,162 272,190" id="r-trong-tai-trai" data-region="trong-tai-trai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="374,222 364,140 312,188" id="r-tai-phai" data-region="tai-phai" class="region" fill="#F4A340" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="360,204 355,162 328,190" id="r-trong-tai-phai" data-region="trong-tai-phai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="255" rx="80" ry="80" id="r-dau" data-region="dau" class="region" fill="#F4A340" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 278 180 L 300 208 L 322 180 Q 300 174 278 180 Z" id="r-soc-tran" data-region="soc-tran" class="region" fill="#D9822B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="282" rx="32" ry="22" id="r-mom" data-region="mom" class="region" fill="#FFE0B5" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="292,258 308,258 300,267" id="r-mui" data-region="mui" class="region" fill="#FF8FA3" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 250 282 L 205 274 M 250 292 L 205 296 M 350 282 L 395 274 M 350 292 L 395 296" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><circle cx="274" cy="245" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="326" cy="245" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="276.5" cy="242" r="2.6" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="328.5" cy="242" r="2.6" fill="#FFFFFF"/></g>
+<ellipse cx="254" cy="265" rx="11" ry="7" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="346" cy="265" rx="11" ry="7" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 285 275 Q 300 291 315 275" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></svg>

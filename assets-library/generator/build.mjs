@@ -237,6 +237,33 @@ function writeAvatars(catalog) {
   }
 }
 
+/** Linh vật cho giao diện: chỉ lấy chủ thể (bỏ nền), tô màu gợi ý, nền trong suốt. */
+const MASCOTS = ['gau', 'tho', 'meo', 'cho', 'voi', 'tao', 'dau-tay', 'hoa', 'o-to', 'may-bay'];
+function writeMascots(catalog) {
+  const outDir = join(ROOT, '..', 'frontend', 'public', 'mascots');
+  mkdirSync(outDir, { recursive: true });
+  const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
+  for (const slug of MASCOTS) {
+    const p = pics.find((x) => x.object === slug && !x.isCard);
+    let svg = readFileSync(join(ROOT, p.file), 'utf8');
+    for (const r of p.regions) svg = svg.replace(`data-region="${r.id}" class="region" fill="#FFFFFF"`, `data-region="${r.id}" class="region" fill="${r.color}"`);
+    const start = svg.indexOf('<g id="subject"');
+    const end = svg.indexOf('<g class="scene-front">');
+    const subject = svg.slice(start, end).trim();
+    // Khung bao chủ thể: bỏ các vùng cảnh nền (trời, đất, mây, mặt trời…).
+    const bg = /^(nen-|mat-nuoc|may-|mat-troi|tia-nang|bong-do|hoa-nho|buom)/;
+    const subj = p.regions.filter((r) => !bg.test(r.id) && r.area > 0);
+    const x0 = Math.min(...subj.map((r) => r.bbox[0])) - 8;
+    const y0 = Math.min(...subj.map((r) => r.bbox[1])) - 8;
+    const x1 = Math.max(...subj.map((r) => r.bbox[2])) + 8;
+    const y1 = Math.max(...subj.map((r) => r.bbox[3])) + 8;
+    writeFileSync(
+      join(outDir, `${slug}.svg`),
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${round1(x0)} ${round1(y0)} ${round1(x1 - x0)} ${round1(y1 - y0)}">${subject}</svg>`,
+    );
+  }
+}
+
 function main() {
   const catalog = { generatedAt: new Date().toISOString(), viewBox: [600, 600], themes: [] };
   for (const theme of THEMES) {
@@ -259,6 +286,7 @@ function main() {
   }
   writeFileSync(join(ROOT, 'catalog.json'), JSON.stringify(catalog));
   writeAvatars(catalog);
+  writeMascots(catalog);
   const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
   console.log(
     `Đã sinh ${pics.length} tranh (${pics.filter((p) => !p.isCard).length} tranh thường, ${pics.filter((p) => p.isCard).length} tranh thẻ).`,

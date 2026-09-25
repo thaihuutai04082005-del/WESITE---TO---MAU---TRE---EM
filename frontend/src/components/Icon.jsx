@@ -45,6 +45,10 @@ const P = {
   eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z',
   edit: 'M4 20h4L19 9l-4-4L4 16zM14 6l4 4',
   menu: 'M4 6h16M4 12h16M4 18h16',
+  medal: 'M8 3l2.5 6M16 3l-2.5 6M12 21a6 6 0 100-12 6 6 0 000 12zM12 12.5l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3z',
+  mountain: 'M2 20L9 8l4 6 3-4 6 10zM9 8V3l4 1.5L9 6',
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+  chevronDown: 'M6 9l6 6 6-6',
 };
 
 export default function Icon({ name, size = 24, className = '', strokeWidth = 2.2 }) {

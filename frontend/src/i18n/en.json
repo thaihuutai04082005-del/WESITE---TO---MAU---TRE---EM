@@ -1,5 +1,7 @@
 {
-  "app": { "name": "Color Buddies" },
+  "app": {
+    "name": "Color Buddies"
+  },
   "common": {
     "loading": "Loading…",
     "back": "Back",
@@ -40,12 +42,30 @@
     "subtitle": "Hundreds of cute pictures, a weekly creative arena, rare picture cards to collect and storybooks made by your child.",
     "cta": "Sign up free",
     "features": {
-      "creative": { "title": "Two coloring modes", "text": "Paint-by-number to learn colors, or Free Coloring to create anything." },
-      "arena": { "title": "Creative Arena", "text": "Color alongside 10 kids with fair, automatic scoring." },
-      "gacha": { "title": "Collect rare cards", "text": "Win prizes to open S/A/B/C cards — no real money involved." },
-      "together": { "title": "Color together", "text": "Invite friends to color one picture in real time." },
-      "storybook": { "title": "Make a storybook", "text": "Turn pictures into a flip-page book and download a PDF." },
-      "safe": { "title": "Safe for kids", "text": "Parents verify with a one-time code; friends and rooms use private codes only." }
+      "creative": {
+        "title": "Two coloring modes",
+        "text": "Paint-by-number to learn colors, or Free Coloring to create anything."
+      },
+      "arena": {
+        "title": "Creative Arena",
+        "text": "Color alongside 10 kids with fair, automatic scoring."
+      },
+      "gacha": {
+        "title": "Collect rare cards",
+        "text": "Win prizes to open S/A/B/C cards — no real money involved."
+      },
+      "together": {
+        "title": "Color together",
+        "text": "Invite friends to color one picture in real time."
+      },
+      "storybook": {
+        "title": "Make a storybook",
+        "text": "Turn pictures into a flip-page book and download a PDF."
+      },
+      "safe": {
+        "title": "Safe for kids",
+        "text": "Parents verify with a one-time code; friends and rooms use private codes only."
+      }
     }
   },
   "home": {
@@ -53,7 +73,8 @@
     "level": "Level {{level}}",
     "missions": "missions",
     "rank": "Rank",
-    "continue": "Keep coloring"
+    "continue": "Keep coloring",
+    "subtitle": "Let's explore the world of colors!"
   },
   "auth": {
     "login": "Log in",
@@ -72,7 +93,10 @@
     "captchaRefresh": "New code",
     "guardian": "Parent contact",
     "guardianHint": "Only used to recover the password. We'll send a one-time code for a parent to confirm.",
-    "contact": { "phone": "Phone number", "email": "Email (Gmail)" },
+    "contact": {
+      "phone": "Phone number",
+      "email": "Email (Gmail)"
+    },
     "otpTitle": "Enter the code",
     "otpSent": "A 6-digit code was sent to {{to}}.",
     "otpCode": "One-time code",
@@ -130,8 +154,14 @@
   },
   "mode": {
     "pick": "How would you like to color?",
-    "template": { "title": "Paint by number", "text": "A sample picture and numbers for every area." },
-    "free": { "title": "Free coloring", "text": "Pick any colors you like — counts in the Arena." }
+    "template": {
+      "title": "Paint by number",
+      "text": "A sample picture and numbers for every area."
+    },
+    "free": {
+      "title": "Free coloring",
+      "text": "Pick any colors you like — counts in the Arena."
+    }
   },
   "coloring": {
     "reference": "Sample",
@@ -145,7 +175,12 @@
     "complete": "Finish",
     "download": "Download",
     "print": "Print",
-    "saveState": { "saved": "Saved", "saving": "Saving…", "dirty": "Unsaved", "error": "Save failed" },
+    "saveState": {
+      "saved": "Saved",
+      "saving": "Saving…",
+      "dirty": "Unsaved",
+      "error": "Save failed"
+    },
     "clearTitle": "Clear everything?",
     "clearText": "All colors, strokes and stickers will be removed. You can press Undo to get them back.",
     "clearConfirm": "Clear all"
@@ -174,9 +209,21 @@
   "history": {
     "title": "Coloring history",
     "retention": "Finished pictures are kept forever. Unfinished ones are deleted after 30 days without opening (you'll be warned first).",
-    "filter": { "all": "All", "in_progress": "In progress", "completed": "Finished" },
-    "status": { "in_progress": "In progress", "completed": "Finished" },
-    "mode": { "template": "By number", "free": "Free", "arena": "Arena", "collab": "Together" },
+    "filter": {
+      "all": "All",
+      "in_progress": "In progress",
+      "completed": "Finished"
+    },
+    "status": {
+      "in_progress": "In progress",
+      "completed": "Finished"
+    },
+    "mode": {
+      "template": "By number",
+      "free": "Free",
+      "arena": "Arena",
+      "collab": "Together"
+    },
     "empty": "No pictures yet.",
     "noPreview": "Not started",
     "edit": "Edit",
@@ -196,7 +243,10 @@
     "note": "Pay with MoMo or PayPal. Prices include tax. The Yearly plan costs ~15% less than 12 monthly payments.",
     "payTitle": "Pay for {{plan}}",
     "payNow": "Pay",
-    "provider": { "momo": "MoMo wallet", "paypal": "PayPal (cards)" },
+    "provider": {
+      "momo": "MoMo wallet",
+      "paypal": "PayPal (cards)"
+    },
     "mockNotice": "The payment gateway is not configured on this server. This is a TEST transaction; no real money is charged.",
     "mockConfirm": "Confirm test payment",
     "success": "Upgrade complete! Have fun coloring.",
@@ -205,9 +255,36 @@
       "month": "Monthly · {{n}}/{{limit}} left",
       "year": "Yearly · until {{date}}"
     },
-    "free": { "name": "Free", "per": "", "limit": "1 picture per day", "perks": ["All themes & both modes", "Arena, cards, color together", "History & PNG download"] },
-    "month": { "name": "Monthly", "per": "/month", "limit": "100 pictures per month (~3/day)", "perks": ["Everything in Free", "More pictures every day", "Priority support"] },
-    "year": { "name": "Yearly", "per": "/year", "limit": "Unlimited pictures", "perks": ["Everything in Monthly", "Unlimited coloring", "Save almost 2 months"] }
+    "free": {
+      "name": "Free",
+      "per": "",
+      "limit": "1 picture per day",
+      "perks": [
+        "All themes & both modes",
+        "Arena, cards, color together",
+        "History & PNG download"
+      ]
+    },
+    "month": {
+      "name": "Monthly",
+      "per": "/month",
+      "limit": "100 pictures per month (~3/day)",
+      "perks": [
+        "Everything in Free",
+        "More pictures every day",
+        "Priority support"
+      ]
+    },
+    "year": {
+      "name": "Yearly",
+      "per": "/year",
+      "limit": "Unlimited pictures",
+      "perks": [
+        "Everything in Monthly",
+        "Unlimited coloring",
+        "Save almost 2 months"
+      ]
+    }
   },
   "payment": {
     "pending": "Confirming payment…",
@@ -223,15 +300,31 @@
   },
   "missions": {
     "title": "Missions & achievements",
-    "cards": { "level": "Level", "rank": "Arena rank", "gacha": "Gacha points" },
+    "cards": {
+      "level": "Level",
+      "rank": "Arena rank",
+      "gacha": "Gacha points"
+    },
     "levelMissions": "Level {{level}} missions",
     "maxed": "You've finished all 20 levels! New missions are coming soon.",
     "hint": "Each mission gives Ruby right away. Finish all 3 to reach the next level.",
-    "difficulty": { "easy": "Easy", "medium": "Medium", "hard": "Hard" },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
     "rankTitle": "Arena rank",
     "rankHint": "Place in the Arena top 3 to earn Rank points. Rank points never go down."
   },
-  "rank": { "bronze": "Bronze", "silver": "Silver", "gold": "Gold", "platinum": "Platinum", "diamond": "Diamond" },
+  "rank": {
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "platinum": "Platinum",
+    "diamond": "Diamond",
+    "pts": "pts",
+    "points": "points"
+  },
   "popup": {
     "missionDone": "Mission complete!",
     "levelUp": "Level {{level}}!",
@@ -310,7 +403,12 @@
     "collection": "Collection",
     "empty": "No cards yet. Join the Arena to earn Gacha points!",
     "colorThis": "Color this picture",
-    "rarity": { "S": "Super rare", "A": "Rare", "B": "Uncommon", "C": "Common" }
+    "rarity": {
+      "S": "Super rare",
+      "A": "Rare",
+      "B": "Uncommon",
+      "C": "Common"
+    }
   },
   "shop": {
     "title": "Shop",
@@ -328,7 +426,9 @@
     "confirmTitle": "Buy this item?",
     "confirmText": "Buy {{name}} for {{price}} Ruby?"
   },
-  "frames": { "none": "No frame" },
+  "frames": {
+    "none": "No frame"
+  },
   "friends": {
     "title": "Friends",
     "myCode": "Your friend code",
@@ -348,7 +448,10 @@
     "title": "Gift & swap cards",
     "with": "Gift/swap with {{name}}",
     "limit": "Used {{used}}/{{limit}} today.",
-    "kind": { "gift": "Gift", "exchange": "Swap" },
+    "kind": {
+      "gift": "Gift",
+      "exchange": "Swap"
+    },
     "pickMine": "Pick your card",
     "pickTheirs": "Pick {{name}}'s card",
     "noCards": "You have no cards to give yet.",
@@ -368,7 +471,13 @@
     "confirmAcceptTitle": "Confirm",
     "confirmAcceptGift": "{{name}} wants to give you “{{card}}”. Accept?",
     "confirmAcceptExchange": "{{name}} wants to swap “{{theirs}}” for your “{{mine}}”. Accept?",
-    "status": { "accepted": "Completed", "declined": "Declined", "cancelled": "Cancelled", "failed": "Invalid", "pending": "Pending" }
+    "status": {
+      "accepted": "Completed",
+      "declined": "Declined",
+      "cancelled": "Cancelled",
+      "failed": "Invalid",
+      "pending": "Pending"
+    }
   },
   "together": {
     "title": "Color together",

@@ -6,6 +6,7 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { getSocket } from '../../services/socket';
 import Avatar from '../Avatar/Avatar';
+import RankBadge from '../RankBadge';
 import { formatDateTime } from '../../lib/format';
 import Icon from '../Icon';
 import Toasts from './Toasts';
@@ -14,20 +15,21 @@ import UpgradeModal from './UpgradeModal';
 import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
 
+// Mỗi mục một biểu tượng đúng nghĩa + màu riêng (khớp màu thẻ ở trang chính).
 export const NAV = [
-  { to: '/', icon: 'home', key: 'home', end: true },
-  { to: '/color', icon: 'palette', key: 'color' },
-  { to: '/history', icon: 'history', key: 'history' },
-  { to: '/arena', icon: 'trophy', key: 'arena' },
-  { to: '/missions', icon: 'target', key: 'missions' },
-  { to: '/gacha', icon: 'gift', key: 'gacha' },
-  { to: '/shop', icon: 'shop', key: 'shop' },
-  { to: '/friends', icon: 'users', key: 'friends' },
-  { to: '/together', icon: 'heart', key: 'together' },
-  { to: '/storybooks', icon: 'book', key: 'storybooks' },
+  { to: '/', icon: 'home', key: 'home', end: true, color: '#2B9BF4' },
+  { to: '/color', icon: 'palette', key: 'color', color: '#2B9BF4' },
+  { to: '/history', icon: 'history', key: 'history', color: '#5E7A8C' },
+  { to: '/arena', icon: 'trophy', key: 'arena', color: '#F07B2E' },
+  { to: '/missions', icon: 'target', key: 'missions', color: '#138FA8' },
+  { to: '/gacha', icon: 'gift', key: 'gacha', color: '#7D5FFF' },
+  { to: '/shop', icon: 'shop', key: 'shop', color: '#FF5F7E' },
+  { to: '/friends', icon: 'users', key: 'friends', color: '#2FA65A' },
+  { to: '/together', icon: 'heart', key: 'together', color: '#2FA65A' },
+  { to: '/storybooks', icon: 'book', key: 'storybooks', color: '#D99A00' },
 ];
 const MOBILE_MAIN = ['home', 'color', 'arena', 'history'];
-const DESKTOP_MAIN = ['color', 'history', 'arena', 'missions', 'gacha', 'together'];
+const DESKTOP_MAIN = ['color', 'history', 'arena', 'missions', 'gacha'];
 // Các sự kiện này đã có popup phần thưởng riêng → không hiện thêm toast.
 const POPUP_TYPES = new Set(['mission_complete', 'level_up', 'rank_up']);
 
@@ -65,32 +67,47 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-white">
       <header className="no-print sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4">
-          <Link to="/" className="flex items-center gap-2 font-display text-2xl font-extrabold text-primary">
+        <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-2 px-4">
+          <Link to="/" className="mr-2 flex shrink-0 items-center gap-2 font-display text-2xl font-extrabold text-primary">
             <img src="/favicon.svg" alt="" className="h-9 w-9" />
-            <span className="hidden sm:inline">{t('app.name')}</span>
+            <span className="hidden whitespace-nowrap sm:inline">{t('app.name')}</span>
           </Link>
           {user && (
-            <nav className="ml-4 hidden flex-1 items-center gap-1 overflow-x-auto lg:flex">
+            <nav className="ml-3 hidden flex-1 items-center gap-1 lg:flex">
               {NAV.filter((n) => DESKTOP_MAIN.includes(n.key)).map((n) => (
-                <NavLink key={n.to} to={n.to} className={({ isActive }) => `whitespace-nowrap rounded-xl px-3 py-2 font-bold ${isActive ? 'bg-primary-light text-primary-dark' : 'text-muted hover:text-ink'}`}>
-                  {t(`nav.${n.key}`)}
+                <NavLink
+                  key={n.to}
+                  to={n.to}
+                  title={t(`nav.${n.key}`)}
+                  className={({ isActive }) => `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`}
+                  data-testid={`nav-${n.key}`}
+                >
+                  <span style={{ color: n.color }}>
+                    <Icon name={n.icon} size={22} strokeWidth={2.4} />
+                  </span>
+                  <span className="hidden xl:inline">{t(`nav.${n.key}`)}</span>
                 </NavLink>
               ))}
             </nav>
           )}
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
             <LanguageSwitch />
             {user ? (
               <>
-                <span className="chip hidden sm:inline-flex" title="Ruby">
-                  <Icon name="ruby" size={16} /> {user.ruby}
+                <span className="hidden sm:block">
+                  <RankBadge rank={user.rank} points={user.rankPoints} />
                 </span>
+                <span className="sm:hidden">
+                  <RankBadge rank={user.rank} points={user.rankPoints} compact />
+                </span>
+                <Link to="/shop" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" title="Ruby" data-testid="ruby-chip">
+                  <Icon name="ruby" size={18} /> {user.ruby}
+                </Link>
                 <NotificationBell />
                 <Link to="/profile" className="flex items-center gap-2" data-testid="nav-profile">
-                  <Avatar avatar={user.avatar} frame={user.avatarFrame} size={44} />
+                  <Avatar avatar={user.avatar} frame={user.avatarFrame} size={42} />
                 </Link>
-                <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => setMenu(true)} aria-label={t('nav.menu')} data-testid="nav-menu">
+                <button type="button" className="btn-ghost min-h-11 px-2.5 sm:px-3" onClick={() => setMenu(true)} aria-label={t('nav.menu')} data-testid="nav-menu">
                   <Icon name="menu" />
                 </button>
               </>

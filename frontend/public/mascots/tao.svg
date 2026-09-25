@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="162 138.6 276 319.4"><g id="subject" class="subject anim-float">
+<path d="M 300 215 C 250 180 170 200 170 290 C 170 380 230 450 270 450 C 285 450 290 442 300 442 C 310 442 315 450 330 450 C 370 450 430 380 430 290 C 430 200 350 180 300 215 Z" id="r-qua-tao" data-region="qua-tao" class="region" fill="#E74C3C" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="218" cy="282" rx="15" ry="30" transform="rotate(20 218 282)" id="r-bong-sang" data-region="bong-sang" class="region" fill="#FF8A80" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 296 220 Q 292 180 305 150 L 315 154 Q 304 185 308 220 Z" id="r-cuong" data-region="cuong" class="region" fill="#8B5A2B" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 310 175 C 330 140 380 140 395 160 C 375 190 330 195 310 175 Z" id="r-la" data-region="la" class="region" fill="#4CAF50" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="334" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="334" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFB3C1" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 342 Q 300 354.8 312 342" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g></svg>
