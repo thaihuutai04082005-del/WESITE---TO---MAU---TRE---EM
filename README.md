@@ -25,6 +25,15 @@ npm run dev            # backend :4000 + frontend :5173 (Vite proxy /api, /socke
 - Ở môi trường dev, mã OTP hiện ngay trên màn hình đăng ký (và in ra console) khi chưa cấu hình SMS/Email.
 - Tài khoản quản trị: đặt `ADMIN_PASSWORD` trong `backend/.env` rồi chạy `npm run seed`, sau đó vào http://localhost:5173/admin/.
 
+### Windows: bấm đúp để chạy
+
+Bấm đúp **`chay-web.bat`**. Mỗi lần chạy, file này tự làm các việc sau:
+1. Tải bản mới nhất từ GitHub (nhánh `main`).
+2. Cài thêm thư viện nếu bản mới cần.
+3. Chạy web và mở trình duyệt.
+
+Lần đầu chạy, nó tạo sẵn biểu tượng **Web To Mau** ngoài Desktop để lần sau bấm luôn.
+
 ### Production
 
 ```bash
