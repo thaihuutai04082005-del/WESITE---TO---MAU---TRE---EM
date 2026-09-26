@@ -5,7 +5,7 @@
 | Nội dung | Chốt |
 |---|---|
 | Tạo chữ ký | Trong trang cá nhân, mục "Tạo chữ ký": gõ biệt danh → chọn mẫu → lưu làm **chữ ký mặc định** |
-| Tên trên chữ ký | Lấy từ biệt danh (không dùng tên thật), lọc từ xấu |
+| Tên trên chữ ký | Bé tự gõ: **tên thật hay biệt danh đều được** (mặc định gợi ý biệt danh), lọc từ xấu |
 | 10 mẫu | 5 mẫu Free (gọn, bình thường) + 5 mẫu "wow" (ánh kim, vương miện, cầu vồng…) chỉ mở khi có **gói tháng**; bé Free vẫn thấy mẫu wow kèm ổ khóa |
 | Tự ký bằng tay | Có, **miễn phí** (nét thường, không hiệu ứng) |
 | Đổi chữ ký | Chỉ đổi ở mục "Tạo chữ ký"; tranh đã ký giữ nguyên chữ ký cũ |
@@ -40,6 +40,37 @@
 | Rút tranh | Rút được trong thứ 7 + chủ nhật; **từ thứ 2 không rút được** |
 | Số lần triển lãm | Mỗi tranh **chỉ đi triển lãm 1 lần** |
 | Kiểm duyệt | Tranh gửi vào hàng chờ duyệt của admin (thứ 7 + CN); tranh bị loại nhận thông báo nhẹ nhàng "Tranh này chưa phù hợp để triển lãm, bé thử gửi tranh khác nhé!" |
+
+### Nội quy triển lãm (ĐÃ CHỐT — chỉ hiển thị bản dành cho bé)
+
+*Gấu Bông nhắc nhỏ: tranh đi triển lãm cần đủ 8 điều này nha!* 🐻
+
+1. ✍️ **Có chữ ký của bé** trên tranh.
+2. ✅ **Tô gần xong hết tranh** (ít nhất 8/10 phần).
+3. 🃏 **Đúng loại tranh**: tranh thẻ hiếm S, A, B hoặc tranh Sáng tạo.
+4. 🔁 **Mỗi tranh chỉ đi triển lãm 1 lần.**
+5. 🎨 **Tô gọn gàng**, không lem quá nhiều ra ngoài nét.
+6. 😊 **Tranh vui vẻ, thân thiện**: không hình bậy, đáng sợ hay đánh nhau.
+7. 🔤 **Không viết chữ xấu**, không ghi số điện thoại hay địa chỉ nhà.
+8. 🖍️ **Tô bằng cả tấm lòng**, không tô vội cho xong.
+
+📅 Gửi tranh vào **thứ 7 và chủ nhật** — tranh được trưng **cả tuần sau**.
+
+Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng xác nhận gửi tranh (ô "Bé đã đọc nội quy", chỉ hỏi lần đầu). Khi bị loại, thông báo nêu đúng điều vi phạm kèm lời động viên của Gấu.
+
+### Quy tắc vận hành (nội bộ, KHÔNG hiển thị — máy/admin làm theo)
+
+- Giờ: theo giờ Việt Nam (GMT+7) của máy chủ. **Đóng cổng gửi tranh lúc CN 20:00** (cùng lúc khóa cảm xúc); admin duyệt tới 23:59; tranh chưa duyệt kịp tự chuyển sang vòng sau, giữ lượt.
+- Điều 2 (tô xong): ≥ 80% số vùng đã tô.
+- Điều 5 (lem): loại nếu > 40% số nét cọ lem ra ngoài vùng (Xô màu không bao giờ tính lem; có dung sai mép nét như máy chấm Đấu trường).
+- Điều 8 (tô vội): loại nếu thời gian tô < 20 giây hoặc < 0,7 giây mỗi vùng đã tô (dùng lại luật chống gian lận có sẵn).
+- Điều 1–5, 8: máy tự kiểm. Điều 6–7: admin xem.
+- Tự duyệt: tranh không/ít nét cọ tự do, hoặc tác giả đã có 3 tranh liên tiếp được duyệt và chưa từng vi phạm điều 6–7. Còn lại vào hàng chờ; trang duyệt dạng lưới có nút "Duyệt tất cả"; loại tranh phải chọn số điều vi phạm.
+- Tranh bị loại/rút không tính vào lượt gửi; được gửi tranh khác thay trong cùng cuối tuần. Rút được tới CN 20:00 (rút thì mở khóa chữ ký).
+- Nút "🚩 Báo cho Gấu" (kín đáo, ẩn danh): bị báo nhiều thì tạm ẩn chờ admin; vi phạm thì gỡ, không xét danh hiệu, không ghi thành tích.
+- Tranh thẻ hiếm tô ở chế độ Sáng tạo: xét theo **hạng thẻ**.
+- Admin được hủy cảm xúc bất thường (nhiều tài khoản mới cùng thả) và thu hồi danh hiệu nếu gian lận.
+- Tranh luôn thuộc về tác giả; chữ ký, bảng cảm xúc, danh hiệu đi theo tranh mãi mãi.
 
 ## Phần 3 — Đấu giá hàng tuần (chưa bàn)
 
