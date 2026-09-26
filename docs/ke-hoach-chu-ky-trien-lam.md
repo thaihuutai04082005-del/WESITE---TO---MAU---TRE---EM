@@ -25,7 +25,13 @@
 | Kiểu hội trường | **Kiểu A — Bảo tàng nhiều phòng**: sảnh chính → Phòng Huyền thoại (S, khung vàng), Quý hiếm (A, khung bạc), Đặc biệt (B, khung gỗ); bấm tranh để phóng to xem chữ ký, tác giả |
 | Tương tác | **Chỉ thả cảm xúc tích cực**: ❤️ Tim, 🙌 Hoan hô, 👏 Vỗ tay, 😍 Rất đẹp, 🌟 Tuyệt vời. Không có biểu tượng buồn/giận |
 | Bình luận | **Không có bình luận** — giữ tâm lý tích cực, vui vẻ cho trẻ |
-| Còn phải chốt | Tranh nào được vào; bé tự gửi hay tự động; tranh trưng bao lâu; hiện số lượt cảm xúc thế nào |
+| Tranh được vào | Chỉ tranh thẻ hiếm **S, A, B** và tranh tô ở chế độ **Sáng tạo**. Tranh "Tô theo mẫu" **không** được vào |
+| Lịch vòng triển lãm (cố định 1 tuần, không có tùy chọn) | **Thứ 2 → Chủ nhật**: trưng tranh vòng hiện tại. **Thứ 7 + Chủ nhật**: vẫn trưng, đồng thời mở cổng gửi tranh cho vòng sau. **Chủ nhật 20:00**: chốt vòng. **Thứ 2 00:00**: mở vòng mới. Hội trường không bao giờ trống |
+| Kết thúc vòng | Tranh tự về bộ sưu tập, mang theo **bảng cảm xúc** đã nhận (thành tích triển lãm). Tranh được thả nhiều nhất tuần nhận danh hiệu 🏆 **"Tranh được yêu thích nhất tuần"** (khung/ruy băng đi theo tranh mãi mãi) |
+| Luật thả cảm xúc | Mỗi người thả cho mỗi tranh 1 cảm xúc (đổi được); không tự thả cho tranh mình; chỉ tài khoản đã xác minh mới được thả |
+| Tâm lý tích cực | Tranh nào cũng có sẵn 1 lời khen của linh vật (không hiện "0"); không có bảng "ít tim nhất"; thông báo cảm xúc gom mỗi ngày 1 lần |
+| Liên kết đấu giá | Tranh có thành tích triển lãm là tranh bé có thể đem đi đấu giá (bàn ở Phần 3) |
+| Còn phải chốt | Mỗi tuần vinh danh mấy tranh; bé tự gửi hay tự động (bàn sau) |
 
 ## Phần 3 — Đấu giá hàng tuần (chưa bàn)
 
