@@ -18,7 +18,7 @@
 | Đấu trường | Chữ ký là lớp riêng, máy chấm bỏ qua — không ảnh hưởng điểm |
 | Xuất file | Chữ ký có trong PNG/PDF, lịch sử tranh, triển lãm |
 
-## Phần 2 — Hội trường triển lãm (đang bàn)
+## Phần 2 — Hội trường triển lãm (ĐÃ CHỐT)
 
 | Nội dung | Chốt |
 |---|---|
