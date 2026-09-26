@@ -76,6 +76,7 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 
 | Nội dung | Chốt |
 |---|---|
+| Nguồn thu | **Chỉ từ gói dịch vụ (gói tháng)**. **Không bán Ruby bằng tiền thật**, không có gì dụ trẻ nạp tiền. Ruby dùng để đấu giá chỉ kiếm được bằng cách chơi (nhiệm vụ, lên rank…) như hiện tại |
 | Quyền sở hữu | **Chuyển hẳn cho người mua**: tranh (kèm chữ ký tác giả gốc + thành tích triển lãm) vào bộ sưu tập người mua, người bán không còn tranh đó. Chữ ký tác giả gốc đi theo tranh mãi mãi, người mua không ký đè |
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
