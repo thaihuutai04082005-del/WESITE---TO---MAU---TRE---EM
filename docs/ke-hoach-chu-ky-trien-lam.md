@@ -20,6 +20,13 @@
 
 ## Phần 2 — Hội trường triển lãm (đang bàn)
 
+| Nội dung | Chốt |
+|---|---|
+| Kiểu hội trường | **Kiểu A — Bảo tàng nhiều phòng**: sảnh chính → Phòng Huyền thoại (S, khung vàng), Quý hiếm (A, khung bạc), Đặc biệt (B, khung gỗ); bấm tranh để phóng to xem chữ ký, tác giả |
+| Tương tác | **Chỉ thả cảm xúc tích cực**: ❤️ Tim, 🙌 Hoan hô, 👏 Vỗ tay, 😍 Rất đẹp, 🌟 Tuyệt vời. Không có biểu tượng buồn/giận |
+| Bình luận | **Không có bình luận** — giữ tâm lý tích cực, vui vẻ cho trẻ |
+| Còn phải chốt | Tranh nào được vào; bé tự gửi hay tự động; tranh trưng bao lâu; hiện số lượt cảm xúc thế nào |
+
 ## Phần 3 — Đấu giá hàng tuần (chưa bàn)
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
