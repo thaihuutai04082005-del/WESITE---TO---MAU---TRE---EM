@@ -72,6 +72,10 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 - Admin được hủy cảm xúc bất thường (nhiều tài khoản mới cùng thả) và thu hồi danh hiệu nếu gian lận.
 - Tranh luôn thuộc về tác giả; chữ ký, bảng cảm xúc, danh hiệu đi theo tranh mãi mãi.
 
-## Phần 3 — Đấu giá hàng tuần (chưa bàn)
+## Phần 3 — Đấu giá hàng tuần (đang bàn)
+
+| Nội dung | Chốt |
+|---|---|
+| Quyền sở hữu | **Chuyển hẳn cho người mua**: tranh (kèm chữ ký tác giả gốc + thành tích triển lãm) vào bộ sưu tập người mua, người bán không còn tranh đó. Chữ ký tác giả gốc đi theo tranh mãi mãi, người mua không ký đè |
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
