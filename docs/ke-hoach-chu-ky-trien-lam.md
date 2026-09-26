@@ -34,7 +34,12 @@
 | Vinh danh mỗi tuần | **Mỗi bảng 1 tranh**: 🏆 "Tranh được yêu thích nhất bảng S / A / B / Sáng tạo" (4 danh hiệu/tuần). Tính theo **tổng số cảm xúc** — 5 loại tính điểm như nhau (VD 3 ❤️ + 2 👏 = 5 điểm) |
 | Đồng hạng | Nếu bằng số cảm xúc với tranh cao nhất thì **đồng hạng, cùng được trao danh hiệu**. Bảng không có tranh nào được thả cảm xúc thì tuần đó bảng không trao |
 | Khóa khi xét | **Chủ nhật 20:00 (giờ Việt Nam) khóa thả cảm xúc** trên toàn hội trường, không thả/đổi/gỡ được nữa, rồi mới xét danh hiệu — đảm bảo công bằng |
-| Còn phải chốt | Bé tự gửi hay tự động (bàn sau) |
+| Cách gửi | **Bé tự gửi**, từ trang **Bộ sưu tập** (nâng cấp thêm tab chứa toàn bộ tranh đã hoàn thành, gồm tranh thẻ S/A/B và tranh Sáng tạo). Nút "🏛️ Gửi triển lãm" chỉ sáng vào thứ 7 + chủ nhật |
+| Điều kiện gửi | Tranh đã tô xong, **bắt buộc đã ký tên**, thuộc S/A/B hoặc Sáng tạo. Bảng xác nhận báo chữ ký sẽ bị khóa |
+| Số tranh mỗi vòng | **Free: 1 tranh**, **Gói tháng: 3 tranh** |
+| Rút tranh | Rút được trong thứ 7 + chủ nhật; **từ thứ 2 không rút được** |
+| Số lần triển lãm | Mỗi tranh **chỉ đi triển lãm 1 lần** |
+| Kiểm duyệt | Tranh gửi vào hàng chờ duyệt của admin (thứ 7 + CN); tranh bị loại nhận thông báo nhẹ nhàng "Tranh này chưa phù hợp để triển lãm, bé thử gửi tranh khác nhé!" |
 
 ## Phần 3 — Đấu giá hàng tuần (chưa bàn)
 
