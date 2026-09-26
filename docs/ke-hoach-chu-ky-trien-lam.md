@@ -76,6 +76,14 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 
 Quyết định không làm đấu giá. Lý do: bé sẽ không muốn bán tác phẩm do chính mình tạo ra, nhất là tranh đã có thành tích — giữ lại để khoe và chia sẻ có ý nghĩa hơn; đấu giá cũng làm hệ thống phức tạp (kinh tế Ruby, gian lận, tranh chấp) mà không mang lại thu nhập. Nguồn thu vẫn **chỉ từ gói dịch vụ**, không bán Ruby.
 
-## Phần 3 (mới) — Khoe & chia sẻ tranh (đang bàn)
+## Phần 3 (mới) — Khoe & chia sẻ tranh (ĐÃ CHỐT)
 
-## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
+| Tính năng | Nội dung |
+|---|---|
+| 🏅 Tủ kính thành tích | Mục mới trong trang cá nhân: trưng các tranh đã đi triển lãm, kèm bảng cảm xúc và danh hiệu 🏆. Ai xem trang cá nhân của bé cũng thấy |
+| 📜 Giấy khen | Tranh đạt danh hiệu được tạo giấy khen (PDF tải về/in): hình tranh, chữ ký của bé, dòng "Tranh được yêu thích nhất bảng … tuần …". Dùng lại công cụ tạo PDF có sẵn |
+| 📤 Nút "Khoe tranh" | Tạo 1 ảnh đẹp (khung + chữ ký + logo web) để tải về / gửi người thân qua Zalo, Facebook. Có cho mọi tranh đã hoàn thành; tranh có thành tích thì ảnh kèm huy hiệu |
+
+## Phần 4 — An toàn trẻ em & phụ huynh: KHÔNG CẦN RIÊNG
+
+Đã bỏ đấu giá và không bán Ruby → không có tiền/mua bán giữa các bé. Các biện pháp an toàn đã nằm sẵn trong Phần 2 (chỉ cảm xúc tích cực, không bình luận, kiểm duyệt, nút "Báo cho Gấu").
