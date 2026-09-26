@@ -72,16 +72,10 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 - Admin được hủy cảm xúc bất thường (nhiều tài khoản mới cùng thả) và thu hồi danh hiệu nếu gian lận.
 - Tranh luôn thuộc về tác giả; chữ ký, bảng cảm xúc, danh hiệu đi theo tranh mãi mãi.
 
-## Phần 3 — Đấu giá hàng tuần (đang bàn)
+## Phần 3 — Đấu giá: ĐÃ BỎ
 
-| Nội dung | Chốt |
-|---|---|
-| Nguồn thu | **Chỉ từ gói dịch vụ (gói tháng)**. **Không bán Ruby bằng tiền thật**, không có gì dụ trẻ nạp tiền. Ruby dùng để đấu giá chỉ kiếm được bằng cách chơi (nhiệm vụ, lên rank…) như hiện tại |
-| Quyền sở hữu | **Chuyển hẳn cho người mua**: tranh (kèm chữ ký tác giả gốc + thành tích triển lãm) vào bộ sưu tập người mua, người bán không còn tranh đó. Chữ ký tác giả gốc đi theo tranh mãi mãi, người mua không ký đè |
-| Tranh được bán | **Chỉ tranh đã đi triển lãm** (có thành tích) mới được đem đấu giá |
-| Thẻ gốc | **Chỉ bán bức tranh đã tô**, người bán **giữ thẻ** (tô bức mới được — bức mới là tác phẩm khác, chưa có thành tích) |
-| Luật độc nhất | **Mỗi thẻ chỉ được đem đấu giá 1 bức tranh**. Tranh tô lại từ thẻ đó vẫn giữ và đi triển lãm được nhưng không bán được nữa. Tranh Sáng tạo (không từ thẻ): mỗi hình, mỗi bé chỉ bán được 1 bức |
-| Bán lại | **Không được bán lại**: mua về là giữ mãi để ngắm/khoe. Nhà đấu giá chỉ có tranh do chính tác giả bán |
-| Không ai trả giá | Tranh **về lại người bán**, không mất phí, tuần sau đăng bán lại được |
+Quyết định không làm đấu giá. Lý do: bé sẽ không muốn bán tác phẩm do chính mình tạo ra, nhất là tranh đã có thành tích — giữ lại để khoe và chia sẻ có ý nghĩa hơn; đấu giá cũng làm hệ thống phức tạp (kinh tế Ruby, gian lận, tranh chấp) mà không mang lại thu nhập. Nguồn thu vẫn **chỉ từ gói dịch vụ**, không bán Ruby.
+
+## Phần 3 (mới) — Khoe & chia sẻ tranh (đang bàn)
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
