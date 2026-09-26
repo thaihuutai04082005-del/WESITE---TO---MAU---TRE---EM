@@ -31,7 +31,10 @@
 | Luật thả cảm xúc | Mỗi người thả cho mỗi tranh 1 cảm xúc (đổi được); không tự thả cho tranh mình; chỉ tài khoản đã xác minh mới được thả |
 | Tâm lý tích cực | Tranh nào cũng có sẵn 1 lời khen của linh vật (không hiện "0"); không có bảng "ít tim nhất"; thông báo cảm xúc gom mỗi ngày 1 lần |
 | Liên kết đấu giá | Tranh có thành tích triển lãm là tranh bé có thể đem đi đấu giá (bàn ở Phần 3) |
-| Còn phải chốt | Mỗi tuần vinh danh mấy tranh; bé tự gửi hay tự động (bàn sau) |
+| Vinh danh mỗi tuần | **Mỗi bảng 1 tranh**: 🏆 "Tranh được yêu thích nhất bảng S / A / B / Sáng tạo" (4 danh hiệu/tuần). Tính theo **tổng số cảm xúc** (5 loại ngang giá trị) |
+| Đồng hạng | Nếu bằng số cảm xúc với tranh cao nhất thì **đồng hạng, cùng được trao danh hiệu**. Bảng không có tranh nào được thả cảm xúc thì tuần đó bảng không trao |
+| Khóa khi xét | **Chủ nhật 20:00 (giờ Việt Nam) khóa thả cảm xúc** trên toàn hội trường, không thả/đổi/gỡ được nữa, rồi mới xét danh hiệu — đảm bảo công bằng |
+| Còn phải chốt | Bé tự gửi hay tự động (bàn sau) |
 
 ## Phần 3 — Đấu giá hàng tuần (chưa bàn)
 
