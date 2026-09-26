@@ -81,5 +81,7 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 | Tranh được bán | **Chỉ tranh đã đi triển lãm** (có thành tích) mới được đem đấu giá |
 | Thẻ gốc | **Chỉ bán bức tranh đã tô**, người bán **giữ thẻ** (tô bức mới được — bức mới là tác phẩm khác, chưa có thành tích) |
 | Luật độc nhất | **Mỗi thẻ chỉ được đem đấu giá 1 bức tranh**. Tranh tô lại từ thẻ đó vẫn giữ và đi triển lãm được nhưng không bán được nữa. Tranh Sáng tạo (không từ thẻ): mỗi hình, mỗi bé chỉ bán được 1 bức |
+| Bán lại | **Không được bán lại**: mua về là giữ mãi để ngắm/khoe. Nhà đấu giá chỉ có tranh do chính tác giả bán |
+| Không ai trả giá | Tranh **về lại người bán**, không mất phí, tuần sau đăng bán lại được |
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
