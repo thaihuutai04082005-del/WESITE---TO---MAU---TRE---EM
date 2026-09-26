@@ -78,5 +78,8 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 |---|---|
 | Nguồn thu | **Chỉ từ gói dịch vụ (gói tháng)**. **Không bán Ruby bằng tiền thật**, không có gì dụ trẻ nạp tiền. Ruby dùng để đấu giá chỉ kiếm được bằng cách chơi (nhiệm vụ, lên rank…) như hiện tại |
 | Quyền sở hữu | **Chuyển hẳn cho người mua**: tranh (kèm chữ ký tác giả gốc + thành tích triển lãm) vào bộ sưu tập người mua, người bán không còn tranh đó. Chữ ký tác giả gốc đi theo tranh mãi mãi, người mua không ký đè |
+| Tranh được bán | **Chỉ tranh đã đi triển lãm** (có thành tích) mới được đem đấu giá |
+| Thẻ gốc | **Chỉ bán bức tranh đã tô**, người bán **giữ thẻ** (tô bức mới được — bức mới là tác phẩm khác, chưa có thành tích) |
+| Luật độc nhất | **Mỗi thẻ chỉ được đem đấu giá 1 bức tranh**. Tranh tô lại từ thẻ đó vẫn giữ và đi triển lãm được nhưng không bán được nữa. Tranh Sáng tạo (không từ thẻ): mỗi hình, mỗi bé chỉ bán được 1 bức |
 
 ## Phần 4 — An toàn trẻ em & phụ huynh (chưa bàn)
