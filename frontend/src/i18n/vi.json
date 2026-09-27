@@ -693,11 +693,13 @@
     "join": "Vào phòng",
     "joinHint": "Nhập mã phòng bạn gửi cho bé.",
     "joinBtn": "Vào tô",
-    "safety": "Phòng tô chung chỉ vào được bằng mã riêng — không có danh sách phòng công khai. Chỉ chia sẻ mã với người bé quen.",
+    "safety": "Phòng tô chung chỉ vào được bằng mã riêng — không có danh sách phòng công khai.",
     "room": "Phòng tô chung",
     "count": "{{n}}/{{max}} bạn",
     "save": "Lưu tranh chung",
-    "saved": "{{name}} đã lưu tranh vào Lịch sử của cả nhóm!"
+    "saved": "{{name}} đã lưu tranh vào Lịch sử của cả nhóm!",
+    "sizeChip": "2–4 bạn",
+    "codeChip": "Mã riêng"
   },
   "storybook": {
     "title": "Truyện tranh của bé",

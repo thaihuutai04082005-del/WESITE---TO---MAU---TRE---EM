@@ -693,11 +693,13 @@
     "join": "Join a room",
     "joinHint": "Enter the room code a friend sent you.",
     "joinBtn": "Join",
-    "safety": "Rooms can only be joined with a private code — there is no public room list. Only share codes with people you know.",
+    "safety": "Shared rooms can only be joined with a private code — there is no public room list.",
     "room": "Shared room",
     "count": "{{n}}/{{max}} kids",
     "save": "Save picture",
-    "saved": "{{name}} saved the picture to everyone's History!"
+    "saved": "{{name}} saved the picture to everyone's History!",
+    "sizeChip": "2–4 kids",
+    "codeChip": "Private code"
   },
   "storybook": {
     "title": "My storybooks",
