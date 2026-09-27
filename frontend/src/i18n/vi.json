@@ -501,6 +501,7 @@
   },
   "missions": {
     "title": "Nhiệm vụ & Thành tích",
+    "subtitle": "Hoàn thành nhiệm vụ để nhận Ruby và mở khoá các thành tích đặc biệt!",
     "cards": {
       "level": "Cấp độ",
       "rank": "Hạng đấu",
@@ -523,6 +524,7 @@
     "gold": "Vàng",
     "platinum": "Bạch Kim",
     "diamond": "Kim Cương",
+    "master": "Cao Thủ",
     "pts": "điểm",
     "points": "điểm"
   },

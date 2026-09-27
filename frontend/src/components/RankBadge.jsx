@@ -8,6 +8,7 @@ export const RANK_STYLE = {
   gold: { fill: '#FFD54F', ring: '#E6A817', bg: '#FFF4CC', text: '#9A6A00' },
   platinum: { fill: '#B9F2FF', ring: '#5FB8CC', bg: '#E3F9FF', text: '#2F7E91' },
   diamond: { fill: '#7DE2FF', ring: '#2B9BF4', bg: '#DDF3FF', text: '#0B6FB8' },
+  master: { fill: '#FF7AA2', ring: '#D6336C', bg: '#FFE6EE', text: '#B0245A' },
 };
 
 export function RankMedal({ rank = 'bronze', size = 28 }) {

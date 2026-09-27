@@ -14,7 +14,7 @@ import { randomCode } from '../utils/ids.js';
 import { isoWeek, VN_OFFSET_MS } from '../utils/time.js';
 
 /** Nhóm trình độ để ghép phòng ngẫu nhiên. */
-const BRACKET = { bronze: 'newbie', silver: 'newbie', gold: 'middle', platinum: 'pro', diamond: 'pro' };
+const BRACKET = { bronze: 'newbie', silver: 'newbie', gold: 'middle', platinum: 'pro', diamond: 'pro', master: 'pro' };
 const GRACE_MS = 5000;
 const START_DELAY_MS = 3000;
 

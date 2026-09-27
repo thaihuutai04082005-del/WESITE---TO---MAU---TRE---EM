@@ -66,6 +66,12 @@ export const artworkFrameSvg = (slug) =>
   ARTWORK_FRAMES[slug] ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="700" height="700">${ARTWORK_FRAMES[slug]()}</svg>` : null;
 
 export const AVATAR_FRAMES = {
+  // Cao Thủ: vòng hồng–vàng ánh kim, vương miện đỏ và 2 cánh lửa hai bên.
+  'avatar-cao-thu': () =>
+    `<defs><linearGradient id="av-master" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD54F"/><stop offset=".5" stop-color="#FF7AA2"/><stop offset="1" stop-color="#D6336C"/></linearGradient></defs>` +
+    `<circle cx="60" cy="60" r="52" fill="none" stroke="url(#av-master)" stroke-width="11"/><circle cx="60" cy="60" r="58" fill="none" stroke="#FFD54F" stroke-width="2" stroke-dasharray="3 6"/>` +
+    `<path d="M6 70 q-6 -20 8 -34 q0 14 8 18 q-8 6 -16 16z M114 70 q6 -20 -8 -34 q0 14 -8 18 q8 6 16 16z" fill="#FF8A65" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>` +
+    `<polygon points="36,16 32,-2 46,8 60,-6 74,8 88,-2 84,16" fill="#FFD54F" stroke="${INK}" stroke-width="2" stroke-linejoin="round" transform="translate(0 6)"/><circle cx="60" cy="14" r="4" fill="#FF5F7E" stroke="${INK}" stroke-width="1.5"/>`,
   'avatar-dong': () => `<circle cx="60" cy="60" r="52" fill="none" stroke="#B08D57" stroke-width="8"/>`,
   'avatar-bac': () =>
     `<circle cx="60" cy="60" r="52" fill="none" stroke="#C0C0C0" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 10"/>` +

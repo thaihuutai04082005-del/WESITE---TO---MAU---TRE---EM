@@ -21,4 +21,5 @@ export const ITEMS = [
   { type: 'avatar_frame', slug: 'avatar-vang', name_vi: 'Khung Vàng', name_en: 'Gold frame', rank: 'gold' },
   { type: 'avatar_frame', slug: 'avatar-bach-kim', name_vi: 'Khung Bạch Kim', name_en: 'Platinum frame', rank: 'platinum' },
   { type: 'avatar_frame', slug: 'avatar-kim-cuong', name_vi: 'Khung Kim Cương', name_en: 'Diamond frame', rank: 'diamond' },
+  { type: 'avatar_frame', slug: 'avatar-cao-thu', name_vi: 'Khung Cao Thủ', name_en: 'Master frame', rank: 'master' },
 ];

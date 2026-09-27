@@ -501,6 +501,7 @@
   },
   "missions": {
     "title": "Missions & achievements",
+    "subtitle": "Complete missions to earn Ruby and unlock special achievements!",
     "cards": {
       "level": "Level",
       "rank": "Arena rank",
@@ -523,6 +524,7 @@
     "gold": "Gold",
     "platinum": "Platinum",
     "diamond": "Diamond",
+    "master": "Master",
     "pts": "pts",
     "points": "points"
   },
