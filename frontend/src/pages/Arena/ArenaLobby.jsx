@@ -153,24 +153,24 @@ export default function ArenaLobby() {
         <p className="mt-3 text-sm text-muted">{t('arena.rewardsHint', { a: rules.rewards[0], b: rules.rewards[1], c: rules.rewards[2] })}</p>
       </section>
 
-      {/* Bảng vàng tuần + Các trận của bé: nền trắng như "Cách chấm điểm", màu chỉ ở biểu tượng cho dịu mắt */}
+      {/* Bảng vàng tuần + Các trận của bé: nền pastel rất nhạt, biểu tượng đặc màu, hình nhỏ bên phải */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="rounded-[28px] bg-white p-5 shadow-soft">
-          <h2 className="mb-3 flex items-center gap-2 font-display text-xl font-extrabold">
-            <IconBubble name="calendar" color="#C9961A" bg="#FFF6D8" size={38} /> {t('arena.weekly', { week: info.week })}
-          </h2>
-          {info.leaderboard.length === 0 ? (
-            <div className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] p-3">
-              <div className="h-12 w-16 shrink-0">
-                <CrownCloudArt />
-              </div>
-              <p className="text-sm text-muted">{t('arena.noLeaders')}</p>
+        <section className="rounded-[28px] border border-white bg-gradient-to-r from-[#F1EEFF] to-[#F8F7FF] p-4 shadow-soft sm:p-5">
+          <div className="flex items-center gap-3">
+            <IconBubble name="calendar" color="#FFFFFF" bg="#8B7CF6" size={44} />
+            <div className="min-w-0 flex-1">
+              <h2 className="font-display text-lg font-extrabold text-[#5B4FD6]">{t('arena.weekly', { week: info.week })}</h2>
+              {info.leaderboard.length === 0 && <p className="text-sm text-muted">{t('arena.noLeaders')}</p>}
             </div>
-          ) : (
-            <ol className="space-y-2">
+            <div className="pointer-events-none h-14 w-24 shrink-0 sm:h-16 sm:w-28">
+              <CrownCloudArt />
+            </div>
+          </div>
+          {info.leaderboard.length > 0 && (
+            <ol className="mt-3 space-y-2">
               {info.leaderboard.map((r) => (
-                <li key={r.user.id} className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] px-3 py-2">
-                  <span className="w-6 text-center font-display text-xl font-extrabold text-[#C9961A]">{r.place}</span>
+                <li key={r.user.id} className="flex items-center gap-3 rounded-2xl bg-white/80 px-3 py-2">
+                  <span className="w-6 text-center font-display text-xl font-extrabold text-[#5B4FD6]">{r.place}</span>
                   <Avatar avatar={r.user.avatar} frame={r.user.avatarFrame} size={40} />
                   <span className="flex-1 truncate font-bold">{r.user.nickname}</span>
                   <span className="chip">
@@ -182,21 +182,21 @@ export default function ArenaLobby() {
           )}
         </section>
 
-        <section className="rounded-[28px] bg-white p-5 shadow-soft">
-          <h2 className="mb-3 flex items-center gap-2 font-display text-xl font-extrabold">
-            <IconBubble name="heart" color="#FF5F7E" bg="#FFE9EE" size={38} /> {t('arena.myHistory')}
-          </h2>
-          {info.history.length === 0 ? (
-            <div className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] p-3">
-              <div className="h-12 w-16 shrink-0">
-                <BearCloudArt />
-              </div>
-              <p className="text-sm text-muted">{t('arena.noHistory')}</p>
+        <section className="rounded-[28px] border border-white bg-gradient-to-r from-[#FFEFF3] to-[#FFF7F9] p-4 shadow-soft sm:p-5">
+          <div className="flex items-center gap-3">
+            <IconBubble name="heart" color="#FFFFFF" bg="#FF7AA2" size={44} />
+            <div className="min-w-0 flex-1">
+              <h2 className="font-display text-lg font-extrabold text-[#E0457B]">{t('arena.myHistory')}</h2>
+              {info.history.length === 0 && <p className="text-sm text-muted">{t('arena.noHistory')}</p>}
             </div>
-          ) : (
-            <ul className="space-y-2">
+            <div className="pointer-events-none h-14 w-24 shrink-0 sm:h-16 sm:w-28">
+              <BearCloudArt />
+            </div>
+          </div>
+          {info.history.length > 0 && (
+            <ul className="mt-3 space-y-2">
               {info.history.map((h) => (
-                <li key={h.roomId} className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] px-3 py-2">
+                <li key={h.roomId} className="flex items-center gap-3 rounded-2xl bg-white/80 px-3 py-2">
                   {h.thumbnail ? <img src={h.thumbnail} alt="" className="h-12 w-12 rounded-xl border border-line" /> : <div className="h-12 w-12 rounded-xl bg-primary-light" />}
                   <div className="flex-1 text-sm">
                     <div className="font-bold">{h.place ? t('arena.placeOf', { place: h.place, n: h.players }) : h.flagged ? t(`arena.flag.${h.flagReason}`) : t('arena.noPlace')}</div>
