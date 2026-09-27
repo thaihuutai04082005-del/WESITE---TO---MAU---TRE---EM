@@ -570,7 +570,11 @@
       "too_fast": "Hoàn thành nhanh bất thường — không xếp hạng",
       "action_rate": "Thao tác bất thường — không xếp hạng",
       "injected": "Dữ liệu bất thường — không xếp hạng"
-    }
+    },
+    "closedShort": "Đang đóng",
+    "friendsOnlyChip": "Chỉ bạn bè",
+    "minutes": "{{n}} phút",
+    "upTo": "Tối đa {{n}} bạn"
   },
   "rubric": {
     "coverage": "Độ phủ màu",

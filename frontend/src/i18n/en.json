@@ -570,7 +570,11 @@
       "too_fast": "Finished unusually fast — not ranked",
       "action_rate": "Unusual activity — not ranked",
       "injected": "Unusual data — not ranked"
-    }
+    },
+    "closedShort": "Closed",
+    "friendsOnlyChip": "Friends only",
+    "minutes": "{{n}} min",
+    "upTo": "Up to {{n}} kids"
   },
   "rubric": {
     "coverage": "Coverage",
