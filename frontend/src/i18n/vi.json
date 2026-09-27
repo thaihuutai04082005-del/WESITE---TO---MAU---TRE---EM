@@ -528,6 +528,7 @@
   },
   "arena": {
     "title": "Đấu trường sáng tạo",
+    "tagline": "Mỗi phòng đấu là một thử thách, hãy thể hiện tài năng của bạn!",
     "subtitle": "Mỗi phòng tối đa {{size}} bạn, cùng tô 1 tranh ở chế độ Sáng tạo trong {{minutes}} phút.",
     "random": "Ghép ngẫu nhiên",
     "randomHint": "Hệ thống ghép bé với các bạn cùng trình độ.",

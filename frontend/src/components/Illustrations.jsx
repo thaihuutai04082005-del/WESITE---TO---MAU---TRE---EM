@@ -181,3 +181,73 @@ export function SunCloud({ className = '' }) {
     </svg>
   );
 }
+
+/** Đấu trường — đầu trang: gấu giơ cúp vàng + tia lấp lánh. */
+export function ArenaHeroArt() {
+  return (
+    <svg viewBox="0 0 170 150" className="h-full w-full" aria-hidden="true">
+      <path d="M22 40 l6 -10 M14 58 l-10 -3 M150 36 l8 -8 M156 60 l10 0" stroke="#FFC94D" strokeWidth="4" strokeLinecap="round" />
+      <circle cx="12" cy="92" r="4" fill="#FF7AA2" />
+      <circle cx="160" cy="90" r="3.5" fill="#4FA3E0" />
+      <image href="/mascots/gau.svg" x="8" y="22" width="112" height="126" preserveAspectRatio="xMidYMax meet" />
+      <g transform="translate(92 34) rotate(12)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        <path d="M14 8 Q2 8 3 20 Q5 30 17 31" fill="none" stroke="#E6A817" strokeWidth="5" strokeLinecap="round" />
+        <path d="M52 8 Q64 8 63 20 Q61 30 49 31" fill="none" stroke="#E6A817" strokeWidth="5" strokeLinecap="round" />
+        <path d="M11 2 H55 Q56 36 33 44 Q10 36 11 2 Z" fill="#FFD54F" />
+        <rect x="27" y="43" width="12" height="10" fill="#E6A817" />
+        <rect x="18" y="52" width="30" height="9" rx="3" fill="#8B5A2B" />
+        <polygon points="33,10 36.5,18 45,18.5 38.5,24 40.5,32 33,27.5 25.5,32 27.5,24 21,18.5 29.5,18" fill="#FFF3B0" strokeWidth="1.8" />
+      </g>
+    </svg>
+  );
+}
+
+/** Phòng riêng: mèo ngồi sau máy tính (có dán sticker gấu) + chậu cây. */
+export function LaptopArt() {
+  return (
+    <svg viewBox="0 0 180 140" className="h-full w-full" aria-hidden="true">
+      <image href="/mascots/meo.svg" x="58" y="0" width="92" height="112" preserveAspectRatio="xMidYMax meet" />
+      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
+        <path d="M18 60 L86 70 L90 124 L22 116 Z" fill="#4FA3E0" />
+        <path d="M26 66 L80 74 L83 116 L29 110 Z" fill="#8FD0FF" strokeWidth="2" />
+        <path d="M8 120 L96 130 L112 122 L28 112 Z" fill="#D6EAF8" />
+        <circle cx="54" cy="92" r="9" fill="#FFFFFF" strokeWidth="2" />
+        <circle cx="48" cy="85" r="3.5" fill="#FFFFFF" strokeWidth="1.8" />
+        <circle cx="60" cy="85" r="3.5" fill="#FFFFFF" strokeWidth="1.8" />
+        <path d="M50 94 Q54 97 58 94" fill="none" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M148 110 h22 l-3 24 h-16 Z" fill="#FF9F43" />
+        <path d="M159 110 Q152 90 140 88 M159 110 Q160 86 170 80 M159 110 Q168 96 178 98" fill="none" stroke="#4CAF50" strokeWidth="4" strokeLinecap="round" />
+      </g>
+      <path d="M160 30 v10 M155 35 h10" stroke="#FF7AA2" strokeWidth="3" strokeLinecap="round" />
+      <path d="M22 26 l6 4 M26 44 l7 -2" stroke="#FFC94D" strokeWidth="4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** Bảng vàng: vương miện trên đám mây nhỏ. */
+export function CrownCloudArt() {
+  return (
+    <svg viewBox="0 0 140 90" className="h-full w-full" aria-hidden="true">
+      <path d="M22 80 Q8 80 12 68 Q10 56 26 58 Q32 44 50 50 Q64 38 80 50 Q98 46 102 60 Q120 60 116 74 Q118 84 104 82 Z" fill="#FFFFFF" opacity="0.95" />
+      <g transform="translate(40 14) rotate(-8)" stroke="#B7791F" strokeWidth="2.5" strokeLinejoin="round">
+        <polygon points="4,44 0,10 16,26 30,2 44,26 60,10 56,44" fill="#FFD54F" />
+        <rect x="4" y="42" width="52" height="9" rx="3" fill="#F2B705" />
+        <circle cx="30" cy="30" r="5" fill="#FF5F7E" strokeWidth="2" />
+      </g>
+      <path d="M18 30 l4 -6 l4 6 l-4 6 Z" fill="#FF9EC0" />
+      <path d="M118 30 l3 -5 l3 5 l-3 5 Z" fill="#FFD54F" />
+    </svg>
+  );
+}
+
+/** Các trận của bé: gấu nằm ôm đám mây + tim. */
+export function BearCloudArt() {
+  return (
+    <svg viewBox="0 0 150 90" className="h-full w-full" aria-hidden="true">
+      <path d="M20 86 Q4 86 8 72 Q6 60 24 62 Q30 50 48 56 Q60 46 76 56 Q96 50 100 64 Q124 62 122 76 Q126 88 108 86 Z" fill="#FFFFFF" opacity="0.95" />
+      <image href="/mascots/gau.svg" x="36" y="0" width="80" height="80" preserveAspectRatio="xMidYMax meet" />
+      <path d="M128 36 C120 30 122 22 128 26 C134 22 136 30 128 36 Z" fill="#FF7AA2" />
+      <path d="M22 30 C16 25 18 19 22 22 C26 19 28 25 22 30 Z" fill="#FF9EC0" />
+    </svg>
+  );
+}
