@@ -1,7 +1,8 @@
 import { getDb } from '../config/db.js';
-import { AVATARS } from '../config/constants.js';
+import { AVATARS, SIGNATURE_INKS, SIGNATURE_STYLES_FREE, SIGNATURE_STYLES_PREMIUM } from '../config/constants.js';
 import * as User from '../models/user.js';
 import * as Notifications from '../services/notifications.js';
+import * as Signature from '../services/signature.js';
 import { badRequest, forbidden, str } from '../utils/http.js';
 
 const ownsItem = (userId, slug, type) =>
@@ -46,4 +47,24 @@ export function readNotifications(req, res) {
   const ids = req.body?.ids === 'all' ? 'all' : (Array.isArray(req.body?.ids) ? req.body.ids : []).map(Number);
   Notifications.markRead(req.user.id, ids);
   res.json({ unread: Notifications.unreadCount(req.user.id) });
+}
+
+/** Chữ ký mặc định + danh sách mẫu (mẫu wow khoá khi không có gói tháng/năm). */
+function signatureState(user) {
+  return {
+    signature: Signature.effectiveSignature(user),
+    premium: Signature.hasPremium(user.id),
+    styles: { free: SIGNATURE_STYLES_FREE, premium: SIGNATURE_STYLES_PREMIUM },
+    inks: SIGNATURE_INKS,
+  };
+}
+
+export function getSignature(req, res) {
+  res.json(signatureState(User.findById(req.user.id)));
+}
+
+export function setSignature(req, res) {
+  const content = Signature.prepareDefault(req.user.id, req.body || {});
+  const user = User.update(req.user.id, { signature: JSON.stringify(content) });
+  res.json(signatureState(user));
 }

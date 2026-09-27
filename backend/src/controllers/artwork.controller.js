@@ -3,6 +3,8 @@ import { getDb } from '../config/db.js';
 import * as Artwork from '../models/artwork.js';
 import * as Picture from '../models/picture.js';
 import { sanitizeArtworkData } from '../services/scoringEngine.js';
+import * as Signature from '../services/signature.js';
+import * as User from '../models/user.js';
 import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
 import { canUsePicture } from './picture.controller.js';
@@ -53,6 +55,9 @@ export function save(req, res) {
   const a = own(req);
   const p = Picture.findPicture(a.picture_id);
   const data = sanitizeArtworkData(Picture.manifestOf(p), req.body?.data);
+  // Chữ ký là lớp riêng (không phải nét cọ) nên nằm ngoài dữ liệu chấm điểm.
+  const signature = Signature.preparePlaced(User.findById(req.user.id), req.body?.data?.signature, Artwork.dataOf(a).signature);
+  if (signature) data.signature = signature;
   if (hasContent(data) && COUNTED_MODES.has(a.mode)) consume(req.user.id, a);
   const thumb = req.body?.thumbnail;
   if (thumb != null && (!THUMB_RE.test(thumb) || thumb.length > MAX_THUMB)) throw badRequest('invalid_thumbnail');

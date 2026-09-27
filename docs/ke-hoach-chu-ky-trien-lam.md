@@ -1,6 +1,6 @@
 # Kế hoạch: Chữ ký & Hội trường triển lãm (đang bàn, chưa code)
 
-## Phần 1 — Chữ ký (ĐÃ CHỐT)
+## Phần 1 — Chữ ký (ĐÃ CHỐT — ĐÃ LÀM ở Đợt 1)
 
 | Nội dung | Chốt |
 |---|---|

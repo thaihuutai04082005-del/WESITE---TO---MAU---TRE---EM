@@ -31,6 +31,7 @@ export default function ColoringScreen() {
   const [saving, setSaving] = useState('saved');
   const [reveal, setReveal] = useState(false);
   const [pendingEvents, setPendingEvents] = useState([]);
+  const [sig, setSig] = useState(null);
   const started = useRef(false);
   const starting = useRef(null);
   const initialData = useRef(null);
@@ -54,6 +55,11 @@ export default function ColoringScreen() {
         toast(errorText(t, e), 'error');
         navigate('/history');
       });
+    // Chữ ký mặc định cho nút "Chữ ký" trong bộ công cụ.
+    api
+      .get('/users/me/signature')
+      .then((r) => alive && setSig(r))
+      .catch(() => {});
     return () => {
       alive = false;
     };
@@ -157,6 +163,8 @@ export default function ColoringScreen() {
         brushSkin={user?.brushSkin}
         userKey={String(user?.id || 'guest')}
         onAction={onAction}
+        signature={sig ? sig.signature : undefined}
+        signatureInks={sig?.inks}
         onUndo={() => {
           editor.undo();
           dirty.current = true;

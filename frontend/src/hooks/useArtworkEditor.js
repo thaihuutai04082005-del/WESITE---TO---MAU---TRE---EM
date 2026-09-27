@@ -22,6 +22,11 @@ function applyAction(data, a) {
       return { ...data, stickers: data.stickers.map((s, i) => (i === a.index ? a.sticker : s)) };
     case 'sticker-remove':
       return { ...data, stickers: data.stickers.filter((_, i) => i !== a.index) };
+    case 'signature-set': {
+      // Chữ ký: lớp riêng trên cùng, mỗi tranh 1 chữ ký (null = gỡ).
+      const { signature: _old, ...rest } = data;
+      return a.signature ? { ...rest, signature: a.signature } : rest;
+    }
     case 'clear':
       return EMPTY_DATA();
     default:
@@ -42,6 +47,8 @@ function inverseOf(data, a) {
       return { type: 'sticker-update', index: a.index, sticker: data.stickers[a.index] };
     case 'sticker-remove':
       return { type: 'restore', data };
+    case 'signature-set':
+      return { type: 'signature-set', signature: data.signature || null };
     case 'clear':
       return { type: 'restore', data };
     default:

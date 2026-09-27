@@ -1,9 +1,10 @@
-// Khung tô màu: lớp vùng SVG (Bucket fill) + lớp <canvas> Brush tự do + lớp sticker.
+// Khung tô màu: lớp vùng SVG (Bucket fill) + lớp <canvas> Brush tự do + lớp sticker + lớp chữ ký.
 // Hỗ trợ zoom (nút, lăn chuột, chụm/mở 2 ngón), kéo di chuyển khi phóng to.
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { applyToSvg, isRegionDone } from '../../lib/picture';
 import { drawStroke, drawStrokes } from '../../lib/brush';
 import { stickerSvg } from '../../lib/stickers';
+import { clampPlacement, ensureSignatureFont, hitSignature, signatureMarkup, BOX } from '../../lib/signature';
 
 const RES = 2; // độ phân giải canvas Brush: 2 px / đơn vị tranh
 const MIN_Z = 1;
@@ -28,6 +29,7 @@ const Canvas = forwardRef(function Canvas(
     onStickerAdd,
     onStickerChange,
     onStickerRemove,
+    onSignatureChange,
     onCursor,
     className = '',
   },
@@ -44,6 +46,19 @@ const Canvas = forwardRef(function Canvas(
   const liveStroke = useRef(null);
   const [selected, setSelected] = useState(null);
   const [dragSticker, setDragSticker] = useState(null);
+  const [dragSig, setDragSig] = useState(null);
+  const [fontTick, setFontTick] = useState(0);
+  const sigStyle = data.signature?.style;
+
+  // Font chữ ký nạp xong thì vẽ lại (cỡ chữ đo theo font thật).
+  useEffect(() => {
+    if (!sigStyle) return;
+    let alive = true;
+    ensureSignatureFont(sigStyle).then(() => alive && setFontTick((n) => n + 1));
+    return () => {
+      alive = false;
+    };
+  }, [sigStyle]);
 
   // ----- Lớp SVG: nạp 1 lần mỗi tranh, sau đó chỉ cập nhật thuộc tính fill -----
   useLayoutEffect(() => {
@@ -151,6 +166,12 @@ const Canvas = forwardRef(function Canvas(
       liveStroke.current = { tool: tool === 'eraser' ? 'eraser' : 'brush', color, size, points: [[lx, ly]], ...(tool === 'brush' && brushSkin ? { skin: brushSkin } : {}) };
       gesture.current = { type: 'stroke' };
       drawStroke(canvasRef.current.getContext('2d'), liveStroke.current, RES);
+    } else if (tool === 'signature' && data.signature) {
+      // Chạm lên chữ ký thì kéo; chạm chỗ khác thì chữ ký nhảy tới đó.
+      const sg = data.signature;
+      const on = hitSignature(sg, lx, ly);
+      gesture.current = { type: 'signature', offset: on ? [lx - sg.x, ly - sg.y] : [0, 0] };
+      setDragSig(clampPlacement({ ...sg, x: on ? sg.x : lx, y: on ? sg.y : ly }));
     } else if (tool === 'sticker') {
       const idx = stickerAtPoint(lx, ly);
       if (idx >= 0) {
@@ -199,6 +220,8 @@ const Canvas = forwardRef(function Canvas(
       } else {
         drawStroke(ctx, { ...liveStroke.current, points: pts.slice(-3) }, RES);
       }
+    } else if (g.type === 'signature' && data.signature) {
+      setDragSig(clampPlacement({ ...data.signature, x: lx - g.offset[0], y: ly - g.offset[1] }));
     } else if (g.type === 'sticker') {
       g.moved = true;
       setDragSticker({ index: g.index, x: lx - g.offset[0], y: ly - g.offset[1] });
@@ -228,6 +251,9 @@ const Canvas = forwardRef(function Canvas(
         onStickerChange?.(g.index, { ...s, x: Math.round(dragSticker.x), y: Math.round(dragSticker.y) });
       }
       setDragSticker(null);
+    } else if (g.type === 'signature') {
+      if (dragSig && (dragSig.x !== data.signature?.x || dragSig.y !== data.signature?.y)) onSignatureChange?.({ ...data.signature, x: dragSig.x, y: dragSig.y });
+      setDragSig(null);
     } else if (g.type === 'sticker-new') {
       setSelected(data.stickers.length);
       onStickerAdd?.({ type: stickerType, x: Math.round(g.at[0]), y: Math.round(g.at[1]), scale: 1, rot: 0 });
@@ -239,6 +265,7 @@ const Canvas = forwardRef(function Canvas(
     gesture.current = null;
     liveStroke.current = null;
     setDragSticker(null);
+    setDragSig(null);
     drawStrokes(canvasRef.current.getContext('2d'), data.strokes, RES);
   }
 
@@ -254,13 +281,17 @@ const Canvas = forwardRef(function Canvas(
     [data.stickers, dragSticker],
   );
 
+  const shownSig = dragSig || data.signature;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const sigMarkup = useMemo(() => signatureMarkup(shownSig, 'c'), [shownSig, fontTick]);
+
   const numbers = useMemo(() => {
     if (!showNumbers || !picture?.regions) return [];
     return picture.regions.filter((r) => r.area > 60 && !isRegionDone(r, data.fills));
   }, [showNumbers, picture, data.fills]);
 
   const sel = selected != null ? stickers[selected] : null;
-  const cursor = readOnly ? 'default' : tool === 'pan' ? 'grab' : tool === 'fill' ? 'pointer' : tool === 'sticker' ? 'copy' : 'crosshair';
+  const cursor = readOnly ? 'default' : tool === 'pan' ? 'grab' : tool === 'fill' ? 'pointer' : tool === 'sticker' ? 'copy' : tool === 'signature' ? 'move' : 'crosshair';
 
   return (
     <div
@@ -306,6 +337,25 @@ const Canvas = forwardRef(function Canvas(
               {tool === 'sticker' && selected === i && <circle r="56" fill="none" stroke="#2B9BF4" strokeWidth={3 / (s.scale || 1)} strokeDasharray="8 6" />}
             </g>
           ))}
+          {shownSig && (
+            <g data-testid="signature-layer">
+              <g dangerouslySetInnerHTML={{ __html: sigMarkup }} />
+              {tool === 'signature' && !readOnly && (
+                <rect
+                  transform={`translate(${shownSig.x} ${shownSig.y}) rotate(${shownSig.rot || 0}) scale(${shownSig.scale || 1})`}
+                  x={-BOX.w / 2 - 4}
+                  y={-BOX.h / 2 - 4}
+                  width={BOX.w + 8}
+                  height={BOX.h + 8}
+                  rx="8"
+                  fill="none"
+                  stroke="#2B9BF4"
+                  strokeWidth={3 / (shownSig.scale || 1)}
+                  strokeDasharray="8 6"
+                />
+              )}
+            </g>
+          )}
           {remoteCursors.map((c) => (
             <g key={c.userId} transform={`translate(${c.x} ${c.y})`}>
               <circle r="9" fill={c.color} stroke="#FFFFFF" strokeWidth="3" />
