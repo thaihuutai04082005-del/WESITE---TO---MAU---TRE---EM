@@ -30,6 +30,24 @@ function IconBubble({ name, color, bg, size = 48 }) {
   );
 }
 
+/** Biểu tượng "Cách chấm điểm": cuốn sổ kẹp giấy màu trắng trên nền tròn xanh dương đậm. */
+function ClipboardBadge() {
+  return (
+    <svg viewBox="0 0 40 40" className="h-10 w-10 shrink-0 drop-shadow-sm" aria-hidden="true">
+      <defs>
+        <linearGradient id="cb-bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#3D8BFD" />
+          <stop offset="1" stopColor="#1E5FD9" />
+        </linearGradient>
+      </defs>
+      <circle cx="20" cy="20" r="20" fill="url(#cb-bg)" />
+      <rect x="11" y="10" width="18" height="22" rx="3" fill="#FFFFFF" />
+      <rect x="15.5" y="7.5" width="9" height="5" rx="1.8" fill="#FFFFFF" stroke="#1E5FD9" strokeWidth="1.4" />
+      <path d="M15 17.5 H25 M15 21.5 H25 M15 25.5 H21.5" stroke="#3D8BFD" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function ArenaLobby() {
   const { t, i18n } = useTranslation();
   const token = useAuth((s) => s.token);
@@ -132,7 +150,7 @@ export default function ArenaLobby() {
       {/* Cách chấm điểm */}
       <section className="rounded-[28px] bg-white p-5 shadow-soft">
         <h2 className="mb-3 flex items-center gap-2 font-display text-2xl font-extrabold">
-          <IconBubble name="clipboard" color="#FFFFFF" bg="linear-gradient(135deg,#FFA36C,#FF6F61)" size={38} /> {t('arena.rubricTitle')}
+          <ClipboardBadge /> {t('arena.rubricTitle')}
         </h2>
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(rules.rubric).map(([k, w]) => {
