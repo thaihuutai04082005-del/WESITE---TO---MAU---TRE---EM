@@ -428,7 +428,7 @@
   },
   "plans": {
     "title": "Choose a plan",
-    "subtitle": "Upgrade to color more pictures every day.",
+    "subtitle": "Upgrade to color more, unlock \"wow\" signatures and send more pictures to the exhibition.",
     "best": "Best value",
     "choose": "Choose",
     "renew": "Renew",
@@ -455,8 +455,11 @@
       "limit": "1 picture per day",
       "perks": [
         "All themes & both modes",
-        "Arena, cards, color together",
-        "History & PNG download"
+        "Arena, card packs, color together, storybooks",
+        "Signature: 5 basic styles + sign by hand",
+        "Exhibition: send 1 picture per round, send reactions",
+        "Trophy cabinet, certificates, show off",
+        "History, PNG download & printing"
       ]
     },
     "month": {
@@ -466,6 +469,8 @@
       "perks": [
         "Everything in Free",
         "More pictures every day",
+        "✨ Unlock 5 \"wow\" signature styles",
+        "🏛️ Send 3 pictures per exhibition round",
         "Priority support"
       ]
     },
@@ -476,6 +481,8 @@
       "perks": [
         "Everything in Monthly",
         "Unlimited coloring",
+        "✨ \"Wow\" signatures all year",
+        "🏛️ Send 3 pictures per exhibition round",
         "Save almost 2 months"
       ]
     }

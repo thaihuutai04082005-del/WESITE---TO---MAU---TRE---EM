@@ -428,7 +428,7 @@
   },
   "plans": {
     "title": "Chọn gói cho bé",
-    "subtitle": "Nâng cấp để tô nhiều tranh hơn mỗi ngày.",
+    "subtitle": "Nâng cấp để tô nhiều tranh hơn, mở chữ ký \"wow\" và gửi nhiều tranh đi triển lãm hơn.",
     "best": "Tiết kiệm nhất",
     "choose": "Chọn gói này",
     "renew": "Gia hạn",
@@ -455,8 +455,11 @@
       "limit": "1 tranh mỗi ngày",
       "perks": [
         "Toàn bộ chủ đề & 2 chế độ tô",
-        "Đấu trường, Gacha, Tô cùng nhau",
-        "Lưu lịch sử & tải PNG"
+        "Đấu trường, Bóc thẻ, Tô cùng nhau, Truyện tranh",
+        "Chữ ký: 5 mẫu cơ bản + tự ký bằng tay",
+        "Triển lãm: gửi 1 tranh mỗi vòng, thả cảm xúc",
+        "Tủ kính thành tích, giấy khen, Khoe tranh",
+        "Lưu lịch sử, tải PNG & in tranh"
       ]
     },
     "month": {
@@ -466,6 +469,8 @@
       "perks": [
         "Mọi quyền lợi gói Free",
         "Tô nhiều tranh hơn mỗi ngày",
+        "✨ Mở khoá 5 mẫu chữ ký \"wow\"",
+        "🏛️ Gửi 3 tranh mỗi vòng triển lãm",
         "Hỗ trợ ưu tiên"
       ]
     },
@@ -476,6 +481,8 @@
       "perks": [
         "Mọi quyền lợi gói Tháng",
         "Tô không giới hạn",
+        "✨ 5 mẫu chữ ký \"wow\" cả năm",
+        "🏛️ Gửi 3 tranh mỗi vòng triển lãm",
         "Tiết kiệm gần 2 tháng"
       ]
     }
