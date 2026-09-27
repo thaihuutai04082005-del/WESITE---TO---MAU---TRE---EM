@@ -105,43 +105,52 @@ export default function ArenaLobby() {
         </div>
       </section>
 
-      {/* 2 cách vào trận */}
+      {/* 2 cách vào trận — cùng một khung: đầu thẻ (biểu tượng + tên + nhãn) → nút chính → hàng phụ cao bằng nhau */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#FFF1DC] to-[#FFF8EE] p-5 shadow-soft">
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 ">
-            <IconBubble name="trophy" color="#FFFFFF" bg="#FF9F43" size={56} />
-            <div className="space-y-3">
-              <div>
-                <h2 className="font-display text-2xl font-extrabold">{t('arena.random')}</h2>
-              </div>
-              <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${slot.open ? 'bg-mint/25 text-[#1E8A4F]' : 'bg-coral/20 text-[#C0522E]'}`}>
-                <span className={`h-2 w-2 rounded-full ${slot.open ? 'bg-[#2FA65A]' : 'bg-coral'}`} />
-                {slot.open ? t('arena.open') : t('arena.closed', { time: formatDateTime(slot.nextOpen, i18n.language) })}
-              </span>
-              {slot.slots.length > 0 && <p className="text-xs text-muted">{t('arena.slots', { slots: slot.slots.join(', ') })}</p>}
-              <button type="button" className="btn-coral w-full text-xl" disabled={busy || !slot.open} onClick={() => go('arena:queue')} data-testid="arena-queue">
-                <Icon name="play" /> {t('arena.findMatch')}
-              </button>
-            </div>
+        <section className="flex flex-col gap-4 rounded-[28px] bg-gradient-to-br from-[#FFF1DC] to-[#FFF8EE] p-5 shadow-soft">
+          <div className="flex flex-wrap items-center gap-3">
+            <IconBubble name="trophy" color="#FFFFFF" bg="#FF9F43" size={52} />
+            <h2 className="flex-1 whitespace-nowrap font-display text-xl font-extrabold sm:text-2xl">{t('arena.random')}</h2>
+            <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${slot.open ? 'bg-mint/25 text-[#1E8A4F]' : 'bg-coral/20 text-[#C0522E]'}`}>
+              <span className={`h-2 w-2 rounded-full ${slot.open ? 'bg-[#2FA65A]' : 'bg-coral'}`} />
+              {slot.open ? t('arena.open') : t('arena.closedShort')}
+            </span>
+          </div>
+          <button type="button" className="btn-coral w-full" disabled={busy || !slot.open} onClick={() => go('arena:queue')} data-testid="arena-queue">
+            <Icon name="play" /> {t('arena.findMatch')}
+          </button>
+          <div className="flex min-h-[60px] items-center justify-center gap-4 rounded-2xl bg-white/70 px-3 py-2 text-sm font-bold text-muted">
+            {slot.open ? (
+              <>
+                <span className="flex items-center gap-1.5">
+                  <Icon name="hourglass" size={18} className="text-[#F07B2E]" /> {t('arena.minutes', { n: Math.round(rules.durationSec / 60) })}
+                </span>
+                <span className="h-5 w-px bg-line" />
+                <span className="flex items-center gap-1.5">
+                  <Icon name="users" size={18} className="text-[#F07B2E]" /> {t('arena.upTo', { n: rules.roomSize })}
+                </span>
+              </>
+            ) : (
+              <span>{t('arena.closed', { time: formatDateTime(slot.nextOpen, i18n.language) })}</span>
+            )}
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#E6F3FF] to-[#F4FAFF] p-5 shadow-soft">
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 ">
-            <IconBubble name="users" color="#FFFFFF" bg="#2B9BF4" size={56} />
-            <div className="space-y-3">
-              <div>
-                <h2 className="font-display text-2xl font-extrabold">{t('arena.private')}</h2>
-              </div>
-              <button type="button" className="btn-primary w-full" disabled={busy} onClick={() => go('arena:create')} data-testid="arena-create">
-                <Icon name="plus" /> {t('arena.createRoom')}
-              </button>
-              <form className="flex gap-2 rounded-2xl bg-white/70 p-1.5" onSubmit={(e) => { e.preventDefault(); go('arena:join', { code }); }}>
-                <input className="input min-w-0 border-0 bg-white font-mono uppercase placeholder:font-sans placeholder:normal-case" placeholder={t('arena.roomCode')} value={code} onChange={(e) => setCode(e.target.value)} maxLength={6} required aria-label={t('arena.roomCode')} data-testid="arena-code" />
-                <button type="submit" className="btn-ghost shrink-0 bg-white px-4 text-base text-primary-dark" disabled={busy} data-testid="arena-join">{t('arena.join')}</button>
-              </form>
-            </div>
+        <section className="flex flex-col gap-4 rounded-[28px] bg-gradient-to-br from-[#E6F3FF] to-[#F4FAFF] p-5 shadow-soft">
+          <div className="flex flex-wrap items-center gap-3">
+            <IconBubble name="users" color="#FFFFFF" bg="#2B9BF4" size={52} />
+            <h2 className="flex-1 whitespace-nowrap font-display text-xl font-extrabold sm:text-2xl">{t('arena.private')}</h2>
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-1 text-sm font-bold text-primary-dark shadow-soft">
+              <Icon name="lock" size={14} /> {t('arena.friendsOnlyChip')}
+            </span>
           </div>
+          <button type="button" className="btn-primary w-full" disabled={busy} onClick={() => go('arena:create')} data-testid="arena-create">
+            <Icon name="plus" /> {t('arena.createRoom')}
+          </button>
+          <form className="flex min-h-[60px] items-center gap-2 rounded-2xl bg-white/70 p-1.5" onSubmit={(e) => { e.preventDefault(); go('arena:join', { code }); }}>
+            <input className="input min-w-0 border-0 bg-white font-mono uppercase placeholder:font-sans placeholder:normal-case" placeholder={t('arena.roomCode')} value={code} onChange={(e) => setCode(e.target.value)} maxLength={6} required aria-label={t('arena.roomCode')} data-testid="arena-code" />
+            <button type="submit" className="btn-ghost shrink-0 bg-white px-4 text-base text-primary-dark" disabled={busy} data-testid="arena-join">{t('arena.join')}</button>
+          </form>
         </section>
       </div>
 
