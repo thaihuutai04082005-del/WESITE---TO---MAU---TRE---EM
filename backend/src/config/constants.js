@@ -53,3 +53,8 @@ export const RUBRIC = {
 };
 
 export const AVATARS = ['meo', 'cho', 'tho', 'voi', 'gau', 'hoa', 'tao', 'dau-tay', 'o-to', 'may-bay', 'nam', 'cau-vong'];
+
+// Chữ ký (Đợt 1): 5 mẫu Free + 5 mẫu "wow" chỉ mở khi có gói tháng/năm. 'hand' = tự ký bằng tay (miễn phí).
+export const SIGNATURE_STYLES_FREE = ['classic', 'round', 'pen', 'neat', 'fun'];
+export const SIGNATURE_STYLES_PREMIUM = ['gold', 'crown', 'rainbow', 'star', 'artist'];
+export const SIGNATURE_INKS = ['#1B2A38', '#FFFFFF', '#C9961A', '#FF5F7E', '#2B7BE4', '#7D5FFF'];

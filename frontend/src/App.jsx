@@ -9,6 +9,7 @@ import Register from './pages/Account/Register';
 import Forgot from './pages/Account/Forgot';
 import Welcome from './pages/Account/Welcome';
 import Profile from './pages/Account/Profile';
+import SignatureStudio from './pages/Account/SignatureStudio';
 import ThemeSelector from './pages/ThemeSelector/ThemeSelector';
 import ObjectSelector from './pages/ObjectSelector/ObjectSelector';
 import PoseSelector from './pages/PoseSelector/PoseSelector';
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="shared/:token" element={<SharedStorybook />} />
           <Route path="welcome" element={auth(<Welcome />)} />
           <Route path="profile" element={auth(<Profile />)} />
+          <Route path="signature" element={auth(<SignatureStudio />)} />
           <Route path="color" element={auth(<ThemeSelector />)} />
           <Route path="color/:theme" element={auth(<ObjectSelector />)} />
           <Route path="color/:theme/:object" element={auth(<PoseSelector />)} />

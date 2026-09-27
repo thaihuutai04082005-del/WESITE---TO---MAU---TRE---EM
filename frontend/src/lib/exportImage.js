@@ -1,8 +1,9 @@
-// Xuất tranh thành PNG (Mục 4.4): lớp vùng SVG + lớp Brush + sticker + Khung Artwork (tuỳ chọn). In trực tiếp.
+// Xuất tranh thành PNG (Mục 4.4): lớp vùng SVG + lớp Brush + sticker + chữ ký + Khung Artwork (tuỳ chọn). In trực tiếp.
 import { coloredSvgString } from './picture';
 import { drawStrokes } from './brush';
 import { stickersMarkup } from './stickers';
 import { artworkFrameSvg } from './frames';
+import { ensureSignatureFont, signatureFontCss, signatureMarkup } from './signature';
 
 function loadSvg(svgString) {
   return new Promise((resolve, reject) => {
@@ -43,6 +44,13 @@ export async function renderArtwork(picture, data, { size = 1200, frame = null, 
   if (data?.stickers?.length) {
     const st = await loadSvg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">${stickersMarkup(data.stickers)}</svg>`);
     ctx.drawImage(st, off, off, size, size);
+  }
+  if (data?.signature) {
+    // Font phải nạp vào trang để đo cỡ chữ, rồi nhúng vào SVG vì ảnh SVG không tự tải font ngoài.
+    await ensureSignatureFont(data.signature.style);
+    const css = await signatureFontCss(data.signature.style).catch(() => '');
+    const sig = await loadSvg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600"><style>${css}</style>${signatureMarkup(data.signature, 'x')}</svg>`);
+    ctx.drawImage(sig, off, off, size, size);
   }
   if (frameSvg) ctx.drawImage(await loadSvg(frameSvg), 0, 0, total, total);
   return canvas.toDataURL(type, quality);

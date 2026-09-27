@@ -1,4 +1,4 @@
-// Hồ sơ cá nhân: avatar + Khung Avatar + Level/Rank + gói dịch vụ + ngôn ngữ.
+// Hồ sơ cá nhân: avatar + chữ ký + Khung Avatar + Level/Rank + gói dịch vụ + ngôn ngữ.
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
 import AvatarPicker from './AvatarPicker';
 import { PlanBadge } from '../Payment/Plans';
+import SignaturePreview from '../../components/SignaturePreview';
 
 export default function Profile() {
   const { t, i18n } = useTranslation();
@@ -24,8 +25,10 @@ export default function Profile() {
   const [items, setItems] = useState([]);
   const [prog, setProg] = useState(null);
   const [nickname, setNickname] = useState(user.nickname);
+  const [signature, setSignature] = useState(undefined);
 
   useEffect(() => {
+    api.get('/users/me/signature').then((r) => setSignature(r.signature)).catch(() => {});
     api.get('/shop').then((r) => setItems(r.items)).catch(() => {});
     api.get('/progression').then(setProg).catch(() => {});
   }, []);
@@ -75,6 +78,19 @@ export default function Profile() {
           <input className="input" value={nickname} onChange={(e) => setNickname(e.target.value)} minLength={2} maxLength={20} required />
           <button className="btn-primary" type="submit">{t('common.save')}</button>
         </form>
+      </div>
+
+      <div className="card space-y-3 p-5" data-testid="profile-signature">
+        <h2 className="font-display text-2xl font-bold">{t('signature.title')}</h2>
+        <p className="text-sm text-muted">{t('signature.profileHint')}</p>
+        <div className="flex flex-col items-center gap-3 sm:flex-row">
+          <div className="w-full max-w-xs rounded-2xl border-2 border-line bg-white p-2">
+            {signature ? <SignaturePreview signature={{ ...signature, color: '#1B2A38' }} className="h-16 w-full" /> : <div className="flex h-16 items-center justify-center font-bold text-muted">{t('signature.noneYet')}</div>}
+          </div>
+          <Link to="/signature" className="btn-primary" data-testid="open-signature">
+            <Icon name="signature" /> {signature ? t('signature.edit') : t('signature.create')}
+          </Link>
+        </div>
       </div>
 
       <div className="card space-y-3 p-5">

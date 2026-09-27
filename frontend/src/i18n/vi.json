@@ -145,6 +145,55 @@
     "toNextRank": "Còn {{n}} điểm để lên {{rank}}",
     "maxRank": "Hạng cao nhất!"
   },
+  "signature": {
+    "title": "Chữ ký của bé",
+    "subtitle": "Tạo chữ ký riêng để ký lên những bức tranh bé tô nhé!",
+    "preview": "Chữ ký sẽ trông như thế này",
+    "noneYet": "Bé chưa có chữ ký",
+    "create": "Tạo chữ ký",
+    "tab": {
+      "styles": "Chọn mẫu chữ ký",
+      "hand": "Tự ký bằng tay"
+    },
+    "nameLabel": "Tên trên chữ ký",
+    "namePlaceholder": "Gõ tên của bé",
+    "nameHint": "Tên thật hay biệt danh đều được. Không ghi số điện thoại hay địa chỉ nhé!",
+    "freeStyles": "Mẫu chữ ký",
+    "premiumStyles": "Mẫu chữ ký \"wow\"",
+    "premiumHint": "5 mẫu này mở khoá khi có Gói tháng hoặc Gói năm.",
+    "styles": {
+      "classic": "Nét mềm",
+      "round": "Chữ tròn",
+      "pen": "Bút bi",
+      "neat": "Gọn gàng",
+      "fun": "Vui nhộn",
+      "gold": "Ánh kim",
+      "crown": "Vương miện",
+      "rainbow": "Cầu vồng",
+      "star": "Sao băng",
+      "artist": "Nghệ sĩ"
+    },
+    "handIntro": "Dùng ngón tay hoặc chuột ký vào ô bên dưới.",
+    "handHint": "Ký tên ở đây ✍️",
+    "clearPad": "Ký lại",
+    "save": "Lưu làm chữ ký của bé",
+    "saved": "Đã lưu chữ ký!",
+    "unlock": "Mở khoá mẫu này",
+    "changeNote": "Tranh đã ký rồi vẫn giữ chữ ký cũ. Chữ ký mới dùng cho những lần ký sau.",
+    "dragHint": "Kéo chữ ký tới chỗ bé thích, hoặc bấm nút góc bên dưới.",
+    "size": "To/nhỏ",
+    "tilt": "Nghiêng",
+    "ink": "Màu mực",
+    "remove": "Gỡ chữ ký",
+    "corner": {
+      "tl": "Góc trên bên trái",
+      "tr": "Góc trên bên phải",
+      "bl": "Góc dưới bên trái",
+      "br": "Góc dưới bên phải"
+    },
+    "profileHint": "Chữ ký dùng để ký lên tranh bé tô.",
+    "edit": "Đổi chữ ký"
+  },
   "select": {
     "themes": "Chọn chủ đề",
     "themesHint": "Bé thích tô gì hôm nay?",
@@ -200,7 +249,8 @@
     "zoomReset": "Vừa khung",
     "clear": "Xoá hết",
     "size": "Độ dày",
-    "pickSticker": "Chọn sticker rồi chạm vào tranh"
+    "pickSticker": "Chọn sticker rồi chạm vào tranh",
+    "signature": "Chữ ký"
   },
   "reveal": {
     "title": "Tranh của bé đã sống dậy!",
@@ -612,7 +662,15 @@
     "time_up": "Đã hết giờ.",
     "empty": "Tranh còn trống, hãy tô thêm nhé.",
     "payload_too_large": "Dữ liệu quá lớn.",
-    "admin_only": "Chỉ dành cho quản trị viên."
+    "admin_only": "Chỉ dành cho quản trị viên.",
+    "signature_name_length": "Tên trên chữ ký dài từ 1 đến 20 ký tự nhé.",
+    "signature_private_info": "Chữ ký không được chứa số điện thoại, email hay đường link.",
+    "signature_bad_word": "Chữ ký có từ chưa đẹp, bé đổi tên khác nhé!",
+    "signature_premium_required": "Mẫu này cần Gói tháng hoặc Gói năm.",
+    "signature_style_invalid": "Mẫu chữ ký không hợp lệ.",
+    "signature_hand_invalid": "Chữ ký tay chưa hợp lệ, bé ký lại nhé.",
+    "signature_invalid": "Chữ ký không hợp lệ.",
+    "signature_not_default": "Chỉ ký được bằng chữ ký của bé."
   },
   "guide": {
     "label": "Hướng dẫn",

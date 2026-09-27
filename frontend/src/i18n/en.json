@@ -145,6 +145,55 @@
     "toNextRank": "{{n}} points to {{rank}}",
     "maxRank": "Top rank!"
   },
+  "signature": {
+    "title": "My signature",
+    "subtitle": "Create your own signature to sign the pictures you color!",
+    "preview": "Your signature will look like this",
+    "noneYet": "No signature yet",
+    "create": "Create a signature",
+    "tab": {
+      "styles": "Pick a style",
+      "hand": "Sign by hand"
+    },
+    "nameLabel": "Name on the signature",
+    "namePlaceholder": "Type your name",
+    "nameHint": "Your real name or a nickname — both are fine. No phone numbers or addresses!",
+    "freeStyles": "Signature styles",
+    "premiumStyles": "\"Wow\" signature styles",
+    "premiumHint": "These 5 styles unlock with the Monthly or Yearly plan.",
+    "styles": {
+      "classic": "Soft",
+      "round": "Round",
+      "pen": "Pen",
+      "neat": "Neat",
+      "fun": "Fun",
+      "gold": "Gold shine",
+      "crown": "Crown",
+      "rainbow": "Rainbow",
+      "star": "Shooting star",
+      "artist": "Artist"
+    },
+    "handIntro": "Use your finger or mouse to sign in the box below.",
+    "handHint": "Sign here ✍️",
+    "clearPad": "Start over",
+    "save": "Save as my signature",
+    "saved": "Signature saved!",
+    "unlock": "Unlock this style",
+    "changeNote": "Pictures you already signed keep their old signature. The new one is used next time.",
+    "dragHint": "Drag your signature anywhere you like, or tap a corner button below.",
+    "size": "Size",
+    "tilt": "Tilt",
+    "ink": "Ink color",
+    "remove": "Remove signature",
+    "corner": {
+      "tl": "Top left",
+      "tr": "Top right",
+      "bl": "Bottom left",
+      "br": "Bottom right"
+    },
+    "profileHint": "Use it to sign the pictures you color.",
+    "edit": "Change signature"
+  },
   "select": {
     "themes": "Pick a theme",
     "themesHint": "What would you like to color today?",
@@ -200,7 +249,8 @@
     "zoomReset": "Fit",
     "clear": "Clear",
     "size": "Size",
-    "pickSticker": "Pick a sticker, then tap the picture"
+    "pickSticker": "Pick a sticker, then tap the picture",
+    "signature": "Signature"
   },
   "reveal": {
     "title": "Your picture came to life!",
@@ -612,7 +662,15 @@
     "time_up": "Time's up.",
     "empty": "The picture is still empty — color some more!",
     "payload_too_large": "That's too much data.",
-    "admin_only": "Admins only."
+    "admin_only": "Admins only.",
+    "signature_name_length": "The name on a signature must be 1–20 characters.",
+    "signature_private_info": "Signatures can't contain phone numbers, emails or links.",
+    "signature_bad_word": "That name has a word that isn’t nice — please pick another!",
+    "signature_premium_required": "This style needs the Monthly or Yearly plan.",
+    "signature_style_invalid": "Invalid signature style.",
+    "signature_hand_invalid": "That hand signature didn't work — please sign again.",
+    "signature_invalid": "Invalid signature.",
+    "signature_not_default": "You can only sign with your own signature."
   },
   "guide": {
     "label": "How it works",

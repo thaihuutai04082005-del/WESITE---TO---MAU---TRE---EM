@@ -1,4 +1,4 @@
-// Thanh công cụ (Mục 4.2–4.5): đổ màu, cọ vẽ, tẩy, sticker, lấp lánh, di chuyển, độ dày nét, undo/redo, zoom, xoá hết.
+// Thanh công cụ (Mục 4.2–4.5): đổ màu, cọ vẽ, tẩy, sticker, chữ ký, lấp lánh, di chuyển, độ dày nét, undo/redo, zoom, xoá hết.
 import { useTranslation } from 'react-i18next';
 import Icon from '../Icon';
 import { STICKERS } from '../../lib/stickers';
@@ -23,7 +23,7 @@ function ToolBtn({ icon, label, active, onClick, disabled, testId }) {
 
 export default function ToolBar({
   tool, setTool, size, setSize, glitter, setGlitter, stickerType, setStickerType,
-  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowGlitter = true,
+  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowGlitter = true, allowSignature = false,
 }) {
   const { t } = useTranslation();
   return (
@@ -33,6 +33,7 @@ export default function ToolBar({
         <ToolBtn icon="brush" label={t('tools.brush')} active={tool === 'brush'} onClick={() => setTool('brush')} testId="tool-brush" />
         <ToolBtn icon="eraser" label={t('tools.eraser')} active={tool === 'eraser'} onClick={() => setTool('eraser')} testId="tool-eraser" />
         {allowStickers && <ToolBtn icon="sticker" label={t('tools.sticker')} active={tool === 'sticker'} onClick={() => setTool('sticker')} testId="tool-sticker" />}
+        {allowSignature && <ToolBtn icon="signature" label={t('tools.signature')} active={tool === 'signature'} onClick={() => setTool('signature')} testId="tool-signature" />}
         <ToolBtn icon="hand" label={t('tools.pan')} active={tool === 'pan'} onClick={() => setTool('pan')} testId="tool-pan" />
         {allowGlitter && <ToolBtn icon="sparkle" label={t('tools.glitter')} active={glitter} onClick={() => setGlitter(!glitter)} testId="tool-glitter" />}
       </div>

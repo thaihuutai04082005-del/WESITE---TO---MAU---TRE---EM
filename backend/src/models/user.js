@@ -28,7 +28,7 @@ export function create(fields) {
 
 const UPDATABLE = new Set([
   'nickname', 'avatar', 'avatar_frame', 'brush_skin', 'language', 'password_hash', 'rank_points', 'gacha_points',
-  'ruby', 'level', 'level_baseline', 'login_streak', 'last_login_date', 'google_sub', 'google_email', 'role',
+  'ruby', 'level', 'level_baseline', 'signature', 'login_streak', 'last_login_date', 'google_sub', 'google_email', 'role',
 ]);
 
 export function update(id, fields) {

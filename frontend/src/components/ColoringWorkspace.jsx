@@ -6,6 +6,8 @@ import ToolBar from './ToolBar/ToolBar';
 import ColorPalette from './ColorPalette/ColorPalette';
 import PictureView from './PictureView/PictureView';
 import Modal from './Modal/Modal';
+import SignaturePanel from './SignaturePanel';
+import { ensureSignatureFont, placeDefault } from '../lib/signature';
 
 export default function ColoringWorkspace({
   picture,
@@ -22,6 +24,9 @@ export default function ColoringWorkspace({
   actions = null,
   allowClear = true,
   readOnly = false,
+  // Chữ ký (chỉ tô cá nhân): undefined = tắt công cụ; null = bé chưa tạo chữ ký.
+  signature,
+  signatureInks = [],
 }) {
   const { t, i18n } = useTranslation();
   const canvasRef = useRef(null);
@@ -40,6 +45,16 @@ export default function ColoringWorkspace({
     if (readOnly) return;
     editor.act(action);
     onAction?.(action);
+  };
+
+  const signatureOn = signature !== undefined;
+  const chooseTool = (next) => {
+    setTool(next);
+    // Bấm nút Chữ ký: tranh chưa ký thì đặt chữ ký mặc định ở góc dưới bên phải.
+    if (next === 'signature' && signature && !editor.data.signature) {
+      ensureSignatureFont(signature.style);
+      act({ type: 'signature-set', signature: placeDefault(signature, signatureInks[0]) });
+    }
   };
 
   const pickColor = (c) => {
@@ -72,6 +87,7 @@ export default function ColoringWorkspace({
             onStickerAdd={(sticker) => act({ type: 'sticker-add', sticker })}
             onStickerChange={(index, sticker) => act({ type: 'sticker-update', index, sticker })}
             onStickerRemove={(index) => act({ type: 'sticker-remove', index })}
+            onSignatureChange={(sig) => act({ type: 'signature-set', signature: sig })}
           />
           {template && (
             <button type="button" onClick={() => setShowRef(true)} className="absolute right-2 top-2 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-pop lg:hidden" aria-label={t('coloring.reference')}>
@@ -92,7 +108,8 @@ export default function ColoringWorkspace({
         <div className="card p-3">
           <ToolBar
             tool={tool}
-            setTool={setTool}
+            setTool={chooseTool}
+            allowSignature={signatureOn}
             size={size}
             setSize={setSize}
             glitter={glitter}
@@ -108,6 +125,11 @@ export default function ColoringWorkspace({
             onZoomReset={() => canvasRef.current?.resetZoom()}
             onClear={allowClear ? () => setConfirmClear(true) : null}
           />
+          {signatureOn && tool === 'signature' && (
+            <div className="mt-3 border-t-2 border-line pt-3">
+              <SignaturePanel signature={editor.data.signature} hasDefault={!!signature} inks={signatureInks} onChange={(sig) => act({ type: 'signature-set', signature: sig })} />
+            </div>
+          )}
         </div>
         <div className="card p-3">
           <ColorPalette color={color} onChange={pickColor} userKey={userKey} numbered={template ? picture.palette : null} activeNumber={number} onNumber={setNumber} />
