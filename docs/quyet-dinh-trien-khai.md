@@ -18,19 +18,22 @@ Tài liệu này ghi lại những điểm **kế hoạch gốc (`ke-hoach-web-t
 - PayPal không hỗ trợ VND nên giá PayPal tính bằng USD: **1,99 USD/tháng, 19,99 USD/năm**.
 
 ## 3. Ruby khi thăng Rank
-| Bậc | Điểm Rank | Ruby thưởng | Khung Avatar |
-|---|---|---|---|
-| Đồng | 0 | — (khung khởi điểm) | `avatar-dong` |
-| Bạc | 50 | 50 | `avatar-bac` |
-| Vàng | 150 | 100 | `avatar-vang` |
-| Bạch Kim | 300 | 150 | `avatar-bach-kim` |
-| Kim Cương | 500 | 200 | `avatar-kim-cuong` |
+Tên bậc theo chủ đề hội họa (mã bậc trong code giữ nguyên để không ảnh hưởng dữ liệu cũ):
+
+| Bậc (mã) | Tên hiển thị | Điểm Rank | Ruby thưởng | Khung Avatar |
+|---|---|---|---|---|
+| `bronze` | Mầm Non Tô Màu | 0 | — (khung khởi điểm) | `avatar-dong` — bút sáp |
+| `silver` | Họa Sĩ Nhí | 50 | 50 | `avatar-bac` — bút chì màu |
+| `gold` | Họa Sĩ Tài Năng | 150 | 100 | `avatar-vang` — bảng màu (chưa có vương miện) |
+| `platinum` | Nghệ Sĩ Sáng Tạo | 300 | 150 | `avatar-bach-kim` — cọ vẽ + vương miện nhỏ |
+| `diamond` | Danh Họa | 500 | 200 | `avatar-kim-cuong` — khung tranh + vương miện lớn |
+| `master` | Bậc Thầy Hội Họa | 800 | 300 | `avatar-cao-thu` — vòng cầu vồng + vương miện hoàng gia |
 
 ## 4. Đấu trường
 - **Thời gian mỗi trận:** 10 phút (`ARENA_DURATION_SEC`), có 3 giây đếm ngược trước khi bắt đầu.
 - **"Hàng tuần"** được hiểu là **Bảng vàng tuần** (theo tuần ISO, giờ VN). Bé thi được nhiều trận trong tuần.
 - **Khung giờ công khai** cho ghép ngẫu nhiên đặt bằng `ARENA_SLOTS` (ví dụ `08:00-11:00,14:00-21:00`). Để trống thì luôn mở.
-- **Ghép ngẫu nhiên:** tối đa 10 bé mỗi phòng, ghép theo 3 nhóm trình độ: (Đồng, Bạc) / (Vàng) / (Bạch Kim, Kim Cương).
+- **Ghép ngẫu nhiên:** tối đa 10 bé mỗi phòng, ghép theo 3 nhóm trình độ: (Mầm Non Tô Màu, Họa Sĩ Nhí) / (Họa Sĩ Tài Năng) / (Nghệ Sĩ Sáng Tạo, Danh Họa, Bậc Thầy Hội Họa).
   - Phòng đủ 10 bé thì bắt đầu ngay.
   - Nếu chưa đủ, sau `ARENA_LOBBY_WAIT_SEC` giây (mặc định 60) phòng sẽ bắt đầu khi có ít nhất `ARENA_MIN_PLAYERS` bé (mặc định 2). Nếu vẫn chưa đủ thì tiếp tục chờ thêm.
 - **Phòng riêng:** chỉ **bạn bè của chủ phòng** vào được (an toàn cho trẻ). Chủ phòng tự bấm bắt đầu khi có từ 2 bé.

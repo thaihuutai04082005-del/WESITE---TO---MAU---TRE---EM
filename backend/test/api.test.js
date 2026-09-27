@@ -454,3 +454,16 @@ test('Triển lãm: lịch cổng gửi tranh theo giờ VN', async () => {
   const s3 = schedule(new Date('2026-10-04T13:00:00Z')); // CN 20:00 VN
   assert.deepEqual([s3.submitOpen, s3.reactionsOpen, s3.submitOpensAt], [false, false, '2026-10-09T17:00:00.000Z']);
 });
+
+test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Thủ + 300 Ruby', async () => {
+  const { awardArena } = await import('../src/services/progression.js');
+  const { token, id } = await register('caothu1');
+  getDb().prepare('UPDATE users SET rank_points = 790 WHERE id = ?').run(id);
+  const events = awardArena(id, 10);
+  const up = events.find((e) => e.type === 'rank_up');
+  assert.deepEqual([up?.rank, up?.frame, up?.ruby], ['master', 'avatar-cao-thu', 300]);
+  const p = await api('GET', '/progression', null, token);
+  assert.equal(p.body.rank.key, 'master');
+  assert.equal(p.body.rank.next, null);
+  assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id));
+});

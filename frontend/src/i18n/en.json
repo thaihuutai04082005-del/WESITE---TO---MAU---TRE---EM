@@ -501,6 +501,7 @@
   },
   "missions": {
     "title": "Missions & achievements",
+    "subtitle": "Complete missions to earn Ruby and unlock special achievements!",
     "cards": {
       "level": "Level",
       "rank": "Arena rank",
@@ -518,11 +519,12 @@
     "rankHint": "Place in the Arena top 3 to earn Rank points. Rank points never go down."
   },
   "rank": {
-    "bronze": "Bronze",
-    "silver": "Silver",
-    "gold": "Gold",
-    "platinum": "Platinum",
-    "diamond": "Diamond",
+    "bronze": "Little Colorer",
+    "silver": "Young Artist",
+    "gold": "Talented Artist",
+    "platinum": "Creative Artist",
+    "diamond": "Famous Painter",
+    "master": "Master Painter",
     "pts": "pts",
     "points": "points"
   },
