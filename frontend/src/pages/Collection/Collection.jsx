@@ -9,6 +9,7 @@ import { REACTIONS } from '../../lib/exhibition';
 import { CardTile } from '../Gacha/Gacha';
 import { ExhibitRules, RulesButton } from '../../components/Exhibition';
 import { ScheduleBanner } from '../Exhibition/Hall';
+import { CertificateButton, ShareDialog } from '../../components/Share';
 import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon';
 
@@ -132,6 +133,7 @@ function ArtworksTab() {
   const [items, setItems] = useState(null);
   const [ex, setEx] = useState(null);
   const [submitFor, setSubmitFor] = useState(null);
+  const [shareFor, setShareFor] = useState(null);
 
   const load = () => {
     api.get('/artworks?status=completed').then((r) => setItems(r.artworks));
@@ -177,7 +179,7 @@ function ArtworksTab() {
               {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-2xl border border-line" /> : <div className="aspect-square rounded-2xl bg-primary-light" />}
               <div className="truncate text-sm font-bold">{a.name[i18n.language]}</div>
               <EntryBadge entry={entry} schedule={s} />
-              <div className="mt-auto">
+              <div className="mt-auto space-y-1.5">
                 {canWithdraw ? (
                   <button type="button" className="btn-ghost min-h-10 w-full text-sm" onClick={() => withdraw(entry)} data-testid={`withdraw-${a.id}`}>
                     {t('exhibition.withdraw')}
@@ -196,12 +198,17 @@ function ArtworksTab() {
                 ) : (
                   <p className="text-center text-xs text-muted">{t('exhibition.notType')}</p>
                 )}
+                {entry?.award && <CertificateButton entry={{ ...entry, artworkId: a.id }} className="btn-primary min-h-10 w-full px-2 text-sm" />}
+                <button type="button" className="btn-ghost min-h-10 w-full px-2 text-sm" onClick={() => setShareFor({ artworkId: a.id, entry: entry?.status === 'approved' ? entry : null })} data-testid={`share-${a.id}`}>
+                  📤 {t('share.button')}
+                </button>
               </div>
             </div>
           );
         })}
       </div>
 
+      {shareFor && <ShareDialog artworkId={shareFor.artworkId} entry={shareFor.entry} onClose={() => setShareFor(null)} />}
       {submitFor && (
         <SubmitDialog
           artwork={submitFor}

@@ -55,3 +55,79 @@ export function storybookPdf(book) {
     doc.end();
   });
 }
+
+function star(doc, cx, cy, r, color) {
+  const pts = [];
+  for (let k = 0; k < 10; k++) {
+    const rr = k % 2 ? r * 0.45 : r;
+    const a = (Math.PI / 5) * k - Math.PI / 2;
+    pts.push([cx + rr * Math.cos(a), cy + rr * Math.sin(a)]);
+  }
+  doc.polygon(...pts).fill(color);
+}
+
+/**
+ * Giấy khen "Tranh được yêu thích nhất" (Đợt 3 — Khoe & chia sẻ). A4 ngang: tranh bên trái, lời khen bên phải.
+ * @param {{ heading, presents, nickname, line1, line2, board, line3, footer, image: string|null }} c  chữ đã dịch sẵn
+ * @returns {Promise<Buffer>}
+ */
+export function certificatePdf(c) {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ size: 'A4', layout: 'landscape', margin: 0, info: { Title: c.heading, Author: c.nickname } });
+    const chunks = [];
+    doc.on('data', (x) => chunks.push(x));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
+    doc.registerFont('body', FONT_BODY);
+    doc.registerFont('title', FONT_TITLE);
+    const W = doc.page.width;
+    const H = doc.page.height;
+    const GOLD = '#D9A400';
+
+    // Nền + viền vàng đôi + góc sao
+    doc.rect(0, 0, W, H).fill('#FFFBEF');
+    doc.roundedRect(18, 18, W - 36, H - 36, 18).lineWidth(8).stroke(GOLD);
+    doc.roundedRect(34, 34, W - 68, H - 68, 12).lineWidth(2).stroke('#F2C94C');
+    for (const [x, y] of [[34, 34], [W - 34, 34], [34, H - 34], [W - 34, H - 34]]) star(doc, x, y, 16, GOLD);
+    for (let i = 0; i < 9; i++) star(doc, 120 + i * ((W - 240) / 8), 58, 5, i % 2 ? '#FF8A65' : '#4FA3E0');
+
+    // Tranh bên trái, trong khung
+    const size = 300;
+    const ix = 70;
+    const iy = (H - size) / 2 + 18;
+    doc.roundedRect(ix - 12, iy - 12, size + 24, size + 24, 10).fill(GOLD);
+    doc.rect(ix - 4, iy - 4, size + 8, size + 8).fill('#FFFFFF');
+    const img = dataUrlToBuffer(c.image);
+    let drawn = false;
+    if (img) {
+      try {
+        doc.image(img, ix, iy, { fit: [size, size], align: 'center', valign: 'center' });
+        drawn = true;
+      } catch {
+        /* ảnh hỏng → để khung trống */
+      }
+    }
+    if (!drawn) doc.rect(ix, iy, size, size).fill('#EAF6FF');
+
+    // Lời khen bên phải
+    const tx = ix + size + 50;
+    const tw = W - tx - 60;
+    doc.fillColor('#B7791F').font('title').fontSize(46).text(c.heading, tx, 92, { width: tw, align: 'center' });
+    doc.fillColor('#5E7A8C').font('body').fontSize(15).text(c.presents, tx, 160, { width: tw, align: 'center' });
+    doc.fillColor('#1B2A38').font('title').fontSize(40).text(c.nickname, tx, 188, { width: tw, align: 'center' });
+    doc.moveTo(tx + 40, 246).lineTo(tx + tw - 40, 246).lineWidth(1.5).stroke(GOLD);
+    doc.fillColor('#1B2A38').font('body').fontSize(17).text(c.line1, tx, 262, { width: tw, align: 'center' });
+    doc.fillColor('#E0662B').font('title').fontSize(26).text(c.line2, tx, 292, { width: tw, align: 'center' });
+    doc.fillColor('#7D5FFF').font('title').fontSize(19).text(c.board, tx, 330, { width: tw, align: 'center' });
+    doc.fillColor('#5E7A8C').font('body').fontSize(14).text(c.line3, tx, 366, { width: tw, align: 'center' });
+    // Huy chương
+    const mx = tx + tw / 2;
+    doc.polygon([mx - 22, 440], [mx - 34, 492], [mx - 14, 482], [mx - 4, 500], [mx + 2, 446]).fill('#FF5F7E');
+    doc.polygon([mx + 22, 440], [mx + 34, 492], [mx + 14, 482], [mx + 4, 500], [mx - 2, 446]).fill('#4FA3E0');
+    doc.circle(mx, 430, 28).fill(GOLD);
+    doc.circle(mx, 430, 21).fill('#FFE08A');
+    star(doc, mx, 431, 15, GOLD);
+    doc.fillColor('#8A9BA8').font('body').fontSize(11).text(c.footer, 40, H - 60, { width: W - 80, align: 'center' });
+    doc.end();
+  });
+}

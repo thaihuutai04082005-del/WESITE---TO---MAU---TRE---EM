@@ -433,6 +433,15 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   assert.ok(notesA.some((n) => n.type === 'exhibit_award' && n.data.board === 'free'));
   const mine = (await api('GET', '/exhibition/mine', null, A.token)).body.entries;
   assert.deepEqual(mine[a1].reactions.star, 1);
+
+  // Đợt 3: tủ kính thành tích (chính chủ + bạn bè) và giấy khen PDF cho tranh đạt danh hiệu.
+  const sc = await api('GET', `/exhibition/showcase/${A.id}`, null, A.token);
+  assert.ok(sc.body.entries.some((x) => x.id === entry.id && x.award));
+  assert.equal((await api('GET', `/exhibition/showcase/${A.id}`, null, B.token)).body.error.code, 'not_friends');
+  const cert = await api('POST', `/exhibition/entries/${entry.id}/certificate`, { lang: 'vi' }, A.token);
+  assert.equal(cert.status, 200);
+  assert.match(cert.headers.get('content-type'), /application\/pdf/);
+  assert.equal((await api('POST', `/exhibition/entries/${entry.id}/certificate`, {}, B.token)).status, 404);
   at(null);
 });
 

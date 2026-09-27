@@ -1,4 +1,4 @@
-// Hồ sơ cá nhân: avatar + chữ ký + Khung Avatar + Level/Rank + gói dịch vụ + ngôn ngữ.
+// Hồ sơ cá nhân: avatar + tủ kính thành tích + chữ ký + Khung Avatar + Level/Rank + gói dịch vụ + ngôn ngữ.
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import Icon from '../../components/Icon';
 import AvatarPicker from './AvatarPicker';
 import { PlanBadge } from '../Payment/Plans';
 import SignaturePreview from '../../components/SignaturePreview';
+import { Showcase } from '../../components/Share';
 
 export default function Profile() {
   const { t, i18n } = useTranslation();
@@ -78,6 +79,11 @@ export default function Profile() {
           <input className="input" value={nickname} onChange={(e) => setNickname(e.target.value)} minLength={2} maxLength={20} required />
           <button className="btn-primary" type="submit">{t('common.save')}</button>
         </form>
+      </div>
+
+      <div className="card space-y-3 p-5" data-testid="profile-showcase">
+        <h2 className="font-display text-2xl font-bold">🏅 {t('showcase.title')}</h2>
+        <Showcase userId={user.id} own />
       </div>
 
       <div className="card space-y-3 p-5" data-testid="profile-signature">

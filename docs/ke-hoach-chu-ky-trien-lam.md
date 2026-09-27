@@ -76,7 +76,7 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 
 Quyết định không làm đấu giá. Lý do: bé sẽ không muốn bán tác phẩm do chính mình tạo ra, nhất là tranh đã có thành tích — giữ lại để khoe và chia sẻ có ý nghĩa hơn; đấu giá cũng làm hệ thống phức tạp (kinh tế Ruby, gian lận, tranh chấp) mà không mang lại thu nhập. Nguồn thu vẫn **chỉ từ gói dịch vụ**, không bán Ruby.
 
-## Phần 3 (mới) — Khoe & chia sẻ tranh (ĐÃ CHỐT)
+## Phần 3 (mới) — Khoe & chia sẻ tranh (ĐÃ CHỐT — ĐÃ LÀM ở Đợt 3)
 
 | Tính năng | Nội dung |
 |---|---|

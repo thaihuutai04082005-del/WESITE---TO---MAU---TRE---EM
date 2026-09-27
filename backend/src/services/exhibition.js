@@ -14,6 +14,7 @@ import { activeSubscription } from './quota.js';
 import { notify } from './notifications.js';
 import { VN_OFFSET_MS } from '../utils/time.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
+import { areFriends } from '../controllers/social.controller.js';
 
 const DAY = 86400000;
 const HOUR = 3600000;
@@ -399,4 +400,31 @@ export function reject(adminId, id, rule) {
   getDb().prepare('UPDATE exhibition_entries SET status = ?, reject_rule = ?, hidden = 0, award = 0, reviewed_at = ?, reviewed_by = ? WHERE id = ?').run(next, r, now().toISOString(), adminId, e.id);
   notify(e.user_id, 'exhibit_rejected', { name: nameOf(e.id), rule: r, entryId: e.id });
   return { status: next };
+}
+
+// ---------------- Khoe & chia sẻ (Đợt 3) ----------------
+/** Tủ kính thành tích: tranh đã lên hội trường của 1 bé. Chỉ chính chủ và bạn bè xem được. */
+export function showcase(ownerId, viewerId) {
+  if (ownerId !== viewerId && !areFriends(ownerId, viewerId)) throw forbidden('not_friends');
+  maintain();
+  const s = schedule();
+  const rows = getDb()
+    .prepare(`${ENTRY_SQL} WHERE e.user_id = ? AND e.status = 'approved' AND e.hidden = 0 AND e.round_key <= ? ORDER BY e.award DESC, e.round_key DESC, e.id DESC`)
+    .all(ownerId, s.current);
+  const u = getDb().prepare('SELECT id, nickname, username, avatar, avatar_frame FROM users WHERE id = ?').get(ownerId);
+  if (!u) throw notFound();
+  return {
+    owner: { id: u.id, nickname: u.nickname || u.username || 'Bé', avatar: u.avatar, avatarFrame: u.avatar_frame },
+    current: s.current,
+    entries: rows.map((r) => ({ ...toClient(r, viewerId), onShow: r.round_key === s.current })),
+    pictures: picturesFor(rows),
+  };
+}
+
+/** Dữ liệu cho giấy khen: chỉ tranh của chính bé, đã nhận danh hiệu. */
+export function awardedEntry(userId, entryId) {
+  const row = getDb().prepare(`${ENTRY_SQL} WHERE e.id = ?`).get(entryId);
+  if (!row || row.user_id !== userId) throw notFound('entry_not_found');
+  if (!row.award) throw forbidden('no_award');
+  return toClient(row, userId, { withData: false });
 }

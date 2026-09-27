@@ -318,6 +318,25 @@
       "reject": "Loại"
     }
   },
+  "share": {
+    "brand": "Bé Tô Màu",
+    "title": "Khoe tranh",
+    "hint": "Ảnh có khung, chữ ký và thành tích của bé — gửi ông bà, bố mẹ xem nhé!",
+    "download": "Tải ảnh",
+    "send": "Khoe ngay",
+    "downloaded": "Đã tải ảnh về máy!",
+    "certificate": "Giấy khen",
+    "button": "Khoe tranh"
+  },
+  "showcase": {
+    "title": "Tủ kính thành tích",
+    "of": "Tủ kính của {{name}}",
+    "exhibited": "{{n}} tranh đã triển lãm",
+    "awards": "{{n}} danh hiệu",
+    "reactions": "{{n}} cảm xúc",
+    "emptyOwn": "Tủ kính còn trống. Gửi tranh đi triển lãm để trưng thành tích ở đây nhé!",
+    "empty": "Bạn ấy chưa có tranh nào đi triển lãm."
+  },
   "select": {
     "themes": "Chọn chủ đề",
     "themesHint": "Bé thích tô gì hôm nay?",
@@ -808,7 +827,8 @@
     "exhibit_locked": "Đã khoá thả cảm xúc của tuần này.",
     "exhibit_own": "Đây là tranh của bé.",
     "exhibit_unverified": "Tài khoản cần được phụ huynh xác minh.",
-    "entry_not_found": "Không tìm thấy tranh này trong hội trường."
+    "entry_not_found": "Không tìm thấy tranh này trong hội trường.",
+    "no_award": "Chỉ tranh đạt danh hiệu mới có giấy khen."
   },
   "guide": {
     "label": "Hướng dẫn",

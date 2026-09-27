@@ -318,6 +318,25 @@
       "reject": "Reject"
     }
   },
+  "share": {
+    "brand": "Bé Tô Màu",
+    "title": "Show off",
+    "hint": "A picture with a frame, your signature and your achievements — send it to your family!",
+    "download": "Download",
+    "send": "Share now",
+    "downloaded": "Image downloaded!",
+    "certificate": "Certificate",
+    "button": "Show off"
+  },
+  "showcase": {
+    "title": "Trophy cabinet",
+    "of": "{{name}}’s trophy cabinet",
+    "exhibited": "{{n}} exhibited",
+    "awards": "{{n}} awards",
+    "reactions": "{{n}} reactions",
+    "emptyOwn": "Your cabinet is empty. Send a picture to the exhibition to show achievements here!",
+    "empty": "No exhibited pictures yet."
+  },
   "select": {
     "themes": "Pick a theme",
     "themesHint": "What would you like to color today?",
@@ -808,7 +827,8 @@
     "exhibit_locked": "Reactions are closed for this week.",
     "exhibit_own": "This is your own picture.",
     "exhibit_unverified": "This account needs parent verification.",
-    "entry_not_found": "This picture is not in the hall."
+    "entry_not_found": "This picture is not in the hall.",
+    "no_award": "Only award-winning pictures have a certificate."
   },
   "guide": {
     "label": "How it works",
