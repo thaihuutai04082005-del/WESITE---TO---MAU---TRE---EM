@@ -528,7 +528,6 @@
   },
   "arena": {
     "title": "Creative Arena",
-    "tagline": "Every room is a new challenge — show everyone your talent!",
     "subtitle": "Up to {{size}} kids per room color the same picture in Free mode for {{minutes}} minutes.",
     "random": "Random match",
     "randomHint": "We match you with kids at a similar level.",

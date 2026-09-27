@@ -182,48 +182,6 @@ export function SunCloud({ className = '' }) {
   );
 }
 
-/** Đấu trường — đầu trang: gấu giơ cúp vàng + tia lấp lánh. */
-export function ArenaHeroArt() {
-  return (
-    <svg viewBox="0 0 170 150" className="h-full w-full" aria-hidden="true">
-      <path d="M22 40 l6 -10 M14 58 l-10 -3 M150 36 l8 -8 M156 60 l10 0" stroke="#FFC94D" strokeWidth="4" strokeLinecap="round" />
-      <circle cx="12" cy="92" r="4" fill="#FF7AA2" />
-      <circle cx="160" cy="90" r="3.5" fill="#4FA3E0" />
-      <image href="/mascots/gau.svg" x="8" y="22" width="112" height="126" preserveAspectRatio="xMidYMax meet" />
-      <g transform="translate(92 34) rotate(12)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <path d="M14 8 Q2 8 3 20 Q5 30 17 31" fill="none" stroke="#E6A817" strokeWidth="5" strokeLinecap="round" />
-        <path d="M52 8 Q64 8 63 20 Q61 30 49 31" fill="none" stroke="#E6A817" strokeWidth="5" strokeLinecap="round" />
-        <path d="M11 2 H55 Q56 36 33 44 Q10 36 11 2 Z" fill="#FFD54F" />
-        <rect x="27" y="43" width="12" height="10" fill="#E6A817" />
-        <rect x="18" y="52" width="30" height="9" rx="3" fill="#8B5A2B" />
-        <polygon points="33,10 36.5,18 45,18.5 38.5,24 40.5,32 33,27.5 25.5,32 27.5,24 21,18.5 29.5,18" fill="#FFF3B0" strokeWidth="1.8" />
-      </g>
-    </svg>
-  );
-}
-
-/** Phòng riêng: mèo ngồi sau máy tính (có dán sticker gấu) + chậu cây. */
-export function LaptopArt() {
-  return (
-    <svg viewBox="0 0 180 140" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/meo.svg" x="58" y="0" width="92" height="112" preserveAspectRatio="xMidYMax meet" />
-      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <path d="M18 60 L86 70 L90 124 L22 116 Z" fill="#4FA3E0" />
-        <path d="M26 66 L80 74 L83 116 L29 110 Z" fill="#8FD0FF" strokeWidth="2" />
-        <path d="M8 120 L96 130 L112 122 L28 112 Z" fill="#D6EAF8" />
-        <circle cx="54" cy="92" r="9" fill="#FFFFFF" strokeWidth="2" />
-        <circle cx="48" cy="85" r="3.5" fill="#FFFFFF" strokeWidth="1.8" />
-        <circle cx="60" cy="85" r="3.5" fill="#FFFFFF" strokeWidth="1.8" />
-        <path d="M50 94 Q54 97 58 94" fill="none" strokeWidth="1.8" strokeLinecap="round" />
-        <path d="M148 110 h22 l-3 24 h-16 Z" fill="#FF9F43" />
-        <path d="M159 110 Q152 90 140 88 M159 110 Q160 86 170 80 M159 110 Q168 96 178 98" fill="none" stroke="#4CAF50" strokeWidth="4" strokeLinecap="round" />
-      </g>
-      <path d="M160 30 v10 M155 35 h10" stroke="#FF7AA2" strokeWidth="3" strokeLinecap="round" />
-      <path d="M22 26 l6 4 M26 44 l7 -2" stroke="#FFC94D" strokeWidth="4" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 /** Bảng vàng: vương miện trên đám mây nhỏ. */
 export function CrownCloudArt() {
   return (
@@ -248,6 +206,46 @@ export function BearCloudArt() {
       <image href="/mascots/gau.svg" x="36" y="0" width="80" height="80" preserveAspectRatio="xMidYMax meet" />
       <path d="M128 36 C120 30 122 22 128 26 C134 22 136 30 128 36 Z" fill="#FF7AA2" />
       <path d="M22 30 C16 25 18 19 22 22 C26 19 28 25 22 30 Z" fill="#FF9EC0" />
+    </svg>
+  );
+}
+
+/** Đấu trường — đầu trang: cúp vàng lớn trong vầng hào quang, tia sáng và ngôi sao lấp lánh. */
+export function GrandTrophy() {
+  const rays = Array.from({ length: 12 }, (_, i) => i * 30);
+  return (
+    <svg viewBox="0 0 140 140" className="h-full w-full" aria-hidden="true">
+      <defs>
+        <radialGradient id="gt-halo" cx="50%" cy="48%" r="50%">
+          <stop offset="0" stopColor="#FFF3B0" />
+          <stop offset="0.6" stopColor="#FFE08A" stopOpacity="0.7" />
+          <stop offset="1" stopColor="#FFE08A" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="gt-cup" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#F2B705" />
+          <stop offset="0.35" stopColor="#FFE680" />
+          <stop offset="0.7" stopColor="#FFC61A" />
+          <stop offset="1" stopColor="#D99A00" />
+        </linearGradient>
+      </defs>
+      <circle cx="70" cy="66" r="66" fill="url(#gt-halo)" />
+      {rays.map((a) => (
+        <rect key={a} x="68" y="4" width="4" height="16" rx="2" fill="#FFC94D" opacity="0.75" transform={`rotate(${a} 70 66)`} />
+      ))}
+      <g stroke={INK} strokeWidth="3" strokeLinejoin="round">
+        <path d="M44 36 Q22 36 24 56 Q27 74 50 76" fill="none" stroke="#D99A00" strokeWidth="8" strokeLinecap="round" />
+        <path d="M96 36 Q118 36 116 56 Q113 74 90 76" fill="none" stroke="#D99A00" strokeWidth="8" strokeLinecap="round" />
+        <path d="M40 26 H100 Q102 80 70 90 Q38 80 40 26 Z" fill="url(#gt-cup)" />
+        <path d="M50 34 Q52 66 64 80" fill="none" stroke="#FFF7C8" strokeWidth="5" strokeLinecap="round" />
+        <rect x="62" y="88" width="16" height="14" fill="#E6A817" />
+        <rect x="48" y="100" width="44" height="10" rx="4" fill="#FFC94D" />
+        <rect x="40" y="108" width="60" height="16" rx="5" fill="#8B5A2B" />
+        <rect x="54" y="112" width="32" height="8" rx="2" fill="#FFD54F" strokeWidth="2" />
+        <polygon points="70,38 75.5,50 88,51 78.5,59 81.5,72 70,65 58.5,72 61.5,59 52,51 64.5,50" fill="#FFFFFF" strokeWidth="2.5" />
+      </g>
+      <path d="M22 28 l3 -8 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 Z" fill="#FFD54F" />
+      <path d="M116 24 l2.5 -6 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 Z" fill="#FF9EC0" />
+      <path d="M118 102 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z" fill="#4FA3E0" />
     </svg>
   );
 }

@@ -10,7 +10,7 @@ import { formatDateTime } from '../../lib/format';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import { RankMedal } from '../../components/RankBadge';
-import { ArenaHeroArt, BearCloudArt, CrownCloudArt, LaptopArt, TrophyArt } from '../../components/Illustrations';
+import { BearCloudArt, CrownCloudArt, GrandTrophy } from '../../components/Illustrations';
 
 // Mỗi tiêu chí chấm điểm một biểu tượng + màu riêng.
 const RUBRIC_ICON = {
@@ -66,15 +66,14 @@ export default function ArenaLobby() {
     <div className="page space-y-5">
       {/* Đầu trang */}
       <section className="relative flex flex-wrap items-center gap-3 sm:gap-5">
-        <div className="h-28 w-32 shrink-0 sm:h-36 sm:w-40">
-          <ArenaHeroArt />
+        <div className="h-24 w-24 shrink-0 sm:h-32 sm:w-32">
+          <GrandTrophy />
         </div>
         <div className="min-w-0 flex-1">
           <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-5xl">
-            {t('arena.title')} <span className="align-middle text-3xl sm:text-4xl">👑</span>
+            {t('arena.title')}
           </h1>
-          <p className="mt-1 text-muted sm:text-lg">{t('arena.tagline')}</p>
-          <p className="hidden text-sm text-muted sm:block">{t('arena.subtitle', { size: rules.roomSize, minutes: Math.round(rules.durationSec / 60) })}</p>
+          <p className="mt-1 text-muted">{t('arena.subtitle', { size: rules.roomSize, minutes: Math.round(rules.durationSec / 60) })}</p>
         </div>
         <div className="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-2.5 shadow-soft" data-testid="arena-me">
           <RankMedal rank={user?.rank} size={30} />
@@ -91,7 +90,7 @@ export default function ArenaLobby() {
       {/* 2 cách vào trận */}
       <div className="grid gap-4 lg:grid-cols-2">
         <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#FFF1DC] to-[#FFF8EE] p-5 shadow-soft">
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 sm:grid-cols-[auto_minmax(0,1fr)_150px]">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 ">
             <IconBubble name="trophy" color="#FFFFFF" bg="#FF9F43" size={56} />
             <div className="space-y-3">
               <div>
@@ -107,14 +106,11 @@ export default function ArenaLobby() {
                 <Icon name="play" /> {t('arena.findMatch')}
               </button>
             </div>
-            <div className="pointer-events-none hidden self-center sm:block">
-              <TrophyArt />
-            </div>
           </div>
         </section>
 
         <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#E6F3FF] to-[#F4FAFF] p-5 shadow-soft">
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 sm:grid-cols-[auto_minmax(0,1fr)_150px]">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-4 ">
             <IconBubble name="users" color="#FFFFFF" bg="#2B9BF4" size={56} />
             <div className="space-y-3">
               <div>
@@ -128,9 +124,6 @@ export default function ArenaLobby() {
                 <input className="input min-w-0 border-0 bg-white font-mono uppercase placeholder:font-sans placeholder:normal-case" placeholder={t('arena.roomCode')} value={code} onChange={(e) => setCode(e.target.value)} maxLength={6} required aria-label={t('arena.roomCode')} data-testid="arena-code" />
                 <button type="submit" className="btn-ghost shrink-0 bg-white px-4 text-base text-primary-dark" disabled={busy} data-testid="arena-join">{t('arena.join')}</button>
               </form>
-            </div>
-            <div className="pointer-events-none hidden self-center sm:block">
-              <LaptopArt />
             </div>
           </div>
         </section>
