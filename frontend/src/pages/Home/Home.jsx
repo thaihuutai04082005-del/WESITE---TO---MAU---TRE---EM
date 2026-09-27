@@ -102,15 +102,13 @@ function HomeCard({ card, onInfo }) {
 }
 
 function Dashboard() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const user = useAuth((s) => s.user);
   const plan = useAuth((s) => s.plan);
   const [prog, setProg] = useState(null);
-  const [drafts, setDrafts] = useState([]);
   const [guide, setGuide] = useState(null);
   useEffect(() => {
     api.get('/progression').then(setProg).catch(() => {});
-    api.get('/artworks?status=in_progress').then((r) => setDrafts(r.artworks.slice(0, 4))).catch(() => {});
   }, []);
   const done = prog ? prog.missions.filter((m) => m.completed).length : 0;
   const rank = prog?.rank;
@@ -217,20 +215,6 @@ function Dashboard() {
                 </div>
               </div>
             </Link>
-          </section>
-        )}
-
-        {drafts.length > 0 && (
-          <section>
-            <h2 className="mb-3 font-display text-2xl font-bold">{t('home.continue')}</h2>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {drafts.map((a) => (
-                <Link key={a.id} to={`/draw/${a.id}`} className="card p-2">
-                  {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-2xl" /> : <div className="aspect-square rounded-2xl bg-primary-light" />}
-                  <div className="mt-1 truncate font-bold">{a.name[i18n.language]}</div>
-                </Link>
-              ))}
-            </div>
           </section>
         )}
       </div>
