@@ -10,6 +10,10 @@ import Forgot from './pages/Account/Forgot';
 import Welcome from './pages/Account/Welcome';
 import Profile from './pages/Account/Profile';
 import SignatureStudio from './pages/Account/SignatureStudio';
+import Hall from './pages/Exhibition/Hall';
+import Room from './pages/Exhibition/Room';
+import Review from './pages/Exhibition/Review';
+import Collection from './pages/Collection/Collection';
 import ThemeSelector from './pages/ThemeSelector/ThemeSelector';
 import ObjectSelector from './pages/ObjectSelector/ObjectSelector';
 import PoseSelector from './pages/PoseSelector/PoseSelector';
@@ -74,6 +78,10 @@ export default function App() {
           <Route path="welcome" element={auth(<Welcome />)} />
           <Route path="profile" element={auth(<Profile />)} />
           <Route path="signature" element={auth(<SignatureStudio />)} />
+          <Route path="collection" element={auth(<Collection />)} />
+          <Route path="exhibition" element={auth(<Hall />)} />
+          <Route path="exhibition/review" element={auth(<Review />)} />
+          <Route path="exhibition/:board" element={auth(<Room />)} />
           <Route path="color" element={auth(<ThemeSelector />)} />
           <Route path="color/:theme" element={auth(<ObjectSelector />)} />
           <Route path="color/:theme/:object" element={auth(<PoseSelector />)} />

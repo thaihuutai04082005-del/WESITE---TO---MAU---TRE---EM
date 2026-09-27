@@ -341,3 +341,107 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   await put(null);
   assert.equal((await api('GET', `/artworks/${id}`, null, token)).body.artwork.data.signature, undefined);
 });
+
+test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm xúc, khoá lúc 20:00 CN, danh hiệu, chuyển vòng', async () => {
+  const Ex = await import('../src/services/exhibition.js');
+  const at = (iso) => Ex.setClockForTest(iso);
+  const db = getDb();
+  const vn = (s) => new Date(Date.parse(s) - 7 * 3600e3).toISOString(); // giờ VN → UTC
+
+  const mk = async (username) => {
+    const u = await register(username);
+    await api('PUT', '/users/me/signature', { name: username, style: 'classic' }, u.token);
+    return u;
+  };
+  const A = await mk('trienlam1');
+  const B = await mk('trienlam2');
+  const pic = (await api('GET', '/pictures/1', null, A.token)).body.picture;
+  const sig = { style: 'classic', x: 500, y: 560, scale: 0.8, rot: 0 };
+  // Vẽ 1 tranh đã hoàn thành; lùi giờ bắt đầu để không bị coi là "tô vội" (điều 8).
+  async function artwork(u, { signed = true, brush = 0 } = {}) {
+    const a = (await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, u.token)).body.artwork;
+    await api('POST', `/artworks/${a.id}/start`, null, u.token);
+    const r = pic.regions.find((x) => x.area > 2000);
+    const strokes = Array.from({ length: brush }, () => ({ tool: 'brush', color: '#FF0000', size: 4, points: [[r.label[0], r.label[1]], [r.label[0] + 1, r.label[1]]] }));
+    const data = { fills: FULL_FILLS(pic), strokes, stickers: [], ...(signed ? { signature: { ...sig, name: u === A ? 'trienlam1' : 'trienlam2' } } : {}) };
+    const s = await api('PUT', `/artworks/${a.id}`, { data, completed: true }, u.token);
+    assert.equal(s.status, 200, JSON.stringify(s.body));
+    // Lùi mốc bắt đầu tô 2 ngày: vừa không bị "tô vội", vừa trả lại lượt tô Free hôm nay cho bài test.
+    db.prepare('UPDATE usage_log SET used_at = ? WHERE artwork_id = ?').run(new Date(Date.now() - 2 * 86400000).toISOString(), a.id);
+    return a.id;
+  }
+
+  // Thứ 6: cổng gửi tranh chưa mở.
+  at(vn('2026-10-02T10:00:00Z'));
+  const a1 = await artwork(A);
+  assert.equal((await api('POST', '/exhibition/entries', { artworkId: a1 }, A.token)).body.error.code, 'exhibit_closed');
+
+  // Thứ 7: mở cổng cho vòng 2026-10-05.
+  at(vn('2026-10-03T10:00:00Z'));
+  const st = await api('GET', '/exhibition/mine', null, A.token);
+  assert.deepEqual([st.body.schedule.submitOpen, st.body.schedule.nextRound, st.body.limit], [true, '2026-10-05', 1]);
+  const noSig = await artwork(A, { signed: false });
+  const bad = await api('POST', '/exhibition/entries', { artworkId: noSig }, A.token);
+  assert.equal(bad.body.error.code, 'exhibit_rules');
+  assert.ok(bad.body.error.failures.includes(1));
+  // Tranh không có nét cọ → tự duyệt; Free chỉ gửi 1 tranh/vòng.
+  const e1 = await api('POST', '/exhibition/entries', { artworkId: a1 }, A.token);
+  assert.equal(e1.status, 201, JSON.stringify(e1.body));
+  assert.deepEqual([e1.body.entry.status, e1.body.entry.board], ['approved', 'free']);
+  const a1b = await artwork(A);
+  assert.equal((await api('POST', '/exhibition/entries', { artworkId: a1b }, A.token)).body.error.code, 'exhibit_limit');
+  // Mỗi tranh chỉ 1 lần; tranh đã gửi không sửa được.
+  assert.ok((await api('POST', '/exhibition/entries', { artworkId: a1 }, A.token)).body.error.failures.includes(4));
+  assert.equal((await api('PUT', `/artworks/${a1}`, { data: { fills: {} } }, A.token)).body.error.code, 'artwork_exhibited');
+
+  // Tranh nhiều nét cọ → chờ admin; admin loại theo điều 6 → bé nhận thông báo, lượt được trả lại.
+  const b1 = await artwork(B, { brush: 6 });
+  const e2 = await api('POST', '/exhibition/entries', { artworkId: b1 }, B.token);
+  assert.equal(e2.body.entry.status, 'pending');
+  db.prepare("UPDATE users SET role = 'admin' WHERE username = 'trienlam1'").run();
+  const q = await api('GET', '/exhibition/review', null, A.token);
+  assert.ok(q.body.entries.some((x) => x.id === e2.body.entry.id && x.data.fills));
+  assert.equal((await api('GET', '/exhibition/review', null, B.token)).status, 403);
+  assert.equal((await api('POST', `/exhibition/review/${e2.body.entry.id}/reject`, { rule: 6 }, A.token)).body.status, 'rejected');
+  const notes = (await api('GET', '/users/me/notifications', null, B.token)).body.notifications;
+  assert.ok(notes.some((n) => n.type === 'exhibit_rejected' && n.data.rule === 6));
+  // Đã vi phạm điều 6 → không được tự duyệt; tranh chưa duyệt kịp sẽ chuyển vòng.
+  const b2 = await artwork(B, { brush: 6 });
+  const e3 = await api('POST', '/exhibition/entries', { artworkId: b2 }, B.token);
+  assert.equal(e3.body.entry.status, 'pending');
+
+  // Thứ 2: vòng 2026-10-05 mở. B thả cảm xúc cho A; A không tự thả; không rút được nữa.
+  at(vn('2026-10-05T09:00:00Z'));
+  const room = await api('GET', '/exhibition/rooms/free', null, B.token);
+  const entry = room.body.entries.find((x) => x.id === e1.body.entry.id);
+  assert.ok(entry && room.body.pictures[entry.pictureId].svg);
+  assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'love' }, B.token)).body.counts.love, 1);
+  const r2 = await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'star' }, B.token);
+  assert.deepEqual([r2.body.counts.love, r2.body.counts.star, r2.body.mine], [0, 1, 'star']);
+  assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'heart' }, A.token)).body.error.code, 'exhibit_own');
+  assert.equal((await api('DELETE', `/exhibition/entries/${entry.id}`, null, A.token)).body.error.code, 'exhibit_cannot_withdraw');
+  assert.equal(db.prepare('SELECT round_key FROM exhibition_entries WHERE id = ?').get(e3.body.entry.id).round_key, '2026-10-12');
+  assert.equal((await api('POST', `/exhibition/entries/${entry.id}/report`, null, B.token)).body.ok, true);
+
+  // Chủ nhật 20:30: khoá cảm xúc, xét danh hiệu (đồng hạng thì cùng nhận).
+  at(vn('2026-10-11T20:30:00Z'));
+  assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'clap' }, B.token)).body.error.code, 'exhibit_locked');
+  const hall = await api('GET', '/exhibition', null, A.token);
+  assert.equal(hall.body.lastRound, '2026-10-05');
+  assert.ok(hall.body.winners.some((w) => w.id === entry.id && w.award && w.total === 1));
+  const notesA = (await api('GET', '/users/me/notifications', null, A.token)).body.notifications;
+  assert.ok(notesA.some((n) => n.type === 'exhibit_award' && n.data.board === 'free'));
+  const mine = (await api('GET', '/exhibition/mine', null, A.token)).body.entries;
+  assert.deepEqual(mine[a1].reactions.star, 1);
+  at(null);
+});
+
+test('Triển lãm: lịch cổng gửi tranh theo giờ VN', async () => {
+  const { schedule } = await import('../src/services/exhibition.js');
+  const s1 = schedule(new Date('2026-10-02T16:59:00Z')); // Thứ 6 23:59 VN
+  assert.deepEqual([s1.current, s1.submitOpen, s1.submitOpensAt], ['2026-09-28', false, '2026-10-02T17:00:00.000Z']);
+  const s2 = schedule(new Date('2026-10-04T12:59:00Z')); // CN 19:59 VN
+  assert.deepEqual([s2.submitOpen, s2.reactionsOpen, s2.nextRound], [true, true, '2026-10-05']);
+  const s3 = schedule(new Date('2026-10-04T13:00:00Z')); // CN 20:00 VN
+  assert.deepEqual([s3.submitOpen, s3.reactionsOpen, s3.submitOpensAt], [false, false, '2026-10-09T17:00:00.000Z']);
+});

@@ -19,6 +19,7 @@ import shopRoutes from './routes/shop.routes.js';
 import socialRoutes from './routes/social.routes.js';
 import storybookRoutes from './routes/storybook.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import exhibitionRoutes from './routes/exhibition.routes.js';
 
 export function createApp() {
   const app = express();
@@ -61,6 +62,7 @@ export function createApp() {
   app.use('/api/social', socialRoutes);
   app.use('/api/storybooks', storybookRoutes);
   app.use('/api/admin', adminRoutes);
+  app.use('/api/exhibition', exhibitionRoutes);
   app.use('/api', notFoundHandler);
 
   // Công cụ quản trị nội dung (trang tĩnh).

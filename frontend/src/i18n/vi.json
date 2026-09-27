@@ -35,7 +35,9 @@
     "more": "Thêm",
     "menu": "Mở menu",
     "language": "Đổi ngôn ngữ",
-    "notifications": "Thông báo"
+    "notifications": "Thông báo",
+    "exhibition": "Triển lãm",
+    "collection": "Bộ sưu tập"
   },
   "landing": {
     "title": "Tô màu thật vui, sáng tạo mỗi ngày!",
@@ -193,6 +195,128 @@
     },
     "profileHint": "Chữ ký dùng để ký lên tranh bé tô.",
     "edit": "Đổi chữ ký"
+  },
+  "collection": {
+    "title": "Bộ sưu tập",
+    "cards": "Thẻ hiếm",
+    "artworks": "Tranh đã hoàn thành",
+    "noArtworks": "Bé chưa có tranh nào tô xong. Tô một bức thật đẹp nhé!",
+    "toGacha": "Tới trang Bóc thẻ"
+  },
+  "exhibition": {
+    "title": "Hội trường triển lãm",
+    "subtitle": "Nơi trưng bày những bức tranh đẹp nhất của các bé mỗi tuần.",
+    "homeHint": "Xem tranh của các bạn, thả tim và khoe tranh của bé mỗi tuần!",
+    "submitCta": "Gửi tranh triển lãm",
+    "rooms": "Các phòng tranh",
+    "pictures": "{{count}} bức tranh",
+    "boards": {
+      "S": "Phòng Huyền thoại (S)",
+      "A": "Phòng Quý hiếm (A)",
+      "B": "Phòng Đặc biệt (B)",
+      "free": "Phòng Sáng tạo"
+    },
+    "award": "Tranh được yêu thích nhất tuần",
+    "awardShort": "Yêu thích nhất",
+    "by": "Tác giả",
+    "mascotPraise": "Bạn tô đẹp lắm! Gấu thích bức tranh này 🌟",
+    "reactions": {
+      "heart": "Tim",
+      "cheer": "Hoan hô",
+      "clap": "Vỗ tay",
+      "love": "Rất đẹp",
+      "star": "Tuyệt vời"
+    },
+    "ownHint": "Đây là tranh của bé — các bạn sẽ thả cảm xúc cho bé nhé!",
+    "lockedHint": "Đã khoá thả cảm xúc của tuần này.",
+    "changeHint": "Bấm cảm xúc khác để đổi, bấm lại để gỡ.",
+    "reactHint": "Chọn 1 cảm xúc để khen bạn nha!",
+    "report": "Báo cho Gấu",
+    "reportConfirm": "Tranh này chưa phù hợp? Gấu sẽ xem lại giúp bé. Tên bé được giữ bí mật.",
+    "reported": "Cảm ơn bé! Gấu sẽ xem lại bức tranh này.",
+    "rules": {
+      "title": "Nội quy",
+      "intro": "Gấu Bông nhắc nhỏ: tranh đi triển lãm cần đủ 8 điều này nha!",
+      "when": "Gửi tranh vào thứ 7 và chủ nhật — tranh được trưng cả tuần sau.",
+      "r1": {
+        "title": "Có chữ ký của bé",
+        "text": "Tranh là của bé thì ký tên lên tranh nha!"
+      },
+      "r2": {
+        "title": "Tô gần xong hết tranh",
+        "text": "Ít nhất 8 phần trên 10 phần, không để nhiều chỗ trắng."
+      },
+      "r3": {
+        "title": "Đúng loại tranh",
+        "text": "Tranh thẻ hiếm S, A, B hoặc tranh tô ở chế độ Sáng tạo."
+      },
+      "r4": {
+        "title": "Mỗi tranh đi triển lãm 1 lần",
+        "text": "Để dành chỗ cho những bức tranh mới."
+      },
+      "r5": {
+        "title": "Tô gọn gàng",
+        "text": "Màu tô trong nét, không lem quá nhiều ra ngoài."
+      },
+      "r6": {
+        "title": "Tranh vui vẻ, thân thiện",
+        "text": "Không có hình bậy, hình đáng sợ hay đánh nhau."
+      },
+      "r7": {
+        "title": "Không viết chữ xấu",
+        "text": "Không ghi số điện thoại hay địa chỉ nhà lên tranh."
+      },
+      "r8": {
+        "title": "Tô bằng cả tấm lòng",
+        "text": "Không tô vội vàng cho xong."
+      }
+    },
+    "thisWeek": "Tuần {{from}} – {{to}}",
+    "reactUntil": "Thả cảm xúc tới {{date}}",
+    "judging": "Đang xét danh hiệu · vòng mới mở lúc {{date}}",
+    "submitGate": "Cổng gửi tranh",
+    "submitOpenUntil": "Đang mở tới {{date}}",
+    "submitOpensAt": "Mở lúc {{date}}",
+    "winnersTitle": "Tranh được yêu thích nhất vòng vừa rồi",
+    "winnersWeek": "Vòng bắt đầu {{date}}",
+    "noWinners": "Chưa có vòng nào kết thúc. Tuần này bé gửi tranh nhé!",
+    "emptyRoom": "Phòng này chưa có tranh nào tuần này. Bé gửi tranh vào thứ 7 và chủ nhật nhé!",
+    "status": {
+      "pending": "Chờ duyệt",
+      "rejected": "Chưa đạt điều {{rule}}",
+      "removed": "Đã gỡ khỏi triển lãm",
+      "showing": "Đang triển lãm",
+      "done": "Đã triển lãm",
+      "approved": "Trưng từ {{date}}"
+    },
+    "sentApproved": "Đã gửi! Tranh sẽ lên hội trường vào thứ 2 🎉",
+    "sentPending": "Đã gửi! Gấu sẽ xem tranh trước khi lên hội trường nhé.",
+    "submitTitle": "Gửi tranh triển lãm",
+    "notYet": "Tranh chưa đạt điều {{rules}} trong nội quy. Bé sửa lại rồi gửi nhé, Gấu tin bé làm được!",
+    "submitNote": "Sau khi gửi, chữ ký và bức tranh sẽ được khoá lại. Tranh được trưng từ thứ 2 ({{date}}) đến chủ nhật.",
+    "readRules": "Bé đã đọc nội quy",
+    "send": "Gửi triển lãm",
+    "quota": "Đã gửi {{used}}/{{limit}} tranh",
+    "visit": "Vào hội trường",
+    "premiumMore": "Gói tháng/năm được gửi 3 tranh mỗi vòng.",
+    "withdraw": "Rút tranh",
+    "withdrawn": "Đã rút tranh.",
+    "submitOpensShort": "Mở vào thứ 7",
+    "full": "Đã đủ lượt",
+    "notType": "Chỉ tranh thẻ S, A, B hoặc tranh Sáng tạo được đi triển lãm.",
+    "lockedArtwork": "Tranh đã gửi triển lãm nên được giữ nguyên, không sửa nữa.",
+    "review": {
+      "title": "Duyệt tranh triển lãm",
+      "approveAll": "Duyệt tất cả ({{n}})",
+      "hint": "Chỉ còn những tranh máy chưa tự duyệt được và tranh bị báo nhiều. Bấm \"Duyệt tất cả\", rồi chỉ loại những tranh vi phạm.",
+      "empty": "Không còn tranh nào cần duyệt.",
+      "reported": "bị báo {{n}} lần",
+      "pickRule": "Loại vì vi phạm điều:",
+      "restore": "Trưng lại",
+      "remove": "Gỡ tranh",
+      "approve": "Duyệt",
+      "reject": "Loại"
+    }
   },
   "select": {
     "themes": "Chọn chủ đề",
@@ -586,7 +710,12 @@
     "trade_accepted": "{{by}} đã đồng ý giao dịch thẻ.",
     "trade_declined": "{{by}} đã từ chối giao dịch thẻ.",
     "plan_activated": "Gói dịch vụ đã được kích hoạt, hạn đến {{date}}.",
-    "draft_expiring": "Tranh dở “{{name}}” sẽ tự xoá vào {{date}} nếu bé không mở lại."
+    "draft_expiring": "Tranh dở “{{name}}” sẽ tự xoá vào {{date}} nếu bé không mở lại.",
+    "exhibit_award": "🏆 Chúc mừng! Tranh “{{name}}” là Tranh được yêu thích nhất bảng {{boardName}} tuần này!",
+    "exhibit_done": "Tranh “{{name}}” đã triển lãm xong với {{n}} cảm xúc. Giỏi quá!",
+    "exhibit_reactions": "🎉 Có thêm {{n}} bạn thả cảm xúc cho tranh “{{name}}”!",
+    "exhibit_approved": "Tranh “{{name}}” đã được duyệt, sẽ lên hội trường vào thứ 2!",
+    "exhibit_rejected": "Tranh “{{name}}” chưa đạt điều {{rule}} của nội quy triển lãm. Bé thử gửi tranh khác nhé!"
   },
   "errors": {
     "network_error": "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại nhé.",
@@ -670,7 +799,16 @@
     "signature_style_invalid": "Mẫu chữ ký không hợp lệ.",
     "signature_hand_invalid": "Chữ ký tay chưa hợp lệ, bé ký lại nhé.",
     "signature_invalid": "Chữ ký không hợp lệ.",
-    "signature_not_default": "Chỉ ký được bằng chữ ký của bé."
+    "signature_not_default": "Chỉ ký được bằng chữ ký của bé.",
+    "exhibit_closed": "Cổng gửi tranh chỉ mở vào thứ 7 và chủ nhật (tới 20:00).",
+    "exhibit_rules": "Tranh chưa đạt nội quy triển lãm.",
+    "exhibit_limit": "Bé đã gửi đủ số tranh của vòng này.",
+    "exhibit_cannot_withdraw": "Tranh đã lên hội trường nên không rút được nữa.",
+    "artwork_exhibited": "Tranh đã gửi triển lãm nên không sửa hay xoá được.",
+    "exhibit_locked": "Đã khoá thả cảm xúc của tuần này.",
+    "exhibit_own": "Đây là tranh của bé.",
+    "exhibit_unverified": "Tài khoản cần được phụ huynh xác minh.",
+    "entry_not_found": "Không tìm thấy tranh này trong hội trường."
   },
   "guide": {
     "label": "Hướng dẫn",

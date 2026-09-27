@@ -50,6 +50,8 @@ const P = {
   arrow: 'M5 12h14M13 6l6 6-6 6',
   chevronDown: 'M6 9l6 6 6-6',
   signature: 'M3 19c2.5-3 4-3 5 0s2.5 3 5 0M14 4.5l5.5 5.5M16.5 2l5.5 5.5-9.5 9.5H9v-3.5z',
+  museum: 'M3 21h18M4 18h16M5 10h14M12 3l9 5H3zM6.5 10v8M10 10v8M14 10v8M17.5 10v8',
+  collection: 'M4 7h16v13H4zM7 4h10M9 11l2 2 4-4M8 17h8',
   bulb: 'M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z',
 };
 

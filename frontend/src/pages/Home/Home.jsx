@@ -162,6 +162,20 @@ function Dashboard() {
 
         <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
+        {/* Lối vào Hội trường triển lãm */}
+        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#FFF3D6] via-[#FFF9EE] to-[#F6F2FF] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#C9961A] shadow-soft">
+            <Icon name="museum" size={32} strokeWidth={2.4} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-2xl font-extrabold leading-tight">{t('exhibition.title')}</span>
+            <span className="block text-sm text-muted">{t('exhibition.homeHint')}</span>
+          </span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#C9961A] shadow-soft transition group-hover:translate-x-1">
+            <Icon name="arrow" size={22} strokeWidth={3} />
+          </span>
+        </Link>
+
         {/* Cấp độ & Rank */}
         {prog && (
           <section className="card grid gap-5 p-5 md:grid-cols-2 md:gap-8">

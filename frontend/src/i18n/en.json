@@ -35,7 +35,9 @@
     "more": "More",
     "menu": "Open menu",
     "language": "Change language",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "exhibition": "Exhibition",
+    "collection": "Collection"
   },
   "landing": {
     "title": "Fun, creative coloring every day!",
@@ -193,6 +195,128 @@
     },
     "profileHint": "Use it to sign the pictures you color.",
     "edit": "Change signature"
+  },
+  "collection": {
+    "title": "Collection",
+    "cards": "Rare cards",
+    "artworks": "Finished pictures",
+    "noArtworks": "No finished pictures yet. Color a lovely one!",
+    "toGacha": "Go to Card packs"
+  },
+  "exhibition": {
+    "title": "Exhibition hall",
+    "subtitle": "Where the best pictures by kids are shown every week.",
+    "homeHint": "See friends’ pictures, send hearts and show off yours every week!",
+    "submitCta": "Send a picture",
+    "rooms": "Rooms",
+    "pictures": "{{count}} pictures",
+    "boards": {
+      "S": "Legend room (S)",
+      "A": "Rare room (A)",
+      "B": "Special room (B)",
+      "free": "Creative room"
+    },
+    "award": "Most loved picture of the week",
+    "awardShort": "Most loved",
+    "by": "By",
+    "mascotPraise": "Great coloring! Bear loves this picture 🌟",
+    "reactions": {
+      "heart": "Heart",
+      "cheer": "Hooray",
+      "clap": "Clap",
+      "love": "So pretty",
+      "star": "Awesome"
+    },
+    "ownHint": "This is your picture — friends will cheer for you!",
+    "lockedHint": "Reactions are closed for this week.",
+    "changeHint": "Tap another to change, tap again to remove.",
+    "reactHint": "Pick one reaction to cheer your friend!",
+    "report": "Tell Bear",
+    "reportConfirm": "Is this picture not okay? Bear will take a look. Your name stays secret.",
+    "reported": "Thank you! Bear will take a look.",
+    "rules": {
+      "title": "Rules",
+      "intro": "Bear’s little reminder: exhibition pictures need all 8 of these!",
+      "when": "Send pictures on Saturday and Sunday — they are shown all next week.",
+      "r1": {
+        "title": "Sign your picture",
+        "text": "It is your art — put your signature on it!"
+      },
+      "r2": {
+        "title": "Color almost all of it",
+        "text": "At least 8 out of 10 parts, no big white gaps."
+      },
+      "r3": {
+        "title": "The right kind of picture",
+        "text": "A rare S, A, B card picture or a Free-color picture."
+      },
+      "r4": {
+        "title": "Each picture exhibits once",
+        "text": "That leaves room for new pictures."
+      },
+      "r5": {
+        "title": "Color neatly",
+        "text": "Keep colors inside the lines, not too much outside."
+      },
+      "r6": {
+        "title": "Happy and friendly",
+        "text": "No rude, scary or fighting pictures."
+      },
+      "r7": {
+        "title": "No bad words",
+        "text": "No phone numbers or home addresses on the picture."
+      },
+      "r8": {
+        "title": "Color with your whole heart",
+        "text": "Don’t rush just to finish."
+      }
+    },
+    "thisWeek": "Week {{from}} – {{to}}",
+    "reactUntil": "Reactions open until {{date}}",
+    "judging": "Choosing winners · new round opens {{date}}",
+    "submitGate": "Picture gate",
+    "submitOpenUntil": "Open until {{date}}",
+    "submitOpensAt": "Opens {{date}}",
+    "winnersTitle": "Most loved pictures of the last round",
+    "winnersWeek": "Round starting {{date}}",
+    "noWinners": "No round has finished yet. Send a picture this week!",
+    "emptyRoom": "No pictures in this room this week. Send yours on Saturday or Sunday!",
+    "status": {
+      "pending": "Waiting for review",
+      "rejected": "Missed rule {{rule}}",
+      "removed": "Removed from the exhibition",
+      "showing": "On show now",
+      "done": "Exhibited",
+      "approved": "On show from {{date}}"
+    },
+    "sentApproved": "Sent! Your picture goes up on Monday 🎉",
+    "sentPending": "Sent! Bear will check it before it goes up.",
+    "submitTitle": "Send to the exhibition",
+    "notYet": "This picture misses rule {{rules}}. Fix it and try again — Bear believes in you!",
+    "submitNote": "After sending, the signature and the picture are locked. It is shown from Monday ({{date}}) to Sunday.",
+    "readRules": "I have read the rules",
+    "send": "Send",
+    "quota": "Sent {{used}}/{{limit}}",
+    "visit": "Visit the hall",
+    "premiumMore": "Monthly/Yearly plans can send 3 pictures per round.",
+    "withdraw": "Take back",
+    "withdrawn": "Picture taken back.",
+    "submitOpensShort": "Opens Saturday",
+    "full": "Limit reached",
+    "notType": "Only S, A, B card pictures or Free-color pictures can be exhibited.",
+    "lockedArtwork": "This picture was sent to the exhibition, so it stays as it is.",
+    "review": {
+      "title": "Review exhibition pictures",
+      "approveAll": "Approve all ({{n}})",
+      "hint": "Only pictures the system could not approve and pictures reported many times. Approve all, then reject only the ones breaking a rule.",
+      "empty": "Nothing left to review.",
+      "reported": "reported {{n}} times",
+      "pickRule": "Reject for rule:",
+      "restore": "Show again",
+      "remove": "Remove",
+      "approve": "Approve",
+      "reject": "Reject"
+    }
   },
   "select": {
     "themes": "Pick a theme",
@@ -586,7 +710,12 @@
     "trade_accepted": "{{by}} accepted the card trade.",
     "trade_declined": "{{by}} declined the card trade.",
     "plan_activated": "Your plan is active until {{date}}.",
-    "draft_expiring": "Unfinished picture “{{name}}” will be deleted on {{date}} unless you open it."
+    "draft_expiring": "Unfinished picture “{{name}}” will be deleted on {{date}} unless you open it.",
+    "exhibit_award": "🏆 Congratulations! “{{name}}” is the Most loved picture in board {{boardName}} this week!",
+    "exhibit_done": "“{{name}}” finished its exhibition with {{n}} reactions. Well done!",
+    "exhibit_reactions": "🎉 {{n}} more friends reacted to “{{name}}”!",
+    "exhibit_approved": "“{{name}}” was approved and goes up on Monday!",
+    "exhibit_rejected": "“{{name}}” missed rule {{rule}} of the exhibition rules. Try another picture!"
   },
   "errors": {
     "network_error": "Can't reach the server. Check your connection and try again.",
@@ -670,7 +799,16 @@
     "signature_style_invalid": "Invalid signature style.",
     "signature_hand_invalid": "That hand signature didn't work — please sign again.",
     "signature_invalid": "Invalid signature.",
-    "signature_not_default": "You can only sign with your own signature."
+    "signature_not_default": "You can only sign with your own signature.",
+    "exhibit_closed": "The picture gate is open only on Saturday and Sunday (until 20:00).",
+    "exhibit_rules": "This picture does not meet the exhibition rules yet.",
+    "exhibit_limit": "You already sent the maximum for this round.",
+    "exhibit_cannot_withdraw": "The picture is already on show and can’t be taken back.",
+    "artwork_exhibited": "This picture was sent to the exhibition, so it can’t be edited or deleted.",
+    "exhibit_locked": "Reactions are closed for this week.",
+    "exhibit_own": "This is your own picture.",
+    "exhibit_unverified": "This account needs parent verification.",
+    "entry_not_found": "This picture is not in the hall."
   },
   "guide": {
     "label": "How it works",

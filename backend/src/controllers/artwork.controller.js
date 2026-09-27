@@ -5,6 +5,7 @@ import * as Picture from '../models/picture.js';
 import { sanitizeArtworkData } from '../services/scoringEngine.js';
 import * as Signature from '../services/signature.js';
 import * as User from '../models/user.js';
+import * as Exhibition from '../services/exhibition.js';
 import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
 import { canUsePicture } from './picture.controller.js';
@@ -40,7 +41,7 @@ export function get(req, res) {
   const a = own(req);
   const p = Picture.findPicture(a.picture_id);
   res.json({
-    artwork: { ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en, is_card: p.is_card, rarity: p.rarity }), data: Artwork.dataOf(a), counted: !!a.counted },
+    artwork: { ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en, is_card: p.is_card, rarity: p.rarity }), data: Artwork.dataOf(a), counted: !!a.counted, exhibited: !!Exhibition.activeEntryFor(a.id) },
     picture: Picture.toClient(p),
   });
 }
@@ -53,6 +54,8 @@ export function start(req, res) {
 
 export function save(req, res) {
   const a = own(req);
+  // Tranh đã gửi triển lãm: chữ ký và nội dung bị khoá.
+  Exhibition.assertEditable(a.id);
   const p = Picture.findPicture(a.picture_id);
   const data = sanitizeArtworkData(Picture.manifestOf(p), req.body?.data);
   // Chữ ký là lớp riêng (không phải nét cọ) nên nằm ngoài dữ liệu chấm điểm.
@@ -84,6 +87,7 @@ export function save(req, res) {
 
 export function remove(req, res) {
   const a = own(req);
+  Exhibition.assertDeletable(a.id);
   getDb().prepare('DELETE FROM artworks WHERE id = ?').run(a.id);
   res.json({ ok: true });
 }

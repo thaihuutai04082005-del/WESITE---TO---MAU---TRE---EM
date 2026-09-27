@@ -23,6 +23,8 @@ export const NAV = [
   { to: '/arena', icon: 'trophy', key: 'arena', color: '#F07B2E' },
   { to: '/missions', icon: 'target', key: 'missions', color: '#138FA8' },
   { to: '/gacha', icon: 'gift', key: 'gacha', color: '#7D5FFF' },
+  { to: '/exhibition', icon: 'museum', key: 'exhibition', color: '#C9961A' },
+  { to: '/collection', icon: 'collection', key: 'collection', color: '#7D5FFF' },
   { to: '/shop', icon: 'shop', key: 'shop', color: '#FF5F7E' },
   { to: '/friends', icon: 'users', key: 'friends', color: '#2FA65A' },
   { to: '/together', icon: 'heart', key: 'together', color: '#2FA65A' },

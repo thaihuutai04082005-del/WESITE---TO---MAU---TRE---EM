@@ -58,3 +58,18 @@ export const AVATARS = ['meo', 'cho', 'tho', 'voi', 'gau', 'hoa', 'tao', 'dau-ta
 export const SIGNATURE_STYLES_FREE = ['classic', 'round', 'pen', 'neat', 'fun'];
 export const SIGNATURE_STYLES_PREMIUM = ['gold', 'crown', 'rainbow', 'star', 'artist'];
 export const SIGNATURE_INKS = ['#1B2A38', '#FFFFFF', '#C9961A', '#FF5F7E', '#2B7BE4', '#7D5FFF'];
+
+// Hội trường triển lãm (Đợt 2).
+export const EXHIBITION = {
+  boards: ['S', 'A', 'B', 'free'],
+  reactions: ['heart', 'cheer', 'clap', 'love', 'star'], // ❤️ 🎉 👏 😍 🌟 — mỗi cái 1 điểm
+  perRound: { free: 1, premium: 3 },
+  minCoverage: 0.8, // điều 2: tô ≥ 80% diện tích
+  maxSpill: 0.4, // điều 5: loại nếu > 40% nét cọ lem ra ngoài
+  minMs: 20000, // điều 8: tô dưới 20 giây…
+  msPerRegion: 700, // …hoặc dưới 0,7 giây mỗi vùng đã tô
+  autoBrushStrokes: 3, // ≤ 3 nét cọ tự do (≤ 200 điểm) → tự duyệt
+  autoBrushPoints: 200,
+  trustedStreak: 3, // 3 tranh liên tiếp được duyệt, chưa vi phạm điều 6–7 → tự duyệt
+  hideAfterReports: 3,
+};
