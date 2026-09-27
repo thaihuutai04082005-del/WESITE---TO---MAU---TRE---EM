@@ -132,7 +132,7 @@ export default function ArenaLobby() {
       {/* Cách chấm điểm */}
       <section className="rounded-[28px] bg-white p-5 shadow-soft">
         <h2 className="mb-3 flex items-center gap-2 font-display text-2xl font-extrabold">
-          <IconBubble name="clipboard" color="#2B9BF4" bg="#EAF6FF" size={38} /> {t('arena.rubricTitle')}
+          <IconBubble name="clipboard" color="#16324F" bg="#E6ECF3" size={38} /> {t('arena.rubricTitle')}
         </h2>
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(rules.rubric).map(([k, w]) => {
@@ -153,56 +153,60 @@ export default function ArenaLobby() {
         <p className="mt-3 text-sm text-muted">{t('arena.rewardsHint', { a: rules.rewards[0], b: rules.rewards[1], c: rules.rewards[2] })}</p>
       </section>
 
-      {/* Bảng vàng tuần + Các trận của bé */}
+      {/* Bảng vàng tuần + Các trận của bé: nền trắng như "Cách chấm điểm", màu chỉ ở biểu tượng cho dịu mắt */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#EEEAFF] to-[#F7F5FF] p-5 shadow-soft">
-          <div className="pointer-events-none absolute right-2 top-2 h-14 w-24 opacity-95 sm:right-3 sm:h-20 sm:w-32">
-            <CrownCloudArt />
-          </div>
-          <div className="relative mb-3 flex items-start gap-3 pr-20 sm:pr-32">
-            <IconBubble name="calendar" color="#7D5FFF" bg="#FFFFFF" size={46} />
-            <div>
-              <h2 className="font-display text-xl font-extrabold text-[#5B3FD6]">{t('arena.weekly', { week: info.week })}</h2>
-              {info.leaderboard.length === 0 && <p className="text-sm text-muted">{t('arena.noLeaders')}</p>}
+        <section className="rounded-[28px] bg-white p-5 shadow-soft">
+          <h2 className="mb-3 flex items-center gap-2 font-display text-xl font-extrabold">
+            <IconBubble name="calendar" color="#C9961A" bg="#FFF6D8" size={38} /> {t('arena.weekly', { week: info.week })}
+          </h2>
+          {info.leaderboard.length === 0 ? (
+            <div className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] p-3">
+              <div className="h-12 w-16 shrink-0">
+                <CrownCloudArt />
+              </div>
+              <p className="text-sm text-muted">{t('arena.noLeaders')}</p>
             </div>
-          </div>
-          <ol className="relative space-y-2">
-            {info.leaderboard.map((r) => (
-              <li key={r.user.id} className="flex items-center gap-3 rounded-2xl bg-white/80 px-3 py-2">
-                <span className="w-6 text-center font-display text-xl font-extrabold text-[#5B3FD6]">{r.place}</span>
-                <Avatar avatar={r.user.avatar} frame={r.user.avatarFrame} size={40} />
-                <span className="flex-1 truncate font-bold">{r.user.nickname}</span>
-                <span className="chip">
-                  {r.points} {t('arena.points')}
-                </span>
-              </li>
-            ))}
-          </ol>
+          ) : (
+            <ol className="space-y-2">
+              {info.leaderboard.map((r) => (
+                <li key={r.user.id} className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] px-3 py-2">
+                  <span className="w-6 text-center font-display text-xl font-extrabold text-[#C9961A]">{r.place}</span>
+                  <Avatar avatar={r.user.avatar} frame={r.user.avatarFrame} size={40} />
+                  <span className="flex-1 truncate font-bold">{r.user.nickname}</span>
+                  <span className="chip">
+                    {r.points} {t('arena.points')}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
         </section>
 
-        <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#FFE9EF] to-[#FFF6F8] p-5 shadow-soft">
-          <div className="pointer-events-none absolute bottom-0 right-1 h-16 w-24 sm:right-2 sm:h-24 sm:w-36">
-            <BearCloudArt />
-          </div>
-          <div className="relative mb-3 flex items-start gap-3 pr-20 sm:pr-32">
-            <IconBubble name="heart" color="#FF5F7E" bg="#FFFFFF" size={46} />
-            <div>
-              <h2 className="font-display text-xl font-extrabold text-[#D6336C]">{t('arena.myHistory')}</h2>
-              {info.history.length === 0 && <p className="text-sm text-muted">{t('arena.noHistory')}</p>}
+        <section className="rounded-[28px] bg-white p-5 shadow-soft">
+          <h2 className="mb-3 flex items-center gap-2 font-display text-xl font-extrabold">
+            <IconBubble name="heart" color="#FF5F7E" bg="#FFE9EE" size={38} /> {t('arena.myHistory')}
+          </h2>
+          {info.history.length === 0 ? (
+            <div className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] p-3">
+              <div className="h-12 w-16 shrink-0">
+                <BearCloudArt />
+              </div>
+              <p className="text-sm text-muted">{t('arena.noHistory')}</p>
             </div>
-          </div>
-          <ul className="relative space-y-2 sm:pr-32">
-            {info.history.map((h) => (
-              <li key={h.roomId} className="flex items-center gap-3 rounded-2xl bg-white/85 px-3 py-2">
-                {h.thumbnail ? <img src={h.thumbnail} alt="" className="h-12 w-12 rounded-xl border border-line" /> : <div className="h-12 w-12 rounded-xl bg-primary-light" />}
-                <div className="flex-1 text-sm">
-                  <div className="font-bold">{h.place ? t('arena.placeOf', { place: h.place, n: h.players }) : h.flagged ? t(`arena.flag.${h.flagReason}`) : t('arena.noPlace')}</div>
-                  <div className="text-muted">{formatDateTime(h.startedAt, i18n.language)}</div>
-                </div>
-                <span className="font-display text-xl font-extrabold">{h.total?.toFixed(1) ?? '—'}</span>
-              </li>
-            ))}
-          </ul>
+          ) : (
+            <ul className="space-y-2">
+              {info.history.map((h) => (
+                <li key={h.roomId} className="flex items-center gap-3 rounded-2xl bg-[#F5F9FD] px-3 py-2">
+                  {h.thumbnail ? <img src={h.thumbnail} alt="" className="h-12 w-12 rounded-xl border border-line" /> : <div className="h-12 w-12 rounded-xl bg-primary-light" />}
+                  <div className="flex-1 text-sm">
+                    <div className="font-bold">{h.place ? t('arena.placeOf', { place: h.place, n: h.players }) : h.flagged ? t(`arena.flag.${h.flagReason}`) : t('arena.noPlace')}</div>
+                    <div className="text-muted">{formatDateTime(h.startedAt, i18n.language)}</div>
+                  </div>
+                  <span className="font-display text-xl font-extrabold">{h.total?.toFixed(1) ?? '—'}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </div>
     </div>
