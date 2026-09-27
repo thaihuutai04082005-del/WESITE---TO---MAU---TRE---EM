@@ -56,6 +56,8 @@ const P = {
   hourglass: 'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
   calendar: 'M4 6h16v15H4zM4 10h16M8 3v5M16 3v5M8 14h2M12 14h2M16 14h.01M8 17h2',
   clipboard: 'M8 4h8v3H8zM6 5H5v16h14V5h-1M8 11h8M8 15h6',
+  door: 'M5 21V4a1 1 0 011-1h9l4 2v16M3 21h18M14 12h.01M15 3v18',
+  shield: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9.5 12l2 2 3.5-4',
   bulb: 'M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z',
 };
 
