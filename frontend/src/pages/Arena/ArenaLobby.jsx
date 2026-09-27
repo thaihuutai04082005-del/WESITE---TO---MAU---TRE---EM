@@ -113,7 +113,6 @@ export default function ArenaLobby() {
             <div className="space-y-3">
               <div>
                 <h2 className="font-display text-2xl font-extrabold">{t('arena.random')}</h2>
-                <p className="text-sm text-muted">{t('arena.randomHint')}</p>
               </div>
               <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${slot.open ? 'bg-mint/25 text-[#1E8A4F]' : 'bg-coral/20 text-[#C0522E]'}`}>
                 <span className={`h-2 w-2 rounded-full ${slot.open ? 'bg-[#2FA65A]' : 'bg-coral'}`} />
@@ -133,7 +132,6 @@ export default function ArenaLobby() {
             <div className="space-y-3">
               <div>
                 <h2 className="font-display text-2xl font-extrabold">{t('arena.private')}</h2>
-                <p className="text-sm text-muted">{t('arena.privateHint')}</p>
               </div>
               <button type="button" className="btn-primary w-full" disabled={busy} onClick={() => go('arena:create')} data-testid="arena-create">
                 <Icon name="plus" /> {t('arena.createRoom')}
@@ -178,7 +176,6 @@ export default function ArenaLobby() {
             <IconBubble name="calendar" color="#FFFFFF" bg="#8B7CF6" size={44} />
             <div className="min-w-0 flex-1">
               <h2 className="font-display text-lg font-extrabold text-[#5B4FD6]">{t('arena.weekly', { week: info.week })}</h2>
-              {info.leaderboard.length === 0 && <p className="text-sm text-muted">{t('arena.noLeaders')}</p>}
             </div>
             <div className="pointer-events-none h-14 w-24 shrink-0 sm:h-16 sm:w-28">
               <CrownCloudArt />
@@ -205,7 +202,6 @@ export default function ArenaLobby() {
             <IconBubble name="heart" color="#FFFFFF" bg="#FF7AA2" size={44} />
             <div className="min-w-0 flex-1">
               <h2 className="font-display text-lg font-extrabold text-[#E0457B]">{t('arena.myHistory')}</h2>
-              {info.history.length === 0 && <p className="text-sm text-muted">{t('arena.noHistory')}</p>}
             </div>
             <div className="pointer-events-none h-14 w-24 shrink-0 sm:h-16 sm:w-28">
               <BearCloudArt />
