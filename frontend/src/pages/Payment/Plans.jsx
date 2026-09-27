@@ -38,8 +38,7 @@ export default function Plans() {
   ];
   return (
     <div className="page">
-      <h1 className="page-title text-center">{t('plans.title')}</h1>
-      <p className="mb-6 text-center text-muted">{t('plans.subtitle')}</p>
+      <h1 className="page-title mb-8 text-center">{t('plans.title')}</h1>
       <div className="grid gap-4 md:grid-cols-3">
         {cards.map((c) => (
           <div key={c.key} className={`card relative flex flex-col p-6 ${c.cls}`}>
