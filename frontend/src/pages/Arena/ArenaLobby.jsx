@@ -91,7 +91,6 @@ export default function ArenaLobby() {
           <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-5xl">
             {t('arena.title')}
           </h1>
-          <p className="mt-1 text-muted">{t('arena.subtitle', { size: rules.roomSize, minutes: Math.round(rules.durationSec / 60) })}</p>
         </div>
         <div className="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-2.5 shadow-soft" data-testid="arena-me">
           <RankMedal rank={user?.rank} size={30} />
