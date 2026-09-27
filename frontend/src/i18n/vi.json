@@ -519,12 +519,12 @@
     "rankHint": "Thắng Top 3 ở Đấu trường để tích Điểm Rank. Điểm Rank không bao giờ bị trừ."
   },
   "rank": {
-    "bronze": "Đồng",
-    "silver": "Bạc",
-    "gold": "Vàng",
-    "platinum": "Bạch Kim",
-    "diamond": "Kim Cương",
-    "master": "Cao Thủ",
+    "bronze": "Mầm Non Tô Màu",
+    "silver": "Họa Sĩ Nhí",
+    "gold": "Họa Sĩ Tài Năng",
+    "platinum": "Nghệ Sĩ Sáng Tạo",
+    "diamond": "Danh Họa",
+    "master": "Bậc Thầy Hội Họa",
     "pts": "điểm",
     "points": "điểm"
   },
@@ -532,7 +532,7 @@
     "missionDone": "Hoàn thành nhiệm vụ!",
     "levelUp": "Lên cấp {{level}}!",
     "newMissions": "Bộ nhiệm vụ mới đã mở.",
-    "rankUp": "Thăng hạng {{rank}}!",
+    "rankUp": "Lên hạng {{rank}}!",
     "newFrame": "Bé nhận được Khung Avatar mới."
   },
   "arena": {

@@ -1,4 +1,4 @@
-// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 6 bậc (tới Cao Thủ).
+// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 6 bậc (tới Bậc Thầy Hội Họa).
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -77,7 +77,7 @@ export default function Progression() {
             </span>
             <div className="min-w-0">
               <div className="text-xs font-bold text-muted">{labels[i]}</div>
-              <div className="truncate font-display text-2xl font-extrabold leading-tight">{values[i]}</div>
+              <div className={`font-display font-extrabold leading-tight ${icon === 'medal' ? 'text-lg' : 'truncate text-2xl'}`}>{values[i]}</div>
             </div>
           </div>
         ))}
@@ -141,7 +141,7 @@ export default function Progression() {
                 {i > 0 && <span className={`mt-7 hidden h-0.5 min-w-3 flex-1 rounded sm:block ${reached ? 'bg-[#FFC94D]' : 'bg-line'}`} />}
                 <div className={`mx-auto flex w-20 shrink-0 flex-col items-center text-center ${reached ? '' : 'opacity-45'}`}>
                   <Avatar avatar={user.avatar} frame={tier.frame} size={52} />
-                  <div className="mt-1 whitespace-nowrap text-xs font-extrabold" style={{ color: RANK_STYLE[tier.key]?.text }}>
+                  <div className="mt-1 text-xs font-extrabold leading-tight" style={{ color: RANK_STYLE[tier.key]?.text }}>
                     {t(`rank.${tier.key}`)}
                   </div>
                   <div className="text-[11px] text-muted">{tier.min}+</div>

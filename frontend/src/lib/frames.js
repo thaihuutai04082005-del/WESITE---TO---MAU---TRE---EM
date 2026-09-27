@@ -85,46 +85,64 @@ function crown({ w, h, peaks, fill, stroke = INK, gems = [], tip = null, y = 8 }
 const sparkle = (x, y, r, c) => `<path d="M${x} ${y - r} L${x + r * 0.3} ${y - r * 0.3} L${x + r} ${y} L${x + r * 0.3} ${y + r * 0.3} L${x} ${y + r} L${x - r * 0.3} ${y + r * 0.3} L${x - r} ${y} L${x - r * 0.3} ${y - r * 0.3} Z" fill="${c}"/>`;
 const around = (n, r, off = -90) => Array.from({ length: n }, (_, k) => { const a = ((off + (k * 360) / n) * Math.PI) / 180; return [60 + r * Math.cos(a), 60 + r * Math.sin(a)]; });
 
-// Khung Avatar theo Rank — càng lên cao càng hoành tráng: Đồng → Bạc → Vàng (chưa có vương miện)
-// → Bạch Kim (vương miện nhỏ) → Kim Cương (vương miện lớn đính đá) → Cao Thủ (vương miện hoàng gia + cánh lửa).
+// Khung Avatar theo Rank — chủ đề hội họa, càng lên cao càng hoành tráng:
+// Mầm Non Tô Màu (bút sáp) → Họa Sĩ Nhí (bút chì màu) → Họa Sĩ Tài Năng (bảng màu, chưa có vương miện)
+// → Nghệ Sĩ Sáng Tạo (cọ vẽ + vương miện nhỏ) → Danh Họa (khung tranh + vương miện lớn đính đá)
+// → Bậc Thầy Hội Họa (vòng cầu vồng, cánh sơn màu, bảng màu vàng, vương miện hoàng gia).
+const crayon = (x, y, rot, c) =>
+  `<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="-12" y="-4" width="20" height="8" rx="2" fill="${c}" stroke="${INK}" stroke-width="1.5"/><polygon points="8,-4 14,0 8,4" fill="${c}" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/><rect x="-7" y="-4" width="3" height="8" fill="#FFFFFF" opacity=".6"/></g>`;
+const pencil = (x, y, rot, c, len = 26) =>
+  `<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="${-len / 2}" y="-3.5" width="${len - 8}" height="7" rx="1.5" fill="${c}" stroke="${INK}" stroke-width="1.4"/><polygon points="${len / 2 - 8},-3.5 ${len / 2},0 ${len / 2 - 8},3.5" fill="#F5D6A8" stroke="${INK}" stroke-width="1.4" stroke-linejoin="round"/><polygon points="${len / 2 - 3},-1.3 ${len / 2},0 ${len / 2 - 3},1.3" fill="${c}"/></g>`;
+const brush = (x, y, rot, c) =>
+  `<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="-16" y="-2.5" width="18" height="5" rx="2" fill="#B5793F" stroke="${INK}" stroke-width="1.3"/><rect x="2" y="-3.5" width="5" height="7" fill="#C9D3DC" stroke="${INK}" stroke-width="1.3"/><path d="M7 -3.5 Q16 -3 18 0 Q16 3 7 3.5 Z" fill="${c}" stroke="${INK}" stroke-width="1.3" stroke-linejoin="round"/></g>`;
+const palette = (x, y, s, fill, dots) =>
+  `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 -14 C-16 -14 -22 -4 -20 4 C-18 12 -8 14 -4 10 C-1 7 -6 3 -1 1 C4 -1 8 6 14 3 C20 0 18 -14 0 -14 Z" fill="${fill}" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>` +
+  dots.map((c, k) => `<circle cx="${-12 + k * 7}" cy="${-5 + (k % 2) * -2}" r="2.6" fill="${c}" stroke="${INK}" stroke-width="0.8"/>`).join('') + `</g>`;
+const splat = (x, y, r, c) => `<path d="M${x} ${y - r} q${r * 0.5} ${r * 0.4} ${r} ${r * 0.3} q-${r * 0.4} ${r * 0.5} -${r * 0.1} ${r} q-${r * 0.5} -${r * 0.3} -${r * 0.9} ${r * 0.2} q${r * 0.1} -${r * 0.6} -${r * 0.5} -${r * 0.9} q${r * 0.6} 0 ${r * 0.5} -${r * 0.6} z" fill="${c}"/>`;
+const RAINBOW = ['#FF5F5F', '#FF9F43', '#FFD54F', '#4CD787', '#4FA3E0', '#7D5FFF'];
+
 export const AVATAR_FRAMES = {
-  'avatar-dong': () => `<circle cx="60" cy="60" r="52" fill="none" stroke="#B08D57" stroke-width="8"/>`,
+  // Mầm Non Tô Màu: vòng màu đồng + 2 cây bút sáp chéo dưới đáy.
+  'avatar-dong': () =>
+    `<circle cx="60" cy="60" r="52" fill="none" stroke="#B08D57" stroke-width="8"/>` + crayon(46, 112, -20, '#FF7AA2') + crayon(74, 112, 20 + 180, '#4FA3E0'),
+  // Họa Sĩ Nhí: vòng bạc chấm màu + 3 bút chì màu xếp quanh đáy.
   'avatar-bac': () =>
-    `<circle cx="60" cy="60" r="52" fill="none" stroke="#C0C0C0" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="4 10"/>` +
-    [0, 120, 240].map((a) => `<polygon points="${starPts(60 + 54 * Math.cos(((a - 90) * Math.PI) / 180), 60 + 54 * Math.sin(((a - 90) * Math.PI) / 180), 9, 4)}" fill="#E8E8E8" stroke="${INK}" stroke-width="1.5"/>`).join(''),
-  // Vàng: vòng vàng + 6 ngôi sao nhỏ, KHÔNG có vương miện.
+    `<circle cx="60" cy="60" r="52" fill="none" stroke="#C0C0C0" stroke-width="9"/>` +
+    around(8, 52, -67.5).map(([x, y], k) => `<circle cx="${x}" cy="${y}" r="2.3" fill="${RAINBOW[k % 6]}"/>`).join('') +
+    pencil(34, 104, -40, '#FF5F7E') + pencil(60, 114, 0, '#FFD54F') + pencil(86, 104, 40, '#4CD787'),
+  // Họa Sĩ Tài Năng: vòng vàng + vệt sơn nhiều màu + bảng màu dưới đáy — CHƯA có vương miện.
   'avatar-vang': () =>
     `<circle cx="60" cy="60" r="52" fill="none" stroke="#FFD700" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="#FFF3B0" stroke-width="2.5"/>` +
-    around(6, 54).map(([x, y]) => `<polygon points="${starPts(x, y, 7.5, 3.4)}" fill="#FFD54F" stroke="${INK}" stroke-width="1.4"/>`).join(''),
-  // Bạch Kim: vòng bạch kim 2 lớp + lá băng hai bên + vương miện bạc nhỏ.
+    splat(14, 30, 7, '#FF7AA2') + splat(106, 28, 6, '#4FA3E0') + splat(8, 78, 6, '#4CD787') + splat(112, 80, 7, '#7D5FFF') +
+    palette(60, 114, 0.95, '#F5D6A8', ['#FF5F5F', '#FFD54F', '#4FA3E0', '#4CD787']),
+  // Nghệ Sĩ Sáng Tạo: vòng bạch kim + 2 cọ vẽ chéo dưới đáy + vương miện nhỏ.
   'avatar-bach-kim': () =>
     `<defs><linearGradient id="av-pt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2FCFF"/><stop offset="1" stop-color="#8FCFE0"/></linearGradient></defs>` +
     `<circle cx="60" cy="60" r="52" fill="none" stroke="url(#av-pt)" stroke-width="10"/><circle cx="60" cy="60" r="57" fill="none" stroke="#7DB9C9" stroke-width="2"/>` +
-    `<path d="M8 64 q-8 -16 4 -30 q2 14 10 18 z M112 64 q8 -16 -4 -30 q-2 14 -10 18 z" fill="#E0FBFF" stroke="${INK}" stroke-width="2"/>` +
+    splat(10, 70, 6, '#FF9EC0') + splat(110, 70, 6, '#7DE2FF') +
+    brush(44, 110, -25, '#FF7AA2') + brush(76, 110, 180 + 25, '#4FA3E0') +
     crown({ w: 36, h: 17, peaks: 3, fill: '#C9E4EE', gems: ['#7DE2FF'], tip: '#FFFFFF', y: 9 }),
-  // Kim Cương: vòng pha lê dày + viên kim cương quanh vòng + vương miện lớn đính 3 viên đá, lấp lánh.
+  // Danh Họa: khung tranh mạ vàng (4 góc hoa văn) quanh vòng pha lê + vương miện lớn đính đá + lấp lánh.
   'avatar-kim-cuong': () =>
     `<defs><linearGradient id="av-dia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E0FBFF"/><stop offset=".5" stop-color="#7DE2FF"/><stop offset="1" stop-color="#2B9BF4"/></linearGradient>` +
     `<linearGradient id="av-dia-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0FBFF"/><stop offset="1" stop-color="#5FC3F2"/></linearGradient></defs>` +
+    [[4, 4, 0], [116, 4, 90], [116, 116, 180], [4, 116, 270]].map(([x, y, r]) => `<path transform="translate(${x} ${y}) rotate(${r})" d="M0 0 H22 Q10 4 8 8 Q4 10 0 22 Z" fill="#FFD54F" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>`).join('') +
     `<circle cx="60" cy="60" r="52" fill="none" stroke="url(#av-dia)" stroke-width="12"/><circle cx="60" cy="60" r="58.5" fill="none" stroke="#2B9BF4" stroke-width="1.8"/>` +
-    around(6, 53, -60).map(([x, y]) => `<polygon points="${x},${y - 9} ${x + 7},${y - 2} ${x},${y + 9} ${x - 7},${y - 2}" fill="#B9F2FF" stroke="${INK}" stroke-width="1.5"/>`).join('') +
-    crown({ w: 50, h: 22, peaks: 3, fill: 'url(#av-dia-c)', gems: ['#FF5F7E', '#7DE2FF', '#FF5F7E'], tip: '#FFFFFF', y: 10 }) +
-    sparkle(26, 6, 5, '#7DE2FF') + sparkle(96, 4, 4, '#B9F2FF'),
-  // Cao Thủ: vòng hồng–vàng ánh kim 2 lớp, cánh lửa lớn hai bên, vương miện hoàng gia 5 chóp đính ngọc,
-  // ruy băng + ngôi sao dưới đáy, lấp lánh xung quanh — hoành tráng nhất.
+    around(6, 52, -60).map(([x, y], k) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${RAINBOW[k]}" stroke="${INK}" stroke-width="1"/>`).join('') +
+    crown({ w: 50, h: 22, peaks: 3, fill: 'url(#av-dia-c)', gems: ['#FF5F7E', '#FFD54F', '#FF5F7E'], tip: '#FFFFFF', y: 10 }) +
+    sparkle(26, 4, 5, '#7DE2FF') + sparkle(96, 2, 4.5, '#FFD54F'),
+  // Bậc Thầy Hội Họa: vòng cầu vồng 2 lớp, 2 cánh là vệt sơn cầu vồng, bảng màu vàng + cọ dưới đáy,
+  // vương miện hoàng gia 5 chóp đính ngọc, lấp lánh — hoành tráng nhất.
   'avatar-cao-thu': () =>
-    `<defs><linearGradient id="av-master" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset=".5" stop-color="#FF7AA2"/><stop offset="1" stop-color="#C2185B"/></linearGradient>` +
-    `<linearGradient id="av-master-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".6" stop-color="#FFC61A"/><stop offset="1" stop-color="#E09A00"/></linearGradient>` +
-    `<linearGradient id="av-flame" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF5F5F"/><stop offset=".6" stop-color="#FF9F43"/><stop offset="1" stop-color="#FFD54F"/></linearGradient></defs>` +
-    // Cánh lửa nằm hẳn bên ngoài vòng (x < 8 và x > 112), không lấn vào ảnh đại diện.
-    `<g stroke="${INK}" stroke-width="2" stroke-linejoin="round" fill="url(#av-flame)">` +
-    `<path d="M8 84 C-10 78 -16 56 -8 38 C-6 50 0 56 6 58 C-4 46 -2 30 6 20 C6 34 10 42 12 46 Z"/>` +
-    `<path d="M112 84 C130 78 136 56 128 38 C126 50 120 56 114 58 C124 46 122 30 114 20 C114 34 110 42 108 46 Z"/></g>` +
-    `<circle cx="60" cy="60" r="52" fill="none" stroke="url(#av-master)" stroke-width="13"/><circle cx="60" cy="60" r="59" fill="none" stroke="#FFC61A" stroke-width="2.5" stroke-dasharray="2 5"/>` +
-    around(8, 52, -67.5).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.6" fill="#FFF3B0" stroke="${INK}" stroke-width="1"/>`).join('') +
-    `<path d="M40 110 l-8 12 l10 -3 l4 8 l6 -13z M80 110 l8 12 l-10 -3 l-4 8 l-6 -13z" fill="#D6336C" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/>` +
-    `<polygon points="${starPts(60, 112, 11, 5)}" fill="url(#av-master-c)" stroke="${INK}" stroke-width="1.8"/>` +
+    `<defs><linearGradient id="av-rb" x1="0" y1="0" x2="1" y2="1">${RAINBOW.map((c, k) => `<stop offset="${k / 5}" stop-color="${c}"/>`).join('')}</linearGradient>` +
+    `<linearGradient id="av-master-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".6" stop-color="#FFC61A"/><stop offset="1" stop-color="#E09A00"/></linearGradient></defs>` +
+    [-1, 1].map((d) => RAINBOW.slice(0, 5).map((c, k) => { const x = d < 0 ? 8 - k * 3.2 : 112 + k * 3.2; return `<path d="M${60 + d * 52} ${34 + k * 4} Q${x + d * 14} ${50 + k * 4} ${x} ${88 - k * 2}" fill="none" stroke="${c}" stroke-width="4.5" stroke-linecap="round"/>`; }).join('')).join('') +
+    `<circle cx="60" cy="60" r="52" fill="none" stroke="url(#av-rb)" stroke-width="12"/><circle cx="60" cy="60" r="59" fill="none" stroke="#FFC61A" stroke-width="2.5" stroke-dasharray="2 5"/>` +
+    around(8, 52, -67.5).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.6" fill="#FFFFFF" stroke="${INK}" stroke-width="1"/>`).join('') +
+    brush(36, 112, -30, '#FF5F7E') + brush(84, 112, 180 + 30, '#4FA3E0') +
+    palette(60, 116, 1.05, 'url(#av-master-c)', ['#FF5F5F', '#4CD787', '#4FA3E0', '#7D5FFF']) +
     crown({ w: 66, h: 30, peaks: 4, fill: 'url(#av-master-c)', gems: ['#4CD787', '#FF5F7E', '#2B9BF4', '#FF5F7E', '#4CD787'], tip: '#FFFFFF', y: 11 }) +
-    sparkle(18, -2, 6, '#FFD54F') + sparkle(104, -4, 6.5, '#FF9EC0') + sparkle(60, -26, 5, '#FFF3B0') + sparkle(4, 30, 4, '#FFD54F') + sparkle(116, 30, 4, '#FFD54F'),
+    sparkle(18, -2, 6, '#FFD54F') + sparkle(104, -4, 6.5, '#FF9EC0') + sparkle(60, -26, 5, '#FFF3B0') + sparkle(2, 30, 4, '#FFD54F') + sparkle(118, 30, 4, '#7DE2FF'),
 };
+
 

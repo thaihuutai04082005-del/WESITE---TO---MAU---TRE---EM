@@ -16,10 +16,10 @@ export const ITEMS = [
   { type: 'artwork_frame', slug: 'khung-cau-vong', name_vi: 'Khung cầu vồng lấp lánh', name_en: 'Sparkling rainbow frame', price: 400, limited: 1 },
   { type: 'artwork_frame', slug: 'khung-kim-cuong', name_vi: 'Khung kim cương', name_en: 'Diamond frame', price: 500, limited: 1 },
 
-  { type: 'avatar_frame', slug: 'avatar-dong', name_vi: 'Khung Đồng', name_en: 'Bronze frame', rank: 'bronze' },
-  { type: 'avatar_frame', slug: 'avatar-bac', name_vi: 'Khung Bạc', name_en: 'Silver frame', rank: 'silver' },
-  { type: 'avatar_frame', slug: 'avatar-vang', name_vi: 'Khung Vàng', name_en: 'Gold frame', rank: 'gold' },
-  { type: 'avatar_frame', slug: 'avatar-bach-kim', name_vi: 'Khung Bạch Kim', name_en: 'Platinum frame', rank: 'platinum' },
-  { type: 'avatar_frame', slug: 'avatar-kim-cuong', name_vi: 'Khung Kim Cương', name_en: 'Diamond frame', rank: 'diamond' },
-  { type: 'avatar_frame', slug: 'avatar-cao-thu', name_vi: 'Khung Cao Thủ', name_en: 'Master frame', rank: 'master' },
+  { type: 'avatar_frame', slug: 'avatar-dong', name_vi: 'Khung Mầm Non Tô Màu', name_en: 'Little Colorer frame', rank: 'bronze' },
+  { type: 'avatar_frame', slug: 'avatar-bac', name_vi: 'Khung Họa Sĩ Nhí', name_en: 'Young Artist frame', rank: 'silver' },
+  { type: 'avatar_frame', slug: 'avatar-vang', name_vi: 'Khung Họa Sĩ Tài Năng', name_en: 'Talented Artist frame', rank: 'gold' },
+  { type: 'avatar_frame', slug: 'avatar-bach-kim', name_vi: 'Khung Nghệ Sĩ Sáng Tạo', name_en: 'Creative Artist frame', rank: 'platinum' },
+  { type: 'avatar_frame', slug: 'avatar-kim-cuong', name_vi: 'Khung Danh Họa', name_en: 'Famous Painter frame', rank: 'diamond' },
+  { type: 'avatar_frame', slug: 'avatar-cao-thu', name_vi: 'Khung Bậc Thầy Hội Họa', name_en: 'Master Painter frame', rank: 'master' },
 ];

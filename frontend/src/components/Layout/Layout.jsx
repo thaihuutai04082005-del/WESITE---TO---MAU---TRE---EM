@@ -96,12 +96,7 @@ export default function Layout() {
             <LanguageSwitch />
             {user ? (
               <>
-                <span className="hidden sm:block">
-                  <RankBadge rank={user.rank} points={user.rankPoints} />
-                </span>
-                <span className="sm:hidden">
-                  <RankBadge rank={user.rank} points={user.rankPoints} compact />
-                </span>
+                <RankBadge rank={user.rank} points={user.rankPoints} compact />
                 <Link to="/shop" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" title="Ruby" data-testid="ruby-chip">
                   <Icon name="ruby" size={18} /> {user.ruby}
                 </Link>
