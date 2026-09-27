@@ -1,5 +1,6 @@
 // Bạn bè & trao đổi thẻ (Mục 10.3): kết bạn chỉ qua mã mời riêng; tặng/đổi tối đa 3 lượt/ngày, xác nhận 2 chiều.
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useUi } from '../../store/ui';
@@ -183,6 +184,9 @@ export default function Friends() {
                   {t('home.level', { level: f.user.level })} · {t(`rank.${f.user.rank}`)}
                 </div>
               </div>
+              <Link to={`/showcase/${f.user.id}`} className="btn-ghost min-h-11 px-3 text-base" title={t('showcase.title')} aria-label={t('showcase.title')} data-testid="friend-showcase">
+                <Icon name="museum" size={20} />
+              </Link>
               <button type="button" className="btn-primary min-h-11 px-3 text-base" onClick={() => setTradeWith(f.user)} data-testid="friend-trade">
                 <Icon name="swap" size={20} />
               </button>

@@ -152,6 +152,8 @@ export default function ColoringScreen() {
   if (!picture) return <div className="page text-center text-muted">{t('common.loading')}</div>;
 
   const progress = progressOf(picture, editor.data.fills);
+  // Tranh đã gửi triển lãm: chỉ xem, không sửa được (chữ ký và nội dung bị khoá).
+  const locked = !!artwork.exhibited;
   const mode = artwork.mode === 'template' ? 'template' : 'free';
 
   return (
@@ -163,6 +165,7 @@ export default function ColoringScreen() {
         brushSkin={user?.brushSkin}
         userKey={String(user?.id || 'guest')}
         onAction={onAction}
+        readOnly={locked}
         signature={sig ? sig.signature : undefined}
         signatureInks={sig?.inks}
         onUndo={() => {
@@ -193,6 +196,11 @@ export default function ColoringScreen() {
           </div>
         }
         actions={
+          locked ? (
+            <p className="rounded-2xl bg-sun/25 px-4 py-2 text-center font-bold" data-testid="exhibit-locked">
+              🏛️ {t('exhibition.lockedArtwork')}
+            </p>
+          ) : (
           <>
             <button type="button" className="btn-ghost" onClick={saveAndExit} data-testid="save-exit">
               <Icon name="save" /> {t('coloring.saveExit')}
@@ -201,6 +209,7 @@ export default function ColoringScreen() {
               <Icon name="check" /> {t('coloring.complete')}
             </button>
           </>
+          )
         }
       />
       <RevealModal
