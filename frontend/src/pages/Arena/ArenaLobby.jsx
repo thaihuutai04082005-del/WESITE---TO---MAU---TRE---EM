@@ -132,7 +132,7 @@ export default function ArenaLobby() {
       {/* Cách chấm điểm */}
       <section className="rounded-[28px] bg-white p-5 shadow-soft">
         <h2 className="mb-3 flex items-center gap-2 font-display text-2xl font-extrabold">
-          <IconBubble name="clipboard" color="#2FA65A" bg="#E4F6E8" size={38} /> {t('arena.rubricTitle')}
+          <IconBubble name="clipboard" color="#FFFFFF" bg="linear-gradient(135deg,#FFA36C,#FF6F61)" size={38} /> {t('arena.rubricTitle')}
         </h2>
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(rules.rubric).map(([k, w]) => {

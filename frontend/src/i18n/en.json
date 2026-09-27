@@ -543,7 +543,7 @@
     "rubricTitle": "How scoring works",
     "rewardsHint": "1st +{{a}}, 2nd +{{b}}, 3rd +{{c}} Rank and Gacha points.",
     "weekly": "Weekly leaders {{week}}",
-    "noLeaders": "No leaders yet this week — be the first!",
+    "noLeaders": "Be the first on the board this week!",
     "myHistory": "Your matches",
     "noHistory": "No matches yet.",
     "placeOf": "Place {{place}}/{{n}}",
