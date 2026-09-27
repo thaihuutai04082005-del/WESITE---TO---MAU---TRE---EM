@@ -181,3 +181,71 @@ export function SunCloud({ className = '' }) {
     </svg>
   );
 }
+
+/** Bảng vàng: vương miện trên đám mây nhỏ. */
+export function CrownCloudArt() {
+  return (
+    <svg viewBox="0 0 140 90" className="h-full w-full" aria-hidden="true">
+      <path d="M22 80 Q8 80 12 68 Q10 56 26 58 Q32 44 50 50 Q64 38 80 50 Q98 46 102 60 Q120 60 116 74 Q118 84 104 82 Z" fill="#FFFFFF" opacity="0.95" />
+      <g transform="translate(40 14) rotate(-8)" stroke="#B7791F" strokeWidth="2.5" strokeLinejoin="round">
+        <polygon points="4,44 0,10 16,26 30,2 44,26 60,10 56,44" fill="#FFD54F" />
+        <rect x="4" y="42" width="52" height="9" rx="3" fill="#F2B705" />
+        <circle cx="30" cy="30" r="5" fill="#FF5F7E" strokeWidth="2" />
+      </g>
+      <path d="M18 30 l4 -6 l4 6 l-4 6 Z" fill="#FF9EC0" />
+      <path d="M118 30 l3 -5 l3 5 l-3 5 Z" fill="#FFD54F" />
+    </svg>
+  );
+}
+
+/** Các trận của bé: gấu nằm ôm đám mây + tim. */
+export function BearCloudArt() {
+  return (
+    <svg viewBox="0 0 150 90" className="h-full w-full" aria-hidden="true">
+      <path d="M20 86 Q4 86 8 72 Q6 60 24 62 Q30 50 48 56 Q60 46 76 56 Q96 50 100 64 Q124 62 122 76 Q126 88 108 86 Z" fill="#FFFFFF" opacity="0.95" />
+      <image href="/mascots/gau.svg" x="36" y="0" width="80" height="80" preserveAspectRatio="xMidYMax meet" />
+      <path d="M128 36 C120 30 122 22 128 26 C134 22 136 30 128 36 Z" fill="#FF7AA2" />
+      <path d="M22 30 C16 25 18 19 22 22 C26 19 28 25 22 30 Z" fill="#FF9EC0" />
+    </svg>
+  );
+}
+
+/** Đấu trường — đầu trang: cúp vàng lớn trong vầng hào quang, tia sáng và ngôi sao lấp lánh. */
+export function GrandTrophy() {
+  const rays = Array.from({ length: 12 }, (_, i) => i * 30);
+  return (
+    <svg viewBox="0 0 140 140" className="h-full w-full" aria-hidden="true">
+      <defs>
+        <radialGradient id="gt-halo" cx="50%" cy="48%" r="50%">
+          <stop offset="0" stopColor="#FFF3B0" />
+          <stop offset="0.6" stopColor="#FFE08A" stopOpacity="0.7" />
+          <stop offset="1" stopColor="#FFE08A" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="gt-cup" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#F2B705" />
+          <stop offset="0.35" stopColor="#FFE680" />
+          <stop offset="0.7" stopColor="#FFC61A" />
+          <stop offset="1" stopColor="#D99A00" />
+        </linearGradient>
+      </defs>
+      <circle cx="70" cy="66" r="66" fill="url(#gt-halo)" />
+      {rays.map((a) => (
+        <rect key={a} x="68" y="4" width="4" height="16" rx="2" fill="#FFC94D" opacity="0.75" transform={`rotate(${a} 70 66)`} />
+      ))}
+      <g stroke={INK} strokeWidth="3" strokeLinejoin="round">
+        <path d="M44 36 Q22 36 24 56 Q27 74 50 76" fill="none" stroke="#D99A00" strokeWidth="8" strokeLinecap="round" />
+        <path d="M96 36 Q118 36 116 56 Q113 74 90 76" fill="none" stroke="#D99A00" strokeWidth="8" strokeLinecap="round" />
+        <path d="M40 26 H100 Q102 80 70 90 Q38 80 40 26 Z" fill="url(#gt-cup)" />
+        <path d="M50 34 Q52 66 64 80" fill="none" stroke="#FFF7C8" strokeWidth="5" strokeLinecap="round" />
+        <rect x="62" y="88" width="16" height="14" fill="#E6A817" />
+        <rect x="48" y="100" width="44" height="10" rx="4" fill="#FFC94D" />
+        <rect x="40" y="108" width="60" height="16" rx="5" fill="#8B5A2B" />
+        <rect x="54" y="112" width="32" height="8" rx="2" fill="#FFD54F" strokeWidth="2" />
+        <polygon points="70,38 75.5,50 88,51 78.5,59 81.5,72 70,65 58.5,72 61.5,59 52,51 64.5,50" fill="#FFFFFF" strokeWidth="2.5" />
+      </g>
+      <path d="M22 28 l3 -8 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 Z" fill="#FFD54F" />
+      <path d="M116 24 l2.5 -6 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 Z" fill="#FF9EC0" />
+      <path d="M118 102 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z" fill="#4FA3E0" />
+    </svg>
+  );
+}
