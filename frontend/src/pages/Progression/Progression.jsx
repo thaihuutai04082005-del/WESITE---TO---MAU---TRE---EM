@@ -37,7 +37,7 @@ function TargetBadge() {
 }
 
 const STATS = [
-  ['mountain', '#FF5F7E', '#FFE8EE'],
+  ['mountain', '#2FA65A', '#E4F6E8'],
   ['medal', '#F07B2E', '#FFE7D3'],
   ['gift', '#7D5FFF', '#F0EBFF'],
   ['ruby', '#2B9BF4', '#EAF6FF'],
