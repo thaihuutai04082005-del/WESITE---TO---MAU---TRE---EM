@@ -92,7 +92,7 @@ export function ScheduleBanner({ schedule, compact = false }) {
         </div>
       </div>
       <div className={`flex items-center gap-3 ${compact ? '' : 'sm:pl-4'}`}>
-        <IconBubble name="hourglass" bg={schedule.submitOpen ? '#E4F6E8' : '#FFF4CC'} color={schedule.submitOpen ? '#2FA65A' : '#C98A00'} />
+        <IconBubble name="hourglass" bg="#E4F6E8" color="#2FA65A" />
         <div className="min-w-0">
           <div className="text-xs font-bold text-muted">{t('exhibition.submitGate')}</div>
           <div className="font-bold">
