@@ -59,6 +59,23 @@ function IconBubble({ name, bg, color }) {
   );
 }
 
+/** Cuốn lịch đỏ – trắng: gáy đỏ có 2 khoen, thân trắng kẻ ô ngày, 1 ô được khoanh đỏ. */
+function CalendarArt() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-9 w-9" aria-hidden="true">
+      <g stroke="#1B2A38" strokeWidth="2" strokeLinejoin="round">
+        <rect x="6" y="9" width="36" height="33" rx="6" fill="#FFFFFF" />
+        <path d="M6 15a6 6 0 016-6h24a6 6 0 016 6v5H6z" fill="#FF5F5F" />
+        <rect x="14" y="4" width="4" height="10" rx="2" fill="#FFFFFF" />
+        <rect x="30" y="4" width="4" height="10" rx="2" fill="#FFFFFF" />
+      </g>
+      {[0, 1, 2].map((r) => [0, 1, 2, 3].map((c) => (
+        <rect key={`${r}${c}`} x={11 + c * 7.5} y={24 + r * 5.5} width="4" height="3" rx="1" fill={r === 1 && c === 2 ? '#FF5F5F' : '#C9D4DE'} />
+      )))}
+    </svg>
+  );
+}
+
 export function ScheduleBanner({ schedule, compact = false }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -66,7 +83,9 @@ export function ScheduleBanner({ schedule, compact = false }) {
   return (
     <div className={`grid gap-3 rounded-[24px] bg-white p-4 shadow-soft ${compact ? '' : 'sm:grid-cols-2 sm:divide-x sm:divide-line'}`} data-testid="exhibit-schedule">
       <div className="flex items-center gap-3">
-        <IconBubble name="calendar" bg="#EAF6FF" color="#2B9BF4" />
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#FFECEC]">
+          <CalendarArt />
+        </span>
         <div className="min-w-0">
           <div className="text-xs font-bold text-muted">{t('exhibition.thisWeek', { from: formatVnTime(`${schedule.current}T12:00:00Z`, lang, { time: false }), to: formatVnTime(weekEnd.toISOString(), lang, { time: false }) })}</div>
           <div className="font-bold">{schedule.reactionsOpen ? t('exhibition.reactUntil', { date: formatVnTime(schedule.lockAt, lang) }) : t('exhibition.judging', { date: formatVnTime(schedule.nextRoundStart, lang) })}</div>
