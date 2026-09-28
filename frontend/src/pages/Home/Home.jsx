@@ -160,16 +160,16 @@ function Dashboard() {
 
         <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
-        {/* Lối vào Hội trường triển lãm: nền xanh đêm + vàng kiểu bảo tàng, khác hẳn các ô pastel xung quanh */}
-        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#1F3A6B] via-[#2A4C87] to-[#3A5FA3] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FFD54F] text-[#1F3A6B] shadow-soft">
+        {/* Lối vào Hội trường triển lãm: pastel hồng — màu chưa ô nào dùng, vẫn cùng tông với các ô xung quanh */}
+        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#FFE4EC] via-[#FFD9E4] to-[#FFC9D9] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E0527A] shadow-soft">
             <Icon name="museum" size={32} strokeWidth={2.4} />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block font-display text-2xl font-extrabold leading-tight text-white">{t('exhibition.title')}</span>
-            <span className="block text-sm text-white/80">{t('exhibition.homeHint')}</span>
+            <span className="block font-display text-2xl font-extrabold leading-tight">{t('exhibition.title')}</span>
+            <span className="block text-sm text-muted">{t('exhibition.homeHint')}</span>
           </span>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#1F3A6B] shadow-soft transition group-hover:translate-x-1">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#E0527A] shadow-soft transition group-hover:translate-x-1">
             <Icon name="arrow" size={22} strokeWidth={3} />
           </span>
         </Link>
