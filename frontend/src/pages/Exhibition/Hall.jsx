@@ -107,7 +107,6 @@ export default function Hall() {
         </span>
         <div className="min-w-0 flex-1">
           <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-4xl">{t('exhibition.title')}</h1>
-          <p className="text-muted">{t('exhibition.subtitle')}</p>
         </div>
         <div className="flex w-full flex-wrap gap-2 sm:w-auto">
           <RulesButton className="btn-ghost flex-1 whitespace-nowrap bg-white px-3 sm:flex-none sm:px-6" />
