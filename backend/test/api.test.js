@@ -455,10 +455,10 @@ test('Triển lãm: lịch cổng gửi tranh theo giờ VN', async () => {
   assert.deepEqual([s3.submitOpen, s3.reactionsOpen, s3.submitOpensAt], [false, false, '2026-10-09T17:00:00.000Z']);
 });
 
-test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Thủ + 300 Ruby', async () => {
+test('Rank Bậc Thầy Hội Họa: đủ 850 điểm thì thăng bậc, nhận khung Cao Thủ + 300 Ruby', async () => {
   const { awardArena } = await import('../src/services/progression.js');
   const { token, id } = await register('caothu1');
-  getDb().prepare('UPDATE users SET rank_points = 790 WHERE id = ?').run(id);
+  getDb().prepare('UPDATE users SET rank_points = 840 WHERE id = ?').run(id);
   const events = awardArena(id, 10);
   const up = events.find((e) => e.type === 'rank_up');
   assert.deepEqual([up?.rank, up?.frame, up?.ruby], ['master', 'avatar-cao-thu', 300]);
@@ -466,4 +466,17 @@ test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Th�
   assert.equal(p.body.rank.key, 'master');
   assert.equal(p.body.rank.next, null);
   assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id));
+});
+
+test('Chưa có hạng: bé mới 0 điểm chưa có khung; đủ 50 điểm mới lên Mầm Non Tô Màu', async () => {
+  const { awardArena } = await import('../src/services/progression.js');
+  const { token, id } = await register('chuahang1');
+  let p = await api('GET', '/progression', null, token);
+  assert.deepEqual([p.body.rank.key, p.body.rank.next.key, p.body.rank.next.min], ['none', 'bronze', 50]);
+  assert.equal(getDb().prepare('SELECT avatar_frame FROM users WHERE id = ?').get(id).avatar_frame, null);
+  assert.equal(awardArena(id, 40).find((e) => e.type === 'rank_up'), undefined);
+  const up = awardArena(id, 10).find((e) => e.type === 'rank_up');
+  assert.deepEqual([up?.rank, up?.frame], ['bronze', 'avatar-dong']);
+  p = await api('GET', '/progression', null, token);
+  assert.deepEqual([p.body.rank.key, p.body.rank.next.min], ['bronze', 100]);
 });

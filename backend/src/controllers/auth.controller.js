@@ -7,7 +7,7 @@ import * as User from '../models/user.js';
 import { createCaptcha, verifyCaptcha } from '../services/captcha.js';
 import { issueOtp, consumeOtp, normalizeContact } from '../services/otp.js';
 import { signToken } from '../middlewares/auth.js';
-import { touchLogin, grantAvatarFrame } from '../services/progression.js';
+import { touchLogin } from '../services/progression.js';
 import { planStatus } from '../services/quota.js';
 import { unreadCount } from '../services/notifications.js';
 import { vnDateKey } from '../utils/time.js';
@@ -47,14 +47,9 @@ export function registerVerify(req, res) {
     password_hash: payload.passwordHash,
     guardian_contact: target,
     guardian_type: payload.contactType,
-    avatar_frame: 'avatar-dong',
   });
-  grantStarterFrame(user.id);
   res.status(201).json({ ok: true, username: user.username });
 }
-
-// Bậc Đồng là bậc khởi điểm: ai cũng có Khung Avatar Đồng.
-const grantStarterFrame = (userId) => grantAvatarFrame(userId, 'avatar-dong');
 
 function session(user) {
   const events = touchLogin(user.id, vnDateKey());
@@ -94,8 +89,7 @@ export async function google(req, res) {
   const info = await verifyGoogleIdToken(credential);
   let user = User.findByGoogleSub(info.sub);
   if (!user) {
-    user = User.create({ google_sub: info.sub, google_email: info.email || null, avatar_frame: 'avatar-dong' });
-    grantStarterFrame(user.id);
+    user = User.create({ google_sub: info.sub, google_email: info.email || null });
   }
   res.json(session(user));
 }
