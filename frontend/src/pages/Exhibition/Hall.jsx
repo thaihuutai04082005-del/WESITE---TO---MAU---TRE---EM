@@ -59,7 +59,7 @@ function IconBubble({ name, bg, color }) {
   );
 }
 
-/** Cuốn lịch đỏ – trắng: gáy đỏ có 2 khoen, thân trắng kẻ ô ngày, 1 ô được khoanh đỏ. */
+/** Cuốn lịch đỏ – trắng: gáy đỏ có 2 khoen, thân trắng kẻ ô ngày màu xám. */
 function CalendarArt() {
   return (
     <svg viewBox="0 0 48 48" className="h-9 w-9" aria-hidden="true">
@@ -70,7 +70,7 @@ function CalendarArt() {
         <rect x="30" y="4" width="4" height="10" rx="2" fill="#FFFFFF" />
       </g>
       {[0, 1, 2].map((r) => [0, 1, 2, 3].map((c) => (
-        <rect key={`${r}${c}`} x={11 + c * 7.5} y={24 + r * 5.5} width="4" height="3" rx="1" fill={r === 1 && c === 2 ? '#FF5F5F' : '#C9D4DE'} />
+        <rect key={`${r}${c}`} x={11 + c * 7.5} y={24 + r * 5.5} width="4" height="3" rx="1" fill="#C9D4DE" />
       )))}
     </svg>
   );
