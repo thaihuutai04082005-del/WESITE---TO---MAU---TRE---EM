@@ -468,12 +468,13 @@ test('Rank Bậc Thầy Hội Họa: đủ 850 điểm thì thăng bậc, nhận
   assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id));
 });
 
-test('Chưa có hạng: bé mới 0 điểm chưa có khung; đủ 50 điểm mới lên Mầm Non Tô Màu', async () => {
+test('Hạt Giống Tô Màu: bé mới 0 điểm có bậc + khung chồi lá; đủ 50 điểm mới lên Mầm Non Tô Màu', async () => {
   const { awardArena } = await import('../src/services/progression.js');
-  const { token, id } = await register('chuahang1');
+  const { token, id } = await register('hatgiong1');
   let p = await api('GET', '/progression', null, token);
-  assert.deepEqual([p.body.rank.key, p.body.rank.next.key, p.body.rank.next.min], ['none', 'bronze', 50]);
-  assert.equal(getDb().prepare('SELECT avatar_frame FROM users WHERE id = ?').get(id).avatar_frame, null);
+  assert.deepEqual([p.body.rank.key, p.body.rank.next.key, p.body.rank.next.min], ['seed', 'bronze', 50]);
+  assert.equal(getDb().prepare('SELECT avatar_frame FROM users WHERE id = ?').get(id).avatar_frame, 'avatar-hat-giong');
+  assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-hat-giong'").get(id));
   assert.equal(awardArena(id, 40).find((e) => e.type === 'rank_up'), undefined);
   const up = awardArena(id, 10).find((e) => e.type === 'rank_up');
   assert.deepEqual([up?.rank, up?.frame], ['bronze', 'avatar-dong']);

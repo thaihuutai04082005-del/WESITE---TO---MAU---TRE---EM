@@ -8,10 +8,10 @@ export const PLANS = {
 
 /**
  * Bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ).
- * Bậc đầu 'none' = chưa có hạng (0–49 điểm, chưa có khung); 6 bậc thật bắt đầu từ 50 điểm.
+ * Bậc khởi đầu 'seed' (Hạt Giống Tô Màu, 0–49 điểm) ai mới vào cũng có; Mầm Non Tô Màu từ 50 điểm.
  */
 export const RANK_TIERS = [
-  { key: 'none', min: 0, ruby: 0, color: '#9AA9B6', frame: null },
+  { key: 'seed', min: 0, ruby: 0, color: '#6CC57C', frame: 'avatar-hat-giong' },
   { key: 'bronze', min: 50, ruby: 0, color: '#B08D57', frame: 'avatar-dong' },
   { key: 'silver', min: 100, ruby: 50, color: '#C0C0C0', frame: 'avatar-bac' },
   { key: 'gold', min: 200, ruby: 100, color: '#FFD700', frame: 'avatar-vang' },

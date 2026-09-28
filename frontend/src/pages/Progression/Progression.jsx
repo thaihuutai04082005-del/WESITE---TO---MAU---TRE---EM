@@ -1,4 +1,4 @@
-// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 6 bậc (tới Bậc Thầy Hội Họa).
+// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 7 bậc (tới Bậc Thầy Hội Họa).
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -52,8 +52,7 @@ export default function Progression() {
   }, []);
   if (!p) return <div className="page text-muted">{t('common.loading')}</div>;
   const done = p.missions.filter((m) => m.completed).length;
-  // Thang hạng chỉ vẽ 6 bậc thật; "Chưa có hạng" không có ô riêng.
-  const ladder = p.tiers.filter((x) => x.frame);
+  const ladder = p.tiers;
   const rankIdx = ladder.findIndex((x) => x.key === p.rank.key);
   const values = [`${p.level}/${p.maxLevel}`, t(`rank.${p.rank.key}`), p.gachaPoints, p.ruby];
   const labels = [t('missions.cards.level'), t('missions.cards.rank'), t('missions.cards.gacha'), 'Ruby'];
@@ -138,14 +137,14 @@ export default function Progression() {
             <Bar value={p.rank.points - p.rank.currentMin} max={p.rank.next ? p.rank.next.min - p.rank.currentMin : 1} color="linear-gradient(90deg,#FFD54F,#FF9F43)" height={10} />
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-y-3 rounded-[22px] bg-white/85 px-3 py-3 sm:flex sm:items-start sm:justify-between sm:gap-1" data-testid="rank-ladder">
+        <div className="grid grid-cols-4 gap-y-3 rounded-[22px] bg-white/85 px-2 py-3 sm:flex sm:items-start sm:justify-between sm:gap-1" data-testid="rank-ladder">
           {ladder.map((tier, i) => {
             const reached = p.rank.points >= tier.min;
             const current = i === rankIdx;
             return (
               <Fragment key={tier.key}>
                 {i > 0 && <span className={`mt-7 hidden h-0.5 min-w-3 flex-1 rounded sm:block ${reached ? 'bg-[#FFC94D]' : 'bg-line'}`} />}
-                <div className={`mx-auto flex w-20 shrink-0 flex-col items-center text-center ${reached ? '' : 'opacity-45'}`}>
+                <div className={`mx-auto flex w-full shrink-0 flex-col items-center px-0.5 text-center sm:w-20 sm:px-0 ${reached ? '' : 'opacity-45'}`}>
                   <Avatar avatar={user.avatar} frame={tier.frame} size={52} />
                   <div className="mt-1 text-xs font-extrabold leading-tight" style={{ color: RANK_STYLE[tier.key]?.text }}>
                     {t(`rank.${tier.key}`)}

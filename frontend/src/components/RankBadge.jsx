@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export const RANK_STYLE = {
-  none: { fill: '#E4EAF0', ring: '#AAB7C4', bg: '#F1F4F7', text: '#6B7C8C' },
+  seed: { fill: '#BFEBC6', ring: '#6CC57C', bg: '#EAF9EF', text: '#2F8A45' },
   bronze: { fill: '#D9A066', ring: '#B08D57', bg: '#FBEBDC', text: '#8A5A2B' },
   silver: { fill: '#D7DEE6', ring: '#9AA6B2', bg: '#EEF2F6', text: '#5E6B78' },
   gold: { fill: '#FFD54F', ring: '#E6A817', bg: '#FFF4CC', text: '#9A6A00' },
