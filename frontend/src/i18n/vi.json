@@ -519,6 +519,7 @@
     "rankHint": "Thắng Top 3 ở Đấu trường để tích Điểm Rank. Điểm Rank không bao giờ bị trừ."
   },
   "rank": {
+    "seed": "Hạt Giống Tô Màu",
     "bronze": "Mầm Non Tô Màu",
     "silver": "Họa Sĩ Nhí",
     "gold": "Họa Sĩ Tài Năng",

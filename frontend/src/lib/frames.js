@@ -93,6 +93,12 @@ const splat = (x, y, r, c) => `<path d="M${x} ${y - r} q${r * 0.5} ${r * 0.4} ${
 const RAINBOW = ['#FF5F5F', '#FF9F43', '#FFD54F', '#4CD787', '#4FA3E0', '#7D5FFF'];
 
 export const AVATAR_FRAMES = {
+  // Hạt Giống Tô Màu: vòng xanh lá nhạt + chồi 2 lá nhú ở đỉnh.
+  'avatar-hat-giong': () =>
+    `<circle cx="60" cy="60" r="52" fill="none" stroke="#A8DDB0" stroke-width="7"/>` +
+    `<path d="M60 12 Q60 6 61 1" fill="none" stroke="#3E9B52" stroke-width="2.6" stroke-linecap="round"/>` +
+    `<path d="M60 5 Q48 -2 44 8 Q54 12 60 5 Z" fill="#6CC57C" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>` +
+    `<path d="M61 3 Q74 -4 77 7 Q67 11 61 3 Z" fill="#8EDB9A" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`,
   // Mầm Non Tô Màu: vòng màu đồng.
   'avatar-dong': () =>
     `<circle cx="60" cy="60" r="52" fill="none" stroke="#B08D57" stroke-width="8"/>`,

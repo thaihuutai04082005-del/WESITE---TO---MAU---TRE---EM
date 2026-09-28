@@ -144,7 +144,7 @@ export function MissionArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
       <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <g transform="rotate(-12 80 108)">
+        <g transform="translate(0 -10) rotate(-12 80 108)">
           <rect x="44" y="66" width="72" height="82" rx="8" fill="#FFFFFF" />
           <rect x="64" y="60" width="32" height="14" rx="4" fill="#4FA3E0" />
           {[0, 1, 2].map((k) => (

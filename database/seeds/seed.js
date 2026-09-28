@@ -73,7 +73,7 @@ export async function seedAdmin(db = getDb()) {
     db.prepare("UPDATE users SET role = 'admin', password_hash = ? WHERE id = ?").run(hash, existing.id);
   } else {
     db.prepare(
-      "INSERT INTO users (username, password_hash, nickname, role, friend_code, avatar_frame) VALUES (?, ?, 'Quản trị viên', 'admin', ?, 'avatar-dong')",
+      "INSERT INTO users (username, password_hash, nickname, role, friend_code) VALUES (?, ?, 'Quản trị viên', 'admin', ?)",
     ).run(env.admin.username, hash, `ADM${Date.now().toString(36).toUpperCase().slice(-5)}`);
   }
   return true;
