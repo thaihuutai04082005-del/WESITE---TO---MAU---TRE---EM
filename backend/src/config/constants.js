@@ -6,18 +6,14 @@ export const PLANS = {
   year: { key: 'year', priceVnd: 499000, priceUsd: 19.99, days: 365, limit: null },
 };
 
-/**
- * Bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ).
- * Bậc khởi đầu 'seed' (Hạt Giống Tô Màu, 0–49 điểm) ai mới vào cũng có; Mầm Non Tô Màu từ 50 điểm.
- */
+/** 6 bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ). */
 export const RANK_TIERS = [
-  { key: 'seed', min: 0, ruby: 0, color: '#6CC57C', frame: 'avatar-hat-giong' },
-  { key: 'bronze', min: 50, ruby: 0, color: '#B08D57', frame: 'avatar-dong' },
-  { key: 'silver', min: 100, ruby: 50, color: '#C0C0C0', frame: 'avatar-bac' },
-  { key: 'gold', min: 200, ruby: 100, color: '#FFD700', frame: 'avatar-vang' },
-  { key: 'platinum', min: 350, ruby: 150, color: '#B9F2FF', frame: 'avatar-bach-kim' },
-  { key: 'diamond', min: 550, ruby: 200, color: '#7DE2FF', frame: 'avatar-kim-cuong' },
-  { key: 'master', min: 850, ruby: 300, color: '#FF5F7E', frame: 'avatar-cao-thu' },
+  { key: 'bronze', min: 0, ruby: 0, color: '#B08D57', frame: 'avatar-dong' },
+  { key: 'silver', min: 50, ruby: 50, color: '#C0C0C0', frame: 'avatar-bac' },
+  { key: 'gold', min: 150, ruby: 100, color: '#FFD700', frame: 'avatar-vang' },
+  { key: 'platinum', min: 300, ruby: 150, color: '#B9F2FF', frame: 'avatar-bach-kim' },
+  { key: 'diamond', min: 500, ruby: 200, color: '#7DE2FF', frame: 'avatar-kim-cuong' },
+  { key: 'master', min: 800, ruby: 300, color: '#FF5F7E', frame: 'avatar-cao-thu' },
 ];
 
 export function rankOf(points) {

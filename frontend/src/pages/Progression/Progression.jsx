@@ -1,4 +1,4 @@
-// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 7 bậc (tới Bậc Thầy Hội Họa).
+// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 6 bậc (tới Bậc Thầy Hội Họa).
 import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -22,13 +22,13 @@ function TargetBadge() {
   return (
     <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden="true">
       <circle cx="30" cy="34" r="26" fill="#FFFFFF" stroke="#1B2A38" strokeWidth="2.5" />
-      <circle cx="30" cy="34" r="19" fill="#FF7AA2" />
+      <circle cx="30" cy="34" r="19" fill="#4FA3E0" />
       <circle cx="30" cy="34" r="12" fill="#FFFFFF" />
-      <circle cx="30" cy="34" r="6" fill="#FF5F7E" />
+      <circle cx="30" cy="34" r="6" fill="#FFD54F" />
       <g stroke="#1B2A38" strokeWidth="1.8" strokeLinejoin="round">
         <path d="M33 31 L53 11" stroke="#8B5A2B" strokeWidth="3.4" strokeLinecap="round" />
-        <path d="M46 18 L41 15 L49 5 L54 10 Z" fill="#2B9BF4" />
-        <path d="M46 18 L49 23 L59 15 L54 10 Z" fill="#4FA3E0" />
+        <path d="M46 18 L41 15 L49 5 L54 10 Z" fill="#FF5F5F" />
+        <path d="M46 18 L49 23 L59 15 L54 10 Z" fill="#FF8A80" />
         <path d="M27 37 L30 28 L36 34 Z" fill="#C9D4DE" />
       </g>
       <path d="M6 12 l3 -6 l3 6 l6 3 l-6 3 l-3 6 l-3 -6 l-6 -3 Z" fill="#FFD54F" />
@@ -52,8 +52,7 @@ export default function Progression() {
   }, []);
   if (!p) return <div className="page text-muted">{t('common.loading')}</div>;
   const done = p.missions.filter((m) => m.completed).length;
-  const ladder = p.tiers;
-  const rankIdx = ladder.findIndex((x) => x.key === p.rank.key);
+  const rankIdx = p.tiers.findIndex((x) => x.key === p.rank.key);
   const values = [`${p.level}/${p.maxLevel}`, t(`rank.${p.rank.key}`), p.gachaPoints, p.ruby];
   const labels = [t('missions.cards.level'), t('missions.cards.rank'), t('missions.cards.gacha'), 'Ruby'];
 
@@ -137,14 +136,14 @@ export default function Progression() {
             <Bar value={p.rank.points - p.rank.currentMin} max={p.rank.next ? p.rank.next.min - p.rank.currentMin : 1} color="linear-gradient(90deg,#FFD54F,#FF9F43)" height={10} />
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-y-3 rounded-[22px] bg-white/85 px-2 py-3 sm:flex sm:items-start sm:justify-between sm:gap-1" data-testid="rank-ladder">
-          {ladder.map((tier, i) => {
+        <div className="grid grid-cols-3 gap-y-3 rounded-[22px] bg-white/85 px-3 py-3 sm:flex sm:items-start sm:justify-between sm:gap-1" data-testid="rank-ladder">
+          {p.tiers.map((tier, i) => {
             const reached = p.rank.points >= tier.min;
             const current = i === rankIdx;
             return (
               <Fragment key={tier.key}>
                 {i > 0 && <span className={`mt-7 hidden h-0.5 min-w-3 flex-1 rounded sm:block ${reached ? 'bg-[#FFC94D]' : 'bg-line'}`} />}
-                <div className={`mx-auto flex w-full shrink-0 flex-col items-center px-0.5 text-center sm:w-20 sm:px-0 ${reached ? '' : 'opacity-45'}`}>
+                <div className={`mx-auto flex w-20 shrink-0 flex-col items-center text-center ${reached ? '' : 'opacity-45'}`}>
                   <Avatar avatar={user.avatar} frame={tier.frame} size={52} />
                   <div className="mt-1 text-xs font-extrabold leading-tight" style={{ color: RANK_STYLE[tier.key]?.text }}>
                     {t(`rank.${tier.key}`)}

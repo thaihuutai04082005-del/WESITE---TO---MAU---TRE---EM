@@ -47,14 +47,14 @@ export function registerVerify(req, res) {
     password_hash: payload.passwordHash,
     guardian_contact: target,
     guardian_type: payload.contactType,
-    avatar_frame: STARTER_FRAME,
+    avatar_frame: 'avatar-dong',
   });
-  grantAvatarFrame(user.id, STARTER_FRAME);
+  grantStarterFrame(user.id);
   res.status(201).json({ ok: true, username: user.username });
 }
 
-// Bậc khởi đầu Hạt Giống Tô Màu: ai mới vào cũng có khung chồi lá.
-const STARTER_FRAME = 'avatar-hat-giong';
+// Bậc Đồng là bậc khởi điểm: ai cũng có Khung Avatar Đồng.
+const grantStarterFrame = (userId) => grantAvatarFrame(userId, 'avatar-dong');
 
 function session(user) {
   const events = touchLogin(user.id, vnDateKey());
@@ -94,8 +94,8 @@ export async function google(req, res) {
   const info = await verifyGoogleIdToken(credential);
   let user = User.findByGoogleSub(info.sub);
   if (!user) {
-    user = User.create({ google_sub: info.sub, google_email: info.email || null, avatar_frame: STARTER_FRAME });
-    grantAvatarFrame(user.id, STARTER_FRAME);
+    user = User.create({ google_sub: info.sub, google_email: info.email || null, avatar_frame: 'avatar-dong' });
+    grantStarterFrame(user.id);
   }
   res.json(session(user));
 }

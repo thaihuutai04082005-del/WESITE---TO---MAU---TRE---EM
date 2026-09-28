@@ -178,7 +178,7 @@ function Dashboard() {
         {prog && (
           <section className="card grid gap-5 p-5 md:grid-cols-2 md:gap-8">
             <Link to="/missions" className="flex items-center gap-4" data-testid="home-level">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#E4F6E8] text-[#2FA65A]">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FFE8EE] text-[#FF5F7E]">
                 <Icon name="mountain" size={32} strokeWidth={2.4} />
               </span>
               <div className="min-w-0 flex-1">
@@ -188,7 +188,7 @@ function Dashboard() {
                     {done}/{prog.missions.length} {t('home.missions')}
                   </span>
                 </div>
-                <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#4CD787,#2FA65A)" height={12} />
+                <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#FF9EB5,#FF5F7E)" height={12} />
               </div>
             </Link>
             <Link to="/missions" className="flex items-center gap-4" data-testid="home-rank">
