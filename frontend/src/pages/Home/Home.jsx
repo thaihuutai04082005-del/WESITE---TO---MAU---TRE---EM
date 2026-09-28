@@ -172,7 +172,6 @@ function Dashboard() {
           </span>
           <span className="relative min-w-0 flex-1">
             <span className="block font-display text-2xl font-extrabold leading-tight text-white">{t('exhibition.title')}</span>
-            <span className="block text-sm text-white/90">{t('exhibition.homeHint')}</span>
           </span>
           <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#1F3A6B] shadow-soft transition group-hover:translate-x-1">
             <Icon name="arrow" size={22} strokeWidth={3} />
@@ -215,9 +214,6 @@ function Dashboard() {
                   color={`linear-gradient(90deg,${RANK_STYLE[rank.key].fill},${RANK_STYLE[rank.key].ring})`}
                   height={12}
                 />
-                <div className="mt-1 text-xs font-bold text-muted">
-                  {rank.next ? t('profile.toNextRank', { n: rank.next.min - rank.points, rank: t(`rank.${rank.next.key}`) }) : t('profile.maxRank')}
-                </div>
               </div>
             </Link>
           </section>
