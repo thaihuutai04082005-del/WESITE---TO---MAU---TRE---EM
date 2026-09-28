@@ -160,16 +160,16 @@ function Dashboard() {
 
         <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
-        {/* Lối vào Hội trường triển lãm */}
-        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#FFF3D6] via-[#FFF9EE] to-[#F6F2FF] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#C9961A] shadow-soft">
+        {/* Lối vào Hội trường triển lãm: nền xanh đêm + vàng kiểu bảo tàng, khác hẳn các ô pastel xung quanh */}
+        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#1F3A6B] via-[#2A4C87] to-[#3A5FA3] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FFD54F] text-[#1F3A6B] shadow-soft">
             <Icon name="museum" size={32} strokeWidth={2.4} />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block font-display text-2xl font-extrabold leading-tight">{t('exhibition.title')}</span>
-            <span className="block text-sm text-muted">{t('exhibition.homeHint')}</span>
+            <span className="block font-display text-2xl font-extrabold leading-tight text-white">{t('exhibition.title')}</span>
+            <span className="block text-sm text-white/80">{t('exhibition.homeHint')}</span>
           </span>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#C9961A] shadow-soft transition group-hover:translate-x-1">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#1F3A6B] shadow-soft transition group-hover:translate-x-1">
             <Icon name="arrow" size={22} strokeWidth={3} />
           </span>
         </Link>
@@ -178,7 +178,7 @@ function Dashboard() {
         {prog && (
           <section className="card grid gap-5 p-5 md:grid-cols-2 md:gap-8">
             <Link to="/missions" className="flex items-center gap-4" data-testid="home-level">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FFE8EE] text-[#FF5F7E]">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#E4F6E8] text-[#2FA65A]">
                 <Icon name="mountain" size={32} strokeWidth={2.4} />
               </span>
               <div className="min-w-0 flex-1">
@@ -188,7 +188,7 @@ function Dashboard() {
                     {done}/{prog.missions.length} {t('home.missions')}
                   </span>
                 </div>
-                <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#FF9EB5,#FF5F7E)" height={12} />
+                <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#4CD787,#2FA65A)" height={12} />
               </div>
             </Link>
             <Link to="/missions" className="flex items-center gap-4" data-testid="home-rank">
