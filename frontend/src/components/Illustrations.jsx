@@ -243,7 +243,7 @@ export function GrandTrophy() {
         <rect x="54" y="112" width="32" height="8" rx="2" fill="#FFD54F" strokeWidth="2" />
         <polygon points="70,38 75.5,50 88,51 78.5,59 81.5,72 70,65 58.5,72 61.5,59 52,51 64.5,50" fill="#FFFFFF" strokeWidth="2.5" />
       </g>
-      <path d="M22 28 l3 -8 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 Z" fill="#FFD54F" />
+      <path d="M16 16 l2.5 -6 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 Z" fill="#FF5F7E" />
       <path d="M116 24 l2.5 -6 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 Z" fill="#FF9EC0" />
       <path d="M118 102 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z" fill="#4FA3E0" />
     </svg>
