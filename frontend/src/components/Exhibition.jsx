@@ -98,7 +98,7 @@ export function RulesButton({ className = 'btn-ghost' }) {
   return (
     <>
       <button type="button" className={className} onClick={() => setOpen(true)} data-testid="open-rules">
-        📜 {t('exhibition.rules.title')}
+        <Icon name="book" size={20} /> {t('exhibition.rules.title')}
       </button>
       <Modal open={open} onClose={() => setOpen(false)} wide>
         <h2 className="mb-3 font-display text-2xl font-extrabold">📜 {t('exhibition.rules.title')}</h2>
