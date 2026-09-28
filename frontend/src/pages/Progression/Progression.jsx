@@ -22,13 +22,13 @@ function TargetBadge() {
   return (
     <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden="true">
       <circle cx="30" cy="34" r="26" fill="#FFFFFF" stroke="#1B2A38" strokeWidth="2.5" />
-      <circle cx="30" cy="34" r="19" fill="#4FA3E0" />
+      <circle cx="30" cy="34" r="19" fill="#FF7AA2" />
       <circle cx="30" cy="34" r="12" fill="#FFFFFF" />
-      <circle cx="30" cy="34" r="6" fill="#FFD54F" />
+      <circle cx="30" cy="34" r="6" fill="#FF5F7E" />
       <g stroke="#1B2A38" strokeWidth="1.8" strokeLinejoin="round">
         <path d="M33 31 L53 11" stroke="#8B5A2B" strokeWidth="3.4" strokeLinecap="round" />
-        <path d="M46 18 L41 15 L49 5 L54 10 Z" fill="#FF5F5F" />
-        <path d="M46 18 L49 23 L59 15 L54 10 Z" fill="#FF8A80" />
+        <path d="M46 18 L41 15 L49 5 L54 10 Z" fill="#2B9BF4" />
+        <path d="M46 18 L49 23 L59 15 L54 10 Z" fill="#4FA3E0" />
         <path d="M27 37 L30 28 L36 34 Z" fill="#C9D4DE" />
       </g>
       <path d="M6 12 l3 -6 l3 6 l6 3 l-6 3 l-3 6 l-3 -6 l-6 -3 Z" fill="#FFD54F" />
