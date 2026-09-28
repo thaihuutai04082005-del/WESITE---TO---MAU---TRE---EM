@@ -160,16 +160,21 @@ function Dashboard() {
 
         <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
-        {/* Lối vào Hội trường triển lãm: pastel hồng — màu chưa ô nào dùng, vẫn cùng tông với các ô xung quanh */}
-        <Link to="/exhibition" className="group flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#FFE4EC] via-[#FFD9E4] to-[#FFC9D9] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E0527A] shadow-soft">
-            <Icon name="museum" size={32} strokeWidth={2.4} />
+        {/* Lối vào Hội trường triển lãm: nền xanh dương sáng + mây mờ góc phải + ngôi sao vàng */}
+        <Link to="/exhibition" className="group relative flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#2C66AE] via-[#3478BD] to-[#4F90CF] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
+          <svg viewBox="0 0 300 100" preserveAspectRatio="xMaxYMax slice" className="pointer-events-none absolute inset-y-0 right-0 h-full w-72 sm:w-96" aria-hidden="true">
+            <path d="M40 100 Q60 62 110 70 Q130 34 180 44 Q215 18 255 36 Q300 30 300 60 L300 100 Z" fill="#FFFFFF" opacity="0.1" />
+            <path d="M110 100 Q130 78 170 82 Q190 58 230 64 Q262 48 300 66 L300 100 Z" fill="#FFFFFF" opacity="0.12" />
+            <path d="M66 36 l3.2 -8 l3.2 8 l8 3.2 l-8 3.2 l-3.2 8 l-3.2 -8 l-8 -3.2 Z" fill="#FFD54F" />
+          </svg>
+          <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] shadow-soft">
+            <Icon name="museum" size={30} strokeWidth={2.4} />
           </span>
-          <span className="min-w-0 flex-1">
-            <span className="block font-display text-2xl font-extrabold leading-tight">{t('exhibition.title')}</span>
-            <span className="block text-sm text-muted">{t('exhibition.homeHint')}</span>
+          <span className="relative min-w-0 flex-1">
+            <span className="block font-display text-2xl font-extrabold leading-tight text-white">{t('exhibition.title')}</span>
+            <span className="block text-sm text-white/90">{t('exhibition.homeHint')}</span>
           </span>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#E0527A] shadow-soft transition group-hover:translate-x-1">
+          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#1F3A6B] shadow-soft transition group-hover:translate-x-1">
             <Icon name="arrow" size={22} strokeWidth={3} />
           </span>
         </Link>
