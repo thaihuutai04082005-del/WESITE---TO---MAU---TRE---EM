@@ -71,12 +71,15 @@ export function seedPicturesIfNeeded(db = getDb()) {
   const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
   const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   const themeSlugs = catalog.themes.map((t) => t.slug);
-  const have = db
-    .prepare(`SELECT p.slug FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
-    .all(...themeSlugs)
-    .map((r) => r.slug);
-  const same = have.length === want.size && have.every((s) => want.has(s));
-  return same ? 0 : seedPictures(db);
+  const rows = db
+    .prepare(`SELECT p.slug, p.svg FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+    .all(...themeSlugs);
+  const sameSet = rows.length === want.size && rows.every((r) => want.has(r.slug));
+  // Tranh được vẽ lại (cùng tên, khác nội dung) cũng phải nạp lại.
+  const lib = join(REPO_ROOT, 'assets-library');
+  const files = new Map(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => [p.slug, p.file]))));
+  const sameSvg = sameSet && rows.every((r) => r.svg === readFileSync(join(lib, files.get(r.slug)), 'utf8'));
+  return sameSvg ? 0 : seedPictures(db);
 }
 
 export function seedMissions(db = getDb()) {

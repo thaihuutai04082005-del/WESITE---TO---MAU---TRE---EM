@@ -12,7 +12,7 @@ import { flame, bolt, iceCrystal, asteroid, soccerBall, basketball } from './acc
 export const THEMES = [
   { slug: 'anh-hung-sieu-thu', name: { vi: 'Anh Hùng Siêu Thú', en: 'Super Beast Heroes' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'vuong-quoc-keo-ngot', name: { vi: 'Vương Quốc Kẹo Ngọt', en: 'Candy Kingdom' }, faceStyle: 'face', animation: 'float' },
-  { slug: 'doi-xe-vu-tru', name: { vi: 'Đội Xe Chinh Phục Vũ Trụ', en: 'Space Vehicle Squad' }, faceStyle: 'face', animation: 'drive' },
+  { slug: 'doi-xe-vu-tru', name: { vi: 'Đội Xe Chinh Phục Vũ Trụ', en: 'Space Vehicle Squad' }, faceStyle: 'none', animation: 'drive' },
   { slug: 'thi-tran-khung-long', name: { vi: 'Thị Trấn Khủng Long Tài Ba', en: 'Talented Dino Town' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'the-thao-trai-cay', name: { vi: 'Đại Hội Thể Thao Trái Cây', en: 'Fruit Sports Festival' }, faceStyle: 'face', animation: 'float' },
   // Đợt 2

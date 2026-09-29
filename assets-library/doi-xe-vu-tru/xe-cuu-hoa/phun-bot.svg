@@ -28,13 +28,6 @@
 <ellipse cx="184" cy="440" rx="17" ry="17" id="r-mam-sau" data-region="mam-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="420" cy="440" rx="40" ry="40" id="r-banh-truoc" data-region="banh-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="420" cy="440" rx="17" ry="17" id="r-mam-truoc" data-region="mam-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><circle cx="422.6" cy="396" r="3.5" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="445.4" cy="396" r="3.5" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="423.7" cy="394.7" r="1.1" fill="#FFFFFF"/></g>
-<g class="deco" pointer-events="none"><circle cx="446.5" cy="394.7" r="1.1" fill="#FFFFFF"/></g>
-<ellipse cx="413.8" cy="404.8" rx="4.8" ry="3.1" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="454.2" cy="404.8" rx="4.8" ry="3.1" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 427.4 409.2 Q 434 416.2 440.6 409.2" fill="none" stroke="#1B2A38" stroke-width="2.76" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
 <ellipse cx="100" cy="150" rx="30" ry="30" id="r-bot-1" data-region="bot-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
