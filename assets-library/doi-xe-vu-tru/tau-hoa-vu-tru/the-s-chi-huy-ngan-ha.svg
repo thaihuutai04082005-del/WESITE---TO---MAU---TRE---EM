@@ -39,13 +39,6 @@
 <ellipse cx="275" cy="452" rx="12" ry="12" id="r-truc-2" data-region="truc-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="395" cy="448" rx="38" ry="38" id="r-banh-3" data-region="banh-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="395" cy="448" rx="14" ry="14" id="r-truc-3" data-region="truc-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><circle cx="216.4" cy="362" r="4.8" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="247.6" cy="362" r="4.8" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="217.9" cy="360.2" r="1.6" fill="#FFFFFF"/></g>
-<g class="deco" pointer-events="none"><circle cx="249.1" cy="360.2" r="1.6" fill="#FFFFFF"/></g>
-<ellipse cx="204.4" cy="374" rx="6.6" ry="4.2" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="259.6" cy="374" rx="6.6" ry="4.2" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 223 380 Q 232 389.6 241 380" fill="none" stroke="#1B2A38" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="283,57 293.6,82.4 321,84.6 300.1,102.6 306.5,129.4 283,115 259.5,129.4 265.9,102.6 245,84.6 272.4,82.4" id="r-huy-hieu-sao" data-region="huy-hieu-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="283" cy="97" rx="10" ry="10" id="r-tam-huy-hieu" data-region="tam-huy-hieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>

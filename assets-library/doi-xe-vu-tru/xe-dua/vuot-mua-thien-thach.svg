@@ -27,15 +27,6 @@
 <ellipse cx="196" cy="440" rx="17" ry="17" id="r-mam-sau" data-region="mam-sau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="420" cy="440" rx="40" ry="40" id="r-banh-truoc" data-region="banh-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="420" cy="440" rx="17" ry="17" id="r-mam-truoc" data-region="mam-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><circle cx="429.1" cy="386" r="4.2" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="450.9" cy="386" r="4.2" fill="#1B2A38"/></g>
-<g class="deco" pointer-events="none"><circle cx="430.1" cy="384.7" r="1.1" fill="#FFFFFF"/></g>
-<g class="deco" pointer-events="none"><circle cx="452" cy="384.7" r="1.1" fill="#FFFFFF"/></g>
-<g class="deco" pointer-events="none"><path d="M 425.7 377.6 Q 429.1 375.1 432.4 377.6" fill="none" stroke="#1B2A38" stroke-width="2.26" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g class="deco" pointer-events="none"><path d="M 447.6 377.6 Q 450.9 375.1 454.3 377.6" fill="none" stroke="#1B2A38" stroke-width="2.26" stroke-linecap="round" stroke-linejoin="round"/></g>
-<ellipse cx="420.7" cy="394.4" rx="4.6" ry="2.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="459.3" cy="394.4" rx="4.6" ry="2.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="440" cy="401.1" rx="3.8" ry="4.6" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <polygon points="136,150 133.3,181.3 103.8,194.3 75.4,185.7 49,167.1 52.5,134.2 74.7,113.2 104.9,99.5 132.4,119.5" id="r-thien-thach-1" data-region="thien-thach-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

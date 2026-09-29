@@ -210,7 +210,7 @@ const SV = (slug, vi, en, opts) => V(slug, vi, en, { sky: 'space', ground: 'rock
 
 const XE = {
   'xe-dua': [
-    SV('phan-luc', 'Phản Lực', 'Jet Boost', { scene: ['planet', 'speed'], transform: { ty: -30, rot: -4, px: 300, py: 440 }, acc: (c) => ({ behind: A.jetFlame(c) }) }),
+    SV('phan-luc', 'Phản Lực', 'Jet Boost', { scene: ['planet'], transform: { ty: -30, rot: -4, px: 300, py: 440 }, acc: (c) => ({ behind: A.jetFlame(c), mid: [C('bui-1', 110, 455, 18, '#D6DEE6'), C('bui-2', 80, 440, 13, '#D6DEE6'), C('bui-3', 60, 462, 10, '#D6DEE6')] }) }),
     SV('dua-vong-quanh-hanh-tinh', 'Đua Vòng Quanh Hành Tinh', 'Planet Lap', { transform: { ty: 20, scale: 0.8, rot: -6, px: 300, py: 480 }, acc: () => ({ back: X.bigPlanet(300, 200, 110, '#FF8A65') }) }),
     SV('dua-tren-duong-sao', 'Đua Trên Đường Sao', 'Star Road Race', { scene: ['planet'], transform: { ty: -30, scale: 0.9, px: 300, py: 440 }, acc: () => ({ mid: X.starRoad() }) }),
     SV('vuot-mua-thien-thach', 'Vượt Mưa Thiên Thạch', 'Meteor Shower Dash', { expr: 'surprised', transform: { rot: -6, px: 300, py: 440 }, acc: () => ({ fg: [...A.asteroid('thien-thach-1', 96, 150, 50), ...A.asteroid('thien-thach-2', 500, 110, 40), ...A.asteroid('thien-thach-3', 540, 290, 32), ...A.asteroid('thien-thach-4', 70, 320, 34)] }) }),
