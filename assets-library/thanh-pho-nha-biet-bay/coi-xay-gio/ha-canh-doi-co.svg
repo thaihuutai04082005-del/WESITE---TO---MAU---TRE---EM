@@ -11,6 +11,9 @@
 <path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float" transform="translate(0 40) translate(300 480) scale(0.72) rotate(0) translate(-300 -480)">
+<path d="M 150 -10 Q 150 -110 300 -110 Q 450 -110 450 -10 Q 400 -30 350 -10 Q 300 -30 250 -10 Q 200 -30 150 -10 Z" id="r-du" data-region="du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 250 -10 Q 260 -90 300 -110 Q 340 -90 350 -10 Q 300 -30 250 -10 Z" id="r-soc-du" data-region="soc-du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 150 -10 L 258 234 M 450 -10 L 342 234 M 250 -10 L 286 206 M 350 -10 L 314 206" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="240,470 262,230 338,230 360,470" id="r-than-coi-xay" data-region="than-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="248,236 300,176 352,236" id="r-mai-coi-xay" data-region="mai-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 280 470 L 280 420 Q 280 398 300 398 Q 320 398 320 420 L 320 470 Z" id="r-cua-coi-xay" data-region="cua-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
@@ -20,9 +23,6 @@
 <polygon points="300,214 310,348 282,348 288,214" id="r-canh-quat-3" data-region="canh-quat-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="300,214 166,224 166,196 300,202" id="r-canh-quat-4" data-region="canh-quat-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="214" rx="14" ry="14" id="r-truc-quat" data-region="truc-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 150 -10 Q 150 -110 300 -110 Q 450 -110 450 -10 Q 400 -30 350 -10 Q 300 -30 250 -10 Q 200 -30 150 -10 Z" id="r-du" data-region="du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 250 -10 Q 260 -90 300 -110 Q 340 -90 350 -10 Q 300 -30 250 -10 Z" id="r-soc-du" data-region="soc-du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 150 -10 L 250 170 M 450 -10 L 350 170 M 250 -10 L 270 160 M 350 -10 L 330 160" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
 

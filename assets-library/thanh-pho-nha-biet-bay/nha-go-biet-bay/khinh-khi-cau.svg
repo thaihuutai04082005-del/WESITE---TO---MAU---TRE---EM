@@ -7,7 +7,7 @@
 <path d="M 300 470 Q 460 320 620 470 Z" id="r-doi-xa-2" data-region="doi-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="110" rx="90" ry="99" id="r-khinh-khi-cau" data-region="khinh-khi-cau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 268.5 15.5 Q 250.5 110 273 200 L 327 200 Q 349.5 110 331.5 15.5 Q 300 6.5 268.5 15.5 Z" id="r-soc-khinh-khi-cau" data-region="soc-khinh-khi-cau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 262 205 L 250 322 M 338 205 L 350 322" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 262 205 L 245 371 M 338 205 L 355 371" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
 <path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="60" cy="509" rx="9" ry="9" id="r-hoa-dong-1-canh-1" data-region="hoa-dong-1-canh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="70.5" cy="516.6" rx="9" ry="9" id="r-hoa-dong-1-canh-2" data-region="hoa-dong-1-canh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

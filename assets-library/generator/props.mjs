@@ -53,13 +53,16 @@ export function cracks(id, x, y, color = '#6D4C41') {
   return [P(id, [[x - 70, y], [x - 40, y - 8], [x - 20, y + 6], [x + 6, y - 10], [x + 30, y + 4], [x + 60, y - 6], [x + 80, y + 2], [x + 58, y + 8], [x + 30, y + 16], [x + 4, y + 2], [x - 18, y + 18], [x - 42, y + 4]], color)];
 }
 
-export function parachute(c, color = '#FF7AA2', stripe = '#FFFFFF') {
+/** Dù: `anchors` = 4 điểm buộc dây [ngoài trái, ngoài phải, trong trái, trong phải] trên thân (mặc định: vai). */
+export function parachute(c, color = '#FF7AA2', stripe = '#FFFFFF', anchors = null) {
   const x = c.cx;
   const top = c.bb[1] - 190;
+  const [al, ar, il, ir] = anchors || [[x - 58, c.neck + 30], [x + 58, c.neck + 30], [x - 40, c.neck], [x + 40, c.neck]];
   return [
     D('du', `M ${pt(x - 150, top + 100)} Q ${pt(x - 150, top)} ${pt(x, top)} Q ${pt(x + 150, top)} ${pt(x + 150, top + 100)} Q ${pt(x + 100, top + 80)} ${pt(x + 50, top + 100)} Q ${pt(x, top + 80)} ${pt(x - 50, top + 100)} Q ${pt(x - 100, top + 80)} ${pt(x - 150, top + 100)} Z`, color),
     D('soc-du', `M ${pt(x - 50, top + 100)} Q ${pt(x - 40, top + 20)} ${pt(x, top)} Q ${pt(x + 40, top + 20)} ${pt(x + 50, top + 100)} Q ${pt(x, top + 80)} ${pt(x - 50, top + 100)} Z`, stripe),
-    line(`M ${pt(x - 150, top + 100)} L ${pt(x - 50, c.bb[1] + 90)} M ${pt(x + 150, top + 100)} L ${pt(x + 50, c.bb[1] + 90)} M ${pt(x - 50, top + 100)} L ${pt(x - 30, c.bb[1] + 80)} M ${pt(x + 50, top + 100)} L ${pt(x + 30, c.bb[1] + 80)}`, 2.5),
+    // Dây buộc vào hai bên vai, vẽ SAU thân (dùng trong `behind`) nên không vắt ngang mặt.
+    line(`M ${pt(x - 150, top + 100)} L ${pt(...al)} M ${pt(x + 150, top + 100)} L ${pt(...ar)} M ${pt(x - 50, top + 100)} L ${pt(...il)} M ${pt(x + 50, top + 100)} L ${pt(...ir)}`, 2.5),
   ];
 }
 
@@ -122,10 +125,11 @@ export function detectiveCap(c, color = '#C8A26B') {
 export function headset(c) {
   const { x, y, s } = c.face;
   return [
-    line(`M ${pt(x - 70 * s, y - 10 * s)} Q ${pt(x, y - 120 * s)} ${pt(x + 70 * s, y - 10 * s)}`, 5),
+    // Quai và dây micro của tai nghe cố ý nằm sát mặt (onFace) — bước kiểm tra nét vắt ngang mặt bỏ qua.
+    { ...line(`M ${pt(x - 70 * s, y - 10 * s)} Q ${pt(x, y - 120 * s)} ${pt(x + 70 * s, y - 10 * s)}`, 5), onFace: true },
     C('tai-nghe-trai', x - 72 * s, y, 16 * s, '#4FA3E0'),
     C('tai-nghe-phai', x + 72 * s, y, 16 * s, '#4FA3E0'),
-    line(`M ${pt(x + 72 * s, y + 10 * s)} Q ${pt(x + 60 * s, y + 50 * s)} ${pt(x + 26 * s, y + 46 * s)}`, 3),
+    { ...line(`M ${pt(x + 72 * s, y + 10 * s)} Q ${pt(x + 60 * s, y + 50 * s)} ${pt(x + 26 * s, y + 46 * s)}`, 3), onFace: true },
     C('mic', x + 22 * s, y + 46 * s, 7 * s, '#2F3640'),
   ];
 }
@@ -657,7 +661,7 @@ export function stopSign(x, y) {
 
 export function whistle(c) {
   const { x, y, s } = c.face;
-  return [R('coi', x + 10 * s, y + 34 * s, 44 * s, 18 * s, 8 * s, '#BFC8D0'), line(`M ${pt(x + 14 * s, y + 44 * s)} Q ${pt(x - 20 * s, y + 90 * s)} ${pt(x - 50 * s, y + 70 * s)}`, 2)];
+  return [R('coi', x + 10 * s, y + 34 * s, 44 * s, 18 * s, 8 * s, '#BFC8D0'), { ...line(`M ${pt(x + 14 * s, y + 44 * s)} Q ${pt(x - 20 * s, y + 90 * s)} ${pt(x - 50 * s, y + 70 * s)}`, 2), onFace: true }]; // dây còi đeo cổ
 }
 
 export function bucket(x, y) {
