@@ -19,7 +19,7 @@ export default function PoseSelector() {
   }, [theme, object]);
   const lang = i18n.language;
   const gridRef = useRef(null);
-  useOneLineTitles(gridRef, i18n.language, [data]);
+  useOneLineTitles(gridRef, i18n.language, [data], { shared: false });
   return (
     <div className="page px-3 sm:px-4 lg:max-w-[1320px]">
       <Link to={`/color/${theme}`} className="mb-2 inline-flex items-center gap-1 font-bold text-primary">
@@ -28,7 +28,7 @@ export default function PoseSelector() {
       <h1 className="page-title mb-4">{data?.object.name[lang]}</h1>
       <div ref={gridRef} className={GRID_CLASS}>
         {(data?.pictures || []).map((p) => (
-          <ThemeCard key={p.id} onClick={() => setPicked(p)} picture={p} title={p.variantName?.[lang] || p.name[lang]} testId={`pose-${p.slug}`} />
+          <ThemeCard key={p.id} onClick={() => setPicked(p)} picture={p} title={p.name[lang]} testId={`pose-${p.slug}`} />
         ))}
       </div>
       {picked && <ModePicker picture={picked} onClose={() => setPicked(null)} />}
