@@ -34,8 +34,8 @@
 <ellipse cx="254" cy="268" rx="11" ry="7" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="346" cy="268" rx="11" ry="7" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 285 278 Q 300 294 315 278" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
-<polygon points="180,178.2 142.6,263.2 176.6,263.2 149.4,341.4 217.4,242.8 183.4,242.8 207.2,178.2" id="r-tia-chop-trai" data-region="tia-chop-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="515.6,238.2 482.6,313.2 512.6,313.2 488.6,382.2 548.6,295.2 518.6,295.2 539.6,238.2" id="r-tia-chop-phai" data-region="tia-chop-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="172,178.2 134.6,263.2 168.6,263.2 141.4,341.4 209.4,242.8 175.4,242.8 199.2,178.2" id="r-tia-chop-trai" data-region="tia-chop-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="448,238.2 415,313.2 445,313.2 421,382.2 481,295.2 451,295.2 472,238.2" id="r-tia-chop-phai" data-region="tia-chop-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <g class="deco" pointer-events="none"><path d="M 110 280 L 60 280 M 120 330 L 50 330 M 110 380 L 60 380 M 490 300 L 540 300 M 495 350 L 555 350" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>

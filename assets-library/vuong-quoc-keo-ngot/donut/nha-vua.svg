@@ -8,6 +8,8 @@
 <path d="M 491 470 L 491 330 Q 491 286 526 286 Q 560 286 560 320 L 542 320 Q 542 304 526 304 Q 509 304 509 330 L 509 470 Z" id="r-keo-gay-phai" data-region="keo-gay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float">
+<path d="M 240 210 L 360 210 Q 490 345 500 480 L 100 480 Q 110 345 240 210 Z" id="r-ao-choang-hoang-gia" data-region="ao-choang-hoang-gia" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="96" y="462" width="408" height="20" rx="10" id="r-vien-ao-choang" data-region="vien-ao-choang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="320" rx="150" ry="150" id="r-banh-donut" data-region="banh-donut" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 162 318 Q 160 186 300 178 Q 440 186 438 318 Q 428 344 412 328 Q 398 364 380 340 Q 360 324 340 346 Q 320 368 300 344 Q 280 324 262 348 Q 240 368 224 340 Q 206 324 192 346 Q 172 356 162 318 Z" id="r-kem-phu" data-region="kem-phu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="272" rx="36" ry="36" id="r-lo-donut" data-region="lo-donut" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

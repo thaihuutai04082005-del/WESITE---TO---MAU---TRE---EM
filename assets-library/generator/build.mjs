@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
 import { THEMES, OBJECTS, THEME_VARIANTS } from './themes.mjs';
+import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
 import { face } from './face.mjs';
 import { R } from './shapes.mjs';
@@ -127,7 +128,7 @@ function buildPicture(theme, obj, variant, isCard) {
   const night = skyName === 'night';
   const groundKind = variant.ground || (obj.ground === 'water' ? 'water' : skyName === 'snow' ? 'snow' : 'grass');
   const groundColor =
-    groundKind === 'water' ? (night ? GROUND.waterNight : GROUND.water) : groundKind === 'rock' ? GROUND.rock : groundKind === 'snow' ? GROUND.snow : night ? GROUND.night : GROUND.grass;
+    groundKind === 'water' ? (night ? GROUND.waterNight : GROUND.water) : groundKind === 'grass' ? (night ? GROUND.night : GROUND.grass) : GROUND[groundKind] || GROUND.grass;
 
   const sky = R('nen-troi', 0, 0, 600, 600, 0, SKY[skyName]);
   const ground = groundItem(groundKind === 'water' ? 'water' : groundKind === 'rock' ? 'rock' : 'grass', groundColor);
@@ -154,6 +155,10 @@ function buildPicture(theme, obj, variant, isCard) {
   const expr = theme.faceStyle === 'face' ? variant.expr : null;
   const faceItems = expr && obj.face ? face(obj.face.x, obj.face.y, obj.face.s, expr, { mouth: obj.mouth !== false }) : [];
   const subject = [...(acc.behind || []), ...body, ...(acc.preface || []), ...faceItems, ...(acc.front || []), ...subjectExtra];
+  // Cảnh riêng của biến thể (không chịu biến đổi tư thế của chủ thể).
+  back.push(...(acc.back || []));
+  mid.push(...(acc.mid || []));
+  front.push(...(acc.fg || []));
 
   const all = [sky, ...back, ground, ...mid, ...subject, ...front];
   uniquify(all);
@@ -284,7 +289,9 @@ function main() {
     for (const obj of OBJECTS.filter((o) => o.theme === theme.slug)) {
       const oEntry = { slug: obj.slug, name: obj.name, pictures: [] };
       const tv = THEME_VARIANTS[theme.slug];
-      const variants = [...tv.variants.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
+      // Lớp 3: mỗi đối tượng có 5 biến thể riêng (object-variants.mjs); thẻ vẫn theo chủ đề.
+      const own = OBJECT_VARIANTS[obj.slug] || tv.variants;
+      const variants = [...own.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
       for (const [variant, isCard] of variants) {
         const { svg, meta } = buildPicture(theme, obj, variant, isCard);
         const out = join(ROOT, meta.file);

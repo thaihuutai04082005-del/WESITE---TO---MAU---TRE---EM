@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="chuoi-the-thao--truot-tuyet">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="-20,470 120,250 260,470" id="r-nui-xa-1" data-region="nui-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="120,250 96,290 120,282 144,290" id="r-tuyet-nui-xa-1" data-region="tuyet-nui-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="340,470 480,230 620,470" id="r-nui-xa-2" data-region="nui-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="480,230 454,274 480,266 506,274" id="r-tuyet-nui-xa-2" data-region="tuyet-nui-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(0 0) translate(300 440) scale(0.9) rotate(10) translate(-300 -440)">
+<ellipse cx="172" cy="335.7" rx="12" ry="36" transform="rotate(40 172 335.7)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="457" cy="335.7" rx="12" ry="36" transform="rotate(-40 457 335.7)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="270.5" y="409.5" width="16" height="46" rx="7" id="r-chan-trai" data-region="chan-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="342.5" y="409.5" width="16" height="46" rx="7" id="r-chan-phai" data-region="chan-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="270.5" cy="457.5" rx="22" ry="12" id="r-giay-trai" data-region="giay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="358.5" cy="457.5" rx="22" ry="12" id="r-giay-phai" data-region="giay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 170 230 C 150 390 290 480 450 402 C 460 396 458 380 444 380 C 330 395 235 330 215 230 Z" id="r-qua-chuoi" data-region="qua-chuoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 205 300 C 225 360 290 395 360 405 C 300 410 230 380 205 300 Z" id="r-vet-chuoi" data-region="vet-chuoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 168 232 L 216 232 L 206 202 L 178 202 Z" id="r-cuong" data-region="cuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="452" cy="392" rx="9" ry="11" id="r-dau-chuoi" data-region="dau-chuoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="247.7" cy="350" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="276.3" cy="350" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="249.1" cy="348.4" r="1.4" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="277.7" cy="348.4" r="1.4" fill="#FFFFFF"/></g>
+<ellipse cx="236.7" cy="361" rx="6.1" ry="3.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="287.3" cy="361" rx="6.1" ry="3.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 253.8 366.5 Q 262 375.3 270.3 366.5" fill="none" stroke="#1B2A38" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="163.9,461.5 443.9,491.5 445.1,479.5 165.1,449.5" id="r-van-truot-tuyet-1" data-region="van-truot-tuyet-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="183.9,481.5 463.9,511.5 465.1,499.5 185.1,469.5" id="r-van-truot-tuyet-2" data-region="van-truot-tuyet-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="155.1,328.6 105.1,494.6 110.9,496.4 160.9,330.4" id="r-gay-truot-trai" data-region="gay-truot-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="468.1,330.4 518.1,496.4 523.9,494.6 473.9,328.6" id="r-gay-truot-phai" data-region="gay-truot-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<ellipse cx="60" cy="80" rx="8" ry="8" id="r-bong-tuyet-1" data-region="bong-tuyet-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="150" rx="8" ry="8" id="r-bong-tuyet-2" data-region="bong-tuyet-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="250" cy="60" rx="8" ry="8" id="r-bong-tuyet-3" data-region="bong-tuyet-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="360" cy="120" rx="8" ry="8" id="r-bong-tuyet-4" data-region="bong-tuyet-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="470" cy="60" rx="8" ry="8" id="r-bong-tuyet-5" data-region="bong-tuyet-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="550" cy="150" rx="8" ry="8" id="r-bong-tuyet-6" data-region="bong-tuyet-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="80" cy="250" rx="8" ry="8" id="r-bong-tuyet-7" data-region="bong-tuyet-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="280" rx="8" ry="8" id="r-bong-tuyet-8" data-region="bong-tuyet-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="420" cy="220" rx="8" ry="8" id="r-bong-tuyet-9" data-region="bong-tuyet-9" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="180" cy="260" rx="8" ry="8" id="r-bong-tuyet-10" data-region="bong-tuyet-10" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

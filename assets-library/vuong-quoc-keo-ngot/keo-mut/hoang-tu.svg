@@ -8,6 +8,8 @@
 <path d="M 491 470 L 491 330 Q 491 286 526 286 Q 560 286 560 320 L 542 320 Q 542 304 526 304 Q 509 304 509 330 L 509 470 Z" id="r-keo-gay-phai" data-region="keo-gay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float">
+<path d="M 240 152 L 360 152 Q 458 326 468 500 L 132 500 Q 142 326 240 152 Z" id="r-ao-choang-hoang-gia" data-region="ao-choang-hoang-gia" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="128" y="482" width="344" height="20" rx="10" id="r-vien-ao-choang" data-region="vien-ao-choang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="290" y="340" width="20" height="150" rx="8" id="r-que-keo" data-region="que-keo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="300,352 258,332 262,376" id="r-no-trai" data-region="no-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="300,352 342,332 338,376" id="r-no-phai" data-region="no-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
@@ -24,9 +26,9 @@
 <ellipse cx="328.5" cy="238.4" rx="6.8" ry="4.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 290.7 244.6 Q 300 254.5 309.3 244.6" fill="none" stroke="#1B2A38" stroke-width="3.48" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="246.2,124 246.2,73.2 273.1,97.1 300,64.2 326.9,97.1 353.8,73.2 353.8,124" id="r-vuong-mien-nho" data-region="vuong-mien-nho" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="300,265.7 268.4,248.9 268.4,282.4" id="r-no-trai-2" data-region="no-trai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="300,265.7 331.6,248.9 331.6,282.4" id="r-no-phai-2" data-region="no-phai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="300" cy="265.7" rx="7.4" ry="7.4" id="r-nut-no" data-region="nut-no" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,325.7 268.4,308.9 268.4,342.4" id="r-no-trai-2" data-region="no-trai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,325.7 331.6,308.9 331.6,342.4" id="r-no-phai-2" data-region="no-phai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="325.7" rx="7.4" ry="7.4" id="r-nut-no" data-region="nut-no" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <g class="deco" pointer-events="none"><path d="M 51 350 L 69 336 M 51 390 L 69 376 M 51 430 L 69 416 M 491 350 L 509 336 M 491 390 L 509 376 M 491 430 L 509 416" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>

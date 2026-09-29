@@ -41,9 +41,9 @@
 <g class="deco" pointer-events="none"><path d="M 285 280 Q 300 296 315 280" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="256.8,155.4 251.4,105 276.6,130.2 300,92.4 323.4,130.2 348.6,105 343.2,155.4" id="r-vuong-mien" data-region="vuong-mien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="137.4" rx="8.1" ry="8.1" id="r-vuong-mien-ngoc" data-region="vuong-mien-ngoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 398 360 L 498 360 Q 500 436 448 476 Q 396 436 398 360 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 414 376 L 482 376 Q 482 428 448 456 Q 414 428 414 376 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="448,390 453.9,403.9 468.9,405.2 457.5,415.1 460.9,429.8 448,422 435.1,429.8 438.5,415.1 427.1,405.2 442.1,403.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 318 360 L 418 360 Q 420 436 368 476 Q 316 436 318 360 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 334 376 L 402 376 Q 402 428 368 456 Q 334 428 334 376 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="368,390 373.9,403.9 388.9,405.2 377.5,415.1 380.9,429.8 368,422 355.1,429.8 358.5,415.1 347.1,405.2 362.1,403.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <rect x="33" y="36" width="14" height="8" rx="2" id="r-hoa-giay-1" data-region="hoa-giay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

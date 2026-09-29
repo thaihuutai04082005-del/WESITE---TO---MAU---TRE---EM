@@ -30,6 +30,8 @@
 <path d="M 491 470 L 491 330 Q 491 286 526 286 Q 560 286 560 320 L 542 320 Q 542 304 526 304 Q 509 304 509 330 L 509 470 Z" id="r-keo-gay-phai" data-region="keo-gay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float">
+<path d="M 230 422 L 370 422 Q 470 492 490 520 Q 300 540 110 520 Q 130 492 230 422 Z" id="r-vay-da-hoi" data-region="vay-da-hoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 110 520 Q 300 540 490 520 L 486 506 Q 300 524 114 506 Z" id="r-vien-vay" data-region="vien-vay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="350" rx="116" ry="40" id="r-kem-duoi" data-region="kem-duoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="308" rx="92" ry="38" id="r-kem-giua" data-region="kem-giua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="270" rx="62" ry="32" id="r-kem-tren" data-region="kem-tren" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

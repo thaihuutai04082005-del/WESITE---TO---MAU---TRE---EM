@@ -29,9 +29,9 @@
 <polygon points="415,410 415,280 424,258 433,280 433,410" id="r-luoi-kiem" data-region="luoi-kiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="394" y="408" width="60" height="12" rx="5" id="r-chuoi-kiem-ngang" data-region="chuoi-kiem-ngang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="417" y="420" width="14" height="36" rx="5" id="r-chuoi-kiem" data-region="chuoi-kiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 152 354 L 252 354 Q 254 430 202 470 Q 150 430 152 354 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 168 370 L 236 370 Q 236 422 202 450 Q 168 422 168 370 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="202,384 207.9,397.9 222.9,399.2 211.5,409.1 214.9,423.8 202,416 189.1,423.8 192.5,409.1 181.1,399.2 196.1,397.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 152 214 L 252 214 Q 254 290 202 330 Q 150 290 152 214 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 168 230 L 236 230 Q 236 282 202 310 Q 168 282 168 230 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="202,244 207.9,257.9 222.9,259.2 211.5,269.1 214.9,283.8 202,276 189.1,283.8 192.5,269.1 181.1,259.2 196.1,257.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <g class="deco" pointer-events="none"><path d="M 51 350 L 69 336 M 51 390 L 69 376 M 51 430 L 69 416 M 491 350 L 509 336 M 491 390 L 509 376 M 491 430 L 509 416" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>

@@ -28,6 +28,7 @@ export function seedPictures(db = getDb()) {
        rarity = excluded.rarity, sort = excluded.sort`,
   );
   let count = 0;
+  const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   tx(() => {
     catalog.themes.forEach((t, ti) => {
       const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti).id;
@@ -41,17 +42,41 @@ export function seedPictures(db = getDb()) {
         });
       });
     });
+    // Tranh / đối tượng của các chủ đề trong catalog nhưng không còn trong catalog (VD đổi biến thể) → xoá hẳn.
+    const themeSlugs = catalog.themes.map((t) => t.slug);
+    const stale = db
+      .prepare(`SELECT p.id, p.slug FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+      .all(...themeSlugs)
+      .filter((r) => !keep.has(r.slug))
+      .map((r) => r.id);
+    purgePictures(db, stale);
+    db.prepare(`DELETE FROM objects WHERE theme_id IN (SELECT id FROM themes WHERE slug IN (${themeSlugs.map(() => '?').join(',')})) AND id NOT IN (SELECT object_id FROM pictures)`).run(...themeSlugs);
   });
   return count;
 }
 
-/** Dữ liệu cũ chưa có chủ đề mới trong catalog (VD vừa cập nhật bộ tranh) → nạp bổ sung, không đụng dữ liệu khác. */
+/** Xoá hẳn các tranh cùng dữ liệu gắn với chúng (tranh bé đã tô, thẻ, giao dịch, lịch sử bóc thẻ, phòng Đấu trường). */
+export function purgePictures(db, ids) {
+  if (!ids.length) return;
+  const q = ids.map(() => '?').join(',');
+  db.prepare(`DELETE FROM trades WHERE offer_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q})) OR request_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q}))`).run(...ids, ...ids);
+  for (const table of ['user_cards', 'gacha_pulls', 'arena_rooms', 'artworks']) db.prepare(`DELETE FROM ${table} WHERE picture_id IN (${q})`).run(...ids);
+  db.prepare(`DELETE FROM pictures WHERE id IN (${q})`).run(...ids);
+}
+
+/** Bộ tranh trong catalog khác dữ liệu đang có (thêm chủ đề / đổi biến thể) → nạp lại kho tranh cho khớp. */
 export function seedPicturesIfNeeded(db = getDb()) {
   const catalogFile = join(REPO_ROOT, 'assets-library', 'catalog.json');
   if (!existsSync(catalogFile)) return 0;
-  const slugs = JSON.parse(readFileSync(catalogFile, 'utf8')).themes.map((t) => t.slug);
-  const has = db.prepare('SELECT 1 FROM themes WHERE slug = ?');
-  return slugs.some((s) => !has.get(s)) ? seedPictures(db) : 0;
+  const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
+  const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
+  const themeSlugs = catalog.themes.map((t) => t.slug);
+  const have = db
+    .prepare(`SELECT p.slug FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+    .all(...themeSlugs)
+    .map((r) => r.slug);
+  const same = have.length === want.size && have.every((s) => want.has(s));
+  return same ? 0 : seedPictures(db);
 }
 
 export function seedMissions(db = getDb()) {
