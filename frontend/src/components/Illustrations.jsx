@@ -79,7 +79,7 @@ export function GachaArt() {
       <rect width="60" height="84" rx="9" fill={color} />
       <rect x="6" y="6" width="48" height="72" rx="6" fill="none" stroke="#FFFFFF" strokeWidth="2.5" />
       {mark === '?' ? (
-        <text x="30" y="56" textAnchor="middle" fontSize="38" fontWeight="900" fontFamily="Baloo 2, Nunito, sans-serif" fill="#FFFFFF" stroke="none">?</text>
+        <text x="30" y="56" textAnchor="middle" fontSize="38" fontWeight="900" fontFamily="Viet Hook, Baloo 2, Nunito, sans-serif" fill="#FFFFFF" stroke="none">?</text>
       ) : (
         <polygon points="30,24 36,38 51,39 39,48 43,63 30,55 17,63 21,48 9,39 24,38" fill="#FFFFFF" strokeWidth="1.5" />
       )}
@@ -126,7 +126,7 @@ export function BookArt({ bubble = 'Xin chào!' }) {
       <g stroke={INK} strokeWidth="2.2" strokeLinejoin="round">
         <path d="M122 46 H192 Q198 46 198 52 V76 Q198 82 192 82 H132 L118 92 L124 80 Q118 80 118 74 V52 Q118 46 122 46 Z" fill="#FFFFFF" />
       </g>
-      <text x="158" y="69" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Baloo 2, Nunito, sans-serif" fill={INK}>
+      <text x="158" y="69" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Viet Hook, Baloo 2, Nunito, sans-serif" fill={INK}>
         {bubble}
       </text>
       <g stroke="#8FA8BF" strokeWidth="2.5" strokeLinecap="round">

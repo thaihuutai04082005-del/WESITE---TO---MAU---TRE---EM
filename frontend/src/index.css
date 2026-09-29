@@ -1,6 +1,22 @@
 @import 'tailwindcss';
 
 /* ===== Design system (Mục 15.3): tông xanh biển & trắng ===== */
+/* Baloo 2 đặt dấu hỏi dính vào dấu móc ở ử/ở (nhìn như số 3) → riêng 4 chữ ử Ử ở Ở lấy từ Nunito (tự lưu, giấy phép OFL). */
+@font-face {
+  font-family: 'Viet Hook';
+  src: url('/fonts/nunito/nunito-vi-800.woff2') format('woff2');
+  font-weight: 600 900;
+  font-display: swap;
+  unicode-range: U+1EDE-1EDF, U+1EEC-1EED;
+}
+@font-face {
+  font-family: 'Viet Hook';
+  src: url('/fonts/nunito/nunito-vi-700.woff2') format('woff2');
+  font-weight: 100 599;
+  font-display: swap;
+  unicode-range: U+1EDE-1EDF, U+1EEC-1EED;
+}
+
 @theme {
   --color-primary: #2b9bf4;
   --color-primary-dark: #0b6fb8;
@@ -23,7 +39,7 @@
   --color-card-a: #7d5fff;
   --color-card-s: #ff5f7e;
 
-  --font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --font-display: 'Viet Hook', 'Baloo 2', 'Nunito', system-ui, sans-serif;
   --font-body: 'Nunito', system-ui, sans-serif;
 
   --radius-card: 20px;

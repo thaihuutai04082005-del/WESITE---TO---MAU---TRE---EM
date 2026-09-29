@@ -21,7 +21,7 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-function fitText(ctx, text, maxW, size, weight = 800, family = "'Baloo 2', Nunito, sans-serif") {
+function fitText(ctx, text, maxW, size, weight = 800, family = "'Viet Hook', 'Baloo 2', Nunito, sans-serif") {
   let s = size;
   do {
     ctx.font = `${weight} ${s}px ${family}`;
@@ -84,7 +84,7 @@ export async function renderShareCard({ picture, data, title, nickname, entry = 
   // Ruy băng danh hiệu
   if (entry?.award) {
     const text = `🏆 ${labels.award}`;
-    ctx.font = "800 38px 'Baloo 2', Nunito, sans-serif";
+    ctx.font = "800 38px 'Viet Hook', 'Baloo 2', Nunito, sans-serif";
     const w = ctx.measureText(text).width + 60;
     roundRect(ctx, W - w - 40, 70, w, 70, 35);
     ctx.fillStyle = '#FF8A65';
@@ -99,7 +99,7 @@ export async function renderShareCard({ picture, data, title, nickname, entry = 
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = '#2B9BF4';
-  ctx.font = "800 44px 'Baloo 2', Nunito, sans-serif";
+  ctx.font = "800 44px 'Viet Hook', 'Baloo 2', Nunito, sans-serif";
   ctx.fillText(`🎨 ${labels.brand}`, 50, 76);
 
   // Tên tranh + tác giả
