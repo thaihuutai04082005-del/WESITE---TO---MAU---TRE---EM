@@ -91,8 +91,8 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(themes.body.themes.length, 5);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
   const objects = await api('GET', `/themes/${themes.body.themes[0].slug}/objects`);
-  assert.equal(objects.body.objects.length, 5);
-  const pics = await api('GET', `/themes/dong-vat/objects/meo/pictures`);
+  assert.equal(objects.body.objects.length, 6);
+  const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
   assert.equal(pics.body.pictures.length, 5);
   const pic = pics.body.pictures[0];
 
@@ -466,4 +466,21 @@ test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Th�
   assert.equal(p.body.rank.key, 'master');
   assert.equal(p.body.rank.next, null);
   assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id));
+});
+
+test('Chủ đề đã ẩn: không hiện ở danh sách, không vào Bóc thẻ, tranh cũ vẫn mở được', async () => {
+  const Picture = await import('../src/models/picture.js');
+  const t = getDb().prepare("SELECT id FROM themes WHERE slug = 'the-thao-trai-cay'").get();
+  const card = getDb().prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 1 LIMIT 1').get(t.id);
+  getDb().prepare('UPDATE themes SET active = 0 WHERE id = ?').run(t.id);
+  try {
+    const list = await api('GET', '/themes');
+    assert.ok(!list.body.themes.some((x) => x.slug === 'the-thao-trai-cay'));
+    assert.equal((await api('GET', '/themes/the-thao-trai-cay/objects')).status, 404);
+    const pool = Picture.cardPool();
+    assert.ok(!Object.values(pool).flat().includes(card.id));
+    assert.ok(Picture.findPicture(card.id));
+  } finally {
+    getDb().prepare('UPDATE themes SET active = 1 WHERE id = ?').run(t.id);
+  }
 });

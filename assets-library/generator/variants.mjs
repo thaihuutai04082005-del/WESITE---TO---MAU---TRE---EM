@@ -68,10 +68,13 @@ export const CARD_VARIANTS = [
 
 // ----------------- Cảnh nền -----------------
 
-export const SKY = { day: '#BDE6FF', night: '#2C3E74', sunset: '#FFD3A5', rain: '#A9C4D6', snow: '#CFE3F2' };
-export const GROUND = { grass: '#8BD17C', night: '#2F6B3F', snow: '#E3F2FD', water: '#5DADE2', waterNight: '#1F4E79' };
+export const SKY = { day: '#BDE6FF', night: '#2C3E74', sunset: '#FFD3A5', rain: '#A9C4D6', snow: '#CFE3F2', space: '#243B6B' };
+export const GROUND = { grass: '#8BD17C', night: '#2F6B3F', snow: '#E3F2FD', water: '#5DADE2', waterNight: '#1F4E79', rock: '#B7BCC6' };
 
 export function groundItem(kind, color) {
+  if (kind === 'rock') {
+    return D('mat-dat-hanh-tinh', 'M 0 468 Q 120 450 240 462 Q 380 476 480 456 Q 550 444 600 452 L 600 600 L 0 600 Z', color);
+  }
   if (kind === 'water') {
     return D('mat-nuoc', 'M 0 440 Q 75 425 150 440 Q 225 455 300 440 Q 375 425 450 440 Q 525 455 600 440 L 600 600 L 0 600 Z', color);
   }
@@ -167,6 +170,57 @@ export function sceneParts(names, obj) {
   if (has('wind')) {
     front.push(line('M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260', 4));
     front.push(E('la-bay-1', 520, 200, 12, 7, '#4CAF50', 30), E('la-bay-2', 90, 150, 12, 7, '#4CAF50', -20));
+  }
+  // ---- Cảnh nền cho bộ chủ đề mới ----
+  if (has('space')) {
+    [[60, 60], [170, 120], [260, 40], [420, 90], [560, 50], [540, 210], [40, 230], [330, 150]].forEach(([x, y], k) =>
+      back.push(star(`sao-${k + 1}`, x, y, k % 2 ? 9 : 13, k % 2 ? 4 : 6, '#FFE066')),
+    );
+  }
+  if (has('planet')) {
+    back.push(C('hanh-tinh', 505, 115, 50, '#FF8A65'), C('ho-hanh-tinh-1', 488, 100, 12, '#E57350'), C('ho-hanh-tinh-2', 522, 132, 8, '#E57350'));
+  }
+  if (has('craters')) {
+    mid.push(E('mieng-ho-1', 110, 520, 50, 14, '#9AA1AD'), E('mieng-ho-2', 480, 545, 40, 11, '#9AA1AD'), E('mieng-ho-3', 300, 575, 30, 8, '#9AA1AD'));
+  }
+  if (has('flag')) {
+    mid.push(R('can-co', 76, 330, 8, 150, 3, '#BFC8D0'), P('co', [[84, 332], [150, 350], [84, 370]], '#FF5F7E'));
+  }
+  if (has('station')) {
+    back.push(
+      R('tam-pin-trai', 60, 96, 110, 44, 4, '#4FA3E0'),
+      R('tam-pin-phai', 250, 96, 110, 44, 4, '#4FA3E0'),
+      R('thanh-noi', 170, 112, 80, 12, 4, '#BFC8D0'),
+      R('khoang-tram', 180, 82, 60, 72, 14, '#E3F0FF'),
+      C('cua-so-tram', 210, 118, 14, '#FFE066'),
+    );
+    back.push(line('M 88 96 L 88 140 M 116 96 L 116 140 M 144 96 L 144 140 M 278 96 L 278 140 M 306 96 L 306 140 M 334 96 L 334 140', 2));
+  }
+  if (has('candyCanes')) {
+    const cane = (id, x) => [
+      D(id, `M ${x - 9} 470 L ${x - 9} 330 Q ${x - 9} 286 ${x + 26} 286 Q ${x + 60} 286 ${x + 60} 320 L ${x + 42} 320 Q ${x + 42} 304 ${x + 26} 304 Q ${x + 9} 304 ${x + 9} 330 L ${x + 9} 470 Z`, '#FFFFFF'),
+    ];
+    mid.push(...cane('keo-gay-trai', 60), ...cane('keo-gay-phai', 500));
+    front.push(line('M 51 350 L 69 336 M 51 390 L 69 376 M 51 430 L 69 416 M 491 350 L 509 336 M 491 390 L 509 376 M 491 430 L 509 416', 5));
+  }
+  if (has('volcano')) {
+    back.push(P('nui-lua', [[0, 450], [0, 430], [70, 260], [120, 260], [200, 460]], '#A1887F'));
+    back.push(D('dung-nham', 'M 70 262 Q 95 230 120 262 L 110 300 Q 102 284 95 304 Q 88 284 80 300 Z', '#FF7043'));
+    back.push(C('khoi-nui-lua-1', 90, 220, 18, '#D6DEE6'), C('khoi-nui-lua-2', 70, 190, 22, '#D6DEE6'));
+  }
+  if (has('goal')) {
+    back.push(R('khung-thanh', 30, 300, 150, 170, 4, '#FFFFFF'), R('luoi-khung-thanh', 44, 314, 122, 156, 2, '#E3F0FF'));
+    back.push(line('M 74 314 L 74 470 M 104 314 L 104 470 M 134 314 L 134 470 M 44 350 L 166 350 M 44 390 L 166 390 M 44 430 L 166 430', 2));
+  }
+  if (has('hoop')) {
+    back.push(R('cot-bong-ro', 62, 200, 14, 280, 4, '#BFC8D0'), R('bang-bong-ro', 20, 150, 110, 76, 6, '#FFFFFF'), R('o-bang', 52, 176, 46, 32, 3, '#FFE0B5'));
+    back.push(E('vong-ro', 112, 214, 34, 8, '#FF5F5F'), P('luoi-ro', [[80, 216], [144, 216], [132, 262], [92, 262]], '#F0F4F8'));
+  }
+  if (has('podium')) {
+    mid.push(R('buc-hai', 60, 410, 150, 80, 6, '#BFC8D0'), R('buc-nhat', 210, 360, 180, 130, 6, '#FFD54F'), R('buc-ba', 390, 430, 150, 60, 6, '#E0A15A'));
+  }
+  if (has('bubbles')) {
+    [[90, 260, 16], [130, 200, 10], [480, 240, 18], [520, 180, 11], [450, 320, 9]].forEach(([x, y, r], k) => front.push(C(`bong-nuoc-${k + 1}`, x, y, r, '#D6F0FF')));
   }
   if (has('zzz') && hat) {
     subjectExtra.push(

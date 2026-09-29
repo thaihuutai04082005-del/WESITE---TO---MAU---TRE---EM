@@ -1,10 +1,11 @@
 // Chạy: node assets-library/generator/build.mjs
 // Sinh toàn bộ tranh SVG theo cấu trúc 3 tầng + file catalog.json (manifest vùng tô).
-import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { THEMES, OBJECTS } from './objects.mjs';
-import { THEME_VARIANTS, CARD_VARIANTS, SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
+import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS } from './themes.mjs';
+import { SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
 import { face } from './face.mjs';
 import { R } from './shapes.mjs';
 import {
@@ -121,38 +122,38 @@ function computeManifestRegions(regions) {
 }
 
 function buildPicture(theme, obj, variant, isCard) {
-  const night = variant.scene.includes('night');
-  const skyColor = night
-    ? SKY.night
-    : variant.scene.includes('sunset')
-      ? SKY.sunset
-      : variant.scene.includes('rain')
-        ? SKY.rain
-        : variant.scene.includes('snow')
-          ? SKY.snow
-          : SKY.day;
-  const water = obj.ground === 'water';
-  const groundColor = water
-    ? night
-      ? GROUND.waterNight
-      : GROUND.water
-    : night
-      ? GROUND.night
-      : variant.scene.includes('snow')
-        ? GROUND.snow
-        : GROUND.grass;
+  const scene = variant.scene || [];
+  const skyName = variant.sky || (scene.includes('night') ? 'night' : scene.includes('sunset') ? 'sunset' : scene.includes('rain') ? 'rain' : scene.includes('snow') ? 'snow' : 'day');
+  const night = skyName === 'night';
+  const groundKind = variant.ground || (obj.ground === 'water' ? 'water' : skyName === 'snow' ? 'snow' : 'grass');
+  const groundColor =
+    groundKind === 'water' ? (night ? GROUND.waterNight : GROUND.water) : groundKind === 'rock' ? GROUND.rock : groundKind === 'snow' ? GROUND.snow : night ? GROUND.night : GROUND.grass;
 
-  const sky = R('nen-troi', 0, 0, 600, 600, 0, skyColor);
-  const ground = groundItem(water ? 'water' : 'grass', groundColor);
-  const { back, mid, front, subjectExtra } = sceneParts(variant.scene, obj);
+  const sky = R('nen-troi', 0, 0, 600, 600, 0, SKY[skyName]);
+  const ground = groundItem(groundKind === 'water' ? 'water' : groundKind === 'rock' ? 'rock' : 'grass', groundColor);
+  const { back, mid, front, subjectExtra } = sceneParts(scene, obj);
 
-  const subject = obj.build();
+  const body = obj.build();
   if (night && obj.glow) {
-    for (const it of subject) if (it.kind === 'region' && obj.glow.includes(it.id)) it.color = '#FFE066';
+    for (const it of body) if (it.kind === 'region' && obj.glow.includes(it.id)) it.color = '#FFE066';
   }
+  // Khung bao của thân (trước phụ kiện) để đặt phụ kiện concept cho vừa từng đối tượng.
+  const pts = body.filter((it) => it.kind === 'region').flatMap((it) => it.poly);
+  const bb = bbox(pts);
+  const ctx = {
+    face: obj.face,
+    hat: obj.hat,
+    bb,
+    // Động vật (có "neck") lấy tâm theo mặt; đồ vật/xe lấy tâm khung bao.
+    cx: obj.neck && obj.face ? obj.face.x : (bb[0] + bb[2]) / 2,
+    neck: obj.neck || (obj.face ? obj.face.y + 84 * obj.face.s : bb[1] + 80),
+    left: obj.left ?? bb[0],
+    right: obj.right ?? bb[2],
+  };
+  const acc = variant.acc ? variant.acc(ctx) : {};
   const expr = theme.faceStyle === 'face' ? variant.expr : null;
-  if (expr && obj.face) subject.push(...face(obj.face.x, obj.face.y, obj.face.s, expr));
-  subject.push(...subjectExtra);
+  const faceItems = expr && obj.face ? face(obj.face.x, obj.face.y, obj.face.s, expr, { mouth: obj.mouth !== false }) : [];
+  const subject = [...(acc.behind || []), ...body, ...(acc.preface || []), ...faceItems, ...(acc.front || []), ...subjectExtra];
 
   const all = [sky, ...back, ground, ...mid, ...subject, ...front];
   uniquify(all);
@@ -176,7 +177,7 @@ function buildPicture(theme, obj, variant, isCard) {
   }
 
   const slug = `${obj.slug}--${variant.slug}`;
-  const animation = obj.animation || theme.animation;
+  const animation = obj.animation || theme.animation || 'bounce';
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="${slug}">`,
     `<g class="scene-back">`,
@@ -213,18 +214,31 @@ function buildPicture(theme, obj, variant, isCard) {
   };
 }
 
+/** Tranh "vui vẻ" của đối tượng cũ — chỉ dùng để xuất ảnh đại diện + linh vật giao diện (không vào kho tranh). */
+const LEGACY_HAPPY = { slug: 'vui-ve', name: { vi: 'vui vẻ', en: 'happy' }, expr: 'happy', scene: ['sun', 'clouds'] };
+function legacyPictures(slugs) {
+  return slugs.map((slug) => {
+    const obj = LEGACY_OBJECTS.find((o) => o.slug === slug);
+    const theme = LEGACY_THEMES.find((t) => t.slug === obj.theme);
+    return buildPicture(theme, obj, LEGACY_HAPPY, false);
+  });
+}
+
+const colorize = ({ svg, meta }) => {
+  let out = svg;
+  for (const r of meta.regions) out = out.replace(`data-region="${r.id}" class="region" fill="#FFFFFF"`, `data-region="${r.id}" class="region" fill="${r.color}"`);
+  return out;
+};
+
 /** Ảnh đại diện: tranh "vui vẻ" đã tô màu gợi ý, cắt khung quanh chủ thể. */
 const AVATARS = ['meo', 'cho', 'tho', 'voi', 'gau', 'hoa', 'tao', 'dau-tay', 'o-to', 'may-bay', 'nam', 'cau-vong'];
-function writeAvatars(catalog) {
+function writeAvatars() {
   const outDir = join(ROOT, '..', 'frontend', 'public', 'avatars');
   mkdirSync(outDir, { recursive: true });
-  const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
-  for (const slug of AVATARS) {
-    const p = pics.find((x) => x.object === slug && !x.isCard);
-    let svg = readFileSync(join(ROOT, p.file), 'utf8');
-    for (const r of p.regions) svg = svg.replace(`data-region="${r.id}" class="region" fill="#FFFFFF"`, `data-region="${r.id}" class="region" fill="${r.color}"`);
+  for (const pic of legacyPictures(AVATARS)) {
+    let svg = colorize(pic);
     // Khung vuông bao chủ thể (bỏ qua nền trời/đất).
-    const subj = p.regions.filter((r) => !['nen-troi', 'nen-dat', 'mat-nuoc'].includes(r.id) && !/^(may-|mat-troi|tia-nang)/.test(r.id));
+    const subj = pic.meta.regions.filter((r) => !['nen-troi', 'nen-dat', 'mat-nuoc'].includes(r.id) && !/^(may-|mat-troi|tia-nang)/.test(r.id));
     const x0 = Math.min(...subj.map((r) => r.bbox[0]));
     const y0 = Math.min(...subj.map((r) => r.bbox[1]));
     const x1 = Math.max(...subj.map((r) => r.bbox[2]));
@@ -233,32 +247,29 @@ function writeAvatars(catalog) {
     const cx = (x0 + x1) / 2;
     const cy = (y0 + y1) / 2;
     svg = svg.replace('viewBox="0 0 600 600"', `viewBox="${round1(cx - size / 2)} ${round1(cy - size / 2)} ${round1(size)} ${round1(size)}"`);
-    writeFileSync(join(outDir, `${slug}.svg`), svg);
+    writeFileSync(join(outDir, `${pic.meta.object}.svg`), svg);
   }
 }
 
 /** Linh vật cho giao diện: chỉ lấy chủ thể (bỏ nền), tô màu gợi ý, nền trong suốt. */
 const MASCOTS = ['gau', 'tho', 'meo', 'cho', 'voi', 'tao', 'dau-tay', 'hoa', 'o-to', 'may-bay'];
-function writeMascots(catalog) {
+function writeMascots() {
   const outDir = join(ROOT, '..', 'frontend', 'public', 'mascots');
   mkdirSync(outDir, { recursive: true });
-  const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
-  for (const slug of MASCOTS) {
-    const p = pics.find((x) => x.object === slug && !x.isCard);
-    let svg = readFileSync(join(ROOT, p.file), 'utf8');
-    for (const r of p.regions) svg = svg.replace(`data-region="${r.id}" class="region" fill="#FFFFFF"`, `data-region="${r.id}" class="region" fill="${r.color}"`);
+  for (const pic of legacyPictures(MASCOTS)) {
+    const svg = colorize(pic);
     const start = svg.indexOf('<g id="subject"');
     const end = svg.indexOf('<g class="scene-front">');
     const subject = svg.slice(start, end).trim();
     // Khung bao chủ thể: bỏ các vùng cảnh nền (trời, đất, mây, mặt trời…).
     const bg = /^(nen-|mat-nuoc|may-|mat-troi|tia-nang|bong-do|hoa-nho|buom)/;
-    const subj = p.regions.filter((r) => !bg.test(r.id) && r.area > 0);
+    const subj = pic.meta.regions.filter((r) => !bg.test(r.id) && r.area > 0);
     const x0 = Math.min(...subj.map((r) => r.bbox[0])) - 8;
     const y0 = Math.min(...subj.map((r) => r.bbox[1])) - 8;
     const x1 = Math.max(...subj.map((r) => r.bbox[2])) + 8;
     const y1 = Math.max(...subj.map((r) => r.bbox[3])) + 8;
     writeFileSync(
-      join(outDir, `${slug}.svg`),
+      join(outDir, `${pic.meta.object}.svg`),
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${round1(x0)} ${round1(y0)} ${round1(x1 - x0)} ${round1(y1 - y0)}">${subject}</svg>`,
     );
   }
@@ -272,7 +283,8 @@ function main() {
     const tEntry = { slug: theme.slug, name: theme.name, objects: [] };
     for (const obj of OBJECTS.filter((o) => o.theme === theme.slug)) {
       const oEntry = { slug: obj.slug, name: obj.name, pictures: [] };
-      const variants = [...THEME_VARIANTS[theme.slug].map((v) => [v, false]), ...CARD_VARIANTS.map((v) => [v, true])];
+      const tv = THEME_VARIANTS[theme.slug];
+      const variants = [...tv.variants.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
       for (const [variant, isCard] of variants) {
         const { svg, meta } = buildPicture(theme, obj, variant, isCard);
         const out = join(ROOT, meta.file);
@@ -285,8 +297,8 @@ function main() {
     catalog.themes.push(tEntry);
   }
   writeFileSync(join(ROOT, 'catalog.json'), JSON.stringify(catalog));
-  writeAvatars(catalog);
-  writeMascots(catalog);
+  writeAvatars();
+  writeMascots();
   const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
   console.log(
     `Đã sinh ${pics.length} tranh (${pics.filter((p) => !p.isCard).length} tranh thường, ${pics.filter((p) => p.isCard).length} tranh thẻ).`,

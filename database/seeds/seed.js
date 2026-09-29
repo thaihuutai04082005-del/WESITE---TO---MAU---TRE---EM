@@ -14,7 +14,7 @@ export function seedPictures(db = getDb()) {
   if (!existsSync(catalogFile)) throw new Error('Chưa có catalog.json — chạy "npm run gen:pictures" trước');
   const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
   const upTheme = db.prepare(
-    'INSERT INTO themes (slug, name_vi, name_en, sort) VALUES (?, ?, ?, ?) ON CONFLICT (slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort RETURNING id',
+    'INSERT INTO themes (slug, name_vi, name_en, sort, active) VALUES (?, ?, ?, ?, 1) ON CONFLICT (slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort, active = 1 RETURNING id',
   );
   const upObject = db.prepare(
     'INSERT INTO objects (theme_id, slug, name_vi, name_en, sort) VALUES (?, ?, ?, ?, ?) ON CONFLICT (theme_id, slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort RETURNING id',
@@ -43,6 +43,15 @@ export function seedPictures(db = getDb()) {
     });
   });
   return count;
+}
+
+/** Dữ liệu cũ chưa có chủ đề mới trong catalog (VD vừa cập nhật bộ tranh) → nạp bổ sung, không đụng dữ liệu khác. */
+export function seedPicturesIfNeeded(db = getDb()) {
+  const catalogFile = join(REPO_ROOT, 'assets-library', 'catalog.json');
+  if (!existsSync(catalogFile)) return 0;
+  const slugs = JSON.parse(readFileSync(catalogFile, 'utf8')).themes.map((t) => t.slug);
+  const has = db.prepare('SELECT 1 FROM themes WHERE slug = ?');
+  return slugs.some((s) => !has.get(s)) ? seedPictures(db) : 0;
 }
 
 export function seedMissions(db = getDb()) {

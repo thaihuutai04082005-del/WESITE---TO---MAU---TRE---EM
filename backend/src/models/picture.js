@@ -9,12 +9,17 @@ export function listThemes() {
       `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id) AS object_count,
         (SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id
           WHERE o.theme_id = t.id AND p.is_card = 0 ORDER BY o.sort, p.sort LIMIT 1) AS cover_id
-       FROM themes t ORDER BY t.sort, t.id`,
+       FROM themes t WHERE t.active = 1 ORDER BY t.sort, t.id`,
     )
     .all();
 }
 
 export const findTheme = (slug) => getDb().prepare('SELECT * FROM themes WHERE slug = ?').get(slug);
+/** Chủ đề đang mở cho bé duyệt (chủ đề đã ẩn chỉ còn xem lại tranh cũ qua lịch sử / bộ sưu tập). */
+export const findActiveTheme = (slug) => getDb().prepare('SELECT * FROM themes WHERE slug = ? AND active = 1').get(slug);
+
+/** Điều kiện SQL: tranh p thuộc chủ đề đang mở. */
+export const ACTIVE_PICTURE = 'p.object_id IN (SELECT o.id FROM objects o JOIN themes t ON t.id = o.theme_id WHERE t.active = 1)';
 
 export function listObjects(themeId) {
   return getDb()
@@ -74,14 +79,14 @@ export function toClient(p, withSvg = true) {
 }
 
 export function cardPool() {
-  const rows = getDb().prepare('SELECT id, rarity FROM pictures WHERE is_card = 1 AND rarity IS NOT NULL').all();
+  const rows = getDb().prepare(`SELECT p.id, p.rarity FROM pictures p WHERE p.is_card = 1 AND p.rarity IS NOT NULL AND ${ACTIVE_PICTURE}`).all();
   const pool = { S: [], A: [], B: [], C: [] };
   for (const r of rows) pool[r.rarity].push(r.id);
   return pool;
 }
 
 export function randomPictureForArena() {
-  return getDb().prepare('SELECT id FROM pictures WHERE is_card = 0 ORDER BY RANDOM() LIMIT 1').get();
+  return getDb().prepare(`SELECT p.id FROM pictures p WHERE p.is_card = 0 AND ${ACTIVE_PICTURE} ORDER BY RANDOM() LIMIT 1`).get();
 }
 
 export { lang };

@@ -15,7 +15,7 @@ export function themes(_req, res) {
 }
 
 export function objects(req, res) {
-  const theme = Picture.findTheme(req.params.theme);
+  const theme = Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
   const list = Picture.listObjects(theme.id).map((o) => ({
     id: o.id,
@@ -28,7 +28,7 @@ export function objects(req, res) {
 }
 
 export function pictures(req, res) {
-  const theme = Picture.findTheme(req.params.theme);
+  const theme = Picture.findActiveTheme(req.params.theme);
   const obj = theme && Picture.findObject(theme.id, req.params.object);
   if (!obj) throw notFound();
   const list = Picture.listPictures(obj.id).map((p) => Picture.toClient(Picture.findPicture(p.id)));
