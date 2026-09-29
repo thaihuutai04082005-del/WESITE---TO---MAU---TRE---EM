@@ -16,7 +16,7 @@
 <path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-bounce">
-<path d="M 256 334 L 344 334 Q 455.6 417 465.6 500 Q 382.8 482 300 500 Q 217.2 482 134.4 500 Q 144.4 417 256 334 Z" id="r-ao-choang" data-region="ao-choang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 256 334 L 344 334 Q 447.8 417 457.8 500 Q 378.9 482 300 500 Q 221.1 482 142.2 500 Q 152.2 417 256 334 Z" id="r-ao-choang" data-region="ao-choang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 380 440 C 470 440 485 350 445 318 C 434 310 420 322 428 334 C 452 366 440 418 380 418 Z" id="r-duoi" data-region="duoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="410" rx="90" ry="75" id="r-than" data-region="than" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="425" rx="52" ry="48" id="r-bung" data-region="bung" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
@@ -31,8 +31,6 @@
 <ellipse cx="300" cy="282" rx="32" ry="22" id="r-mom" data-region="mom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="292,258 308,258 300,267" id="r-mui" data-region="mui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 250 282 L 205 274 M 250 292 L 205 296 M 350 282 L 395 274 M 350 292 L 395 296" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-<ellipse cx="222" cy="402" rx="22" ry="42" transform="rotate(28 222 402)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="378" cy="402" rx="22" ry="42" transform="rotate(-28 378 402)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 248 239 Q 256 219 284 225 Q 300 233 316 225 Q 344 219 352 239 Q 348 263 316 261 Q 300 253 284 261 Q 252 263 248 239 Z" id="r-mat-na" data-region="mat-na" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><circle cx="274" cy="245" r="8" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="326" cy="245" r="8" fill="#1B2A38"/></g>

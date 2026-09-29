@@ -23,8 +23,6 @@
 <ellipse cx="300" cy="258" rx="76" ry="76" id="r-dau" data-region="dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="286" rx="32" ry="22" id="r-mom" data-region="mom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="290,262 310,262 300,272" id="r-mui" data-region="mui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="222" cy="402" rx="22" ry="42" transform="rotate(28 222 402)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="378" cy="402" rx="22" ry="42" transform="rotate(-28 378 402)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><circle cx="274" cy="250" r="8" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="326" cy="250" r="8" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="276.5" cy="247" r="2.6" fill="#FFFFFF"/></g>
