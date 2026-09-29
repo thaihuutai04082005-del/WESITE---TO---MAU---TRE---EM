@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="khoi-xep-chu--do-domino">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-gac" data-region="tuong-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="0,0 220,0 0,260" id="r-mai-doc-trai" data-region="mai-doc-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="600,0 380,0 600,260" id="r-mai-doc-phai" data-region="mai-doc-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="90" rx="50" ry="50" id="r-cua-so-gac" data-region="cua-so-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,74 304.1,84.3 315.2,85.1 306.7,92.2 309.4,102.9 300,97 290.6,102.9 293.3,92.2 284.8,85.1 295.9,84.3" id="r-sao-cua-so-gac" data-region="sao-cua-so-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="380" width="110" height="70" rx="8" id="r-ruong-cu" data-region="ruong-cu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(-70 0) translate(300 480) scale(1) rotate(0) translate(-300 -480)">
+<rect x="170" y="360" width="120" height="120" rx="8" id="r-khoi-a" data-region="khoi-a" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="180" y="370" width="100" height="100" rx="6" id="r-khoi-a-o-trong" data-region="khoi-a-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="230" y="434" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="54" fill="#1B2A38" pointer-events="none">A</text></g>
+<rect x="310" y="360" width="120" height="120" rx="8" id="r-khoi-b" data-region="khoi-b" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="320" y="370" width="100" height="100" rx="6" id="r-khoi-b-o-trong" data-region="khoi-b-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="370" y="434" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="54" fill="#1B2A38" pointer-events="none">B</text></g>
+<rect x="235" y="230" width="130" height="130" rx="8" id="r-khoi-c" data-region="khoi-c" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="245" y="240" width="110" height="110" rx="6" id="r-khoi-c-o-trong" data-region="khoi-c-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="300" y="309" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="59" fill="#1B2A38" pointer-events="none"></text></g>
+<g class="deco" pointer-events="none"><circle cx="285.7" cy="284" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="314.3" cy="284" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="287.1" cy="282.4" r="1.4" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="315.7" cy="282.4" r="1.4" fill="#FFFFFF"/></g>
+<ellipse cx="274.7" cy="295" rx="6.1" ry="3.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="325.3" cy="295" rx="6.1" ry="3.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 291.8 300.5 Q 300 309.3 308.3 300.5" fill="none" stroke="#1B2A38" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<polygon points="380,480 406,480 406,400 380,400" id="r-domino-1" data-region="domino-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430,480 455.2,486.3 474.6,408.7 449.4,402.4" id="r-domino-2" data-region="domino-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="480,480 503,492.2 540.5,421.6 517.6,409.4" id="r-domino-3" data-region="domino-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="530,480 549.3,497.4 602.9,437.9 583.5,420.5" id="r-domino-4" data-region="domino-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="580,480 594.5,501.6 660.9,456.8 646.3,435.3" id="r-domino-5" data-region="domino-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

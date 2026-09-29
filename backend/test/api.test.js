@@ -88,7 +88,7 @@ test('Đăng ký: sai CAPTCHA bị từ chối, mật khẩu yếu bị từ ch�
 test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', async () => {
   const { token } = await register('bena01');
   const themes = await api('GET', '/themes');
-  assert.equal(themes.body.themes.length, 5);
+  assert.equal(themes.body.themes.length, 10);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
   const objects = await api('GET', `/themes/${themes.body.themes[0].slug}/objects`);
   assert.equal(objects.body.objects.length, 6);

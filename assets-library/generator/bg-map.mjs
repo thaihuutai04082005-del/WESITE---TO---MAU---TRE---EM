@@ -42,8 +42,29 @@ const M = {
   'cam-the-thao': { 'truot-van': ['playground', 'sunset'], 'quyen-anh': ['stage', 'day'], 'khuc-con-cau': ['iceRink', 'day'], 'truot-patin': ['river', 'sunset'], 'nhay-bat-lo-xo': ['playground', 'dusk'] },
 };
 
+// Bối cảnh đợt 2 (bg-map2.mjs) ghi [khung cảnh, 'màu ưu tiên|màu 2…'] — màu trời được chọn tự động
+// theo thứ tự ưu tiên sao cho cặp (khung cảnh, màu trời) không trùng tranh nào.
+import { M2 } from './bg-map2.mjs';
+
+const ALL_PALS = ['day', 'morning', 'sunset', 'dusk', 'mint', 'pink', 'lavender', 'peach', 'lemon', 'aqua', 'storm', 'night', 'deep', 'space', 'nebula', 'alien'];
+const RESOLVED = (() => {
+  const used = new Set(Object.values(M).flatMap((o) => Object.values(o).map((b) => b.join('/'))));
+  const out = {};
+  for (const [obj, vs] of Object.entries(M2)) {
+    out[obj] = {};
+    for (const [v, [setting, pref = '']] of Object.entries(vs)) {
+      const order = [...pref.split('|').filter(Boolean), ...ALL_PALS];
+      const pal = order.find((p) => !used.has(`${setting}/${p}`));
+      if (!pal) throw new Error(`Hết màu trời cho khung cảnh ${setting} (${obj}--${v})`);
+      used.add(`${setting}/${pal}`);
+      out[obj][v] = [setting, pal];
+    }
+  }
+  return out;
+})();
+
 export function bgFor(objSlug, variantSlug) {
-  return M[objSlug]?.[variantSlug] || null;
+  return M[objSlug]?.[variantSlug] || RESOLVED[objSlug]?.[variantSlug] || null;
 }
 
 /** Kiểm tra: mọi tranh đều có bối cảnh và không cặp (khung cảnh, màu trời) nào trùng. */

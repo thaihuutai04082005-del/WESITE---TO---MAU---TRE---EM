@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="sao-choi--ve-nha-buoi-toi">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="20" y="330" width="120" height="140" rx="4" id="r-nha-mai-1" data-region="nha-mai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="10,336 80,270 150,336" id="r-mai-1" data-region="mai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="460" y="350" width="120" height="120" rx="4" id="r-nha-mai-2" data-region="nha-mai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="450,356 520,290 590,356" id="r-mai-2" data-region="mai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="470" width="600" height="130" rx="0" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float">
+<path d="M 330 200 Q 200 250 70 460 Q 170 360 300 330 Z" id="r-duoi-sao-choi" data-region="duoi-sao-choi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 330 230 Q 230 290 150 450 Q 240 360 320 310 Z" id="r-duoi-sao-choi-2" data-region="duoi-sao-choi-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="370" cy="250" rx="90" ry="90" id="r-dau-sao-choi" data-region="dau-sao-choi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="351.2" cy="246" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="392.8" cy="246" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="353.2" cy="243.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="394.8" cy="243.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="335.2" cy="262" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="408.8" cy="262" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 360 270 Q 372 282.8 384 270" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 470 340 Q 470 310 490 310" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="448" y="340" width="44" height="60" rx="10" id="r-den-long-tay" data-region="den-long-tay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="444" y="334" width="52" height="12" rx="4" id="r-nap-den-long" data-region="nap-den-long" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="444" y="396" width="52" height="10" rx="4" id="r-day-den-long" data-region="day-den-long" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

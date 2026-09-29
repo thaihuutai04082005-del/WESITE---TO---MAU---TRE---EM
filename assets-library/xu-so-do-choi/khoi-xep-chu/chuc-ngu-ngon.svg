@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="khoi-xep-chu--chuc-ngu-ngon">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-ngu" data-region="tuong-ngu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="60" y="60" width="130" height="130" rx="10" id="r-cua-so-ngu" data-region="cua-so-ngu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="125,109 129.1,119.3 140.2,120.1 131.7,127.2 134.4,137.9 125,132 115.6,137.9 118.3,127.2 109.8,120.1 120.9,119.3" id="r-sao-cua-so" data-region="sao-cua-so" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="520" rx="200" ry="40" id="r-tham-tron" data-region="tham-tron" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="110" cy="100" rx="36" ry="36" id="r-trang-tron" data-region="trang-tron" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="99.2" cy="92.8" rx="6.5" ry="6.5" id="r-ho-trang-nho" data-region="ho-trang-nho" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="170" y="360" width="120" height="120" rx="8" id="r-khoi-a" data-region="khoi-a" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="180" y="370" width="100" height="100" rx="6" id="r-khoi-a-o-trong" data-region="khoi-a-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="230" y="434" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="54" fill="#1B2A38" pointer-events="none">A</text></g>
+<rect x="310" y="360" width="120" height="120" rx="8" id="r-khoi-b" data-region="khoi-b" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="320" y="370" width="100" height="100" rx="6" id="r-khoi-b-o-trong" data-region="khoi-b-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="370" y="434" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="54" fill="#1B2A38" pointer-events="none">B</text></g>
+<rect x="235" y="230" width="130" height="130" rx="8" id="r-khoi-c" data-region="khoi-c" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="245" y="240" width="110" height="110" rx="6" id="r-khoi-c-o-trong" data-region="khoi-c-o-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="300" y="309" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="59" fill="#1B2A38" pointer-events="none"></text></g>
+<g class="deco" pointer-events="none"><path d="M 280.2 282.9 Q 285.7 288.4 291.2 282.9" fill="none" stroke="#1B2A38" stroke-width="2.9250000000000003" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 308.8 282.9 Q 314.3 288.4 319.8 282.9" fill="none" stroke="#1B2A38" stroke-width="2.9250000000000003" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="274.7" cy="295" rx="6.1" ry="3.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="325.3" cy="295" rx="6.1" ry="3.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="302.7" rx="2.8" ry="3.3" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><text x="370" y="222" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="40" fill="#1B2A38" pointer-events="none">Z<tspan font-size="30" dy="-18">z</tspan><tspan font-size="22" dy="-14">z</tspan></text></g>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>
