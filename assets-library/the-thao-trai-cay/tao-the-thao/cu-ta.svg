@@ -2,8 +2,16 @@
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-nha-thi-dau" data-region="tuong-nha-thi-dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<rect x="220" y="50" width="160" height="70" rx="8" id="r-bang-ti-so" data-region="bang-ti-so" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 0 300 L 600 300" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 0 40 Q 300 110 600 40" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="20,47.3 60,47.3 40,87.3" id="r-co-nha-thi-dau-1" data-region="co-nha-thi-dau-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="94,59.7 134,59.7 114,99.7" id="r-co-nha-thi-dau-2" data-region="co-nha-thi-dau-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="168,69.2 208,69.2 188,109.2" id="r-co-nha-thi-dau-3" data-region="co-nha-thi-dau-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="242,74.3 282,74.3 262,114.3" id="r-co-nha-thi-dau-4" data-region="co-nha-thi-dau-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="316,74.4 356,74.4 336,114.4" id="r-co-nha-thi-dau-5" data-region="co-nha-thi-dau-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="390,69.4 430,69.4 410,109.4" id="r-co-nha-thi-dau-6" data-region="co-nha-thi-dau-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="464,60 504,60 484,100" id="r-co-nha-thi-dau-7" data-region="co-nha-thi-dau-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="538,47.6 578,47.6 558,87.6" id="r-co-nha-thi-dau-8" data-region="co-nha-thi-dau-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float" transform="translate(0 30) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">

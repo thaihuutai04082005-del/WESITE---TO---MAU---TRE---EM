@@ -762,7 +762,8 @@ export function fencing(c) {
   return [
     bar('kiem-dau', x, y, x + 150, y - 110, 6, '#DDE2E8'),
     C('chuoi-kiem-dau', x, y, 14, '#BFC8D0'),
-    R('mat-na-dau-kiem', fx - 52 * s, fy - 34 * s, 104 * s, 80 * s, 30 * s, '#5D6D7E'),
+    R('mat-na-dau-kiem', fx - 52 * s, fy - 34 * s, 104 * s, 80 * s, 30 * s, '#DDE2E8'),
+    line(`M ${pt(fx - 30 * s, fy - 30 * s)} L ${pt(fx - 30 * s, fy + 42 * s)} M ${pt(fx, fy - 34 * s)} L ${pt(fx, fy + 46 * s)} M ${pt(fx + 30 * s, fy - 30 * s)} L ${pt(fx + 30 * s, fy + 42 * s)} M ${pt(fx - 50 * s, fy - 6 * s)} L ${pt(fx + 50 * s, fy - 6 * s)} M ${pt(fx - 48 * s, fy + 20 * s)} L ${pt(fx + 48 * s, fy + 20 * s)}`, 2),
   ];
 }
 

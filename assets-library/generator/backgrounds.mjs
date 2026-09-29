@@ -91,7 +91,19 @@ export const SETTINGS = {
   library: () => ({ ground: G.floor('#D7B37A'), far: [R('tuong-thu-vien', 0, 0, 600, 450, 0, '#EFE6D8'), R('ke-1', 0, 80, 130, 370, 4, '#A0673A'), R('ke-2', 470, 80, 130, 370, 4, '#A0673A'), ...[0, 1, 2].flatMap((r) => [R(`sach-trai-${r}`, 10, 100 + r * 110, 110, 80, 2, ['#FF7AA2', '#4FA3E0', '#FFD54F'][r]), R(`sach-phai-${r}`, 480, 100 + r * 110, 110, 80, 2, ['#4CD787', '#FF9F43', '#7D5FFF'][r])])] }),
   bedroom: () => ({ ground: G.floor('#B39DDB'), far: [R('tuong-ngu', 0, 0, 600, 450, 0, '#3E3B6E'), R('cua-so-ngu', 60, 60, 130, 130, 10, '#2C3E74'), star('sao-cua-so', 125, 125, 16, 7, '#FFE066'), E('tham-tron', 300, 520, 200, 40, '#FFB3C1')] }),
   workshop: () => ({ ground: G.floor('#C8A26B'), far: [R('bang-dung-cu', 0, 0, 600, 450, 0, '#D7CCC8'), R('ban-lam-viec', 0, 360, 600, 22, 4, '#8B5A2B'), R('hop-dung-cu', 480, 320, 90, 40, 6, '#FF5F5F'), line('M 40 80 L 40 160 M 80 70 L 80 150 M 120 90 L 120 170 M 480 80 L 520 160 M 540 80 L 540 160', 6)] }),
-  gym: () => ({ ground: G.floor('#E0B070'), far: [R('tuong-nha-thi-dau', 0, 0, 600, 450, 0, '#E3F2FD'), R('bang-ti-so', 220, 50, 160, 70, 8, '#2F3640'), line('M 0 300 L 600 300', 5)] }),
+  gym: () => ({
+    ground: G.floor('#E0B070'),
+    far: [
+      R('tuong-nha-thi-dau', 0, 0, 600, 450, 0, '#E3F2FD'),
+      line('M 0 300 L 600 300', 5),
+      line('M 0 40 Q 300 110 600 40', 3),
+      ...['#FF5F7E', '#FFD54F', '#4FA3E0', '#4CD787', '#7D5FFF', '#FF9F43', '#FF5F7E', '#FFD54F'].map((col, k) => {
+        const x = 40 + k * 74;
+        const y = 40 + 70 * Math.sin((x / 600) * Math.PI) * 0.5;
+        return P(`co-nha-thi-dau-${k + 1}`, [[x - 20, y], [x + 20, y], [x, y + 40]], col);
+      }),
+    ],
+  }),
   stationInside: () => ({ ground: G.floor('#90A4AE'), far: [R('tuong-tram', 0, 0, 600, 450, 0, '#CFD8DC'), C('cua-so-tron-tram', 470, 150, 80, '#243B6B'), star('sao-cua-so-tram', 460, 140, 14, 6, '#FFE066'), R('bang-dieu-khien', 20, 300, 160, 150, 8, '#607D8B'), C('nut-1', 60, 340, 10, '#FF5F5F'), C('nut-2', 100, 340, 10, '#4CD787'), C('nut-3', 140, 340, 10, '#FFD54F')] }),
   // Đêm & vũ trụ
   nightCity: () => ({ ground: G.flat('#37474F'), far: [...building('toa-dem-1', 0, 120, 280, '#263238', '#FFE066'), ...building('toa-dem-2', 460, 140, 320, '#37474F', '#FFE066')] }),
