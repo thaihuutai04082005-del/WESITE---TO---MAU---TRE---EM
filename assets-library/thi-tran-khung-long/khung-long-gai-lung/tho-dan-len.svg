@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="khung-long-gai-lung--tho-dan-len">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="95" cy="110" rx="44" ry="44" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 466.5 93.8 Q 450 93.8 454.4 80 Q 451.1 60.8 474.8 60.8 Q 480.3 42.6 500.6 47 Q 514.9 31.6 531.4 49.8 Q 555.6 45.9 552.3 70.1 Q 562.2 93.8 543.5 93.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
+
 <rect x="30" y="390" width="90" height="80" rx="4" id="r-nha-tuyet-1" data-region="nha-tuyet-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="20,395 75,340 130,395" id="r-mai-tuyet-1" data-region="mai-tuyet-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="480" y="380" width="90" height="90" rx="4" id="r-nha-tuyet-2" data-region="nha-tuyet-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

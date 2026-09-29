@@ -58,8 +58,21 @@ export function deco(markup) {
   return { kind: 'deco', markup };
 }
 
-export const line = (d, w = 4) =>
-  deco(`<path d="${d}" fill="none" stroke="#1B2A38" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`);
+export const line = (d, w = 4) => ({
+  ...deco(`<path d="${d}" fill="none" stroke="#1B2A38" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`),
+  d,
+});
+
+/**
+ * Vạch trang trí "mềm" (vạch tốc độ, chuyển động, gió): tách từng nét riêng; nét nào đè lên hình khác
+ * thì build.mjs tự bỏ (chỉ giữ nét nằm ở chỗ trống).
+ */
+export const softLines = (d, w = 4) =>
+  d
+    .split(/(?=M )/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => ({ ...line(part, w), soft: true }));
 
 export const dot = (x, y, r) => deco(`<circle cx="${f(x)}" cy="${f(y)}" r="${f(r)}" fill="#1B2A38"/>`);
 

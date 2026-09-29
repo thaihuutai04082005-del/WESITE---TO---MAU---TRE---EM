@@ -3,7 +3,7 @@
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="564,74 566.4,80.8 573.5,80.9 567.8,85.2 569.9,92.1 564,88 558.1,92.1 560.2,85.2 554.5,80.9 561.6,80.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
 <ellipse cx="150" cy="170" rx="130" ry="34" transform="rotate(-25 150 170)" id="r-canh-thien-ha-1" data-region="canh-thien-ha-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="150" cy="170" rx="90" ry="22" transform="rotate(20 150 170)" id="r-canh-thien-ha-2" data-region="canh-thien-ha-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="150" cy="170" rx="20" ry="20" id="r-loi-thien-ha" data-region="loi-thien-ha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

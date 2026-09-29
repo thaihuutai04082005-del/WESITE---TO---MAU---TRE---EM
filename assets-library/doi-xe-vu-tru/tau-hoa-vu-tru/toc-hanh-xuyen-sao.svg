@@ -43,6 +43,8 @@
 <ellipse cx="395" cy="448" rx="14" ry="14" id="r-truc-3" data-region="truc-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 100 300 L 30 300 M 90 350 L 10 350 M 100 400 L 40 400" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 100 300 L 30 300" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 90 350 L 10 350" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 100 400 L 40 400" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 </svg>

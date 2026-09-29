@@ -33,7 +33,14 @@ const G = {
 };
 
 // ---------- Trang trí bầu trời theo màu trời ----------
+/** Trang trí bầu trời (mây, mặt trời, trăng): build.mjs bỏ đi nếu chạm vào hình/dây khác. Sao thì được dời. */
 function skyDecor(pal, side = 1) {
+  const items = skyDecorItems(pal, side);
+  const group = `troi-${pal}`;
+  return items.map((it) => (it.movable ? it : Object.assign(it, { optional: true, group: it.id.startsWith('tia-nang') || it.id === 'mat-troi' ? group : it.id })));
+}
+
+function skyDecorItems(pal, side = 1) {
   const x = side > 0 ? 505 : 95;
   if (pal === 'day') return [star('tia-nang', x, 88, 60, 42, '#FFB74D', 12), C('mat-troi', x, 88, 36, '#FFD54F'), cloud('may-1', 600 - x, 90, 0.6)];
   if (pal === 'morning') return [C('mat-troi', x, 110, 44, '#FFB74D'), cloud('may-1', 600 - x, 80, 0.55, '#FFFFFF')];
