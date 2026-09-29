@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="cay-thong--tuyet-phep-mau">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="60,47 63.5,55.1 72.4,56 65.7,61.9 67.6,70.5 60,66 52.4,70.5 54.3,61.9 47.6,56 56.5,55.1" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="60,35 63.5,43.1 72.4,44 65.7,49.9 67.6,58.5 60,54 52.4,58.5 54.3,49.9 47.6,44 56.5,43.1" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="170,111 172.4,116.8 178.6,117.2 173.8,121.2 175.3,127.3 170,124 164.7,127.3 166.2,121.2 161.4,117.2 167.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="270,27 273.5,35.1 282.4,36 275.7,41.9 277.6,50.5 270,46 262.4,50.5 264.3,41.9 257.6,36 266.5,35.1" id="r-sao-3" data-region="sao-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="430,81 432.4,86.8 438.6,87.2 433.8,91.2 435.3,97.3 430,94 424.7,97.3 426.2,91.2 421.4,87.2 427.6,86.8" id="r-sao-4" data-region="sao-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

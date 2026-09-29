@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="khom-tre--cay-cau-tre">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="84,24 86.9,32 95.4,32.3 88.8,37.5 91.1,45.7 84,41 76.9,45.7 79.2,37.5 72.6,32.3 81.1,32" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="510,100 512.4,106.8 519.5,106.9 513.8,111.2 515.9,118.1 510,114 504.1,118.1 506.2,111.2 500.5,106.9 507.6,106.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="95" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 460 Q 150 430 300 460 Q 450 490 600 450 L 600 490 Q 450 520 300 490 Q 150 460 0 490 Z" id="r-dong-song" data-region="dong-song" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

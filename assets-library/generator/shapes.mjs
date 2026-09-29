@@ -81,6 +81,11 @@ export function star(id, cx, cy, rOuter, rInner, color, n = 5, rot = -90) {
   return P(id, pts, color);
 }
 
+/** Ngôi sao trang trí trên trời: build.mjs tự dời sang chỗ trống nếu chạm vào hình khác. */
+export function skyStar(id, cx, cy, rOuter, rInner, color, n = 5, rot = -90) {
+  return { ...star(id, cx, cy, rOuter, rInner, color, n, rot), movable: { cx, cy, rOuter, rInner, n, rot } };
+}
+
 export function heart(id, x, y, s, color) {
   const d = `M ${f(x)} ${f(y + 18 * s)} C ${f(x - 30 * s)} ${f(y - 2 * s)} ${f(x - 20 * s)} ${f(y - 24 * s)} ${f(x)} ${f(
     y - 10 * s,
