@@ -2,7 +2,7 @@
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-nha-thi-dau" data-region="tuong-nha-thi-dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 0 300 L 600 300" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="0" y="290" width="600" height="24" rx="0" id="r-soc-tuong-nha-thi-dau" data-region="soc-tuong-nha-thi-dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 0 40 Q 300 110 600 40" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="20,47.3 60,47.3 40,87.3" id="r-co-nha-thi-dau-1" data-region="co-nha-thi-dau-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="94,59.7 134,59.7 114,99.7" id="r-co-nha-thi-dau-2" data-region="co-nha-thi-dau-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

@@ -491,7 +491,11 @@ export function rails(y = 486) {
 }
 
 export function starStreaks() {
-  return [line('M 60 90 L 180 110 M 420 60 L 560 80 M 40 240 L 150 250 M 460 250 L 580 262 M 250 40 L 340 52', 4), ...[[180, 110], [560, 80], [150, 250], [580, 262], [340, 52]].map(([x, y], k) => star(`sao-bang-${k + 1}`, x, y, 12, 5, '#FFE066'))];
+  // Sao băng: đuôi sáng (vùng tô) + ngôi sao ở đầu.
+  return [[90, 110], [440, 70], [520, 250], [120, 260]].flatMap(([x, y], k) => [
+    P(`duoi-sao-bang-${k + 1}`, [[x, y - 7], [x - 110, y - 22], [x - 116, y - 14], [x, y + 7]], '#FFF3B0'),
+    star(`sao-bang-${k + 1}`, x, y, 14, 6, '#FFE066'),
+  ]);
 }
 
 export function crates(x, y) {
@@ -504,7 +508,7 @@ export function wormhole(x, y) {
 
 export function constellation() {
   const pts = [[80, 80], [150, 130], [230, 90], [300, 150], [380, 100], [460, 150], [530, 90]];
-  return [line(pts.map(([x, y], k) => `${k ? 'L' : 'M'} ${x} ${y}`).join(' '), 2), ...pts.map(([x, y], k) => star(`chom-sao-${k + 1}`, x, y, 14, 6, '#FFE066'))];
+  return pts.map(([x, y], k) => star(`chom-sao-${k + 1}`, x, y, 16, 7, '#FFE066'));
 }
 
 export function boosters(y1, xs) {
@@ -516,7 +520,7 @@ export function loopTrail() {
 }
 
 export function fuelHose(x0, y0, x1, y1) {
-  return [line(`M ${x0} ${y0} Q ${(x0 + x1) / 2} ${y1 + 80} ${x1} ${y1}`, 8), C('dau-voi-xang', x1, y1, 12, '#FFC94D')];
+  return [bar('ong-tiep-nhien-lieu', x0, y0, x1, y1, 14, '#FFC94D'), C('dau-voi-xang', x1, y1, 14, '#FF9F43')];
 }
 
 export function runwayLights() {
@@ -871,7 +875,7 @@ export function golf(c) {
 
 export function karate(c) {
   const { x, y, s } = c.face;
-  return [R('bang-dau-karate', x - 64 * s, y - 50 * s, 128 * s, 18 * s, 6 * s, '#FF5F5F'), P('duoi-bang-dau', [[x + 60 * s, y - 44 * s], [x + 100 * s, y - 70 * s], [x + 96 * s, y - 30 * s]], '#FF5F5F'), R('dai-karate', c.left, (c.bb[1] + c.bb[3]) / 2 + 30, c.right - c.left, 18, 6, '#2F3640')];
+  return [R('bang-dau-karate', x - 64 * s, y - 64 * s, 128 * s, 18 * s, 6 * s, '#FF5F5F'), P('duoi-bang-dau', [[x + 60 * s, y - 58 * s], [x + 100 * s, y - 84 * s], [x + 96 * s, y - 44 * s]], '#FF5F5F'), R('dai-karate', c.cx - 70, c.bb[3] - 44, 140, 16, 6, '#FFFFFF'), P('nut-dai-karate', [[c.cx - 6, c.bb[3] - 36], [c.cx - 26, c.bb[3] - 6], [c.cx - 10, c.bb[3] - 8], [c.cx + 10, c.bb[3] - 8], [c.cx + 26, c.bb[3] - 6], [c.cx + 6, c.bb[3] - 36]], '#FFFFFF')];
 }
 
 export function brokenBoard(x, y) {

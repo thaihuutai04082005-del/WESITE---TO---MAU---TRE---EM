@@ -35,16 +35,13 @@
 <g class="deco" pointer-events="none"><circle cx="320" cy="225.9" r="1.8" fill="#FFFFFF"/></g>
 <ellipse cx="267.8" cy="242" rx="7.7" ry="4.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="332.2" cy="242" rx="7.7" ry="4.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 410 331 Q 480 200 470 120" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
-<ellipse cx="520" cy="200" rx="12" ry="7" transform="rotate(30 520 200)" id="r-la-bay-1" data-region="la-bay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="90" cy="150" rx="12" ry="7" transform="rotate(-20 90 150)" id="r-la-bay-2" data-region="la-bay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="470,40 526,110 470,180 414,110" id="r-dieu" data-region="dieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 470 40 L 470 180 M 414 110 L 526 110" fill="none" stroke="#1B2A38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g class="deco" pointer-events="none"><path d="M 470 180 Q 440 240 480 280" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-<rect x="450" y="220" width="20" height="12" rx="4" id="r-no-duoi-dieu-1" data-region="no-duoi-dieu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<rect x="464" y="256" width="20" height="12" rx="4" id="r-no-duoi-dieu-2" data-region="no-duoi-dieu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 520 222 Q 530 190 500 150" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="470,20 526,90 470,160 414,90" id="r-dieu" data-region="dieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 470 20 L 470 160 M 414 90 L 526 90" fill="none" stroke="#1B2A38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 470 160 Q 440 220 480 260" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="450" y="200" width="20" height="12" rx="4" id="r-no-duoi-dieu-1" data-region="no-duoi-dieu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="464" y="236" width="20" height="12" rx="4" id="r-no-duoi-dieu-2" data-region="no-duoi-dieu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 </svg>

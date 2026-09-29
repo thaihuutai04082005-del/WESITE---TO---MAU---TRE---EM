@@ -4,7 +4,9 @@
 <polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="510,100 512.4,106.8 519.5,106.9 513.8,111.2 515.9,118.1 510,114 504.1,118.1 506.2,111.2 500.5,106.9 507.6,106.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 300 150 Q 420 120 440 200 Q 450 280 330 270 Q 230 250 250 180 Q 270 140 330 160 Q 380 180 360 220 Q 340 240 310 220 Z" id="r-xoan-thien-ha" data-region="xoan-thien-ha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="170" rx="130" ry="34" transform="rotate(-25 150 170)" id="r-canh-thien-ha-1" data-region="canh-thien-ha-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="170" rx="90" ry="22" transform="rotate(20 150 170)" id="r-canh-thien-ha-2" data-region="canh-thien-ha-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="170" rx="20" ry="20" id="r-loi-thien-ha" data-region="loi-thien-ha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="505" cy="115" rx="50" ry="50" id="r-hanh-tinh" data-region="hanh-tinh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="488" cy="100" rx="12" ry="12" id="r-ho-hanh-tinh-1" data-region="ho-hanh-tinh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="522" cy="132" rx="8" ry="8" id="r-ho-hanh-tinh-2" data-region="ho-hanh-tinh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

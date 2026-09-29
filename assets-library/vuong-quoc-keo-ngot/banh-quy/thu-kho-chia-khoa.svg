@@ -4,7 +4,12 @@
 <rect x="0" y="0" width="600" height="450" rx="0" id="r-bang-dung-cu" data-region="bang-dung-cu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="0" y="360" width="600" height="22" rx="4" id="r-ban-lam-viec" data-region="ban-lam-viec" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="480" y="320" width="90" height="40" rx="6" id="r-hop-dung-cu" data-region="hop-dung-cu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 40 80 L 40 160 M 80 70 L 80 150 M 120 90 L 120 170 M 480 80 L 520 160 M 540 80 L 540 160" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="90" cy="120" rx="44" ry="44" id="r-dong-ho-xuong" data-region="dong-ho-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 90 120 L 90 92 M 90 120 L 110 128" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="430" y="150" width="150" height="14" rx="4" id="r-ke-go-xuong" data-region="ke-go-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="446" y="108" width="34" height="42" rx="6" id="r-hu-1" data-region="hu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="494" y="118" width="30" height="32" rx="6" id="r-hu-2" data-region="hu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="536" y="100" width="32" height="50" rx="6" id="r-hu-3" data-region="hu-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float">

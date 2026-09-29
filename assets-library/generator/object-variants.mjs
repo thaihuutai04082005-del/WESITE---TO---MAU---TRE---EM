@@ -64,8 +64,8 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5F5F'), fg: [...cloudsLow()] }),
     }),
     V('tai-bay-luon', 'Tai Bay Lượn', 'Ear Glider', {
-      scene: ['clouds', 'sun', 'shadow', 'motion'], transform: { ty: -60, scale: 0.9, px: 300, py: 400 },
-      acc: (c) => ({ preface: A.mask(c, '#7D5FFF'), front: [line('M 110 200 Q 130 180 150 200 M 450 200 Q 470 180 490 200', 4)] }),
+      scene: ['clouds', 'sun', 'motion'], transform: { ty: -60, scale: 0.9, px: 300, py: 400 },
+      acc: (c) => ({ preface: A.mask(c, '#7D5FFF') }),
     }),
     V('bong-bong-bao-ve', 'Bong Bóng Bảo Vệ', 'Bubble Shield', {
       scene: ['sun', 'flowers'], transform: { scale: 0.88, px: 300, py: 470 },
@@ -108,7 +108,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5F5F'), preface: A.mask(c, '#FF5F5F'), back: X.brickWall(110, 470) }),
     }),
     V('nhay-sieu-cao', 'Nhảy Siêu Cao', 'Super Jump', {
-      scene: ['clouds', 'motion', 'shadow'], transform: { ty: -120, scale: 0.8, px: 300, py: 400 },
+      scene: ['clouds', 'motion'], transform: { ty: -120, scale: 0.8, px: 300, py: 400 },
       acc: (c) => ({ behind: A.cape(c, '#4CD787'), mid: [E('lo-xo-1', 300, 480, 60, 12, '#BFC8D0')] }),
     }),
     V('ria-radar', 'Ria Radar', 'Whisker Radar', {
@@ -134,7 +134,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#4FA3E0'), preface: A.mask(c, '#2B7CC4'), front: X.boneShield(c) }),
     }),
     V('chi-huy-doi', 'Chỉ Huy Đội', 'Team Commander', {
-      scene: ['clouds', 'flowers'],
+      scene: [],
       acc: (c) => ({ behind: A.cape(c, '#7D5FFF'), front: [...X.headset(c), ...X.walkieTalkie(c.right + 24, c.bb[3] - 70), star('sao-chi-huy', c.cx, c.bb[3] - 90, 24, 10, '#FFD54F')] }),
     }),
     V('nhay-du-cuu-ho', 'Nhảy Dù Cứu Hộ', 'Parachute Rescue', {
@@ -192,7 +192,7 @@ const KEO = {
   'banh-quy': [
     V('linh-gac', 'Lính Gác', 'Royal Guard', { scene: ['sun', 'candyCanes'], acc: (c) => ({ front: [...A.guardHat(c), ...A.flagPole(c, 1)] }) }),
     V('thu-kho-chia-khoa', 'Thủ Kho Chìa Khóa', 'Key Keeper', { scene: ['clouds'], acc: (c) => ({ front: [...A.sportCap(c), ...X.bigKey(c.right + 40, c.bb[3] - 100)] }) }),
-    V('thu-thu-hoang-gia', 'Thủ Thư Hoàng Gia', 'Royal Librarian', { scene: ['clouds', 'flowers'], acc: (c) => ({ preface: X.glasses(c), front: X.openBook(c.cx, c.bb[3] - 40) }) }),
+    V('thu-thu-hoang-gia', 'Thủ Thư Hoàng Gia', 'Royal Librarian', { scene: [], acc: (c) => ({ preface: X.glasses(c), front: X.openBook(c.cx, c.bb[3] - 40) }) }),
     V('nguoi-gac-chuong', 'Người Gác Chuông', 'Bell Keeper', { scene: ['clouds'], transform: { tx: -60, scale: 0.85, px: 300, py: 480 }, acc: () => ({ fg: X.bell(470, 250) }) }),
     V('xa-thu-cung-ten', 'Xạ Thủ Cung Tên', 'Archer', { scene: ['clouds'], transform: { tx: -40, px: 300, py: 480 }, acc: (c) => ({ front: [...A.safariHat(c), ...X.bowAndArrow(c.right + 20, (c.bb[1] + c.bb[3]) / 2)] }) }),
   ],
@@ -211,7 +211,7 @@ const SV = (slug, vi, en, opts) => V(slug, vi, en, { sky: 'space', ground: 'rock
 const XE = {
   'xe-dua': [
     SV('phan-luc', 'Phản Lực', 'Jet Boost', { scene: ['planet', 'speed'], transform: { ty: -30, rot: -4, px: 300, py: 440 }, acc: (c) => ({ behind: A.jetFlame(c) }) }),
-    SV('dua-vong-quanh-hanh-tinh', 'Đua Vòng Quanh Hành Tinh', 'Planet Lap', { transform: { ty: 20, scale: 0.8, rot: -6, px: 300, py: 480 }, acc: () => ({ back: [...X.bigPlanet(300, 200, 110, '#FF8A65'), line('M 60 260 Q 300 380 540 240', 4)] }) }),
+    SV('dua-vong-quanh-hanh-tinh', 'Đua Vòng Quanh Hành Tinh', 'Planet Lap', { transform: { ty: 20, scale: 0.8, rot: -6, px: 300, py: 480 }, acc: () => ({ back: X.bigPlanet(300, 200, 110, '#FF8A65') }) }),
     SV('dua-tren-duong-sao', 'Đua Trên Đường Sao', 'Star Road Race', { scene: ['planet'], transform: { ty: -30, scale: 0.9, px: 300, py: 440 }, acc: () => ({ mid: X.starRoad() }) }),
     SV('vuot-mua-thien-thach', 'Vượt Mưa Thiên Thạch', 'Meteor Shower Dash', { expr: 'surprised', transform: { rot: -6, px: 300, py: 440 }, acc: () => ({ fg: [...A.asteroid('thien-thach-1', 96, 150, 50), ...A.asteroid('thien-thach-2', 500, 110, 40), ...A.asteroid('thien-thach-3', 540, 290, 32), ...A.asteroid('thien-thach-4', 70, 320, 34)] }) }),
     SV('ve-dich-ngan-ha', 'Về Đích Ngân Hà', 'Galaxy Finish Line', { scene: ['confetti'], transform: { tx: -40, px: 300, py: 480 }, acc: () => ({ mid: X.finishFlag(470, 470) }) }),
@@ -240,8 +240,8 @@ const XE = {
   'may-bay-vu-tru': [
     SV('canh-ten-lua', 'Cánh Tên Lửa', 'Rocket Wings', { scene: ['planet'], transform: { ty: -40, px: 300, py: 400 }, acc: () => ({ front: X.boosters(352, [240, 420]) }) }),
     SV('bay-qua-vong-hanh-tinh', 'Bay Qua Vòng Hành Tinh', 'Through the Planet Ring', { transform: { ty: -20, scale: 0.85, px: 300, py: 330 }, acc: () => ({ back: X.bigPlanet(300, 300, 110, '#FF8A65', '#FFE0B5') }) }),
-    SV('nhao-lon-giua-sao', 'Nhào Lộn Giữa Sao', 'Star Loop', { scene: ['stars'], transform: { rot: -25, scale: 0.85, px: 330, py: 300 }, acc: () => ({ back: X.loopTrail() }) }),
-    SV('tiep-nhien-lieu', 'Tiếp Nhiên Liệu Ở Trạm', 'Station Refuel', { scene: ['station'], transform: { ty: -20, px: 300, py: 400 }, acc: () => ({ fg: X.fuelHose(240, 150, 300, 300) }) }),
+    SV('nhao-lon-giua-sao', 'Nhào Lộn Giữa Sao', 'Star Loop', { scene: ['stars'], transform: { rot: -25, scale: 0.85, px: 330, py: 300 }, acc: () => ({ fg: X.sparkles('vet-sao', [[110, 360, 14], [170, 250, 16], [260, 190, 12]], '#FFE066') }) }),
+    SV('tiep-nhien-lieu', 'Tiếp Nhiên Liệu Ở Trạm', 'Station Refuel', { scene: ['station'], transform: { ty: -20, px: 300, py: 400 }, acc: () => ({ fg: X.fuelHose(210, 150, 250, 330) }) }),
     SV('ha-canh-hanh-tinh-la', 'Hạ Cánh Hành Tinh Lạ', 'Alien Landing', { scene: ['planet', 'craters'], transform: { ty: 60, px: 300, py: 400 }, acc: () => ({ mid: X.runwayLights() }) }),
   ],
   'truc-thang': [
@@ -290,7 +290,7 @@ const KHUNG_LONG = {
     V('phi-cong', 'Phi Công', 'Pilot', { scene: ['clouds', 'sun'], transform: { ty: -30, px: 300, py: 400 }, acc: (c) => ({ front: [...X.pilotCap(c), ...X.scarf(c, '#FF5F5F')] }) }),
     V('nha-du-bao-thoi-tiet', 'Nhà Dự Báo Thời Tiết', 'Weather Reporter', { scene: ['rain'], acc: (c) => ({ front: X.umbrella(c.cx, c.bb[1] - 30) }) }),
     V('nhiep-anh-gia', 'Nhiếp Ảnh Gia', 'Photographer', { scene: ['sun', 'butterfly'], acc: (c) => ({ front: [...X.beret(c, '#2F3640'), ...X.camera(c.right + 20, hy(c) - 60)] }) }),
-    V('nguoi-lam-dieu', 'Người Làm Diều', 'Kite Maker', { scene: ['clouds', 'wind'], acc: (c) => ({ front: [line(`M ${c.right - 10} ${hy(c) - 40} Q 480 200 470 120`, 2.5)], fg: X.kite(470, 110) }) }),
+    V('nguoi-lam-dieu', 'Người Làm Diều', 'Kite Maker', { scene: ['clouds'], acc: () => ({ fg: [line('M 520 222 Q 530 190 500 150', 2.5), ...X.kite(470, 90)] }) }),
     V('cuu-ho-bo-bien', 'Cứu Hộ Bờ Biển', 'Lifeguard', { scene: ['sun'], ground: 'water', acc: (c) => ({ front: [...X.cap(c, '#FF5F5F', '#C0392B'), ...X.whistle(c), ...X.ringBuoy(c.right + 30, hy(c) - 20)] }) }),
   ],
   'khung-long-mao-ken': [

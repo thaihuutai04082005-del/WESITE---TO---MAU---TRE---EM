@@ -133,7 +133,7 @@ export function sceneParts(names, obj) {
     const petals = ['#FF7AA2', '#7D5FFF', '#FF9F43', '#4FA3E0'];
     [[70, 515], [150, 548], [455, 548], [535, 512]].forEach(([x, y], k) => mid.push(...smallFlower(`hoa-nho-${k + 1}`, x, y, petals[k])));
   }
-  if (has('shadow')) mid.push(E('bong-do', 300, 505, 100, 16, '#6FB36A'));
+  if (has('shadow')) mid.push(E('bong-do', 300, 505, 100, 16, '#B7C3CC'));
   if (has('snowman')) {
     mid.push(
       C('nguoi-tuyet-duoi', 80, 478, 38, '#FFFFFF'),

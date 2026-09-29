@@ -44,7 +44,7 @@
 <g class="deco" pointer-events="none"><path d="M 398.3 325.5 Q 405 332.7 411.8 325.5" fill="none" stroke="#1B2A38" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 240 150 Q 270 380 300 300" fill="none" stroke="#1B2A38" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
-<ellipse cx="300" cy="300" rx="12" ry="12" id="r-dau-voi-xang" data-region="dau-voi-xang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="203.2,151.5 243.2,331.5 256.8,328.5 216.8,148.5" id="r-ong-tiep-nhien-lieu" data-region="ong-tiep-nhien-lieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="250" cy="330" rx="14" ry="14" id="r-dau-voi-xang" data-region="dau-voi-xang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 </svg>

@@ -4,7 +4,6 @@
 <polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="510,100 512.4,106.8 519.5,106.9 513.8,111.2 515.9,118.1 510,114 504.1,118.1 506.2,111.2 500.5,106.9 507.6,106.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 120 150 L 180 110 L 250 140 L 320 90" fill="none" stroke="#1B2A38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
 <ellipse cx="90" cy="420" rx="6" ry="6" id="r-den-dom-1" data-region="den-dom-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="520" cy="400" rx="6" ry="6" id="r-den-dom-2" data-region="den-dom-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="70,73 74.7,83.5 86.2,84.7 77.6,92.5 80,103.8 70,98 60,103.8 62.4,92.5 53.8,84.7 65.3,83.5" id="r-sao-lap-lanh-1" data-region="sao-lap-lanh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

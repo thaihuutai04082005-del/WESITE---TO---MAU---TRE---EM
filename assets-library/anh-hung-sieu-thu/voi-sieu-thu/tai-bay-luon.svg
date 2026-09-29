@@ -7,7 +7,6 @@
 <path d="M 61 197.5 Q 40 197.5 45.6 180 Q 41.4 155.5 71.5 155.5 Q 78.5 132.4 104.4 138 Q 122.6 118.4 143.6 141.5 Q 174.4 136.6 170.2 167.4 Q 182.8 197.5 159 197.5 Z" id="r-may-cao-1" data-region="may-cao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 438 235 Q 420 235 424.8 220 Q 421.2 199 447 199 Q 453 179.2 475.2 184 Q 490.8 167.2 508.8 187 Q 535.2 182.8 531.6 209.2 Q 542.4 235 522 235 Z" id="r-may-cao-2" data-region="may-cao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 470 Q 60 430 120 460 Q 180 420 250 455 Q 320 420 390 455 Q 460 425 520 458 Q 570 435 600 450 L 600 600 L 0 600 Z" id="r-bien-may" data-region="bien-may" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="300" cy="505" rx="100" ry="16" id="r-bong-do" data-region="bong-do" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-bounce" transform="translate(0 -60) translate(300 400) scale(0.9) rotate(0) translate(-300 -400)">
 <ellipse cx="205" cy="250" rx="70" ry="85" transform="rotate(-10 205 250)" id="r-tai-trai" data-region="tai-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
@@ -29,7 +28,6 @@
 <ellipse cx="258.6" cy="254" rx="9.9" ry="6.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="341.4" cy="254" rx="9.9" ry="6.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 286.5 263 Q 300 277.4 313.5 263" fill="none" stroke="#1B2A38" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g class="deco" pointer-events="none"><path d="M 110 200 Q 130 180 150 200 M 450 200 Q 470 180 490 200" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
 <g class="deco" pointer-events="none"><path d="M 110 280 L 60 280 M 120 330 L 50 330 M 110 380 L 60 380 M 490 300 L 540 300 M 495 350 L 555 350" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
