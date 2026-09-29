@@ -8,7 +8,7 @@ export default function ThemeTile({ to, picture, title, subtitle, testId }) {
     <Link
       to={to}
       data-testid={testId}
-      className="group flex flex-col rounded-[22px] border border-[#E3F0FA] bg-white p-3 shadow-[0_6px_18px_rgba(43,155,244,0.10)] transition hover:-translate-y-1 hover:shadow-[0_12px_26px_rgba(43,155,244,0.18)] active:scale-[0.98]"
+      className="group flex flex-col rounded-[22px] border border-[#E3F0FA] bg-white p-2 shadow-[0_6px_18px_rgba(43,155,244,0.10)] transition hover:-translate-y-1 hover:shadow-[0_12px_26px_rgba(43,155,244,0.18)] active:scale-[0.98] sm:p-3"
     >
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-primary-light">
         {picture && (
@@ -17,8 +17,10 @@ export default function ThemeTile({ to, picture, title, subtitle, testId }) {
           </div>
         )}
       </div>
-      <div className="flex flex-1 flex-col px-1 pt-3">
-        <div className="font-display text-[17px] font-extrabold leading-snug text-[#17365D] md:text-lg">{title}</div>
+      <div className="flex flex-1 flex-col px-0.5 pt-2 sm:px-1 sm:pt-3">
+        <div data-one-line className="overflow-hidden whitespace-nowrap font-display tracking-tight sm:tracking-normal text-[17px] font-extrabold leading-snug text-[#17365D] md:text-lg" title={title}>
+          {title}
+        </div>
         <div className="mt-auto flex items-center justify-between gap-2 pt-2">
           <span className="flex items-center gap-1 whitespace-nowrap text-xs text-muted sm:gap-1.5 sm:text-sm">
             <Icon name="user" size={15} /> {subtitle}

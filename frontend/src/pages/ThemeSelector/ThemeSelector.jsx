@@ -1,5 +1,5 @@
 // Tầng 1: Chủ đề lớn.
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
@@ -26,6 +26,30 @@ function Sparkle({ className, color }) {
   );
 }
 
+/** Tên chủ đề luôn trên 1 hàng và cùng một cỡ chữ: lấy cỡ lớn nhất mà tên dài nhất vẫn vừa thẻ. */
+function useOneLineTitles(ref, deps) {
+  useLayoutEffect(() => {
+    const grid = ref.current;
+    if (!grid) return undefined;
+    const fit = () => {
+      const els = [...grid.querySelectorAll('[data-one-line]')];
+      if (!els.length) return;
+      els.forEach((el) => (el.style.fontSize = ''));
+      let size = parseFloat(getComputedStyle(els[0]).fontSize);
+      while (size > 9 && els.some((el) => el.scrollWidth > el.clientWidth)) {
+        size -= 0.5;
+        els.forEach((el) => (el.style.fontSize = `${size}px`));
+      }
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(grid);
+    document.fonts?.ready.then(fit);
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
+
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
@@ -34,13 +58,15 @@ export default function ThemeSelector() {
     api.get('/themes').then((r) => setThemes(r.themes));
   }, []);
   const badge = planBadgeText(plan, t, i18n.language);
+  const gridRef = useRef(null);
+  useOneLineTitles(gridRef, [themes, i18n.language]);
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-[#EEF7FF] to-[#F5FAFF]">
       <Cloud className="-left-10 top-40 w-56 opacity-70" />
       <Cloud className="-right-12 top-24 w-64 opacity-80" />
       <Cloud className="-left-16 bottom-4 w-72 opacity-70" />
       <Cloud className="-right-10 bottom-24 w-60 opacity-70" />
-      <div className="page relative lg:max-w-[1320px]">
+      <div className="page relative px-3 sm:px-4 lg:max-w-[1320px]">
         <div className="relative mb-6 flex flex-wrap items-center gap-3 md:gap-5">
           <div className="h-20 w-24 shrink-0 md:h-40 md:w-44">
             <PainterBear />
@@ -61,7 +87,7 @@ export default function ThemeSelector() {
           <Sparkle className="right-2 -top-2 hidden h-9 w-9 md:block" color="#FFD54F" />
           <Sparkle className="-right-6 top-8 hidden h-5 w-5 md:block" color="#7FC8C8" />
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 lg:gap-5">
+        <div ref={gridRef} className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-5 lg:gap-5">
           {(themes || []).map((th) => (
             <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
           ))}
