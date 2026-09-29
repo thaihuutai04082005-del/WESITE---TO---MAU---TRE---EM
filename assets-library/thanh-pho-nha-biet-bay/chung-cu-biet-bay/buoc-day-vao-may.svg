@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="chung-cu-biet-bay--buoc-day-vao-may">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 64 110 Q 40 110 46.4 90 Q 41.6 62 76 62 Q 84 35.6 113.6 42 Q 134.4 19.6 158.4 46 Q 193.6 40.4 188.8 75.6 Q 203.2 110 176 110 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 424 100 Q 400 100 406.4 80 Q 401.6 52 436 52 Q 444 25.6 473.6 32 Q 494.4 9.6 518.4 36 Q 553.6 30.4 548.8 65.6 Q 563.2 100 536 100 Z" id="r-may-mua-2" data-region="may-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 61 197.5 Q 40 197.5 45.6 180 Q 41.4 155.5 71.5 155.5 Q 78.5 132.4 104.4 138 Q 122.6 118.4 143.6 141.5 Q 174.4 136.6 170.2 167.4 Q 182.8 197.5 159 197.5 Z" id="r-may-cao-1" data-region="may-cao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 438 235 Q 420 235 424.8 220 Q 421.2 199 447 199 Q 453 179.2 475.2 184 Q 490.8 167.2 508.8 187 Q 535.2 182.8 531.6 209.2 Q 542.4 235 522 235 Z" id="r-may-cao-2" data-region="may-cao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 223 137.5 Q 190 137.5 198.8 110 Q 192.2 71.5 239.5 71.5 Q 250.5 35.2 291.2 44 Q 319.8 13.2 352.8 49.5 Q 401.2 41.8 394.6 90.2 Q 414.4 137.5 377 137.5 Z" id="r-may-buoc" data-region="may-buoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 300 135 L 300 285" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M 0 470 Q 60 430 120 460 Q 180 420 250 455 Q 320 420 390 455 Q 460 425 520 458 Q 570 435 600 450 L 600 600 L 0 600 Z" id="r-bien-may" data-region="bien-may" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(0 50) translate(300 480) scale(0.72) rotate(0) translate(-300 -480)">
+<rect x="190" y="150" width="220" height="322" rx="8" id="r-toa-nha" data-region="toa-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="180" y="135" width="240" height="22" rx="6" id="r-mai-nha" data-region="mai-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="212" y="180" width="46" height="44" rx="6" id="r-cua-so-1" data-region="cua-so-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="277" y="180" width="46" height="44" rx="6" id="r-cua-so-2" data-region="cua-so-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="342" y="180" width="46" height="44" rx="6" id="r-cua-so-3" data-region="cua-so-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="212" y="245" width="46" height="44" rx="6" id="r-cua-so-4" data-region="cua-so-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="277" y="245" width="46" height="44" rx="6" id="r-cua-so-5" data-region="cua-so-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="342" y="245" width="46" height="44" rx="6" id="r-cua-so-6" data-region="cua-so-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="212" y="310" width="46" height="44" rx="6" id="r-cua-so-7" data-region="cua-so-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="277" y="310" width="46" height="44" rx="6" id="r-cua-so-8" data-region="cua-so-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="342" y="310" width="46" height="44" rx="6" id="r-cua-so-9" data-region="cua-so-9" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="270" y="395" width="60" height="77" rx="6" id="r-cua-chinh" data-region="cua-chinh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="252,392 348,392 336,370 264,370" id="r-mai-hien" data-region="mai-hien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="172" cy="452" rx="28" ry="28" id="r-bui-cay-trai" data-region="bui-cay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="428" cy="452" rx="28" ry="28" id="r-bui-cay-phai" data-region="bui-cay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

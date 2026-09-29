@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="ngoi-sao--nhay-day">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 61 197.5 Q 40 197.5 45.6 180 Q 41.4 155.5 71.5 155.5 Q 78.5 132.4 104.4 138 Q 122.6 118.4 143.6 141.5 Q 174.4 136.6 170.2 167.4 Q 182.8 197.5 159 197.5 Z" id="r-may-cao-1" data-region="may-cao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 438 235 Q 420 235 424.8 220 Q 421.2 199 447 199 Q 453 179.2 475.2 184 Q 490.8 167.2 508.8 187 Q 535.2 182.8 531.6 209.2 Q 542.4 235 522 235 Z" id="r-may-cao-2" data-region="may-cao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 60 430 120 460 Q 180 420 250 455 Q 320 420 390 455 Q 460 425 520 458 Q 570 435 600 450 L 600 600 L 0 600 Z" id="r-bien-may" data-region="bien-may" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(0 -30) translate(300 420) scale(0.8) rotate(0) translate(-300 -420)">
+<ellipse cx="132.8" cy="302.8" rx="12" ry="36" transform="rotate(40 132.8 302.8)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="467.2" cy="302.8" rx="12" ry="36" transform="rotate(-40 467.2 302.8)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="256" y="425.6" width="16" height="46" rx="7" id="r-chan-trai" data-region="chan-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="328" y="425.6" width="16" height="46" rx="7" id="r-chan-phai" data-region="chan-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="256" cy="473.6" rx="22" ry="12" id="r-giay-trai" data-region="giay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="344" cy="473.6" rx="22" ry="12" id="r-giay-phai" data-region="giay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,120 351.7,228.8 471.2,244.4 383.7,327.2 405.8,445.6 300,388 194.2,445.6 216.3,327.2 128.8,244.4 248.3,228.8" id="r-than-ngoi-sao" data-region="than-ngoi-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="316" rx="70" ry="70" id="r-ma-sao-trong" data-region="ma-sao-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="275.3" cy="300" r="7.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="324.7" cy="300" r="7.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="277.7" cy="297.2" r="2.5" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="327.1" cy="297.2" r="2.5" fill="#FFFFFF"/></g>
+<ellipse cx="256.3" cy="319" rx="10.5" ry="6.7" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="343.7" cy="319" rx="10.5" ry="6.7" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 285.8 328.5 Q 300 343.7 314.3 328.5" fill="none" stroke="#1B2A38" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 108.8 282.8 Q 300 -30 491.2 282.8" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="96.8" y="278.8" width="24" height="60" rx="10" id="r-tay-cam-trai" data-region="tay-cam-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="479.2" y="278.8" width="24" height="60" rx="10" id="r-tay-cam-phai" data-region="tay-cam-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

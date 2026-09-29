@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="mat-trang--ke-chuyen-ru-ngu">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="90" cy="420" rx="6" ry="6" id="r-den-dom-1" data-region="den-dom-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="400" rx="6" ry="6" id="r-den-dom-2" data-region="den-dom-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float">
+<path d="M 330 130 C 150 140 100 330 170 420 C 240 500 380 490 440 410 C 330 440 250 380 250 290 C 250 215 280 160 330 130 Z" id="r-mat-trang-khuyet" data-region="mat-trang-khuyet" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="170" cy="250" rx="12" ry="12" id="r-ho-trang-1" data-region="ho-trang-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="210" cy="410" rx="10" ry="10" id="r-ho-trang-2" data-region="ho-trang-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="179.9" cy="300" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="212.1" cy="300" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="181.4" cy="298.1" r="1.6" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="213.7" cy="298.1" r="1.6" fill="#FFFFFF"/></g>
+<ellipse cx="167.5" cy="312.4" rx="6.8" ry="4.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="224.5" cy="312.4" rx="6.8" ry="4.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 186.7 318.6 Q 196 328.5 205.3 318.6" fill="none" stroke="#1B2A38" stroke-width="3.48" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 380 410 Q 380 380 400 380" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="358" y="410" width="44" height="60" rx="10" id="r-den-long-tay" data-region="den-long-tay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="354" y="404" width="52" height="12" rx="4" id="r-nap-den-long" data-region="nap-den-long" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="354" y="466" width="52" height="10" rx="4" id="r-day-den-long" data-region="day-den-long" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<ellipse cx="480" cy="150" rx="11" ry="8" transform="rotate(-20 480 150)" id="r-not-ru-1" data-region="not-ru-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 490 148 L 490 110 L 506 120" fill="none" stroke="#1B2A38" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="520" cy="240" rx="11" ry="8" transform="rotate(-20 520 240)" id="r-not-ru-2" data-region="not-ru-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 530 238 L 530 200 L 546 210" fill="none" stroke="#1B2A38" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="nha-tuyet--bong-tuyet-nang-nha">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="505" cy="110" rx="44" ry="44" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 56.5 93.8 Q 40 93.8 44.4 80 Q 41.1 60.8 64.8 60.8 Q 70.3 42.6 90.6 47 Q 104.9 31.6 121.4 49.8 Q 145.6 45.9 142.3 70.1 Q 152.2 93.8 133.5 93.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 160 Q 150 60 300 160 Q 450 260 600 150 L 600 200 Q 450 300 300 200 Q 150 100 0 210 Z" id="r-cuc-quang-1" data-region="cuc-quang-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 230 Q 200 150 360 240 Q 480 300 600 230 L 600 260 Q 480 330 360 270 Q 200 180 0 260 Z" id="r-cuc-quang-2" data-region="cuc-quang-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,370 322,441.9 395.3,425 344,480 395.3,535 322,518.1 300,590 278,518.1 204.7,535 256,480 204.7,425 278,441.9" id="r-bong-tuyet-to" data-region="bong-tuyet-to" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="480" rx="27.5" ry="27.5" id="r-tam-bong-tuyet" data-region="tam-bong-tuyet" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(0 -70) translate(300 300) scale(0.78) rotate(0) translate(-300 -300)">
+<path d="M 140 470 Q 140 250 300 240 Q 460 250 460 470 Z" id="r-mai-vom-tuyet" data-region="mai-vom-tuyet" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 150 420 L 450 420 M 162 370 L 438 370 M 190 320 L 410 320 M 240 280 L 360 280 M 240 320 L 240 370 M 360 320 L 360 370 M 300 280 L 300 320 M 200 370 L 200 420 M 300 370 L 300 420 M 400 370 L 400 420" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M 250 470 L 250 420 Q 250 380 300 380 Q 350 380 350 420 L 350 470 Z" id="r-cua-vom-tuyet" data-region="cua-vom-tuyet" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

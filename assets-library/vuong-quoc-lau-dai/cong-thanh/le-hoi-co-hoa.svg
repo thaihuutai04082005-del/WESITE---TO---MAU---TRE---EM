@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="cong-thanh--le-hoi-co-hoa">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="60,47 63.5,55.1 72.4,56 65.7,61.9 67.6,70.5 60,66 52.4,70.5 54.3,61.9 47.6,56 56.5,55.1" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="170,111 172.4,116.8 178.6,117.2 173.8,121.2 175.3,127.3 170,124 164.7,127.3 166.2,121.2 161.4,117.2 167.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="270,27 273.5,35.1 282.4,36 275.7,41.9 277.6,50.5 270,46 262.4,50.5 264.3,41.9 257.6,36 266.5,35.1" id="r-sao-3" data-region="sao-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430,81 432.4,86.8 438.6,87.2 433.8,91.2 435.3,97.3 430,94 424.7,97.3 426.2,91.2 421.4,87.2 427.6,86.8" id="r-sao-4" data-region="sao-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="560,37 563.5,45.1 572.4,46 565.7,51.9 567.6,60.5 560,56 552.4,60.5 554.3,51.9 547.6,46 556.5,45.1" id="r-sao-5" data-region="sao-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,201 542.4,206.8 548.6,207.2 543.8,211.2 545.3,217.3 540,214 534.7,217.3 536.2,211.2 531.4,207.2 537.6,206.8" id="r-sao-6" data-region="sao-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="40,217 43.5,225.1 52.4,226 45.7,231.9 47.6,240.5 40,236 32.4,240.5 34.3,231.9 27.6,226 36.5,225.1" id="r-sao-7" data-region="sao-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="10" y="210" width="110" height="260" rx="4" id="r-toa-1" data-region="toa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="226" width="18" height="22" rx="3" id="r-toa-1-cs-1" data-region="toa-1-cs-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="226" width="18" height="22" rx="3" id="r-toa-1-cs-2" data-region="toa-1-cs-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="226" width="18" height="22" rx="3" id="r-toa-1-cs-3" data-region="toa-1-cs-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="264" width="18" height="22" rx="3" id="r-toa-1-cs-4" data-region="toa-1-cs-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="264" width="18" height="22" rx="3" id="r-toa-1-cs-5" data-region="toa-1-cs-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="264" width="18" height="22" rx="3" id="r-toa-1-cs-6" data-region="toa-1-cs-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="302" width="18" height="22" rx="3" id="r-toa-1-cs-7" data-region="toa-1-cs-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="302" width="18" height="22" rx="3" id="r-toa-1-cs-8" data-region="toa-1-cs-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="302" width="18" height="22" rx="3" id="r-toa-1-cs-9" data-region="toa-1-cs-9" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="340" width="18" height="22" rx="3" id="r-toa-1-cs-10" data-region="toa-1-cs-10" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="340" width="18" height="22" rx="3" id="r-toa-1-cs-11" data-region="toa-1-cs-11" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="340" width="18" height="22" rx="3" id="r-toa-1-cs-12" data-region="toa-1-cs-12" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="378" width="18" height="22" rx="3" id="r-toa-1-cs-13" data-region="toa-1-cs-13" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="378" width="18" height="22" rx="3" id="r-toa-1-cs-14" data-region="toa-1-cs-14" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="378" width="18" height="22" rx="3" id="r-toa-1-cs-15" data-region="toa-1-cs-15" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="22" y="416" width="18" height="22" rx="3" id="r-toa-1-cs-16" data-region="toa-1-cs-16" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="52" y="416" width="18" height="22" rx="3" id="r-toa-1-cs-17" data-region="toa-1-cs-17" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="82" y="416" width="18" height="22" rx="3" id="r-toa-1-cs-18" data-region="toa-1-cs-18" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="170" width="120" height="300" rx="4" id="r-toa-2" data-region="toa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="186" width="18" height="22" rx="3" id="r-toa-2-cs-1" data-region="toa-2-cs-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="186" width="18" height="22" rx="3" id="r-toa-2-cs-2" data-region="toa-2-cs-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="186" width="18" height="22" rx="3" id="r-toa-2-cs-3" data-region="toa-2-cs-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="224" width="18" height="22" rx="3" id="r-toa-2-cs-4" data-region="toa-2-cs-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="224" width="18" height="22" rx="3" id="r-toa-2-cs-5" data-region="toa-2-cs-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="224" width="18" height="22" rx="3" id="r-toa-2-cs-6" data-region="toa-2-cs-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="262" width="18" height="22" rx="3" id="r-toa-2-cs-7" data-region="toa-2-cs-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="262" width="18" height="22" rx="3" id="r-toa-2-cs-8" data-region="toa-2-cs-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="262" width="18" height="22" rx="3" id="r-toa-2-cs-9" data-region="toa-2-cs-9" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="300" width="18" height="22" rx="3" id="r-toa-2-cs-10" data-region="toa-2-cs-10" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="300" width="18" height="22" rx="3" id="r-toa-2-cs-11" data-region="toa-2-cs-11" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="300" width="18" height="22" rx="3" id="r-toa-2-cs-12" data-region="toa-2-cs-12" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="338" width="18" height="22" rx="3" id="r-toa-2-cs-13" data-region="toa-2-cs-13" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="338" width="18" height="22" rx="3" id="r-toa-2-cs-14" data-region="toa-2-cs-14" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="338" width="18" height="22" rx="3" id="r-toa-2-cs-15" data-region="toa-2-cs-15" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="376" width="18" height="22" rx="3" id="r-toa-2-cs-16" data-region="toa-2-cs-16" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="376" width="18" height="22" rx="3" id="r-toa-2-cs-17" data-region="toa-2-cs-17" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="376" width="18" height="22" rx="3" id="r-toa-2-cs-18" data-region="toa-2-cs-18" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="482" y="414" width="18" height="22" rx="3" id="r-toa-2-cs-19" data-region="toa-2-cs-19" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="414" width="18" height="22" rx="3" id="r-toa-2-cs-20" data-region="toa-2-cs-20" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="542" y="414" width="18" height="22" rx="3" id="r-toa-2-cs-21" data-region="toa-2-cs-21" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="470" width="600" height="130" rx="0" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 0 530 L 80 530 M 140 530 L 220 530 M 380 530 L 460 530 M 520 530 L 600 530" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g id="subject" class="subject anim-wiggle">
+<rect x="150" y="250" width="300" height="220" rx="4" id="r-tuong-cong" data-region="tuong-cong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="110" y="190" width="80" height="280" rx="4" id="r-thap-cong-trai" data-region="thap-cong-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="410" y="190" width="80" height="280" rx="4" id="r-thap-cong-phai" data-region="thap-cong-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="110" y="170" width="20" height="24" rx="2" id="r-rang-trai-1" data-region="rang-trai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="140" y="170" width="20" height="24" rx="2" id="r-rang-trai-2" data-region="rang-trai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="170" y="170" width="20" height="24" rx="2" id="r-rang-trai-3" data-region="rang-trai-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="410" y="170" width="20" height="24" rx="2" id="r-rang-phai-1" data-region="rang-phai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="170" width="20" height="24" rx="2" id="r-rang-phai-2" data-region="rang-phai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="170" width="20" height="24" rx="2" id="r-rang-phai-3" data-region="rang-phai-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 230 470 L 230 350 Q 230 290 300 290 Q 370 290 370 350 L 370 470 Z" id="r-vom-cong" data-region="vom-cong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 256 330 L 256 470 M 282 300 L 282 470 M 318 300 L 318 470 M 344 330 L 344 470 M 232 380 L 368 380 M 230 430 L 370 430" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M 136 300 L 136 270 Q 136 256 150 256 Q 164 256 164 270 L 164 300 Z" id="r-cua-so-cong-trai" data-region="cua-so-cong-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 436 300 L 436 270 Q 436 256 450 256 Q 464 256 464 270 L 464 300 Z" id="r-cua-so-cong-phai" data-region="cua-so-cong-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<rect x="33" y="36" width="14" height="8" rx="2" id="r-hoa-giay-1" data-region="hoa-giay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="213" y="36" width="14" height="8" rx="2" id="r-hoa-giay-2" data-region="hoa-giay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="393" y="26" width="14" height="8" rx="2" id="r-hoa-giay-3" data-region="hoa-giay-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="573" y="36" width="14" height="8" rx="2" id="r-hoa-giay-4" data-region="hoa-giay-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="23" y="436" width="14" height="8" rx="2" id="r-hoa-giay-5" data-region="hoa-giay-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="568" y="446" width="14" height="8" rx="2" id="r-hoa-giay-6" data-region="hoa-giay-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 0 60 Q 300 110 600 60" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="22,65.2 58,65.2 40,101.2" id="r-co-duoi-nheo-1" data-region="co-duoi-nheo-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="96,74.1 132,74.1 114,110.1" id="r-co-duoi-nheo-2" data-region="co-duoi-nheo-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="170,80.8 206,80.8 188,116.8" id="r-co-duoi-nheo-3" data-region="co-duoi-nheo-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="244,84.5 280,84.5 262,120.5" id="r-co-duoi-nheo-4" data-region="co-duoi-nheo-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="318,84.6 354,84.6 336,120.6" id="r-co-duoi-nheo-5" data-region="co-duoi-nheo-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="392,81 428,81 410,117" id="r-co-duoi-nheo-6" data-region="co-duoi-nheo-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="466,74.3 502,74.3 484,110.3" id="r-co-duoi-nheo-7" data-region="co-duoi-nheo-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,65.5 576,65.5 558,101.5" id="r-co-duoi-nheo-8" data-region="co-duoi-nheo-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

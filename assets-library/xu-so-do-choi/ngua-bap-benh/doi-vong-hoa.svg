@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="ngua-bap-benh--doi-vong-hoa">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-gac" data-region="tuong-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="0,0 220,0 0,260" id="r-mai-doc-trai" data-region="mai-doc-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="600,0 380,0 600,260" id="r-mai-doc-phai" data-region="mai-doc-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="90" rx="50" ry="50" id="r-cua-so-gac" data-region="cua-so-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,74 304.1,84.3 315.2,85.1 306.7,92.2 309.4,102.9 300,97 290.6,102.9 293.3,92.2 284.8,85.1 295.9,84.3" id="r-sao-cua-so-gac" data-region="sao-cua-so-gac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="380" width="110" height="70" rx="8" id="r-ruong-cu" data-region="ruong-cu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<path d="M 110 440 Q 300 520 490 440 L 494 458 Q 300 540 106 458 Z" id="r-go-bap-benh" data-region="go-bap-benh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="200" y="360" width="22" height="90" rx="6" id="r-chan-ngua-1" data-region="chan-ngua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="360" width="22" height="98" rx="6" id="r-chan-ngua-2" data-region="chan-ngua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="340" y="360" width="22" height="98" rx="6" id="r-chan-ngua-3" data-region="chan-ngua-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="390" y="360" width="22" height="90" rx="6" id="r-chan-ngua-4" data-region="chan-ngua-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="170" cy="330" rx="20" ry="54" transform="rotate(30 170 330)" id="r-duoi-ngua" data-region="duoi-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="340" rx="120" ry="60" id="r-than-ngua" data-region="than-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="260" y="290" width="80" height="30" rx="10" id="r-yen-ngua" data-region="yen-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 370 320 L 400 210 L 450 214 L 420 330 Z" id="r-co-ngua" data-region="co-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="440" cy="220" rx="60" ry="44" id="r-dau-ngua" data-region="dau-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="486" cy="234" rx="26" ry="22" id="r-mom-ngua" data-region="mom-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="420,184 428,150 446,182" id="r-tai-ngua" data-region="tai-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 400 200 Q 380 240 392 300 L 376 300 Q 362 240 390 196 Z" id="r-bom-ngua" data-region="bom-ngua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="428.3" cy="216" r="3.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="451.7" cy="216" r="3.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="429.4" cy="214.7" r="1.2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="452.8" cy="214.7" r="1.2" fill="#FFFFFF"/></g>
+<ellipse cx="419.3" cy="225" rx="5" ry="3.2" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="460.7" cy="225" rx="5" ry="3.2" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="396.6" cy="190" rx="9" ry="9" id="r-vong-hoa-1" data-region="vong-hoa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="402.1" cy="181" rx="9" ry="9" id="r-vong-hoa-2" data-region="vong-hoa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="417.3" cy="174.4" rx="9" ry="9" id="r-vong-hoa-3" data-region="vong-hoa-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="438" cy="172" rx="9" ry="9" id="r-vong-hoa-4" data-region="vong-hoa-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="458.7" cy="174.4" rx="9" ry="9" id="r-vong-hoa-5" data-region="vong-hoa-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="473.9" cy="181" rx="9" ry="9" id="r-vong-hoa-6" data-region="vong-hoa-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="479.4" cy="190" rx="9" ry="9" id="r-vong-hoa-7" data-region="vong-hoa-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

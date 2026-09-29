@@ -1,4 +1,4 @@
-# Ma trận 15 chủ đề tô màu (đã duyệt — Đợt 1 đã làm: 01, 02, 03, 07, 08)
+# Ma trận 15 chủ đề tô màu (đã duyệt — đã làm: Đợt 1 — 01, 02, 03, 07, 08; Đợt 2 — 04, 05, 06, 09, 12)
 
 ## Nguyên tắc cố định
 
@@ -162,3 +162,38 @@ Hình dáng các đối tượng cũ có trong bộ tạo tranh (mèo, chó, tá
 Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ riêng.
 
 **Bối cảnh:** mỗi tranh Lớp 3 có 1 khung cảnh + màu trời riêng, không tranh nào trùng (assets-library/generator/bg-map.mjs — bộ tạo tranh tự kiểm tra trùng).
+
+## Lớp 3 — Đợt 2 (đã làm: 150 biến thể riêng)
+
+| Chủ đề | Đối tượng | 5 biến thể |
+|---|---|---|
+| 🌳 Khu Rừng Cây Thần | Cây cổ thụ | Cánh Cửa Bí Mật · Quả Táo Vàng · Xích Đu Phép Thuật · Rễ Cây Biết Đi · Vương Miện Lá Thần |
+|  | Cây thông | Đèn Lồng Tiên · Ngôi Sao Ước Nguyện · Tuyết Phép Màu · Quà Bất Ngờ · Chuông Gió Pha Lê |
+|  | Cây dừa | Võng Mây · Quả Dừa Biết Nhảy · Bay Bằng Lá Quạt · Suối Nước Thần · Đảo Hoàng Hôn |
+|  | Cây xương rồng | Nở Hoa Ngũ Sắc · Đội Mũ Phù Thủy · Ốc Đảo Thần Kỳ · Gai Ngọc Lấp Lánh · Chiếc Ô Hoa Sa Mạc |
+|  | Cây liễu | Tóc Liễu Tết Hoa · Đom Đóm Thắp Sáng · Soi Gương Mặt Hồ · Múa Cùng Gió · Chiếc Nôi Lá |
+|  | Khóm tre | Sáo Trúc Thần · Cây Cầu Tre · Măng Non Lớn Vù · Chuồn Chuồn Tre · Đêm Trăng Rằm |
+| 🏠 Thành Phố Nhà Biết Bay | Nhà gỗ | Khinh Khí Cầu · Đôi Cánh Chim · Cưỡi Đám Mây · Diều Kéo Nhà · Bay Qua Cầu Vồng |
+|  | Nhà phố | Cánh Quạt Trực Thăng · Chùm Bóng Bay · Tên Lửa Đẩy · Bay Giữa Sao Đêm · Hạ Cánh Trên Mây |
+|  | Chung cư | Động Cơ Phản Lực · Cánh Máy Bay · Căng Buồm Bay · Đàn Chim Dẫn Đường · Buộc Dây Vào Mây |
+|  | Nhà sàn | Đèn Trời Nâng Nhà · Cánh Diều Sáo · Bay Qua Ruộng Bậc Thang · Mái Chèo Mây · Hạc Giấy Dẫn Đường |
+|  | Nhà tuyết | Bay Trên Cực Quang · Chong Chóng Tuyết · Khinh Khí Cầu Băng · Trượt Trên Mây Tuyết · Bông Tuyết Khổng Lồ Nâng Nhà |
+|  | Nhà cối xay gió | Cánh Quạt Cất Cánh · Bay Theo Gió Mùa · Kéo Theo Cánh Đồng Hoa · Lượn Vòng Hoàng Hôn · Hạ Cánh Đồi Cỏ |
+| 🧸 Xứ Sở Đồ Chơi Thức Giấc | Búp bê gỗ | Thức Dậy Vươn Vai · Múa Ba Lê · Tiệc Trà Nửa Đêm · Ngắm Trăng Bên Cửa Sổ · Ru Em Ngủ |
+|  | Lính chì | Diễu Hành Nửa Đêm · Thổi Kèn Báo Thức · Canh Gác Hộp Đồ Chơi · Chèo Thuyền Giấy · Chào Bình Minh |
+|  | Ngựa bập bênh | Phi Nước Đại · Nhảy Qua Gối · Kéo Xe Đồ Chơi · Đội Vòng Hoa · Ngủ Gật Lúc Bình Minh |
+|  | Con quay | Xoay Tít · Khiêu Vũ Vòng Tròn · Vẽ Vòng Sao · Trượt Trên Sàn Gỗ · Đua Với Bi Ve |
+|  | Hộp hình nhảy | Bật Ra Chào · Ảo Thuật Hoa Giấy · Hộp Nhạc Ngân Nga · Trốn Tìm · Tặng Quà |
+|  | Khối xếp chữ | Xếp Tháp Cao · Chúc Ngủ Ngon · Xếp Đoàn Tàu · Đổ Domino · Cầu Thang Lên Kệ |
+| 🌞 Vương Quốc Thiên Thể | Mặt Trời | Thức Dậy Vươn Vai · Tập Thể Dục · Đi Biển · Đạp Xe Buổi Sáng · Chào Buổi Chiều |
+|  | Mặt Trăng | Đánh Răng · Đọc Sách · Kể Chuyện Ru Ngủ · Đội Mũ Ngủ · Soi Bóng Mặt Hồ |
+|  | Ngôi sao | Nhảy Dây · Học Bài · Hát Ru · Tiệc Sinh Nhật · Rơi Xuống Điều Ước |
+|  | Sao Thổ | Lắc Vòng · Tắm Bồn Bong Bóng · Nghe Nhạc · Trượt Patin · Đi Ngủ Trong Chăn |
+|  | Trái Đất | Tưới Hoa · Ôm Cây Xanh · Uống Nước Mát · Ngủ Trưa Dưới Ô · Đi Dạo Công Viên |
+|  | Sao chổi | Chạy Bộ Buổi Sáng · Đưa Thư · Thả Diều · Đi Học · Về Nhà Buổi Tối |
+| 🏰 Vương Quốc Lâu Đài Huyền Bí | Lâu đài | Mùa Xuân Hoa Nở · Mùa Đông Tuyết Phủ · Đêm Pháo Hoa · Lễ Hội Đèn Lồng · Trên Đồi Mây |
+|  | Cung điện mái vòm | Tết Nguyên Đán · Mùa Hè Đài Phun Nước · Đêm Trăng Rằm · Mùa Thu Lá Vàng · Lễ Hội Bóng Bay |
+|  | Tháp cổ | Mùa Thu Lá Rơi · Đêm Sao Băng · Mùa Xuân Dây Leo · Lễ Hội Thả Diều · Cầu Vồng Sau Mưa |
+|  | Cổng thành | Lễ Hội Cờ Hoa · Mùa Đông Người Tuyết · Mùa Hè Hướng Dương · Đêm Hội Ánh Nến · Mùa Thu Bí Ngô |
+|  | Cầu đá cổ tích | Mùa Xuân Hoa Đào · Mùa Hè Thuyền Giấy · Mùa Đông Băng Giá · Lễ Hội Hoa Đăng · Mùa Thu Sương Sớm |
+|  | Giếng ước | Mùa Xuân Bướm Bay · Mùa Hè Đom Đóm · Mùa Thu Hạt Dẻ · Mùa Đông Tuyết Rơi · Lễ Hội Ước Nguyện |

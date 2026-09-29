@@ -16,6 +16,10 @@ export const SKIES = {
   nebula: '#3B2667',
   alien: '#1E4D5C',
   deep: '#14213D',
+  lavender: '#E6DDF7',
+  peach: '#FFE3D3',
+  lemon: '#FFF6C7',
+  aqua: '#D4F4F7',
 };
 const DARK = new Set(['night', 'space', 'nebula', 'alien', 'deep']);
 
@@ -34,7 +38,7 @@ function skyDecor(pal, side = 1) {
   if (pal === 'day') return [star('tia-nang', x, 88, 60, 42, '#FFB74D', 12), C('mat-troi', x, 88, 36, '#FFD54F'), cloud('may-1', 600 - x, 90, 0.6)];
   if (pal === 'morning') return [C('mat-troi', x, 110, 44, '#FFB74D'), cloud('may-1', 600 - x, 80, 0.55, '#FFFFFF')];
   if (pal === 'sunset') return [C('mat-troi', x, 150, 54, '#FF8A65'), E('dai-may-1', 600 - x, 90, 90, 14, '#FFB3A1')];
-  if (pal === 'pink' || pal === 'mint') return [cloud('may-1', 600 - x, 86, 0.6, '#FFFFFF'), cloud('may-2', x, 60, 0.45, '#FFFFFF')];
+  if (['pink', 'mint', 'lavender', 'peach', 'lemon', 'aqua'].includes(pal)) return [cloud('may-1', 600 - x, 86, 0.6, '#FFFFFF'), cloud('may-2', x, 60, 0.45, '#FFFFFF')];
   if (pal === 'storm') return [cloud('may-mua-1', 120, 90, 0.8, '#B0BEC5'), cloud('may-mua-2', 480, 80, 0.8, '#B0BEC5')];
   if (pal === 'dusk') return [star('sao-1', 90, 70, 12, 5, '#FFF3B0'), star('sao-2', 510, 110, 10, 4, '#FFF3B0'), C('trang-chieu', x, 80, 26, '#FFF3D6')];
   if (DARK.has(pal)) {
@@ -115,11 +119,24 @@ export const SETTINGS = {
   asteroidBelt: () => ({ ground: G.flat('#7B7F8C'), far: [0, 1, 2, 3, 4, 5].map((k) => E(`da-vanh-dai-${k + 1}`, 40 + k * 104, 180 + (k % 2) * 40, 22 - (k % 3) * 4, 14, '#A89F94', k * 20)) }),
   ringPlanet: () => ({ ground: G.flat('#9FA8DA'), far: [E('vanh-sau-xa', 150, 150, 120, 26, '#FFE0B5', -15), C('hanh-tinh-vanh', 150, 150, 56, '#FFB74D')] }),
   galaxy: () => ({ ground: G.flat('#3949AB'), far: [E('canh-thien-ha-1', 150, 170, 130, 34, '#B39DDB', -25), E('canh-thien-ha-2', 150, 170, 90, 22, '#D1C4E9', 20), C('loi-thien-ha', 150, 170, 20, '#FFF3B0')] }),
+  // ---- Đợt 2 ----
+  playroom: () => ({ ground: G.floor('#E0B070'), far: [R('tuong-phong-choi', 0, 0, 600, 450, 0, '#FFE6EE'), R('ke-do-choi', 440, 180, 150, 16, 4, '#A0673A'), C('bong-tren-ke', 480, 158, 22, '#4FA3E0'), R('hop-tren-ke', 520, 130, 50, 50, 6, '#FFD54F'), R('tham-phong-choi', 120, 490, 360, 60, 30, '#B3E5FC')] }),
+  toyShelf: () => ({ ground: G.floor('#C8A26B'), far: [R('tuong-ke', 0, 0, 600, 450, 0, '#DDF5EC'), R('ke-go-1', 0, 150, 600, 16, 3, '#8B5A2B'), R('ke-go-2', 0, 320, 600, 16, 3, '#8B5A2B'), C('bong-ke-1', 60, 126, 24, '#FF7AA2'), R('sach-ke', 520, 90, 30, 60, 3, '#4FA3E0'), R('sach-ke-2', 554, 100, 26, 50, 3, '#FFD54F'), star('sao-ke', 80, 290, 26, 11, '#FFD54F')] }),
+  attic: () => ({ ground: G.floor('#A1887F'), far: [R('tuong-gac', 0, 0, 600, 450, 0, '#FFF3D6'), P('mai-doc-trai', [[0, 0], [220, 0], [0, 260]], '#D7A574'), P('mai-doc-phai', [[600, 0], [380, 0], [600, 260]], '#D7A574'), C('cua-so-gac', 300, 90, 50, '#2C3E74'), star('sao-cua-so-gac', 300, 90, 16, 7, '#FFE066'), R('ruong-cu', 470, 380, 110, 70, 8, '#8D6E63')] }),
+  moonWindow: () => ({ ground: G.floor('#90A4AE'), far: [R('tuong-cua-so', 0, 0, 600, 450, 0, '#5C6BC0'), R('khung-cua-so', 330, 60, 230, 230, 12, '#FFF3D6'), R('kinh-cua-so', 346, 76, 198, 198, 8, '#1A237E'), C('trang-ngoai-cua', 470, 150, 44, '#FFF3B0'), star('sao-ngoai-cua', 390, 120, 12, 5, '#FFE066'), D('rem-cua', 'M 316 50 L 360 50 Q 340 180 360 310 L 316 310 Z', '#FF7AA2')] }),
+  terraces: () => ({ ground: G.hill('#8BD17C'), far: [D('ruong-1', 'M 0 470 Q 300 380 600 470 Z', '#AED581'), D('ruong-2', 'M 0 420 Q 300 320 600 420 L 600 440 Q 300 350 0 440 Z', '#C5E1A5'), D('ruong-3', 'M 0 370 Q 300 270 600 370 L 600 390 Q 300 300 0 390 Z', '#DCEDC8')] }),
+  mountainDawn: () => ({ ground: G.hill('#9CCC65'), far: [P('nui-binh-minh-1', [[-40, 470], [140, 290], [320, 470]], '#9575CD'), P('nui-binh-minh-2', [[260, 470], [460, 270], [660, 470]], '#7E57C2')] }),
+  seaHorizon: () => ({ ground: G.wave('#4FA3E0'), far: [E('dao-nho', 520, 440, 70, 20, '#F6D98B'), R('than-dua-dao', 516, 380, 8, 60, 3, '#8B5A2B'), E('la-dua-dao', 520, 378, 36, 10, '#43A047')] }),
+  rooftops: () => ({ ground: G.flat('#A1887F'), far: [R('nha-mai-1', 20, 330, 120, 140, 4, '#FFCC80'), P('mai-1', [[10, 336], [80, 270], [150, 336]], '#E57350'), R('nha-mai-2', 460, 350, 120, 120, 4, '#B3E5FC'), P('mai-2', [[450, 356], [520, 290], [590, 356]], '#7D5FFF')] }),
+  sunflowerField: () => ({ ground: G.hill('#9CCC65'), far: [0, 1, 2, 3].map((k) => star(`huong-duong-xa-${k + 1}`, 60 + k * 160 - (k > 1 ? 0 : 0), 400 + (k % 2) * 20, 26, 15, '#FFD54F', 12)) }),
+  pumpkinPatch: () => ({ ground: G.hill('#C5A572'), far: [E('bi-ngo-xa-1', 70, 470, 40, 26, '#FF9F43'), E('bi-ngo-xa-2', 530, 474, 44, 28, '#FFB74D')] }),
+  lavenderField: () => ({ ground: G.hill('#B39DDB'), far: [0, 1, 2, 3, 4, 5].map((k) => E(`oai-huong-${k + 1}`, 30 + k * 108, 440, 12, 34, '#7E57C2')) }),
+  orchard: () => ({ ground: G.hill('#8BD17C'), far: [R('than-vuon-1', 60, 360, 16, 110, 4, '#8B5A2B'), C('tan-vuon-1', 68, 330, 56, '#66BB6A'), C('qua-vuon-1', 50, 320, 9, '#FF5F5F'), R('than-vuon-2', 524, 360, 16, 110, 4, '#8B5A2B'), C('tan-vuon-2', 532, 330, 56, '#66BB6A'), C('qua-vuon-2', 550, 316, 9, '#FF5F5F')] }),
   alienJungle: () => ({ ground: G.hill('#26A69A'), far: [C('nam-la-1', 70, 360, 50, '#F06292'), R('than-nam-la-1', 60, 400, 20, 70, 6, '#B2DFDB'), C('nam-la-2', 530, 340, 60, '#BA68C8'), R('than-nam-la-2', 518, 390, 24, 80, 6, '#B2DFDB')] }),
 };
 
-const INDOOR = ['kitchen', 'classroom', 'stage', 'palaceHall', 'library', 'bedroom', 'workshop', 'gym', 'stationInside'];
-const WALLS = { day: '#E3F2FD', morning: '#FFF3D6', sunset: '#FFE0CC', dusk: '#E1D5F2', night: '#3E3B6E', mint: '#DDF5EC', pink: '#FFE6EE', storm: '#DDE3E8', deep: '#2B2D42', space: '#CFD8DC', nebula: '#D1C4E9', alien: '#B2DFDB' };
+const INDOOR = ['kitchen', 'classroom', 'stage', 'palaceHall', 'library', 'bedroom', 'workshop', 'gym', 'stationInside', 'playroom', 'toyShelf', 'attic', 'moonWindow'];
+const WALLS = { day: '#E3F2FD', morning: '#FFF3D6', sunset: '#FFE0CC', dusk: '#E1D5F2', night: '#3E3B6E', mint: '#DDF5EC', pink: '#FFE6EE', storm: '#DDE3E8', deep: '#2B2D42', lavender: '#EDE7F6', peach: '#FFEDE3', lemon: '#FFF9DB', aqua: '#E0F7FA', space: '#CFD8DC', nebula: '#D1C4E9', alien: '#B2DFDB' };
 const CURTAINS = { day: '#E74C3C', morning: '#FF9F43', sunset: '#C0392B', dusk: '#7D5FFF', night: '#8E24AA', pink: '#FF7AA2', mint: '#26A69A' };
 
 /** Tạo lớp nền cho 1 tranh: màu trời + trang trí trời + khung cảnh. */

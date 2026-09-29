@@ -139,7 +139,7 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   const ground = bg ? bg.ground : groundItem(groundKind === 'water' ? 'water' : groundKind === 'rock' ? 'rock' : 'grass', groundColor);
   const { back, mid, front, subjectExtra } = sceneParts(scene, obj);
   if (bg) {
-    back.unshift(...bg.skyItems, ...bg.far);
+    back.unshift(...(theme.plainSky ? [] : bg.skyItems), ...bg.far);
     mid.unshift(...bg.near);
     front.push(...bg.fg);
   }

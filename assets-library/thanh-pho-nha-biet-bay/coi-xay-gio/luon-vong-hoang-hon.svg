@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="coi-xay-gio--luon-vong-hoang-hon">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="95" cy="150" rx="54" ry="54" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="505" cy="90" rx="90" ry="14" id="r-dai-may-1" data-region="dai-may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="30" cy="440" rx="12" ry="34" id="r-oai-huong-1" data-region="oai-huong-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="138" cy="440" rx="12" ry="34" id="r-oai-huong-2" data-region="oai-huong-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="246" cy="440" rx="12" ry="34" id="r-oai-huong-3" data-region="oai-huong-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="354" cy="440" rx="12" ry="34" id="r-oai-huong-4" data-region="oai-huong-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="462" cy="440" rx="12" ry="34" id="r-oai-huong-5" data-region="oai-huong-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="570" cy="440" rx="12" ry="34" id="r-oai-huong-6" data-region="oai-huong-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(0 -40) translate(300 300) scale(0.8) rotate(10) translate(-300 -300)">
+<polygon points="240,470 262,230 338,230 360,470" id="r-than-coi-xay" data-region="than-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="248,236 300,176 352,236" id="r-mai-coi-xay" data-region="mai-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 280 470 L 280 420 Q 280 398 300 398 Q 320 398 320 420 L 320 470 Z" id="r-cua-coi-xay" data-region="cua-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="320" rx="16" ry="16" id="r-cua-so-coi-xay" data-region="cua-so-coi-xay" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,214 290,80 318,80 312,214" id="r-canh-quat-1" data-region="canh-quat-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,214 434,204 434,232 300,226" id="r-canh-quat-2" data-region="canh-quat-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,214 310,348 282,348 288,214" id="r-canh-quat-3" data-region="canh-quat-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,214 166,224 166,196 300,202" id="r-canh-quat-4" data-region="canh-quat-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="214" rx="14" ry="14" id="r-truc-quat" data-region="truc-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<path d="M 79.2 160 Q 90.4 147.2 100 160 Q 109.6 147.2 120.8 160 Q 109.6 155.2 100 164.8 Q 90.4 155.2 79.2 160 Z" id="r-chim-1" data-region="chim-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 124.4 130 Q 132.8 120.4 140 130 Q 147.2 120.4 155.6 130 Q 147.2 126.4 140 133.6 Q 132.8 126.4 124.4 130 Z" id="r-chim-2" data-region="chim-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

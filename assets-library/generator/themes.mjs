@@ -2,6 +2,8 @@
 // Mỗi chủ đề = Nhóm đối tượng × Concept; 5 biến thể cố định + 4 thẻ (C/B/A/S) áp cho mọi đối tượng.
 import { legacy } from './objects.mjs';
 import * as B from './bodies.mjs';
+import * as B2 from './bodies2.mjs';
+import * as X from './props.mjs';
 import * as A from './accessories.mjs';
 import { E } from './shapes.mjs';
 import { flame, bolt, iceCrystal, asteroid, soccerBall, basketball } from './accessories.mjs';
@@ -12,6 +14,12 @@ export const THEMES = [
   { slug: 'doi-xe-vu-tru', name: { vi: 'Đội Xe Chinh Phục Vũ Trụ', en: 'Space Vehicle Squad' }, faceStyle: 'face', animation: 'drive' },
   { slug: 'thi-tran-khung-long', name: { vi: 'Thị Trấn Khủng Long Tài Ba', en: 'Talented Dino Town' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'the-thao-trai-cay', name: { vi: 'Đại Hội Thể Thao Trái Cây', en: 'Fruit Sports Festival' }, faceStyle: 'face', animation: 'float' },
+  // Đợt 2
+  { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Cây Thần', en: 'Magic Tree Forest' }, faceStyle: 'face', animation: 'sway' },
+  { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
+  { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce' },
+  { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
+  { slug: 'vuong-quoc-lau-dai', name: { vi: 'Vương Quốc Lâu Đài Huyền Bí', en: 'Mystic Castle Kingdom' }, faceStyle: 'none', animation: 'wiggle' },
 ];
 
 const O = (theme, slug, vi, en, opts) => ({ theme, slug, name: { vi, en }, ...opts });
@@ -69,6 +77,46 @@ export const OBJECTS = [
   reuse('the-thao-trai-cay', 'dua-hau', 'dua-hau-the-thao', 'Dưa hấu', 'Watermelon'),
   O('the-thao-trai-cay', 'dua', 'Dứa', 'Pineapple', { face: { x: 300, y: 370, s: 0.8 }, hat: { x: 300, y: 150, s: 0.7 }, build: B.dua }),
   reuse('the-thao-trai-cay', 'cam', 'cam-the-thao', 'Cam', 'Orange'),
+
+  // 04 — Cây × Phép thuật
+  reuse('khu-rung-cay-than', 'cay', 'cay-co-thu', 'Cây cổ thụ', 'Ancient tree'),
+  O('khu-rung-cay-than', 'cay-thong', 'Cây thông', 'Pine tree', { face: { x: 300, y: 370, s: 0.75 }, hat: { x: 300, y: 118, s: 0.7 }, build: B2.cayThong }),
+  O('khu-rung-cay-than', 'cay-dua', 'Cây dừa', 'Coconut palm', { face: { x: 292, y: 372, s: 0.6 }, hat: { x: 325, y: 150, s: 0.7 }, build: B2.cayDua }),
+  O('khu-rung-cay-than', 'cay-xuong-rong', 'Cây xương rồng', 'Cactus', { face: { x: 300, y: 300, s: 0.8 }, hat: { x: 300, y: 184, s: 0.8 }, build: B2.xuongRong }),
+  O('khu-rung-cay-than', 'cay-lieu', 'Cây liễu', 'Willow tree', { face: { x: 300, y: 214, s: 0.8 }, hat: { x: 300, y: 122, s: 0.9 }, build: B2.cayLieu }),
+  O('khu-rung-cay-than', 'khom-tre', 'Khóm tre', 'Bamboo grove', { face: { x: 300, y: 310, s: 0.62 }, hat: { x: 300, y: 124, s: 0.6 }, build: B2.khomTre }),
+
+  // 05 — Nhà × Bay lượn
+  reuse('thanh-pho-nha-biet-bay', 'nha-go', 'nha-go-biet-bay', 'Nhà gỗ', 'Cottage'),
+  O('thanh-pho-nha-biet-bay', 'nha-pho', 'Nhà phố', 'Townhouse', { face: null, hat: { x: 300, y: 124, s: 0.9 }, build: B2.nhaPho }),
+  reuse('thanh-pho-nha-biet-bay', 'chung-cu', 'chung-cu-biet-bay', 'Chung cư', 'Apartment'),
+  O('thanh-pho-nha-biet-bay', 'nha-san', 'Nhà sàn', 'Stilt house', { face: null, hat: { x: 300, y: 152, s: 0.9 }, build: B2.nhaSan }),
+  O('thanh-pho-nha-biet-bay', 'nha-tuyet', 'Nhà tuyết', 'Igloo', { face: null, hat: { x: 300, y: 244, s: 1 }, build: B2.nhaTuyet }),
+  O('thanh-pho-nha-biet-bay', 'coi-xay-gio', 'Nhà cối xay gió', 'Windmill house', { face: null, hat: { x: 300, y: 180, s: 0.7 }, build: B2.coiXayGio }),
+
+  // 06 — Đồ chơi × Sống dậy lúc nửa đêm
+  O('xu-so-do-choi', 'bup-be-go', 'Búp bê gỗ', 'Wooden doll', { face: { x: 300, y: 250, s: 0.72 }, hat: { x: 300, y: 166, s: 0.8 }, build: B2.bupBeGo }),
+  O('xu-so-do-choi', 'linh-chi', 'Lính chì', 'Tin soldier', { face: { x: 300, y: 244, s: 0.62 }, hat: { x: 300, y: 124, s: 0.8 }, build: B2.linhChi }),
+  O('xu-so-do-choi', 'ngua-bap-benh', 'Ngựa bập bênh', 'Rocking horse', { face: { x: 440, y: 216, s: 0.45 }, mouth: false, hat: { x: 438, y: 180, s: 0.6 }, build: B2.nguaBapBenh }),
+  O('xu-so-do-choi', 'con-quay', 'Con quay', 'Spinning top', { face: { x: 300, y: 372, s: 0.7 }, hat: { x: 300, y: 204, s: 0.6 }, build: B2.conQuay }),
+  O('xu-so-do-choi', 'hop-hinh-nhay', 'Hộp hình nhảy', 'Jack-in-the-box', { face: { x: 300, y: 188, s: 0.7 }, hat: { x: 300, y: 128, s: 0.7 }, build: B2.hopHinhNhay }),
+  O('xu-so-do-choi', 'khoi-xep-chu', 'Khối xếp chữ', 'Letter blocks', { face: { x: 300, y: 284, s: 0.55 }, hat: { x: 300, y: 232, s: 0.8 }, build: B2.khoiXepChu }),
+
+  // 09 — Thiên thể × Một ngày sinh hoạt
+  O('vuong-quoc-thien-the', 'mat-troi', 'Mặt Trời', 'Sun', { face: { x: 300, y: 290, s: 1.1 }, hat: { x: 300, y: 184, s: 1 }, build: B2.matTroi }),
+  O('vuong-quoc-thien-the', 'mat-trang', 'Mặt Trăng', 'Moon', { face: { x: 196, y: 300, s: 0.62 }, hat: { x: 250, y: 150, s: 0.8 }, build: B2.matTrang }),
+  O('vuong-quoc-thien-the', 'ngoi-sao', 'Ngôi sao', 'Star', { face: { x: 300, y: 300, s: 0.95 }, hat: { x: 300, y: 150, s: 0.7 }, build: B2.ngoiSao }),
+  O('vuong-quoc-thien-the', 'sao-tho', 'Sao Thổ', 'Saturn', { face: { x: 300, y: 318, s: 0.9 }, hat: { x: 300, y: 190, s: 0.9 }, build: B2.saoTho }),
+  O('vuong-quoc-thien-the', 'trai-dat', 'Trái Đất', 'Earth', { face: { x: 300, y: 294, s: 1 }, hat: { x: 300, y: 164, s: 1 }, build: B2.traiDat }),
+  O('vuong-quoc-thien-the', 'sao-choi', 'Sao chổi', 'Comet', { face: { x: 372, y: 246, s: 0.8 }, hat: { x: 372, y: 164, s: 0.8 }, build: B2.saoChoi }),
+
+  // 12 — Công trình cổ tích × Bốn mùa & lễ hội
+  reuse('vuong-quoc-lau-dai', 'lau-dai', 'lau-dai-huyen-bi', 'Lâu đài', 'Castle'),
+  O('vuong-quoc-lau-dai', 'cung-dien', 'Cung điện mái vòm', 'Domed palace', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: B2.cungDien }),
+  O('vuong-quoc-lau-dai', 'thap-co', 'Tháp cổ', 'Ancient tower', { face: null, hat: { x: 300, y: 62, s: 0.6 }, build: B2.thapCo }),
+  O('vuong-quoc-lau-dai', 'cong-thanh', 'Cổng thành', 'Castle gate', { face: null, hat: { x: 300, y: 250, s: 0.8 }, build: B2.congThanh }),
+  O('vuong-quoc-lau-dai', 'cau-da', 'Cầu đá cổ tích', 'Fairytale stone bridge', { face: null, hat: { x: 300, y: 282, s: 0.7 }, ground: 'water', build: B2.cauDa }),
+  O('vuong-quoc-lau-dai', 'gieng-uoc', 'Giếng ước', 'Wishing well', { face: null, hat: { x: 300, y: 142, s: 0.7 }, build: B2.giengUoc }),
 ];
 
 // ---------------- Biến thể ----------------
@@ -176,6 +224,52 @@ export const THEME_VARIANTS = {
       card('B', 'tuyen-thu', 'Tuyển Thủ', 'Team Player', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ behind: A.limbs(c), front: A.sportCap(c) }) }),
       card('A', 'tren-buc-nhan-giai', 'Trên Bục Nhận Giải', 'On the Podium', { expr: 'happy', scene: ['rainbow', 'podium', 'confetti'], transform: { ty: -128, scale: 0.72, px: 300, py: 480 }, acc: (c) => ({ behind: A.limbs(c), front: A.goldMedal(c) }) }),
       card('S', 'vo-dich-cup-vang', 'Nhà Vô Địch Cúp Vàng', 'Golden Cup Champion', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti', 'hearts'], transform: { ty: -24, scale: 0.84, px: 250, py: 480 }, acc: (c) => ({ behind: A.limbs(c), front: [...A.crown(c), ...A.goldMedal(c), ...A.trophy(c)] }) }),
+    ],
+  },
+  // ================= Đợt 2 (thẻ tạm theo chủ đề) =================
+  'khu-rung-cay-than': {
+    variants: [],
+    cards: [
+      card('C', 'mam-xanh', 'Mầm Xanh', 'Green Sprout', { expr: 'happy', scene: ['sun', 'clouds'], acc: () => ({}) }),
+      card('B', 'deo-no-hoa', 'Đeo Nơ Hoa', 'Flower Bow', { expr: 'happy', scene: ['clouds', 'flowers', 'butterfly'], acc: (c) => ({ front: A.ribbonBow(c) }) }),
+      card('A', 'duoi-cau-vong', 'Dưới Cầu Vồng', 'Under the Rainbow', { expr: 'happy', scene: ['rainbow', 'clouds', 'stars'], acc: () => ({}) }),
+      card('S', 'cay-than-nghin-nam', 'Cây Thần Nghìn Năm', 'Thousand-Year Magic Tree', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
+    ],
+  },
+  'thanh-pho-nha-biet-bay': {
+    variants: [],
+    cards: [
+      card('C', 'ngoi-nha-nho', 'Ngôi Nhà Nhỏ', 'Little Home', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+      card('B', 'co-bong-bay', 'Có Bóng Bay', 'With Balloons', { scene: ['clouds', 'balloons'], acc: () => ({}) }),
+      card('A', 'duoi-cau-vong', 'Dưới Cầu Vồng', 'Under the Rainbow', { scene: ['rainbow', 'clouds', 'stars'], acc: () => ({}) }),
+      card('S', 'nha-bay-hoang-kim', 'Nhà Bay Hoàng Kim', 'Golden Flying House', { scene: ['rainbow', 'stars', 'confetti'], transform: { ty: -40, scale: 0.85, px: 300, py: 400 }, acc: (c) => ({ behind: A.wings(c, '#FFE9A8', '#FFD54F'), front: A.crown(c) }) }),
+    ],
+  },
+  'xu-so-do-choi': {
+    variants: [],
+    cards: [
+      card('C', 'mon-do-choi', 'Món Đồ Chơi', 'Little Toy', { expr: 'happy', scene: ['sun', 'clouds'], acc: () => ({}) }),
+      card('B', 'deo-no-qua', 'Đeo Nơ Quà', 'Gift Bow', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ front: A.ribbonBow(c) }) }),
+      card('A', 'dem-sao', 'Đêm Đầy Sao', 'Starry Night', { expr: 'happy', scene: ['night', 'stars'], acc: () => ({}) }),
+      card('S', 'hop-qua-vang', 'Hộp Quà Vàng', 'Golden Gift Box', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
+    ],
+  },
+  'vuong-quoc-thien-the': {
+    variants: [],
+    cards: [
+      card('C', 'lap-lanh', 'Lấp Lánh', 'Twinkle', { expr: 'happy', scene: ['clouds'], acc: () => ({}) }),
+      card('B', 'deo-no', 'Đeo Nơ', 'With a Bow', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ front: A.ribbonBow(c) }) }),
+      card('A', 'giua-dai-ngan-ha', 'Giữa Dải Ngân Hà', 'In the Milky Way', { expr: 'happy', scene: ['space', 'stars'], sky: 'space', acc: () => ({}) }),
+      card('S', 'hao-quang-ruc-ro', 'Hào Quang Rực Rỡ', 'Radiant Glory', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFF3B0'), front: A.crown(c) }) }),
+    ],
+  },
+  'vuong-quoc-lau-dai': {
+    variants: [],
+    cards: [
+      card('C', 'cong-trinh-nho', 'Công Trình Nhỏ', 'Little Landmark', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+      card('B', 'treo-co-hoa', 'Treo Cờ Hoa', 'Flag Garland', { scene: ['clouds', 'confetti'], acc: () => ({ fg: X.bunting(70) }) }),
+      card('A', 'duoi-cau-vong', 'Dưới Cầu Vồng', 'Under the Rainbow', { scene: ['rainbow', 'clouds', 'stars'], acc: () => ({}) }),
+      card('S', 'ban-pha-le', 'Bản Pha Lê', 'Crystal Edition', { scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#B3E5FC'), front: A.crown(c, '#B3E5FC', '#7DE2FF') }) }),
     ],
   },
 };
