@@ -11,18 +11,47 @@ export const cayThong = () => [
   P('tang-la-tren', [[215, 235], [300, 110], [385, 235]], '#43A047'),
 ];
 
-export const cayDua = () => [
-  D('than-cay-dua', 'M 262 480 Q 250 360 300 220 L 340 226 Q 300 360 318 480 Z', '#C68B59'),
-  E('la-dua-1', 250, 205, 95, 26, '#43A047', 20),
-  E('la-dua-2', 400, 205, 95, 26, '#43A047', -20),
-  E('la-dua-3', 270, 170, 80, 24, '#66BB6A', -35),
-  E('la-dua-4', 385, 168, 80, 24, '#66BB6A', 35),
-  E('la-dua-5', 325, 150, 70, 22, '#4CAF50', -80),
-  C('trai-dua-1', 300, 232, 22, '#8D6E63'),
-  C('trai-dua-2', 338, 238, 22, '#8D6E63'),
-  C('trai-dua-3', 318, 262, 20, '#A1887F'),
-  E('bung-cay-dua', 292, 380, 42, 56, '#D7A574'),
-];
+// Tàu lá dừa: cong vòng từ ngọn (cx,cy) ra đầu lá (tx,ty), mép dưới có răng cưa như lá chét.
+const frond = (id, cx, cy, tx, ty, lift, w, color) => {
+  const mx = (cx + tx) / 2, my = (cy + ty) / 2 - lift;
+  const q = (t) => [(1 - t) ** 2 * cx + 2 * (1 - t) * t * mx + t * t * tx, (1 - t) ** 2 * cy + 2 * (1 - t) * t * my + t * t * ty];
+  const N = 14, top = [], bot = [];
+  for (let i = 0; i <= N; i++) {
+    const t = i / N, [x, y] = q(t), [x2, y2] = q(Math.min(1, t + 0.01)), [x1, y1] = q(Math.max(0, t - 0.01));
+    let dx = x2 - x1, dy = y2 - y1; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+    let nx = -dy, ny = dx; if (ny > 0) { nx = -nx; ny = -ny; } // pháp tuyến hướng lên
+    const ww = w * Math.sin(Math.PI * Math.min(0.97, 0.12 + t * 0.88));
+    top.push([x + nx * ww * 0.35, y + ny * ww * 0.35]);
+    const tooth = i % 2 ? 1.25 : 0.55;
+    bot.push([x - nx * ww * tooth, y - ny * ww * tooth]);
+  }
+  const pts = [...top, ...bot.reverse()].map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`);
+  return D(id, `M ${pts.join(' L ')} Z`, color);
+};
+
+export const cayDua = () => {
+  // Thân cong thon, chia đốt (mỗi đốt là một vùng tô riêng).
+  const L = (y) => 252 + (480 - y) * 0.03 + ((480 - y) / 255) ** 2 * 50; // mép trái
+  const Rr = (y) => L(y) + 32 + (y - 225) * 0.2;                          // mép phải
+  const cuts = [225, 262, 300, 340, 410, 445, 480];
+  const seg = cuts.slice(1).map((y1, k) => {
+    const y0 = cuts[k];
+    return D(`dot-than-dua-${k + 1}`, `M ${L(y0).toFixed(1)} ${y0} L ${Rr(y0).toFixed(1)} ${y0} L ${Rr(y1).toFixed(1)} ${y1} L ${L(y1).toFixed(1)} ${y1} Z`, k % 2 ? '#B97A4A' : '#C68B59');
+  });
+  const cx = 320, cy = 215;
+  return [
+    ...seg,
+    frond('la-dua-sau-1', cx, cy, 200, 150, 40, 30, '#388E3C'),
+    frond('la-dua-sau-2', cx, cy, 440, 150, 40, 30, '#388E3C'),
+    frond('la-dua-1', cx, cy, 160, 270, 70, 34, '#43A047'),
+    frond('la-dua-2', cx, cy, 480, 270, 70, 34, '#43A047'),
+    frond('la-dua-3', cx, cy, 230, 110, 20, 26, '#66BB6A'),
+    frond('la-dua-4', cx, cy, 415, 115, 20, 26, '#66BB6A'),
+    C('trai-dua-1', 305, 244, 20, '#8D6E63'),
+    C('trai-dua-2', 340, 244, 20, '#8D6E63'),
+    C('trai-dua-3', 322, 264, 19, '#A1887F'),
+  ];
+};
 
 export const xuongRong = () => [
   P('chau-xuong-rong', [[228, 420], [372, 420], [356, 486], [244, 486]], '#E07A5F'),
