@@ -1,6 +1,6 @@
 // Tầng 3: biến thể tư thế / cảm xúc / hoạt động, và 4 cấp thẻ Gacha (C/B/A/S).
 // Mỗi biến thể = biểu cảm khuôn mặt + cảnh nền + (tuỳ chọn) biến đổi tư thế của chủ thể.
-import { E, C, R, P, D, deco, line, star, heart, cloud, drop, arcBand, smallFlower, butterfly } from './shapes.mjs';
+import { E, C, R, P, D, deco, line, star, skyStar, heart, cloud, drop, arcBand, smallFlower, butterfly } from './shapes.mjs';
 
 const V = (slug, vi, en, opts) => ({ slug, name: { vi, en }, ...opts });
 
@@ -105,7 +105,7 @@ export function sceneParts(names, obj) {
     );
   }
   if (has('stars')) {
-    [[70, 90], [540, 70], [520, 240], [90, 260]].forEach(([x, y], k) => back.push(star(`sao-lap-lanh-${k + 1}`, x, y, 17, 8, '#FFD700')));
+    [[70, 90], [540, 70], [520, 240], [90, 260]].forEach(([x, y], k) => back.push(skyStar(`sao-lap-lanh-${k + 1}`, x, y, 17, 8, '#FFD700')));
   }
   if (has('clouds')) {
     back.push(cloud('may-1', 110, 110, 0.75));

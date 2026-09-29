@@ -10,7 +10,7 @@ import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
 import { SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
 import { face } from './face.mjs';
-import { R } from './shapes.mjs';
+import { R, skyStar } from './shapes.mjs';
 import {
   applyGroupTransform,
   groupTransformAttr,
@@ -136,6 +136,40 @@ function lowerVi(text) {
   return out;
 }
 
+/**
+ * Sao trang trí trên trời (skyStar) không được chạm vào hình khác (mây, trăng, núi, chủ thể…):
+ * nếu chạm thì dời sang chỗ trống gần nhất ở nửa trên tranh.
+ */
+function unstickStars(all, sky, subjectSet, transform) {
+  const world = (it) => (subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly);
+  const shapes = all.filter((it) => it.kind === 'region' && it !== sky).map((it) => ({ it, poly: world(it), box: bbox(world(it)) }));
+  const PAD = 6;
+  const hits = (self, x, y, r) => {
+    const probe = [];
+    for (let k = 0; k < 16; k++) probe.push([x + (r + PAD) * Math.cos((k * Math.PI) / 8), y + (r + PAD) * Math.sin((k * Math.PI) / 8)]);
+    probe.push([x, y]);
+    return shapes.some((s) => {
+      if (s.it === self || s.box[0] > x + r + PAD || s.box[2] < x - r - PAD || s.box[1] > y + r + PAD || s.box[3] < y - r - PAD) return false;
+      return probe.some(([px, py]) => pointInPoly(px, py, s.poly)) || s.poly.some(([px, py]) => (px - x) ** 2 + (py - y) ** 2 < (r + PAD) ** 2);
+    });
+  };
+  for (let i = 0; i < all.length; i++) {
+    const it = all[i];
+    const m = it.movable;
+    if (!m || !hits(it, m.cx, m.cy, m.rOuter)) continue;
+    const spots = [];
+    for (let y = 24; y <= 300; y += 12) for (let x = 24; x <= 576; x += 12) spots.push([x, y, (x - m.cx) ** 2 + (y - m.cy) ** 2]);
+    spots.sort((a, b) => a[2] - b[2]);
+    const free = spots.find(([x, y]) => !hits(it, x, y, m.rOuter));
+    if (!free) continue;
+    // Sửa tại chỗ để các mảng back/mid/front (dùng khi vẽ SVG) cũng nhận vị trí mới.
+    Object.assign(it, skyStar(it.id, free[0], free[1], m.rOuter, m.rInner, it.color, m.n, m.rot));
+    const s = shapes.find((q) => q.it === it);
+    s.poly = it.poly;
+    s.box = bbox(it.poly);
+  }
+}
+
 function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   // Tranh Lớp 3 có bối cảnh riêng (bg-map.mjs) → bỏ trang trí trời chung, dùng khung cảnh riêng.
   const bgPick = isCard ? null : bgFor(obj.slug, variant.slug);
@@ -183,10 +217,11 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   front.push(...(acc.fg || []));
 
   const all = [sky, ...back, ground, ...mid, ...subject, ...front];
-  uniquify(all);
-
   const transform = variant.transform || null;
   const subjectSet = new Set(subject);
+  unstickStars(all, sky, subjectSet, transform);
+  uniquify(all);
+
   const regions = all
     .filter((it) => it.kind === 'region')
     .map((it) => ({ ...it, worldPoly: subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly }));

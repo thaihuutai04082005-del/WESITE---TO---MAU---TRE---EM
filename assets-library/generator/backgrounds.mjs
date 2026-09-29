@@ -1,7 +1,7 @@
 // Bối cảnh (background) riêng cho từng tranh Lớp 3: ~40 khung cảnh × nhiều màu trời.
 // Mỗi tranh được gán 1 cặp (khung cảnh, màu trời) KHÔNG TRÙNG với tranh nào khác (xem bg-map.mjs).
 // Bối cảnh chỉ vẽ ở rìa / phía xa để không che chủ thể ở giữa tranh.
-import { E, C, R, P, D, line, star, cloud, smallFlower } from './shapes.mjs';
+import { E, C, R, P, D, line, star, skyStar, cloud, smallFlower } from './shapes.mjs';
 
 export const SKIES = {
   day: '#BDE6FF',
@@ -40,9 +40,9 @@ function skyDecor(pal, side = 1) {
   if (pal === 'sunset') return [C('mat-troi', x, 150, 54, '#FF8A65'), E('dai-may-1', 600 - x, 90, 90, 14, '#FFB3A1')];
   if (['pink', 'mint', 'lavender', 'peach', 'lemon', 'aqua'].includes(pal)) return [cloud('may-1', 600 - x, 86, 0.6, '#FFFFFF'), cloud('may-2', x, 60, 0.45, '#FFFFFF')];
   if (pal === 'storm') return [cloud('may-mua-1', 120, 90, 0.8, '#B0BEC5'), cloud('may-mua-2', 480, 80, 0.8, '#B0BEC5')];
-  if (pal === 'dusk') return [star('sao-1', 90, 70, 12, 5, '#FFF3B0'), star('sao-2', 510, 110, 10, 4, '#FFF3B0'), C('trang-chieu', x, 80, 26, '#FFF3D6')];
+  if (pal === 'dusk') return [skyStar('sao-1', 90, 70, 12, 5, '#FFF3B0'), skyStar('sao-2', 510, 110, 10, 4, '#FFF3B0'), C('trang-chieu', x, 80, 26, '#FFF3D6')];
   if (DARK.has(pal)) {
-    return [[60, 60], [170, 120], [270, 40], [430, 90], [560, 50], [540, 210], [40, 230]].map(([sx, sy], k) => star(`sao-${k + 1}`, sx, sy, k % 2 ? 9 : 13, k % 2 ? 4 : 6, '#FFE066'));
+    return [[60, 60], [170, 120], [270, 40], [430, 90], [560, 50], [540, 210], [40, 230]].map(([sx, sy], k) => skyStar(`sao-${k + 1}`, sx, sy, k % 2 ? 9 : 13, k % 2 ? 4 : 6, '#FFE066'));
   }
   return [];
 }
@@ -56,6 +56,17 @@ const building = (id, x, w, h, col, win = '#D6F0FF', y0 = 470) => {
   return items;
 };
 const hills = (col1, col2) => [D('doi-xa-1', 'M -20 470 Q 120 330 280 470 Z', col1), D('doi-xa-2', 'M 300 470 Q 460 320 620 470 Z', col2)];
+
+/** Bụi dương xỉ: 5 lá nhọn xòe ra từ gốc. */
+const fern = (id, x, y, s = 1) =>
+  [-70, -38, -8, 24, 56].map((deg, k) => {
+    const a = ((deg - 90) * Math.PI) / 180, L = (k === 2 ? 78 : 64) * s, w = 15 * s;
+    const tx = x + L * Math.cos(a), ty = y + L * Math.sin(a);
+    const nx = -Math.sin(a) * w, ny = Math.cos(a) * w;
+    const mx = x + (L / 2) * Math.cos(a), my = y + (L / 2) * Math.sin(a);
+    const q = (v) => Math.round(v * 10) / 10;
+    return D(`${id}-${k + 1}`, `M ${q(x)} ${q(y)} Q ${q(mx + nx)} ${q(my + ny)} ${q(tx)} ${q(ty)} Q ${q(mx - nx)} ${q(my - ny)} ${q(x)} ${q(y)} Z`, k % 2 ? '#66BB6A' : '#43A047');
+  });
 
 // ---------- Khung cảnh ----------
 // Mỗi hàm trả về { ground, far (sau mặt đất), near (trước mặt đất), fg (trước chủ thể) }.
@@ -76,7 +87,7 @@ export const SETTINGS = {
   spring: () => ({ ground: G.hill('#A5D66F'), far: [...tree('cay-hoa-1', 80, 470, 1.1, '#FFB3C1'), ...tree('cay-hoa-2', 520, 470, 1, '#FF9EC0')], fg: [E('canh-hoa-roi-1', 220, 140, 10, 6, '#FFB3C1', 20), E('canh-hoa-roi-2', 380, 100, 10, 6, '#FFB3C1', -30)] }),
   rainyStreet: () => ({ ground: G.flat('#8D9BA6'), far: [...building('nha-mua-1', 20, 100, 220, '#A1B0BC'), ...building('nha-mua-2', 480, 100, 250, '#90A4AE')], near: [E('vung-nuoc-1', 120, 540, 60, 12, '#7DC4FF'), E('vung-nuoc-2', 470, 560, 50, 10, '#7DC4FF')], fg: [0, 1, 2, 3, 4, 5].map((k) => E(`giot-mua-${k + 1}`, 60 + k * 100, 150 + (k % 2) * 60, 4, 10, '#5DADE2')) }),
   snowVillage: () => ({ ground: G.hill('#F0F6FB'), far: [R('nha-tuyet-1', 30, 390, 90, 80, 4, '#FFCC80'), P('mai-tuyet-1', [[20, 395], [75, 340], [130, 395]], '#FFFFFF'), R('nha-tuyet-2', 480, 380, 90, 90, 4, '#FF8A65'), P('mai-tuyet-2', [[470, 385], [525, 330], [580, 385]], '#FFFFFF')], fg: [[80, 150], [220, 90], [380, 140], [520, 200], [300, 60]].map(([x, y], k) => C(`bong-tuyet-${k + 1}`, x, y, 7, '#FFFFFF')) }),
-  volcanoValley: () => ({ ground: G.hill('#8BC34A'), far: [P('nui-lua-xa', [[380, 470], [470, 250], [520, 250], [610, 470]], '#8D6E63'), D('dung-nham-xa', 'M 470 252 Q 495 222 520 252 L 510 290 Q 495 270 480 290 Z', '#FF7043')], near: [E('duong-xi-1', 60, 480, 40, 16, '#4CAF50', -30), E('duong-xi-2', 100, 486, 34, 14, '#66BB6A', 30)] }),
+  volcanoValley: () => ({ ground: G.hill('#8BC34A'), far: [P('nui-lua-xa', [[380, 470], [470, 250], [520, 250], [610, 470]], '#8D6E63'), D('dung-nham-xa', 'M 470 252 Q 495 222 520 252 L 510 290 Q 495 270 480 290 Z', '#FF7043')], near: [...fern('duong-xi', 78, 512)] }),
   cloudland: () => ({ ground: D('bien-may', 'M 0 470 Q 60 430 120 460 Q 180 420 250 455 Q 320 420 390 455 Q 460 425 520 458 Q 570 435 600 450 L 600 600 L 0 600 Z', '#FFFFFF'), far: [cloud('may-cao-1', 110, 180, 0.7, '#FFFFFF'), cloud('may-cao-2', 480, 220, 0.6, '#FFFFFF')] }),
   rainbowHills: () => ({ ground: G.hill('#9CCC65'), far: ['#FF5F5F', '#FF9F43', '#FFD54F', '#4CD787', '#4FA3E0'].map((col, k) => D(`cau-vong-xa-${k + 1}`, `M ${-40 + k * 14} 470 Q 300 ${120 + k * 14} ${640 - k * 14} 470 L ${626 - k * 14} 470 Q 300 ${134 + k * 14} ${-26 + k * 14} 470 Z`, col)) }),
   stadium: () => ({ ground: G.flat('#7CC47F'), far: [R('khan-dai', 0, 330, 600, 140, 0, '#B0BEC5'), line('M 0 370 L 600 370 M 0 410 L 600 410 M 0 450 L 600 450', 3), ...[40, 120, 200, 400, 480, 560].map((x, k) => C(`khan-gia-${k + 1}`, x, 356, 10, ['#FF5F7E', '#4FA3E0', '#FFD54F'][k % 3]))], near: [line('M 0 540 L 600 540', 4)] }),
