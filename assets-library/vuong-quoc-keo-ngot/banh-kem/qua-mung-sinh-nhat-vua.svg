@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="banh-kem--qua-mung-sinh-nhat-vua">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="150" rx="54" ry="54" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="95" cy="90" rx="90" ry="14" id="r-dai-may-1" data-region="dai-may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
+
 <path d="M -40 470 Q 300 120 640 470 L 626 470 Q 300 134 -26 470 Z" id="r-cau-vong-xa-1" data-region="cau-vong-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M -26 470 Q 300 134 626 470 L 612 470 Q 300 148 -12 470 Z" id="r-cau-vong-xa-2" data-region="cau-vong-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M -12 470 Q 300 148 612 470 L 598 470 Q 300 162 2 470 Z" id="r-cau-vong-xa-3" data-region="cau-vong-xa-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

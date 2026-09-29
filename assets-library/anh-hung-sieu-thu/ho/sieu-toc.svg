@@ -42,8 +42,14 @@
 <g class="deco" pointer-events="none"><path d="M 285 278 Q 300 294 315 278" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 110 280 L 60 280 M 120 330 L 50 330 M 110 380 L 60 380 M 490 300 L 540 300 M 495 350 L 555 350" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
-<g class="deco" pointer-events="none"><path d="M 100 300 L 30 300 M 90 350 L 10 350 M 100 400 L 40 400" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 110 280 L 60 280" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+
+<g class="deco" pointer-events="none"><path d="M 490 300 L 540 300" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 495 350 L 555 350" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 100 300 L 30 300" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 90 350 L 10 350" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+
 <polygon points="500,150 473.6,210 497.6,210 478.4,265.2 526.4,195.6 502.4,195.6 519.2,150" id="r-tia-toc-do" data-region="tia-toc-do" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 </svg>

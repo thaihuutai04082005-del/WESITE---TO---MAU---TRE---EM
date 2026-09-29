@@ -1,6 +1,6 @@
 // Tầng 3: biến thể tư thế / cảm xúc / hoạt động, và 4 cấp thẻ Gacha (C/B/A/S).
 // Mỗi biến thể = biểu cảm khuôn mặt + cảnh nền + (tuỳ chọn) biến đổi tư thế của chủ thể.
-import { E, C, R, P, D, deco, line, star, skyStar, heart, cloud, drop, arcBand, smallFlower, butterfly } from './shapes.mjs';
+import { E, C, R, P, D, deco, line, softLines, star, skyStar, heart, cloud, drop, arcBand, smallFlower, butterfly } from './shapes.mjs';
 
 const V = (slug, vi, en, opts) => ({ slug, name: { vi, en }, ...opts });
 
@@ -95,8 +95,8 @@ export function sceneParts(names, obj) {
     );
   }
   if (has('sun')) {
-    back.push(star('tia-nang', 510, 92, 72, 50, '#FFB74D', 12));
-    back.push(C('mat-troi', 510, 92, 42, '#FFD54F'));
+    back.push(Object.assign(star('tia-nang', 510, 92, 72, 50, '#FFB74D', 12), { optional: true, group: 'mat-troi-canh' }));
+    back.push(Object.assign(C('mat-troi', 510, 92, 42, '#FFD54F'), { optional: true, group: 'mat-troi-canh' }));
   }
   if (has('night')) {
     back.push(D('mat-trang', 'M 490 50 C 412 56 412 164 490 170 C 452 146 452 76 490 50 Z', '#FFE066'));
@@ -108,8 +108,9 @@ export function sceneParts(names, obj) {
     [[70, 90], [540, 70], [520, 240], [90, 260]].forEach(([x, y], k) => back.push(skyStar(`sao-lap-lanh-${k + 1}`, x, y, 17, 8, '#FFD700')));
   }
   if (has('clouds')) {
-    back.push(cloud('may-1', 110, 110, 0.75));
-    back.push(cloud('may-2', 330, 70, 0.6));
+    // Mây trang trí: chạm vào hình/dây khác thì build.mjs bỏ đi.
+    back.push(Object.assign(cloud('may-1', 110, 110, 0.75), { optional: true, group: 'may-1' }));
+    back.push(Object.assign(cloud('may-2', 330, 70, 0.6), { optional: true, group: 'may-2' }));
   }
   if (has('stormCloud')) {
     back.push(cloud('may-den', 470, 110, 0.9, '#90A4AE'));
@@ -162,13 +163,13 @@ export function sceneParts(names, obj) {
       front.push(R(`hoa-giay-${k + 1}`, x - 7, y - 4, 14, 8, 2, cs[k])),
     );
   }
-  if (has('motion')) front.push(line('M 110 280 L 60 280 M 120 330 L 50 330 M 110 380 L 60 380 M 490 300 L 540 300 M 495 350 L 555 350', 5));
+  if (has('motion')) front.push(...softLines('M 110 280 L 60 280 M 120 330 L 50 330 M 110 380 L 60 380 M 490 300 L 540 300 M 495 350 L 555 350', 5));
   if (has('speed')) {
-    front.push(line('M 100 300 L 30 300 M 90 350 L 10 350 M 100 400 L 40 400', 6));
+    front.push(...softLines('M 100 300 L 30 300 M 90 350 L 10 350 M 100 400 L 40 400', 6));
     mid.push(C('bui-1', 110, 455, 18, '#D6DEE6'), C('bui-2', 80, 440, 13, '#D6DEE6'), C('bui-3', 60, 462, 10, '#D6DEE6'));
   }
   if (has('wind')) {
-    front.push(line('M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260', 4));
+    front.push(...softLines('M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260', 4));
     front.push(E('la-bay-1', 520, 200, 12, 7, '#4CAF50', 30), E('la-bay-2', 90, 150, 12, 7, '#4CAF50', -20));
   }
   // ---- Cảnh nền cho bộ chủ đề mới ----

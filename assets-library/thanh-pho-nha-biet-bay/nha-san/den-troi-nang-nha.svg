@@ -2,8 +2,8 @@
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="528,110 530.4,116.8 537.5,116.9 531.8,121.2 533.9,128.1 528,124 522.1,128.1 524.2,121.2 518.5,116.9 525.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="516,98 518.4,104.8 525.5,104.9 519.8,109.2 521.9,116.1 516,112 510.1,116.1 512.2,109.2 506.5,104.9 513.6,104.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
 <path d="M 0 470 Q 300 380 600 470 Z" id="r-ruong-1" data-region="ruong-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 420 Q 300 320 600 420 L 600 440 Q 300 350 0 440 Z" id="r-ruong-2" data-region="ruong-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 370 Q 300 270 600 370 L 600 390 Q 300 300 0 390 Z" id="r-ruong-3" data-region="ruong-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

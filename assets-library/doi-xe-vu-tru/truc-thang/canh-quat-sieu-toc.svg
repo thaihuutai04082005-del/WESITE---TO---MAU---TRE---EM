@@ -32,6 +32,8 @@
 <g class="deco" pointer-events="none"><path d="M 80 214 Q 310 174 540 214 M 110 250 Q 310 274 510 250" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 100 300 L 30 300 M 90 350 L 10 350 M 100 400 L 40 400" fill="none" stroke="#1B2A38" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+
+
 </g>
 </svg>

@@ -27,7 +27,9 @@
 <g class="deco" pointer-events="none"><path d="M 289.5 459 Q 300 470.2 310.5 459" fill="none" stroke="#1B2A38" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+<g class="deco" pointer-events="none"><path d="M 460 150 Q 510 130 560 150" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 480 260 Q 530 240 580 260" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
 <ellipse cx="520" cy="200" rx="12" ry="7" transform="rotate(30 520 200)" id="r-la-bay-1" data-region="la-bay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="90" cy="150" rx="12" ry="7" transform="rotate(-20 90 150)" id="r-la-bay-2" data-region="la-bay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="200" cy="120" rx="14" ry="8" transform="rotate(30 200 120)" id="r-la-thu-1" data-region="la-thu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

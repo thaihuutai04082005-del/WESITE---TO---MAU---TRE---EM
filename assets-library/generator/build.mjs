@@ -16,6 +16,8 @@ import {
   groupTransformAttr,
   bbox,
   pointInPoly,
+  distToPolyEdge,
+  flattenPath,
   polyArea,
   simplify,
   round1,
@@ -37,6 +39,7 @@ function uniquify(items) {
 function renderItems(items) {
   return items
     .map((it) => {
+      if (it.dropped || (it.kind === 'deco' && !it.markup)) return '';
       if (it.kind === 'deco') return `<g class="deco" pointer-events="none">${it.markup}</g>`;
       const attrs = `id="r-${it.id}" data-region="${it.id}" class="region" fill="#FFFFFF" stroke="${STROKE}" stroke-width="3" stroke-linejoin="round"`;
       return it.svg(attrs);
@@ -136,18 +139,45 @@ function lowerVi(text) {
   return out;
 }
 
+/** Điểm mẫu dọc các nét dây/đường (không phải của chủ thể) để tránh đặt trang trí đè lên. */
+function barrierPoints(all, subjectSet) {
+  const pts = [];
+  for (const it of all) if (it.kind === 'deco' && it.d && it.markup && !subjectSet.has(it)) pts.push(...densify(flattenPath(it.d), 5));
+  return pts;
+}
+
+/** Mây / mặt trời / trăng trang trí (optional) chạm vào hình khác hoặc dây → bỏ cả nhóm. */
+function dropBlockedSkyDecor(all, sky, subjectSet, transform) {
+  const opt = all.filter((it) => it.optional);
+  if (!opt.length) return;
+  const world = (it) => (subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly);
+  const solid = all.filter((it) => it.kind === 'region' && it !== sky && !it.optional && !it.movable).map((it) => ({ poly: world(it), box: bbox(world(it)) }));
+  const lines = barrierPoints(all, subjectSet);
+  const near = (a, b, pad) => a[0] <= b[2] + pad && a[2] >= b[0] - pad && a[1] <= b[3] + pad && a[3] >= b[1] - pad;
+  const bad = new Set();
+  for (const it of opt) {
+    const poly = world(it), box = bbox(poly);
+    const hitShape = solid.some((s) => near(box, s.box, 4) && (poly.some(([x, y]) => pointInPoly(x, y, s.poly)) || s.poly.some(([x, y]) => pointInPoly(x, y, poly))));
+    const hitLine = lines.some(([x, y]) => x >= box[0] - 4 && x <= box[2] + 4 && y >= box[1] - 4 && y <= box[3] + 4 && (pointInPoly(x, y, poly) || distToPolyEdge(x, y, poly) < 4));
+    if (hitShape || hitLine) bad.add(it.group || it.id);
+  }
+  for (const it of opt) if (bad.has(it.group || it.id)) it.dropped = true;
+}
+
 /**
  * Sao trang trí trên trời (skyStar) không được chạm vào hình khác (mây, trăng, núi, chủ thể…):
  * nếu chạm thì dời sang chỗ trống gần nhất ở nửa trên tranh.
  */
 function unstickStars(all, sky, subjectSet, transform) {
   const world = (it) => (subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly);
-  const shapes = all.filter((it) => it.kind === 'region' && it !== sky).map((it) => ({ it, poly: world(it), box: bbox(world(it)) }));
+  const shapes = all.filter((it) => it.kind === 'region' && it !== sky && !it.dropped).map((it) => ({ it, poly: world(it), box: bbox(world(it)) }));
+  const lines = barrierPoints(all, subjectSet);
   const PAD = 6;
   const hits = (self, x, y, r) => {
     const probe = [];
     for (let k = 0; k < 16; k++) probe.push([x + (r + PAD) * Math.cos((k * Math.PI) / 8), y + (r + PAD) * Math.sin((k * Math.PI) / 8)]);
     probe.push([x, y]);
+    if (lines.some(([px, py]) => (px - x) ** 2 + (py - y) ** 2 < (r + PAD) ** 2)) return true;
     return shapes.some((s) => {
       if (s.it === self || s.box[0] > x + r + PAD || s.box[2] < x - r - PAD || s.box[1] > y + r + PAD || s.box[3] < y - r - PAD) return false;
       return probe.some(([px, py]) => pointInPoly(px, py, s.poly)) || s.poly.some(([px, py]) => (px - x) ** 2 + (py - y) ** 2 < (r + PAD) ** 2);
@@ -168,6 +198,33 @@ function unstickStars(all, sky, subjectSet, transform) {
     s.poly = it.poly;
     s.box = bbox(it.poly);
   }
+}
+
+/** Vạch mềm (tốc độ, chuyển động, gió) đè lên bất kỳ hình nào (trừ nền trời) thì bỏ đi. */
+function dropBlockedLines(all, sky, subjectSet, transform) {
+  const soft = all.filter((it) => it.kind === 'deco' && it.soft);
+  if (!soft.length) return;
+  const world = (it) => (subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly);
+  const shapes = all.filter((it) => it.kind === 'region' && it !== sky).map((it) => ({ poly: world(it), box: bbox(world(it)) }));
+  for (const it of soft) {
+    const pts = densify(flattenPath(it.d), 4);
+    const blocked = pts.some(([x, y]) => shapes.some((s) => x >= s.box[0] - 4 && x <= s.box[2] + 4 && y >= s.box[1] - 4 && y <= s.box[3] + 4 && (pointInPoly(x, y, s.poly) || distToPolyEdge(x, y, s.poly) < 5)));
+    if (blocked) it.markup = '';
+  }
+}
+
+/** Chèn thêm điểm để khoảng cách giữa 2 điểm liên tiếp ≤ step. */
+function densify(pts, step) {
+  const out = [];
+  for (let i = 0; i < pts.length; i++) {
+    const [x, y] = pts[i];
+    out.push([x, y]);
+    const nx = pts[i + 1];
+    if (!nx) break;
+    const n = Math.ceil(Math.hypot(nx[0] - x, nx[1] - y) / step);
+    for (let k = 1; k < n; k++) out.push([x + ((nx[0] - x) * k) / n, y + ((nx[1] - y) * k) / n]);
+  }
+  return out;
 }
 
 function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
@@ -219,11 +276,13 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   const all = [sky, ...back, ground, ...mid, ...subject, ...front];
   const transform = variant.transform || null;
   const subjectSet = new Set(subject);
+  dropBlockedLines(all, sky, subjectSet, transform);
+  dropBlockedSkyDecor(all, sky, subjectSet, transform);
   unstickStars(all, sky, subjectSet, transform);
   uniquify(all);
 
   const regions = all
-    .filter((it) => it.kind === 'region')
+    .filter((it) => it.kind === 'region' && !it.dropped)
     .map((it) => ({ ...it, worldPoly: subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly }));
 
   const manifestRegions = computeManifestRegions(regions);

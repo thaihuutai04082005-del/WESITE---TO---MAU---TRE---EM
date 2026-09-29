@@ -2,8 +2,8 @@
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="84,60 86.9,68 95.4,68.3 88.8,73.5 91.1,81.7 84,77 76.9,81.7 79.2,73.5 72.6,68.3 81.1,68" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="492,110 494.4,116.8 501.5,116.9 495.8,121.2 497.9,128.1 492,124 486.1,128.1 488.2,121.2 482.5,116.9 489.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="510,100 512.4,106.8 519.5,106.9 513.8,111.2 515.9,118.1 510,114 504.1,118.1 506.2,111.2 500.5,106.9 507.6,106.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
 <ellipse cx="300" cy="440" rx="320" ry="10" id="r-duong-chan-troi" data-region="duong-chan-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 0 40 Q 300 90 600 40" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polygon points="22,45.2 58,45.2 40,81.2" id="r-co-duoi-nheo-1" data-region="co-duoi-nheo-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
