@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="chuoi-the-thao--leo-nui">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 64 110 Q 40 110 46.4 90 Q 41.6 62 76 62 Q 84 35.6 113.6 42 Q 134.4 19.6 158.4 46 Q 193.6 40.4 188.8 75.6 Q 203.2 110 176 110 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 424 100 Q 400 100 406.4 80 Q 401.6 52 436 52 Q 444 25.6 473.6 32 Q 494.4 9.6 518.4 36 Q 553.6 30.4 548.8 65.6 Q 563.2 100 536 100 Z" id="r-may-mua-2" data-region="may-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="-20,470 150,170 320,470" id="r-dinh-nui" data-region="dinh-nui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="150,170 118,230 150,216 182,230" id="r-tuyet-dinh" data-region="tuyet-dinh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="150" y="130" width="4" height="44" rx="1" id="r-co-dinh-nui" data-region="co-dinh-nui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="154,132 190,142 154,152" id="r-la-co-dinh" data-region="la-co-dinh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <rect x="60" y="40" width="480" height="440" rx="10" id="r-vach-leo" data-region="vach-leo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="120" cy="100" rx="18" ry="13" id="r-cuc-bam-1" data-region="cuc-bam-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="220" cy="160" rx="18" ry="13" transform="rotate(30 220 160)" id="r-cuc-bam-2" data-region="cuc-bam-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

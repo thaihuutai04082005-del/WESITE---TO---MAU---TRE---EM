@@ -3,13 +3,16 @@
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="60,47 63.5,55.1 72.4,56 65.7,61.9 67.6,70.5 60,66 52.4,70.5 54.3,61.9 47.6,56 56.5,55.1" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="170,111 172.4,116.8 178.6,117.2 173.8,121.2 175.3,127.3 170,124 164.7,127.3 166.2,121.2 161.4,117.2 167.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="260,27 263.5,35.1 272.4,36 265.7,41.9 267.6,50.5 260,46 252.4,50.5 254.3,41.9 247.6,36 256.5,35.1" id="r-sao-3" data-region="sao-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="420,81 422.4,86.8 428.6,87.2 423.8,91.2 425.3,97.3 420,94 414.7,97.3 416.2,91.2 411.4,87.2 417.6,86.8" id="r-sao-4" data-region="sao-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="270,27 273.5,35.1 282.4,36 275.7,41.9 277.6,50.5 270,46 262.4,50.5 264.3,41.9 257.6,36 266.5,35.1" id="r-sao-3" data-region="sao-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430,81 432.4,86.8 438.6,87.2 433.8,91.2 435.3,97.3 430,94 424.7,97.3 426.2,91.2 421.4,87.2 427.6,86.8" id="r-sao-4" data-region="sao-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="560,37 563.5,45.1 572.4,46 565.7,51.9 567.6,60.5 560,56 552.4,60.5 554.3,51.9 547.6,46 556.5,45.1" id="r-sao-5" data-region="sao-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="540,201 542.4,206.8 548.6,207.2 543.8,211.2 545.3,217.3 540,214 534.7,217.3 536.2,211.2 531.4,207.2 537.6,206.8" id="r-sao-6" data-region="sao-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="40,217 43.5,225.1 52.4,226 45.7,231.9 47.6,240.5 40,236 32.4,240.5 34.3,231.9 27.6,226 36.5,225.1" id="r-sao-7" data-region="sao-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="330,141 332.4,146.8 338.6,147.2 333.8,151.2 335.3,157.3 330,154 324.7,157.3 326.2,151.2 321.4,147.2 327.6,146.8" id="r-sao-8" data-region="sao-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 0 468 Q 120 450 240 462 Q 380 476 480 456 Q 550 444 600 452 L 600 600 L 0 600 Z" id="r-mat-dat-hanh-tinh" data-region="mat-dat-hanh-tinh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="70" cy="360" rx="50" ry="50" id="r-nam-la-1" data-region="nam-la-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="60" y="400" width="20" height="70" rx="6" id="r-than-nam-la-1" data-region="than-nam-la-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="530" cy="340" rx="60" ry="60" id="r-nam-la-2" data-region="nam-la-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="518" y="390" width="24" height="80" rx="6" id="r-than-nam-la-2" data-region="than-nam-la-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-drive" transform="translate(0 0) translate(300 470) scale(0.88) rotate(0) translate(-300 -470)">
 <ellipse cx="300" cy="310" rx="206" ry="120" id="r-kinh-vom" data-region="kinh-vom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

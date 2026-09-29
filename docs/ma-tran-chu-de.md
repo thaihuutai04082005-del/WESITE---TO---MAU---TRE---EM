@@ -160,3 +160,5 @@ Hình dáng các đối tượng cũ có trong bộ tạo tranh (mèo, chó, tá
 | | Cam | Trượt Ván · Quyền Anh · Khúc Côn Cầu · Trượt Patin · Nhảy Bạt Lò Xo |
 
 Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ riêng.
+
+**Bối cảnh:** mỗi tranh Lớp 3 có 1 khung cảnh + màu trời riêng, không tranh nào trùng (assets-library/generator/bg-map.mjs — bộ tạo tranh tự kiểm tra trùng).

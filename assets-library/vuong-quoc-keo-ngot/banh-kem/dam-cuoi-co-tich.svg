@@ -1,6 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="banh-kem--dam-cuoi-co-tich">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 463 101 Q 445 101 449.8 86 Q 446.2 65 472 65 Q 478 45.2 500.2 50 Q 515.8 33.2 533.8 53 Q 560.2 48.8 556.6 75.2 Q 567.4 101 547 101 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 63.5 71.3 Q 50 71.3 53.6 60 Q 50.9 44.3 70.3 44.3 Q 74.8 29.4 91.4 33 Q 103.1 20.4 116.6 35.3 Q 136.4 32.1 133.7 51.9 Q 141.8 71.3 126.5 71.3 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="71.2" y="404" width="17.6" height="66" rx="3" id="r-than-cay-hoa-1" data-region="than-cay-hoa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="80" cy="371" rx="48.4" ry="48.4" id="r-cay-hoa-1" data-region="cay-hoa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="512" y="410" width="16" height="60" rx="3" id="r-than-cay-hoa-2" data-region="than-cay-hoa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="380" rx="44" ry="44" id="r-cay-hoa-2" data-region="cay-hoa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 60 480 L 60 250 Q 60 60 300 60 Q 540 60 540 250 L 540 480 L 500 480 L 500 250 Q 500 100 300 100 Q 100 100 100 250 L 100 480 Z" id="r-cong-hoa" data-region="cong-hoa" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="80" cy="250" rx="16" ry="16" id="r-hoa-cong-1" data-region="hoa-cong-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="90.8" cy="197.5" rx="16" ry="16" id="r-hoa-cong-2" data-region="hoa-cong-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
@@ -68,5 +74,7 @@
 <path d="M 60 399.8 C 27 377.8 38 353.6 60 369 C 82 353.6 93 377.8 60 399.8 Z" id="r-trai-tim-1" data-region="trai-tim-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 545 379.8 C 512 357.8 523 333.6 545 349 C 567 333.6 578 357.8 545 379.8 Z" id="r-trai-tim-2" data-region="trai-tim-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 240 109.8 C 207 87.8 218 63.6 240 79 C 262 63.6 273 87.8 240 109.8 Z" id="r-trai-tim-3" data-region="trai-tim-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="220" cy="140" rx="10" ry="6" transform="rotate(20 220 140)" id="r-canh-hoa-roi-1" data-region="canh-hoa-roi-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="380" cy="100" rx="10" ry="6" transform="rotate(-30 380 100)" id="r-canh-hoa-roi-2" data-region="canh-hoa-roi-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 </svg>

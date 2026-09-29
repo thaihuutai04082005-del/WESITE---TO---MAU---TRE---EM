@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
 import { THEMES, OBJECTS, THEME_VARIANTS } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
+import { buildBackground } from './backgrounds.mjs';
+import { bgFor, checkBgMap } from './bg-map.mjs';
 import { SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
 import { face } from './face.mjs';
 import { R } from './shapes.mjs';
@@ -122,17 +124,25 @@ function computeManifestRegions(regions) {
   });
 }
 
-function buildPicture(theme, obj, variant, isCard) {
-  const scene = variant.scene || [];
+function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
+  // Tranh Lớp 3 có bối cảnh riêng (bg-map.mjs) → bỏ trang trí trời chung, dùng khung cảnh riêng.
+  const bgPick = isCard ? null : bgFor(obj.slug, variant.slug);
+  const scene = (variant.scene || []).filter((n) => !bgPick || !['sun', 'clouds', 'space', 'night'].includes(n));
   const skyName = variant.sky || (scene.includes('night') ? 'night' : scene.includes('sunset') ? 'sunset' : scene.includes('rain') ? 'rain' : scene.includes('snow') ? 'snow' : 'day');
   const night = skyName === 'night';
   const groundKind = variant.ground || (obj.ground === 'water' ? 'water' : skyName === 'snow' ? 'snow' : 'grass');
   const groundColor =
     groundKind === 'water' ? (night ? GROUND.waterNight : GROUND.water) : groundKind === 'grass' ? (night ? GROUND.night : GROUND.grass) : GROUND[groundKind] || GROUND.grass;
 
-  const sky = R('nen-troi', 0, 0, 600, 600, 0, SKY[skyName]);
-  const ground = groundItem(groundKind === 'water' ? 'water' : groundKind === 'rock' ? 'rock' : 'grass', groundColor);
+  const bg = bgPick ? buildBackground(bgPick[0], bgPick[1], bgIndex % 2 ? -1 : 1) : null;
+  const sky = R('nen-troi', 0, 0, 600, 600, 0, bg ? bg.skyColor : SKY[skyName]);
+  const ground = bg ? bg.ground : groundItem(groundKind === 'water' ? 'water' : groundKind === 'rock' ? 'rock' : 'grass', groundColor);
   const { back, mid, front, subjectExtra } = sceneParts(scene, obj);
+  if (bg) {
+    back.unshift(...bg.skyItems, ...bg.far);
+    mid.unshift(...bg.near);
+    front.push(...bg.fg);
+  }
 
   const body = obj.build();
   if (night && obj.glow) {
@@ -281,6 +291,8 @@ function writeMascots() {
 }
 
 function main() {
+  const bgErrors = checkBgMap(OBJECTS, (o) => OBJECT_VARIANTS[o.slug] || []);
+  if (bgErrors.length) throw new Error(`Bối cảnh chưa hợp lệ:\n${bgErrors.join('\n')}`);
   const catalog = { generatedAt: new Date().toISOString(), viewBox: [600, 600], themes: [] };
   for (const theme of THEMES) {
     const dir = join(ROOT, theme.slug);
@@ -292,8 +304,8 @@ function main() {
       // Lớp 3: mỗi đối tượng có 5 biến thể riêng (object-variants.mjs); thẻ vẫn theo chủ đề.
       const own = OBJECT_VARIANTS[obj.slug] || tv.variants;
       const variants = [...own.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
-      for (const [variant, isCard] of variants) {
-        const { svg, meta } = buildPicture(theme, obj, variant, isCard);
+      for (const [[variant, isCard], k] of variants.map((v, i) => [v, i])) {
+        const { svg, meta } = buildPicture(theme, obj, variant, isCard, k);
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
         writeFileSync(out, svg);

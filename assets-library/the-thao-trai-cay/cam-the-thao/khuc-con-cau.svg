@@ -1,7 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="cam-the-thao--khuc-con-cau">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="505,28 515.9,47.4 535,36 534.7,58.3 557,58 545.6,77.1 565,88 545.6,98.9 557,118 534.7,117.7 535,140 515.9,128.6 505,148 494.1,128.6 475,140 475.3,117.7 453,118 464.4,98.9 445,88 464.4,77.1 453,58 475.3,58.3 475,36 494.1,47.4" id="r-tia-nang" data-region="tia-nang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="505" cy="88" rx="36" ry="36" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 53 105 Q 35 105 39.8 90 Q 36.2 69 62 69 Q 68 49.2 90.2 54 Q 105.8 37.2 123.8 57 Q 150.2 52.8 146.6 79.2 Q 157.4 105 137 105 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="430" width="600" height="40" rx="0" id="r-thanh-chan-san" data-region="thanh-chan-san" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="446" width="600" height="8" rx="0" id="r-vach-do" data-region="vach-do" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="470" width="600" height="130" rx="0" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 60 530 Q 200 500 300 530 M 360 560 Q 480 530 560 560" fill="none" stroke="#1B2A38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
 </g>
 <g id="subject" class="subject anim-float" transform="translate(-40 0) translate(300 480) scale(1) rotate(0) translate(-300 -480)">
 <ellipse cx="174" cy="327.2" rx="12" ry="36" transform="rotate(40 174 327.2)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

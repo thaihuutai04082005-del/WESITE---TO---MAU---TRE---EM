@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="dua-hau-the-thao--keo-co">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 57.5 128.8 Q 35 128.8 41 110 Q 36.5 83.8 68.8 83.8 Q 76.3 59 104 65 Q 123.5 44 146 68.8 Q 179 63.5 174.5 96.5 Q 188 128.8 162.5 128.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 288 85 Q 270 85 274.8 70 Q 271.2 49 297 49 Q 303 29.2 325.2 34 Q 340.8 17.2 358.8 37 Q 385.2 32.8 381.6 59.2 Q 392.4 85 372 85 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 64 110 Q 40 110 46.4 90 Q 41.6 62 76 62 Q 84 35.6 113.6 42 Q 134.4 19.6 158.4 46 Q 193.6 40.4 188.8 75.6 Q 203.2 110 176 110 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 424 100 Q 400 100 406.4 80 Q 401.6 52 436 52 Q 444 25.6 473.6 32 Q 494.4 9.6 518.4 36 Q 553.6 30.4 548.8 65.6 Q 563.2 100 536 100 Z" id="r-may-mua-2" data-region="may-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M -20 470 Q 120 330 280 470 Z" id="r-doi-xa-1" data-region="doi-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 300 470 Q 460 320 620 470 Z" id="r-doi-xa-2" data-region="doi-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="60" cy="509" rx="9" ry="9" id="r-hoa-dong-1-canh-1" data-region="hoa-dong-1-canh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="70.5" cy="516.6" rx="9" ry="9" id="r-hoa-dong-1-canh-2" data-region="hoa-dong-1-canh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="66.5" cy="528.9" rx="9" ry="9" id="r-hoa-dong-1-canh-3" data-region="hoa-dong-1-canh-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="53.5" cy="528.9" rx="9" ry="9" id="r-hoa-dong-1-canh-4" data-region="hoa-dong-1-canh-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="49.5" cy="516.6" rx="9" ry="9" id="r-hoa-dong-1-canh-5" data-region="hoa-dong-1-canh-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="60" cy="520" rx="7" ry="7" id="r-hoa-dong-1-nhuy" data-region="hoa-dong-1-nhuy" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="540" cy="519" rx="9" ry="9" id="r-hoa-dong-2-canh-1" data-region="hoa-dong-2-canh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="550.5" cy="526.6" rx="9" ry="9" id="r-hoa-dong-2-canh-2" data-region="hoa-dong-2-canh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="546.5" cy="538.9" rx="9" ry="9" id="r-hoa-dong-2-canh-3" data-region="hoa-dong-2-canh-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="533.5" cy="538.9" rx="9" ry="9" id="r-hoa-dong-2-canh-4" data-region="hoa-dong-2-canh-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="529.5" cy="526.6" rx="9" ry="9" id="r-hoa-dong-2-canh-5" data-region="hoa-dong-2-canh-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="540" cy="530" rx="7" ry="7" id="r-hoa-dong-2-nhuy" data-region="hoa-dong-2-nhuy" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g id="subject" class="subject anim-float" transform="translate(60 0) translate(300 480) scale(1) rotate(8) translate(-300 -480)">
 <ellipse cx="132" cy="406" rx="12" ry="36" transform="rotate(40 132 406)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
