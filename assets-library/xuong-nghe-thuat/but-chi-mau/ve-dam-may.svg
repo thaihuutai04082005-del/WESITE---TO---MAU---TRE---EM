@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="but-chi-mau--ve-dam-may">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 463 101 Q 445 101 449.8 86 Q 446.2 65 472 65 Q 478 45.2 500.2 50 Q 515.8 33.2 533.8 53 Q 560.2 48.8 556.6 75.2 Q 567.4 101 547 101 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 63.5 71.3 Q 50 71.3 53.6 60 Q 50.9 44.3 70.3 44.3 Q 74.8 29.4 91.4 33 Q 103.1 20.4 116.6 35.3 Q 136.4 32.1 133.7 51.9 Q 141.8 71.3 126.5 71.3 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 61 197.5 Q 40 197.5 45.6 180 Q 41.4 155.5 71.5 155.5 Q 78.5 132.4 104.4 138 Q 122.6 118.4 143.6 141.5 Q 174.4 136.6 170.2 167.4 Q 182.8 197.5 159 197.5 Z" id="r-may-cao-1" data-region="may-cao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 438 235 Q 420 235 424.8 220 Q 421.2 199 447 199 Q 453 179.2 475.2 184 Q 490.8 167.2 508.8 187 Q 535.2 182.8 531.6 209.2 Q 542.4 235 522 235 Z" id="r-may-cao-2" data-region="may-cao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 60 430 120 460 Q 180 420 250 455 Q 320 420 390 455 Q 460 425 520 458 Q 570 435 600 450 L 600 600 L 0 600 Z" id="r-bien-may" data-region="bien-may" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="252" y="72" width="96" height="40" rx="12" id="r-tay-bui" data-region="tay-bui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="108" width="100" height="30" rx="4" id="r-dai-bac" data-region="dai-bac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="136" width="100" height="250" rx="0" id="r-than-but-chi" data-region="than-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="136" width="22" height="250" rx="0" id="r-canh-but-trai" data-region="canh-but-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="328" y="136" width="22" height="250" rx="0" id="r-canh-but-phai" data-region="canh-but-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="250,386 350,386 300,470" id="r-go-but-chi" data-region="go-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="284,443 316,443 300,470" id="r-ruot-but-chi" data-region="ruot-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="281.8" cy="250" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.2" cy="250" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="283.6" cy="247.9" r="1.8" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="320" cy="247.9" r="1.8" fill="#FFFFFF"/></g>
+<ellipse cx="267.8" cy="264" rx="7.7" ry="4.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="332.2" cy="264" rx="7.7" ry="4.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 289.5 271 Q 300 282.2 310.5 271" fill="none" stroke="#1B2A38" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<path d="M 64 180 Q 40 180 46.4 160 Q 41.6 132 76 132 Q 84 105.6 113.6 112 Q 134.4 89.6 158.4 116 Q 193.6 110.4 188.8 145.6 Q 203.2 180 176 180 Z" id="r-may-ve-1" data-region="may-ve-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 431 267.5 Q 410 267.5 415.6 250 Q 411.4 225.5 441.5 225.5 Q 448.5 202.4 474.4 208 Q 492.6 188.4 513.6 211.5 Q 544.4 206.6 540.2 237.4 Q 552.8 267.5 529 267.5 Z" id="r-may-ve-2" data-region="may-ve-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

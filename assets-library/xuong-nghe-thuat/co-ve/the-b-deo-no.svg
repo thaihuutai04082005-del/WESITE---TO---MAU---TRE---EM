@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="co-ve--the-b-deo-no">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 57.5 128.8 Q 35 128.8 41 110 Q 36.5 83.8 68.8 83.8 Q 76.3 59 104 65 Q 123.5 44 146 68.8 Q 179 63.5 174.5 96.5 Q 188 128.8 162.5 128.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 288 85 Q 270 85 274.8 70 Q 271.2 49 297 49 Q 303 29.2 325.2 34 Q 340.8 17.2 358.8 37 Q 385.2 32.8 381.6 59.2 Q 392.4 85 372 85 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="254" y="90" width="92" height="250" rx="40" id="r-can-co" data-region="can-co" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="246" y="330" width="108" height="52" rx="8" id="r-dai-kim-loai" data-region="dai-kim-loai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 250 380 L 350 380 Q 360 440 300 486 Q 240 440 250 380 Z" id="r-long-co" data-region="long-co" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 272 440 L 328 440 Q 322 468 300 486 Q 278 468 272 440 Z" id="r-mau-dau-co" data-region="mau-dau-co" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="283.9" cy="220" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="316.1" cy="220" r="5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="285.4" cy="218.1" r="1.6" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="317.7" cy="218.1" r="1.6" fill="#FFFFFF"/></g>
+<ellipse cx="271.5" cy="232.4" rx="6.8" ry="4.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="328.5" cy="232.4" rx="6.8" ry="4.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 290.7 238.6 Q 300 248.5 309.3 238.6" fill="none" stroke="#1B2A38" stroke-width="3.48" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M 300 84 Q 264 54 266.4 87.6 Q 282 93.6 300 84 Z" id="r-no-ruy-bang-trai" data-region="no-ruy-bang-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 300 84 Q 336 54 333.6 87.6 Q 318 93.6 300 84 Z" id="r-no-ruy-bang-phai" data-region="no-ruy-bang-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="84" rx="7.2" ry="7.2" id="r-nut-ruy-bang" data-region="nut-ruy-bang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<rect x="33" y="36" width="14" height="8" rx="2" id="r-hoa-giay-1" data-region="hoa-giay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="213" y="36" width="14" height="8" rx="2" id="r-hoa-giay-2" data-region="hoa-giay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="393" y="26" width="14" height="8" rx="2" id="r-hoa-giay-3" data-region="hoa-giay-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="573" y="36" width="14" height="8" rx="2" id="r-hoa-giay-4" data-region="hoa-giay-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="23" y="436" width="14" height="8" rx="2" id="r-hoa-giay-5" data-region="hoa-giay-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="568" y="446" width="14" height="8" rx="2" id="r-hoa-giay-6" data-region="hoa-giay-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

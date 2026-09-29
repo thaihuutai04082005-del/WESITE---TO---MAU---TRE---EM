@@ -45,15 +45,22 @@ const M = {
 // Bối cảnh đợt 2 (bg-map2.mjs) ghi [khung cảnh, 'màu ưu tiên|màu 2…'] — màu trời được chọn tự động
 // theo thứ tự ưu tiên sao cho cặp (khung cảnh, màu trời) không trùng tranh nào.
 import { M2 } from './bg-map2.mjs';
+import { M3 } from './bg-map3.mjs';
 
 const ALL_PALS = ['day', 'morning', 'sunset', 'dusk', 'mint', 'pink', 'lavender', 'peach', 'lemon', 'aqua', 'storm', 'night', 'deep', 'space', 'nebula', 'alien'];
+const DARK_PALS = new Set(['night', 'deep', 'space', 'nebula', 'alien']);
 const RESOLVED = (() => {
   const used = new Set(Object.values(M).flatMap((o) => Object.values(o).map((b) => b.join('/'))));
   const out = {};
-  for (const [obj, vs] of Object.entries(M2)) {
+  const batches = [...Object.entries(M2).map(([o, vs]) => [o, vs, false]), ...Object.entries(M3).map(([o, vs]) => [o, vs, true])];
+  for (const [obj, entries, toned] of batches) {
     out[obj] = {};
-    for (const [v, [setting, pref = '']] of Object.entries(vs)) {
-      const order = [...pref.split('|').filter(Boolean), ...ALL_PALS];
+    for (const [v, [setting, pref = '']] of Object.entries(entries)) {
+      // Hết màu ưu tiên → lấy màu cùng tông (sáng/tối) trước, để trời đêm/vũ trụ không bị đổi thành trời sáng.
+      const prefs = pref.split('|').filter(Boolean);
+      const dark = DARK_PALS.has(prefs[0]);
+      // (Đợt 1–2 giữ thứ tự cũ để tranh đã duyệt không đổi màu.)
+      const order = [...prefs, ...(toned ? ALL_PALS.filter((p) => DARK_PALS.has(p) === dark) : []), ...ALL_PALS];
       const pal = order.find((p) => !used.has(`${setting}/${p}`));
       if (!pal) throw new Error(`Hết màu trời cho khung cảnh ${setting} (${obj}--${v})`);
       used.add(`${setting}/${pal}`);

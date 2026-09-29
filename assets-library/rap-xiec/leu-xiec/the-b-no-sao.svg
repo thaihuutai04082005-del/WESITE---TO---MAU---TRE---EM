@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="leu-xiec--the-b-no-sao">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 57.5 128.8 Q 35 128.8 41 110 Q 36.5 83.8 68.8 83.8 Q 76.3 59 104 65 Q 123.5 44 146 68.8 Q 179 63.5 174.5 96.5 Q 188 128.8 162.5 128.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 288 85 Q 270 85 274.8 70 Q 271.2 49 297 49 Q 303 29.2 325.2 34 Q 340.8 17.2 358.8 37 Q 385.2 32.8 381.6 59.2 Q 392.4 85 372 85 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="140" y="296" width="320" height="180" rx="4" id="r-tuong-leu" data-region="tuong-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 140 296 L 210 296 Q 180 380 140 400 Z" id="r-rem-trai" data-region="rem-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 460 296 L 390 296 Q 420 380 460 400 Z" id="r-rem-phai" data-region="rem-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 120,300 165,300" id="r-mai-leu-1" data-region="mai-leu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 165,300 210,300" id="r-mai-leu-2" data-region="mai-leu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 210,300 255,300" id="r-mai-leu-3" data-region="mai-leu-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 255,300 300,300" id="r-mai-leu-4" data-region="mai-leu-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 300,300 345,300" id="r-mai-leu-5" data-region="mai-leu-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 345,300 390,300" id="r-mai-leu-6" data-region="mai-leu-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 390,300 435,300" id="r-mai-leu-7" data-region="mai-leu-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 435,300 480,300" id="r-mai-leu-8" data-region="mai-leu-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="296" y="76" width="8" height="60" rx="2" id="r-cot-co-leu" data-region="cot-co-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="304,78 350,92 304,106" id="r-co-leu" data-region="co-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="112" y="292" width="376" height="16" rx="8" id="r-vien-mai" data-region="vien-mai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="390" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="390" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="387.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="387.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="406" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="406" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 414 Q 300 426.8 312 414" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="300,441.2 259.2,419.6 259.2,462.8" id="r-no-trai" data-region="no-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,441.2 340.8,419.6 340.8,462.8" id="r-no-phai" data-region="no-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="441.2" rx="9.6" ry="9.6" id="r-nut-no" data-region="nut-no" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<rect x="33" y="36" width="14" height="8" rx="2" id="r-hoa-giay-1" data-region="hoa-giay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="213" y="36" width="14" height="8" rx="2" id="r-hoa-giay-2" data-region="hoa-giay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="393" y="26" width="14" height="8" rx="2" id="r-hoa-giay-3" data-region="hoa-giay-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="573" y="36" width="14" height="8" rx="2" id="r-hoa-giay-4" data-region="hoa-giay-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="23" y="436" width="14" height="8" rx="2" id="r-hoa-giay-5" data-region="hoa-giay-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="568" y="446" width="14" height="8" rx="2" id="r-hoa-giay-6" data-region="hoa-giay-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

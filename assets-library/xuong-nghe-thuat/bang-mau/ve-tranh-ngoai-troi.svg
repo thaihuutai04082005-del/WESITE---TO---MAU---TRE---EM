@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="bang-mau--ve-tranh-ngoai-troi">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 53 101 Q 35 101 39.8 86 Q 36.2 65 62 65 Q 68 45.2 90.2 50 Q 105.8 33.2 123.8 53 Q 150.2 48.8 146.6 75.2 Q 157.4 101 137 101 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 473.5 71.3 Q 460 71.3 463.6 60 Q 460.9 44.3 480.3 44.3 Q 484.8 29.4 501.4 33 Q 513.1 20.4 526.6 35.3 Q 546.4 32.1 543.7 51.9 Q 551.8 71.3 536.5 71.3 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="511.2" y="404" width="17.6" height="66" rx="3" id="r-than-cay-cong-vien" data-region="than-cay-cong-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="371" rx="48.4" ry="48.4" id="r-cay-cong-vien" data-region="cay-cong-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="480" width="120" height="14" rx="4" id="r-ghe-da" data-region="ghe-da" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="450" width="120" height="12" rx="4" id="r-lung-ghe" data-region="lung-ghe" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 250 600 L 350 600 L 320 470 L 280 470 Z" id="r-loi-di" data-region="loi-di" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(-80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<path d="M 140 300 Q 140 150 320 140 Q 480 140 480 280 Q 480 360 420 360 Q 380 360 380 400 Q 380 470 290 470 Q 140 470 140 300 Z" id="r-bang-mau" data-region="bang-mau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="400" cy="300" rx="26" ry="22" id="r-lo-ngon-cai" data-region="lo-ngon-cai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200" cy="250" rx="26" ry="26" id="r-mau-do" data-region="mau-do" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="262" cy="190" rx="26" ry="26" id="r-mau-vang" data-region="mau-vang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="340" cy="182" rx="26" ry="26" id="r-mau-xanh-la" data-region="mau-xanh-la" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="414" cy="214" rx="24" ry="24" id="r-mau-xanh-duong" data-region="mau-xanh-duong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200" cy="340" rx="22" ry="22" id="r-mau-tim" data-region="mau-tim" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="250.5" cy="390" r="6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="289.5" cy="390" r="6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="252.4" cy="387.8" r="2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="291.4" cy="387.8" r="2" fill="#FFFFFF"/></g>
+<ellipse cx="235.5" cy="405" rx="8.3" ry="5.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="304.5" cy="405" rx="8.3" ry="5.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 258.8 412.5 Q 270 424.5 281.3 412.5" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<polygon points="476.2,358.7 436.2,478.7 443.8,481.3 483.8,361.3" id="r-chan-gia-nho-1" data-region="chan-gia-nho-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="496.2,361.3 536.2,481.3 543.8,478.7 503.8,358.7" id="r-chan-gia-nho-2" data-region="chan-gia-nho-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="330" width="100" height="76" rx="3" id="r-toan-nho" data-region="toan-nho" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="490,347 493.8,353.8 500.5,349.8 500.4,357.6 508.2,357.5 504.2,364.2 511,368 504.2,371.8 508.2,378.5 500.4,378.4 500.5,386.2 493.8,382.2 490,389 486.2,382.2 479.5,386.2 479.6,378.4 471.8,378.5 475.8,371.8 469,368 475.8,364.2 471.8,357.5 479.6,357.6 479.5,349.8 486.2,353.8" id="r-tia-mat-troi-ve" data-region="tia-mat-troi-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="490" cy="368" rx="14" ry="14" id="r-mat-troi-ve" data-region="mat-troi-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

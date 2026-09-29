@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="quat-dien--thoi-buom-thuyen-giay">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 463 101 Q 445 101 449.8 86 Q 446.2 65 472 65 Q 478 45.2 500.2 50 Q 515.8 33.2 533.8 53 Q 560.2 48.8 556.6 75.2 Q 567.4 101 547 101 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 63.5 71.3 Q 50 71.3 53.6 60 Q 50.9 44.3 70.3 44.3 Q 74.8 29.4 91.4 33 Q 103.1 20.4 116.6 35.3 Q 136.4 32.1 133.7 51.9 Q 141.8 71.3 126.5 71.3 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="511.2" y="404" width="17.6" height="66" rx="3" id="r-than-cay-cong-vien" data-region="than-cay-cong-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="371" rx="48.4" ry="48.4" id="r-cay-cong-vien" data-region="cay-cong-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="480" width="120" height="14" rx="4" id="r-ghe-da" data-region="ghe-da" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="450" width="120" height="12" rx="4" id="r-lung-ghe" data-region="lung-ghe" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 250 600 L 350 600 L 320 470 L 280 470 Z" id="r-loi-di" data-region="loi-di" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-wiggle" transform="translate(-80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<path d="M 160 482 Q 160 386 300 386 Q 440 386 440 482 Z" id="r-de-quat" data-region="de-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="282" y="300" width="36" height="96" rx="10" id="r-than-quat" data-region="than-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="200" rx="150" ry="150" id="r-long-quat" data-region="long-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="126" rx="64" ry="34" transform="rotate(-90 300 126)" id="r-canh-quat-1" data-region="canh-quat-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="364.1" cy="237" rx="64" ry="34" transform="rotate(30 364.1 237)" id="r-canh-quat-2" data-region="canh-quat-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="235.9" cy="237" rx="64" ry="34" transform="rotate(150 235.9 237)" id="r-canh-quat-3" data-region="canh-quat-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="200" rx="30" ry="30" id="r-tam-quat" data-region="tam-quat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 330 200 L 450 200 M 321.2 221.2 L 406.1 306.1 M 300 230 L 300 350 M 278.8 221.2 L 193.9 306.1 M 270 200 L 150 200 M 278.8 178.8 L 193.9 93.9 M 300 170 L 300 50 M 321.2 178.8 L 406.1 93.9" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.8" cy="438" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.2" cy="438" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="283.6" cy="435.9" r="1.8" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="320" cy="435.9" r="1.8" fill="#FFFFFF"/></g>
+<ellipse cx="267.8" cy="452" rx="7.7" ry="4.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="332.2" cy="452" rx="7.7" ry="4.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 289.5 459 Q 300 470.2 310.5 459" fill="none" stroke="#1B2A38" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<g class="deco" pointer-events="none"><path d="M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="520" cy="200" rx="12" ry="7" transform="rotate(30 520 200)" id="r-la-bay-1" data-region="la-bay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="90" cy="150" rx="12" ry="7" transform="rotate(-20 90 150)" id="r-la-bay-2" data-region="la-bay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="500" cy="520" rx="110" ry="24" id="r-ao-thuyen" data-region="ao-thuyen" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="467" cy="516" rx="33" ry="7.2" id="r-ao-thuyen-song" data-region="ao-thuyen-song" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="440,490 560,490 540,520 460,520" id="r-thuyen-giay-nho" data-region="thuyen-giay-nho" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="496,488 530,430 536,488" id="r-buom-giay-nho" data-region="buom-giay-nho" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

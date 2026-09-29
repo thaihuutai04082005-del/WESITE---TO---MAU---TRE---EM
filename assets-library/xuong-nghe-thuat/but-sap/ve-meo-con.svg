@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="but-sap--ve-meo-con">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-xuong-ve" data-region="tuong-xuong-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="50" width="130" height="120" rx="8" id="r-cua-so-xuong" data-region="cua-so-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="60" width="110" height="90" rx="4" id="r-tranh-treo-xuong" data-region="tranh-treo-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="40" y="70" width="90" height="70" rx="2" id="r-long-tranh-xuong" data-region="long-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="85" cy="105" rx="16" ry="16" id="r-mat-troi-tranh-xuong" data-region="mat-troi-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="90" cy="530" rx="40" ry="12" id="r-vet-son-san-1" data-region="vet-son-san-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="545" rx="34" ry="10" id="r-vet-son-san-2" data-region="vet-son-san-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<path d="M 244 190 L 272 110 Q 300 90 328 110 L 356 190 Z" id="r-dau-but-sap" data-region="dau-but-sap" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="236" y="186" width="128" height="290" rx="18" id="r-than-but-sap" data-region="than-but-sap" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="236,236 236,236 252,226 268,236 284,226 300,236 316,226 332,236 348,226 364,236 364,236 364,410 364,410 348,420 332,410 316,420 300,410 284,420 268,410 252,420 236,410 236,410" id="r-giay-boc" data-region="giay-boc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="334" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="334" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 342 Q 300 354.8 312 342" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<polygon points="98,274 105.8,216.8 139.6,253.2" id="r-tai-meo-ve-1" data-region="tai-meo-ve-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="202,274 194.2,216.8 160.4,253.2" id="r-tai-meo-ve-2" data-region="tai-meo-ve-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="300" rx="57.2" ry="57.2" id="r-mat-meo-ve" data-region="mat-meo-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="129.2" cy="292.2" rx="7.8" ry="7.8" id="r-mat-meo-trai" data-region="mat-meo-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="170.8" cy="292.2" rx="7.8" ry="7.8" id="r-mat-meo-phai" data-region="mat-meo-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="142.2,310.4 157.8,310.4 150,320.8" id="r-mui-meo-ve" data-region="mui-meo-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

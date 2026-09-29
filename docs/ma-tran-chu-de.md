@@ -1,4 +1,4 @@
-# Ma trận 15 chủ đề tô màu (đã duyệt — đã làm: Đợt 1 — 01, 02, 03, 07, 08; Đợt 2 — 04, 05, 06, 09, 12)
+# Ma trận 15 chủ đề tô màu (đã duyệt — đã làm: Đợt 1 — 01, 02, 03, 07, 08; Đợt 2 — 04, 05, 06, 09, 12; Đợt 3 — 10, 11, 13, 14, 15)
 
 ## Nguyên tắc cố định
 
@@ -197,3 +197,38 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 |  | Cổng thành | Lễ Hội Cờ Hoa · Mùa Đông Người Tuyết · Mùa Hè Hướng Dương · Đêm Hội Ánh Nến · Mùa Thu Bí Ngô |
 |  | Cầu đá cổ tích | Mùa Xuân Hoa Đào · Mùa Hè Thuyền Giấy · Mùa Đông Băng Giá · Lễ Hội Hoa Đăng · Mùa Thu Sương Sớm |
 |  | Giếng ước | Mùa Xuân Bướm Bay · Mùa Hè Đom Đóm · Mùa Thu Hạt Dẻ · Mùa Đông Tuyết Rơi · Lễ Hội Ước Nguyện |
+
+## Lớp 3 — Đợt 3 (đã làm: 150 biến thể riêng)
+
+| Chủ đề | Đối tượng | 5 biến thể |
+|---|---|---|
+| 🧪 Phòng Thí Nghiệm Kỳ Diệu | Ống nghiệm | Sủi Bọt Cầu Vồng · Khói Hình Con Thỏ · Bắn Pháo Hoa Mini · Mọc Tinh Thể Tím · Lơ Lửng Không Trọng Lực |
+|  | Bình tam giác | Trào Bọt Xà Phòng · Khói Hình Trái Tim · Phun Trào Núi Lửa · Ba Lớp Màu · Kết Tinh Bông Tuyết |
+|  | Kính hiển vi | Soi Vi Khuẩn Vui Nhộn · Soi Giọt Nước · Soi Lá Cây · Soi Tinh Thể Muối · Ánh Sáng Thần Kỳ |
+|  | Nam châm | Hút Kẹp Giấy · Hút Đinh Vít · Nâng Ô Tô Đồ Chơi · Vòng Từ Trường · Đẩy Nhau Lơ Lửng |
+|  | Kính lúp | Soi Chú Kiến · Soi Bọ Rùa · Hội Tụ Tia Nắng · Soi Bông Tuyết · Soi Vỏ Ốc |
+|  | Mô hình nguyên tử | Quay Tít Siêu Tốc · Ghép Phân Tử Nước · Tia Điện Lấp Lánh · Trôi Giữa Vũ Trụ · Nổ Pháo Hoa Hạt |
+| 🎨 Xưởng Nghệ Thuật Sắc Màu | Cọ vẽ | Vẽ Cầu Vồng · Vẽ Sóng Biển · Vẽ Mặt Trời · Vẽ Bông Hoa · Vẽ Cá Vàng |
+|  | Bút chì màu | Vẽ Ngôi Nhà · Vẽ Xoắn Ốc · Vẽ Ngôi Sao · Vẽ Đám Mây · Vẽ Cánh Diều |
+|  | Bút sáp | Vẽ Chấm Bi · Vẽ Trái Tim · Vẽ Mèo Con · Vẽ Tên Lửa · Vẽ Bướm Xinh |
+|  | Bảng màu | Pha Màu Mới · Màu Tung Tóe · Vẽ Tranh Ngoài Trời · Vẽ Chân Dung · Triển Lãm Tranh |
+|  | Tuýp màu | Bóp Màu Thành Sông · Vẽ Sóng Xanh Ngắt · In Dấu Bàn Tay · Vẽ Thuyền Buồm · Vẽ Hoa Hướng Dương |
+|  | Giá vẽ | Chấm Màu Lên Tranh · Vẽ Trái Tim Hồng · Vẽ Hoàng Hôn · Bộ Sưu Tập Tranh · Tranh Biết Bay |
+| 🏴‍☠️ Hạm Đội Hải Tặc Kho Báu | Tàu hải tặc | Vượt Bão Lớn · Cập Đảo Hoang · Gặp Cá Voi · Săn Kho Báu Đêm Trăng · Mừng Chiến Thắng |
+|  | Rương kho báu | Chìm Dưới Đáy Biển · Đầy Ắp Vàng · Chôn Trên Đảo Hoang · Mở Bằng Chìa Khóa Vàng · Trong Hang Kho Báu |
+|  | La bàn | Chỉ Đường Qua Bão · Tìm Đảo Hoang · Chỉ Hướng Sao Bắc Cực · Băng Qua Rừng Rậm · Đi Theo Dấu Chân |
+|  | Mỏ neo | Thả Neo Đáy Biển · San Hô Quấn Quanh · Bạch Tuộc Ôm Neo · Kéo Neo Lên Tàu · Nghỉ Trên Bến Cảng |
+|  | Bản đồ kho báu | Bay Trong Gió Bão · Chỉ Đường Tới Kho Báu · Đảo Núi Lửa · Hé Lộ Dưới Ánh Trăng · Tìm Thấy Dấu X |
+|  | Bánh lái | Lái Qua Sóng Dữ · Tránh Đá Ngầm · Theo Đàn Hải Âu · Đêm Hải Đăng · Về Bến Chiến Thắng |
+| 🎪 Rạp Xiếc Diệu Kỳ | Lều xiếc | Đèn Sân Khấu Bật Sáng · Đoàn Xiếc Tới Thị Trấn · Cờ Bay Phấp Phới · Đêm Hội Pháo Giấy · Bóng Bay Chào Khách |
+|  | Mũ ảo thuật | Thỏ Trắng Nhảy Ra · Bồ Câu Bay Ra · Biến Ra Hoa · Chiếc Khăn Dài Bất Tận · Đũa Phép Lấp Lánh |
+|  | Bóng tung hứng | Tung Hứng Năm Bóng · Nhảy Qua Vòng Lửa · Lăn Trên Dây · Xếp Tháp Bóng · Mưa Pháo Giấy |
+|  | Vòng nhào lộn | Xoay Tít Trên Sân Khấu · Múa Ruy Băng · Lăn Vòng Qua Sân · Chồng Ba Vòng · Hạ Màn Tung Hoa |
+|  | Trống xiếc | Gõ Nhịp Mở Màn · Trống Diễu Hành · Tấu Nhạc Cùng Kèn · Đêm Nhạc Ánh Đèn · Màn Kết Pháo Giấy |
+|  | Xà đu | Đu Cao Chạm Sao · Bay Qua Lưới An Toàn · Đu Đôi Bạn Thân · Đu Giữa Đèn Chiếu · Tung Pháo Giấy Trên Cao |
+| ⚙️ Thành Phố Máy Móc Tí Hon | Bánh răng | Lên Dây Cót · Chạy Tháp Đồng Hồ · Kéo Băng Chuyền · Nghỉ Trưa Uống Dầu · Quay Đu Quay Tí Hon |
+|  | Cờ lê | Sửa Đường Ống · Xây Đường Tí Hon · Sửa Xe Đạp · Đi Làm Buổi Sáng · Siết Ốc Cầu Sắt |
+|  | Tua vít | Lắp Ghế Gỗ · Vặn Ốc Biển Báo · Sửa Hộp Thư · Nghỉ Trưa Dưới Ô · Lắp Chong Chóng |
+|  | Bóng đèn | Thắp Đèn Thành Phố · Ý Tưởng Chợt Lóe · Đèn Đường Tí Hon · Soi Đường Đêm Mưa · Chuỗi Đèn Nhà Tí Hon |
+|  | Đồng hồ báo thức | Reng Reng Buổi Sáng · Gọi Cả Phố Dậy · Đi Làm Đúng Giờ · Nghỉ Trưa Ngủ Gật · Lên Dây Cót Buổi Tối |
+|  | Quạt điện | Thổi Mát Cả Phố · Thổi Buồm Thuyền Giấy · Thổi Chong Chóng · Thổi Bay Lá Thu · Thổi Bong Bóng Xà Phòng |

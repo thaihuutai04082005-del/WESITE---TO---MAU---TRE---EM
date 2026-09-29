@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="but-sap--ve-ten-lua">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-lop" data-region="tuong-lop" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="460" y="250" width="120" height="200" rx="6" id="r-ke-sach" data-region="ke-sach" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="474" y="270" width="18" height="60" rx="2" id="r-sach-1" data-region="sach-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="496" y="270" width="18" height="60" rx="2" id="r-sach-2" data-region="sach-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="518" y="270" width="18" height="60" rx="2" id="r-sach-3" data-region="sach-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="40" y="60" width="140" height="110" rx="8" id="r-cua-so-lop" data-region="cua-so-lop" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<path d="M 244 190 L 272 110 Q 300 90 328 110 L 356 190 Z" id="r-dau-but-sap" data-region="dau-but-sap" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="236" y="186" width="128" height="290" rx="18" id="r-than-but-sap" data-region="than-but-sap" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="236,236 236,236 252,226 268,236 284,226 300,236 316,226 332,236 348,226 364,236 364,236 364,410 364,410 348,420 332,410 316,420 300,410 284,420 268,410 252,420 236,410 236,410" id="r-giay-boc" data-region="giay-boc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="318" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="315.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="334" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="334" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 342 Q 300 354.8 312 342" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<polygon points="118.8,266 85,318 118.8,305" id="r-canh-ten-lua-ve-1" data-region="canh-ten-lua-ve-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="181.2,266 215,318 181.2,305" id="r-canh-ten-lua-ve-2" data-region="canh-ten-lua-ve-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 118.8 312.8 L 118.8 214 Q 150 136 181.2 214 L 181.2 312.8 Z" id="r-than-ten-lua-ve" data-region="than-ten-lua-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="150" cy="234.8" rx="14.3" ry="14.3" id="r-cua-so-ten-lua-ve" data-region="cua-so-ten-lua-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="129.2,312.8 150,364.8 170.8,312.8" id="r-lua-ten-lua-ve" data-region="lua-ten-lua-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

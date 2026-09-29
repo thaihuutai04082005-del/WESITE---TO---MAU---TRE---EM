@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="nam-cham--vong-tu-truong">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-thi-nghiem" data-region="tuong-thi-nghiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="380" width="600" height="20" rx="3" id="r-ban-thi-nghiem" data-region="ban-thi-nghiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="20" y="120" width="150" height="12" rx="3" id="r-ke-lo-hoa-chat" data-region="ke-lo-hoa-chat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="34" y="76" width="30" height="44" rx="6" id="r-lo-1" data-region="lo-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="76" y="86" width="26" height="34" rx="6" id="r-lo-2" data-region="lo-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="114" y="70" width="34" height="50" rx="6" id="r-lo-3" data-region="lo-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="60" width="140" height="100" rx="6" id="r-bang-cong-thuc" data-region="bang-cong-thuc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="110" rx="18" ry="18" id="r-nguyen-tu-bang" data-region="nguyen-tu-bang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 180 180 Q 300 30 420 180 M 180 180 Q 300 -20 420 180 M 180 180 Q 300 -70 420 180" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-wiggle">
+<polygon points="180,200 180,330 180.7,343.6 182.6,357 185.9,370.2 190.4,382.9 196.1,395 202.9,406.4 210.8,417 219.7,426.6 229.5,435.2 240,442.6 251.2,448.8 262.9,453.6 275.1,457.2 287.5,459.3 300,460 312.5,459.3 324.9,457.2 337.1,453.6 348.8,448.8 360,442.6 370.5,435.2 380.3,426.6 389.2,417 397.1,406.4 403.9,395 409.6,382.9 414.1,370.2 417.4,357 419.3,343.6 420,330 420,200 340,200 340,330 339.2,339.8 337,349.1 333.3,357.8 328.3,365.4 322.2,371.6 315.3,376.2 307.8,379 300,380 292.2,379 284.7,376.2 277.8,371.6 271.7,365.4 266.7,357.8 263,349.1 260.8,339.8 260,330 260,200" id="r-than-nam-cham" data-region="than-nam-cham" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="180" y="150" width="80" height="60" rx="6" id="r-cuc-trai" data-region="cuc-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="340" y="150" width="80" height="60" rx="6" id="r-cuc-phai" data-region="cuc-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="285.7" cy="416" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="314.3" cy="416" r="4.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="287.1" cy="414.4" r="1.4" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="315.7" cy="414.4" r="1.4" fill="#FFFFFF"/></g>
+<ellipse cx="274.7" cy="427" rx="6.1" ry="3.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="325.3" cy="427" rx="6.1" ry="3.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 291.8 432.5 Q 300 441.3 308.3 432.5" fill="none" stroke="#1B2A38" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

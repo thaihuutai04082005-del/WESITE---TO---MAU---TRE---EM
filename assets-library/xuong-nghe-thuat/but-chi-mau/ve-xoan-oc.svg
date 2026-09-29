@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="but-chi-mau--ve-xoan-oc">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-xuong-ve" data-region="tuong-xuong-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="50" width="130" height="120" rx="8" id="r-cua-so-xuong" data-region="cua-so-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="60" width="110" height="90" rx="4" id="r-tranh-treo-xuong" data-region="tranh-treo-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="40" y="70" width="90" height="70" rx="2" id="r-long-tranh-xuong" data-region="long-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="85" cy="105" rx="16" ry="16" id="r-mat-troi-tranh-xuong" data-region="mat-troi-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="90" cy="530" rx="40" ry="12" id="r-vet-son-san-1" data-region="vet-son-san-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="545" rx="34" ry="10" id="r-vet-son-san-2" data-region="vet-son-san-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<rect x="252" y="72" width="96" height="40" rx="12" id="r-tay-bui" data-region="tay-bui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="108" width="100" height="30" rx="4" id="r-dai-bac" data-region="dai-bac" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="136" width="100" height="250" rx="0" id="r-than-but-chi" data-region="than-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="250" y="136" width="22" height="250" rx="0" id="r-canh-but-trai" data-region="canh-but-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="328" y="136" width="22" height="250" rx="0" id="r-canh-but-phai" data-region="canh-but-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="250,386 350,386 300,470" id="r-go-but-chi" data-region="go-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="284,443 316,443 300,470" id="r-ruot-but-chi" data-region="ruot-but-chi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="281.8" cy="250" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.2" cy="250" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="283.6" cy="247.9" r="1.8" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="320" cy="247.9" r="1.8" fill="#FFFFFF"/></g>
+<ellipse cx="267.8" cy="264" rx="7.7" ry="4.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="332.2" cy="264" rx="7.7" ry="4.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 289.5 271 Q 300 282.2 310.5 271" fill="none" stroke="#1B2A38" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<ellipse cx="160" cy="280" rx="5" ry="5" id="r-xoan-oc-1" data-region="xoan-oc-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="161.1" cy="283.4" rx="5.1" ry="5.1" id="r-xoan-oc-2" data-region="xoan-oc-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="160.9" cy="287.4" rx="5.2" ry="5.2" id="r-xoan-oc-3" data-region="xoan-oc-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="159.2" cy="291.5" rx="5.3" ry="5.3" id="r-xoan-oc-4" data-region="xoan-oc-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="156" cy="295.2" rx="5.4" ry="5.4" id="r-xoan-oc-5" data-region="xoan-oc-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="151.3" cy="297.9" rx="5.6" ry="5.6" id="r-xoan-oc-6" data-region="xoan-oc-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="145.7" cy="299" rx="5.7" ry="5.7" id="r-xoan-oc-7" data-region="xoan-oc-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="139.4" cy="298.3" rx="5.8" ry="5.8" id="r-xoan-oc-8" data-region="xoan-oc-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="133.4" cy="295.4" rx="5.9" ry="5.9" id="r-xoan-oc-9" data-region="xoan-oc-9" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="128.1" cy="290.5" rx="6" ry="6" id="r-xoan-oc-10" data-region="xoan-oc-10" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="124.4" cy="283.9" rx="6.1" ry="6.1" id="r-xoan-oc-11" data-region="xoan-oc-11" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="122.8" cy="275.9" rx="6.2" ry="6.2" id="r-xoan-oc-12" data-region="xoan-oc-12" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="123.8" cy="267.4" rx="6.3" ry="6.3" id="r-xoan-oc-13" data-region="xoan-oc-13" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="127.5" cy="259.2" rx="6.4" ry="6.4" id="r-xoan-oc-14" data-region="xoan-oc-14" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="133.9" cy="252.1" rx="6.6" ry="6.6" id="r-xoan-oc-15" data-region="xoan-oc-15" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="142.5" cy="247" rx="6.7" ry="6.7" id="r-xoan-oc-16" data-region="xoan-oc-16" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="152.6" cy="244.7" rx="6.8" ry="6.8" id="r-xoan-oc-17" data-region="xoan-oc-17" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="163.5" cy="245.6" rx="6.9" ry="6.9" id="r-xoan-oc-18" data-region="xoan-oc-18" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="174" cy="249.8" rx="7" ry="7" id="r-xoan-oc-19" data-region="xoan-oc-19" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="183.2" cy="257.4" rx="7.1" ry="7.1" id="r-xoan-oc-20" data-region="xoan-oc-20" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="189.9" cy="267.7" rx="7.2" ry="7.2" id="r-xoan-oc-21" data-region="xoan-oc-21" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="193.3" cy="280" rx="7.3" ry="7.3" id="r-xoan-oc-22" data-region="xoan-oc-22" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="192.9" cy="293.2" rx="7.4" ry="7.4" id="r-xoan-oc-23" data-region="xoan-oc-23" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="188.4" cy="306.2" rx="7.6" ry="7.6" id="r-xoan-oc-24" data-region="xoan-oc-24" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="180" cy="317.6" rx="7.7" ry="7.7" id="r-xoan-oc-25" data-region="xoan-oc-25" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="168.2" cy="326.2" rx="7.8" ry="7.8" id="r-xoan-oc-26" data-region="xoan-oc-26" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="153.8" cy="331.1" rx="7.9" ry="7.9" id="r-xoan-oc-27" data-region="xoan-oc-27" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="138.2" cy="331.5" rx="8" ry="8" id="r-xoan-oc-28" data-region="xoan-oc-28" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="122.8" cy="327.2" rx="8.1" ry="8.1" id="r-xoan-oc-29" data-region="xoan-oc-29" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="108.9" cy="318.1" rx="8.2" ry="8.2" id="r-xoan-oc-30" data-region="xoan-oc-30" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="98.1" cy="305" rx="8.3" ry="8.3" id="r-xoan-oc-31" data-region="xoan-oc-31" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="91.5" cy="288.8" rx="8.4" ry="8.4" id="r-xoan-oc-32" data-region="xoan-oc-32" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="89.9" cy="270.9" rx="8.6" ry="8.6" id="r-xoan-oc-33" data-region="xoan-oc-33" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="93.8" cy="252.9" rx="8.7" ry="8.7" id="r-xoan-oc-34" data-region="xoan-oc-34" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="103.1" cy="236.5" rx="8.8" ry="8.8" id="r-xoan-oc-35" data-region="xoan-oc-35" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="117.2" cy="223.2" rx="8.9" ry="8.9" id="r-xoan-oc-36" data-region="xoan-oc-36" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="135.1" cy="214.5" rx="9" ry="9" id="r-xoan-oc-37" data-region="xoan-oc-37" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="155.1" cy="211.5" rx="9.1" ry="9.1" id="r-xoan-oc-38" data-region="xoan-oc-38" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="175.7" cy="214.5" rx="9.2" ry="9.2" id="r-xoan-oc-39" data-region="xoan-oc-39" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="194.8" cy="223.8" rx="9.3" ry="9.3" id="r-xoan-oc-40" data-region="xoan-oc-40" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="210.7" cy="238.6" rx="9.4" ry="9.4" id="r-xoan-oc-41" data-region="xoan-oc-41" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="221.7" cy="257.9" rx="9.6" ry="9.6" id="r-xoan-oc-42" data-region="xoan-oc-42" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="226.7" cy="280" rx="9.7" ry="9.7" id="r-xoan-oc-43" data-region="xoan-oc-43" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="224.8" cy="303.1" rx="9.8" ry="9.8" id="r-xoan-oc-44" data-region="xoan-oc-44" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="216" cy="325" rx="9.9" ry="9.9" id="r-xoan-oc-45" data-region="xoan-oc-45" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200.8" cy="343.7" rx="10" ry="10" id="r-xoan-oc-46" data-region="xoan-oc-46" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="180.3" cy="357.3" rx="10.1" ry="10.1" id="r-xoan-oc-47" data-region="xoan-oc-47" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="156.3" cy="364.4" rx="10.2" ry="10.2" id="r-xoan-oc-48" data-region="xoan-oc-48" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="130.8" cy="364" rx="10.3" ry="10.3" id="r-xoan-oc-49" data-region="xoan-oc-49" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="106.1" cy="356" rx="10.4" ry="10.4" id="r-xoan-oc-50" data-region="xoan-oc-50" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="84.5" cy="340.8" rx="10.6" ry="10.6" id="r-xoan-oc-51" data-region="xoan-oc-51" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="68.1" cy="319.5" rx="10.7" ry="10.7" id="r-xoan-oc-52" data-region="xoan-oc-52" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="58.5" cy="293.8" rx="10.8" ry="10.8" id="r-xoan-oc-53" data-region="xoan-oc-53" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="56.9" cy="266" rx="10.9" ry="10.9" id="r-xoan-oc-54" data-region="xoan-oc-54" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="63.8" cy="238.5" rx="11" ry="11" id="r-xoan-oc-55" data-region="xoan-oc-55" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="78.7" cy="213.8" rx="11.1" ry="11.1" id="r-xoan-oc-56" data-region="xoan-oc-56" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="100.6" cy="194.4" rx="11.2" ry="11.2" id="r-xoan-oc-57" data-region="xoan-oc-57" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="127.6" cy="182" rx="11.3" ry="11.3" id="r-xoan-oc-58" data-region="xoan-oc-58" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="157.6" cy="178.2" rx="11.4" ry="11.4" id="r-xoan-oc-59" data-region="xoan-oc-59" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="187.9" cy="183.5" rx="11.6" ry="11.6" id="r-xoan-oc-60" data-region="xoan-oc-60" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="215.6" cy="197.7" rx="11.7" ry="11.7" id="r-xoan-oc-61" data-region="xoan-oc-61" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="238.3" cy="219.8" rx="11.8" ry="11.8" id="r-xoan-oc-62" data-region="xoan-oc-62" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="253.6" cy="248" rx="11.9" ry="11.9" id="r-xoan-oc-63" data-region="xoan-oc-63" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="260" cy="280" rx="12" ry="12" id="r-xoan-oc-64" data-region="xoan-oc-64" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>
