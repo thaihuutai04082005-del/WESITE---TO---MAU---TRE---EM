@@ -7,15 +7,20 @@ import { formatVnd, formatDate } from '../../lib/format';
 import PaymentModal from '../../components/PaymentModal/PaymentModal';
 import Icon from '../../components/Icon';
 
+/** Chữ trên nhãn gói (Gói Tháng · còn 97/100 lượt…). */
+export function planBadgeText(plan, t, lang) {
+  if (!plan) return '';
+  return plan.plan === 'year'
+    ? t('plans.badge.year', { date: formatDate(plan.endsAt, lang) })
+    : plan.plan === 'month'
+      ? t('plans.badge.month', { n: plan.remaining, limit: plan.limit })
+      : t('plans.badge.free', { n: plan.remaining });
+}
+
 export function PlanBadge({ plan }) {
   const { t, i18n } = useTranslation();
   if (!plan) return null;
-  const text =
-    plan.plan === 'year'
-      ? t('plans.badge.year', { date: formatDate(plan.endsAt, i18n.language) })
-      : plan.plan === 'month'
-        ? t('plans.badge.month', { n: plan.remaining, limit: plan.limit })
-        : t('plans.badge.free', { n: plan.remaining });
+  const text = planBadgeText(plan, t, i18n.language);
   return (
     <Link to="/plans" className={`chip ${plan.remaining === 0 ? 'bg-coral/20 text-coral' : ''}`} data-testid="plan-badge">
       <Icon name="star" size={16} /> {text}
