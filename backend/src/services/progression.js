@@ -13,7 +13,7 @@ const COUNTER_TYPES = new Set([
   'friend_add', 'arena_join', 'collab_join', 'shop_buy', 'flipbook_complete',
 ]);
 
-const totalThemes = () => getDb().prepare('SELECT COUNT(*) AS c FROM themes').get().c;
+const totalThemes = () => getDb().prepare('SELECT COUNT(*) AS c FROM themes WHERE active = 1').get().c;
 const missionsOfLevel = (level) => getDb().prepare('SELECT * FROM missions WHERE level = ? ORDER BY idx').all(level);
 const completedSet = (userId) =>
   new Set(getDb().prepare('SELECT mission_id FROM user_missions WHERE user_id = ?').all(userId).map((r) => r.mission_id));

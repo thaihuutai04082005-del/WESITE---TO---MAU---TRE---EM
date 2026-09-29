@@ -1,6 +1,6 @@
 // Tầng 2: Đối tượng cụ thể — mỗi đối tượng 1 tranh minh hoạ đại diện.
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import ThemeCard from '../../components/ThemeCard/ThemeCard';
@@ -8,10 +8,11 @@ import Icon from '../../components/Icon';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [data, setData] = useState(null);
   useEffect(() => {
-    api.get(`/themes/${theme}/objects`).then(setData);
+    api.get(`/themes/${theme}/objects`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
   return (
     <div className="page">

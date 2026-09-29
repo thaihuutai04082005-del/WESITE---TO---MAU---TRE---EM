@@ -9,7 +9,7 @@ import { badRequest, int } from '../utils/http.js';
 
 export function info(req, res) {
   const u = User.findById(req.user.id);
-  const total = getDb().prepare('SELECT rarity, COUNT(*) AS c FROM pictures WHERE is_card = 1 GROUP BY rarity').all();
+  const total = getDb().prepare(`SELECT p.rarity, COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND ${Picture.ACTIVE_PICTURE} GROUP BY p.rarity`).all();
   res.json({
     gachaPoints: u.gacha_points,
     cost: GACHA_COST,
@@ -42,7 +42,7 @@ export function pull(req, res) {
 
 export function collection(req, res) {
   const cards = Card.listByUser(req.user.id);
-  const total = getDb().prepare('SELECT COUNT(*) AS c FROM pictures WHERE is_card = 1').get().c;
+  const total = getDb().prepare(`SELECT COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND ${Picture.ACTIVE_PICTURE}`).get().c;
   const distinct = new Set(cards.map((c) => c.pictureId)).size;
   res.json({ cards, distinct, total });
 }

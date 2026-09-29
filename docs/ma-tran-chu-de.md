@@ -1,4 +1,4 @@
-# Ma trận 15 chủ đề tô màu (bản đề xuất — chờ duyệt, chưa code)
+# Ma trận 15 chủ đề tô màu (đã duyệt — Đợt 1 đã làm: 01, 02, 03, 07, 08)
 
 ## Nguyên tắc cố định
 

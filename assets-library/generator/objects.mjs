@@ -1,8 +1,9 @@
-// 25 đối tượng khởi điểm (5 chủ đề × 5 đối tượng). Mỗi đối tượng tự vẽ các vùng của mình
-// trong khung 600×600, chủ thể nằm quanh giữa, đáy khoảng y≈480.
+// 25 đối tượng của bộ chủ đề cũ (5 chủ đề × 5 đối tượng) — không còn đưa vào kho tranh,
+// nhưng hình dáng được dùng lại cho chủ đề mới (themes.mjs) và cho ảnh đại diện / linh vật giao diện.
+// Mỗi đối tượng tự vẽ các vùng trong khung 600×600, chủ thể nằm quanh giữa, đáy khoảng y≈480.
 import { E, C, R, P, D, line, dot, mirrorX, cloud, arcBand, halfDisk } from './shapes.mjs';
 
-export const THEMES = [
+export const LEGACY_THEMES = [
   { slug: 'dong-vat', name: { vi: 'Động vật', en: 'Animals' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'xe-co', name: { vi: 'Xe cộ', en: 'Vehicles' }, faceStyle: 'face', animation: 'drive' },
   { slug: 'thien-nhien', name: { vi: 'Thiên nhiên', en: 'Nature' }, faceStyle: 'face', animation: 'sway' },
@@ -12,7 +13,7 @@ export const THEMES = [
 
 const O = (theme, slug, vi, en, opts) => ({ theme, slug, name: { vi, en }, ...opts });
 
-export const OBJECTS = [
+export const LEGACY_OBJECTS = [
   // ================= ĐỘNG VẬT =================
   O('dong-vat', 'meo', 'Mèo', 'Cat', {
     face: { x: 300, y: 245, s: 1 },
@@ -458,3 +459,10 @@ export const OBJECTS = [
     ],
   }),
 ];
+
+/** Lấy đối tượng cũ theo slug để dùng lại hình dáng. */
+export const legacy = (slug) => {
+  const o = LEGACY_OBJECTS.find((x) => x.slug === slug);
+  if (!o) throw new Error(`Không có đối tượng cũ: ${slug}`);
+  return o;
+};

@@ -1,6 +1,6 @@
 // Tầng 3: Biến thể tư thế / cảm xúc / hoạt động → chọn chế độ tô.
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import ThemeCard from '../../components/ThemeCard/ThemeCard';
@@ -9,11 +9,12 @@ import Icon from '../../components/Icon';
 
 export default function PoseSelector() {
   const { theme, object } = useParams();
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [data, setData] = useState(null);
   const [picked, setPicked] = useState(null);
   useEffect(() => {
-    api.get(`/themes/${theme}/objects/${object}/pictures`).then(setData);
+    api.get(`/themes/${theme}/objects/${object}/pictures`).then(setData).catch(() => navigate(`/color/${theme}`, { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme, object]);
   const lang = i18n.language;
   return (

@@ -3,8 +3,10 @@ import { E, D, dot, whiteDot, line } from './shapes.mjs';
 
 const f = (n) => Math.round(n * 10) / 10;
 
-export function face(x, y, s, expr) {
+/** mouth = false: chỉ vẽ mắt + má (dùng cho đối tượng đã có mỏ riêng, VD đại bàng, dực long). */
+export function face(x, y, s, expr, { mouth = true } = {}) {
   const items = [];
+  const mouthItems = [];
   const ex = 26 * s; // khoảng cách mắt tới giữa
   const cheeks = () => [
     E('ma-trai', x - 46 * s, y + 20 * s, 11 * s, 7 * s, '#FFB3C1'),
@@ -25,26 +27,26 @@ export function face(x, y, s, expr) {
       items.push(...eyes(7));
       items.push(line(`M ${f(x - ex - 12 * s)} ${f(y - 22 * s)} L ${f(x - ex + 10 * s)} ${f(y - 12 * s)}`, 4 * s + 1));
       items.push(line(`M ${f(x + ex + 12 * s)} ${f(y - 22 * s)} L ${f(x + ex - 10 * s)} ${f(y - 12 * s)}`, 4 * s + 1));
-      items.push(line(`M ${f(x - 14 * s)} ${f(y + 40 * s)} Q ${f(x)} ${f(y + 28 * s)} ${f(x + 14 * s)} ${f(y + 40 * s)}`, 4 * s + 1));
+      mouthItems.push(line(`M ${f(x - 14 * s)} ${f(y + 40 * s)} Q ${f(x)} ${f(y + 28 * s)} ${f(x + 14 * s)} ${f(y + 40 * s)}`, 4 * s + 1));
       items.push(E('ma-trai', x - 46 * s, y + 20 * s, 11 * s, 7 * s, '#FF8A80'), E('ma-phai', x + 46 * s, y + 20 * s, 11 * s, 7 * s, '#FF8A80'));
       break;
     case 'sleep':
       items.push(closedEye(x - ex), closedEye(x + ex));
       items.push(...cheeks());
-      items.push(E('mieng', x, y + 34 * s, 5 * s, 6 * s, '#E57373'));
+      mouthItems.push(E('mieng', x, y + 34 * s, 5 * s, 6 * s, '#E57373'));
       break;
     case 'surprised':
       items.push(...eyes(10));
       items.push(line(`M ${f(x - ex - 8 * s)} ${f(y - 20 * s)} Q ${f(x - ex)} ${f(y - 26 * s)} ${f(x - ex + 8 * s)} ${f(y - 20 * s)}`, 3 * s + 1));
       items.push(line(`M ${f(x + ex - 8 * s)} ${f(y - 20 * s)} Q ${f(x + ex)} ${f(y - 26 * s)} ${f(x + ex + 8 * s)} ${f(y - 20 * s)}`, 3 * s + 1));
-      items.push(E('mieng', x, y + 36 * s, 9 * s, 11 * s, '#C0392B'));
+      mouthItems.push(E('mieng', x, y + 36 * s, 9 * s, 11 * s, '#C0392B'));
       items.push(...cheeks());
       break;
     case 'tongue':
       items.push(happyArc(x - ex));
       items.push(dot(x + ex, y, 8 * s), whiteDot(x + ex + 2.5 * s, y - 3 * s, 2.6 * s));
       items.push(...cheeks());
-      items.push(
+      mouthItems.push(
         D(
           'luoi',
           `M ${f(x - 9 * s)} ${f(y + 34 * s)} L ${f(x + 9 * s)} ${f(y + 34 * s)} Q ${f(x + 11 * s)} ${f(y + 54 * s)} ${f(x)} ${f(
@@ -53,14 +55,14 @@ export function face(x, y, s, expr) {
           '#FF7A9C',
         ),
       );
-      items.push(line(`M ${f(x - 15 * s)} ${f(y + 30 * s)} Q ${f(x)} ${f(y + 42 * s)} ${f(x + 15 * s)} ${f(y + 30 * s)}`, 4 * s + 1));
+      mouthItems.push(line(`M ${f(x - 15 * s)} ${f(y + 30 * s)} Q ${f(x)} ${f(y + 42 * s)} ${f(x + 15 * s)} ${f(y + 30 * s)}`, 4 * s + 1));
       break;
     case 'happy':
     default:
       items.push(...eyes(8));
       items.push(...cheeks());
-      items.push(smile());
+      mouthItems.push(smile());
       break;
   }
-  return items;
+  return mouth ? [...items, ...mouthItems] : items;
 }
