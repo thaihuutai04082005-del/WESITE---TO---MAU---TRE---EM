@@ -1,8 +1,9 @@
 // Tầng 1: Chủ đề lớn.
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import ThemeTile from '../../components/ThemeCard/ThemeTile';
+import useOneLineTitles, { GRID_CLASS } from '../../components/ThemeCard/useOneLineTitles';
 import { PainterBear } from '../../components/Illustrations';
 import { useAuth } from '../../store/auth';
 import { PlanBadge } from '../Payment/Plans';
@@ -24,30 +25,6 @@ function Sparkle({ className, color }) {
   );
 }
 
-/** Tên chủ đề luôn trên 1 hàng và cùng một cỡ chữ: lấy cỡ lớn nhất mà tên dài nhất vẫn vừa thẻ. */
-function useOneLineTitles(ref, deps) {
-  useLayoutEffect(() => {
-    const grid = ref.current;
-    if (!grid) return undefined;
-    const fit = () => {
-      const els = [...grid.querySelectorAll('[data-one-line]')];
-      if (!els.length) return;
-      els.forEach((el) => (el.style.fontSize = ''));
-      let size = parseFloat(getComputedStyle(els[0]).fontSize);
-      while (size > 9 && els.some((el) => el.scrollWidth > el.clientWidth)) {
-        size -= 0.5;
-        els.forEach((el) => (el.style.fontSize = `${size}px`));
-      }
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(grid);
-    document.fonts?.ready.then(fit);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
-}
-
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
@@ -56,7 +33,7 @@ export default function ThemeSelector() {
     api.get('/themes').then((r) => setThemes(r.themes));
   }, []);
   const gridRef = useRef(null);
-  useOneLineTitles(gridRef, [themes, i18n.language]);
+  useOneLineTitles(gridRef, i18n.language, [themes]);
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-[#EEF7FF] to-[#F5FAFF]">
       <Cloud className="-left-10 top-40 w-56 opacity-70" />
@@ -76,7 +53,7 @@ export default function ThemeSelector() {
           <Sparkle className="right-2 -top-2 hidden h-9 w-9 md:block" color="#FFD54F" />
           <Sparkle className="-right-6 top-8 hidden h-5 w-5 md:block" color="#7FC8C8" />
         </div>
-        <div ref={gridRef} className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-5 lg:gap-5">
+        <div ref={gridRef} className={GRID_CLASS}>
           {(themes || []).map((th) => (
             <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
           ))}

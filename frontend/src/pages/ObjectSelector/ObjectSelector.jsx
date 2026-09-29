@@ -1,9 +1,10 @@
 // Tầng 2: Đối tượng cụ thể — mỗi đối tượng 1 tranh minh hoạ đại diện.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import ThemeCard from '../../components/ThemeCard/ThemeCard';
+import useOneLineTitles, { GRID_CLASS } from '../../components/ThemeCard/useOneLineTitles';
 import Icon from '../../components/Icon';
 
 export default function ObjectSelector() {
@@ -14,13 +15,15 @@ export default function ObjectSelector() {
   useEffect(() => {
     api.get(`/themes/${theme}/objects`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
+  const gridRef = useRef(null);
+  useOneLineTitles(gridRef, i18n.language, [data]);
   return (
-    <div className="page">
+    <div className="page px-3 sm:px-4 lg:max-w-[1320px]">
       <Link to="/color" className="mb-2 inline-flex items-center gap-1 font-bold text-primary">
         <Icon name="back" size={20} /> {t('select.themes')}
       </Link>
       <h1 className="page-title mb-4">{data?.theme.name[i18n.language]}</h1>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+      <div ref={gridRef} className={GRID_CLASS}>
         {(data?.objects || []).map((o) => (
           <ThemeCard key={o.slug} to={`/color/${theme}/${o.slug}`} picture={o.cover} title={o.name[i18n.language]} subtitle={t('select.variantCount', { n: o.pictureCount })} testId={`object-${o.slug}`} />
         ))}
