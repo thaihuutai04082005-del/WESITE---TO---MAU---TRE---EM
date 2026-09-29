@@ -8,7 +8,7 @@ import PaymentModal from '../../components/PaymentModal/PaymentModal';
 import Icon from '../../components/Icon';
 
 /** Chữ trên nhãn gói (Gói Tháng · còn 97/100 lượt…). */
-export function planBadgeText(plan, t, lang) {
+function planBadgeText(plan, t, lang) {
   if (!plan) return '';
   return plan.plan === 'year'
     ? t('plans.badge.year', { date: formatDate(plan.endsAt, lang) })
@@ -17,13 +17,18 @@ export function planBadgeText(plan, t, lang) {
       : t('plans.badge.free', { n: plan.remaining });
 }
 
+/** Nhãn gói dạng viên thuốc viền xanh — dùng chung ở mọi trang. */
 export function PlanBadge({ plan }) {
   const { t, i18n } = useTranslation();
   if (!plan) return null;
   const text = planBadgeText(plan, t, i18n.language);
   return (
-    <Link to="/plans" className={`chip ${plan.remaining === 0 ? 'bg-coral/20 text-coral' : ''}`} data-testid="plan-badge">
-      <Icon name="star" size={16} /> {text}
+    <Link
+      to="/plans"
+      data-testid="plan-badge"
+      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 px-5 py-2.5 font-bold transition hover:bg-white ${plan.remaining === 0 ? 'border-coral/40 bg-coral/10 text-coral' : 'border-[#CFE6FA] bg-white/70 text-primary-dark'}`}
+    >
+      <Icon name="star" size={18} /> {text}
     </Link>
   );
 }

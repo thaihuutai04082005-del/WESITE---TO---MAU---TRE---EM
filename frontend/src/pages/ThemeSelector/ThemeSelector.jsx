@@ -1,13 +1,11 @@
 // Tầng 1: Chủ đề lớn.
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
 import ThemeTile from '../../components/ThemeCard/ThemeTile';
-import Icon from '../../components/Icon';
 import { PainterBear } from '../../components/Illustrations';
 import { useAuth } from '../../store/auth';
-import { planBadgeText } from '../Payment/Plans';
+import { PlanBadge } from '../Payment/Plans';
 
 /** Đám mây mờ trang trí nền. */
 function Cloud({ className }) {
@@ -57,7 +55,6 @@ export default function ThemeSelector() {
   useEffect(() => {
     api.get('/themes').then((r) => setThemes(r.themes));
   }, []);
-  const badge = planBadgeText(plan, t, i18n.language);
   const gridRef = useRef(null);
   useOneLineTitles(gridRef, [themes, i18n.language]);
   return (
@@ -75,15 +72,7 @@ export default function ThemeSelector() {
             <h1 className="font-display whitespace-nowrap text-[34px] font-extrabold leading-none text-[#17365D] md:text-6xl">{t('select.themes')}</h1>
             <p className="mt-1 text-sm text-muted md:mt-2 md:text-lg">{t('select.themesHint')}</p>
           </div>
-          {badge && (
-            <Link
-              to="/plans"
-              data-testid="plan-badge"
-              className={`inline-flex items-center gap-2 rounded-full border-2 px-5 py-2.5 font-bold transition hover:bg-white ${plan.remaining === 0 ? 'border-coral/40 bg-coral/10 text-coral' : 'border-[#CFE6FA] bg-white/70 text-primary-dark'}`}
-            >
-              <Icon name="star" size={18} /> {badge}
-            </Link>
-          )}
+          <PlanBadge plan={plan} />
           <Sparkle className="right-2 -top-2 hidden h-9 w-9 md:block" color="#FFD54F" />
           <Sparkle className="-right-6 top-8 hidden h-5 w-5 md:block" color="#7FC8C8" />
         </div>
