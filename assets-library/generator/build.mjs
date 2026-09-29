@@ -142,7 +142,7 @@ function lowerVi(text) {
 /** Điểm mẫu dọc các nét dây/đường (không phải của chủ thể) để tránh đặt trang trí đè lên. */
 function barrierPoints(all, subjectSet) {
   const pts = [];
-  for (const it of all) if (it.kind === 'deco' && it.d && it.markup && !subjectSet.has(it)) pts.push(...densify(flattenPath(it.d), 5));
+  for (const it of all) if (it.kind === 'deco' && it.d && it.markup && !subjectSet.has(it)) pts.push(...pathPoints(it.d, 5));
   return pts;
 }
 
@@ -207,10 +207,18 @@ function dropBlockedLines(all, sky, subjectSet, transform) {
   const world = (it) => (subjectSet.has(it) ? applyGroupTransform(it.poly, transform) : it.poly);
   const shapes = all.filter((it) => it.kind === 'region' && it !== sky).map((it) => ({ poly: world(it), box: bbox(world(it)) }));
   for (const it of soft) {
-    const pts = densify(flattenPath(it.d), 4);
+    const pts = pathPoints(it.d, 4);
     const blocked = pts.some(([x, y]) => shapes.some((s) => x >= s.box[0] - 4 && x <= s.box[2] + 4 && y >= s.box[1] - 4 && y <= s.box[3] + 4 && (pointInPoly(x, y, s.poly) || distToPolyEdge(x, y, s.poly) < 5)));
     if (blocked) it.markup = '';
   }
+}
+
+/** Điểm mẫu dọc một nét SVG (tách từng đoạn M… riêng để không nối nhầm các đoạn rời nhau). */
+function pathPoints(d, step) {
+  return d
+    .split(/(?=M )/)
+    .filter((p) => p.trim())
+    .flatMap((p) => densify(flattenPath(p), step));
 }
 
 /** Chèn thêm điểm để khoảng cách giữa 2 điểm liên tiếp ≤ step. */
@@ -226,6 +234,8 @@ function densify(pts, step) {
   }
   return out;
 }
+
+const FACE_WARN = [];
 
 function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   // Tranh Lớp 3 có bối cảnh riêng (bg-map.mjs) → bỏ trang trí trời chung, dùng khung cảnh riêng.
@@ -268,6 +278,21 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   const expr = theme.faceStyle === 'face' ? variant.expr : null;
   const faceItems = expr && obj.face ? face(obj.face.x, obj.face.y, obj.face.s, expr, { mouth: obj.mouth !== false }) : [];
   const subject = [...(acc.behind || []), ...body, ...(acc.preface || []), ...faceItems, ...(acc.front || []), ...subjectExtra];
+  // Kiểm tra: không có nét đen (dây, vạch…) nào vắt ngang khuôn mặt.
+  if (faceItems.length) {
+    const f = obj.face;
+    const [[fx, fy]] = applyGroupTransform([[f.x, f.y + 8 * f.s]], variant.transform || null);
+    const k = (variant.transform?.scale || 1) * f.s;
+    // Bỏ qua đồ đeo trên mặt (kính, mặt nạ, tai nghe… nằm trong preface/front có vùng tô) — chỉ xét nét dây/trang trí.
+    const mine = (acc.front || []).filter((it) => it.kind === 'deco');
+    const over = [...mine, ...front, ...(acc.fg || [])]
+      .filter((it) => it.kind === 'deco' && it.d && it.markup && !it.onFace)
+      .some((it) => {
+        const pts = mine.includes(it) ? applyGroupTransform(pathPoints(it.d, 4), variant.transform || null) : pathPoints(it.d, 4);
+        return pts.some(([x, y]) => ((x - fx) / (58 * k)) ** 2 + ((y - fy) / (46 * k)) ** 2 < 1);
+      });
+    if (over) FACE_WARN.push(`${obj.slug}--${variant.slug}`);
+  }
   // Cảnh riêng của biến thể (không chịu biến đổi tư thế của chủ thể).
   back.push(...(acc.back || []));
   mid.push(...(acc.mid || []));
@@ -425,6 +450,7 @@ function main() {
   writeAvatars();
   writeMascots();
   const pics = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures));
+  if (FACE_WARN.length) console.log(`⚠ Nét đen vắt ngang mặt (${FACE_WARN.length}): ${FACE_WARN.join(', ')}`);
   console.log(
     `Đã sinh ${pics.length} tranh (${pics.filter((p) => !p.isCard).length} tranh thường, ${pics.filter((p) => p.isCard).length} tranh thẻ).`,
   );

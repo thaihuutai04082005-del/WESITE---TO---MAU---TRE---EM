@@ -58,7 +58,7 @@ const CAY = {
 // ======================= 05 · THÀNH PHỐ NHÀ BIẾT BAY =======================
 const NHA = {
   'nha-go-biet-bay': [
-    V('khinh-khi-cau', 'Khinh Khí Cầu', 'Hot-Air Balloon', { transform: { ty: 60, scale: 0.7, px: 300, py: 480 }, acc: () => ({ back: [...Y.hotAirBalloon(300, 110, 90), Y.ropesTo([[262, 250], [338, 350]], 205, 322)] }) }),
+    V('khinh-khi-cau', 'Khinh Khí Cầu', 'Hot-Air Balloon', { transform: { ty: 60, scale: 0.7, px: 300, py: 480 }, acc: () => ({ back: [...Y.hotAirBalloon(300, 110, 90), Y.ropesTo([[262, 245], [338, 355]], 205, 371)] }) }),
     V('doi-canh-chim', 'Đôi Cánh Chim', 'Bird Wings', { transform: FLY, acc: (c) => ({ behind: A.wings(c) }) }),
     V('cuoi-dam-may', 'Cưỡi Đám Mây', 'Cloud Rider', { transform: FLY, acc: () => ({ fg: Y.cloudBase(300, 470, 1.8) }) }),
     V('dieu-keo-nha', 'Diều Kéo Nhà', 'Kite-Pulled House', { transform: { ty: -40, tx: -60, scale: 0.75, px: 300, py: 300 }, acc: () => ({ fg: [line('M 330 170 Q 420 120 480 90', 2.5), ...X.kite(500, 80)] }) }),
@@ -97,7 +97,7 @@ const NHA = {
     V('bay-theo-gio-mua', 'Bay Theo Gió Mùa', 'Riding the Monsoon', { scene: ['wind'], transform: { ty: -50, rot: -8, scale: 0.8, px: 300, py: 300 }, acc: () => ({ fg: X.leaves('la-gio', [[100, 180, 20], [500, 150, -20], [530, 320, 30]]) }) }),
     V('keo-canh-dong-hoa', 'Kéo Theo Cánh Đồng Hoa', 'Flying Flower Field', { transform: FLY, acc: () => ({ behind: Y.flowerPatch(300, 470) }) }),
     V('luon-vong-hoang-hon', 'Lượn Vòng Hoàng Hôn', 'Sunset Loop', { transform: { ty: -40, rot: 10, scale: 0.8, px: 300, py: 300 }, acc: () => ({ fg: Y.birds([[100, 160, 0.8], [140, 130, 0.6]], '#2F3640') }) }),
-    V('ha-canh-doi-co', 'Hạ Cánh Đồi Cỏ', 'Hill Landing', { transform: { ty: 40, scale: 0.72, px: 300, py: 480 }, acc: (c) => ({ front: X.parachute(c, '#4FA3E0') }) }),
+    V('ha-canh-doi-co', 'Hạ Cánh Đồi Cỏ', 'Hill Landing', { transform: { ty: 40, scale: 0.72, px: 300, py: 480 }, acc: (c) => ({ behind: X.parachute(c, '#4FA3E0') }) }),
   ],
 };
 

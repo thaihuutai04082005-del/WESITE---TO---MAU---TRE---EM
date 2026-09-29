@@ -139,7 +139,7 @@ const SIEU_THU = {
     }),
     V('nhay-du-cuu-ho', 'Nhảy Dù Cứu Hộ', 'Parachute Rescue', {
       scene: ['clouds', 'sun', 'shadow'], transform: { ty: 30, scale: 0.72, px: 300, py: 480 },
-      acc: (c) => ({ behind: A.cape(c, '#FF9F43'), front: X.parachute(c) }),
+      acc: (c) => ({ behind: [...A.cape(c, '#FF9F43'), ...X.parachute(c)] }),
     }),
   ],
 };
