@@ -256,22 +256,24 @@ export const khungLongMaoKen = () => [
 // ================= TRÁI CÂY =================
 
 /** Các đường chéo đan ô trám, cắt gọn trong hình elip (không lòi ra ngoài quả). */
-function diamondLines(cx, cy, rx, ry, gap, inset = 6) {
+function diamondLines(cx, cy, rx, ry, gap, hole = null, inset = 6) {
+  // hole = [hx, hy, hr]: chừa trống vùng khuôn mặt để nét vân không chạy qua mắt/miệng.
   const segs = [];
-  const inside = (x, y) => ((x - cx) / (rx - inset)) ** 2 + ((y - cy) / (ry - inset)) ** 2 <= 1;
+  const ok = (x, y) => ((x - cx) / (rx - inset)) ** 2 + ((y - cy) / (ry - inset)) ** 2 <= 1 && (!hole || Math.hypot(x - hole[0], y - hole[1]) > hole[2]);
   for (const dir of [1, -1]) {
     for (let c = -2 * rx; c <= 2 * rx; c += gap) {
-      let first = null;
-      let last = null;
+      let run = null;
+      const flush = () => {
+        if (run && Math.hypot(run[1][0] - run[0][0], run[1][1] - run[0][1]) > 16) segs.push(`M ${run[0][0].toFixed(1)} ${run[0][1].toFixed(1)} L ${run[1][0].toFixed(1)} ${run[1][1].toFixed(1)}`);
+        run = null;
+      };
       for (let t = -ry; t <= ry; t += 2) {
         const x = cx + c + dir * t * 0.8;
         const y = cy + t;
-        if (inside(x, y)) {
-          if (!first) first = [x, y];
-          last = [x, y];
-        }
+        if (ok(x, y)) run = run ? [run[0], [x, y]] : [[x, y], [x, y]];
+        else flush();
       }
-      if (first && last && Math.hypot(last[0] - first[0], last[1] - first[1]) > 20) segs.push(`M ${first[0].toFixed(1)} ${first[1].toFixed(1)} L ${last[0].toFixed(1)} ${last[1].toFixed(1)}`);
+      flush();
     }
   }
   return line(segs.join(' '), 3);
@@ -284,5 +286,5 @@ export const dua = () => [
   P('la-dua-4', [[296, 262], [220, 196], [276, 222]], '#6CCB5F'),
   P('la-dua-5', [[304, 262], [380, 196], [324, 222]], '#6CCB5F'),
   E('qua-dua', 300, 372, 106, 122, '#FFC94D'),
-  diamondLines(300, 372, 106, 122, 64),
+  diamondLines(300, 372, 106, 122, 64, [300, 390, 62]),
 ];

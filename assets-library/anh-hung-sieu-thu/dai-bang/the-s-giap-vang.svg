@@ -37,9 +37,9 @@
 <ellipse cx="339.1" cy="245" rx="9.4" ry="6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="259.2,173.1 254.1,125.5 277.9,149.3 300,113.6 322.1,149.3 345.9,125.5 340.8,173.1" id="r-vuong-mien" data-region="vuong-mien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="156.1" rx="7.7" ry="7.7" id="r-vuong-mien-ngoc" data-region="vuong-mien-ngoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 381.8 364 L 481.8 364 Q 483.8 440 431.8 480 Q 379.8 440 381.8 364 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 397.8 380 L 465.8 380 Q 465.8 432 431.8 460 Q 397.8 432 397.8 380 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="431.8,394 437.7,407.9 452.7,409.2 441.3,419.1 444.7,433.8 431.8,426 418.9,433.8 422.3,419.1 410.9,409.2 425.9,407.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 380 364 L 480 364 Q 482 440 430 480 Q 378 440 380 364 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 396 380 L 464 380 Q 464 432 430 460 Q 396 432 396 380 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430,394 435.9,407.9 450.9,409.2 439.5,419.1 442.9,433.8 430,426 417.1,433.8 420.5,419.1 409.1,409.2 424.1,407.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 <rect x="33" y="36" width="14" height="8" rx="2" id="r-hoa-giay-1" data-region="hoa-giay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

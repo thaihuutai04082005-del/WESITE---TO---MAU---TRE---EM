@@ -36,9 +36,9 @@
 <ellipse cx="258.6" cy="254" rx="9.9" ry="6.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="341.4" cy="254" rx="9.9" ry="6.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><path d="M 286.5 263 Q 300 277.4 313.5 263" fill="none" stroke="#1B2A38" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></g>
-<path d="M 395.5 359 L 495.5 359 Q 497.5 435 445.5 475 Q 393.5 435 395.5 359 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 411.5 375 L 479.5 375 Q 479.5 427 445.5 455 Q 411.5 427 411.5 375 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="445.5,389 451.3,402.9 466.4,404.2 455,414.1 458.4,428.8 445.5,421 432.5,428.8 435.9,414.1 424.5,404.2 439.6,402.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 330 359 L 430 359 Q 432 435 380 475 Q 328 435 330 359 Z" id="r-khien" data-region="khien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 346 375 L 414 375 Q 414 427 380 455 Q 346 427 346 375 Z" id="r-khien-vien" data-region="khien-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="380,389 385.9,402.9 400.9,404.2 389.5,414.1 392.9,428.8 380,421 367.1,428.8 370.5,414.1 359.1,404.2 374.1,402.9" id="r-khien-sao" data-region="khien-sao" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
 

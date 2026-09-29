@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="dua-hau-the-thao--bowling">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-nha-thi-dau" data-region="tuong-nha-thi-dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="290" width="600" height="24" rx="0" id="r-soc-tuong-nha-thi-dau" data-region="soc-tuong-nha-thi-dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 0 40 Q 300 110 600 40" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<polygon points="20,47.3 60,47.3 40,87.3" id="r-co-nha-thi-dau-1" data-region="co-nha-thi-dau-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="94,59.7 134,59.7 114,99.7" id="r-co-nha-thi-dau-2" data-region="co-nha-thi-dau-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="168,69.2 208,69.2 188,109.2" id="r-co-nha-thi-dau-3" data-region="co-nha-thi-dau-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="242,74.3 282,74.3 262,114.3" id="r-co-nha-thi-dau-4" data-region="co-nha-thi-dau-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="316,74.4 356,74.4 336,114.4" id="r-co-nha-thi-dau-5" data-region="co-nha-thi-dau-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="390,69.4 430,69.4 410,109.4" id="r-co-nha-thi-dau-6" data-region="co-nha-thi-dau-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="464,60 504,60 484,100" id="r-co-nha-thi-dau-7" data-region="co-nha-thi-dau-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="538,47.6 578,47.6 558,87.6" id="r-co-nha-thi-dau-8" data-region="co-nha-thi-dau-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="70,73 74.7,83.5 86.2,84.7 77.6,92.5 80,103.8 70,98 60,103.8 62.4,92.5 53.8,84.7 65.3,83.5" id="r-sao-lap-lanh-1" data-region="sao-lap-lanh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,53 544.7,63.5 556.2,64.7 547.6,72.5 550,83.8 540,78 530,83.8 532.4,72.5 523.8,64.7 535.3,63.5" id="r-sao-lap-lanh-2" data-region="sao-lap-lanh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="520,223 524.7,233.5 536.2,234.7 527.6,242.5 530,253.8 520,248 510,253.8 512.4,242.5 503.8,234.7 515.3,233.5" id="r-sao-lap-lanh-3" data-region="sao-lap-lanh-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="90,243 94.7,253.5 106.2,254.7 97.6,262.5 100,273.8 90,268 80,273.8 82.4,262.5 73.8,254.7 85.3,253.5" id="r-sao-lap-lanh-4" data-region="sao-lap-lanh-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float" transform="translate(-80 0) translate(300 480) scale(0.9) rotate(0) translate(-300 -480)">
+<ellipse cx="132" cy="406" rx="12" ry="36" transform="rotate(40 132 406)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="468" cy="406" rx="12" ry="36" transform="rotate(-40 468 406)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="256" y="452" width="16" height="46" rx="7" id="r-chan-trai" data-region="chan-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="328" y="452" width="16" height="46" rx="7" id="r-chan-phai" data-region="chan-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="256" cy="500" rx="22" ry="12" id="r-giay-trai" data-region="giay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="344" cy="500" rx="22" ry="12" id="r-giay-phai" data-region="giay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="472,300 470.9,319.3 467.7,338.3 462.3,356.8 455,374.6 445.6,391.5 434.5,407.2 421.6,421.6 407.2,434.5 391.5,445.6 374.6,455 356.8,462.3 338.3,467.7 319.3,470.9 300,472 280.7,470.9 261.7,467.7 243.2,462.3 225.4,455 208.5,445.6 192.8,434.5 178.4,421.6 165.5,407.2 154.4,391.5 145,374.6 137.7,356.8 132.3,338.3 129.1,319.3 128,300" id="r-vo-dua" data-region="vo-dua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="456,300 455,317.5 452.1,334.7 447.2,351.5 440.6,367.7 432.1,383 422,397.3 410.3,410.3 397.3,422 383,432.1 367.7,440.6 351.5,447.2 334.7,452.1 317.5,455 300,456 282.5,455 265.3,452.1 248.5,447.2 232.3,440.6 217,432.1 202.7,422 189.7,410.3 178,397.3 167.9,383 159.4,367.7 152.8,351.5 147.9,334.7 145,317.5 144,300" id="r-cui-dua" data-region="cui-dua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="440,300 439.1,315.7 436.5,331.2 432.1,346.2 426.1,360.7 418.5,374.5 409.5,387.3 399,399 387.3,409.5 374.5,418.5 360.7,426.1 346.2,432.1 331.2,436.5 315.7,439.1 300,440 284.3,439.1 268.8,436.5 253.8,432.1 239.3,426.1 225.5,418.5 212.7,409.5 201,399 190.5,387.3 181.5,374.5 173.9,360.7 167.9,346.2 163.5,331.2 160.9,315.7 160,300" id="r-ruot-dua" data-region="ruot-dua" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="215" cy="334" rx="5" ry="9" transform="rotate(-15 215 334)" id="r-hat-1" data-region="hat-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="385" cy="334" rx="5" ry="9" transform="rotate(15 385 334)" id="r-hat-2" data-region="hat-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="245" cy="398" rx="5" ry="9" transform="rotate(-10 245 398)" id="r-hat-3" data-region="hat-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="355" cy="398" rx="5" ry="9" transform="rotate(10 355 398)" id="r-hat-4" data-region="hat-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="418" rx="5" ry="9" id="r-hat-5" data-region="hat-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="281.8" cy="330" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.2" cy="330" r="5.6" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="283.6" cy="327.9" r="1.8" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="320" cy="327.9" r="1.8" fill="#FFFFFF"/></g>
+<ellipse cx="267.8" cy="344" rx="7.7" ry="4.9" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="332.2" cy="344" rx="7.7" ry="4.9" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 289.5 351 Q 300 362.2 310.5 351" fill="none" stroke="#1B2A38" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="512" cy="462" rx="36" ry="36" id="r-bong-bowling" data-region="bong-bowling" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="504" cy="450" rx="5" ry="5" id="r-lo-bowling-1" data-region="lo-bowling-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="520" cy="448" rx="5" ry="5" id="r-lo-bowling-2" data-region="lo-bowling-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="512" cy="462" rx="5" ry="5" id="r-lo-bowling-3" data-region="lo-bowling-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<path d="M 460 460 Q 474 460 470 482 Q 482 510 474 520 L 446 520 Q 438 510 450 482 Q 446 460 460 460 Z" id="r-ky-bowling-1" data-region="ky-bowling-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="449" y="476" width="22" height="6" rx="2" id="r-soc-ky-1" data-region="soc-ky-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 496 450 Q 510 450 506 472 Q 518 500 510 510 L 482 510 Q 474 500 486 472 Q 482 450 496 450 Z" id="r-ky-bowling-2" data-region="ky-bowling-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="485" y="466" width="22" height="6" rx="2" id="r-soc-ky-2" data-region="soc-ky-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 532 460 Q 546 460 542 482 Q 554 510 546 520 L 518 520 Q 510 510 522 482 Q 518 460 532 460 Z" id="r-ky-bowling-3" data-region="ky-bowling-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="521" y="476" width="22" height="6" rx="2" id="r-soc-ky-3" data-region="soc-ky-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 478 426 Q 492 426 488 448 Q 500 476 492 486 L 464 486 Q 456 476 468 448 Q 464 426 478 426 Z" id="r-ky-bowling-4" data-region="ky-bowling-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="467" y="442" width="22" height="6" rx="2" id="r-soc-ky-4" data-region="soc-ky-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

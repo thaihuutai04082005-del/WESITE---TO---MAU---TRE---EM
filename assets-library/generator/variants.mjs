@@ -69,7 +69,7 @@ export const CARD_VARIANTS = [
 // ----------------- Cảnh nền -----------------
 
 export const SKY = { day: '#BDE6FF', night: '#2C3E74', sunset: '#FFD3A5', rain: '#A9C4D6', snow: '#CFE3F2', space: '#243B6B' };
-export const GROUND = { grass: '#8BD17C', night: '#2F6B3F', snow: '#E3F2FD', water: '#5DADE2', waterNight: '#1F4E79', rock: '#B7BCC6' };
+export const GROUND = { grass: '#8BD17C', night: '#2F6B3F', snow: '#E3F2FD', water: '#5DADE2', waterNight: '#1F4E79', rock: '#B7BCC6', sand: '#F6D98B', ice: '#DDF1FB', court: '#7FC8A9' };
 
 export function groundItem(kind, color) {
   if (kind === 'rock') {
@@ -133,7 +133,7 @@ export function sceneParts(names, obj) {
     const petals = ['#FF7AA2', '#7D5FFF', '#FF9F43', '#4FA3E0'];
     [[70, 515], [150, 548], [455, 548], [535, 512]].forEach(([x, y], k) => mid.push(...smallFlower(`hoa-nho-${k + 1}`, x, y, petals[k])));
   }
-  if (has('shadow')) mid.push(E('bong-do', 300, 505, 100, 16, '#6FB36A'));
+  if (has('shadow')) mid.push(E('bong-do', 300, 505, 100, 16, '#B7C3CC'));
   if (has('snowman')) {
     mid.push(
       C('nguoi-tuyet-duoi', 80, 478, 38, '#FFFFFF'),

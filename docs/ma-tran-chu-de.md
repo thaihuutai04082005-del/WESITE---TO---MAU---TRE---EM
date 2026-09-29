@@ -4,8 +4,9 @@
 
 1. **Lớp 1 — Chủ đề** = *Nhóm đối tượng cốt lõi × Concept*. Mỗi chủ đề có **1 concept riêng, không chủ đề nào trùng concept**.
 2. **Lớp 2 — Đối tượng**: **6 đối tượng**, tất cả cùng một nhóm cốt lõi. Mỗi đối tượng chỉ thuộc **đúng 1 chủ đề** trên toàn web.
-3. **Lớp 3 — Biến thể**: mỗi chủ đề có **1 bộ 5 biến thể cố định**, áp cho cả 6 đối tượng.
-   - Ví dụ: Anh Hùng Siêu Thú có bộ *Rực Lửa · Tia Chớp · Băng Giá · Hộ Vệ · Phi Thiên* → Sư tử Rực Lửa, Hổ Băng Giá, Voi Phi Thiên…
+3. **Lớp 3 — Biến thể**: **mỗi đối tượng có 5 biến thể RIÊNG**, không trùng với đối tượng khác, và vẫn bám concept của chủ đề. *(Đã đổi: trước đây mỗi chủ đề dùng 1 bộ 5 biến thể chung.)*
+   - Ví dụ: Sư tử có *Rực Lửa · Tiếng Gầm Sóng Âm · Nâng Tảng Đá · Khiên Hoàng Gia · Bờm Ánh Sáng*; Đại bàng có *Cánh Thép · Mắt Thần Tia X · Lốc Xoáy · Lông Vũ Phi Tiêu · Bổ Nhào Siêu Tốc*.
+   - Danh sách đã làm: xem mục "Lớp 3 — Đợt 1 (đã làm)" ở cuối file. Bảng "Bộ 5 biến thể" bên dưới chỉ còn là gợi ý concept của từng chủ đề.
    - Nhân vật chính của tranh luôn là **đối tượng Lớp 2**. Đồ vật khác chỉ là phụ kiện hoặc bối cảnh nhỏ.
    - Mỗi chủ đề dùng **bộ từ Lớp 3 riêng**, không lặp các từ "phát sáng / cầu vồng / pha lê / dưới trăng" ở khắp nơi.
 4. **Khớp với web hiện tại**: chủ đề → đối tượng → tranh. Mỗi đối tượng có **9 tranh**:
@@ -122,3 +123,42 @@ Hình dáng các đối tượng cũ có trong bộ tạo tranh (mèo, chó, tá
 | 1 | 01 Siêu Thú · 02 Kẹo Ngọt · 03 Xe Vũ Trụ · 07 Khủng Long · 08 Trái Cây Thể Thao | 270 |
 | 2 | 04 Cây Thần · 05 Nhà Biết Bay · 06 Đồ Chơi · 09 Thiên Thể · 12 Lâu Đài | 270 |
 | 3 | 10 Thí Nghiệm · 11 Mỹ Thuật · 13 Hải Tặc · 14 Xiếc · 15 Máy Móc | 270 |
+
+## Lớp 3 — Đợt 1 (đã làm: 150 biến thể riêng)
+
+| Chủ đề | Đối tượng | 5 biến thể |
+|---|---|---|
+| 🦸 Anh Hùng Siêu Thú | Sư tử | Rực Lửa · Tiếng Gầm Sóng Âm · Nâng Tảng Đá · Khiên Hoàng Gia · Bờm Ánh Sáng |
+| | Hổ | Tia Chớp · Móng Vuốt Laser · Siêu Tốc · Băng Giá · Nhảy Vọt Qua Núi |
+| | Voi | Vòi Rồng Nước · Khổng Lồ · Tai Bay Lượn · Bong Bóng Bảo Vệ · Dậm Chân Động Đất |
+| | Đại bàng | Cánh Thép · Mắt Thần Tia X · Lốc Xoáy · Lông Vũ Phi Tiêu · Bổ Nhào Siêu Tốc |
+| | Mèo | Bóng Đêm · Leo Tường · Nhảy Siêu Cao · Ria Radar · Chín Mạng |
+| | Chó | Mũi Thám Tử · Cứu Hộ Siêu Tốc · Khiên Xương · Chỉ Huy Đội · Nhảy Dù Cứu Hộ |
+| 🍭 Vương Quốc Kẹo Ngọt | Donut | Nhà Vua · Lễ Đăng Quang · Tiệc Trà Hoàng Gia · Diễu Hành Hoàng Gia · Người Đưa Thư Hoàng Gia |
+| | Cupcake | Công Chúa · Nàng Tiên Đường · Dạ Hội Khiêu Vũ · Vườn Hoa Thượng Uyển · Tiệc Sinh Nhật Công Chúa |
+| | Kẹo mút | Hoàng Tử · Hiệp Sĩ · Cận Vệ Cầm Giáo · Nhạc Công Kèn Đồng · Pháp Sư Kẹo Ngọt |
+| | Kem ốc quế | Nữ Hoàng Băng Giá · Thị Nữ Quạt Lông · Thợ Làm Vườn Hoàng Gia · Đầu Bếp Hoàng Gia · Ngủ Trưa Gối Nhung |
+| | Bánh quy | Lính Gác · Thủ Kho Chìa Khóa · Thủ Thư Hoàng Gia · Người Gác Chuông · Xạ Thủ Cung Tên |
+| | Bánh kem nhiều tầng | Hoàng Hậu · Đám Cưới Cổ Tích · Đêm Hội Ánh Nến · Yến Tiệc Hoàng Cung · Quà Mừng Sinh Nhật Vua |
+| 🚀 Đội Xe Chinh Phục Vũ Trụ | Xe đua | Phản Lực · Đua Vòng Quanh Hành Tinh · Đua Trên Đường Sao · Vượt Mưa Thiên Thạch · Về Đích Ngân Hà |
+| | Xe buýt | Chở Phi Hành Gia Đi Học · Kính Vòm Không Gian · Nhún Nhảy Trên Hành Tinh Lạ · Trạm Dừng Vũ Trụ · Chạy Trên Vành Đai Hành Tinh |
+| | Xe cứu hỏa | Dập Lửa Thiên Thạch · Thang Lên Trạm Vũ Trụ · Cứu Hộ Tàu Vũ Trụ · Phun Bọt Không Trọng Lực · Tuần Tra Hành Tinh Lạ |
+| | Tàu hỏa | Đường Ray Ngân Hà · Tốc Hành Xuyên Sao · Chở Hàng Lên Trạm · Đường Hầm Vũ Trụ · Toa Kính Ngắm Sao |
+| | Máy bay | Cánh Tên Lửa · Bay Qua Vòng Hành Tinh · Nhào Lộn Giữa Sao · Tiếp Nhiên Liệu Ở Trạm · Hạ Cánh Hành Tinh Lạ |
+| | Trực thăng | Cánh Quạt Siêu Tốc · Thả Dù Tiếp Tế · Soi Đèn Hang Hành Tinh · Chở Vệ Tinh · Cứu Hộ Phi Hành Gia |
+| 🦖 Thị Trấn Khủng Long Tài Ba | Bạo chúa | Đầu Bếp · Ca Sĩ · Thợ Xây · Cảnh Sát Giao Thông · Bưu Tá |
+| | Cổ dài | Lính Cứu Hỏa · Thợ Lau Kính Tòa Nhà · Người Thắp Đèn Đường · Giáo Viên · Kiểm Lâm |
+| | Ba sừng | Bác Sĩ · Thợ Cắt Tóc · Người Bán Hoa · Thợ Mộc · Nhạc Trưởng |
+| | Gai lưng | Nông Dân · Thợ Làm Vườn · Thợ Gốm · Thợ Đan Len · Người Quét Lá |
+| | Dực long | Phi Công · Nhà Dự Báo Thời Tiết · Nhiếp Ảnh Gia · Người Làm Diều · Cứu Hộ Bờ Biển |
+| | Mào kèn | Nhà Thám Hiểm · Nhạc Công Kèn · Nhà Khảo Cổ · Hướng Dẫn Viên · Thám Tử |
+| 🍎 Đại Hội Thể Thao Trái Cây | Táo | Đá Bóng · Chạy Tiếp Sức · Bắn Cung · Đấu Kiếm · Cử Tạ |
+| | Chuối | Lướt Sóng · Chèo Thuyền Kayak · Trượt Tuyết · Nhảy Sào · Leo Núi |
+| | Dâu tây | Thể Dục Ruy Băng · Trượt Băng Nghệ Thuật · Cầu Lông · Nhảy Dây · Yoga |
+| | Dưa hấu | Bóng Rổ · Bóng Chuyền Bãi Biển · Bowling · Bơi Lội · Kéo Co |
+| | Dứa | Quần Vợt · Bóng Bàn · Golf · Karate · Bóng Chày |
+| | Cam | Trượt Ván · Quyền Anh · Khúc Côn Cầu · Trượt Patin · Nhảy Bạt Lò Xo |
+
+Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ riêng.
+
+**Bối cảnh:** mỗi tranh Lớp 3 có 1 khung cảnh + màu trời riêng, không tranh nào trùng (assets-library/generator/bg-map.mjs — bộ tạo tranh tự kiểm tra trùng).

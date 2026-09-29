@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="banh-quy--thu-thu-hoang-gia">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-thu-vien" data-region="tuong-thu-vien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="80" width="130" height="370" rx="4" id="r-ke-1" data-region="ke-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="470" y="80" width="130" height="370" rx="4" id="r-ke-2" data-region="ke-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="10" y="100" width="110" height="80" rx="2" id="r-sach-trai-0" data-region="sach-trai-0" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="480" y="100" width="110" height="80" rx="2" id="r-sach-phai-0" data-region="sach-phai-0" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="10" y="210" width="110" height="80" rx="2" id="r-sach-trai-1" data-region="sach-trai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="480" y="210" width="110" height="80" rx="2" id="r-sach-phai-1" data-region="sach-phai-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="10" y="320" width="110" height="80" rx="2" id="r-sach-trai-2" data-region="sach-trai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="480" y="320" width="110" height="80" rx="2" id="r-sach-phai-2" data-region="sach-phai-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-float">
+<ellipse cx="300" cy="322" rx="150" ry="150" id="r-banh-quy" data-region="banh-quy" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="322" rx="132" ry="132" id="r-vien-nuong" data-region="vien-nuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="220" cy="250" rx="13" ry="10" transform="rotate(20 220 250)" id="r-hat-socola-1" data-region="hat-socola-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="380" cy="250" rx="13" ry="10" transform="rotate(-15 380 250)" id="r-hat-socola-2" data-region="hat-socola-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="205" cy="380" rx="13" ry="10" transform="rotate(-10 205 380)" id="r-hat-socola-3" data-region="hat-socola-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="395" cy="385" rx="13" ry="10" transform="rotate(30 395 385)" id="r-hat-socola-4" data-region="hat-socola-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="425" rx="13" ry="10" id="r-hat-socola-5" data-region="hat-socola-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="205" rx="13" ry="10" transform="rotate(10 300 205)" id="r-hat-socola-6" data-region="hat-socola-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="276.6" cy="318" rx="15.3" ry="15.3" id="r-mat-kinh-trai" data-region="mat-kinh-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="323.4" cy="318" rx="15.3" ry="15.3" id="r-mat-kinh-phai" data-region="mat-kinh-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 291.9 318 L 308.1 318" fill="none" stroke="#1B2A38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><circle cx="276.6" cy="318" r="7.2" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="323.4" cy="318" r="7.2" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="278.9" cy="315.3" r="2.3" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="325.7" cy="315.3" r="2.3" fill="#FFFFFF"/></g>
+<ellipse cx="258.6" cy="336" rx="9.9" ry="6.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="341.4" cy="336" rx="9.9" ry="6.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 286.5 345 Q 300 359.4 313.5 345" fill="none" stroke="#1B2A38" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M 300 432 Q 260 412 220 426 L 220 492 Q 260 478 300 498 Z" id="r-sach-trai" data-region="sach-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 300 432 Q 340 412 380 426 L 380 492 Q 340 478 300 498 Z" id="r-sach-phai" data-region="sach-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 214 430 L 214 502 Q 300 492 386 502 L 386 430 L 380 492 Q 300 482 220 492 Z" id="r-bia-sach" data-region="bia-sach" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 234 442 L 284 450 M 234 460 L 284 468 M 316 450 L 366 442 M 316 468 L 366 460" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>
