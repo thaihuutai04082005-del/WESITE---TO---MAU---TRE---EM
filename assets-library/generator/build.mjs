@@ -124,6 +124,18 @@ function computeManifestRegions(regions) {
   });
 }
 
+// Tên đầy đủ tiếng Việt chỉ viết hoa chữ đầu ("Sư tử rực lửa"): phần tên kiểu viết thường,
+// trừ tên riêng (Tết Nguyên Đán, Bắc Cực…) và chữ cái đứng một mình (tia X).
+const KEEP_CASE = ['Tết Nguyên Đán', 'Bắc Cực'];
+function lowerVi(text) {
+  let out = text
+    .split(' ')
+    .map((w) => (w.length === 1 && w === w.toUpperCase() ? w : w.toLocaleLowerCase('vi')))
+    .join(' ');
+  for (const k of KEEP_CASE) out = out.replace(k.toLocaleLowerCase('vi'), k);
+  return out;
+}
+
 function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   // Tranh Lớp 3 có bối cảnh riêng (bg-map.mjs) → bỏ trang trí trời chung, dùng khung cảnh riêng.
   const bgPick = isCard ? null : bgFor(obj.slug, variant.slug);
@@ -215,7 +227,7 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
       object: obj.slug,
       variant: variant.slug,
       name: {
-        vi: `${obj.name.vi} ${variant.name.vi}`,
+        vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`,
         en: `${obj.name.en} – ${variant.name.en}`,
       },
       variantName: variant.name,
