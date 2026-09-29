@@ -3,6 +3,7 @@
 import { legacy } from './objects.mjs';
 import * as B from './bodies.mjs';
 import * as A from './accessories.mjs';
+import { E } from './shapes.mjs';
 import { flame, bolt, iceCrystal, asteroid, soccerBall, basketball } from './accessories.mjs';
 
 export const THEMES = [
@@ -14,20 +15,28 @@ export const THEMES = [
 ];
 
 const O = (theme, slug, vi, en, opts) => ({ theme, slug, name: { vi, en }, ...opts });
+/** Thêm 2 tay (chi trước) cho thú 4 chân: vẽ sau thân, hai bên sườn. */
+const withArms = (build, color, { x = 78, y = 402 } = {}) => () => [
+  ...build(),
+  E('tay-trai', 300 - x, y, 22, 42, color, 28),
+  E('tay-phai', 300 + x, y, 22, 42, color, -28),
+];
 /** Dùng lại hình dáng đối tượng cũ, đổi slug/tên để không trùng tranh cũ. */
 const reuse = (theme, oldSlug, slug, vi, en, extra = {}) => {
   const o = legacy(oldSlug);
-  return O(theme, slug, vi, en, { face: o.face, hat: o.hat, build: o.build, glow: o.glow, animation: o.animation, ground: o.ground, ...extra });
+  const { arms, ...rest } = extra;
+  const build = arms ? withArms(o.build, arms.color, arms) : o.build;
+  return O(theme, slug, vi, en, { face: o.face, hat: o.hat, build, glow: o.glow, animation: o.animation, ground: o.ground, ...rest });
 };
 
 export const OBJECTS = [
   // 01 — Động vật × Siêu anh hùng
-  O('anh-hung-sieu-thu', 'su-tu', 'Sư tử', 'Lion', { face: { x: 300, y: 250, s: 1 }, hat: { x: 300, y: 150, s: 0.9 }, neck: 336, left: 212, right: 388, build: B.suTu }),
-  O('anh-hung-sieu-thu', 'ho', 'Hổ', 'Tiger', { face: { x: 300, y: 248, s: 1 }, hat: { x: 300, y: 176, s: 0.9 }, neck: 334, left: 212, right: 388, build: B.ho }),
-  reuse('anh-hung-sieu-thu', 'voi', 'voi-sieu-thu', 'Voi', 'Elephant', { neck: 336, left: 200, right: 400 }),
+  O('anh-hung-sieu-thu', 'su-tu', 'Sư tử', 'Lion', { face: { x: 300, y: 250, s: 1 }, hat: { x: 300, y: 150, s: 0.9 }, neck: 336, left: 212, right: 388, build: withArms(B.suTu, '#F4B942') }),
+  O('anh-hung-sieu-thu', 'ho', 'Hổ', 'Tiger', { face: { x: 300, y: 248, s: 1 }, hat: { x: 300, y: 176, s: 0.9 }, neck: 334, left: 212, right: 388, build: withArms(B.ho, '#FF9F43') }),
+  reuse('anh-hung-sieu-thu', 'voi', 'voi-sieu-thu', 'Voi', 'Elephant', { neck: 336, left: 200, right: 400, arms: { color: '#8FA8BF', x: 86, y: 408 } }),
   O('anh-hung-sieu-thu', 'dai-bang', 'Đại bàng', 'Eagle', { face: { x: 300, y: 228, s: 0.85 }, mouth: false, hat: { x: 300, y: 168, s: 0.85 }, neck: 306, left: 150, right: 450, build: B.daiBang }),
-  reuse('anh-hung-sieu-thu', 'meo', 'meo-sieu-thu', 'Mèo', 'Cat', { neck: 334, left: 210, right: 390 }),
-  reuse('anh-hung-sieu-thu', 'cho', 'cho-sieu-thu', 'Chó', 'Dog', { neck: 334, left: 208, right: 392 }),
+  reuse('anh-hung-sieu-thu', 'meo', 'meo-sieu-thu', 'Mèo', 'Cat', { neck: 334, left: 210, right: 390, arms: { color: '#F4A340' } }),
+  reuse('anh-hung-sieu-thu', 'cho', 'cho-sieu-thu', 'Chó', 'Dog', { neck: 334, left: 208, right: 392, arms: { color: '#C68B59' } }),
 
   // 02 — Bánh kẹo × Hoàng gia
   O('vuong-quoc-keo-ngot', 'donut', 'Donut', 'Donut', { face: { x: 300, y: 398, s: 0.62 }, hat: { x: 300, y: 186, s: 1.2 }, build: B.donut }),

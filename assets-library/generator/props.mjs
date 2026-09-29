@@ -155,12 +155,42 @@ export function bigBubble(c, color = '#D6F0FF') {
   return [E('bong-bong-bao-ve', c.cx, midY(c), rx, ry, color), E('anh-bong-bong', c.cx - rx * 0.55, midY(c) - ry * 0.55, 22, 12, '#FFFFFF', -35)];
 }
 
-export function waterJet(x0, y0, x1, y1, color = '#8FD3FF') {
+/** Dải cong có độ dày thay đổi theo đường cong bậc 2 (p0 → pc → p1). */
+function curveBand(id, p0, pc, p1, w0, w1, color, n = 24) {
+  const L = [];
+  const Rr = [];
+  for (let k = 0; k <= n; k++) {
+    const t = k / n;
+    const u = 1 - t;
+    const x = u * u * p0[0] + 2 * u * t * pc[0] + t * t * p1[0];
+    const y = u * u * p0[1] + 2 * u * t * pc[1] + t * t * p1[1];
+    const dx = 2 * u * (pc[0] - p0[0]) + 2 * t * (p1[0] - pc[0]);
+    const dy = 2 * u * (pc[1] - p0[1]) + 2 * t * (p1[1] - pc[1]);
+    const len = Math.hypot(dx, dy) || 1;
+    const w = (w0 + (w1 - w0) * t) / 2;
+    L.push([x - (dy / len) * w, y + (dx / len) * w]);
+    Rr.push([x + (dy / len) * w, y - (dx / len) * w]);
+  }
+  return P(id, [...L, ...Rr.reverse()], color);
+}
+
+function flameBig(id, x, y, s) {
   return [
-    D('tia-nuoc-voi', `M ${pt(x0 - 16, y0)} Q ${pt((x0 + x1) / 2 - 70, y1 - 30)} ${pt(x1 - 44, y1)} Q ${pt(x1, y1 - 40)} ${pt(x1 + 44, y1)} Q ${pt((x0 + x1) / 2 + 10, y1 + 20)} ${pt(x0 + 16, y0)} Z`, color),
-    C('giot-nuoc-1', x1 - 40, y1 + 30, 10, color),
-    C('giot-nuoc-2', x1 + 30, y1 + 36, 8, color),
-    C('giot-nuoc-3', x1 - 4, y1 + 56, 9, color),
+    D(id, `M ${pt(x, y)} C ${pt(x - 34 * s, y - 20 * s)} ${pt(x - 20 * s, y - 60 * s)} ${pt(x, y - 84 * s)} C ${pt(x + 6 * s, y - 56 * s)} ${pt(x + 34 * s, y - 50 * s)} ${pt(x + 26 * s, y - 16 * s)} Q ${pt(x + 20 * s, y)} ${pt(x, y)} Z`, '#FF7043'),
+    D(`${id}-loi`, `M ${pt(x, y - 4 * s)} C ${pt(x - 16 * s, y - 14 * s)} ${pt(x - 10 * s, y - 34 * s)} ${pt(x, y - 46 * s)} C ${pt(x + 4 * s, y - 32 * s)} ${pt(x + 18 * s, y - 28 * s)} ${pt(x + 12 * s, y - 10 * s)} Q ${pt(x + 8 * s, y - 4 * s)} ${pt(x, y - 4 * s)} Z`, '#FFC94D'),
+  ];
+}
+
+/** Vòi rồng nước: dòng nước dày bắn thành vòng cung từ vòi voi xuống đám lửa, có vệt sáng + bọt nước bắn toé. */
+export function waterJet(x0, y0, x1, y1, pc = null, color = '#4FC3F7', fire = true) {
+  pc = pc || [(x0 + x1) / 2, Math.min(y0, y1) - 80];
+  const splash = [[-40, -18, 13], [-10, -40, 15], [26, -30, 12], [44, -6, 10], [-56, 4, 10]];
+  return [
+    ...(fire ? [-1, 1] : []).flatMap((k) => flameBig(`lua-chay-${k > 0 ? 2 : 1}`, x1 + k * 34, y1 + 30, k > 0 ? 1.1 : 1.4)),
+    curveBand('tia-nuoc-voi', [x0, y0], pc, [x1, y1], 38, 70, color),
+    curveBand('vet-sang-nuoc', [x0 - 2, y0 - 8], [pc[0] + 8, pc[1] + 2], [x1 + 8, y1 - 16], 10, 18, '#E1F5FE'),
+    ...splash.map(([dx, dy, r], k) => C(`giot-nuoc-${k + 1}`, x1 + dx, y1 + dy, r, k % 2 ? '#B3E5FC' : color)),
+    ...(fire ? [E('vung-nuoc-ban', x1, y1 + 34, 80, 16, '#81D4FA')] : []),
   ];
 }
 

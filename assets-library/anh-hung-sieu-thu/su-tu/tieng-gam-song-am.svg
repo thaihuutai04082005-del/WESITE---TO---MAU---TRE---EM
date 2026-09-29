@@ -22,6 +22,8 @@
 <ellipse cx="300" cy="258" rx="76" ry="76" id="r-dau" data-region="dau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="286" rx="32" ry="22" id="r-mom" data-region="mom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="290,262 310,262 300,272" id="r-mui" data-region="mui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="222" cy="402" rx="22" ry="42" transform="rotate(28 222 402)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="378" cy="402" rx="22" ry="42" transform="rotate(-28 378 402)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><circle cx="274" cy="250" r="10" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="326" cy="250" r="10" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="276.5" cy="247" r="2.6" fill="#FFFFFF"/></g>
@@ -39,8 +41,6 @@
 <path d="M 440 216 Q 496 286 440 356 L 450 352 Q 508 286 450 220 Z" id="r-song-am-phai-3" data-region="song-am-phai-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 </g>
 <g class="scene-front">
-<g class="deco" pointer-events="none"><path d="M 40 200 Q 90 180 140 200 Q 170 212 160 230 M 460 150 Q 510 130 560 150 M 480 260 Q 530 240 580 260" fill="none" stroke="#1B2A38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
-<ellipse cx="520" cy="200" rx="12" ry="7" transform="rotate(30 520 200)" id="r-la-bay-1" data-region="la-bay-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="90" cy="150" rx="12" ry="7" transform="rotate(-20 90 150)" id="r-la-bay-2" data-region="la-bay-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
 </g>
 </svg>

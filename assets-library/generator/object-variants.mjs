@@ -16,7 +16,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5F5F'), front: [...A.flame('ngon-lua-trai', c.left - 10, c.bb[3] + 8, 1.5), ...A.flame('ngon-lua-phai', c.right + 10, c.bb[3] + 8, 1.5), ...A.flame('ngon-lua-tren-trai', c.left - 40, c.bb[3] - 140, 0.9), ...A.flame('ngon-lua-tren-phai', c.right + 40, c.bb[3] - 160, 0.9)] }),
     }),
     V('tieng-gam-song-am', 'Tiếng Gầm Sóng Âm', 'Sonic Roar', {
-      expr: 'surprised', scene: ['clouds', 'wind'],
+      expr: 'surprised', scene: ['clouds'],
       acc: (c) => ({ behind: A.cape(c, '#4FA3E0'), front: [...X.soundWaves('song-am-trai', c.face.x - 90, c.face.y + 36, -1), ...X.soundWaves('song-am-phai', c.face.x + 90, c.face.y + 36, 1)] }),
     }),
     V('nang-tang-da', 'Nâng Tảng Đá', 'Boulder Lift', {
@@ -34,7 +34,7 @@ const SIEU_THU = {
   ],
   ho: [
     V('tia-chop', 'Tia Chớp', 'Lightning', {
-      scene: ['clouds', 'motion'],
+      scene: ['clouds'],
       acc: (c) => ({ behind: A.cape(c, '#4FA3E0'), preface: A.mask(c, '#2B7CC4'), front: [A.bolt('tia-chop-trai', c.left - 40, midYc(c) - 150, 1.7), A.bolt('tia-chop-phai', c.right + 60, midYc(c) - 90, 1.5)] }),
     }),
     V('mong-vuot-laser', 'Móng Vuốt Laser', 'Laser Claws', {
@@ -50,14 +50,14 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#B3E5FC'), front: [A.iceCrystal('pha-le-bang-1', c.left - 60, midYc(c) - 90, 44), A.iceCrystal('pha-le-bang-2', c.right + 60, midYc(c) - 30, 40), A.iceCrystal('pha-le-bang-3', c.left - 30, midYc(c) + 70, 30)] }),
     }),
     V('nhay-vot-qua-nui', 'Nhảy Vọt Qua Núi', 'Mountain Leap', {
-      scene: ['clouds', 'motion'], transform: { ty: -110, rot: -10, scale: 0.8, px: 300, py: 400 },
+      scene: ['clouds'], transform: { ty: -110, rot: -10, scale: 0.8, px: 300, py: 400 },
       acc: (c) => ({ behind: A.cape(c, '#FF9F43'), back: X.mountains() }),
     }),
   ],
   'voi-sieu-thu': [
     V('voi-rong-nuoc', 'Vòi Rồng Nước', 'Water Cannon', {
       scene: ['sun'],
-      acc: (c) => ({ behind: A.cape(c, '#4FA3E0'), front: X.waterJet(262, 396, 110, 140) }),
+      acc: (c) => ({ behind: A.cape(c, '#4FA3E0'), front: X.waterJet(256, 392, 130, 460, [-70, 110]) }),
     }),
     V('khong-lo', 'Khổng Lồ', 'Giant', {
       scene: ['clouds'], transform: { ty: 30, scale: 1.12, px: 300, py: 480 },
@@ -72,7 +72,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: [...X.bigBubble(c), ...A.cape(c, '#FF7AA2')] }),
     }),
     V('dam-chan-dong-dat', 'Dậm Chân Động Đất', 'Earthquake Stomp', {
-      scene: ['clouds', 'motion'],
+      scene: ['clouds'],
       acc: (c) => ({ behind: A.cape(c, '#8D6E63'), mid: [...X.cracks('vet-nut-1', 140, 520), ...X.cracks('vet-nut-2', 450, 540)], fg: [...X.boulder('da-bay-1', 90, 360, 18), ...X.boulder('da-bay-2', 520, 330, 22)] }),
     }),
   ],
@@ -86,7 +86,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#7D5FFF'), preface: X.visor(c), front: X.eyeBeams(c) }),
     }),
     V('loc-xoay', 'Lốc Xoáy', 'Whirlwind', {
-      scene: ['clouds', 'wind'], transform: { ty: -30, scale: 0.8, px: 300, py: 300 },
+      scene: ['clouds'], transform: { ty: -30, scale: 0.8, px: 300, py: 300 },
       acc: () => ({ back: X.tornado('loc-xoay', 300, 120, 360, 200) }),
     }),
     V('long-vu-phi-tieu', 'Lông Vũ Phi Tiêu', 'Feather Darts', {
@@ -108,7 +108,7 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5F5F'), preface: A.mask(c, '#FF5F5F'), back: X.brickWall(110, 470) }),
     }),
     V('nhay-sieu-cao', 'Nhảy Siêu Cao', 'Super Jump', {
-      scene: ['clouds', 'motion'], transform: { ty: -120, scale: 0.8, px: 300, py: 400 },
+      scene: ['clouds'], transform: { ty: -120, scale: 0.8, px: 300, py: 400 },
       acc: (c) => ({ behind: A.cape(c, '#4CD787'), mid: [E('lo-xo-1', 300, 480, 60, 12, '#BFC8D0')] }),
     }),
     V('ria-radar', 'Ria Radar', 'Whisker Radar', {
@@ -123,7 +123,7 @@ const SIEU_THU = {
   'cho-sieu-thu': [
     V('mui-tham-tu', 'Mũi Thám Tử', 'Super Sniffer', {
       scene: ['sun', 'clouds'],
-      acc: (c) => ({ behind: A.cape(c, '#C8A26B'), front: X.detectiveCap(c), mid: X.footprints() }),
+      acc: (c) => ({ behind: A.cape(c, '#66BB6A'), front: X.detectiveCap(c), mid: X.footprints() }),
     }),
     V('cuu-ho-sieu-toc', 'Cứu Hộ Siêu Tốc', 'Rescue Dash', {
       scene: ['clouds', 'speed'], transform: { rot: -6, px: 300, py: 460 },
@@ -224,7 +224,7 @@ const XE = {
     SV('chay-tren-vanh-dai', 'Chạy Trên Vành Đai Hành Tinh', 'Planet Ring Road', { transform: { ty: -30, scale: 0.8, px: 300, py: 480 }, acc: () => ({ back: X.bigPlanet(300, 520, 150, '#FFB74D'), mid: X.ringRoad() }) }),
   ],
   'xe-cuu-hoa': [
-    SV('dap-lua-thien-thach', 'Dập Lửa Thiên Thạch', 'Meteor Firefighter', { acc: () => ({ fg: [...X.flamingMeteor(110, 160), ...X.waterJet(330, 380, 150, 190)] }) }),
+    SV('dap-lua-thien-thach', 'Dập Lửa Thiên Thạch', 'Meteor Firefighter', { acc: () => ({ fg: [...X.flamingMeteor(110, 160), ...X.waterJet(330, 380, 150, 200, [270, 170], '#4FC3F7', false)] }) }),
     SV('thang-len-tram', 'Thang Lên Trạm Vũ Trụ', 'Ladder to the Station', { scene: ['station'], acc: () => ({ mid: X.ladderUp(260, 300, 200, 150) }) }),
     SV('cuu-ho-tau-vu-tru', 'Cứu Hộ Tàu Vũ Trụ', 'Spaceship Rescue', { scene: ['planet'], acc: () => ({ fg: [...X.smallRocket(120, 180, -35), ...X.foam('khoi', [[60, 250, 16], [90, 270, 12]])] }) }),
     SV('phun-bot', 'Phun Bọt Không Trọng Lực', 'Zero-G Foam', { acc: () => ({ fg: X.foam('bot', [[100, 150, 30], [150, 110, 22], [70, 220, 20], [520, 140, 26], [480, 200, 18], [540, 250, 16], [200, 170, 14]]) }) }),

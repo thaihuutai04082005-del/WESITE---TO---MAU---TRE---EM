@@ -4,7 +4,7 @@ const M = {
   // 01 · Anh Hùng Siêu Thú
   'su-tu': { 'ruc-lua': ['volcanoValley', 'sunset'], 'tieng-gam-song-am': ['canyon', 'day'], 'nang-tang-da': ['peak', 'morning'], 'khien-hoang-gia': ['palaceHall', 'day'], 'bom-anh-sang': ['rainbowHills', 'pink'] },
   ho: { 'tia-chop': ['rainyStreet', 'storm'], 'mong-vuot-laser': ['nightCity', 'night'], 'sieu-toc': ['desert', 'day'], 'bang-gia': ['aurora', 'night'], 'nhay-vot-qua-nui': ['meadow', 'mint'] },
-  'voi-sieu-thu': { 'voi-rong-nuoc': ['waterfall', 'day'], 'khong-lo': ['city', 'morning'], 'tai-bay-luon': ['cloudland', 'day'], 'bong-bong-bao-ve': ['garden', 'pink'], 'dam-chan-dong-dat': ['canyon', 'sunset'] },
+  'voi-sieu-thu': { 'voi-rong-nuoc': ['forest', 'dusk'], 'khong-lo': ['city', 'morning'], 'tai-bay-luon': ['cloudland', 'day'], 'bong-bong-bao-ve': ['garden', 'pink'], 'dam-chan-dong-dat': ['canyon', 'sunset'] },
   'dai-bang': { 'canh-thep': ['peak', 'day'], 'mat-than-tia-x': ['galaxy', 'space'], 'loc-xoay': ['desert', 'storm'], 'long-vu-phi-tieu': ['forest', 'morning'], 'bo-nhao-sieu-toc': ['cloudland', 'sunset'] },
   'meo-sieu-thu': { 'bong-dem': ['nightCity', 'deep'], 'leo-tuong': ['city', 'dusk'], 'nhay-sieu-cao': ['playground', 'day'], 'ria-radar': ['starField', 'night'], 'chin-mang': ['spring', 'pink'] },
   'cho-sieu-thu': { 'mui-tham-tu': ['park', 'morning'], 'cuu-ho-sieu-toc': ['river', 'day'], 'khien-xuong': ['farm', 'day'], 'chi-huy-doi': ['stationInside', 'day'], 'nhay-du-cuu-ho': ['meadow', 'day'] },

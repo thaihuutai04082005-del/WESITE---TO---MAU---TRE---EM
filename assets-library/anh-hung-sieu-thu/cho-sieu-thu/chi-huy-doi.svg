@@ -24,6 +24,8 @@
 <ellipse cx="328" cy="240" rx="22" ry="20" id="r-dom-mat" data-region="dom-mat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="285" rx="38" ry="26" id="r-mom" data-region="mom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="263" rx="13" ry="9" id="r-mui" data-region="mui" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="222" cy="402" rx="22" ry="42" transform="rotate(28 222 402)" id="r-tay-trai" data-region="tay-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="378" cy="402" rx="22" ry="42" transform="rotate(-28 378 402)" id="r-tay-phai" data-region="tay-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <g class="deco" pointer-events="none"><circle cx="274" cy="242" r="8" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="326" cy="242" r="8" fill="#1B2A38"/></g>
 <g class="deco" pointer-events="none"><circle cx="276.5" cy="239" r="2.6" fill="#FFFFFF"/></g>
