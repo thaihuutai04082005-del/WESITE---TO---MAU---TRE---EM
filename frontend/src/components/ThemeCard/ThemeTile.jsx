@@ -1,4 +1,4 @@
-// Thẻ chủ đề ở trang "Chọn chủ đề": ảnh bìa ngang (cắt từ tranh đầu tiên), tên chủ đề, số đối tượng và nút mũi tên.
+// Thẻ chủ đề ở trang "Chọn chủ đề": ảnh bìa vuông đủ cả tranh, tên chủ đề (1 hàng), số đối tượng và nút mũi tên.
 import { Link } from 'react-router-dom';
 import PictureView from '../PictureView/PictureView';
 import Icon from '../Icon';
@@ -10,12 +10,8 @@ export default function ThemeTile({ to, picture, title, subtitle, testId }) {
       data-testid={testId}
       className="group flex flex-col rounded-[22px] border border-[#E3F0FA] bg-white p-2 shadow-[0_6px_18px_rgba(43,155,244,0.10)] transition hover:-translate-y-1 hover:shadow-[0_12px_26px_rgba(43,155,244,0.18)] active:scale-[0.98] sm:p-3"
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-primary-light">
-        {picture && (
-          <div className="absolute inset-x-0 top-[-5%]">
-            <PictureView picture={picture} title={title} />
-          </div>
-        )}
+      <div className="overflow-hidden rounded-2xl bg-primary-light">
+        {picture ? <PictureView picture={picture} title={title} /> : <div className="aspect-square" />}
       </div>
       <div className="flex flex-1 flex-col px-0.5 pt-2 sm:px-1 sm:pt-3">
         <div data-one-line className="overflow-hidden whitespace-nowrap font-display tracking-tight sm:tracking-normal text-[17px] font-extrabold leading-snug text-[#17365D] md:text-lg" title={title}>
