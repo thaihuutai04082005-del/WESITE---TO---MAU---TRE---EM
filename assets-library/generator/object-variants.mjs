@@ -356,7 +356,8 @@ const TRAI_CAY = {
 };
 
 import { OBJECT_VARIANTS_2 } from './object-variants2.mjs';
-export const OBJECT_VARIANTS = { ...SIEU_THU, ...KEO, ...XE, ...KHUNG_LONG, ...TRAI_CAY, ...OBJECT_VARIANTS_2 };
+import { OBJECT_VARIANTS_3 } from './object-variants3.mjs';
+export const OBJECT_VARIANTS = { ...SIEU_THU, ...KEO, ...XE, ...KHUNG_LONG, ...TRAI_CAY, ...OBJECT_VARIANTS_2, ...OBJECT_VARIANTS_3 };
 
 // Tránh cảnh báo import chưa dùng khi các chủ đề sau chưa thêm.
 void C; void R; void P; void D; void heart;

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="xa-du--du-giua-den-chieu">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-vach-leu-trong" data-region="vach-leu-trong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="0" width="60" height="440" rx="0" id="r-soc-vach-leu-1" data-region="soc-vach-leu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="150" y="0" width="60" height="440" rx="0" id="r-soc-vach-leu-2" data-region="soc-vach-leu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="270" y="0" width="60" height="440" rx="0" id="r-soc-vach-leu-3" data-region="soc-vach-leu-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="390" y="0" width="60" height="440" rx="0" id="r-soc-vach-leu-4" data-region="soc-vach-leu-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="510" y="0" width="60" height="440" rx="0" id="r-soc-vach-leu-5" data-region="soc-vach-leu-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="440" width="600" height="20" rx="4" id="r-vanh-san-dien" data-region="vanh-san-dien" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="60" cy="80" rx="14" ry="14" id="r-den-trang-tri-1" data-region="den-trang-tri-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="540" cy="80" rx="14" ry="14" id="r-den-trang-tri-2" data-region="den-trang-tri-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="60,110 86,94 300,470 160,510" id="r-chum-sang-phai" data-region="chum-sang-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="60" cy="110" rx="22" ry="22" id="r-den-chieu-phai" data-region="den-chieu-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,110 514,94 300,470 440,510" id="r-chum-sang-trai" data-region="chum-sang-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="540" cy="110" rx="22" ry="22" id="r-den-chieu-trai" data-region="den-chieu-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="150" y="40" width="300" height="18" rx="8" id="r-moc-treo" data-region="moc-treo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 200 58 L 199 282 M 400 58 L 401 282" fill="none" stroke="#1B2A38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="160" y="280" width="280" height="96" rx="48" id="r-xa-du" data-region="xa-du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="184" y="280" width="30" height="96" rx="6" id="r-bang-quan-trai" data-region="bang-quan-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="386" y="280" width="30" height="96" rx="6" id="r-bang-quan-phai" data-region="bang-quan-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="282.8" cy="322" r="5.3" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="317.2" cy="322" r="5.3" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="284.5" cy="320" r="1.7" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.8" cy="320" r="1.7" fill="#FFFFFF"/></g>
+<ellipse cx="269.6" cy="335.2" rx="7.3" ry="4.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="330.4" cy="335.2" rx="7.3" ry="4.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 290.1 341.8 Q 300 352.4 309.9 341.8" fill="none" stroke="#1B2A38" stroke-width="3.64" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="bang-mau--mau-tung-toe">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-xuong-ve" data-region="tuong-xuong-ve" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="50" width="130" height="120" rx="8" id="r-cua-so-xuong" data-region="cua-so-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="30" y="60" width="110" height="90" rx="4" id="r-tranh-treo-xuong" data-region="tranh-treo-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="40" y="70" width="90" height="70" rx="2" id="r-long-tranh-xuong" data-region="long-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="85" cy="105" rx="16" ry="16" id="r-mat-troi-tranh-xuong" data-region="mat-troi-tranh-xuong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="90" cy="530" rx="40" ry="12" id="r-vet-son-san-1" data-region="vet-son-san-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="545" rx="34" ry="10" id="r-vet-son-san-2" data-region="vet-son-san-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<path d="M 140 300 Q 140 150 320 140 Q 480 140 480 280 Q 480 360 420 360 Q 380 360 380 400 Q 380 470 290 470 Q 140 470 140 300 Z" id="r-bang-mau" data-region="bang-mau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="400" cy="300" rx="26" ry="22" id="r-lo-ngon-cai" data-region="lo-ngon-cai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200" cy="250" rx="26" ry="26" id="r-mau-do" data-region="mau-do" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="262" cy="190" rx="26" ry="26" id="r-mau-vang" data-region="mau-vang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="340" cy="182" rx="26" ry="26" id="r-mau-xanh-la" data-region="mau-xanh-la" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="414" cy="214" rx="24" ry="24" id="r-mau-xanh-duong" data-region="mau-xanh-duong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200" cy="340" rx="22" ry="22" id="r-mau-tim" data-region="mau-tim" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="250.5" cy="390" r="7.5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="289.5" cy="390" r="7.5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="252.4" cy="387.8" r="2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="291.4" cy="387.8" r="2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><path d="M 244.5 375 Q 250.5 370.5 256.5 375" fill="none" stroke="#1B2A38" stroke-width="3.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 283.5 375 Q 289.5 370.5 295.5 375" fill="none" stroke="#1B2A38" stroke-width="3.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="235.5" cy="405" rx="8.3" ry="5.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="304.5" cy="405" rx="8.3" ry="5.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="270" cy="417" rx="6.8" ry="8.3" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<polygon points="130.6,130 117.6,136.4 129.7,154.9 109.4,146.2 106,164.2 96.8,148.4 84.7,156.5 85.7,142 63.6,143.3 81.3,130 67.4,118.1 85.7,118 84.7,103.5 96.8,111.6 106.7,91.8 109.4,113.8 126.6,107.7 117.6,123.6" id="r-vet-mau-ban-1" data-region="vet-mau-ban-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="530.6,120 515.5,125.6 520.7,137.4 508.3,134.3 505.9,153.7 497.1,136.2 484.7,146.5 487.4,130.6 474.6,129.2 483.5,120 467.9,108.3 487.4,109.4 484.7,93.5 497.1,103.8 504.7,93.4 508.3,105.7 526.2,98 515.5,114.4" id="r-vet-mau-ban-2" data-region="vet-mau-ban-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="119.6,420 103.4,424.9 110.3,437 97.2,432.4 94.1,443 87.5,434.1 75.2,445.7 79,429.2 65.1,429.1 75.7,420 68,412 79,410.8 75.2,394.3 87.5,405.9 94.6,393.9 97.1,407.6 107.9,405 103.4,415.1" id="r-vet-mau-ban-3" data-region="vet-mau-ban-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="538.8,440 526.5,446 537.9,463.4 518.8,455.2 515.7,472.1 506.9,457.3 495.6,464.9 496.5,451.3 475.7,452.5 492.4,440 479.3,428.8 496.5,428.7 495.6,415.1 506.9,422.7 516.3,404.1 518.8,424.8 535,419 526.5,434" id="r-vet-mau-ban-4" data-region="vet-mau-ban-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="322.4,60 311.4,64.1 315.2,72.7 306.1,70.5 304.4,84.7 297.9,71.9 288.8,79.4 290.7,67.8 281.4,66.8 287.9,60 276.4,51.4 290.7,52.2 288.8,40.6 297.9,48.1 303.4,40.5 306.1,49.5 319.2,43.9 311.4,55.9" id="r-vet-mau-ban-5" data-region="vet-mau-ban-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

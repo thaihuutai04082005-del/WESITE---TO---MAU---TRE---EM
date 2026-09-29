@@ -133,9 +133,19 @@ export const SETTINGS = {
   lavenderField: () => ({ ground: G.hill('#B39DDB'), far: [0, 1, 2, 3, 4, 5].map((k) => E(`oai-huong-${k + 1}`, 30 + k * 108, 440, 12, 34, '#7E57C2')) }),
   orchard: () => ({ ground: G.hill('#8BD17C'), far: [R('than-vuon-1', 60, 360, 16, 110, 4, '#8B5A2B'), C('tan-vuon-1', 68, 330, 56, '#66BB6A'), C('qua-vuon-1', 50, 320, 9, '#FF5F5F'), R('than-vuon-2', 524, 360, 16, 110, 4, '#8B5A2B'), C('tan-vuon-2', 532, 330, 56, '#66BB6A'), C('qua-vuon-2', 550, 316, 9, '#FF5F5F')] }),
   alienJungle: () => ({ ground: G.hill('#26A69A'), far: [C('nam-la-1', 70, 360, 50, '#F06292'), R('than-nam-la-1', 60, 400, 20, 70, 6, '#B2DFDB'), C('nam-la-2', 530, 340, 60, '#BA68C8'), R('than-nam-la-2', 518, 390, 24, 80, 6, '#B2DFDB')] }),
+  // ---- Đợt 3 ----
+  lab: () => ({ ground: G.floor('#B0BEC5'), far: [R('tuong-thi-nghiem', 0, 0, 600, 450, 0, '#E0F7FA'), R('ban-thi-nghiem', 0, 380, 600, 20, 3, '#78909C'), R('ke-lo-hoa-chat', 20, 120, 150, 12, 3, '#90A4AE'), R('lo-1', 34, 76, 30, 44, 6, '#FF9EC0'), R('lo-2', 76, 86, 26, 34, 6, '#A5F2C4'), R('lo-3', 114, 70, 34, 50, 6, '#FFF3B0'), R('bang-cong-thuc', 440, 60, 140, 100, 6, '#FFFFFF'), C('nguyen-tu-bang', 510, 110, 18, '#4FA3E0')] }),
+  artStudio: () => ({ ground: G.floor('#D7B37A'), far: [R('tuong-xuong-ve', 0, 0, 600, 450, 0, '#FFF3E0'), R('cua-so-xuong', 440, 50, 130, 120, 8, '#BDE6FF'), R('tranh-treo-xuong', 30, 60, 110, 90, 4, '#C68B59'), R('long-tranh-xuong', 40, 70, 90, 70, 2, '#FFFFFF'), C('mat-troi-tranh-xuong', 85, 105, 16, '#FFD54F'), E('vet-son-san-1', 90, 530, 40, 12, '#FF7AA2'), E('vet-son-san-2', 510, 545, 34, 10, '#4FA3E0')] }),
+  gallery: () => ({ ground: G.floor('#BCAAA4'), far: [R('tuong-trien-lam', 0, 0, 600, 450, 0, '#F5F5F5'), R('khung-trien-lam-1', 20, 90, 100, 130, 4, '#FFD54F'), R('tranh-trien-lam-1', 30, 100, 80, 110, 2, '#B3E5FC'), R('khung-trien-lam-2', 480, 90, 100, 130, 4, '#FFD54F'), R('tranh-trien-lam-2', 490, 100, 80, 110, 2, '#FFCDD2'), R('day-chan', 0, 420, 600, 10, 3, '#E57350')] }),
+  circusRing: () => ({ ground: G.floor('#E57350'), far: [R('vach-leu-trong', 0, 0, 600, 450, 0, '#FFF3D6'), ...[0, 1, 2, 3, 4].map((k) => R(`soc-vach-leu-${k + 1}`, 30 + k * 120, 0, 60, 440, 0, '#FFCDD2')), R('vanh-san-dien', 0, 440, 600, 20, 4, '#FFD54F'), ...[60, 540].map((x, k) => C(`den-trang-tri-${k + 1}`, x, 80, 14, '#FFE066'))] }),
+  circusGrounds: () => ({ ground: G.flat('#A5D66F'), far: [P('leu-xa-1', [[0, 470], [0, 360], [70, 300], [140, 360], [140, 470]], '#FF9EC0'), P('leu-xa-2', [[460, 470], [460, 370], [530, 310], [600, 370], [600, 470]], '#B3E5FC'), P('co-leu-xa-1', [[70, 300], [70, 270], [96, 280]], '#FFD54F'), P('co-leu-xa-2', [[530, 310], [530, 280], [556, 290]], '#FF5F5F')] }),
+  cove: () => ({ ground: G.dune('#F6D98B'), far: [R('bien-vinh', 0, 400, 600, 80, 0, '#4FC3F7'), P('vach-da-vinh-trai', [[0, 470], [0, 180], [90, 220], [130, 470]], '#A1887F'), P('vach-da-vinh-phai', [[600, 470], [600, 200], [500, 240], [470, 470]], '#8D6E63')], near: [E('vo-so-vinh', 90, 540, 16, 12, '#FFB3C1')] }),
+  harbor: () => ({ ground: G.wave('#4FA3E0'), far: [R('ben-xa', 0, 400, 180, 40, 4, '#A0673A'), R('nha-kho-cang', 20, 320, 120, 80, 4, '#FFCC80'), P('mai-kho-cang', [[10, 324], [80, 280], [150, 324]], '#E57350'), R('cot-den-cang', 520, 300, 16, 140, 4, '#FFFFFF'), C('den-cang', 528, 296, 14, '#FF5F5F')] }),
+  tinyTown: () => ({ ground: G.flat('#C5E1A5'), far: [R('nha-pho-nho-1', 10, 380, 70, 90, 4, '#FFE0B2'), P('mai-pho-nho-1', [[4, 384], [45, 340], [86, 384]], '#FF7043'), R('nha-pho-nho-2', 520, 370, 70, 100, 4, '#E1BEE7'), P('mai-pho-nho-2', [[514, 374], [555, 330], [596, 374]], '#7D5FFF'), C('banh-rang-nha', 45, 420, 14, '#FFB74D')] }),
+  factory: () => ({ ground: G.floor('#90A4AE'), far: [R('tuong-nha-may', 0, 0, 600, 450, 0, '#ECEFF1'), star('banh-rang-tuong-1', 70, 100, 50, 40, '#FFCC80', 10), C('truc-banh-rang-1', 70, 100, 14, '#FFE0B2'), star('banh-rang-tuong-2', 150, 50, 30, 24, '#FFE0B2', 8), R('ong-tren-tuong', 300, 22, 300, 26, 6, '#B0BEC5'), C('van-ong-tuong', 560, 35, 16, '#FF7043')] }),
 };
 
-const INDOOR = ['kitchen', 'classroom', 'stage', 'palaceHall', 'library', 'bedroom', 'workshop', 'gym', 'stationInside', 'playroom', 'toyShelf', 'attic', 'moonWindow'];
+const INDOOR = ['kitchen', 'classroom', 'stage', 'palaceHall', 'library', 'bedroom', 'workshop', 'gym', 'stationInside', 'playroom', 'toyShelf', 'attic', 'moonWindow', 'lab', 'artStudio', 'gallery', 'circusRing', 'factory'];
 const WALLS = { day: '#E3F2FD', morning: '#FFF3D6', sunset: '#FFE0CC', dusk: '#E1D5F2', night: '#3E3B6E', mint: '#DDF5EC', pink: '#FFE6EE', storm: '#DDE3E8', deep: '#2B2D42', lavender: '#EDE7F6', peach: '#FFEDE3', lemon: '#FFF9DB', aqua: '#E0F7FA', space: '#CFD8DC', nebula: '#D1C4E9', alien: '#B2DFDB' };
 const CURTAINS = { day: '#E74C3C', morning: '#FF9F43', sunset: '#C0392B', dusk: '#7D5FFF', night: '#8E24AA', pink: '#FF7AA2', mint: '#26A69A' };
 
@@ -150,7 +160,7 @@ export function buildBackground(setting, pal, side = 1) {
   if (setting === 'stage' && CURTAINS[pal]) parts.far[1].color = parts.far[2].color = CURTAINS[pal];
   return {
     skyColor: SKIES[pal],
-    skyItems: indoor ? [] : skyDecor(pal, side),
+    skyItems: indoor || setting === 'underwater' ? [] : skyDecor(pal, side),
     ground: parts.ground,
     far: parts.far || [],
     near: parts.near || [],

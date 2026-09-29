@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="mo-neo--bach-tuoc-om-neo">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 60 480 Q 30 400 70 330 Q 90 400 80 480 Z" id="r-rong-1" data-region="rong-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 530 480 Q 500 380 550 300 Q 570 400 550 480 Z" id="r-rong-2" data-region="rong-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 480 Q 100 440 220 470 Q 340 500 460 455 Q 540 430 600 460 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-sway" transform="translate(80 0) translate(300 480) scale(0.85) rotate(0) translate(-300 -480)">
+<ellipse cx="300" cy="118" rx="40" ry="40" id="r-vong-neo" data-region="vong-neo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="118" rx="20" ry="20" id="r-lo-vong-neo" data-region="lo-vong-neo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="190" y="168" width="220" height="32" rx="14" id="r-ngang-neo" data-region="ngang-neo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="248" y="150" width="104" height="300" rx="26" id="r-than-neo" data-region="than-neo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="140.3,381.3 145.5,392.6 151.8,403.5 159.1,413.9 167.3,423.7 176.3,432.9 186.2,441.5 196.9,449.3 208.2,456.3 220.2,462.4 232.7,467.7 245.6,472.1 258.9,475.5 272.4,478 286.2,479.5 300,480 313.8,479.5 327.6,478 341.1,475.5 354.4,472.1 367.3,467.7 379.8,462.4 391.8,456.3 403.1,449.3 413.8,441.5 423.7,432.9 432.7,423.7 440.9,413.9 448.2,403.5 454.5,392.6 459.7,381.3 420.3,367.6 416.3,375.9 411.6,383.9 406.1,391.5 399.9,398.7 393.1,405.5 385.6,411.7 377.6,417.5 369.1,422.6 360.1,427.1 350.7,431 341,434.2 331,436.7 320.8,438.5 310.4,439.6 300,440 289.6,439.6 279.2,438.5 269,436.7 259,434.2 249.3,431 239.9,427.1 230.9,422.6 222.4,417.5 214.4,411.7 206.9,405.5 200.1,398.7 193.9,391.5 188.4,383.9 183.7,375.9 179.7,367.6" id="r-cung-neo" data-region="cung-neo" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="112,330 178,384 130,410" id="r-mui-neo-trai" data-region="mui-neo-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="488,330 422,384 470,410" id="r-mui-neo-phai" data-region="mui-neo-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="282.8" cy="290" r="5.3" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="317.2" cy="290" r="5.3" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="284.5" cy="288" r="1.7" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="318.8" cy="288" r="1.7" fill="#FFFFFF"/></g>
+<ellipse cx="269.6" cy="303.2" rx="7.3" ry="4.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="330.4" cy="303.2" rx="7.3" ry="4.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 290.1 309.8 Q 300 320.4 309.9 309.8" fill="none" stroke="#1B2A38" stroke-width="3.64" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<ellipse cx="120" cy="180" rx="12" ry="12" id="r-bot-nuoc-1" data-region="bot-nuoc-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="480" cy="140" rx="16" ry="16" id="r-bot-nuoc-2" data-region="bot-nuoc-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="500" cy="240" rx="9" ry="9" id="r-bot-nuoc-3" data-region="bot-nuoc-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 75 380 Q 28.2 425 21 443 Q 39 416 89.4 380 Z" id="r-vuot-bach-tuoc-1" data-region="vuot-bach-tuoc-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 87.6 380 Q 58.8 425 57 443 Q 66 416 102 380 Z" id="r-vuot-bach-tuoc-2" data-region="vuot-bach-tuoc-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 100.2 380 Q 89.4 425 93 443 Q 93 416 114.6 380 Z" id="r-vuot-bach-tuoc-3" data-region="vuot-bach-tuoc-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 125.4 380 Q 150.6 425 165 443 Q 147 416 139.8 380 Z" id="r-vuot-bach-tuoc-5" data-region="vuot-bach-tuoc-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 138 380 Q 181.2 425 201 443 Q 174 416 152.4 380 Z" id="r-vuot-bach-tuoc-6" data-region="vuot-bach-tuoc-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 150.6 380 Q 211.8 425 237 443 Q 201 416 165 380 Z" id="r-vuot-bach-tuoc-7" data-region="vuot-bach-tuoc-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="120" cy="353" rx="50.4" ry="45" id="r-dau-bach-tuoc" data-region="dau-bach-tuoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="103.8" cy="353" rx="7.2" ry="7.2" id="r-mat-bach-tuoc-1" data-region="mat-bach-tuoc-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="136.2" cy="353" rx="7.2" ry="7.2" id="r-mat-bach-tuoc-2" data-region="mat-bach-tuoc-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

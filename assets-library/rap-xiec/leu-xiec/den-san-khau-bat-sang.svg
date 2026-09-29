@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="leu-xiec--den-san-khau-bat-sang">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="60,47 63.5,55.1 72.4,56 65.7,61.9 67.6,70.5 60,66 52.4,70.5 54.3,61.9 47.6,56 56.5,55.1" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="170,111 172.4,116.8 178.6,117.2 173.8,121.2 175.3,127.3 170,124 164.7,127.3 166.2,121.2 161.4,117.2 167.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="270,27 273.5,35.1 282.4,36 275.7,41.9 277.6,50.5 270,46 262.4,50.5 264.3,41.9 257.6,36 266.5,35.1" id="r-sao-3" data-region="sao-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="430,81 432.4,86.8 438.6,87.2 433.8,91.2 435.3,97.3 430,94 424.7,97.3 426.2,91.2 421.4,87.2 427.6,86.8" id="r-sao-4" data-region="sao-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="560,37 563.5,45.1 572.4,46 565.7,51.9 567.6,60.5 560,56 552.4,60.5 554.3,51.9 547.6,46 556.5,45.1" id="r-sao-5" data-region="sao-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,201 542.4,206.8 548.6,207.2 543.8,211.2 545.3,217.3 540,214 534.7,217.3 536.2,211.2 531.4,207.2 537.6,206.8" id="r-sao-6" data-region="sao-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="40,217 43.5,225.1 52.4,226 45.7,231.9 47.6,240.5 40,236 32.4,240.5 34.3,231.9 27.6,226 36.5,225.1" id="r-sao-7" data-region="sao-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="0,470 0,360 70,300 140,360 140,470" id="r-leu-xa-1" data-region="leu-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="460,470 460,370 530,310 600,370 600,470" id="r-leu-xa-2" data-region="leu-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="70,300 70,270 96,280" id="r-co-leu-xa-1" data-region="co-leu-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="530,310 530,280 556,290" id="r-co-leu-xa-2" data-region="co-leu-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="60,60 86,44 300,420 160,460" id="r-chum-sang-phai" data-region="chum-sang-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="60" cy="60" rx="22" ry="22" id="r-den-chieu-phai" data-region="den-chieu-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="540,60 514,44 300,420 440,460" id="r-chum-sang-trai" data-region="chum-sang-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="540" cy="60" rx="22" ry="22" id="r-den-chieu-trai" data-region="den-chieu-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="470" width="600" height="130" rx="0" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce">
+<rect x="140" y="296" width="320" height="180" rx="4" id="r-tuong-leu" data-region="tuong-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 140 296 L 210 296 Q 180 380 140 400 Z" id="r-rem-trai" data-region="rem-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 460 296 L 390 296 Q 420 380 460 400 Z" id="r-rem-phai" data-region="rem-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 120,300 165,300" id="r-mai-leu-1" data-region="mai-leu-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 165,300 210,300" id="r-mai-leu-2" data-region="mai-leu-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 210,300 255,300" id="r-mai-leu-3" data-region="mai-leu-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 255,300 300,300" id="r-mai-leu-4" data-region="mai-leu-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 300,300 345,300" id="r-mai-leu-5" data-region="mai-leu-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 345,300 390,300" id="r-mai-leu-6" data-region="mai-leu-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 390,300 435,300" id="r-mai-leu-7" data-region="mai-leu-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,130 435,300 480,300" id="r-mai-leu-8" data-region="mai-leu-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="296" y="76" width="8" height="60" rx="2" id="r-cot-co-leu" data-region="cot-co-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="304,78 350,92 304,106" id="r-co-leu" data-region="co-leu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="112" y="292" width="376" height="16" rx="8" id="r-vien-mai" data-region="vien-mai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="390" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="390" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="387.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="387.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="406" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="406" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 414 Q 300 426.8 312 414" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="tuyp-mau--ve-sau-bien">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 463 101 Q 445 101 449.8 86 Q 446.2 65 472 65 Q 478 45.2 500.2 50 Q 515.8 33.2 533.8 53 Q 560.2 48.8 556.6 75.2 Q 567.4 101 547 101 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 63.5 71.3 Q 50 71.3 53.6 60 Q 50.9 44.3 70.3 44.3 Q 74.8 29.4 91.4 33 Q 103.1 20.4 116.6 35.3 Q 136.4 32.1 133.7 51.9 Q 141.8 71.3 126.5 71.3 Z" id="r-may-2" data-region="may-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="400" width="600" height="80" rx="0" id="r-bien-xa" data-region="bien-xa" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="100" cy="400" rx="26" ry="8" id="r-buom-thuyen" data-region="buom-thuyen" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 480 Q 100 440 220 470 Q 340 500 460 455 Q 540 430 600 460 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="80" cy="540" rx="16" ry="12" id="r-vo-so" data-region="vo-so" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="520,529 524.1,539.3 535.2,540.1 526.7,547.2 529.4,557.9 520,552 510.6,557.9 513.3,547.2 504.8,540.1 515.9,539.3" id="r-sao-bien-cat" data-region="sao-bien-cat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-bounce" transform="translate(0 -40) translate(300 480) scale(0.8) rotate(0) translate(-300 -480)">
+<rect x="262" y="96" width="76" height="60" rx="12" id="r-nap-tuyp" data-region="nap-tuyp" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="270,150 330,150 376,200 224,200" id="r-vai-tuyp" data-region="vai-tuyp" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="220" y="196" width="160" height="250" rx="16" id="r-than-tuyp" data-region="than-tuyp" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="220" y="280" width="160" height="110" rx="0" id="r-nhan-tuyp" data-region="nhan-tuyp" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="208,440 392,440 392,478 392,478 373.6,470 355.2,478 336.8,470 318.4,478 300,470 281.6,478 263.2,470 244.8,478 226.4,470 208,478 208,478" id="r-duoi-tuyp" data-region="duoi-tuyp" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="335" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="335" r="6.4" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="332.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="332.6" r="2.1" fill="#FFFFFF"/></g>
+<ellipse cx="263.2" cy="351" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="351" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><path d="M 288 359 Q 300 371.8 312 359" fill="none" stroke="#1B2A38" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g class="scene-front">
+<polygon points="40,489 57.3,499.4 74.7,502.9 92,497.2 109.3,486.1 126.7,476.9 144,475.7 161.3,483.3 178.7,494.7 196,502.3 213.3,501.1 230.7,491.9 248,480.8 265.3,475.1 282.7,478.6 300,489 317.3,499.4 334.7,502.9 352,497.2 369.3,486.1 386.7,476.9 404,475.7 421.3,483.3 438.7,494.7 456,502.3 473.3,501.1 490.7,491.9 508,480.8 525.3,475.1 542.7,478.6 560,489 560,511 542.7,500.6 525.3,497.1 508,502.8 490.7,513.9 473.3,523.1 456,524.3 438.7,516.7 421.3,505.3 404,497.7 386.7,498.9 369.3,508.1 352,519.2 334.7,524.9 317.3,521.4 300,511 282.7,500.6 265.3,497.1 248,502.8 230.7,513.9 213.3,523.1 196,524.3 178.7,516.7 161.3,505.3 144,497.7 126.7,498.9 109.3,508.1 92,519.2 74.7,524.9 57.3,521.4 40,511" id="r-song-xanh-1" data-region="song-xanh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="40,529 57.3,539.4 74.7,542.9 92,537.2 109.3,526.1 126.7,516.9 144,515.7 161.3,523.3 178.7,534.7 196,542.3 213.3,541.1 230.7,531.9 248,520.8 265.3,515.1 282.7,518.6 300,529 317.3,539.4 334.7,542.9 352,537.2 369.3,526.1 386.7,516.9 404,515.7 421.3,523.3 438.7,534.7 456,542.3 473.3,541.1 490.7,531.9 508,520.8 525.3,515.1 542.7,518.6 560,529 560,551 542.7,540.6 525.3,537.1 508,542.8 490.7,553.9 473.3,563.1 456,564.3 438.7,556.7 421.3,545.3 404,537.7 386.7,538.9 369.3,548.1 352,559.2 334.7,564.9 317.3,561.4 300,551 282.7,540.6 265.3,537.1 248,542.8 230.7,553.9 213.3,563.1 196,564.3 178.7,556.7 161.3,545.3 144,537.7 126.7,538.9 109.3,548.1 92,559.2 74.7,564.9 57.3,561.4 40,551" id="r-song-xanh-2" data-region="song-xanh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

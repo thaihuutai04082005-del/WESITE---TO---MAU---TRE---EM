@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="tau-hai-tac--vuot-bao-lon">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 64 110 Q 40 110 46.4 90 Q 41.6 62 76 62 Q 84 35.6 113.6 42 Q 134.4 19.6 158.4 46 Q 193.6 40.4 188.8 75.6 Q 203.2 110 176 110 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 424 100 Q 400 100 406.4 80 Q 401.6 52 436 52 Q 444 25.6 473.6 32 Q 494.4 9.6 518.4 36 Q 553.6 30.4 548.8 65.6 Q 563.2 100 536 100 Z" id="r-may-mua-2" data-region="may-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="440" rx="320" ry="10" id="r-duong-chan-troi" data-region="duong-chan-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 73.5 123.8 Q 45 123.8 52.6 100 Q 46.9 66.8 87.8 66.8 Q 97.3 35.4 132.4 43 Q 157.1 16.4 185.6 47.8 Q 227.4 41.1 221.7 82.9 Q 238.8 123.8 206.5 123.8 Z" id="r-may-mua-1-2" data-region="may-mua-1-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 393.5 113.8 Q 365 113.8 372.6 90 Q 366.9 56.8 407.8 56.8 Q 417.3 25.4 452.4 33 Q 477.1 6.4 505.6 37.8 Q 547.4 31.1 541.7 72.9 Q 558.8 113.8 526.5 113.8 Z" id="r-may-mua-2-2" data-region="may-mua-2-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 440 Q 75 425 150 440 Q 225 455 300 440 Q 375 425 450 440 Q 525 455 600 440 L 600 600 L 0 600 Z" id="r-mat-nuoc" data-region="mat-nuoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="480" cy="535" rx="70" ry="16" id="r-vung-nuoc" data-region="vung-nuoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-sway" transform="translate(0 0) translate(300 480) scale(1) rotate(-6) translate(-300 -480)">
+<rect x="292" y="90" width="16" height="290" rx="4" id="r-cot-buom" data-region="cot-buom" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="308,92 370,110 308,128" id="r-co-dinh-cot" data-region="co-dinh-cot" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 190 150 Q 300 128 410 150 Q 430 230 410 310 Q 300 290 190 310 Q 170 230 190 150 Z" id="r-buom-lon" data-region="buom-lon" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="270" y="112" width="60" height="22" rx="6" id="r-choi-canh" data-region="choi-canh" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 110 350 L 490 350 Q 470 470 380 480 L 220 480 Q 130 470 110 350 Z" id="r-than-tau" data-region="than-tau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="104" y="340" width="392" height="22" rx="8" id="r-man-tau" data-region="man-tau" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="200" cy="410" rx="16" ry="16" id="r-cua-tron-1" data-region="cua-tron-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="400" cy="410" rx="16" ry="16" id="r-cua-tron-2" data-region="cua-tron-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="279.2" cy="225" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="320.8" cy="225" r="8" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="281.2" cy="222.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="322.8" cy="222.6" r="2.1" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><path d="M 272.8 209 Q 279.2 204.2 285.6 209" fill="none" stroke="#1B2A38" stroke-width="3.4000000000000004" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 314.4 209 Q 320.8 204.2 327.2 209" fill="none" stroke="#1B2A38" stroke-width="3.4000000000000004" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="263.2" cy="241" rx="8.8" ry="5.6" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="336.8" cy="241" rx="8.8" ry="5.6" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="253.8" rx="7.2" ry="8.8" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+<path d="M 70 174 Q 82 192 80 198 Q 70 210 60 198 Q 58 192 70 174 Z" id="r-giot-mua-1" data-region="giot-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 130 214 Q 142 232 140 238 Q 130 250 120 238 Q 118 232 130 214 Z" id="r-giot-mua-2" data-region="giot-mua-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 200 169 Q 212 187 210 193 Q 200 205 190 193 Q 188 187 200 169 Z" id="r-giot-mua-3" data-region="giot-mua-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 400 164 Q 412 182 410 188 Q 400 200 390 188 Q 388 182 400 164 Z" id="r-giot-mua-4" data-region="giot-mua-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 470 209 Q 482 227 480 233 Q 470 245 460 233 Q 458 227 470 209 Z" id="r-giot-mua-5" data-region="giot-mua-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 540 169 Q 552 187 550 193 Q 540 205 530 193 Q 528 187 540 169 Z" id="r-giot-mua-6" data-region="giot-mua-6" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 100 284 Q 112 302 110 308 Q 100 320 90 308 Q 88 302 100 284 Z" id="r-giot-mua-7" data-region="giot-mua-7" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 510 294 Q 522 312 520 318 Q 510 330 500 318 Q 498 312 510 294 Z" id="r-giot-mua-8" data-region="giot-mua-8" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 0 480 Q 50 450 100 480 Q 150 510 200 480 Q 250 450 300 480 Q 350 510 400 480 Q 450 450 500 480 Q 550 510 600 480 L 600 600 L 0 600 Z" id="r-song-truoc" data-region="song-truoc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="80" cy="464" rx="18" ry="7" id="r-bot-song-1" data-region="bot-song-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="280" cy="464" rx="18" ry="7" id="r-bot-song-2" data-region="bot-song-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="480" cy="464" rx="18" ry="7" id="r-bot-song-3" data-region="bot-song-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="500,120 471.4,185 497.4,185 476.6,244.8 528.6,169.4 502.6,169.4 520.8,120" id="r-tia-set" data-region="tia-set" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+</svg>

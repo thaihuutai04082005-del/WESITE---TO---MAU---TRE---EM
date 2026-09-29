@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="ong-nghiem--sui-bot-cau-vong">
+<g class="scene-back">
+<rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="0" width="600" height="450" rx="0" id="r-tuong-thi-nghiem" data-region="tuong-thi-nghiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="380" width="600" height="20" rx="3" id="r-ban-thi-nghiem" data-region="ban-thi-nghiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="20" y="120" width="150" height="12" rx="3" id="r-ke-lo-hoa-chat" data-region="ke-lo-hoa-chat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="34" y="76" width="30" height="44" rx="6" id="r-lo-1" data-region="lo-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="76" y="86" width="26" height="34" rx="6" id="r-lo-2" data-region="lo-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="114" y="70" width="34" height="50" rx="6" id="r-lo-3" data-region="lo-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="440" y="60" width="140" height="100" rx="6" id="r-bang-cong-thuc" data-region="bang-cong-thuc" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="510" cy="110" rx="18" ry="18" id="r-nguyen-tu-bang" data-region="nguyen-tu-bang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="0" y="450" width="600" height="150" rx="0" id="r-san-nha" data-region="san-nha" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g id="subject" class="subject anim-wiggle">
+<polygon points="232,140 368,140 368,400 367.4,409.4 365.7,418.6 362.8,427.6 358.9,436 353.9,443.8 348.1,450.9 341.4,457.1 334,462.4 326,466.5 317.6,469.5 308.9,471.4 300,472 291.1,471.4 282.4,469.5 274,466.5 266,462.4 258.6,457.1 251.9,450.9 246.1,443.8 241.1,436 237.2,427.6 234.3,418.6 232.6,409.4 232,400" id="r-ong-nghiem" data-region="ong-nghiem" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="238,300 362,300 362,400 361.5,408.6 359.9,417.1 357.3,425.3 353.7,433 349.2,440.2 343.8,446.7 337.7,452.4 331,457.2 323.7,461 316,463.8 308.1,465.4 300,466 291.9,465.4 284,463.8 276.3,461 269,457.2 262.3,452.4 256.2,446.7 250.8,440.2 246.3,433 242.7,425.3 240.1,417.1 238.5,408.6 238,400" id="r-dung-dich-ong" data-region="dung-dich-ong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="270" cy="400" rx="12" ry="12" id="r-bot-trong-ong-1" data-region="bot-trong-ong-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="326" cy="360" rx="9" ry="9" id="r-bot-trong-ong-2" data-region="bot-trong-ong-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="310" cy="430" rx="7" ry="7" id="r-bot-trong-ong-3" data-region="bot-trong-ong-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<rect x="220" y="118" width="160" height="26" rx="10" id="r-mieng-ong" data-region="mieng-ong" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<g class="deco" pointer-events="none"><circle cx="280.5" cy="220" r="7.5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="319.5" cy="220" r="7.5" fill="#1B2A38"/></g>
+<g class="deco" pointer-events="none"><circle cx="282.4" cy="217.8" r="2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><circle cx="321.4" cy="217.8" r="2" fill="#FFFFFF"/></g>
+<g class="deco" pointer-events="none"><path d="M 274.5 205 Q 280.5 200.5 286.5 205" fill="none" stroke="#1B2A38" stroke-width="3.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 313.5 205 Q 319.5 200.5 325.5 205" fill="none" stroke="#1B2A38" stroke-width="3.25" stroke-linecap="round" stroke-linejoin="round"/></g>
+<ellipse cx="265.5" cy="235" rx="8.3" ry="5.3" id="r-ma-trai" data-region="ma-trai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="334.5" cy="235" rx="8.3" ry="5.3" id="r-ma-phai" data-region="ma-phai" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="247" rx="6.8" ry="8.3" id="r-mieng" data-region="mieng" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="300" cy="90" rx="18" ry="18" id="r-bong-bot-1" data-region="bong-bot-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="293.7" cy="83.7" rx="4.5" ry="2.7" transform="rotate(-30 293.7 83.7)" id="r-loe-bot-1" data-region="loe-bot-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="262" cy="50" rx="13" ry="13" id="r-bong-bot-2" data-region="bong-bot-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="257.5" cy="45.5" rx="3.3" ry="2" transform="rotate(-30 257.5 45.5)" id="r-loe-bot-2" data-region="loe-bot-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="340" cy="40" rx="15" ry="15" id="r-bong-bot-3" data-region="bong-bot-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="334.8" cy="34.8" rx="3.8" ry="2.3" transform="rotate(-30 334.8 34.8)" id="r-loe-bot-3" data-region="loe-bot-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="226" cy="96" rx="10" ry="10" id="r-bong-bot-4" data-region="bong-bot-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="222.5" cy="92.5" rx="2.5" ry="1.5" transform="rotate(-30 222.5 92.5)" id="r-loe-bot-4" data-region="loe-bot-4" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="380" cy="92" rx="11" ry="11" id="r-bong-bot-5" data-region="bong-bot-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="376.2" cy="88.2" rx="2.8" ry="1.7" transform="rotate(-30 376.2 88.2)" id="r-loe-bot-5" data-region="loe-bot-5" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+</g>
+<g class="scene-front">
+
+</g>
+</svg>
