@@ -97,7 +97,7 @@ const NHA = {
     V('bay-theo-gio-mua', 'Bay Theo Gió Mùa', 'Riding the Monsoon', { scene: ['wind'], transform: { ty: -50, rot: -8, scale: 0.8, px: 300, py: 300 }, acc: () => ({ fg: X.leaves('la-gio', [[100, 180, 20], [500, 150, -20], [530, 320, 30]]) }) }),
     V('keo-canh-dong-hoa', 'Kéo Theo Cánh Đồng Hoa', 'Flying Flower Field', { transform: FLY, acc: () => ({ behind: Y.flowerPatch(300, 470) }) }),
     V('luon-vong-hoang-hon', 'Lượn Vòng Hoàng Hôn', 'Sunset Loop', { transform: { ty: -40, rot: 10, scale: 0.8, px: 300, py: 300 }, acc: () => ({ fg: Y.birds([[100, 160, 0.8], [140, 130, 0.6]], '#2F3640') }) }),
-    V('ha-canh-doi-co', 'Hạ Cánh Đồi Cỏ', 'Hill Landing', { transform: { ty: 40, scale: 0.72, px: 300, py: 480 }, acc: (c) => ({ behind: X.parachute(c, '#4FA3E0') }) }),
+    V('ha-canh-doi-co', 'Hạ Cánh Đồi Cỏ', 'Hill Landing', { transform: { ty: 40, scale: 0.72, px: 300, py: 480 }, acc: (c) => ({ behind: X.parachute(c, '#4FA3E0', '#FFFFFF', [[258, 234], [342, 234], [286, 206], [314, 206]]) }) }), // dây buộc vào mái cối xay
   ],
 };
 

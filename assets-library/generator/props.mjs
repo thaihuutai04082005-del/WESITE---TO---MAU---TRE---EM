@@ -53,14 +53,16 @@ export function cracks(id, x, y, color = '#6D4C41') {
   return [P(id, [[x - 70, y], [x - 40, y - 8], [x - 20, y + 6], [x + 6, y - 10], [x + 30, y + 4], [x + 60, y - 6], [x + 80, y + 2], [x + 58, y + 8], [x + 30, y + 16], [x + 4, y + 2], [x - 18, y + 18], [x - 42, y + 4]], color)];
 }
 
-export function parachute(c, color = '#FF7AA2', stripe = '#FFFFFF') {
+/** Dù: `anchors` = 4 điểm buộc dây [ngoài trái, ngoài phải, trong trái, trong phải] trên thân (mặc định: vai). */
+export function parachute(c, color = '#FF7AA2', stripe = '#FFFFFF', anchors = null) {
   const x = c.cx;
   const top = c.bb[1] - 190;
+  const [al, ar, il, ir] = anchors || [[x - 58, c.neck + 30], [x + 58, c.neck + 30], [x - 40, c.neck], [x + 40, c.neck]];
   return [
     D('du', `M ${pt(x - 150, top + 100)} Q ${pt(x - 150, top)} ${pt(x, top)} Q ${pt(x + 150, top)} ${pt(x + 150, top + 100)} Q ${pt(x + 100, top + 80)} ${pt(x + 50, top + 100)} Q ${pt(x, top + 80)} ${pt(x - 50, top + 100)} Q ${pt(x - 100, top + 80)} ${pt(x - 150, top + 100)} Z`, color),
     D('soc-du', `M ${pt(x - 50, top + 100)} Q ${pt(x - 40, top + 20)} ${pt(x, top)} Q ${pt(x + 40, top + 20)} ${pt(x + 50, top + 100)} Q ${pt(x, top + 80)} ${pt(x - 50, top + 100)} Z`, stripe),
     // Dây buộc vào hai bên vai, vẽ SAU thân (dùng trong `behind`) nên không vắt ngang mặt.
-    line(`M ${pt(x - 150, top + 100)} L ${pt(c.left + 14, c.neck)} M ${pt(x + 150, top + 100)} L ${pt(c.right - 14, c.neck)} M ${pt(x - 50, top + 100)} L ${pt(x - 40, c.neck)} M ${pt(x + 50, top + 100)} L ${pt(x + 40, c.neck)}`, 2.5),
+    line(`M ${pt(x - 150, top + 100)} L ${pt(...al)} M ${pt(x + 150, top + 100)} L ${pt(...ar)} M ${pt(x - 50, top + 100)} L ${pt(...il)} M ${pt(x + 50, top + 100)} L ${pt(...ir)}`, 2.5),
   ];
 }
 

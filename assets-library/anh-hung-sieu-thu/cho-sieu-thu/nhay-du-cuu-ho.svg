@@ -25,7 +25,7 @@
 <path d="M 256 334 L 344 334 Q 460.1 417 470.1 500 Q 385.1 482 300 500 Q 214.9 482 129.9 500 Q 139.9 417 256 334 Z" id="r-ao-choang" data-region="ao-choang" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 150 82 Q 150 -18 300 -18 Q 450 -18 450 82 Q 400 62 350 82 Q 300 62 250 82 Q 200 62 150 82 Z" id="r-du" data-region="du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 250 82 Q 260 2 300 -18 Q 340 2 350 82 Q 300 62 250 82 Z" id="r-soc-du" data-region="soc-du" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<g class="deco" pointer-events="none"><path d="M 150 82 L 222 334 M 450 82 L 378 334 M 250 82 L 260 334 M 350 82 L 340 334" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="deco" pointer-events="none"><path d="M 150 82 L 242 364 M 450 82 L 358 364 M 250 82 L 260 334 M 350 82 L 340 334" fill="none" stroke="#1B2A38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
 <path d="M 385 420 Q 450 400 455 340 Q 470 345 468 360 Q 462 420 390 445 Z" id="r-duoi" data-region="duoi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="300" cy="412" rx="92" ry="75" id="r-than" data-region="than" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="345" cy="392" rx="28" ry="22" id="r-dom-than" data-region="dom-than" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
