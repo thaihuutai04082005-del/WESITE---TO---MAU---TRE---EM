@@ -249,3 +249,37 @@ export function GrandTrophy() {
     </svg>
   );
 }
+
+/** Trang Chọn chủ đề: gấu họa sĩ cầm bảng màu và cọ, kèm ngôi sao lấp lánh. */
+export function PainterBear() {
+  const star = (x, y, r, fill) => {
+    const pts = Array.from({ length: 10 }, (_, k) => {
+      const a = ((k * 36 - 90) * Math.PI) / 180;
+      const rr = k % 2 ? r * 0.45 : r;
+      return `${(x + rr * Math.cos(a)).toFixed(1)},${(y + rr * Math.sin(a)).toFixed(1)}`;
+    }).join(' ');
+    return <polygon points={pts} fill={fill} stroke={INK} strokeWidth="2" strokeLinejoin="round" />;
+  };
+  return (
+    <svg viewBox="0 0 200 180" className="h-full w-full" aria-hidden="true">
+      {star(14, 120, 9, '#FFD54F')}
+      {star(178, 28, 10, '#7FC8C8')}
+      <image href="/mascots/gau.svg" x="30" y="4" width="130" height="170" preserveAspectRatio="xMidYMax meet" />
+      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+        {/* Cọ vẽ giơ lên bên phải */}
+        <g transform="translate(-12 14) rotate(35 160 110)">
+          <rect x="154" y="62" width="12" height="62" rx="5" fill="#4FA3E0" />
+          <rect x="152" y="54" width="16" height="12" rx="2" fill="#CFD8DC" />
+          <path d="M152 54 Q160 26 168 54 Z" fill="#1B2A38" />
+        </g>
+        {/* Bảng màu bên trái */}
+        <path d="M18 150 Q14 124 44 120 Q74 116 78 138 Q80 152 66 150 Q56 148 58 160 Q58 172 40 170 Q20 168 18 150 Z" fill="#F6D1A4" />
+        <circle cx="34" cy="136" r="5.5" fill="#FF5F5F" strokeWidth="1.8" />
+        <circle cx="48" cy="130" r="5.5" fill="#FFD54F" strokeWidth="1.8" />
+        <circle cx="62" cy="132" r="5.5" fill="#4CD787" strokeWidth="1.8" />
+        <circle cx="30" cy="152" r="5.5" fill="#4FA3E0" strokeWidth="1.8" />
+        <circle cx="44" cy="158" r="4.5" fill="#FFFFFF" strokeWidth="1.8" />
+      </g>
+    </svg>
+  );
+}
