@@ -499,6 +499,18 @@ function main() {
       }
       tEntry.objects.push(oEntry);
     }
+    // Thẻ vẽ tay của con vật không thuộc 6 đối tượng chủ đề: đối tượng riêng chỉ có thẻ (không hiện ở trang chọn đối tượng).
+    for (const [i, a] of CARD_ART.entries()) {
+      if (a.theme !== theme.slug || OBJECTS.some((o) => o.slug === a.object)) continue;
+      const obj = { slug: a.object, name: a.objectName, theme: theme.slug };
+      const variant = { slug: a.slug, name: a.name, rarity: a.rarity };
+      const { svg, meta } = buildArtPicture(theme, obj, variant, a.file);
+      meta.cardOrder = i + 1;
+      const out = join(ROOT, meta.file);
+      mkdirSync(dirname(out), { recursive: true });
+      writeFileSync(out, svg);
+      tEntry.objects.push({ slug: obj.slug, name: obj.name, cardOnly: true, pictures: [meta] });
+    }
     catalog.themes.push(tEntry);
   }
   writeFileSync(join(ROOT, 'catalog.json'), JSON.stringify(catalog));
