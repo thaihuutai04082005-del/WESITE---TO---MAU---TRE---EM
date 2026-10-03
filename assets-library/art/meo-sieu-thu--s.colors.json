@@ -186,7 +186,7 @@
    "san-go-dam"
   ],
   "85": [
-   "#CE93D8",
+   "#FFFFFF",
    "tham-long"
   ],
   "20": [
@@ -266,19 +266,19 @@
    "soc-duoi"
   ],
   "82": [
-   "#4FA3E0",
+   "#7D5FFF",
    "bo-do-sieu-anh-hung"
   ],
   "93": [
-   "#4FA3E0",
+   "#7D5FFF",
    "bo-do-sieu-anh-hung"
   ],
   "64": [
-   "#4FA3E0",
+   "#7D5FFF",
    "bo-do-sieu-anh-hung"
   ],
   "65": [
-   "#4FA3E0",
+   "#7D5FFF",
    "bo-do-sieu-anh-hung"
   ],
   "70": [
@@ -314,8 +314,8 @@
    "vong-tay"
   ],
   "119": [
-   "#FFD54F",
-   "vong-tay"
+   "#7D5FFF",
+   "bo-do-sieu-anh-hung"
   ],
   "120": [
    "#FF5F5F",
@@ -442,13 +442,13 @@
   [
    600,
    1010,
-   "#4FA3E0",
+   "#7D5FFF",
    "tay-ao"
   ],
   [
    430,
    905,
-   "#4FA3E0",
+   "#7D5FFF",
    "than-ao"
   ],
   [
