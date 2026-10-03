@@ -27,6 +27,8 @@ def main():
         if 'rect' in e:
             x0, y0, x1, y1 = e['rect']
             gray[y0:y1, x0:x1] = 255
+        elif 'poly' in e:
+            cv2.fillPoly(gray, [np.array(e['poly'], np.int32)], 255)
         else:
             cv2.polylines(gray, [np.array(e['line'], np.int32)], False, 255, e.get('w', 8))
     # "keep": giữ lại nét gốc dọc các đường này (nối lại chỗ bị "erase" cắt lẹm vào nét cần giữ).
@@ -36,6 +38,9 @@ def main():
         for k in cfg['keep']:
             cv2.polylines(km, [np.array(k['line'], np.int32)], False, 255, k.get('w', 10))
         gray[km > 0] = orig[km > 0]
+    # "draw": vẽ lại nét đen trơn (nối các nét sau khi xoá) — {"line": [[x, y], ...], "w": độ dày}.
+    for d in cfg.get('draw', []):
+        cv2.polylines(gray, [np.array(d['line'], np.int32)], False, 0, d.get('w', 8), cv2.LINE_AA)
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
