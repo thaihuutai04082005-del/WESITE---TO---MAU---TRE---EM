@@ -615,7 +615,12 @@
       "A": "Rare",
       "B": "Uncommon",
       "C": "Common"
-    }
+    },
+    "deck": "Card deck",
+    "notOwned": "Not yet",
+    "lockedHint": "Pull this card to unlock coloring!",
+    "allThemes": "All themes",
+    "previewNote": "Previewing all cards."
   },
   "shop": {
     "title": "Shop",

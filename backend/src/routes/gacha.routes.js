@@ -7,4 +7,6 @@ r.get('/', requireAuth, c.info);
 r.post('/pull', requireAuth, c.pull);
 r.get('/cards', requireAuth, c.collection);
 r.get('/cards/:id/picture', requireAuth, c.cardPicture);
+r.get('/catalog', requireAuth, c.catalog);
+r.get('/catalog/:id/picture', requireAuth, c.catalogPicture);
 export default r;
