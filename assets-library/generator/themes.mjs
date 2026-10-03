@@ -370,7 +370,9 @@ export const THEME_VARIANTS = {
 // Tranh nét do chủ web gửi, chuyển thành vùng tô bằng assets-library/art/lineart.py → art/<file>.json.
 // CHỈ những thẻ có trong danh sách này mới được tạo (bộ thẻ gacha = tranh chủ web cung cấp), theo đúng thứ tự gửi.
 // Tên/slug thẻ lấy theo thẻ mẫu cùng hạng của chủ đề.
+// Thẻ của con vật không có trong 6 đối tượng của chủ đề: ghi thêm theme + objectName + slug + name (thẻ riêng, không có tranh thường).
 export const CARD_ART = [
   { object: 'meo-sieu-thu', rarity: 'S', file: 'meo-sieu-thu--s' },
+  { theme: 'anh-hung-sieu-thu', object: 'ca-heo', objectName: { vi: 'Cá heo', en: 'Dolphin' }, rarity: 'A', slug: 'the-a-dung-si-bien-ca', name: { vi: 'Dũng Sĩ Biển Cả', en: 'Ocean Warrior' }, file: 'ca-heo--a' },
 ];
 

@@ -16,6 +16,7 @@ Thẻ gacha C/B/A/S có thể dùng tranh nét đen trắng vẽ sẵn thay cho 
 4. Tạo file cho web: `python3 lineart.py src/<file> <file>.colors.json <đối-tượng>--<hạng>.json --preview /tmp/xem.png`
 5. Thêm vào cuối danh sách `CARD_ART` trong `generator/themes.mjs`, ví dụ `{ object: 'meo-sieu-thu', rarity: 'S', file: 'meo-sieu-thu--s' }`, rồi `node generator/build.mjs`.
    Bộ thẻ gacha CHỈ gồm các thẻ trong `CARD_ART`, hiện theo đúng thứ tự trong danh sách.
+   Con vật không thuộc 6 đối tượng của chủ đề: thêm `theme`, `objectName`, `slug`, `name` (thẻ riêng, không hiện ở trang chọn đối tượng).
 
 Tên và slug thẻ giữ như thẻ cũ cùng hạng, nên bé nào đã có thẻ vẫn giữ nguyên (chỉ hình đổi).
 Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
@@ -24,4 +25,5 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 
 | Đối tượng | Hạng | Nguồn | Vùng tô |
 |---|---|---|---|
-| Mèo (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 121 |
+| Mèo giáp vàng huyền thoại (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 119 |
+| Cá heo dũng sĩ biển cả (Anh Hùng Siêu Thú, thẻ riêng) | A | `src/ca-heo--a.webp` | 64 |

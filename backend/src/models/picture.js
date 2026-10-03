@@ -6,7 +6,7 @@ const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`$
 export function listThemes() {
   return getDb()
     .prepare(
-      `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id) AS object_count,
+      `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0)) AS object_count,
         (SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id
           WHERE o.theme_id = t.id AND p.is_card = 0 ORDER BY o.sort, p.sort LIMIT 1) AS cover_id
        FROM themes t WHERE t.active = 1 ORDER BY t.sort, t.id`,
@@ -26,7 +26,7 @@ export function listObjects(themeId) {
     .prepare(
       `SELECT o.*, (SELECT COUNT(*) FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0) AS picture_count,
         (SELECT p.id FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 ORDER BY p.sort LIMIT 1) AS cover_id
-       FROM objects o WHERE o.theme_id = ? ORDER BY o.sort, o.id`,
+       FROM objects o WHERE o.theme_id = ? AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0) ORDER BY o.sort, o.id`, // bỏ đối tượng chỉ có thẻ
     )
     .all(themeId);
 }
