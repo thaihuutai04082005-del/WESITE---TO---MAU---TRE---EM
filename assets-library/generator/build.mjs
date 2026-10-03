@@ -1,16 +1,16 @@
 // Chạy: node assets-library/generator/build.mjs
 // Sinh toàn bộ tranh SVG theo cấu trúc 3 tầng + file catalog.json (manifest vùng tô).
-import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
-import { THEMES, OBJECTS, THEME_VARIANTS } from './themes.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
 import { SKY, GROUND, groundItem, sceneParts } from './variants.mjs';
 import { face } from './face.mjs';
-import { R, skyStar } from './shapes.mjs';
+import { R, D, deco, skyStar } from './shapes.mjs';
 import {
   applyGroupTransform,
   groupTransformAttr,
@@ -41,7 +41,10 @@ function renderItems(items) {
     .map((it) => {
       if (it.dropped || (it.kind === 'deco' && !it.markup)) return '';
       if (it.kind === 'deco') return `<g class="deco" pointer-events="none">${it.markup}</g>`;
-      const attrs = `id="r-${it.id}" data-region="${it.id}" class="region" fill="#FFFFFF" stroke="${STROKE}" stroke-width="3" stroke-linejoin="round"`;
+      // Vùng của tranh vẽ tay không có viền riêng: nét đen nằm ở lớp ảnh phía trên.
+      const attrs = it.noStroke
+        ? `id="r-${it.id}" data-region="${it.id}" class="region" fill="#FFFFFF" stroke="none"`
+        : `id="r-${it.id}" data-region="${it.id}" class="region" fill="#FFFFFF" stroke="${STROKE}" stroke-width="3" stroke-linejoin="round"`;
       return it.svg(attrs);
     })
     .join('\n');
@@ -360,6 +363,54 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   };
 }
 
+/** Thẻ vẽ tay: vùng tô + lớp nét lấy từ art/<file>.json (do lineart.py tạo). */
+function buildArtPicture(theme, obj, variant, file) {
+  const art = JSON.parse(readFileSync(join(ROOT, 'art', `${file}.json`), 'utf8'));
+  const regionsItems = art.regions.map((r) => ({ ...D(r.id, r.d, r.color), noStroke: true }));
+  const lines = deco(`<image href="data:image/png;base64,${art.lines}" x="0" y="0" width="600" height="600" pointer-events="none"/>`);
+  const manifestRegions = computeManifestRegions(regionsItems.map((it) => ({ ...it, worldPoly: it.poly })));
+  const palette = [];
+  for (const r of manifestRegions) {
+    let p = palette.find((q) => q.color === r.color);
+    if (!p) {
+      p = { number: palette.length + 1, color: r.color };
+      palette.push(p);
+    }
+    r.number = p.number;
+  }
+  const slug = `${obj.slug}--${variant.slug}`;
+  const animation = obj.animation || theme.animation || 'bounce';
+  const svg = [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="${slug}">`,
+    `<g class="scene-back">`,
+    renderItems(regionsItems),
+    `</g>`,
+    `<g id="subject" class="subject anim-${animation}"></g>`,
+    `<g class="scene-front">`,
+    renderItems([lines]),
+    `</g>`,
+    `</svg>`,
+  ].join('\n');
+  return {
+    svg,
+    meta: {
+      slug,
+      theme: theme.slug,
+      object: obj.slug,
+      variant: variant.slug,
+      name: { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` },
+      variantName: variant.name,
+      isCard: true,
+      rarity: variant.rarity || null,
+      animation,
+      art: true,
+      file: join(theme.slug, obj.slug, `${variant.slug}.svg`),
+      palette,
+      regions: manifestRegions,
+    },
+  };
+}
+
 /** Tranh "vui vẻ" của đối tượng cũ — chỉ dùng để xuất ảnh đại diện + linh vật giao diện (không vào kho tranh). */
 const LEGACY_HAPPY = { slug: 'vui-ve', name: { vi: 'vui vẻ', en: 'happy' }, expr: 'happy', scene: ['sun', 'clouds'] };
 function legacyPictures(slugs) {
@@ -436,7 +487,8 @@ function main() {
       const own = OBJECT_VARIANTS[obj.slug] || tv.variants;
       const variants = [...own.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
       for (const [[variant, isCard], k] of variants.map((v, i) => [v, i])) {
-        const { svg, meta } = buildPicture(theme, obj, variant, isCard, k);
+        const art = isCard && CARD_ART[obj.slug]?.[variant.rarity];
+        const { svg, meta } = art ? buildArtPicture(theme, obj, variant, art) : buildPicture(theme, obj, variant, isCard, k);
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
         writeFileSync(out, svg);
