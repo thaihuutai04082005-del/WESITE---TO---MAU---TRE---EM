@@ -1,0 +1,539 @@
+{
+ "default": "#FFFFFF",
+ "numbers": {
+  "1": [
+   "#FF9EC0",
+   "rem-cua"
+  ],
+  "24": [
+   "#FF9EC0",
+   "rem-cua"
+  ],
+  "21": [
+   "#FF7AA2",
+   "day-buoc-rem"
+  ],
+  "2": [
+   "#BDE6FF",
+   "kinh-cua-so"
+  ],
+  "4": [
+   "#BDE6FF",
+   "kinh-cua-so"
+  ],
+  "15": [
+   "#BDE6FF",
+   "kinh-cua-so"
+  ],
+  "16": [
+   "#BDE6FF",
+   "kinh-cua-so"
+  ],
+  "7": [
+   "#FFFFFF",
+   "may-ngoai-cua"
+  ],
+  "22": [
+   "#FFFFFF",
+   "may-ngoai-cua"
+  ],
+  "31": [
+   "#FFFFFF",
+   "may-ngoai-cua"
+  ],
+  "3": [
+   "#FFFFFF",
+   "khung-cua-so"
+  ],
+  "5": [
+   "#FFFFFF",
+   "khung-cua-so"
+  ],
+  "39": [
+   "#FFFFFF",
+   "khung-cua-so"
+  ],
+  "42": [
+   "#FFF3D6",
+   "tuong"
+  ],
+  "63": [
+   "#C68B59",
+   "chan-tuong"
+  ],
+  "12": [
+   "#FF5F7E",
+   "tim-trong-tranh"
+  ],
+  "8": [
+   "#4CD787",
+   "la-cay"
+  ],
+  "13": [
+   "#4CD787",
+   "la-cay"
+  ],
+  "11": [
+   "#66BB6A",
+   "la-cay"
+  ],
+  "17": [
+   "#FF8A65",
+   "mieng-chau"
+  ],
+  "19": [
+   "#FF5F7E",
+   "tim-tren-chau"
+  ],
+  "27": [
+   "#A0673A",
+   "thanh-ke"
+  ],
+  "28": [
+   "#C68B59",
+   "mat-ke"
+  ],
+  "33": [
+   "#4FA3E0",
+   "sach"
+  ],
+  "34": [
+   "#FFD54F",
+   "sach"
+  ],
+  "36": [
+   "#4CD787",
+   "sach"
+  ],
+  "35": [
+   "#FF7AA2",
+   "sach"
+  ],
+  "37": [
+   "#7D5FFF",
+   "sach"
+  ],
+  "38": [
+   "#FF9F43",
+   "sach"
+  ],
+  "41": [
+   "#FF9F43",
+   "sach"
+  ],
+  "32": [
+   "#FF9F43",
+   "sach"
+  ],
+  "59": [
+   "#FFD54F",
+   "num-tu"
+  ],
+  "66": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "68": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "141": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "144": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "146": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "148": [
+   "#E8C68A",
+   "san-go"
+  ],
+  "67": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "69": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "139": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "143": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "145": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "147": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "149": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "77": [
+   "#D9B26F",
+   "san-go-dam"
+  ],
+  "85": [
+   "#CE93D8",
+   "tham-long"
+  ],
+  "20": [
+   "#FFB74D",
+   "dau-meo"
+  ],
+  "23": [
+   "#FFB3C1",
+   "trong-tai"
+  ],
+  "30": [
+   "#FFB3C1",
+   "trong-tai"
+  ],
+  "25": [
+   "#F57C00",
+   "soc-tran"
+  ],
+  "26": [
+   "#F57C00",
+   "soc-tran"
+  ],
+  "29": [
+   "#F57C00",
+   "soc-tran"
+  ],
+  "44": [
+   "#4FA3E0",
+   "trong-mat"
+  ],
+  "51": [
+   "#4FA3E0",
+   "trong-mat"
+  ],
+  "56": [
+   "#FF8FA3",
+   "mui"
+  ],
+  "61": [
+   "#FF7AA2",
+   "luoi"
+  ],
+  "74": [
+   "#FFB74D",
+   "ban-chan"
+  ],
+  "130": [
+   "#FFB74D",
+   "ban-chan"
+  ],
+  "127": [
+   "#FFB74D",
+   "ban-chan"
+  ],
+  "89": [
+   "#FFB74D",
+   "hong-meo"
+  ],
+  "71": [
+   "#FFB74D",
+   "duoi"
+  ],
+  "105": [
+   "#FFB74D",
+   "duoi"
+  ],
+  "122": [
+   "#FFB74D",
+   "duoi"
+  ],
+  "90": [
+   "#F57C00",
+   "soc-duoi"
+  ],
+  "115": [
+   "#F57C00",
+   "soc-duoi"
+  ],
+  "82": [
+   "#4FA3E0",
+   "bo-do-sieu-anh-hung"
+  ],
+  "93": [
+   "#4FA3E0",
+   "bo-do-sieu-anh-hung"
+  ],
+  "64": [
+   "#4FA3E0",
+   "bo-do-sieu-anh-hung"
+  ],
+  "65": [
+   "#4FA3E0",
+   "bo-do-sieu-anh-hung"
+  ],
+  "70": [
+   "#FFD54F",
+   "vien-vang"
+  ],
+  "72": [
+   "#FFD54F",
+   "vien-vang"
+  ],
+  "75": [
+   "#FFD54F",
+   "vien-vang"
+  ],
+  "79": [
+   "#FFD54F",
+   "vien-vang"
+  ],
+  "81": [
+   "#FFD54F",
+   "vien-vang"
+  ],
+  "83": [
+   "#FFFFFF",
+   "sao-huy-hieu"
+  ],
+  "104": [
+   "#FFD54F",
+   "vong-tay"
+  ],
+  "116": [
+   "#FFD54F",
+   "vong-tay"
+  ],
+  "119": [
+   "#FFD54F",
+   "vong-tay"
+  ],
+  "120": [
+   "#FF5F5F",
+   "sao-vong-tay"
+  ],
+  "49": [
+   "#FF5F5F",
+   "ao-choang"
+  ],
+  "73": [
+   "#FF5F5F",
+   "ao-choang"
+  ],
+  "62": [
+   "#FF8A80",
+   "mat-trong-ao-choang"
+  ],
+  "60": [
+   "#FF8A80",
+   "mat-trong-ao-choang"
+  ],
+  "86": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "88": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "91": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "94": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "95": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "96": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "97": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "100": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "101": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "102": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "106": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "107": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "108": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "109": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "111": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "112": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "114": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "123": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "124": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "126": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "128": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "132": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "134": [
+   "#FF9EC0",
+   "cuon-len"
+  ],
+  "135": [
+   "#FF7AA2",
+   "cuon-len"
+  ],
+  "136": [
+   "#FF9EC0",
+   "cuon-len"
+  ]
+ },
+ "seeds": [
+  [
+   600,
+   1010,
+   "#4FA3E0",
+   "tay-ao"
+  ],
+  [
+   430,
+   905,
+   "#4FA3E0",
+   "than-ao"
+  ],
+  [
+   640,
+   1172,
+   "#FF7AA2",
+   "soi-len"
+  ],
+  [
+   395,
+   1085,
+   "#FF7AA2",
+   "soi-len"
+  ],
+  [
+   1150,
+   645,
+   "#C68B59",
+   "tu-go"
+  ],
+  [
+   1010,
+   610,
+   "#C68B59",
+   "tu-go"
+  ],
+  [
+   1238,
+   480,
+   "#FFE0B5",
+   "lung-ke"
+  ],
+  [
+   650,
+   120,
+   "#FFF3D6",
+   "tuong"
+  ],
+  [
+   1000,
+   700,
+   "#FFF3D6",
+   "tuong"
+  ],
+  [
+   722,
+   170,
+   "#C68B59",
+   "khung-tranh"
+  ],
+  [
+   760,
+   120,
+   "#FFF6E0",
+   "nen-tranh"
+  ],
+  [
+   1060,
+   320,
+   "#FFB74D",
+   "chau-cay"
+  ],
+  [
+   1190,
+   470,
+   "#FFE0B5",
+   "lung-ke"
+  ],
+  [
+   1080,
+   620,
+   "#C68B59",
+   "tu-go"
+  ],
+  [
+   440,
+   860,
+   "#FFD54F",
+   "vanh-huy-hieu"
+  ],
+  [
+   460,
+   820,
+   "#FF5F5F",
+   "long-huy-hieu"
+  ]
+ ]
+}

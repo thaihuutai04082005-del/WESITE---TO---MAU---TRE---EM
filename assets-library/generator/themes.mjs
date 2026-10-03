@@ -365,3 +365,11 @@ export const THEME_VARIANTS = {
     ],
   },
 };
+
+// ---------------- Thẻ vẽ tay (thay thẻ tạm theo chủ đề) ----------------
+// Tranh nét do chủ web gửi, chuyển thành vùng tô bằng assets-library/art/lineart.py → art/<file>.json.
+// Khoá: đối tượng → hạng thẻ. Tên/slug thẻ giữ như thẻ tạm cùng hạng để thẻ bé đã có vẫn giữ nguyên.
+export const CARD_ART = {
+  'meo-sieu-thu': { S: 'meo-sieu-thu--s' },
+};
+

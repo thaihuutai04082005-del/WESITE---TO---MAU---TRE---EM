@@ -1,0 +1,24 @@
+# Thẻ vẽ tay (tranh nét do chủ web gửi)
+
+Thẻ gacha C/B/A/S có thể dùng tranh nét đen trắng vẽ sẵn thay cho thẻ do bộ tạo tranh vẽ.
+
+## Thêm 1 thẻ mới
+
+1. Lưu ảnh nét gốc vào `src/<đối-tượng>--<hạng>.webp` (hoặc .png/.jpg), nền trắng, nét đen, khung vuông.
+2. Tách vùng và xem số từng vùng:
+   `python3 lineart.py src/<file> - /tmp/thu.json --preview /tmp/so-vung.png`
+3. Tạo `<đối-tượng>--<hạng>.colors.json` để gán màu gợi ý (chế độ Tô theo mẫu) và tên vùng:
+   - `"numbers": {"20": ["#FFB74D", "dau-meo"]}` — theo số vùng in trên ảnh preview,
+   - `"seeds": [[x, y, "#màu", "tên"]]` — theo toạ độ điểm trong ảnh gốc,
+   - vùng không gán dùng `"default"` (trắng).
+4. Tạo file cho web: `python3 lineart.py src/<file> <file>.colors.json <đối-tượng>--<hạng>.json --preview /tmp/xem.png`
+5. Khai báo trong `generator/themes.mjs` → `CARD_ART`, ví dụ `'meo-sieu-thu': { S: 'meo-sieu-thu--s' }`, rồi `node generator/build.mjs`.
+
+Tên và slug thẻ giữ như thẻ cũ cùng hạng, nên bé nào đã có thẻ vẫn giữ nguyên (chỉ hình đổi).
+Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
+
+## Đã có
+
+| Đối tượng | Hạng | Nguồn | Vùng tô |
+|---|---|---|---|
+| Mèo (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 121 |
