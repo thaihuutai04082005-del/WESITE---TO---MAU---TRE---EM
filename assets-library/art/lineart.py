@@ -29,6 +29,13 @@ def main():
             gray[y0:y1, x0:x1] = 255
         else:
             cv2.polylines(gray, [np.array(e['line'], np.int32)], False, 255, e.get('w', 8))
+    # "keep": giữ lại nét gốc dọc các đường này (nối lại chỗ bị "erase" cắt lẹm vào nét cần giữ).
+    if cfg.get('keep'):
+        orig = cv2.cvtColor(cv2.imread(src), cv2.COLOR_BGR2GRAY)
+        km = np.zeros_like(gray)
+        for k in cfg['keep']:
+            cv2.polylines(km, [np.array(k['line'], np.int32)], False, 255, k.get('w', 10))
+        gray[km > 0] = orig[km > 0]
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
