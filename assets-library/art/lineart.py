@@ -4,7 +4,7 @@
 
 - Tách các vùng trắng khép kín (vùng tô), nới mỗi vùng ra tới giữa nét đen để khi tô không hở viền.
 - Nét đen giữ nguyên dạng ảnh PNG trong suốt, đặt đè lên trên các vùng.
-- File màu: {"default": "#FFFFFF", "numbers": {"20": ["#màu", "tên"]}, "seeds": [[x, y, "#màu", "tên"]]}:
+- File màu (có thể thêm "erase" để xoá bớt nét gốc): {"default": "#FFFFFF", "numbers": {"20": ["#màu", "tên"]}, "seeds": [[x, y, "#màu", "tên"]]}:
   gán theo số vùng (in trên ảnh --preview) hoặc theo điểm (x, y) trong ảnh nguồn. Vùng còn lại dùng màu mặc định.
 Kết quả .json: {"size": 600, "regions": [{"id", "d", "color"}...], "lines": "<png base64>"} — build.mjs đọc file này.
 """
@@ -21,6 +21,14 @@ def main():
     preview = sys.argv[sys.argv.index('--preview') + 1] if '--preview' in sys.argv else None
     gray = cv2.cvtColor(cv2.imread(src), cv2.COLOR_BGR2GRAY)
     h, w = gray.shape
+    cfg = json.load(open(colors_file)) if colors_file != '-' else {'default': '#FFFFFF', 'seeds': []}
+    # "erase": xoá bớt nét của tranh gốc — {"rect": [x0, y0, x1, y1]} hoặc {"line": [[x, y], ...], "w": độ dày}.
+    for e in cfg.get('erase', []):
+        if 'rect' in e:
+            x0, y0, x1, y1 = e['rect']
+            gray[y0:y1, x0:x1] = 255
+        else:
+            cv2.polylines(gray, [np.array(e['line'], np.int32)], False, 255, e.get('w', 8))
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
@@ -34,7 +42,6 @@ def main():
     full = labels[iy, ix]
     ids = [i for i in range(1, n + 1) if keep[i]]
 
-    cfg = json.load(open(colors_file)) if colors_file != '-' else {'default': '#FFFFFF', 'seeds': []}
     seed_of = {}
     # "numbers": {"20": ["#màu", "tên"]} — gán theo số vùng (xem ảnh --preview); ưu tiên hơn "seeds".
     for num, (color, name) in cfg.get('numbers', {}).items():
