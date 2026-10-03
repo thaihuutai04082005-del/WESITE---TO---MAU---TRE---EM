@@ -11,6 +11,7 @@ import PictureView from '../../components/PictureView/PictureView';
 import ModePicker from '../../components/ModePicker';
 import Modal from '../../components/Modal/Modal';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import PlayCard, { useCardPreview } from '../../components/GachaCardReveal/PlayCard';
 
 export function CardTile({ card, onClick, selected }) {
   const { i18n } = useTranslation();
@@ -30,7 +31,8 @@ export default function Gacha() {
   const refresh = useAuth((s) => s.refresh);
   const toast = useUi((s) => s.toast);
   const [info, setInfo] = useState(null);
-  const [col, setCol] = useState(null);
+  const [deck, setDeck] = useState(null);
+  const [theme, setTheme] = useState('all');
   const [results, setResults] = useState([]);
   const [filter, setFilter] = useState('all');
   const [openCard, setOpenCard] = useState(null);
@@ -39,7 +41,7 @@ export default function Gacha() {
 
   const load = () => {
     api.get('/gacha').then(setInfo);
-    api.get('/gacha/cards').then(setCol);
+    api.get('/gacha/catalog').then(setDeck);
   };
   useEffect(load, []);
 
@@ -57,14 +59,9 @@ export default function Gacha() {
     }
   }
 
-  // Gộp các bản trùng tranh để hiển thị ×N.
-  const grouped = Object.values(
-    (col?.cards || []).reduce((acc, c) => {
-      acc[c.pictureId] ||= { ...c, count: 0 };
-      acc[c.pictureId].count++;
-      return acc;
-    }, {}),
-  ).filter((c) => filter === 'all' || c.rarity === filter);
+  // Bộ thẻ: toàn bộ thẻ trong game, lọc theo hạng và chủ đề.
+  const themes = deck ? [...new Map(deck.cards.map((c) => [c.theme.slug, c.theme])).values()] : [];
+  const shown = (deck?.cards || []).filter((c) => (filter === 'all' || c.rarity === filter) && (theme === 'all' || c.theme.slug === theme));
 
   return (
     <div className="page space-y-6">
@@ -104,9 +101,15 @@ export default function Gacha() {
       <section>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <h2 className="font-display text-2xl font-bold">
-            {t('gacha.collection')} {col && <span className="text-muted">({col.distinct}/{col.total})</span>}
+            {t('gacha.deck')} {deck && <span className="text-muted">({deck.owned}/{deck.total})</span>}
           </h2>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
+            <select value={theme} onChange={(e) => setTheme(e.target.value)} className="min-h-11 rounded-2xl border-2 border-line bg-white px-3 font-bold text-primary-dark" data-testid="deck-theme">
+              <option value="all">{t('gacha.allThemes')}</option>
+              {themes.map((th) => (
+                <option key={th.slug} value={th.slug}>{th.name[i18n.language]}</option>
+              ))}
+            </select>
             {['all', 'S', 'A', 'B', 'C'].map((f) => (
               <button key={f} type="button" onClick={() => setFilter(f)} className={`btn min-h-11 px-3 text-base ${filter === f ? 'bg-primary text-white' : 'bg-primary-light text-primary-dark'}`}>
                 {f === 'all' ? t('common.all') : f}
@@ -114,9 +117,10 @@ export default function Gacha() {
             ))}
           </div>
         </div>
-        {col && grouped.length === 0 && <div className="card p-6 text-center text-muted">{t('gacha.empty')}</div>}
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-          {grouped.map((c) => <CardTile key={c.pictureId} card={c} onClick={() => setOpenCard(c)} />)}
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+          {shown.map((c) => (
+            <PlayCard key={c.pictureId} card={c} onClick={() => setOpenCard(c)} />
+          ))}
         </div>
       </section>
 
@@ -145,7 +149,10 @@ export default function Gacha() {
 
 function CardModal({ card, lang, onClose, onColor }) {
   const { t } = useTranslation();
-  const pic = usePicture(card.pictureId);
+  const owned = card.count > 0;
+  const preview = useCardPreview(card.pictureId);
+  const full = usePicture(owned ? card.pictureId : null);
+  const pic = full || preview;
   return (
     <Modal open onClose={onClose}>
       <div className="flex flex-col items-center gap-3 text-center">
@@ -153,9 +160,13 @@ function CardModal({ card, lang, onClose, onColor }) {
         <div className={`w-full max-w-xs rounded-2xl p-1 rarity-glow-${card.rarity}`}>{pic && <PictureView picture={pic} reveal className="rounded-xl" />}</div>
         <h2 className="font-display text-2xl font-extrabold">{card.name[lang]}</h2>
         <p className="text-muted">{t(`gacha.rarity.${card.rarity}`)}</p>
-        <button type="button" className="btn-primary w-full" disabled={!pic} onClick={() => onColor(pic)} data-testid="card-color">
-          {t('gacha.colorThis')}
-        </button>
+        {owned ? (
+          <button type="button" className="btn-primary w-full" disabled={!full} onClick={() => onColor(full)} data-testid="card-color">
+            {t('gacha.colorThis')}
+          </button>
+        ) : (
+          <p className="rounded-2xl bg-primary-light px-4 py-3 font-bold text-primary-dark">{t('gacha.lockedHint')}</p>
+        )}
       </div>
     </Modal>
   );

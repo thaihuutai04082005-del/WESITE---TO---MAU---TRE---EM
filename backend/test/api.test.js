@@ -185,6 +185,12 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   // Thẻ = tranh hiếm mở khoá để tô: A tô được, B chưa có thẻ thì không.
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, a.token)).status, 200);
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, b.token)).status, 403);
+  // Bộ thẻ trên trang Bóc thẻ: thấy đủ mọi thẻ và xem trước được ảnh (chế độ xem trước), nhưng vẫn không tô được.
+  const deck = await api('GET', '/gacha/catalog', null, b.token);
+  assert.equal(deck.body.total, deck.body.cards.length);
+  assert.ok(deck.body.total >= 4);
+  assert.equal(deck.body.owned, 0);
+  assert.equal((await api('GET', `/gacha/catalog/${pictureId}/picture`, null, b.token)).status, 200);
 
   const trade = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: cardId }, a.token);
   assert.equal(trade.status, 201);

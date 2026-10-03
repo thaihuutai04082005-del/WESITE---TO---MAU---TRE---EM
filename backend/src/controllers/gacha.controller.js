@@ -5,7 +5,8 @@ import * as User from '../models/user.js';
 import * as Card from '../models/card.js';
 import * as Picture from '../models/picture.js';
 import { pullCard } from '../services/gachaWeightedRandom.js';
-import { badRequest, int } from '../utils/http.js';
+import { badRequest, forbidden, notFound, int } from '../utils/http.js';
+import { env } from '../config/env.js';
 
 export function info(req, res) {
   const u = User.findById(req.user.id);
@@ -52,4 +53,39 @@ export function cardPicture(req, res) {
   const card = Card.findById(Number(req.params.id));
   if (!card || card.user_id !== req.user.id) throw badRequest('card_not_owned');
   res.json({ picture: Picture.toClient(Picture.findPicture(card.picture_id)) });
+}
+
+/** Toàn bộ thẻ đang có trong game (theo chủ đề → đối tượng → hạng), kèm số bản bé đang có. */
+export function catalog(req, res) {
+  const owned = new Map(
+    getDb()
+      .prepare('SELECT picture_id, COUNT(*) AS c FROM user_cards WHERE user_id = ? GROUP BY picture_id')
+      .all(req.user.id)
+      .map((r) => [r.picture_id, r.c]),
+  );
+  const rows = getDb()
+    .prepare(
+      `SELECT p.id, p.rarity, p.name_vi, p.name_en, t.slug AS theme, t.name_vi AS theme_vi, t.name_en AS theme_en
+       FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
+       WHERE p.is_card = 1 AND t.active = 1
+       ORDER BY t.sort, t.id, o.sort, o.id, CASE p.rarity WHEN 'S' THEN 0 WHEN 'A' THEN 1 WHEN 'B' THEN 2 ELSE 3 END`,
+    )
+    .all();
+  const cards = rows.map((r) => ({
+    pictureId: r.id,
+    rarity: r.rarity,
+    name: { vi: r.name_vi, en: r.name_en },
+    theme: { slug: r.theme, name: { vi: r.theme_vi, en: r.theme_en } },
+    count: owned.get(r.id) || 0,
+  }));
+  res.json({ preview: env.gachaPreview, cards, owned: owned.size, total: cards.length });
+}
+
+/** Ảnh 1 thẻ để xem: thẻ đã có, hoặc mọi thẻ khi đang bật xem trước (GACHA_PREVIEW). Chỉ để xem, không mở khoá tô. */
+export function catalogPicture(req, res) {
+  const p = Picture.findPicture(Number(req.params.id));
+  if (!p || !p.is_card) throw notFound();
+  const own = getDb().prepare('SELECT 1 FROM user_cards WHERE user_id = ? AND picture_id = ?').get(req.user.id, p.id);
+  if (!own && !env.gachaPreview && req.user.role !== 'admin') throw forbidden('card_not_owned');
+  res.json({ picture: Picture.toClient(p) });
 }

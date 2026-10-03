@@ -615,7 +615,12 @@
       "A": "Hiếm",
       "B": "Thường",
       "C": "Phổ biến"
-    }
+    },
+    "deck": "Bộ thẻ",
+    "notOwned": "Chưa có",
+    "lockedHint": "Bóc trúng thẻ này để mở khoá tô nhé!",
+    "allThemes": "Tất cả chủ đề",
+    "previewNote": "Đang xem trước toàn bộ thẻ."
   },
   "shop": {
     "title": "Shop",
