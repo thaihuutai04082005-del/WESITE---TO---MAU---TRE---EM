@@ -376,6 +376,5 @@ export const CARD_ART = [
   { theme: 'anh-hung-sieu-thu', object: 'ca-heo', objectName: { vi: 'Cá heo', en: 'Dolphin' }, rarity: 'A', slug: 'the-a-dung-si-bien-ca', name: { vi: 'Dũng Sĩ Biển Cả', en: 'Ocean Warrior' }, file: 'ca-heo--a' },
   { theme: 'vuong-quoc-lau-dai', object: 'tho', objectName: { vi: 'Thỏ', en: 'Bunny' }, rarity: 'S', slug: 'the-s-cong-chua-dang-yeu', name: { vi: 'Công Chúa Đáng Yêu', en: 'Lovely Princess' }, file: 'tho--s' },
   { theme: 'anh-hung-sieu-thu', object: 'heo', objectName: { vi: 'Heo', en: 'Pig' }, rarity: 'A', slug: 'the-a-cao-boi', name: { vi: 'Cao Bồi', en: 'Cowboy' }, file: 'heo--a' },
-  { theme: 'anh-hung-sieu-thu', object: 'cho', objectName: { vi: 'Chó', en: 'Dog' }, rarity: 'A', slug: 'the-a-doi-truong-canh-sat', name: { vi: 'Đội Trưởng Cảnh Sát', en: 'Police Captain' }, file: 'cho--a' },
 ];
 
