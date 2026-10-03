@@ -485,10 +485,13 @@ function main() {
       const tv = THEME_VARIANTS[theme.slug];
       // Lớp 3: mỗi đối tượng có 5 biến thể riêng (object-variants.mjs); thẻ vẫn theo chủ đề.
       const own = OBJECT_VARIANTS[obj.slug] || tv.variants;
-      const variants = [...own.map((v) => [v, false]), ...tv.cards.map((v) => [v, true])];
+      // Thẻ: chỉ tạo thẻ vẽ tay có trong CARD_ART (bỏ thẻ do bộ tạo tranh vẽ).
+      const cards = tv.cards.filter((v) => CARD_ART.some((a) => a.object === obj.slug && a.rarity === v.rarity));
+      const variants = [...own.map((v) => [v, false]), ...cards.map((v) => [v, true])];
       for (const [[variant, isCard], k] of variants.map((v, i) => [v, i])) {
-        const art = isCard && CARD_ART[obj.slug]?.[variant.rarity];
-        const { svg, meta } = art ? buildArtPicture(theme, obj, variant, art) : buildPicture(theme, obj, variant, isCard, k);
+        const artIdx = isCard ? CARD_ART.findIndex((a) => a.object === obj.slug && a.rarity === variant.rarity) : -1;
+        const { svg, meta } = artIdx >= 0 ? buildArtPicture(theme, obj, variant, CARD_ART[artIdx].file) : buildPicture(theme, obj, variant, isCard, k);
+        if (artIdx >= 0) meta.cardOrder = artIdx + 1; // thứ tự hiện trên trang Bóc thẻ = thứ tự chủ web gửi
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
         writeFileSync(out, svg);

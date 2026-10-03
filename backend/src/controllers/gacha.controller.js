@@ -68,7 +68,7 @@ export function catalog(req, res) {
       `SELECT p.id, p.rarity, p.name_vi, p.name_en, t.slug AS theme, t.name_vi AS theme_vi, t.name_en AS theme_en
        FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
        WHERE p.is_card = 1 AND t.active = 1
-       ORDER BY t.sort, t.id, o.sort, o.id, CASE p.rarity WHEN 'S' THEN 0 WHEN 'A' THEN 1 WHEN 'B' THEN 2 ELSE 3 END`,
+       ORDER BY p.sort, p.id`, // thẻ vẽ tay: sort = thứ tự chủ web gửi
     )
     .all();
   const cards = rows.map((r) => ({

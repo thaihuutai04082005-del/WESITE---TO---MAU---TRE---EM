@@ -188,7 +188,7 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   // Bộ thẻ trên trang Bóc thẻ: thấy đủ mọi thẻ và xem trước được ảnh (chế độ xem trước), nhưng vẫn không tô được.
   const deck = await api('GET', '/gacha/catalog', null, b.token);
   assert.equal(deck.body.total, deck.body.cards.length);
-  assert.ok(deck.body.total >= 4);
+  assert.ok(deck.body.total >= 1);
   assert.equal(deck.body.owned, 0);
   assert.equal((await api('GET', `/gacha/catalog/${pictureId}/picture`, null, b.token)).status, 200);
 
@@ -476,13 +476,13 @@ test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Th�
 
 test('Chủ đề đã ẩn: không hiện ở danh sách, không vào Bóc thẻ, tranh cũ vẫn mở được', async () => {
   const Picture = await import('../src/models/picture.js');
-  const t = getDb().prepare("SELECT id FROM themes WHERE slug = 'the-thao-trai-cay'").get();
+  const t = getDb().prepare("SELECT id FROM themes WHERE slug = 'anh-hung-sieu-thu'").get();
   const card = getDb().prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 1 LIMIT 1').get(t.id);
   getDb().prepare('UPDATE themes SET active = 0 WHERE id = ?').run(t.id);
   try {
     const list = await api('GET', '/themes');
-    assert.ok(!list.body.themes.some((x) => x.slug === 'the-thao-trai-cay'));
-    assert.equal((await api('GET', '/themes/the-thao-trai-cay/objects')).status, 404);
+    assert.ok(!list.body.themes.some((x) => x.slug === 'anh-hung-sieu-thu'));
+    assert.equal((await api('GET', '/themes/anh-hung-sieu-thu/objects')).status, 404);
     const pool = Picture.cardPool();
     assert.ok(!Object.values(pool).flat().includes(card.id));
     assert.ok(Picture.findPicture(card.id));

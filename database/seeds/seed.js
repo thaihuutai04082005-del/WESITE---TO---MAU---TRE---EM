@@ -37,7 +37,7 @@ export function seedPictures(db = getDb()) {
         o.pictures.forEach((p, pi) => {
           const svg = readFileSync(join(lib, p.file), 'utf8');
           const manifest = JSON.stringify({ palette: p.palette, regions: p.regions });
-          upPicture.run(objectId, p.slug, p.variant, p.name.vi, p.name.en, p.variantName.vi, p.variantName.en, svg, manifest, p.animation, p.isCard ? 1 : 0, p.rarity, pi);
+          upPicture.run(objectId, p.slug, p.variant, p.name.vi, p.name.en, p.variantName.vi, p.variantName.en, svg, manifest, p.animation, p.isCard ? 1 : 0, p.rarity, p.cardOrder ?? pi);
           count++;
         });
       });

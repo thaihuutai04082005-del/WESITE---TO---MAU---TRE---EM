@@ -368,8 +368,9 @@ export const THEME_VARIANTS = {
 
 // ---------------- Thẻ vẽ tay (thay thẻ tạm theo chủ đề) ----------------
 // Tranh nét do chủ web gửi, chuyển thành vùng tô bằng assets-library/art/lineart.py → art/<file>.json.
-// Khoá: đối tượng → hạng thẻ. Tên/slug thẻ giữ như thẻ tạm cùng hạng để thẻ bé đã có vẫn giữ nguyên.
-export const CARD_ART = {
-  'meo-sieu-thu': { S: 'meo-sieu-thu--s' },
-};
+// CHỈ những thẻ có trong danh sách này mới được tạo (bộ thẻ gacha = tranh chủ web cung cấp), theo đúng thứ tự gửi.
+// Tên/slug thẻ lấy theo thẻ mẫu cùng hạng của chủ đề.
+export const CARD_ART = [
+  { object: 'meo-sieu-thu', rarity: 'S', file: 'meo-sieu-thu--s' },
+];
 
