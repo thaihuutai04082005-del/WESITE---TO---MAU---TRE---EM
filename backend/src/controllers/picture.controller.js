@@ -8,6 +8,7 @@ export function themes(_req, res) {
     id: t.id,
     slug: t.slug,
     name: { vi: t.name_vi, en: t.name_en },
+    age: t.age_group,
     objectCount: t.object_count,
     cover: t.cover_id ? Picture.toClient(Picture.findPicture(t.cover_id)) : null,
   }));

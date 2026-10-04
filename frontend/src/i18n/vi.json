@@ -342,6 +342,11 @@
     "themesHint": "Bé thích tô gì hôm nay?",
     "objects": "Chọn đối tượng",
     "variants": "Chọn tư thế",
+    "age": {
+      "3-4": "Từ 3 – 4 tuổi",
+      "4-5": "Từ 4 – 5 tuổi",
+      "6+": "Từ 6 tuổi trở lên"
+    },
     "objectCount": "{{n}} đối tượng",
     "variantCount": "{{n}} kiểu"
   },

@@ -13,6 +13,7 @@ Thẻ gacha C/B/A/S có thể dùng tranh nét đen trắng vẽ sẵn thay cho 
    - vùng không gán dùng `"default"` (trắng).
    - Bỏ bớt nét gốc: `"erase": [{"rect": [x0,y0,x1,y1]} | {"poly": [[x,y]...]} | {"line": [[x,y]...], "w": 9}]`;
      vẽ lại nét trơn để nối chỗ vừa xoá: `"draw": [{"line": [[x,y]...], "w": 6}]` (độ dày nét gốc khoảng 6px).
+   - Viền hở làm 2 vùng dính nhau (VD tròng trắng mắt dính vào đầu): `"seal": [{"line": [[x,y]...], "w": 3}]` ngăn vùng ngầm, KHÔNG vẽ thêm nét.
 4. Tạo file cho web: `python3 lineart.py src/<file> <file>.colors.json <đối-tượng>--<hạng>.json --preview /tmp/xem.png`
 5. Thêm vào cuối danh sách `CARD_ART` trong `generator/themes.mjs`, ví dụ `{ object: 'meo-sieu-thu', rarity: 'S', file: 'meo-sieu-thu--s' }`, rồi `node generator/build.mjs`.
    Bộ thẻ gacha CHỈ gồm các thẻ trong `CARD_ART`, hiện theo đúng thứ tự trong danh sách.
@@ -27,3 +28,13 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 |---|---|---|---|
 | Mèo giáp vàng huyền thoại (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 119 |
 | Cá heo dũng sĩ biển cả (Anh Hùng Siêu Thú, thẻ riêng) | A | `src/ca-heo--a.webp` | 64 |
+
+## Tranh theo độ tuổi (không phải thẻ)
+
+Chủ đề cho bé **3–4 tuổi** và **4–5 tuổi** dùng tranh vẽ tay, khai báo trong `ART_THEMES` (`generator/themes.mjs`):
+chủ đề (`age`: `'3-4'` | `'4-5'`) → đối tượng → từng tranh (`file` trong thư mục này). Cách tạo file `.json` giống thẻ ở trên.
+15 chủ đề kết hợp do bộ tạo tranh vẽ thuộc nhóm **từ 6 tuổi trở lên**.
+
+| Chủ đề | Đối tượng | Tranh | Vùng tô |
+|---|---|---|---|
+| Động Vật (3–4 tuổi) | Chó con | Ngồi ngoan · Vẫy đuôi | 16 · 15 |

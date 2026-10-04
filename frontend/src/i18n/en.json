@@ -342,6 +342,11 @@
     "themesHint": "What would you like to color today?",
     "objects": "Pick a subject",
     "variants": "Pick a pose",
+    "age": {
+      "3-4": "Ages 3 – 4",
+      "4-5": "Ages 4 – 5",
+      "6+": "Ages 6 and up"
+    },
     "objectCount": "{{n}} subjects",
     "variantCount": "{{n}} poses"
   },

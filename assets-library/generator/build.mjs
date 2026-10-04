@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
-import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART } from './themes.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
@@ -364,7 +364,7 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
 }
 
 /** Thẻ vẽ tay: vùng tô + lớp nét lấy từ art/<file>.json (do lineart.py tạo). */
-function buildArtPicture(theme, obj, variant, file) {
+function buildArtPicture(theme, obj, variant, file, isCard = true) {
   const art = JSON.parse(readFileSync(join(ROOT, 'art', `${file}.json`), 'utf8'));
   const regionsItems = art.regions.map((r) => ({ ...D(r.id, r.d, r.color), noStroke: true }));
   const lines = deco(`<image href="data:image/png;base64,${art.lines}" x="0" y="0" width="600" height="600" pointer-events="none"/>`);
@@ -400,7 +400,7 @@ function buildArtPicture(theme, obj, variant, file) {
       variant: variant.slug,
       name: { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` },
       variantName: variant.name,
-      isCard: true,
+      isCard,
       rarity: variant.rarity || null,
       animation,
       art: true,
@@ -479,7 +479,7 @@ function main() {
   for (const theme of THEMES) {
     const dir = join(ROOT, theme.slug);
     if (existsSync(dir)) rmSync(dir, { recursive: true });
-    const tEntry = { slug: theme.slug, name: theme.name, objects: [] };
+    const tEntry = { slug: theme.slug, name: theme.name, age: '6+', objects: [] };
     for (const obj of OBJECTS.filter((o) => o.theme === theme.slug)) {
       const oEntry = { slug: obj.slug, name: obj.name, pictures: [] };
       const tv = THEME_VARIANTS[theme.slug];
@@ -513,6 +513,24 @@ function main() {
     }
     catalog.themes.push(tEntry);
   }
+  // Chủ đề theo độ tuổi (tranh vẽ tay, không có thẻ): xếp trước các chủ đề kết hợp.
+  const ageThemes = ART_THEMES.map((theme) => {
+    const dir = join(ROOT, theme.slug);
+    if (existsSync(dir)) rmSync(dir, { recursive: true });
+    const objects = theme.objects.map((obj) => ({
+      slug: obj.slug,
+      name: obj.name,
+      pictures: obj.pictures.map((p) => {
+        const { svg, meta } = buildArtPicture(theme, obj, p, p.file, false);
+        const out = join(ROOT, meta.file);
+        mkdirSync(dirname(out), { recursive: true });
+        writeFileSync(out, svg);
+        return meta;
+      }),
+    }));
+    return { slug: theme.slug, name: theme.name, age: theme.age, objects };
+  });
+  catalog.themes.unshift(...ageThemes);
   writeFileSync(join(ROOT, 'catalog.json'), JSON.stringify(catalog));
   writeAvatars();
   writeMascots();
