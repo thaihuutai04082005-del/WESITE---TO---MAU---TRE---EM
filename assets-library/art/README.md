@@ -38,3 +38,6 @@ chủ đề (`age`: `'3-4'` | `'4-5'`) → đối tượng → từng tranh (`fi
 | Chủ đề | Đối tượng | Tranh | Vùng tô |
 |---|---|---|---|
 | Động Vật (3–4 tuổi) | Chó con | Ngồi ngoan · Vẫy đuôi · Chơi bóng · Ăn thức ăn · Nằm nghỉ | 16 · 15 · 23 · 38 · 14 |
+| Động Vật (3–4 tuổi) | Mèo con | Ngồi xinh · Chơi cuộn len · Uống sữa · Rửa mặt · Nằm ngủ | 15 · 44 · 20 · 17 · 15 |
+
+Mèo con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.

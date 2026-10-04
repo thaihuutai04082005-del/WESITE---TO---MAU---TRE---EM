@@ -404,6 +404,17 @@ export const ART_THEMES = [
           { slug: 'nam-nghi', name: { vi: 'Nằm nghỉ', en: 'Resting' }, file: 'cho-con--nam-nghi' },
         ],
       },
+      {
+        slug: 'meo-con',
+        name: { vi: 'Mèo con', en: 'Kitten' },
+        pictures: [
+          { slug: 'ngoi-xinh', name: { vi: 'Ngồi xinh', en: 'Sitting pretty' }, file: 'meo-con--ngoi-xinh' },
+          { slug: 'choi-cuon-len', name: { vi: 'Chơi cuộn len', en: 'Playing with yarn' }, file: 'meo-con--choi-cuon-len' },
+          { slug: 'uong-sua', name: { vi: 'Uống sữa', en: 'Drinking milk' }, file: 'meo-con--uong-sua' },
+          { slug: 'rua-mat', name: { vi: 'Rửa mặt', en: 'Washing its face' }, file: 'meo-con--rua-mat' },
+          { slug: 'nam-ngu', name: { vi: 'Nằm ngủ', en: 'Sleeping' }, file: 'meo-con--nam-ngu' },
+        ],
+      },
     ],
   },
 ];
