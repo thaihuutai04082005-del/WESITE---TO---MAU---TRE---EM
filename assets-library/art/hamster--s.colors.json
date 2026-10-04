@@ -2,16 +2,28 @@
  "default": "#FFFFFF",
  "seeds": [
   [
-   1105,
-   965,
-   "#FAA709",
-   "vo-cam"
+   1082,
+   1012,
+   "#FDC66B",
+   "mui-cam"
   ],
   [
    1092,
    1059,
-   "#FFFFFF",
-   "long-trang-cam"
+   "#FAA709",
+   "long-cam"
+  ],
+  [
+   980,
+   1023,
+   "#FDC44E",
+   "o-gio"
+  ],
+  [
+   1105,
+   965,
+   "#FAA709",
+   "vo-cam"
   ],
   [
    1123,
@@ -90,12 +102,6 @@
    618,
    "#FAAD3A",
    "tay-hamster"
-  ],
-  [
-   1092,
-   1059,
-   "#FFFFFF",
-   "long-trang-cam"
   ],
   [
    421,
