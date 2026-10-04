@@ -48,6 +48,9 @@ def main():
     areas = ndimage.sum(np.ones_like(labels), labels, index=np.arange(n + 1))
     keep = np.zeros(n + 1, bool)
     keep[1:] = areas[1:] >= MIN_AREA
+    # "keep_small": [[x, y], ...] — giữ lại vùng nhỏ hơn MIN_AREA chứa các điểm này (chi tiết nhỏ cần tô riêng).
+    for x, y in cfg.get('keep_small', []):
+        keep[labels[int(y), int(x)]] = labels[int(y), int(x)] > 0
     labels[~keep[labels]] = 0
     # Nới từng vùng ra tới giữa nét đen (mỗi điểm nét nhận vùng gần nhất).
     _, (iy, ix) = ndimage.distance_transform_edt(labels == 0, return_indices=True)
