@@ -378,6 +378,5 @@ export const CARD_ART = [
   { theme: 'anh-hung-sieu-thu', object: 'heo', objectName: { vi: 'Heo', en: 'Pig' }, rarity: 'A', slug: 'the-a-cao-boi', name: { vi: 'Cao Bồi', en: 'Cowboy' }, file: 'heo--a' },
   { theme: 'anh-hung-sieu-thu', object: 'voi', objectName: { vi: 'Voi', en: 'Elephant' }, rarity: 'S', slug: 'the-s-linh-cuu-hoa', name: { vi: 'Lính Cứu Hỏa', en: 'Firefighter' }, file: 'voi--s' },
   { theme: 'hai-tac-kho-bau', object: 'capybara', objectName: { vi: 'Capybara', en: 'Capybara' }, rarity: 'S', slug: 'the-s-hai-tac', name: { vi: 'Hải Tặc', en: 'Pirate' }, file: 'capybara--s' },
-  { theme: 'anh-hung-sieu-thu', object: 'soc', objectName: { vi: 'Sóc nâu', en: 'Brown squirrel' }, rarity: 'A', slug: 'the-a-sieu-toc', name: { vi: 'Siêu Tốc', en: 'Super Speed' }, file: 'soc--a' },
 ];
 
