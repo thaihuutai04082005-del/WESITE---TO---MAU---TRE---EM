@@ -94,7 +94,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6+'), ['3-4']);
   assert.equal(themes.body.themes.filter((t) => t.age === '6+').length, 15);
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
-  assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó con ngồi ngoan', 'Chó con vẫy đuôi', 'Chó con chơi bóng', 'Chó con ăn thức ăn']);
+  assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó con ngồi ngoan', 'Chó con vẫy đuôi', 'Chó con chơi bóng', 'Chó con ăn thức ăn', 'Chó con nằm nghỉ']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 6);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
