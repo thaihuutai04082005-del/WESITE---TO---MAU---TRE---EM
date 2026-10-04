@@ -123,7 +123,7 @@ export default function PaymentModal({ open, plan, onClose }) {
     QRCode.toDataURL(bt.qrData, { width: 440, margin: 1, errorCorrectionLevel: 'M' }).then(setQrImg, () => setQrImg(''));
   }, [bt?.qrData]);
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} className="sm:max-w-3xl!">
       <h2 className="font-display text-2xl font-extrabold">{t('plans.payTitle', { plan: t(`plans.${plan}.name`) })}</h2>
       {planInfo && step === 'choose' && (
         <p className="mb-4 text-muted">
