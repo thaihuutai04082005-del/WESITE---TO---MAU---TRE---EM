@@ -452,12 +452,13 @@
     "free": {
       "name": "Free",
       "per": "",
-      "limit": "1 picture per day",
+      "limit": "🎨 1 picture per day",
       "perks": [
-        "All themes & both modes",
+        "🔓 5 free themes for your age",
+        "Basic coloring tools",
         "Arena, card packs, color together, storybooks",
-        "Signature: 5 basic styles + sign by hand",
-        "Exhibition: send 1 picture per round, send reactions",
+        "5 basic signature styles + sign by hand",
+        "🏛️ 1 picture per exhibition round",
         "Trophy cabinet, certificates, show off",
         "History, PNG download & printing"
       ]
@@ -465,25 +466,24 @@
     "month": {
       "name": "Monthly",
       "per": "/month",
-      "limit": "100 pictures per month (~3/day)",
+      "limit": "🎨 100 pictures per month",
       "perks": [
         "Everything in Free",
-        "More pictures every day",
-        "✨ Unlock 5 \"wow\" signature styles",
-        "🏛️ Send 3 pictures per exhibition round",
-        "Priority support"
+        "🔓 All themes unlocked for 1 month",
+        "✨ 5 extra \"WOW\" signature styles",
+        "🏛️ 3 pictures per exhibition round",
+        "⭐ Priority support"
       ]
     },
     "year": {
       "name": "Yearly",
       "per": "/year",
-      "limit": "Unlimited pictures",
+      "limit": "∞ Unlimited pictures",
       "perks": [
         "Everything in Monthly",
-        "Unlimited coloring",
-        "✨ \"Wow\" signatures all year",
-        "🏛️ Send 3 pictures per exhibition round",
-        "Save almost 2 months"
+        "🔓 All themes unlocked for 1 year",
+        "🏛️ 5 pictures per exhibition round",
+        "💰 Save 89,000đ (~15%)"
       ]
     }
   },

@@ -64,7 +64,7 @@ export const SIGNATURE_INKS = ['#1B2A38', '#FFFFFF', '#C9961A', '#FF5F7E', '#2B7
 export const EXHIBITION = {
   boards: ['S', 'A', 'B', 'free'],
   reactions: ['heart', 'cheer', 'clap', 'love', 'star'], // ❤️ 🎉 👏 😍 🌟 — mỗi cái 1 điểm
-  perRound: { free: 1, premium: 3 },
+  perRound: { free: 1, month: 3, year: 5 },
   minCoverage: 0.8, // điều 2: tô ≥ 80% diện tích
   maxSpill: 0.4, // điều 5: loại nếu > 40% nét cọ lem ra ngoài
   minMs: 20000, // điều 8: tô dưới 20 giây…

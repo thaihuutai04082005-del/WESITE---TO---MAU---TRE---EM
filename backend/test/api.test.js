@@ -386,6 +386,13 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   at(vn('2026-10-03T10:00:00Z'));
   const st = await api('GET', '/exhibition/mine', null, A.token);
   assert.deepEqual([st.body.schedule.submitOpen, st.body.schedule.nextRound, st.body.limit], [true, '2026-10-05', 1]);
+  // Gói Tháng gửi 3 tranh/vòng, Gói Năm 5 tranh/vòng.
+  const uidB = db.prepare('SELECT id FROM users WHERE username = ?').get('trienlam2').id;
+  for (const [plan, n] of [['month', 3], ['year', 5]]) {
+    db.prepare('INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, ?, ?, ?)').run(uidB, plan, '2026-01-01T00:00:00Z', '2027-01-01T00:00:00Z');
+    assert.equal((await api('GET', '/exhibition/mine', null, B.token)).body.limit, n);
+    db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(uidB);
+  }
   const noSig = await artwork(A, { signed: false });
   const bad = await api('POST', '/exhibition/entries', { artworkId: noSig }, A.token);
   assert.equal(bad.body.error.code, 'exhibit_rules');
