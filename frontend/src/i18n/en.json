@@ -428,7 +428,7 @@
   },
   "plans": {
     "title": "Choose a plan",
-    "subtitle": "Upgrade to color more, unlock \"wow\" signatures and send more pictures to the exhibition.",
+    "subtitle": "Unlock a creative world of coloring!",
     "best": "Best value",
     "choose": "Choose",
     "renew": "Renew",
@@ -452,40 +452,89 @@
     "free": {
       "name": "Free",
       "per": "",
-      "limit": "🎨 1 picture per day",
+      "limit": "1 picture per day",
       "perks": [
-        "🔓 5 free themes for your age",
-        "Basic coloring tools",
-        "Arena, card packs, color together, storybooks",
-        "5 basic signature styles + sign by hand",
-        "🏛️ 1 picture per exhibition round",
-        "Trophy cabinet, certificates, show off",
-        "History, PNG download & printing"
+        {
+          "i": "🔒",
+          "t": "5 free themes for your age",
+          "help": "Your child can color 5 age-appropriate themes for free. Upgrade to unlock every theme."
+        },
+        {
+          "i": "⚙️",
+          "t": "Basic coloring tools"
+        },
+        {
+          "i": "🎮",
+          "t": "Arena, card packs, color together, storybooks"
+        },
+        {
+          "i": "✏️",
+          "t": "5 basic signature styles + sign by hand"
+        },
+        {
+          "i": "🏛️",
+          "t": "1 picture per exhibition round"
+        },
+        {
+          "i": "🏆",
+          "t": "Trophy cabinet, certificates, show off"
+        },
+        {
+          "i": "🖼️",
+          "t": "History, PNG download & printing"
+        }
       ]
     },
     "month": {
       "name": "Monthly",
       "per": "/month",
-      "limit": "🎨 100 pictures per month",
+      "limit": "100 pictures per month",
       "perks": [
-        "Everything in Free",
-        "🔓 All themes unlocked for 1 month",
-        "✨ 5 extra \"WOW\" signature styles",
-        "🏛️ 3 pictures per exhibition round",
-        "⭐ Priority support"
+        {
+          "i": "🔓",
+          "t": "All themes unlocked for 1 month",
+          "help": "Every theme is open while the plan is active."
+        },
+        {
+          "i": "✨",
+          "t": "5 extra \"WOW\" signature styles"
+        },
+        {
+          "i": "🏛️",
+          "t": "3 pictures per exhibition round"
+        },
+        {
+          "i": "⭐",
+          "t": "Priority support"
+        }
       ]
     },
     "year": {
       "name": "Yearly",
       "per": "/year",
-      "limit": "∞ Unlimited pictures",
+      "limit": "Unlimited pictures",
       "perks": [
-        "Everything in Monthly",
-        "🔓 All themes unlocked for 1 year",
-        "🏛️ 5 pictures per exhibition round",
-        "💰 Save 89,000đ (~15%)"
+        {
+          "i": "🔓",
+          "t": "All themes unlocked for 1 year",
+          "help": "Every theme is open while the plan is active."
+        },
+        {
+          "i": "🏛️",
+          "t": "5 pictures per exhibition round"
+        },
+        {
+          "i": "💰",
+          "t": "Save 89,000đ (~15%)"
+        }
       ]
-    }
+    },
+    "allOf": {
+      "month": "Everything in Free",
+      "year": "Everything in Monthly"
+    },
+    "chooseMonth": "Choose Monthly",
+    "chooseYear": "Choose Yearly"
   },
   "payment": {
     "pending": "Confirming payment…",

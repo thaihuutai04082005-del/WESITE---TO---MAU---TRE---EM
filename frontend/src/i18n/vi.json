@@ -428,7 +428,7 @@
   },
   "plans": {
     "title": "Chọn gói cho bé",
-    "subtitle": "Nâng cấp để tô nhiều tranh hơn, mở chữ ký \"wow\" và gửi nhiều tranh đi triển lãm hơn.",
+    "subtitle": "Mở khóa thế giới tô màu đầy sáng tạo!",
     "best": "Tiết kiệm nhất",
     "choose": "Chọn gói này",
     "renew": "Gia hạn",
@@ -452,40 +452,89 @@
     "free": {
       "name": "Free",
       "per": "",
-      "limit": "🎨 1 tranh mỗi ngày",
+      "limit": "1 tranh mỗi ngày",
       "perks": [
-        "🔓 5 chủ đề miễn phí theo độ tuổi",
-        "Các chức năng tô cơ bản",
-        "Đấu trường, Bốc thẻ, Tô cùng nhau, Truyện tranh",
-        "5 mẫu chữ ký cơ bản + tự ký",
-        "🏛️ 1 tranh mỗi vòng triển lãm",
-        "Tủ kính thành tích, giấy khen, khoe tranh",
-        "Lưu lịch sử, tải PNG & in tranh"
+        {
+          "i": "🔒",
+          "t": "5 chủ đề miễn phí theo độ tuổi",
+          "help": "Bé được tô miễn phí 5 chủ đề phù hợp với độ tuổi. Nâng cấp để mở toàn bộ chủ đề."
+        },
+        {
+          "i": "⚙️",
+          "t": "Các chức năng tô cơ bản"
+        },
+        {
+          "i": "🎮",
+          "t": "Đấu trường, Bốc thẻ, Tô cùng nhau, Truyện tranh"
+        },
+        {
+          "i": "✏️",
+          "t": "5 mẫu chữ ký cơ bản + tự ký"
+        },
+        {
+          "i": "🏛️",
+          "t": "1 tranh mỗi vòng triển lãm"
+        },
+        {
+          "i": "🏆",
+          "t": "Tủ kính thành tích, giấy khen, khoe tranh"
+        },
+        {
+          "i": "🖼️",
+          "t": "Lưu lịch sử, tải PNG & in tranh"
+        }
       ]
     },
     "month": {
       "name": "Gói Tháng",
       "per": "/tháng",
-      "limit": "🎨 100 tranh mỗi tháng",
+      "limit": "100 tranh mỗi tháng",
       "perks": [
-        "Mọi quyền lợi của gói Free",
-        "🔓 Mở toàn bộ chủ đề trong 1 tháng",
-        "✨ Thêm 5 mẫu chữ ký WOW",
-        "🏛️ 3 tranh mỗi vòng triển lãm",
-        "⭐ Hỗ trợ ưu tiên"
+        {
+          "i": "🔓",
+          "t": "Mở toàn bộ chủ đề trong 1 tháng",
+          "help": "Bé tô được tất cả chủ đề trong suốt thời gian gói còn hiệu lực."
+        },
+        {
+          "i": "✨",
+          "t": "Thêm 5 mẫu chữ ký WOW"
+        },
+        {
+          "i": "🏛️",
+          "t": "3 tranh mỗi vòng triển lãm"
+        },
+        {
+          "i": "⭐",
+          "t": "Hỗ trợ ưu tiên"
+        }
       ]
     },
     "year": {
       "name": "Gói Năm",
       "per": "/năm",
-      "limit": "∞ Không giới hạn số tranh",
+      "limit": "Không giới hạn số tranh",
       "perks": [
-        "Mọi quyền lợi của Gói Tháng",
-        "🔓 Mở toàn bộ chủ đề trong 1 năm",
-        "🏛️ 5 tranh mỗi vòng triển lãm",
-        "💰 Tiết kiệm 89.000đ (~15%)"
+        {
+          "i": "🔓",
+          "t": "Mở toàn bộ chủ đề trong 1 năm",
+          "help": "Bé tô được tất cả chủ đề trong suốt thời gian gói còn hiệu lực."
+        },
+        {
+          "i": "🏛️",
+          "t": "5 tranh mỗi vòng triển lãm"
+        },
+        {
+          "i": "💰",
+          "t": "Tiết kiệm 89.000đ (~15%)"
+        }
       ]
-    }
+    },
+    "allOf": {
+      "month": "Mọi quyền lợi của gói Free",
+      "year": "Mọi quyền lợi của gói Tháng"
+    },
+    "chooseMonth": "Chọn gói Tháng",
+    "chooseYear": "Chọn gói Năm"
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",
