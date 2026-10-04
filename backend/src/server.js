@@ -8,6 +8,7 @@ import { registerArena } from './services/arena.js';
 import { registerCollab } from './services/collab.js';
 import { scheduleCleanup } from './services/lifecycle.js';
 import { scheduleExhibition } from './services/exhibition.js';
+import { scheduleBilling } from './services/payments/index.js';
 import { seedAll, seedPicturesIfNeeded } from '../../database/seeds/seed.js';
 
 const db = getDb();
@@ -23,6 +24,7 @@ const server = createServer(createApp());
 initRealtime(server, { registerHandlers: [registerArena, registerCollab] });
 scheduleCleanup();
 scheduleExhibition();
+scheduleBilling();
 
 server.listen(env.port, () => {
   console.log(`API đang chạy tại http://localhost:${env.port}`);

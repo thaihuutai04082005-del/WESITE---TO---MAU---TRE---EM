@@ -1,4 +1,4 @@
-// Quay về từ MoMo: xác minh kết quả với backend (chữ ký được kiểm tra ở server).
+// Quay về từ PayPal (đồng ý thuê bao) hoặc MoMo: hỏi backend xác nhận rồi hiện kết quả.
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -16,11 +16,13 @@ export default function PaymentResult() {
     if (!id) return setStatus('failed');
     const body = Object.fromEntries(params.entries());
     let tries = 0;
+    let provider = null;
     const poll = async () => {
       try {
-        const r = await api.post(`/payments/${id}/momo/return`, body);
+        if (!provider) provider = (await api.get(`/payments/${id}`)).payment.provider;
+        const r = provider === 'paypal' ? await api.post(`/payments/${id}/paypal/confirm`) : await api.post(`/payments/${id}/momo/return`, body);
         setPlan(r.plan);
-        if (r.payment.status !== 'pending' || ++tries > 10) return setStatus(r.payment.status);
+        if (r.payment.status !== 'pending' || ++tries > 15) return setStatus(r.payment.status);
         setTimeout(poll, 2000);
       } catch {
         setStatus('failed');

@@ -1,11 +1,13 @@
 // Bảng giá 3 gói (Mục 6.1).
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
 import { formatVnd, formatDate } from '../../lib/format';
 import PaymentModal from '../../components/PaymentModal/PaymentModal';
 import Icon from '../../components/Icon';
+import { api } from '../../services/api';
+import { useUi } from '../../store/ui';
 
 /** Chữ trên nhãn gói (Gói Tháng · còn 97/100 lượt…). */
 function planBadgeText(plan, t, lang) {
@@ -97,12 +99,60 @@ function Perk({ p }) {
   );
 }
 
+/** Gói đang dùng + tự gia hạn PayPal (huỷ được), giống trang quản lý thuê bao của các ứng dụng AI. */
+function ManagePlan({ plan, billing, onCancelled }) {
+  const { t, i18n } = useTranslation();
+  const toast = useUi((s) => s.toast);
+  const [busy, setBusy] = useState(false);
+  if (!plan || plan.plan === 'free') return null;
+  async function cancel() {
+    if (!window.confirm(t('plans.manage.cancelConfirm'))) return;
+    setBusy(true);
+    try {
+      const r = await api.post('/payments/recurring/cancel');
+      onCancelled(r);
+      toast(t('plans.manage.cancelled'), 'success');
+    } catch (e) {
+      toast(t(`errors.${e.code}`, { defaultValue: t('errors.server_error') }), 'error');
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <div className="mx-auto mb-8 flex max-w-3xl flex-wrap items-center gap-4 rounded-3xl border-2 border-[#CFE6FA] bg-white p-5 shadow-soft" data-testid="manage-plan">
+      <span className="text-4xl" aria-hidden="true">{plan.plan === 'year' ? '👑' : '⭐'}</span>
+      <div className="min-w-0 flex-1">
+        <div className="font-display text-lg font-extrabold">
+          {t('plans.manage.active', { plan: t(`plans.${plan.plan}.name`), date: formatDate(plan.endsAt, i18n.language) })}
+        </div>
+        <div className="text-sm text-muted">
+          {billing?.autoRenew ? t('plans.manage.autoRenew', { period: t(`plans.manage.${billing.plan}`) }) : t('plans.manage.manual')}
+        </div>
+      </div>
+      {billing?.autoRenew && (
+        <button type="button" className="btn-ghost" onClick={cancel} disabled={busy} data-testid="cancel-recurring">
+          {t('plans.manage.cancel')}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function Plans() {
   const { t } = useTranslation();
   const meta = useAuth((s) => s.meta);
   const user = useAuth((s) => s.user);
   const current = useAuth((s) => s.plan);
+  const setPlan = useAuth((s) => s.setPlan);
   const [buy, setBuy] = useState(null);
+  const [billing, setBilling] = useState(null);
+  useEffect(() => {
+    if (!user) return;
+    api
+      .get('/subscription')
+      .then((r) => setBilling(r.billing))
+      .catch(() => {});
+  }, [user, current?.plan, current?.endsAt]);
   const plans = meta?.plans;
   if (!plans) return null;
   const cards = [
@@ -116,6 +166,16 @@ export default function Plans() {
         <h1 className="page-title">{t('plans.title')}</h1>
         <p className="mt-1 text-muted">{t('plans.subtitle')}</p>
       </div>
+      {user && (
+        <ManagePlan
+          plan={current}
+          billing={billing}
+          onCancelled={(r) => {
+            setBilling(r.billing);
+            setPlan(r.plan);
+          }}
+        />
+      )}
       <div className="mx-auto grid max-w-xl gap-6 xl:max-w-none xl:grid-cols-3">
         {cards.map((c) => {
           const th = THEMES[c.key];
@@ -139,6 +199,11 @@ export default function Plans() {
                   <span className="absolute -bottom-1 -right-2 text-xl">✨</span>
                 </div>
               </div>
+              {c.key !== 'free' && (
+                <div className="mt-1 text-sm font-bold text-muted">
+                  {t('plans.usdNote', { price: `$${plans[c.key].priceUsd}` })}
+                </div>
+              )}
               <span className={`mt-3 inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
                 {c.key === 'year' && <span aria-hidden="true">∞</span>}
                 {t(`plans.${c.key}.limit`)}

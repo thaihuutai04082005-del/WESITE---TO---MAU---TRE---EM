@@ -48,6 +48,21 @@ export const env = {
     clientId: process.env.PAYPAL_CLIENT_ID || '',
     secret: process.env.PAYPAL_CLIENT_SECRET || '',
     base: process.env.PAYPAL_API_BASE || 'https://api-m.sandbox.paypal.com',
+    // Tuỳ chọn: id gói đã tạo sẵn trên PayPal (P-…). Để trống = web tự tạo gói lần đầu.
+    planMonth: process.env.PAYPAL_PLAN_MONTH || '',
+    planYear: process.env.PAYPAL_PLAN_YEAR || '',
+  },
+  // Chuyển khoản VietQR vào tài khoản ngân hàng; SePay báo về webhook khi tiền vào để tự mở gói.
+  bank: {
+    code: process.env.BANK_CODE || 'ACB',
+    // Mã BIN NAPAS của ngân hàng (tự suy ra từ BANK_CODE với các ngân hàng phổ biến; ACB = 970416).
+    bin: process.env.BANK_BIN || '',
+    accountNo: process.env.BANK_ACCOUNT_NO || '35391537',
+    accountName: process.env.BANK_ACCOUNT_NAME || '',
+  },
+  sepay: {
+    // API Key đặt trong cấu hình webhook của SePay (SePay gửi kèm header "Authorization: Apikey <key>").
+    apiKey: process.env.SEPAY_API_KEY || '',
   },
   momo: {
     partnerCode: process.env.MOMO_PARTNER_CODE || '',
