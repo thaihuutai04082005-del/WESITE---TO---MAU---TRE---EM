@@ -44,6 +44,11 @@ def main():
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
+    # "seal": ngăn vùng ngầm dọc các đường này mà KHÔNG vẽ nét (khép chỗ hở để tách 2 vùng, giống tranh màu gốc).
+    for sl in cfg.get('seal', []):
+        sm = np.zeros(gray.shape, np.uint8)
+        cv2.polylines(sm, [np.array(sl['line'], np.int32)], False, 1, sl.get('w', 3))
+        sealed |= sm > 0
     labels, n = ndimage.label(~sealed)
     areas = ndimage.sum(np.ones_like(labels), labels, index=np.arange(n + 1))
     keep = np.zeros(n + 1, bool)
