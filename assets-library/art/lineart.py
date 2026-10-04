@@ -78,6 +78,21 @@ def main():
         regions.append({'n': i, 'id': name or f'vung-{i}', 'd': d, 'color': color, 'area': int(mask.sum())})
     # Vùng lớn vẽ trước, vùng nhỏ (nằm bên trong) vẽ sau đè lên.
     regions.sort(key=lambda r: -r['area'])
+    # "spots": [[x, y, "#màu", "tên"], ...] — ô rất nhỏ (vd. hạt dâu) bị bước bịt khe làm mất:
+    # lấy đúng phần trắng chứa điểm đó trên nét gốc, thêm thành vùng tô vẽ đè lên trên.
+    if cfg.get('spots'):
+        spot_lab, _ = ndimage.label(~line)
+        for x, y, color, name in cfg['spots']:
+            sid = spot_lab[int(y), int(x)]
+            if sid == 0:
+                continue
+            mask = cv2.dilate((spot_lab == sid).astype(np.uint8), np.ones((3, 3), np.uint8))
+            cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.6, True).reshape(-1, 2)
+            if len(c) < 3:
+                continue
+            d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
+            regions.append({'n': -1, 'id': name, 'd': d, 'color': color, 'area': int(mask.sum())})
     # Tên trùng → đánh số.
     seen = {}
     for r in regions:
