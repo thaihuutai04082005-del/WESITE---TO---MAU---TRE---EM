@@ -539,7 +539,7 @@
     "chooseYear": "Choose Yearly",
     "providerHint": {
       "bank": "Scan with your banking or MoMo app. Pay each time; we remind you before it ends.",
-      "paypal": "Charged automatically each period, like ChatGPT. Cancel anytime."
+      "paypal": "Renews automatically each period. Cancel anytime."
     },
     "usdNote": "or {{price}} with PayPal",
     "perMonthUsd": "/month",

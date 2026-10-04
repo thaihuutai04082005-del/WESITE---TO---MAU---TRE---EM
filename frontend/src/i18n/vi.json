@@ -539,7 +539,7 @@
     "chooseYear": "Chọn gói Năm",
     "providerHint": {
       "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
-      "paypal": "Tự trừ tiền mỗi kỳ như ChatGPT. Huỷ được bất cứ lúc nào."
+      "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào."
     },
     "usdNote": "hoặc {{price}} qua PayPal",
     "perMonthUsd": "/tháng",

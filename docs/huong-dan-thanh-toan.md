@@ -5,7 +5,7 @@ Web có 2 cách trả tiền cho Gói Tháng / Gói Năm:
 | Cách | Tiền tệ | Tự gia hạn? | Tiền về đâu |
 |---|---|---|---|
 | **Quét QR / chuyển khoản** (app ngân hàng hoặc MoMo) | VNĐ | Không — web nhắc trước khi hết hạn 3 ngày | Thẳng vào ACB 35391537 |
-| **PayPal** | USD | Có — tự trừ mỗi kỳ như ChatGPT/Claude, huỷ lúc nào cũng được | Ví PayPal → rút về ACB 35391537 |
+| **PayPal** | USD | Có — tự trừ mỗi kỳ, huỷ lúc nào cũng được | Ví PayPal → rút về ACB 35391537 |
 
 Chưa điền khoá nào thì web chạy chế độ **giả lập** (có nút "Hoàn tất giả lập") để thử.
 
