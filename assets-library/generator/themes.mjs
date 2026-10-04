@@ -381,3 +381,26 @@ export const CARD_ART = [
   { theme: 'the-thao-trai-cay', object: 'hamster', objectName: { vi: 'Hamster', en: 'Hamster' }, rarity: 'S', slug: 'the-s-tham-an', name: { vi: 'Tham Ăn', en: 'Little Glutton' }, file: 'hamster--s' },
 ];
 
+
+// Nhóm tuổi: 15 chủ đề kết hợp ở trên dành cho bé từ 6 tuổi. Hai nhóm nhỏ hơn dùng tranh vẽ tay (art/*.json).
+export const AGE_GROUPS = ['3-4', '4-5', '6+'];
+
+/** Chủ đề tranh vẽ tay theo độ tuổi: chủ đề → đối tượng → từng tranh (file trong art/). */
+export const ART_THEMES = [
+  {
+    slug: 'dong-vat-3-4',
+    age: '3-4',
+    name: { vi: 'Động Vật', en: 'Animals' },
+    animation: 'bounce',
+    objects: [
+      {
+        slug: 'cho-con',
+        name: { vi: 'Chó con', en: 'Puppy' },
+        pictures: [
+          { slug: 'ngoi-ngoan', name: { vi: 'Ngồi ngoan', en: 'Sitting nicely' }, file: 'cho-con--ngoi-ngoan' },
+          { slug: 'vay-duoi', name: { vi: 'Vẫy đuôi', en: 'Wagging its tail' }, file: 'cho-con--vay-duoi' },
+        ],
+      },
+    ],
+  },
+];

@@ -14,7 +14,7 @@ export function seedPictures(db = getDb()) {
   if (!existsSync(catalogFile)) throw new Error('Chưa có catalog.json — chạy "npm run gen:pictures" trước');
   const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
   const upTheme = db.prepare(
-    'INSERT INTO themes (slug, name_vi, name_en, sort, active) VALUES (?, ?, ?, ?, 1) ON CONFLICT (slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort, active = 1 RETURNING id',
+    'INSERT INTO themes (slug, name_vi, name_en, sort, age_group, active) VALUES (?, ?, ?, ?, ?, 1) ON CONFLICT (slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort, age_group = excluded.age_group, active = 1 RETURNING id',
   );
   const upObject = db.prepare(
     'INSERT INTO objects (theme_id, slug, name_vi, name_en, sort) VALUES (?, ?, ?, ?, ?) ON CONFLICT (theme_id, slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort RETURNING id',
@@ -31,7 +31,7 @@ export function seedPictures(db = getDb()) {
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   tx(() => {
     catalog.themes.forEach((t, ti) => {
-      const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti).id;
+      const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6+').id;
       t.objects.forEach((o, oi) => {
         const objectId = upObject.get(themeId, o.slug, o.name.vi, o.name.en, oi).id;
         o.pictures.forEach((p, pi) => {

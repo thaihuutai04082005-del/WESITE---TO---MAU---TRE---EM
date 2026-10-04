@@ -27,3 +27,13 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 |---|---|---|---|
 | Mèo giáp vàng huyền thoại (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 119 |
 | Cá heo dũng sĩ biển cả (Anh Hùng Siêu Thú, thẻ riêng) | A | `src/ca-heo--a.webp` | 64 |
+
+## Tranh theo độ tuổi (không phải thẻ)
+
+Chủ đề cho bé **3–4 tuổi** và **4–5 tuổi** dùng tranh vẽ tay, khai báo trong `ART_THEMES` (`generator/themes.mjs`):
+chủ đề (`age`: `'3-4'` | `'4-5'`) → đối tượng → từng tranh (`file` trong thư mục này). Cách tạo file `.json` giống thẻ ở trên.
+15 chủ đề kết hợp do bộ tạo tranh vẽ thuộc nhóm **từ 6 tuổi trở lên**.
+
+| Chủ đề | Đối tượng | Tranh | Vùng tô |
+|---|---|---|---|
+| Động Vật (3–4 tuổi) | Chó con | Ngồi ngoan · Vẫy đuôi | 15 · 14 |

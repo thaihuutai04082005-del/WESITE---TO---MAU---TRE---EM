@@ -25,6 +25,10 @@ function Sparkle({ className, color }) {
   );
 }
 
+// Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
+const AGE_GROUPS = ['3-4', '4-5', '6+'];
+const AGE_ICON = { '3-4': '🐣', '4-5': '🌱', '6+': '🚀' };
+
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
@@ -53,10 +57,24 @@ export default function ThemeSelector() {
           <Sparkle className="right-2 -top-2 hidden h-9 w-9 md:block" color="#FFD54F" />
           <Sparkle className="-right-6 top-8 hidden h-5 w-5 md:block" color="#7FC8C8" />
         </div>
-        <div ref={gridRef} className={GRID_CLASS}>
-          {(themes || []).map((th) => (
-            <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
-          ))}
+        <div ref={gridRef} className="space-y-8">
+          {AGE_GROUPS.map((age) => {
+            const list = (themes || []).filter((th) => (th.age || '6+') === age);
+            if (!list.length) return null;
+            return (
+              <section key={age} data-testid={`age-${age}`}>
+                <h2 className="font-display mb-3 flex items-center gap-2 text-2xl font-extrabold text-[#17365D] md:text-3xl">
+                  <span aria-hidden="true">{AGE_ICON[age]}</span>
+                  {t(`select.age.${age}`)}
+                </h2>
+                <div className={GRID_CLASS}>
+                  {list.map((th) => (
+                    <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </div>
     </div>
