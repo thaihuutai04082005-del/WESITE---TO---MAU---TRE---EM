@@ -37,4 +37,4 @@ chủ đề (`age`: `'3-4'` | `'4-5'`) → đối tượng → từng tranh (`fi
 
 | Chủ đề | Đối tượng | Tranh | Vùng tô |
 |---|---|---|---|
-| Động Vật (3–4 tuổi) | Chó con | Ngồi ngoan · Vẫy đuôi | 16 · 15 |
+| Động Vật (3–4 tuổi) | Chó con | Ngồi ngoan · Vẫy đuôi · Chơi bóng · Ăn thức ăn | 16 · 15 · 23 · 38 |

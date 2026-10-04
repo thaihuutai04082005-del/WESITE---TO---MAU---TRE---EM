@@ -399,6 +399,8 @@ export const ART_THEMES = [
         pictures: [
           { slug: 'ngoi-ngoan', name: { vi: 'Ngồi ngoan', en: 'Sitting nicely' }, file: 'cho-con--ngoi-ngoan' },
           { slug: 'vay-duoi', name: { vi: 'Vẫy đuôi', en: 'Wagging its tail' }, file: 'cho-con--vay-duoi' },
+          { slug: 'choi-bong', name: { vi: 'Chơi bóng', en: 'Playing ball' }, file: 'cho-con--choi-bong' },
+          { slug: 'an-thuc-an', name: { vi: 'Ăn thức ăn', en: 'Eating its food' }, file: 'cho-con--an-thuc-an' },
         ],
       },
     ],
