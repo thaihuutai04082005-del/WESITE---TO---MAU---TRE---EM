@@ -78,10 +78,10 @@ function CalendarArt() {
 
 function Perk({ p }) {
   return (
-    <li className="flex items-start gap-3">
+    <li className="flex items-start gap-2.5">
       <Icon name="check" size={20} className="mt-0.5 shrink-0 text-mint" />
       <span className="w-6 shrink-0 text-center text-lg leading-6" aria-hidden="true">{p.i}</span>
-      <span className="flex-1 leading-6">
+      <span className="flex-1 leading-6 [text-wrap:balance]">
         {p.t}
         {p.help && (
           <span
@@ -111,16 +111,16 @@ export default function Plans() {
     { key: 'year', price: formatVnd(plans.year.priceVnd), best: true },
   ];
   return (
-    <div className="page">
+    <div className="page" style={{ maxWidth: 1480 }}>
       <div className="mb-10 text-center">
         <h1 className="page-title">{t('plans.title')}</h1>
         <p className="mt-1 text-muted">{t('plans.subtitle')}</p>
       </div>
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="mx-auto grid max-w-xl gap-6 xl:max-w-none xl:grid-cols-3">
         {cards.map((c) => {
           const th = THEMES[c.key];
           return (
-            <div key={c.key} className={`relative flex flex-col rounded-[28px] border-2 p-6 shadow-soft ${th.card}`} data-testid={`plan-${c.key}`}>
+            <div key={c.key} className={`relative flex flex-col rounded-[28px] border-2 p-5 shadow-soft xl:p-6 ${th.card}`} data-testid={`plan-${c.key}`}>
               {c.best && (
                 <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#F59E0B] px-5 py-1.5 font-extrabold text-white shadow-soft">
                   <span aria-hidden="true">👑</span> {t('plans.best')}
@@ -139,14 +139,14 @@ export default function Plans() {
                   <span className="absolute -bottom-1 -right-2 text-xl">✨</span>
                 </div>
               </div>
-              <span className={`mt-3 inline-flex w-fit items-center gap-2 rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
+              <span className={`mt-3 inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
                 {c.key === 'year' && <span aria-hidden="true">∞</span>}
                 {t(`plans.${c.key}.limit`)}
               </span>
-              <div className="mt-5 flex-1 rounded-3xl bg-white/80 p-4">
+              <div className="mt-5 flex-1 rounded-3xl bg-white/80 p-3 xl:p-4">
                 {th.box && (
                   <div className={`mb-4 flex items-center gap-3 rounded-2xl px-4 py-3 font-extrabold ${th.box}`}>
-                    <span className="text-2xl" aria-hidden="true">🎁</span> {t(`plans.allOf.${c.key}`)}
+                    <span className="text-2xl" aria-hidden="true">🎁</span> <span className="[text-wrap:balance]">{t(`plans.allOf.${c.key}`)}</span>
                   </div>
                 )}
                 <ul className="space-y-3 text-[15px]">
