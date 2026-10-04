@@ -1,5 +1,8 @@
-// PayPal Orders API v2 (REST). Tài liệu: https://developer.paypal.com/docs/api/orders/v2/
+// PayPal Subscriptions API (thuê bao tự gia hạn). Tài liệu: https://developer.paypal.com/docs/api/subscriptions/v1/
+// Gói (plan) được tự tạo lần đầu và lưu id vào app_settings; hoặc đặt sẵn PAYPAL_PLAN_MONTH / PAYPAL_PLAN_YEAR.
 import { env } from '../../config/env.js';
+import { getDb } from '../../config/db.js';
+import { PLANS } from '../../config/constants.js';
 
 export const isConfigured = () => !!(env.paypal.clientId && env.paypal.secret);
 
@@ -16,31 +19,97 @@ async function accessToken() {
   return (await res.json()).access_token;
 }
 
-export async function createOrder({ paymentId, amountUsd, description }) {
+async function call(method, path, body, requestId) {
   const token = await accessToken();
-  const res = await fetch(`${env.paypal.base}/v2/checkout/orders`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'PayPal-Request-Id': paymentId },
-    body: JSON.stringify({
-      intent: 'CAPTURE',
-      purchase_units: [{ reference_id: paymentId, custom_id: paymentId, description, amount: { currency_code: 'USD', value: amountUsd.toFixed(2) } }],
-    }),
+  const res = await fetch(`${env.paypal.base}${path}`, {
+    method,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      ...(requestId ? { 'PayPal-Request-Id': requestId } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
   });
-  const body = await res.json();
-  if (!res.ok) throw new Error(`PayPal tạo đơn lỗi: ${body.message || res.status}`);
-  return { orderId: body.id, raw: body };
+  const text = await res.text();
+  const json = text ? JSON.parse(text) : {};
+  if (!res.ok) throw new Error(`PayPal ${method} ${path} lỗi ${res.status}: ${json.message || text}`);
+  return json;
 }
 
-/** Thu tiền đơn đã được người mua chấp thuận. Trả về true nếu COMPLETED. */
-export async function captureOrder(orderId) {
-  const token = await accessToken();
-  const res = await fetch(`${env.paypal.base}/v2/checkout/orders/${encodeURIComponent(orderId)}/capture`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+const setting = (key) => getDb().prepare('SELECT value FROM app_settings WHERE key = ?').get(key)?.value;
+const saveSetting = (key, value) =>
+  getDb().prepare('INSERT INTO app_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').run(key, value);
+
+/** Id gói PayPal cho 'month' / 'year' (tự tạo sản phẩm + gói nếu chưa có). */
+export async function planId(plan) {
+  const preset = plan === 'month' ? env.paypal.planMonth : env.paypal.planYear;
+  if (preset) return preset;
+  const price = PLANS[plan].priceUsd.toFixed(2);
+  const key = `paypal:${env.paypal.base}:plan:${plan}:${price}`;
+  const saved = setting(key);
+  if (saved) return saved;
+  const productKey = `paypal:${env.paypal.base}:product`;
+  let productId = setting(productKey);
+  if (!productId) {
+    const prod = await call('POST', '/v1/catalogs/products', { name: 'Bé Tô Màu', type: 'SERVICE', category: 'SOFTWARE' });
+    productId = prod.id;
+    saveSetting(productKey, productId);
+  }
+  const created = await call('POST', '/v1/billing/plans', {
+    product_id: productId,
+    name: plan === 'month' ? 'Bé Tô Màu - Gói Tháng' : 'Bé Tô Màu - Gói Năm',
+    billing_cycles: [
+      {
+        frequency: { interval_unit: plan === 'month' ? 'MONTH' : 'YEAR', interval_count: 1 },
+        tenure_type: 'REGULAR',
+        sequence: 1,
+        total_cycles: 0,
+        pricing_scheme: { fixed_price: { value: price, currency_code: 'USD' } },
+      },
+    ],
+    payment_preferences: { auto_bill_outstanding: true, payment_failure_threshold: 2 },
   });
-  const body = await res.json();
-  if (!res.ok && body?.details?.[0]?.issue !== 'ORDER_ALREADY_CAPTURED') throw new Error(`PayPal capture lỗi: ${body.message || res.status}`);
-  const unit = body.purchase_units?.[0];
-  const capture = unit?.payments?.captures?.[0];
-  return { completed: body.status === 'COMPLETED' || body?.details?.[0]?.issue === 'ORDER_ALREADY_CAPTURED', customId: capture?.custom_id || unit?.reference_id, raw: body };
+  saveSetting(key, created.id);
+  return created.id;
+}
+
+/** Tạo thuê bao; trả về id + đường dẫn để người mua đồng ý trên PayPal. */
+export async function createSubscription({ paymentId, plan, returnUrl, cancelUrl }) {
+  const sub = await call(
+    'POST',
+    '/v1/billing/subscriptions',
+    {
+      plan_id: await planId(plan),
+      custom_id: paymentId,
+      application_context: {
+        brand_name: 'Bé Tô Màu',
+        user_action: 'SUBSCRIBE_NOW',
+        shipping_preference: 'NO_SHIPPING',
+        return_url: returnUrl,
+        cancel_url: cancelUrl,
+      },
+    },
+    paymentId,
+  );
+  const approve = (sub.links || []).find((l) => l.rel === 'approve')?.href;
+  return { subscriptionId: sub.id, approveUrl: approve };
+}
+
+/** Trạng thái thuê bao: { status, customId, cyclesCompleted, nextBillingTime }. */
+export async function getSubscription(id) {
+  const s = await call('GET', `/v1/billing/subscriptions/${encodeURIComponent(id)}`);
+  const cycles = s.billing_info?.cycle_executions?.find((c) => c.tenure_type === 'REGULAR');
+  return {
+    status: s.status,
+    customId: s.custom_id,
+    planId: s.plan_id,
+    cyclesCompleted: cycles?.cycles_completed ?? 0,
+    lastPaymentTime: s.billing_info?.last_payment?.time || null,
+    nextBillingTime: s.billing_info?.next_billing_time || null,
+    raw: s,
+  };
+}
+
+export async function cancelSubscription(id, reason = 'Người dùng huỷ tự gia hạn') {
+  await call('POST', `/v1/billing/subscriptions/${encodeURIComponent(id)}/cancel`, { reason });
 }

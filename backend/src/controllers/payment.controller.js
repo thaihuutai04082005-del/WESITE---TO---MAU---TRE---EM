@@ -6,7 +6,13 @@ import * as pay from '../services/payments/index.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
 
 export function subscription(req, res) {
-  res.json({ plan: planStatus(req.user.id), plans: PLANS, providers: pay.providerStatus() });
+  res.json({ plan: planStatus(req.user.id), plans: PLANS, providers: pay.providerStatus(), billing: pay.billingView(req.user.id) });
+}
+
+/** Huỷ tự gia hạn PayPal (gói vẫn dùng đến hết kỳ đã trả). */
+export async function cancelRecurring(req, res) {
+  await pay.cancelRecurring(req.user.id);
+  res.json({ ok: true, plan: planStatus(req.user.id), billing: pay.billingView(req.user.id) });
 }
 
 export async function create(req, res) {
@@ -20,29 +26,46 @@ function ownPayment(req) {
   return p;
 }
 
+const paymentView = (p) => ({ id: p.id, plan: p.plan, provider: p.provider, status: p.status, amount: p.amount, currency: p.currency });
+
 export function status(req, res) {
   const p = ownPayment(req);
-  res.json({ payment: { id: p.id, plan: p.plan, provider: p.provider, status: p.status, amount: p.amount, currency: p.currency }, plan: planStatus(req.user.id) });
+  res.json({ payment: paymentView(p), plan: planStatus(req.user.id) });
 }
 
-export async function paypalCapture(req, res) {
+/** Quay về từ PayPal sau khi đồng ý thuê bao: hỏi lại PayPal rồi kích hoạt. */
+export async function paypalConfirm(req, res) {
   const p = ownPayment(req);
   if (p.provider !== 'paypal' || p.mock) throw badRequest('invalid_provider');
-  if (p.status === 'paid') return res.json({ ok: true, plan: planStatus(req.user.id) });
-  const r = await pay.providers.paypal.captureOrder(p.provider_ref);
-  if (!r.completed || (r.customId && r.customId !== p.id)) {
-    pay.markFailed(p.id, r.raw);
-    throw badRequest('payment_failed');
+  if (p.status === 'pending' && p.provider_ref) await pay.syncPaypal(p.provider_ref);
+  res.json({ payment: paymentView(pay.findPayment(p.id)), plan: planStatus(req.user.id) });
+}
+
+/** Webhook PayPal (gia hạn mỗi kỳ, huỷ, tạm dừng). Luôn trả 200 nhanh; dữ liệu được hỏi lại PayPal. */
+export async function paypalWebhook(req, res) {
+  try {
+    await pay.handlePaypalWebhook(req.body);
+  } catch (err) {
+    console.error('[paypal webhook]', err.message);
   }
-  pay.markPaid(p.id, r.raw);
-  res.json({ ok: true, plan: planStatus(req.user.id) });
+  res.status(200).json({ ok: true });
+}
+
+/** Webhook SePay: báo có tiền chuyển vào tài khoản ngân hàng. Xác thực bằng API Key. */
+export function sepayWebhook(req, res) {
+  const key = env.sepay.apiKey;
+  const auth = String(req.get('authorization') || '');
+  if (!key || auth.replace(/^Apikey\s+/i, '').trim() !== key) return res.status(401).json({ success: false });
+  const r = pay.handleBankWebhook(req.body);
+  if (!r.paid && !r.already) console.log('[sepay]', r, req.body?.content);
+  res.json({ success: true });
 }
 
 /** Hoàn tất giao dịch giả lập — chỉ khi cổng chưa cấu hình và PAYMENT_MOCK bật (không dùng ở production). */
 export function mockComplete(req, res) {
   const p = ownPayment(req);
   if (!p.mock || !env.paymentMock) throw forbidden('mock_disabled');
-  pay.markPaid(p.id, { mock: true });
+  pay.completeMock(p);
   res.json({ ok: true, plan: planStatus(req.user.id) });
 }
 

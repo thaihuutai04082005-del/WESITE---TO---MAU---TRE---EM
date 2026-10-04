@@ -20,14 +20,22 @@ export function migrate(conn) {
   const done = new Set(conn.prepare('SELECT name FROM _migrations').all().map((r) => r.name));
   for (const name of readdirSync(dir).filter((f) => f.endsWith('.sql')).sort()) {
     if (done.has(name)) continue;
+    const sql = readFileSync(join(dir, name), 'utf8');
+    // Migration dựng lại bảng (đổi CHECK…) ghi "-- @foreign_keys off": tắt khoá ngoại trong lúc chạy
+    // (theo hướng dẫn ALTER TABLE của SQLite), rồi kiểm tra toàn vẹn trước khi COMMIT.
+    const fkOff = sql.includes('-- @foreign_keys off');
+    if (fkOff) conn.exec('PRAGMA foreign_keys = OFF');
     conn.exec('BEGIN');
     try {
-      conn.exec(readFileSync(join(dir, name), 'utf8'));
+      conn.exec(sql);
+      if (fkOff && conn.prepare('PRAGMA foreign_key_check').all().length) throw new Error('vi phạm khoá ngoại');
       conn.prepare('INSERT INTO _migrations (name, applied_at) VALUES (?, ?)').run(name, new Date().toISOString());
       conn.exec('COMMIT');
     } catch (err) {
       conn.exec('ROLLBACK');
       throw new Error(`Migration ${name} lỗi: ${err.message}`);
+    } finally {
+      if (fkOff) conn.exec('PRAGMA foreign_keys = ON');
     }
   }
 }

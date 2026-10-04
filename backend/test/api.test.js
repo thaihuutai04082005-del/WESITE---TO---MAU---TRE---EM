@@ -497,3 +497,118 @@ test('Chủ đề đã ẩn: không hiện ở danh sách, không vào Bóc th�
     getDb().prepare('UPDATE themes SET active = 1 WHERE id = ?').run(t.id);
   }
 });
+
+test('Thanh toán chuyển khoản QR: tạo mã, SePay báo tiền về thì mở gói (chống trùng, sai khoá, thiếu tiền)', async () => {
+  const { env } = await import('../src/config/env.js');
+  const u = await register('chuyenkhoan1');
+  const p = await api('POST', '/payments', { plan: 'month', provider: 'bank' }, u.token);
+  assert.equal(p.status, 201, JSON.stringify(p.body));
+  assert.equal(p.body.currency, 'VND');
+  assert.equal(p.body.bankTransfer.accountNo, '35391537');
+  assert.equal(p.body.bankTransfer.bank, 'ACB');
+  assert.match(p.body.bankTransfer.content, /^BTM[A-Z2-9]{6}$/);
+  // Mã VietQR chuẩn NAPAS: ACB (970416), số TK, 49.000đ, nội dung = mã BTM…; CRC hợp lệ.
+  const qr = p.body.bankTransfer.qrData;
+  assert.ok(qr.startsWith('000201010212'));
+  assert.ok(qr.includes('0006970416010835391537'));
+  assert.ok(qr.includes('540549000') && qr.includes(p.body.bankTransfer.content));
+
+  const hook = (body, key) =>
+    fetch(`${base}/api/payments/sepay/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(key ? { Authorization: `Apikey ${key}` } : {}) }, body: JSON.stringify(body) });
+  env.sepay.apiKey = 'test-sepay-key';
+  try {
+    const content = `MBVCB.123 ${p.body.bankTransfer.content.toLowerCase()} chuyen tien`;
+    assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 49000, content }, 'sai-khoa')).status, 401);
+    // Chuyển thiếu tiền → chưa mở gói.
+    await hook({ id: 2, transferType: 'in', transferAmount: 10000, content }, 'test-sepay-key');
+    assert.equal((await api('GET', `/payments/${p.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
+    // Đủ tiền → mở gói; gửi lại cùng giao dịch không gia hạn thêm.
+    assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key')).status, 200);
+    const st = await api('GET', `/payments/${p.body.paymentId}`, null, u.token);
+    assert.equal(st.body.payment.status, 'paid');
+    assert.equal(st.body.plan.plan, 'month');
+    const ends = st.body.plan.endsAt;
+    await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key');
+    assert.equal((await api('GET', '/subscription', null, u.token)).body.plan.endsAt, ends);
+  } finally {
+    env.sepay.apiKey = '';
+  }
+});
+
+test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiền → gia hạn, huỷ tự gia hạn', async () => {
+  const { env } = await import('../src/config/env.js');
+  const pay = await import('../src/services/payments/index.js');
+  const u = await register('paypalauto1');
+  const realFetch = globalThis.fetch;
+  const fake = { status: 'APPROVAL_PENDING', cycles: 0, cancelled: false, created: null };
+  env.paypal.clientId = 'cid';
+  env.paypal.secret = 'sec';
+  globalThis.fetch = async (url, init = {}) => {
+    const u2 = String(url);
+    if (!u2.startsWith(env.paypal.base)) return realFetch(url, init);
+    const path = u2.slice(env.paypal.base.length);
+    const ok = (body, status = 200) => new Response(body === null ? null : JSON.stringify(body), { status });
+    if (path === '/v1/oauth2/token') return ok({ access_token: 't' });
+    if (path === '/v1/catalogs/products') return ok({ id: 'PROD-1' }, 201);
+    if (path === '/v1/billing/plans') return ok({ id: `P-${JSON.parse(init.body).billing_cycles[0].frequency.interval_unit}` }, 201);
+    if (path === '/v1/billing/subscriptions' && init.method === 'POST') {
+      fake.created = JSON.parse(init.body);
+      return ok({ id: 'I-TEST1', links: [{ rel: 'approve', href: 'https://paypal.test/approve' }] }, 201);
+    }
+    if (path === '/v1/billing/subscriptions/I-TEST1') {
+      return ok({ id: 'I-TEST1', status: fake.status, custom_id: fake.created.custom_id, billing_info: { cycle_executions: [{ tenure_type: 'REGULAR', cycles_completed: fake.cycles }] } });
+    }
+    if (path === '/v1/billing/subscriptions/I-TEST1/cancel') {
+      fake.cancelled = true;
+      return ok(null, 204);
+    }
+    return ok({ message: 'not found' }, 404);
+  };
+  try {
+    const p = await api('POST', '/payments', { plan: 'month', provider: 'paypal' }, u.token);
+    assert.equal(p.status, 201, JSON.stringify(p.body));
+    assert.equal(p.body.payUrl, 'https://paypal.test/approve');
+    assert.equal([p.body.amount, p.body.currency].join(' '), '1.99 USD');
+    assert.equal(fake.created.plan_id, 'P-MONTH');
+    // Chưa đồng ý → vẫn chờ.
+    assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).body.payment.status, 'pending');
+    // Đồng ý xong (kỳ 1 đã trừ tiền) → kích hoạt Gói Tháng, tự gia hạn.
+    Object.assign(fake, { status: 'ACTIVE', cycles: 1 });
+    const c = await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token);
+    assert.equal(c.body.payment.status, 'paid');
+    assert.equal(c.body.plan.plan, 'month');
+    const sub = await api('GET', '/subscription', null, u.token);
+    assert.deepEqual(sub.body.billing, { provider: 'paypal', plan: 'month', autoRenew: true });
+    const ends1 = Date.parse(sub.body.plan.endsAt);
+    // Đang có thuê bao tự gia hạn → không tạo thuê bao thứ 2.
+    assert.equal((await api('POST', '/payments', { plan: 'year', provider: 'paypal' }, u.token)).body.error.code, 'already_subscribed');
+    // Webhook báo trừ tiền kỳ 2 (gửi 2 lần) → gia hạn đúng 1 lần.
+    fake.cycles = 2;
+    const wh = { event_type: 'PAYMENT.SALE.COMPLETED', resource: { id: 'SALE-2', billing_agreement_id: 'I-TEST1' } };
+    for (let i = 0; i < 2; i++) {
+      const r = await realFetch(`${base}/api/payments/paypal/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(wh) });
+      assert.equal(r.status, 200);
+    }
+    const periods = getDb().prepare('SELECT ends_at FROM subscriptions WHERE user_id = ? ORDER BY ends_at').all(u.id);
+    assert.equal(periods.length, 2, 'kỳ 2 nối tiếp kỳ 1');
+    assert.equal(Date.parse(periods[0].ends_at), ends1);
+    const ends2 = Date.parse(periods[1].ends_at);
+    assert.equal(Math.round((ends2 - ends1) / 86400000), 30);
+    // Huỷ tự gia hạn: gọi PayPal huỷ, gói vẫn còn hạn.
+    const cancel = await api('POST', '/payments/recurring/cancel', null, u.token);
+    assert.equal(cancel.status, 200, JSON.stringify(cancel.body));
+    assert.equal(fake.cancelled, true);
+    assert.equal(cancel.body.billing, null);
+    assert.equal(cancel.body.plan.plan, 'month');
+    // Gần hết hạn và không còn tự gia hạn → được nhắc 1 lần.
+    const near = new Date(ends2 - 2 * 86400000);
+    assert.ok((await pay.runBillingJobs(near)).reminded >= 1);
+    assert.equal((await pay.runBillingJobs(near)).reminded, 0);
+    const notes = await api('GET', '/users/me/notifications', null, u.token);
+    assert.ok(notes.body.notifications.some((n) => n.type === 'plan_expiring'));
+  } finally {
+    globalThis.fetch = realFetch;
+    env.paypal.clientId = '';
+    env.paypal.secret = '';
+  }
+});

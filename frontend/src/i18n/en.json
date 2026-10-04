@@ -436,10 +436,12 @@
     "included": "Default",
     "note": "Pay with MoMo or PayPal. Prices include tax. The Yearly plan costs ~15% less than 12 monthly payments.",
     "payTitle": "Pay for {{plan}}",
+    "chooseMethod": "Choose a payment method",
     "payNow": "Pay",
     "provider": {
       "momo": "MoMo wallet",
-      "paypal": "PayPal (cards)"
+      "paypal": "PayPal (USD) · auto-renew",
+      "bank": "Bank transfer / QR (VND)"
     },
     "mockNotice": "The payment gateway is not configured on this server. This is a TEST transaction; no real money is charged.",
     "mockConfirm": "Confirm test payment",
@@ -534,7 +536,39 @@
       "year": "Everything in Monthly"
     },
     "chooseMonth": "Choose Monthly",
-    "chooseYear": "Choose Yearly"
+    "chooseYear": "Choose Yearly",
+    "providerHint": {
+      "bank": "Scan with your banking or MoMo app. Pay each time; we remind you before it ends.",
+      "paypal": "Renews automatically each period. Cancel anytime."
+    },
+    "usdNote": "or {{price}} with PayPal",
+    "perMonthUsd": "/month",
+    "perYearUsd": "/year",
+    "qr": {
+      "title": "Scan to pay",
+      "scan": "Open your banking or MoMo app → Scan QR. Amount and message are pre-filled.",
+      "bank": "Bank",
+      "account": "Account number",
+      "holder": "Account holder",
+      "amount": "Amount",
+      "content": "Transfer message",
+      "contentHint": "Keep this message exactly so we can match your payment.",
+      "waiting": "Waiting for your transfer… the plan unlocks automatically (usually under a minute).",
+      "copied": "Copied!",
+      "copy": "Copy"
+    },
+    "redirecting": "Redirecting to PayPal…",
+    "manage": {
+      "title": "Your plan",
+      "active": "{{plan}} · active until {{date}}",
+      "autoRenew": "Renews automatically via PayPal every {{period}}. Cancel anytime; you keep access until it ends.",
+      "manual": "Paid once. We will remind you 3 days before it ends.",
+      "cancel": "Cancel auto-renew",
+      "cancelConfirm": "Cancel auto-renew? You keep the plan until it ends, then move to Free.",
+      "cancelled": "Auto-renew cancelled.",
+      "month": "month",
+      "year": "year"
+    }
   },
   "payment": {
     "pending": "Confirming payment…",
@@ -803,7 +837,8 @@
     "exhibit_done": "“{{name}}” finished its exhibition with {{n}} reactions. Well done!",
     "exhibit_reactions": "🎉 {{n}} more friends reacted to “{{name}}”!",
     "exhibit_approved": "“{{name}}” was approved and goes up on Monday!",
-    "exhibit_rejected": "“{{name}}” missed rule {{rule}} of the exhibition rules. Try another picture!"
+    "exhibit_rejected": "“{{name}}” missed rule {{rule}} of the exhibition rules. Try another picture!",
+    "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring!"
   },
   "errors": {
     "network_error": "Can't reach the server. Check your connection and try again.",
@@ -844,7 +879,7 @@
     "invalid_thumbnail": "Invalid preview image.",
     "invalid_plan": "Invalid plan.",
     "invalid_provider": "Invalid payment method.",
-    "payment_unavailable": "Payments are unavailable right now.",
+    "payment_unavailable": "Payments are under maintenance, please try again later.",
     "payment_failed": "Payment was not completed.",
     "payment_not_found": "Payment not found.",
     "mock_disabled": "Test payments are disabled.",
@@ -897,7 +932,9 @@
     "exhibit_own": "This is your own picture.",
     "exhibit_unverified": "This account needs parent verification.",
     "entry_not_found": "This picture is not in the hall.",
-    "no_award": "Only award-winning pictures have a certificate."
+    "no_award": "Only award-winning pictures have a certificate.",
+    "already_subscribed": "You already have an auto-renewing PayPal plan. Cancel it before choosing another plan.",
+    "no_recurring": "No auto-renewing plan."
   },
   "guide": {
     "label": "How it works",

@@ -436,10 +436,12 @@
     "included": "Mặc định",
     "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế. Gói Năm rẻ hơn ~15% so với 12 tháng lẻ.",
     "payTitle": "Thanh toán {{plan}}",
+    "chooseMethod": "Chọn hình thức thanh toán",
     "payNow": "Thanh toán",
     "provider": {
       "momo": "Ví MoMo",
-      "paypal": "PayPal (thẻ quốc tế)"
+      "paypal": "PayPal (USD) · tự gia hạn",
+      "bank": "Chuyển khoản / quét QR (VNĐ)"
     },
     "mockNotice": "Cổng thanh toán chưa được cấu hình trên máy chủ này. Đây là giao dịch THỬ NGHIỆM, không trừ tiền thật.",
     "mockConfirm": "Xác nhận thanh toán thử",
@@ -534,7 +536,39 @@
       "year": "Mọi quyền lợi của gói Tháng"
     },
     "chooseMonth": "Chọn gói Tháng",
-    "chooseYear": "Chọn gói Năm"
+    "chooseYear": "Chọn gói Năm",
+    "providerHint": {
+      "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
+      "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào."
+    },
+    "usdNote": "hoặc {{price}} qua PayPal",
+    "perMonthUsd": "/tháng",
+    "perYearUsd": "/năm",
+    "qr": {
+      "title": "Quét mã để thanh toán",
+      "scan": "Mở app ngân hàng hoặc MoMo → Quét mã QR. Số tiền và nội dung đã điền sẵn.",
+      "bank": "Ngân hàng",
+      "account": "Số tài khoản",
+      "holder": "Chủ tài khoản",
+      "amount": "Số tiền",
+      "content": "Nội dung chuyển khoản",
+      "contentHint": "Nhớ giữ đúng nội dung này để web tự nhận tiền.",
+      "waiting": "Đang chờ tiền về… web tự mở gói ngay khi nhận được (thường dưới 1 phút).",
+      "copied": "Đã chép!",
+      "copy": "Chép"
+    },
+    "redirecting": "Đang chuyển sang PayPal…",
+    "manage": {
+      "title": "Gói của bé",
+      "active": "Đang dùng {{plan}} · hạn đến {{date}}",
+      "autoRenew": "Tự gia hạn qua PayPal mỗi {{period}}. Huỷ bất cứ lúc nào, gói vẫn dùng tới hết hạn.",
+      "manual": "Trả từng lần. Web sẽ nhắc trước khi hết hạn 3 ngày.",
+      "cancel": "Huỷ tự gia hạn",
+      "cancelConfirm": "Huỷ tự gia hạn? Bé vẫn dùng gói tới hết hạn, sau đó về gói Free.",
+      "cancelled": "Đã huỷ tự gia hạn.",
+      "month": "tháng",
+      "year": "năm"
+    }
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",
@@ -803,7 +837,8 @@
     "exhibit_done": "Tranh “{{name}}” đã triển lãm xong với {{n}} cảm xúc. Giỏi quá!",
     "exhibit_reactions": "🎉 Có thêm {{n}} bạn thả cảm xúc cho tranh “{{name}}”!",
     "exhibit_approved": "Tranh “{{name}}” đã được duyệt, sẽ lên hội trường vào thứ 2!",
-    "exhibit_rejected": "Tranh “{{name}}” chưa đạt điều {{rule}} của nội quy triển lãm. Bé thử gửi tranh khác nhé!"
+    "exhibit_rejected": "Tranh “{{name}}” chưa đạt điều {{rule}} của nội quy triển lãm. Bé thử gửi tranh khác nhé!",
+    "plan_expiring": "Gói của bé sẽ hết hạn vào {{date}}. Gia hạn để tiếp tục tô thoải mái nhé!"
   },
   "errors": {
     "network_error": "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại nhé.",
@@ -844,7 +879,7 @@
     "invalid_thumbnail": "Ảnh xem trước không hợp lệ.",
     "invalid_plan": "Gói không hợp lệ.",
     "invalid_provider": "Cổng thanh toán không hợp lệ.",
-    "payment_unavailable": "Cổng thanh toán đang tạm ngưng.",
+    "payment_unavailable": "Cổng thanh toán đang bảo trì, bố mẹ thử lại sau nhé.",
     "payment_failed": "Thanh toán chưa thành công.",
     "payment_not_found": "Không tìm thấy giao dịch.",
     "mock_disabled": "Thanh toán thử đã bị tắt.",
@@ -897,7 +932,9 @@
     "exhibit_own": "Đây là tranh của bé.",
     "exhibit_unverified": "Tài khoản cần được phụ huynh xác minh.",
     "entry_not_found": "Không tìm thấy tranh này trong hội trường.",
-    "no_award": "Chỉ tranh đạt danh hiệu mới có giấy khen."
+    "no_award": "Chỉ tranh đạt danh hiệu mới có giấy khen.",
+    "already_subscribed": "Bé đang có gói tự gia hạn qua PayPal. Huỷ tự gia hạn trước khi đăng ký gói khác nhé.",
+    "no_recurring": "Không có gói tự gia hạn nào."
   },
   "guide": {
     "label": "Hướng dẫn",
