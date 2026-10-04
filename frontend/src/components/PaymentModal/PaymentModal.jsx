@@ -133,6 +133,7 @@ export default function PaymentModal({ open, plan, onClose }) {
       )}
       {step === 'choose' && (
         <div className="space-y-3">
+          <h3 className="font-display text-lg font-extrabold">{t('plans.chooseMethod')}</h3>
           {PROVIDERS.map((p) => (
             <label key={p.key} className={`card flex cursor-pointer items-center gap-3 p-4 ${provider === p.key ? 'ring-4 ring-primary/40' : ''}`}>
               <input type="radio" name="provider" checked={provider === p.key} onChange={() => setProvider(p.key)} className="h-5 w-5 accent-primary" />

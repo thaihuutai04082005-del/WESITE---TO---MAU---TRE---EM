@@ -436,6 +436,7 @@
     "included": "Mặc định",
     "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế. Gói Năm rẻ hơn ~15% so với 12 tháng lẻ.",
     "payTitle": "Thanh toán {{plan}}",
+    "chooseMethod": "Chọn hình thức thanh toán",
     "payNow": "Thanh toán",
     "provider": {
       "momo": "Ví MoMo",

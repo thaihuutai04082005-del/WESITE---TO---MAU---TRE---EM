@@ -436,6 +436,7 @@
     "included": "Default",
     "note": "Pay with MoMo or PayPal. Prices include tax. The Yearly plan costs ~15% less than 12 monthly payments.",
     "payTitle": "Pay for {{plan}}",
+    "chooseMethod": "Choose a payment method",
     "payNow": "Pay",
     "provider": {
       "momo": "MoMo wallet",
