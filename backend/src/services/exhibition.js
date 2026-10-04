@@ -116,7 +116,7 @@ export function checkArtwork(artwork) {
   return { board, failures, picture, data };
 }
 
-const perRound = (userId) => (activeSubscription(userId) ? EXHIBITION.perRound.premium : EXHIBITION.perRound.free);
+const perRound = (userId) => EXHIBITION.perRound[activeSubscription(userId)?.plan] ?? EXHIBITION.perRound.free;
 const usedInRound = (userId, key) =>
   getDb().prepare("SELECT COUNT(*) AS c FROM exhibition_entries WHERE user_id = ? AND round_key = ? AND status IN ('pending', 'approved')").get(userId, key).c;
 
