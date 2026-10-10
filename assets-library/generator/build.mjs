@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
-import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES } from './themes.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES, VARIANT_ART } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
@@ -490,7 +490,11 @@ function main() {
       const variants = [...own.map((v) => [v, false]), ...cards.map((v) => [v, true])];
       for (const [[variant, isCard], k] of variants.map((v, i) => [v, i])) {
         const artIdx = isCard ? CARD_ART.findIndex((a) => a.object === obj.slug && a.rarity === variant.rarity) : -1;
-        const { svg, meta } = artIdx >= 0 ? buildArtPicture(theme, obj, variant, CARD_ART[artIdx].file) : buildPicture(theme, obj, variant, isCard, k);
+        const vArt = !isCard && VARIANT_ART[`${obj.slug}--${variant.slug}`];
+        const { svg, meta } =
+          artIdx >= 0 ? buildArtPicture(theme, obj, variant, CARD_ART[artIdx].file)
+          : vArt ? buildArtPicture(theme, obj, variant, vArt, false)
+          : buildPicture(theme, obj, variant, isCard, k);
         if (artIdx >= 0) meta.cardOrder = artIdx + 1; // thứ tự hiện trên trang Bóc thẻ = thứ tự chủ web gửi
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
