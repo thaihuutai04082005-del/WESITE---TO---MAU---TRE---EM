@@ -72,7 +72,7 @@ export function seedPicturesIfNeeded(db = getDb()) {
   const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   const themeSlugs = catalog.themes.map((t) => t.slug);
   const rows = db
-    .prepare(`SELECT p.slug, p.svg, p.name_vi, p.name_en FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+    .prepare(`SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
     .all(...themeSlugs);
   const sameSet = rows.length === want.size && rows.every((r) => want.has(r.slug));
   const lib = join(REPO_ROOT, 'assets-library');
@@ -80,7 +80,9 @@ export function seedPicturesIfNeeded(db = getDb()) {
   // Tranh vẽ lại hoặc đổi tên (cùng slug) cũng phải nạp lại.
   const same = sameSet && rows.every((r) => {
     const p = pics.get(r.slug);
-    return r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8');
+    // Đổi riêng màu vùng thì svg không đổi (vùng luôn trắng) → phải so cả manifest.
+    return r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8')
+      && r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions });
   });
   return same ? 0 : seedPictures(db);
 }
