@@ -388,6 +388,7 @@ export const VARIANT_ART = {
   'xe-dua--phan-luc': 'xe-dua--phan-luc',
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
+  'tao-the-thao--da-bong': 'tao-the-thao--da-bong',
 };
 
 // Nhóm tuổi: 15 chủ đề kết hợp ở trên dành cho bé từ 6 tuổi. Hai nhóm nhỏ hơn dùng tranh vẽ tay (art/*.json).
