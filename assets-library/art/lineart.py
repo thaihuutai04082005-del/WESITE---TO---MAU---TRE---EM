@@ -80,9 +80,9 @@ def main():
             continue
         d = 'M ' + ' L '.join(f'{x * k:.1f} {y * k:.1f}' for x, y in c) + ' Z'
         color, name = seed_of.get(i, (cfg.get('default', '#FFFFFF'), None))
-        regions.append({'n': i, 'id': name or f'vung-{i}', 'd': d, 'color': color, 'area': int(mask.sum())})
-    # Vùng lớn vẽ trước, vùng nhỏ (nằm bên trong) vẽ sau đè lên.
-    regions.sort(key=lambda r: -r['area'])
+        regions.append({'n': i, 'id': name or f'vung-{i}', 'd': d, 'color': color, 'area': int(mask.sum()), 'outer': float(cv2.contourArea(c))})
+    # Vùng bao ngoài lớn vẽ trước, vùng nằm bên trong vẽ sau đè lên (xét theo diện tích viền ngoài, kể cả vùng có lỗ như góc khung).
+    regions.sort(key=lambda r: -r['outer'])
     # "spots": [[x, y, "#màu", "tên"], ...] — ô rất nhỏ (vd. hạt dâu) bị bước bịt khe làm mất:
     # lấy đúng phần trắng chứa điểm đó trên nét gốc, thêm thành vùng tô vẽ đè lên trên.
     if cfg.get('spots'):
