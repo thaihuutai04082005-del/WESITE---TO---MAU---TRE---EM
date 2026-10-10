@@ -385,6 +385,7 @@ export const CARD_ART = [
 // Tranh thường (không phải thẻ) thay bằng tranh vẽ tay: "<đối tượng>--<biến thể>" → file trong art/.
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
+  'xe-dua--phan-luc': 'xe-dua--phan-luc',
 };
 
 // Nhóm tuổi: 15 chủ đề kết hợp ở trên dành cho bé từ 6 tuổi. Hai nhóm nhỏ hơn dùng tranh vẽ tay (art/*.json).
