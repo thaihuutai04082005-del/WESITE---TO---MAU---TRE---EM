@@ -76,6 +76,15 @@
 <path d="M 494.8 508.9 L 491.1 511.7 L 490.6 516.4 L 493.0 519.2 L 496.2 520.2 L 498.6 519.2 L 500.5 517.4 L 501.4 513.6 L 499.5 510.3 L 496.7 508.9 Z" id="r-vung-76" data-region="vung-76" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 87.3 510.3 L 84.5 513.1 L 84.5 517.8 L 86.4 520.2 L 88.3 521.1 L 90.6 521.1 L 93.9 518.8 L 94.8 516.9 L 94.8 514.6 L 93.0 511.3 L 91.1 510.3 Z" id="r-vung-78" data-region="vung-78" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 161.0 493.4 L 159.2 494.4 L 157.7 496.2 L 157.7 500.9 L 159.6 503.3 L 163.4 504.2 L 166.2 502.8 L 167.6 500.9 L 168.1 497.2 L 166.7 494.8 L 164.8 493.4 Z" id="r-vung-69" data-region="vung-69" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 516.4 285.9 L 515.5 286.9 L 515.5 289.7 L 516.0 290.6 L 516.9 291.1 L 519.7 291.1 L 520.7 290.1 L 520.7 286.9 L 519.7 285.9 Z" id="r-nhuy-0" data-region="nhuy-0" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 79.3 291.1 L 78.4 292.5 L 78.4 294.4 L 79.8 296.2 L 82.6 296.2 L 84.0 294.4 L 84.0 292.5 L 83.6 291.5 L 81.7 290.6 Z" id="r-nhuy-1" data-region="nhuy-1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 479.8 309.4 L 478.9 310.3 L 478.9 313.6 L 480.3 314.6 L 482.6 314.6 L 484.0 312.7 L 484.0 310.8 L 483.1 309.4 Z" id="r-nhuy-2" data-region="nhuy-2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 111.7 314.1 L 110.8 315.0 L 110.8 317.8 L 112.7 319.2 L 115.0 318.8 L 116.0 317.4 L 116.0 315.5 L 115.0 314.1 Z" id="r-nhuy-3" data-region="nhuy-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 550.7 318.3 L 549.8 319.7 L 549.8 321.6 L 551.2 323.5 L 554.0 323.5 L 554.9 322.5 L 554.9 319.2 L 554.0 318.3 Z" id="r-nhuy-4" data-region="nhuy-4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 45.5 323.9 L 43.7 325.4 L 43.7 328.2 L 44.1 329.1 L 45.1 329.6 L 47.4 329.6 L 48.8 328.6 L 48.8 325.4 L 47.4 323.9 Z" id="r-nhuy-5" data-region="nhuy-5" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 500.9 342.3 L 499.5 344.1 L 499.5 346.0 L 500.5 347.4 L 502.8 347.9 L 505.2 346.0 L 505.2 344.1 L 503.8 342.3 Z" id="r-nhuy-6" data-region="nhuy-6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 88.7 346.9 L 87.8 347.9 L 87.8 350.7 L 89.7 352.1 L 92.0 351.6 L 93.0 350.7 L 93.0 347.9 L 92.0 346.9 Z" id="r-nhuy-7" data-region="nhuy-7" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 543.7 358.2 L 542.3 359.6 L 542.3 362.0 L 542.7 362.9 L 543.7 363.4 L 546.5 363.4 L 547.4 362.4 L 547.4 359.6 L 546.9 358.7 L 546.0 358.2 Z" id="r-nhuy-8" data-region="nhuy-8" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-wiggle"></g>
 <g class="scene-front">
