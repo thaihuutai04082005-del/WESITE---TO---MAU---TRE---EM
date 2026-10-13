@@ -201,6 +201,14 @@
 <path d="M 305.2 262.0 L 303.3 259.2 L 300.5 259.2 L 298.6 258.2 L 294.4 259.2 L 292.0 261.0 L 292.0 266.2 L 294.4 266.7 L 295.8 265.7 L 300.5 265.7 L 303.3 266.7 L 304.7 266.2 Z" id="r-vung-77" data-region="vung-77" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 513.6 560.6 L 511.3 562.9 L 511.3 567.6 L 512.7 569.5 L 514.6 570.4 L 517.8 570.4 L 521.1 567.1 L 521.1 563.4 L 518.3 560.6 Z" id="r-vung-227" data-region="vung-227" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 358.2 499.5 L 356.3 501.4 L 356.3 504.7 L 358.7 506.6 L 361.0 506.6 L 363.8 503.8 L 363.4 500.9 L 362.0 499.5 Z" id="r-vung-207" data-region="vung-207" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 148.8 147.9 L 148.8 154.5 L 152.6 154.5 L 152.6 151.6 L 151.6 149.3 L 150.2 147.9 Z" id="r-cua-so-33" data-region="cua-so-33" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 147.4 147.9 L 146.5 147.9 L 145.1 149.3 L 144.1 151.2 L 143.7 154.5 L 147.4 154.5 Z" id="r-cua-so-34" data-region="cua-so-34" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 66.7 152.1 L 66.7 159.2 L 70.9 159.2 L 71.4 158.7 L 71.4 152.1 Z" id="r-cua-so-35" data-region="cua-so-35" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 72.3 152.1 L 72.8 159.2 L 77.0 159.2 L 77.0 152.1 L 76.5 151.6 L 75.6 151.6 L 75.1 152.1 L 73.2 151.6 Z" id="r-cua-so-36" data-region="cua-so-36" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 143.7 155.9 L 143.7 162.4 L 147.4 162.4 L 147.4 155.9 Z" id="r-cua-so-38" data-region="cua-so-38" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 148.8 155.9 L 148.8 162.0 L 149.3 162.4 L 152.6 162.4 L 152.6 158.2 L 153.1 157.7 L 153.1 155.9 Z" id="r-cua-so-39" data-region="cua-so-39" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 70.9 142.7 L 70.0 142.7 L 67.1 146.5 L 67.1 147.9 L 66.7 148.4 L 66.7 150.2 L 67.1 150.7 L 68.1 150.7 L 68.5 150.2 L 70.9 150.7 L 71.4 150.2 L 71.4 143.2 Z" id="r-cua-so-30" data-region="cua-so-30" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 72.8 142.7 L 72.8 150.7 L 76.5 150.7 L 77.0 150.2 L 77.0 147.9 L 76.5 147.4 L 76.5 146.5 L 75.6 144.6 L 73.7 142.7 Z" id="r-cua-so-31" data-region="cua-so-31" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-sway"></g>
 <g class="scene-front">
