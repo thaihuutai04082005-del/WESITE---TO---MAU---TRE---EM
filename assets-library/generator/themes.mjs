@@ -326,6 +326,7 @@ export const VARIANT_ART = {
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'tao-the-thao--da-bong': 'tao-the-thao--da-bong',
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
+  'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
 };
 
 // Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).
