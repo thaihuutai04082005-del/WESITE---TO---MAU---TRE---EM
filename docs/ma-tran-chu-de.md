@@ -25,7 +25,7 @@
 | 01 | 🦸 Anh Hùng Siêu Thú | Động vật | Siêu anh hùng | Rực Lửa · Tia Chớp · Băng Giá · Hộ Vệ · Phi Thiên | Giáp Vàng Huyền Thoại |
 | 02 | 🍭 Vương Quốc Kẹo Ngọt | Bánh kẹo | Hoàng gia | Nhà Vua · Công Chúa · Hoàng Tử · Hiệp Sĩ · Lính Gác | Vương Miện Kim Cương |
 | 03 | 🚀 Đội Xe Chinh Phục Vũ Trụ | Phương tiện | Không gian | Phản Lực · Kính Vòm Không Gian · Vượt Mưa Đá Vũ Trụ · Hạ Cánh Hành Tinh Lạ · Ghé Trạm Vũ Trụ | Chỉ Huy Ngân Hà |
-| 04 | 🌳 Khu Rừng Cây Thần | Cây | Phép thuật | Biết Nói · Biết Đi · Quả Phép Màu · Lốc Lá Thần · Cánh Cửa Bí Mật | Cây Thần Nghìn Năm |
+| 04 | 🌳 Khu Rừng Ánh Sáng | Cây | Phép thuật | Biết Nói · Biết Đi · Quả Phép Màu · Lốc Lá Thần · Cánh Cửa Bí Mật | Cây Thần Nghìn Năm |
 | 05 | 🏠 Thành Phố Nhà Biết Bay | Nhà ở | Bay lượn | Mọc Cánh · Cánh Quạt · Khinh Khí Cầu · Dù Lượn · Cưỡi Mây | Nhà Bay Hoàng Kim |
 | 06 | 🧸 Xứ Sở Đồ Chơi Thức Giấc | Đồ chơi | Sống dậy lúc nửa đêm | Thức Dậy · Nhảy Múa · Diễu Hành · Trốn Tìm · Ngủ Gật Lúc Bình Minh | Hộp Quà Vàng |
 | 07 | 🦖 Thị Trấn Khủng Long Tài Ba *(đổi tên)* | Khủng long | Nghề nghiệp | Đầu Bếp · Lính Cứu Hỏa · Bác Sĩ · Nông Dân · Nhà Thám Hiểm | Vua Thung Lũng |
@@ -45,7 +45,7 @@
 | 01 | Anh Hùng Siêu Thú | 🦁 Sư tử · 🐯 Hổ · 🐘 Voi · 🦅 Đại bàng · 🐱 Mèo · 🐶 Chó |
 | 02 | Vương Quốc Kẹo Ngọt | 🍩 Donut · 🧁 Cupcake · 🍭 Kẹo mút · 🍦 Kem ốc quế · 🍪 Bánh quy · 🎂 Bánh kem nhiều tầng |
 | 03 | Đội Xe Chinh Phục Vũ Trụ | 🏎️ Xe đua · 🚌 Xe buýt · 🚒 Xe cứu hỏa · 🚂 Tàu hỏa · ✈️ Máy bay · 🚁 Trực thăng |
-| 04 | Khu Rừng Cây Thần | 🌳 Cây cổ thụ · 🌲 Cây thông · 🌴 Cây dừa · 🌵 Cây xương rồng · 🌿 Cây liễu · 🎋 Khóm tre |
+| 04 | Khu Rừng Ánh Sáng | 🌳 Cây cổ thụ · 🌲 Cây thông · 🌴 Cây dừa · 🌵 Cây xương rồng · 🌿 Cây liễu · 🎋 Khóm tre |
 | 05 | Thành Phố Nhà Biết Bay | 🏠 Nhà gỗ · 🏘️ Nhà phố · 🏢 Chung cư · 🛖 Nhà sàn · ❄️ Nhà tuyết (igloo) · 🌬️ Nhà cối xay gió |
 | 06 | Xứ Sở Đồ Chơi Thức Giấc | 🪆 Búp bê gỗ · 💂 Lính chì · 🐴 Ngựa bập bênh · 🌀 Con quay · 🎁 Hộp hình nhảy · 🧱 Khối xếp chữ |
 | 07 | Thị Trấn Khủng Long Tài Ba | 🦖 Khủng long bạo chúa · 🦕 Khủng long cổ dài · 🦏 Khủng long ba sừng · 🦔 Khủng long gai lưng · 🪽 Dực long · 🎺 Khủng long mào kèn |
@@ -110,7 +110,7 @@
 |---|---|
 | Động vật | 01 Anh Hùng Siêu Thú |
 | Xe cộ | 03 Đội Xe Chinh Phục Vũ Trụ |
-| Thiên nhiên | 04 Khu Rừng Cây Thần |
+| Thiên nhiên | 04 Khu Rừng Ánh Sáng |
 | Trái cây | 08 Đại Hội Thể Thao Trái Cây |
 | Nhà cửa | 05 Thành Phố Nhà Biết Bay |
 
@@ -167,7 +167,7 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 
 | Chủ đề | Đối tượng | 5 biến thể |
 |---|---|---|
-| 🌳 Khu Rừng Cây Thần | Cây cổ thụ | Cánh Cửa Bí Mật · Quả Táo Vàng · Xích Đu Phép Thuật · Rễ Cây Biết Đi · Vương Miện Lá Thần |
+| 🌳 Khu Rừng Ánh Sáng | Cây cổ thụ | Cánh Cửa Bí Mật · Quả Táo Vàng · Xích Đu Phép Thuật · Rễ Cây Biết Đi · Vương Miện Lá Thần |
 |  | Cây thông | Đèn Lồng Tiên · Ngôi Sao Ước Nguyện · Tuyết Phép Màu · Quà Bất Ngờ · Chuông Gió Pha Lê |
 |  | Cây dừa | Võng Mây · Quả Dừa Biết Nhảy · Bay Bằng Lá Quạt · Suối Nước Thần · Đảo Hoàng Hôn |
 |  | Cây xương rồng | Nở Hoa Ngũ Sắc · Đội Mũ Phù Thủy · Ốc Đảo Thần Kỳ · Gai Ngọc Lấp Lánh · Chiếc Ô Hoa Sa Mạc |
