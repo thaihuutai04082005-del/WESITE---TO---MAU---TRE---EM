@@ -532,9 +532,15 @@ function main() {
         return meta;
       }),
     }));
-    return { slug: theme.slug, name: theme.name, age: theme.age, objects };
+    return { slug: theme.slug, name: theme.name, age: theme.age, after: theme.after, objects };
   });
-  catalog.themes.unshift(...ageThemes);
+  catalog.themes.unshift(...ageThemes.filter((t) => !t.after));
+  for (const t of ageThemes.filter((t) => t.after)) {
+    const i = catalog.themes.findIndex((x) => x.slug === t.after);
+    if (i < 0) throw new Error(`Không thấy chủ đề "${t.after}" để xếp sau`);
+    delete t.after;
+    catalog.themes.splice(i + 1, 0, t);
+  }
   writeFileSync(join(ROOT, 'catalog.json'), JSON.stringify(catalog));
   writeAvatars();
   writeMascots();

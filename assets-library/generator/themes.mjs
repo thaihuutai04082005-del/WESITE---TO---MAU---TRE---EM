@@ -19,8 +19,8 @@ export const THEMES = [
   { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Ánh Sáng', en: 'Forest of Light' }, faceStyle: 'face', animation: 'sway' },
   { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
   { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce' },
-  { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
   { slug: 'vuong-quoc-lau-dai', name: { vi: 'Vương Quốc Lâu Đài Huyền Bí', en: 'Mystic Castle Kingdom' }, faceStyle: 'none', animation: 'wiggle' },
+  { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
   // Đợt 3
   { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce' },
 ];
@@ -382,3 +382,21 @@ export const ART_THEMES = [
     ],
   },
 ];
+
+// Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
+ART_THEMES.push({
+  slug: 'cong-chua-ngan-hoa',
+  age: '6-8',
+  after: 'xu-so-do-choi',
+  name: { vi: 'Công Chúa Ngàn Hoa', en: 'Princess of a Thousand Flowers' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'vay-hoa',
+      name: { vi: 'Váy Hoa', en: 'Flower Gown' },
+      pictures: [
+        { slug: 'cong-chua-vay-hoa-hong', name: { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' }, file: 'cong-chua-ngan-hoa--vay-hoa-hong' },
+      ],
+    },
+  ],
+});
