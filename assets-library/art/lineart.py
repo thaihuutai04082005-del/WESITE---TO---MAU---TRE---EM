@@ -73,6 +73,9 @@ def main():
     regions = []
     for i in ids:
         mask = (full == i).astype(np.uint8)
+        # "grow": N — nở mỗi vùng thêm N px (chồng nhẹ lên vùng kề, nằm dưới nét) để không lộ khe trắng giữa các vùng bên dưới nét mảnh.
+        if cfg.get('grow'):
+            mask = cv2.dilate(mask, np.ones((2 * int(cfg['grow']) + 1,) * 2, np.uint8))
         cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         c = max(cs, key=cv2.contourArea)
         c = cv2.approxPolyDP(c, 1.0, True).reshape(-1, 2)
