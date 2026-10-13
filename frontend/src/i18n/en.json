@@ -339,6 +339,7 @@
   },
   "select": {
     "themes": "Pick a theme",
+    "ageEmpty": "New pictures coming soon for this age group!",
     "themesHint": "What would you like to color today?",
     "objects": "Pick a subject",
     "variants": "Pick a pose",

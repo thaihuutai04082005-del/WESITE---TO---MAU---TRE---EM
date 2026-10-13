@@ -60,13 +60,14 @@ export default function ThemeSelector() {
         <div ref={gridRef} className="space-y-8">
           {AGE_GROUPS.map((age) => {
             const list = (themes || []).filter((th) => (th.age || '6-8') === age);
-            if (!list.length) return null;
+            if (!list.length && !themes) return null;
             return (
               <section key={age} data-testid={`age-${age}`}>
                 <h2 className="font-display mb-3 flex items-center gap-2 text-2xl font-extrabold text-[#17365D] md:text-3xl">
                   <span aria-hidden="true">{AGE_ICON[age]}</span>
                   {t(`select.age.${age}`)}
                 </h2>
+                {!list.length && <p className="rounded-2xl bg-white/70 px-4 py-6 text-center font-bold text-[#17365D]/70" data-testid={`age-empty-${age}`}>{t('select.ageEmpty')}</p>}
                 <div className={GRID_CLASS}>
                   {list.map((th) => (
                     <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
