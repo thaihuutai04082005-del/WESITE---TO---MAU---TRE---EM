@@ -85,6 +85,7 @@
 <path d="M 515.5 445.8 L 515.5 451.0 L 519.4 451.0 L 519.4 445.8 Z" id="r-cua-so-4" data-region="cua-so-4" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 541.2 445.8 L 541.2 450.5 L 544.2 450.5 L 544.2 445.8 Z" id="r-cua-so-5" data-region="cua-so-5" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 179.5 457.5 L 178.6 458.4 L 178.6 464.5 L 181.7 464.5 L 182.1 464.1 L 182.1 458.8 L 181.3 457.5 Z" id="r-cua-so-6" data-region="cua-so-6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 268.0 331.6 L 266.7 331.6 L 264.9 334.2 L 264.9 339.9 L 265.4 340.3 L 267.5 339.9 L 269.7 337.7 L 270.2 337.7 L 270.2 336.4 L 268.4 333.8 Z" id="r-rong-roc-nho" data-region="rong-roc-nho" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
