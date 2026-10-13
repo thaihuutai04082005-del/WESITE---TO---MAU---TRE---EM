@@ -22,11 +22,7 @@ export const THEMES = [
   { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
   { slug: 'vuong-quoc-lau-dai', name: { vi: 'Vương Quốc Lâu Đài Huyền Bí', en: 'Mystic Castle Kingdom' }, faceStyle: 'none', animation: 'wiggle' },
   // Đợt 3
-  { slug: 'phong-thi-nghiem', name: { vi: 'Phòng Thí Nghiệm Kỳ Diệu', en: 'Wonder Lab' }, faceStyle: 'face', animation: 'wiggle' },
   { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce' },
-  { slug: 'hai-tac-kho-bau', name: { vi: 'Hạm Đội Hải Tặc Kho Báu', en: 'Treasure Pirate Fleet' }, faceStyle: 'face', animation: 'sway' },
-  { slug: 'rap-xiec', name: { vi: 'Rạp Xiếc Diệu Kỳ', en: 'Wonder Circus' }, faceStyle: 'face', animation: 'bounce' },
-  { slug: 'thanh-pho-may-moc', name: { vi: 'Thành Phố Máy Móc Tí Hon', en: 'Tiny Machine City' }, faceStyle: 'face', animation: 'wiggle' },
 ];
 
 const O = (theme, slug, vi, en, opts) => ({ theme, slug, name: { vi, en }, ...opts });
@@ -125,12 +121,6 @@ export const OBJECTS = [
   O('vuong-quoc-lau-dai', 'cau-da', 'Cầu đá cổ tích', 'Fairytale stone bridge', { face: null, hat: { x: 300, y: 282, s: 0.7 }, ground: 'water', build: B2.cauDa }),
   O('vuong-quoc-lau-dai', 'gieng-uoc', 'Giếng ước', 'Wishing well', { face: null, hat: { x: 300, y: 142, s: 0.7 }, build: B2.giengUoc }),
   // 10 — Dụng cụ khoa học × Phản ứng kỳ diệu
-  O('phong-thi-nghiem', 'ong-nghiem', 'Ống nghiệm', 'Test tube', { face: { x: 300, y: 220, s: 0.75 }, hat: { x: 300, y: 112, s: 0.7 }, build: B3.ongNghiem }),
-  O('phong-thi-nghiem', 'binh-tam-giac', 'Bình tam giác', 'Flask', { face: { x: 300, y: 300, s: 0.75 }, hat: { x: 300, y: 100, s: 0.6 }, build: B3.binhTamGiac }),
-  O('phong-thi-nghiem', 'kinh-hien-vi', 'Kính hiển vi', 'Microscope', { face: { x: 382, y: 330, s: 0.58 }, hat: { x: 245, y: 86, s: 0.5 }, build: B3.kinhHienVi }),
-  O('phong-thi-nghiem', 'nam-cham', 'Nam châm', 'Magnet', { face: { x: 300, y: 416, s: 0.55 }, hat: { x: 220, y: 150, s: 0.6 }, build: B3.namCham }),
-  O('phong-thi-nghiem', 'kinh-lup', 'Kính lúp', 'Magnifying glass', { face: { x: 270, y: 255, s: 0.9 }, hat: { x: 270, y: 124, s: 0.8 }, build: B3.kinhLup }),
-  O('phong-thi-nghiem', 'mo-hinh-nguyen-tu', 'Mô hình nguyên tử', 'Atom model', { face: { x: 300, y: 312, s: 0.7 }, hat: { x: 300, y: 228, s: 0.6 }, build: B3.nguyenTu }),
 
   // 11 — Dụng cụ mỹ thuật × Họa sĩ nhí
   O('xuong-nghe-thuat', 'co-ve', 'Cọ vẽ', 'Paintbrush', { face: { x: 300, y: 220, s: 0.62 }, hat: { x: 300, y: 90, s: 0.6 }, build: B3.coVe }),
@@ -141,28 +131,10 @@ export const OBJECTS = [
   O('xuong-nghe-thuat', 'gia-ve', 'Giá vẽ', 'Easel', { face: { x: 300, y: 215, s: 0.9 }, hat: { x: 300, y: 96, s: 0.8 }, build: B3.giaVe }),
 
   // 13 — Đồ vật hải tặc × Phiêu lưu biển cả
-  O('hai-tac-kho-bau', 'tau-hai-tac', 'Tàu hải tặc', 'Pirate ship', { face: { x: 300, y: 225, s: 0.8 }, hat: { x: 300, y: 150, s: 0.7 }, build: B3.tauHaiTac }),
-  O('hai-tac-kho-bau', 'ruong-kho-bau', 'Rương kho báu', 'Treasure chest', { face: { x: 300, y: 390, s: 0.85 }, hat: { x: 300, y: 190, s: 0.8 }, build: B3.ruongKhoBau }),
-  O('hai-tac-kho-bau', 'la-ban', 'La bàn', 'Compass', { face: { x: 300, y: 330, s: 0.8 }, hat: { x: 300, y: 150, s: 0.8 }, build: B3.laBan }),
-  O('hai-tac-kho-bau', 'mo-neo', 'Mỏ neo', 'Anchor', { face: { x: 300, y: 290, s: 0.66 }, hat: { x: 300, y: 82, s: 0.6 }, build: B3.moNeo }),
-  O('hai-tac-kho-bau', 'ban-do-kho-bau', 'Bản đồ kho báu', 'Treasure map', { face: { x: 300, y: 235, s: 0.8 }, hat: { x: 300, y: 126, s: 0.8 }, build: B3.banDoKhoBau }),
-  O('hai-tac-kho-bau', 'banh-lai', 'Bánh lái', 'Ship wheel', { face: { x: 300, y: 305, s: 0.8 }, hat: { x: 300, y: 100, s: 0.7 }, build: B3.banhLai }),
 
   // 14 — Đạo cụ xiếc × Màn biểu diễn
-  O('rap-xiec', 'leu-xiec', 'Lều xiếc', 'Circus tent', { face: { x: 300, y: 390, s: 0.8 }, hat: { x: 300, y: 130, s: 0.6 }, build: B3.leuXiec }),
-  O('rap-xiec', 'mu-ao-thuat', 'Mũ ảo thuật', 'Magic hat', { face: { x: 300, y: 270, s: 0.9 }, hat: { x: 300, y: 140, s: 0.8 }, build: B3.muAoThuat }),
-  O('rap-xiec', 'bong-tung-hung', 'Bóng tung hứng', 'Juggling balls', { face: { x: 300, y: 420, s: 0.75 }, hat: { x: 300, y: 222, s: 0.8 }, build: B3.bongTungHung }),
-  O('rap-xiec', 'vong-nhao-lon', 'Vòng nhào lộn', 'Circus hoop', { face: { x: 300, y: 275, s: 1 }, hat: { x: 300, y: 90, s: 0.8 }, build: B3.vongNhaoLon }),
-  O('rap-xiec', 'trong-xiec', 'Trống xiếc', 'Circus drum', { face: { x: 300, y: 350, s: 0.8 }, hat: { x: 300, y: 226, s: 0.8 }, build: B3.trongXiec }),
-  O('rap-xiec', 'xa-du', 'Xà đu', 'Trapeze', { face: { x: 300, y: 322, s: 0.66 }, hat: { x: 300, y: 292, s: 0.6 }, build: B3.xaDu }),
 
   // 15 — Máy móc × Cư dân thành phố tí hon
-  O('thanh-pho-may-moc', 'banh-rang', 'Bánh răng', 'Gear', { face: { x: 300, y: 305, s: 0.9 }, hat: { x: 300, y: 114, s: 0.8 }, build: B3.banhRang }),
-  O('thanh-pho-may-moc', 'co-le', 'Cờ lê', 'Wrench', { face: { x: 300, y: 320, s: 0.6 }, hat: { x: 300, y: 90, s: 0.6 }, build: B3.coLe }),
-  O('thanh-pho-may-moc', 'tua-vit', 'Tua vít', 'Screwdriver', { face: { x: 300, y: 200, s: 0.8 }, hat: { x: 300, y: 100, s: 0.7 }, build: B3.tuaVit }),
-  O('thanh-pho-may-moc', 'bong-den', 'Bóng đèn', 'Light bulb', { face: { x: 300, y: 220, s: 0.95 }, hat: { x: 300, y: 96, s: 0.8 }, build: B3.bongDen }),
-  O('thanh-pho-may-moc', 'dong-ho-bao-thuc', 'Đồng hồ báo thức', 'Alarm clock', { face: { x: 300, y: 335, s: 0.75 }, hat: { x: 300, y: 140, s: 0.6 }, build: B3.dongHoBaoThuc }),
-  O('thanh-pho-may-moc', 'quat-dien', 'Quạt điện', 'Electric fan', { face: { x: 300, y: 438, s: 0.7 }, hat: { x: 300, y: 50, s: 0.8 }, build: B3.quatDien }),
 ];
 
 // ---------------- Biến thể ----------------
@@ -319,15 +291,6 @@ export const THEME_VARIANTS = {
     ],
   },
   // ================= Đợt 3 (thẻ tạm theo chủ đề) =================
-  'phong-thi-nghiem': {
-    variants: [],
-    cards: [
-      card('C', 'dung-cu-nho', 'Dụng Cụ Nhỏ', 'Little Tool', { expr: 'happy', scene: ['clouds'], acc: () => ({}) }),
-      card('B', 'kinh-bao-ho', 'Kính Bảo Hộ', 'Safety Goggles', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ front: A.goggles(c) }) }),
-      card('A', 'duoi-cau-vong', 'Dưới Cầu Vồng', 'Under the Rainbow', { expr: 'happy', scene: ['rainbow', 'clouds', 'stars'], acc: () => ({}) }),
-      card('S', 'phat-minh-the-ky', 'Phát Minh Thế Kỷ', 'Invention of the Century', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
-    ],
-  },
   'xuong-nghe-thuat': {
     variants: [],
     cards: [
@@ -335,33 +298,6 @@ export const THEME_VARIANTS = {
       card('B', 'deo-no', 'Đeo Nơ', 'With a Bow', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ front: A.ribbonBow(c) }) }),
       card('A', 'duoi-cau-vong', 'Dưới Cầu Vồng', 'Under the Rainbow', { expr: 'happy', scene: ['rainbow', 'clouds', 'stars'], acc: () => ({}) }),
       card('S', 'kiet-tac-vang', 'Kiệt Tác Vàng', 'Golden Masterpiece', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
-    ],
-  },
-  'hai-tac-kho-bau': {
-    variants: [],
-    cards: [
-      card('C', 'ra-khoi', 'Ra Khơi', 'Setting Sail', { expr: 'happy', scene: ['sun', 'clouds'], acc: () => ({}) }),
-      card('B', 'treo-co-hoa', 'Treo Cờ Hoa', 'Flag Garland', { expr: 'happy', scene: ['clouds'], acc: () => ({ fg: X.bunting(70) }) }),
-      card('A', 'dem-sao-bien', 'Đêm Sao Biển', 'Starry Sea Night', { expr: 'happy', scene: ['night', 'stars'], acc: () => ({}) }),
-      card('S', 'kho-bau-huyen-thoai', 'Kho Báu Huyền Thoại', 'Legendary Treasure', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
-    ],
-  },
-  'rap-xiec': {
-    variants: [],
-    cards: [
-      card('C', 'chao-khan-gia', 'Chào Khán Giả', 'Hello Audience', { expr: 'happy', scene: ['clouds'], acc: () => ({}) }),
-      card('B', 'no-sao', 'Nơ Sân Khấu', 'Stage Bow Tie', { expr: 'happy', scene: ['clouds', 'confetti'], acc: (c) => ({ front: A.bowTie(c) }) }),
-      card('A', 'dem-bieu-dien', 'Đêm Biểu Diễn', 'Show Night', { expr: 'happy', scene: ['night', 'stars', 'confetti'], acc: () => ({}) }),
-      card('S', 'ngoi-sao-san-khau', 'Ngôi Sao Sân Khấu', 'Star of the Show', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
-    ],
-  },
-  'thanh-pho-may-moc': {
-    variants: [],
-    cards: [
-      card('C', 'cu-dan-ti-hon', 'Cư Dân Tí Hon', 'Tiny Citizen', { expr: 'happy', scene: ['sun', 'clouds'], acc: () => ({}) }),
-      card('B', 'mu-bao-ho', 'Mũ Bảo Hộ', 'Hard Hat', { expr: 'happy', scene: ['clouds'], acc: (c) => ({ front: X.hardHat(c) }) }),
-      card('A', 'thanh-pho-dem', 'Thành Phố Đêm', 'City Night', { expr: 'happy', scene: ['night', 'stars'], acc: () => ({}) }),
-      card('S', 'co-may-vang', 'Cỗ Máy Vàng', 'Golden Machine', { expr: 'happy', scene: ['rainbow', 'stars', 'confetti'], acc: (c) => ({ behind: X.aura(c, '#FFE066'), front: A.crown(c) }) }),
     ],
   },
 };
@@ -377,7 +313,7 @@ export const CARD_ART = [
   { theme: 'vuong-quoc-lau-dai', object: 'tho', objectName: { vi: 'Thỏ', en: 'Bunny' }, rarity: 'S', slug: 'the-s-cong-chua-dang-yeu', name: { vi: 'Công Chúa Đáng Yêu', en: 'Lovely Princess' }, file: 'tho--s' },
   { theme: 'anh-hung-sieu-thu', object: 'heo', objectName: { vi: 'Heo', en: 'Pig' }, rarity: 'A', slug: 'the-a-cao-boi', name: { vi: 'Cao Bồi', en: 'Cowboy' }, file: 'heo--a' },
   { theme: 'anh-hung-sieu-thu', object: 'voi', objectName: { vi: 'Voi', en: 'Elephant' }, rarity: 'S', slug: 'the-s-linh-cuu-hoa', name: { vi: 'Lính Cứu Hỏa', en: 'Firefighter' }, file: 'voi--s' },
-  { theme: 'hai-tac-kho-bau', object: 'capybara', objectName: { vi: 'Capybara', en: 'Capybara' }, rarity: 'S', slug: 'the-s-hai-tac', name: { vi: 'Hải Tặc', en: 'Pirate' }, file: 'capybara--s' },
+  { theme: 'anh-hung-sieu-thu', object: 'capybara', objectName: { vi: 'Capybara', en: 'Capybara' }, rarity: 'S', slug: 'the-s-hai-tac', name: { vi: 'Hải Tặc', en: 'Pirate' }, file: 'capybara--s' },
   { theme: 'the-thao-trai-cay', object: 'hamster', objectName: { vi: 'Hamster', en: 'Hamster' }, rarity: 'S', slug: 'the-s-tham-an', name: { vi: 'Tham Ăn', en: 'Little Glutton' }, file: 'hamster--s' },
 ];
 
@@ -392,14 +328,14 @@ export const VARIANT_ART = {
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
 };
 
-// Nhóm tuổi: 15 chủ đề kết hợp ở trên dành cho bé từ 6 tuổi. Hai nhóm nhỏ hơn dùng tranh vẽ tay (art/*.json).
-export const AGE_GROUPS = ['3-4', '4-5', '6+'];
+// Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).
+export const AGE_GROUPS = ['3-5', '6-8', '9+'];
 
 /** Chủ đề tranh vẽ tay theo độ tuổi: chủ đề → đối tượng → từng tranh (file trong art/). */
 export const ART_THEMES = [
   {
     slug: 'dong-vat-3-4',
-    age: '3-4',
+    age: '3-5',
     name: { vi: 'Động Vật', en: 'Animals' },
     animation: 'bounce',
     objects: [

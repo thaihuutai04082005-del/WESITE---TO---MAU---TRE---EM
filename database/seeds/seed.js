@@ -31,7 +31,7 @@ export function seedPictures(db = getDb()) {
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   tx(() => {
     catalog.themes.forEach((t, ti) => {
-      const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6+').id;
+      const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6-8').id;
       t.objects.forEach((o, oi) => {
         const objectId = upObject.get(themeId, o.slug, o.name.vi, o.name.en, oi).id;
         o.pictures.forEach((p, pi) => {
