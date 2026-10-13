@@ -16,7 +16,7 @@ export const THEMES = [
   { slug: 'thi-tran-khung-long', name: { vi: 'Thị Trấn Khủng Long Tài Ba', en: 'Talented Dino Town' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'the-thao-trai-cay', name: { vi: 'Đại Hội Thể Thao Trái Cây', en: 'Fruit Sports Festival' }, faceStyle: 'face', animation: 'float' },
   // Đợt 2
-  { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Cây Thần', en: 'Magic Tree Forest' }, faceStyle: 'face', animation: 'sway' },
+  { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Ánh Sáng', en: 'Forest of Light' }, faceStyle: 'face', animation: 'sway' },
   { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
   { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
@@ -326,7 +326,13 @@ export const VARIANT_ART = {
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'tao-the-thao--da-bong': 'tao-the-thao--da-bong',
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
+  'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
+};
+
+// Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
+export const PICTURE_NAME = {
+  'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
 };
 
 // Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).

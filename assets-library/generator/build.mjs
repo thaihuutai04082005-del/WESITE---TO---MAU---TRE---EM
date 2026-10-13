@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
-import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES, VARIANT_ART } from './themes.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES, VARIANT_ART, PICTURE_NAME } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
@@ -398,8 +398,8 @@ function buildArtPicture(theme, obj, variant, file, isCard = true) {
       theme: theme.slug,
       object: obj.slug,
       variant: variant.slug,
-      name: { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` },
-      variantName: variant.name,
+      name: PICTURE_NAME[slug] || { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` },
+      variantName: PICTURE_NAME[slug] || variant.name,
       isCard,
       rarity: variant.rarity || null,
       animation,
