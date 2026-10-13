@@ -26,8 +26,8 @@ function Sparkle({ className, color }) {
 }
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
-const AGE_GROUPS = ['3-4', '4-5', '6+'];
-const AGE_ICON = { '3-4': '🐣', '4-5': '🌱', '6+': '🚀' };
+const AGE_GROUPS = ['3-5', '6-8', '9+'];
+const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟' };
 
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
@@ -59,7 +59,7 @@ export default function ThemeSelector() {
         </div>
         <div ref={gridRef} className="space-y-8">
           {AGE_GROUPS.map((age) => {
-            const list = (themes || []).filter((th) => (th.age || '6+') === age);
+            const list = (themes || []).filter((th) => (th.age || '6-8') === age);
             if (!list.length) return null;
             return (
               <section key={age} data-testid={`age-${age}`}>

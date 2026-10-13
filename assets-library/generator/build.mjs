@@ -479,7 +479,7 @@ function main() {
   for (const theme of THEMES) {
     const dir = join(ROOT, theme.slug);
     if (existsSync(dir)) rmSync(dir, { recursive: true });
-    const tEntry = { slug: theme.slug, name: theme.name, age: '6+', objects: [] };
+    const tEntry = { slug: theme.slug, name: theme.name, age: '6-8', objects: [] };
     for (const obj of OBJECTS.filter((o) => o.theme === theme.slug)) {
       const oEntry = { slug: obj.slug, name: obj.name, pictures: [] };
       const tv = THEME_VARIANTS[theme.slug];

@@ -343,9 +343,9 @@
     "objects": "Pick a subject",
     "variants": "Pick a pose",
     "age": {
-      "3-4": "Ages 3 – 4",
-      "4-5": "Ages 4 – 5",
-      "6+": "Ages 6 and up"
+      "3-5": "Ages 3 – 5",
+      "6-8": "Ages 6 – 8",
+      "9+": "Ages 9 and up"
     },
     "objectCount": "{{n}} subjects",
     "variantCount": "{{n}} poses"
