@@ -333,6 +333,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
+  'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
 };
 
 // Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).
@@ -393,7 +394,7 @@ ART_THEMES.push({
   objects: [
     {
       slug: 'vay-hoa',
-      name: { vi: 'Váy Hoa', en: 'Flower Gown' },
+      name: { vi: 'Công Chúa Váy Hoa', en: 'Flower Gown Princess' },
       pictures: [
         { slug: 'cong-chua-vay-hoa-hong', name: { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' }, file: 'cong-chua-ngan-hoa--vay-hoa-hong' },
       ],
