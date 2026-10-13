@@ -232,3 +232,8 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 |  | Bóng đèn | Thắp Đèn Thành Phố · Ý Tưởng Chợt Lóe · Đèn Đường Tí Hon · Soi Đường Đêm Mưa · Chuỗi Đèn Nhà Tí Hon |
 |  | Đồng hồ báo thức | Reng Reng Buổi Sáng · Gọi Cả Phố Dậy · Đi Làm Đúng Giờ · Nghỉ Trưa Ngủ Gật · Lên Dây Cót Buổi Tối |
 |  | Quạt điện | Thổi Mát Cả Phố · Thổi Buồm Thuyền Giấy · Thổi Chong Chóng · Thổi Bay Lá Thu · Thổi Bong Bóng Xà Phòng |
+
+
+## Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi
+
+- **Công Chúa Ngàn Hoa** (thời trang nữ × các loại hoa), xếp ở hàng 2 ngay sau Xứ Sở Đồ Chơi Thức Giấc; Vương Quốc Thiên Thể lùi xuống hàng 3. Đối tượng **Váy Hoa** → tranh **Công Chúa Váy Hoa Hồng** (tranh vẽ tay, khai báo trong `ART_THEMES` với `after`).

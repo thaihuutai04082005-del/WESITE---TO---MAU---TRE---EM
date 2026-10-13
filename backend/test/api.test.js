@@ -88,11 +88,11 @@ test('Đăng ký: sai CAPTCHA bị từ chối, mật khẩu yếu bị từ ch�
 test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', async () => {
   const { token } = await register('bena01');
   const themes = await api('GET', '/themes');
-  assert.equal(themes.body.themes.length, 12);
+  assert.equal(themes.body.themes.length, 13);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
-  // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 11 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ chưa có chủ đề.
+  // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ chưa có chủ đề.
   assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5']);
-  assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 11);
+  assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 12);
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
   assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó con ngồi ngoan', 'Chó con vẫy đuôi', 'Chó con chơi bóng', 'Chó con ăn thức ăn', 'Chó con nằm nghỉ']);
   const kitten = await api('GET', '/themes/dong-vat-3-4/objects/meo-con/pictures');
