@@ -23,7 +23,7 @@
 | # | Lớp 1 — Chủ đề | Nhóm cốt lõi | Concept | Bộ 5 biến thể Lớp 3 | Thẻ S |
 |---|---|---|---|---|---|
 | 01 | 🦸 Anh Hùng Siêu Thú | Động vật | Siêu anh hùng | Rực Lửa · Tia Chớp · Băng Giá · Hộ Vệ · Phi Thiên | Giáp Vàng Huyền Thoại |
-| 02 | 🍭 Vương Quốc Kẹo Ngọt | Bánh kẹo | Hoàng gia | Nhà Vua · Công Chúa · Hoàng Tử · Hiệp Sĩ · Lính Gác | Vương Miện Kim Cương |
+| 02 | 🍭 Vương Quốc Bánh Kẹo | Bánh kẹo | Hoàng gia | Nhà Vua · Công Chúa · Hoàng Tử · Hiệp Sĩ · Lính Gác | Vương Miện Kim Cương |
 | 03 | 🚀 Đội Xe Chinh Phục Vũ Trụ | Phương tiện | Không gian | Phản Lực · Kính Vòm Không Gian · Vượt Mưa Đá Vũ Trụ · Hạ Cánh Hành Tinh Lạ · Ghé Trạm Vũ Trụ | Chỉ Huy Ngân Hà |
 | 04 | 🌳 Khu Rừng Ánh Sáng | Cây | Phép thuật | Biết Nói · Biết Đi · Quả Phép Màu · Lốc Lá Thần · Cánh Cửa Bí Mật | Cây Thần Nghìn Năm |
 | 05 | 🏠 Thành Phố Nhà Biết Bay | Nhà ở | Bay lượn | Mọc Cánh · Cánh Quạt · Khinh Khí Cầu · Dù Lượn · Cưỡi Mây | Nhà Bay Hoàng Kim |
@@ -43,7 +43,7 @@
 | # | Chủ đề | 6 đối tượng |
 |---|---|---|
 | 01 | Anh Hùng Siêu Thú | 🦁 Sư tử · 🐯 Hổ · 🐘 Voi · 🦅 Đại bàng · 🐱 Mèo · 🐶 Chó |
-| 02 | Vương Quốc Kẹo Ngọt | 🍩 Donut · 🧁 Cupcake · 🍭 Kẹo mút · 🍦 Kem ốc quế · 🍪 Bánh quy · 🎂 Bánh kem nhiều tầng |
+| 02 | Vương Quốc Bánh Kẹo | 🍩 Donut · 🧁 Cupcake · 🍭 Kẹo mút · 🍦 Kem ốc quế · 🍪 Bánh quy · 🎂 Bánh kem nhiều tầng |
 | 03 | Đội Xe Chinh Phục Vũ Trụ | 🏎️ Xe đua · 🚌 Xe buýt · 🚒 Xe cứu hỏa · 🚂 Tàu hỏa · ✈️ Máy bay · 🚁 Trực thăng |
 | 04 | Khu Rừng Ánh Sáng | 🌳 Cây cổ thụ · 🌲 Cây thông · 🌴 Cây dừa · 🌵 Cây xương rồng · 🌿 Cây liễu · 🎋 Khóm tre |
 | 05 | Thành Phố Nhà Biết Bay | 🏠 Nhà gỗ · 🏘️ Nhà phố · 🏢 Chung cư · 🛖 Nhà sàn · ❄️ Nhà tuyết (igloo) · 🌬️ Nhà cối xay gió |
@@ -134,7 +134,7 @@ Hình dáng các đối tượng cũ có trong bộ tạo tranh (mèo, chó, tá
 | | Đại bàng | Cánh Thép · Mắt Thần Tia X · Lốc Xoáy · Lông Vũ Phi Tiêu · Bổ Nhào Siêu Tốc |
 | | Mèo | Bóng Đêm · Leo Tường · Nhảy Siêu Cao · Ria Radar · Chín Mạng |
 | | Chó | Mũi Thám Tử · Cứu Hộ Siêu Tốc · Khiên Xương · Chỉ Huy Đội · Nhảy Dù Cứu Hộ |
-| 🍭 Vương Quốc Kẹo Ngọt | Donut | Nhà Vua · Lễ Đăng Quang · Tiệc Trà Hoàng Gia · Diễu Hành Hoàng Gia · Người Đưa Thư Hoàng Gia |
+| 🍭 Vương Quốc Bánh Kẹo | Donut | Nhà Vua · Lễ Đăng Quang · Tiệc Trà Hoàng Gia · Diễu Hành Hoàng Gia · Người Đưa Thư Hoàng Gia |
 | | Cupcake | Công Chúa · Nàng Tiên Đường · Dạ Hội Khiêu Vũ · Vườn Hoa Thượng Uyển · Tiệc Sinh Nhật Công Chúa |
 | | Kẹo mút | Hoàng Tử · Hiệp Sĩ · Cận Vệ Cầm Giáo · Nhạc Công Kèn Đồng · Pháp Sư Kẹo Ngọt |
 | | Kem ốc quế | Nữ Hoàng Băng Giá · Thị Nữ Quạt Lông · Thợ Làm Vườn Hoàng Gia · Đầu Bếp Hoàng Gia · Ngủ Trưa Gối Nhung |
