@@ -38,9 +38,9 @@ def main():
         for k in cfg['keep']:
             cv2.polylines(km, [np.array(k['line'], np.int32)], False, 255, k.get('w', 10))
         gray[km > 0] = orig[km > 0]
-    # "draw": vẽ lại nét đen trơn (nối các nét sau khi xoá) — {"line": [[x, y], ...], "w": độ dày}.
+    # "draw": vẽ lại nét đen trơn (nối các nét sau khi xoá) — {"line": [[x, y], ...], "w": độ dày, "v": độ xám 0–255 (mặc định 0 = đen; lớn hơn thì nét nhạt hơn)}.
     for d in cfg.get('draw', []):
-        cv2.polylines(gray, [np.array(d['line'], np.int32)], False, 0, d.get('w', 8), cv2.LINE_AA)
+        cv2.polylines(gray, [np.array(d['line'], np.int32)], False, d.get('v', 0), d.get('w', 8), cv2.LINE_AA)
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
