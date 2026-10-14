@@ -237,3 +237,8 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 ## Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi
 
 - **Công Chúa Ngàn Hoa** (thời trang nữ × các loại hoa), xếp ở hàng 2 ngay sau Xứ Sở Đồ Chơi Thức Giấc; Vương Quốc Thiên Thể lùi xuống hàng 3. Đối tượng **Công Chúa Váy Hoa** → tranh **Công Chúa Váy Hoa Hồng** (tranh vẽ tay, khai báo trong `ART_THEMES` với `after`).
+
+
+## Chủ đề đang ẩn
+
+Các chủ đề **Xứ Sở Đồ Chơi Thức Giấc**, **Vương Quốc Thiên Thể**, **Xưởng Nghệ Thuật Sắc Màu** đang **ẩn** (cờ `hidden: true` trong `generator/themes.mjs`): không hiện ở trang Tô màu, Bóc thẻ, Đấu trường. Dữ liệu và bài bé đã tô vẫn giữ. Muốn hiện lại: xoá `hidden: true` rồi chạy `node generator/build.mjs` và nạp lại dữ liệu.
