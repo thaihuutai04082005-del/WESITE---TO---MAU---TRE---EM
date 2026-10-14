@@ -7,6 +7,7 @@ import { requireAuth, requireNickname } from '../middlewares/auth.js';
 const r = Router();
 
 r.get('/themes', pic.themes);
+r.get('/themes/:theme/pictures', pic.themePictures);
 r.get('/themes/:theme/objects', pic.objects);
 r.get('/themes/:theme/objects/:object/pictures', pic.pictures);
 r.get('/pictures/:id', requireAuth, pic.picture);

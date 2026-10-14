@@ -70,7 +70,7 @@ export default function ThemeSelector() {
                 {!list.length && <p className="rounded-2xl bg-white/70 px-4 py-6 text-center font-bold text-[#17365D]/70" data-testid={`age-empty-${age}`}>{t('select.ageEmpty')}</p>}
                 <div className={GRID_CLASS}>
                   {list.map((th) => (
-                    <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.objectCount', { n: th.objectCount })} testId={`theme-${th.slug}`} />
+                    <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.pictureCount', { n: th.pictureCount })} testId={`theme-${th.slug}`} />
                   ))}
                 </div>
               </section>

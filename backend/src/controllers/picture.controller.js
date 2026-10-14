@@ -10,6 +10,7 @@ export function themes(_req, res) {
     name: { vi: t.name_vi, en: t.name_en },
     age: t.age_group,
     objectCount: t.object_count,
+    pictureCount: t.picture_count,
     cover: t.cover_id ? Picture.toClient(Picture.findPicture(t.cover_id)) : null,
   }));
   res.json({ themes: list });
@@ -38,6 +39,14 @@ export function pictures(req, res) {
     object: { slug: obj.slug, name: { vi: obj.name_vi, en: obj.name_en } },
     pictures: list,
   });
+}
+
+/** Tranh của cả chủ đề (2 tầng: Chủ đề → Tranh). */
+export function themePictures(req, res) {
+  const theme = Picture.findActiveTheme(req.params.theme);
+  if (!theme) throw notFound();
+  const list = Picture.listThemePictures(theme.id).map((p) => Picture.toClient(Picture.findPicture(p.id)));
+  res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
 }
 
 export function canUsePicture(user, picture) {

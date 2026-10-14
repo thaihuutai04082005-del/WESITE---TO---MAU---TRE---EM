@@ -17,7 +17,6 @@ import Collection from './pages/Collection/Collection';
 import ShowcasePage from './pages/Exhibition/ShowcasePage';
 import ThemeSelector from './pages/ThemeSelector/ThemeSelector';
 import ObjectSelector from './pages/ObjectSelector/ObjectSelector';
-import PoseSelector from './pages/PoseSelector/PoseSelector';
 import ColoringScreen from './pages/ColoringScreen/ColoringScreen';
 import History from './pages/History/History';
 import Plans from './pages/Payment/Plans';
@@ -86,7 +85,6 @@ export default function App() {
           <Route path="exhibition/:board" element={auth(<Room />)} />
           <Route path="color" element={auth(<ThemeSelector />)} />
           <Route path="color/:theme" element={auth(<ObjectSelector />)} />
-          <Route path="color/:theme/:object" element={auth(<PoseSelector />)} />
           <Route path="draw/:id" element={auth(<ColoringScreen />)} />
           <Route path="history" element={auth(<History />)} />
           <Route path="payment/result" element={auth(<PaymentResult />)} />

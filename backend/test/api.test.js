@@ -99,6 +99,10 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.deepEqual(kitten.body.pictures.map((p) => p.name.vi), ['Mèo con ngồi xinh', 'Mèo con chơi cuộn len', 'Mèo con uống sữa', 'Mèo con rửa mặt', 'Mèo con nằm ngủ']);
   const bunny = await api('GET', '/themes/dong-vat-3-4/objects/tho-con/pictures');
   assert.deepEqual(bunny.body.pictures.map((p) => p.name.vi), ['Thỏ con ngồi ngoan', 'Thỏ con ăn cà rốt', 'Thỏ con nhảy vui', 'Thỏ con ngửi hoa', 'Thỏ con nằm nghỉ']);
+  const flat = await api('GET', '/themes/dong-vat-3-4/pictures');
+  assert.equal(flat.body.pictures.length, 15);
+  assert.equal(flat.body.pictures[0].name.vi, 'Chó con ngồi ngoan');
+  assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 15);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 6);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
