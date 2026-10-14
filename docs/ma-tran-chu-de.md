@@ -236,7 +236,7 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 
 ## Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi
 
-- **Công Chúa Ngàn Hoa** (thời trang nữ × các loại hoa), xếp ở hàng 2 ngay sau Xứ Sở Đồ Chơi Thức Giấc; Vương Quốc Thiên Thể lùi xuống hàng 3. Đối tượng **Công Chúa Váy Hoa** → tranh **Công Chúa Váy Hoa Hồng** (tranh vẽ tay, khai báo trong `ART_THEMES` với `after`). Thêm tranh **Thiếu Nữ Áo Dài Hoa Sen** (đối tượng Thiếu Nữ Áo Dài).
+- **Công Chúa Ngàn Hoa** (thời trang nữ × các loại hoa), xếp ở hàng 2 ngay sau Xứ Sở Đồ Chơi Thức Giấc; Vương Quốc Thiên Thể lùi xuống hàng 3. Đối tượng **Công Chúa Váy Hoa** → tranh **Công Chúa Váy Hoa Hồng** (tranh vẽ tay, khai báo trong `ART_THEMES` với `after`). Thêm tranh **Thiếu Nữ Áo Dài Hoa Sen** (đối tượng Thiếu Nữ Áo Dài). Thêm tranh **Vũ Công Ballet Hoa Tulip** (đối tượng Vũ Công Ballet).
 
 
 ## Chủ đề đang ẩn
