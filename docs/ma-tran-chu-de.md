@@ -33,7 +33,7 @@
 | 09 | 🌙 Vương Quốc Thiên Thể | Thiên thể | Một ngày sinh hoạt | Thức Dậy Vươn Vai · Đánh Răng · Tập Thể Dục · Đọc Sách · Đi Ngủ | Hào Quang Rực Rỡ |
 | 10 | 🧪 Phòng Thí Nghiệm Kỳ Diệu | Dụng cụ khoa học | Phản ứng kỳ diệu | Sủi Bọt · Bốc Khói Hình Thù · Bắn Pháo Hoa · Mọc Tinh Thể · Lơ Lửng Không Trọng Lực | Phát Minh Thế Kỷ |
 | 11 | 🎨 Xưởng Nghệ Thuật Sắc Màu | Dụng cụ mỹ thuật | Họa sĩ nhí | Vẽ Cầu Vồng · Vẽ Sóng Biển · Vẽ Chấm Bi · Vẽ Trái Tim · Vẽ Xoắn Ốc | Kiệt Tác Vàng |
-| 12 | 🏰 Vương Quốc Lâu Đài Huyền Bí | Công trình cổ tích | Bốn mùa & lễ hội | Mùa Xuân Hoa Nở · Mùa Hè Bên Biển · Mùa Thu Lá Rơi · Mùa Đông Tuyết Phủ · Đêm Hội Đèn Lồng | Bản Pha Lê |
+| 12 | 🏰 Xứ Sở Học Cụ | Công trình cổ tích | Bốn mùa & lễ hội | Mùa Xuân Hoa Nở · Mùa Hè Bên Biển · Mùa Thu Lá Rơi · Mùa Đông Tuyết Phủ · Đêm Hội Đèn Lồng | Bản Pha Lê |
 | 13 | 🏴‍☠️ Hạm Đội Hải Tặc Kho Báu | Đồ vật hải tặc | Phiêu lưu biển cả | Giữa Bão Biển · Trên Đảo Hoang · Dưới Đáy Biển · Đào Kho Báu · Mừng Chiến Thắng | Kho Báu Huyền Thoại |
 | 14 | 🎪 Rạp Xiếc Diệu Kỳ | Đạo cụ xiếc | Màn biểu diễn | Tung Hứng · Nhào Lộn · Ảo Thuật Biến Hình · Đi Trên Dây · Màn Kết Pháo Giấy | Ngôi Sao Sân Khấu |
 | 15 | ⚙️ Thành Phố Máy Móc Tí Hon | Máy móc & dụng cụ sửa chữa | Cư dân thành phố tí hon | Lên Dây Cót · Đi Làm Buổi Sáng · Xây Đường Tí Hon · Nghỉ Trưa Uống Dầu · Thắp Đèn Thành Phố | Cỗ Máy Vàng |
@@ -53,7 +53,7 @@
 | 09 | Vương Quốc Thiên Thể | ☀️ Mặt Trời · 🌙 Mặt Trăng · ⭐ Ngôi sao · 🪐 Sao Thổ · 🌍 Trái Đất · ☄️ Sao chổi |
 | 10 | Phòng Thí Nghiệm Kỳ Diệu | 🧪 Ống nghiệm · ⚗️ Bình tam giác · 🔬 Kính hiển vi · 🧲 Nam châm · 🔍 Kính lúp · ⚛️ Mô hình nguyên tử |
 | 11 | Xưởng Nghệ Thuật Sắc Màu | 🖌️ Cọ vẽ · ✏️ Bút chì màu · 🖍️ Bút sáp · 🎨 Bảng màu · 🧴 Tuýp màu · 🖼️ Giá vẽ |
-| 12 | Vương Quốc Lâu Đài Huyền Bí | 🏰 Lâu đài · 🕌 Cung điện mái vòm · 🗼 Tháp cổ · 🚪 Cổng thành · 🌉 Cầu đá cổ tích · ⛲ Giếng ước |
+| 12 | Xứ Sở Học Cụ | 🏰 Lâu đài · 🕌 Cung điện mái vòm · 🗼 Tháp cổ · 🚪 Cổng thành · 🌉 Cầu đá cổ tích · ⛲ Giếng ước |
 | 13 | Hạm Đội Hải Tặc Kho Báu | 🏴‍☠️ Tàu hải tặc · 🧰 Rương kho báu · 🧭 La bàn · ⚓ Mỏ neo · 🗺️ Bản đồ kho báu · 🛞 Bánh lái |
 | 14 | Rạp Xiếc Diệu Kỳ | 🎪 Lều xiếc · 🎩 Mũ ảo thuật · 🤹 Bóng tung hứng · ⭕ Vòng nhào lộn · 🥁 Trống xiếc · 🤸 Xà đu |
 | 15 | Thành Phố Máy Móc Tí Hon | ⚙️ Bánh răng · 🔧 Cờ lê · 🪛 Tua vít · 💡 Bóng đèn · ⏰ Đồng hồ báo thức · 🌀 Quạt điện |
@@ -191,7 +191,7 @@ Thẻ C/B/A/S: tạm giữ bộ thẻ theo chủ đề, chờ thiết kế thẻ
 |  | Sao Thổ | Lắc Vòng · Tắm Bồn Bong Bóng · Nghe Nhạc · Trượt Patin · Đi Ngủ Trong Chăn |
 |  | Trái Đất | Tưới Hoa · Ôm Cây Xanh · Uống Nước Mát · Ngủ Trưa Dưới Ô · Đi Dạo Công Viên |
 |  | Sao chổi | Chạy Bộ Buổi Sáng · Đưa Thư · Thả Diều · Đi Học · Về Nhà Buổi Tối |
-| 🏰 Vương Quốc Lâu Đài Huyền Bí | Lâu đài | Mùa Xuân Hoa Nở · Mùa Đông Tuyết Phủ · Đêm Pháo Hoa · Lễ Hội Đèn Lồng · Trên Đồi Mây |
+| 🏰 Xứ Sở Học Cụ | Lâu đài | Mùa Xuân Hoa Nở · Mùa Đông Tuyết Phủ · Đêm Pháo Hoa · Lễ Hội Đèn Lồng · Trên Đồi Mây |
 |  | Cung điện mái vòm | Tết Nguyên Đán · Mùa Hè Đài Phun Nước · Đêm Trăng Rằm · Mùa Thu Lá Vàng · Lễ Hội Bóng Bay |
 |  | Tháp cổ | Mùa Thu Lá Rơi · Đêm Sao Băng · Mùa Xuân Dây Leo · Lễ Hội Thả Diều · Cầu Vồng Sau Mưa |
 |  | Cổng thành | Lễ Hội Cờ Hoa · Mùa Đông Người Tuyết · Mùa Hè Hướng Dương · Đêm Hội Ánh Nến · Mùa Thu Bí Ngô |

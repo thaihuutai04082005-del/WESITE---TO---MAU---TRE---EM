@@ -19,7 +19,7 @@ export const THEMES = [
   { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Ánh Sáng', en: 'Forest of Light' }, faceStyle: 'face', animation: 'sway' },
   { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
   { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce' },
-  { slug: 'vuong-quoc-lau-dai', name: { vi: 'Vương Quốc Lâu Đài Huyền Bí', en: 'Mystic Castle Kingdom' }, faceStyle: 'none', animation: 'wiggle' },
+  { slug: 'vuong-quoc-lau-dai', name: { vi: 'Xứ Sở Học Cụ', en: 'Stationery Land' }, faceStyle: 'none', animation: 'wiggle' },
   { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
   // Đợt 3
   { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce' },
@@ -334,6 +334,7 @@ export const VARIANT_ART = {
 export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
+  'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
 };
 
 // Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).
