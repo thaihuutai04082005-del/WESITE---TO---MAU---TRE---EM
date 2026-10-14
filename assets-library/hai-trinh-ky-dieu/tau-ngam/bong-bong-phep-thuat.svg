@@ -165,6 +165,8 @@
 <path d="M 241.8 382.6 L 241.8 384.5 L 243.2 387.8 L 243.2 389.2 L 246.5 388.7 L 246.9 388.3 L 246.9 386.9 L 246.0 385.9 L 244.6 382.2 Z" id="r-que-nho-1" data-region="que-nho-1" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 241.8 382.6 L 241.8 384.5 L 243.2 387.8 L 243.2 389.2 L 246.5 388.7 L 246.9 388.3 L 246.9 386.9 L 246.0 385.9 L 244.6 382.2 Z" id="r-que-nho-2" data-region="que-nho-2" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 241.8 382.6 L 241.8 384.5 L 243.2 387.8 L 243.2 389.2 L 246.5 388.7 L 246.9 388.3 L 246.9 386.9 L 246.0 385.9 L 244.6 382.2 Z" id="r-que-nho-3" data-region="que-nho-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 204.7 348.8 L 204.2 349.3 L 204.2 358.7 L 210.3 358.7 L 210.3 349.3 L 206.1 349.3 L 205.6 348.8 Z" id="r-que-tren" data-region="que-tren" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 166.2 372.8 L 162.9 376.1 L 162.9 377.5 L 170.0 384.5 L 170.9 384.5 L 173.7 378.9 L 173.7 377.9 L 167.6 372.8 Z" id="r-que-trai" data-region="que-trai" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
