@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'tau-ngam--bong-bong-phep-thuat': { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' },
 };
 
 // Nhóm tuổi: 3–5 (tranh vẽ tay, art/*.json), 6–8 (các chủ đề kết hợp sáng tạo ở trên), 9+ (chưa có tranh).
