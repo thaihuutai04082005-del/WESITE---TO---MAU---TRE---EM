@@ -417,7 +417,6 @@ coloring-web-app/
 │   │   │   ├── Home/
 │   │   │   ├── ThemeSelector/       # Tầng 1
 │   │   │   ├── ObjectSelector/      # Tầng 2
-│   │   │   ├── PoseSelector/        # Tầng 3
 │   │   │   ├── ColoringScreen/      # Màn hình tô (theo mẫu / sáng tạo)
 │   │   │   ├── History/
 │   │   │   ├── Arena/               # Đấu trường sáng tạo

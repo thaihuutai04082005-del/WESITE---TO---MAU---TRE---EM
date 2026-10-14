@@ -59,7 +59,7 @@ Backend phục vụ luôn bản build frontend (SPA), API `/api`, Socket.io và 
 │       ├── components/  Canvas (SVG vùng + lớp Brush), ToolBar, ColorPalette, FrameSelector, ProgressBar,
 │       │                ThemeCard, GachaCardReveal, CountdownTimer, Leaderboard, FlipbookViewer,
 │       │                MissionList, PaymentModal, Layout…
-│       ├── pages/       Home, ThemeSelector, ObjectSelector, PoseSelector, ColoringScreen, History, Arena,
+│       ├── pages/       Home, ThemeSelector, ObjectSelector, ColoringScreen, History, Arena,
 │       │                Progression, Gacha, Shop, Storybook, Collaborative, Social, Account, Payment
 │       ├── i18n/        vi.json, en.json
 │       ├── hooks/ services/ store/ lib/

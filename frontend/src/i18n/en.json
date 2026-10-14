@@ -341,6 +341,7 @@
     "themes": "Pick a theme",
     "ageEmpty": "New pictures coming soon for this age group!",
     "themesHint": "What would you like to color today?",
+    "pictures": "Choose a picture",
     "objects": "Pick a subject",
     "variants": "Pick a pose",
     "age": {
@@ -348,6 +349,7 @@
       "6-8": "Ages 6 – 8",
       "9+": "Ages 9 and up"
     },
+    "pictureCount": "{{n}} pictures",
     "objectCount": "{{n}} subjects",
     "variantCount": "{{n}} poses"
   },

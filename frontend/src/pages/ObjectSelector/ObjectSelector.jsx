@@ -1,10 +1,11 @@
-// Tầng 2: Đối tượng cụ thể — mỗi đối tượng 1 tranh minh hoạ đại diện.
+// Tầng 2: Danh sách tranh của chủ đề — bé chọn thẳng một tranh rồi chọn chế độ tô.
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import ThemeCard from '../../components/ThemeCard/ThemeCard';
 import useOneLineTitles, { GRID_CLASS } from '../../components/ThemeCard/useOneLineTitles';
+import ModePicker from '../../components/ModePicker';
 import Icon from '../../components/Icon';
 
 export default function ObjectSelector() {
@@ -12,22 +13,25 @@ export default function ObjectSelector() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [data, setData] = useState(null);
+  const [picked, setPicked] = useState(null);
   useEffect(() => {
-    api.get(`/themes/${theme}/objects`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
+    api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
+  const lang = i18n.language;
   const gridRef = useRef(null);
-  useOneLineTitles(gridRef, i18n.language, [data]);
+  useOneLineTitles(gridRef, lang, [data], { shared: false });
   return (
     <div className="page px-3 sm:px-4 lg:max-w-[1320px]">
       <Link to="/color" className="mb-2 inline-flex items-center gap-1 font-bold text-primary">
         <Icon name="back" size={20} /> {t('select.themes')}
       </Link>
-      <h1 className="page-title mb-4">{data?.theme.name[i18n.language]}</h1>
+      <h1 className="page-title mb-4">{data?.theme.name[lang]}</h1>
       <div ref={gridRef} className={GRID_CLASS}>
-        {(data?.objects || []).map((o) => (
-          <ThemeCard key={o.slug} to={`/color/${theme}/${o.slug}`} picture={o.cover} title={o.name[i18n.language]} subtitle={t('select.variantCount', { n: o.pictureCount })} testId={`object-${o.slug}`} />
+        {(data?.pictures || []).map((p) => (
+          <ThemeCard key={p.id} onClick={() => setPicked(p)} picture={p} title={p.name[lang]} testId={`pose-${p.slug}`} />
         ))}
       </div>
+      {picked && <ModePicker picture={picked} onClose={() => setPicked(null)} />}
     </div>
   );
 }
