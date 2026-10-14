@@ -1,6 +1,6 @@
 // Hiệu ứng chuyển màn hình — chỉ dùng khi vào / ra khu vực Tô màu (/color…, /draw/…).
-//  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét từ trái sang phải theo đường cong
-//    phủ kín màn hình → đổi trang → cầu vòng chạy tiếp sang phải để hé lộ trang mới.
+//  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét MỘT LƯỢT từ trái sang phải theo đường cong
+//    phủ kín màn hình → đổi trang → cầu vòng mờ dần để hé lộ trang mới.
 //  • Ra khỏi Tô màu (về trang chủ…): chỉ cầu vòng, y hệt.
 // Cầu vòng là một lớp nền duy nhất (7 dải đồng tâm) + mặt nạ hình quạt quay quanh tâm, vẽ bằng requestAnimationFrame
 // với đường cong làm mượt (easeInOutSine) nên chạy mượt, không phải dựng lại 14 hình như trước.
@@ -12,7 +12,8 @@ const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
 const SPARKLES = 18;
 const SPARKLE_MS = 560;     // thời gian lấp lánh trước khi cầu vòng hiện
 const SWEEP_MS = 950;       // một lượt quét (phủ kín, hoặc hé lộ)
-const HOLD_MS = 90;         // giữ kín màn hình một nhịp cho trang mới kịp dựng
+const HOLD_MS = 120;        // giữ kín màn hình một nhịp cho trang mới kịp dựng
+const FADE_MS = 380;        // cầu vòng mờ dần để hé lộ trang mới
 const END_ANGLE = 186;      // quét quá 180° một chút để chắc chắn phủ kín / sạch hẳn
 const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hình
 
@@ -40,7 +41,7 @@ function sweep(ms, set, done) {
 export default function RainbowTransition() {
   const loc = useLocation();
   const navigate = useNavigate();
-  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in' | 'out'
+  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in' | 'fade'
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [spark, setSpark] = useState({ x: 0, y: 0, key: 0 });
   const overlay = useRef(null);
@@ -96,30 +97,35 @@ export default function RainbowTransition() {
     }
     if (from === loc.pathname || !crosses(from, loc.pathname) || reduceMotion() || busy.current) return;
     busy.current = true;
+    pendingTo.current = null;
     setSize({ w: window.innerWidth, h: window.innerHeight });
-    setPhase('out');
+    setPhase('in');
   }, [loc.pathname]);
 
   // Chạy các lượt quét theo pha.
   useEffect(() => {
     const el = overlay.current;
-    if (!el || (phase !== 'in' && phase !== 'out')) return undefined;
+    if (!el || phase !== 'in') return undefined;
     el.style.setProperty('--a', '0deg');
     return sweep(
       SWEEP_MS,
       (deg) => el.style.setProperty('--a', `${deg}deg`),
       () => {
-        if (phase === 'in') {
+        if (pendingTo.current) {
           handled.current = true;
-          navigate(pendingTo.current || '/');
-          later(() => setPhase('out'), HOLD_MS);
-        } else {
-          setPhase(null);
-          busy.current = false;
+          navigate(pendingTo.current);
+          pendingTo.current = null;
         }
+        later(() => setPhase('fade'), HOLD_MS);
       },
     );
   }, [phase, navigate]);
+
+  // Mờ dần xong thì gỡ lớp phủ.
+  useEffect(() => {
+    if (phase !== 'fade') return;
+    later(() => { setPhase(null); busy.current = false; }, FADE_MS + 40);
+  }, [phase]);
 
   const sparkles = useMemo(
     () =>
@@ -144,10 +150,7 @@ export default function RainbowTransition() {
   const R = Math.hypot(w / 2, h * CENTER_Y) + 4;     // bán kính tới góc xa nhất: dải ngoài cùng vừa chạm góc màn hình
   const stops = [...RAINBOW].reverse().map((c, i) => `${c} ${((i * R) / 7).toFixed(1)}px ${(((i + 1) * R) / 7).toFixed(1)}px`).join(', ');
   const center = `50% ${(CENTER_Y * 100).toFixed(1)}%`;
-  const mask =
-    phase === 'in'
-      ? `conic-gradient(from -90deg at ${center}, #000 calc(var(--a) - 2deg), transparent var(--a))`
-      : `conic-gradient(from -90deg at ${center}, transparent calc(var(--a) - 2deg), #000 var(--a))`;
+  const mask = `conic-gradient(from -90deg at ${center}, #000 calc(var(--a) - 2deg), transparent var(--a))`;
 
   return (
     <>
@@ -168,7 +171,7 @@ export default function RainbowTransition() {
           ))}
         </div>
       )}
-      {(phase === 'in' || phase === 'out') && (
+      {(phase === 'in' || phase === 'fade') && (
         <div
           ref={overlay}
           className="fixed inset-0 z-[9999]"
@@ -180,7 +183,8 @@ export default function RainbowTransition() {
             background: `radial-gradient(circle at ${center}, ${stops})`,
             WebkitMaskImage: mask,
             maskImage: mask,
-            willChange: 'mask-image',
+            willChange: 'mask-image, opacity',
+            ...(phase === 'fade' ? { '--a': '190deg', opacity: 0, transition: `opacity ${FADE_MS}ms ease-out` } : null),
           }}
         />
       )}
