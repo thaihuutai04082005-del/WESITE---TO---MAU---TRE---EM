@@ -14,6 +14,7 @@ import EventPopup from './EventPopup';
 import UpgradeModal from './UpgradeModal';
 import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
+import RainbowTransition from './RainbowTransition';
 
 // Mỗi mục một biểu tượng đúng nghĩa + màu riêng (khớp màu thẻ ở trang chính).
 export const NAV = [
@@ -68,6 +69,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-white">
+      <RainbowTransition />
       <header className="no-print sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-2 px-4">
           <Link to="/" className="mr-2 flex shrink-0 items-center gap-2 font-display text-2xl font-extrabold text-primary">
