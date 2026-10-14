@@ -341,6 +341,7 @@
     "themes": "Chọn chủ đề",
     "themesHint": "Bé thích tô gì hôm nay?",
     "ageEmpty": "Sắp có tranh mới cho nhóm tuổi này!",
+    "pictures": "Chọn tranh",
     "objects": "Chọn đối tượng",
     "variants": "Chọn tư thế",
     "age": {
@@ -348,6 +349,7 @@
       "6-8": "Từ 6 – 8 tuổi",
       "9+": "Từ 9 tuổi trở lên"
     },
+    "pictureCount": "{{n}} tranh",
     "objectCount": "{{n}} đối tượng",
     "variantCount": "{{n}} kiểu"
   },
