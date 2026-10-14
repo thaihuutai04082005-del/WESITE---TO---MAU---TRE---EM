@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'hanbok--mau-don': { vi: 'Thiếu Nữ Hanbok Mẫu Đơn', en: 'Peony Hanbok Maiden' },
   'ballet--hoa-tulip': { vi: 'Vũ Công Ballet Hoa Tulip', en: 'Tulip Ballerina' },
   'ao-dai--hoa-sen': { vi: 'Thiếu Nữ Áo Dài Hoa Sen', en: 'Lotus Ao Dai Maiden' },
   'tau-ngam--bong-bong-phep-thuat': { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' },
@@ -415,6 +416,13 @@ ART_THEMES.push({
       name: { vi: 'Vũ Công Ballet', en: 'Ballerina' },
       pictures: [
         { slug: 'hoa-tulip', name: { vi: 'Vũ Công Ballet Hoa Tulip', en: 'Tulip Ballerina' }, file: 'cong-chua-ngan-hoa--ballet-hoa-tulip' },
+      ],
+    },
+    {
+      slug: 'hanbok',
+      name: { vi: 'Thiếu Nữ Hanbok', en: 'Hanbok Maiden' },
+      pictures: [
+        { slug: 'mau-don', name: { vi: 'Thiếu Nữ Hanbok Mẫu Đơn', en: 'Peony Hanbok Maiden' }, file: 'cong-chua-ngan-hoa--hanbok-mau-don' },
       ],
     },
   ],
