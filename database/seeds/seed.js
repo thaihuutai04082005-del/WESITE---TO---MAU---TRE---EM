@@ -84,7 +84,20 @@ export function seedPicturesIfNeeded(db = getDb()) {
     return r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8')
       && r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions });
   });
-  return same ? 0 : seedPictures(db);
+  const n = same ? 0 : seedPictures(db);
+  syncThemeVisibility(catalog, db);
+  return n;
+}
+
+/** Cờ ẩn/hiện chủ đề trong catalog (hidden) phải khớp cột themes.active, kể cả khi tranh không đổi. */
+export function syncThemeVisibility(catalog, db = getDb()) {
+  const up = db.prepare('UPDATE themes SET active = ? WHERE slug = ? AND active != ?');
+  let changed = 0;
+  for (const t of catalog.themes) {
+    const want = t.hidden ? 0 : 1;
+    changed += Number(up.run(want, t.slug, want).changes);
+  }
+  return changed;
 }
 
 export function seedMissions(db = getDb()) {
