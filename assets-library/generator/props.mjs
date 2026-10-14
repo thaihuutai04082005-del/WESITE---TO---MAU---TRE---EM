@@ -206,7 +206,7 @@ export function steelPlates(c) {
   ];
 }
 
-// ---------------- Hoàng gia (Vương Quốc Kẹo Ngọt) ----------------
+// ---------------- Hoàng gia (Vương Quốc Bánh Kẹo) ----------------
 
 /** Áo choàng hoàng gia sau lưng đồ vật (không có cổ): bắt đầu từ gần đỉnh. */
 export function robe(c, color = '#7D5FFF', trim = '#FFFFFF') {

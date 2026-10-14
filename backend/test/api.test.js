@@ -88,11 +88,11 @@ test('Đăng ký: sai CAPTCHA bị từ chối, mật khẩu yếu bị từ ch�
 test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', async () => {
   const { token } = await register('bena01');
   const themes = await api('GET', '/themes');
-  assert.equal(themes.body.themes.length, 10);
+  assert.equal(themes.body.themes.length, 11);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
   // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ chưa có chủ đề.
   assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5']);
-  assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 9);
+  assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 10);
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
   assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó con ngồi ngoan', 'Chó con vẫy đuôi', 'Chó con chơi bóng', 'Chó con ăn thức ăn', 'Chó con nằm nghỉ']);
   const kitten = await api('GET', '/themes/dong-vat-3-4/objects/meo-con/pictures');
@@ -628,9 +628,9 @@ test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi cata
   const ph = hidden.map(() => '?').join(',');
   // Mô phỏng máy đã có dữ liệu từ trước: 3 chủ đề này đang hiện (active = 1).
   db.prepare(`UPDATE themes SET active = 1 WHERE slug IN (${ph})`).run(...hidden);
-  assert.equal((await api('GET', '/themes')).body.themes.length, 13);
+  const visible = (await api('GET', '/themes')).body.themes.length; // 3 chủ đề ẩn đã bị bật lại → hiện = tổng số chủ đề
   seedPicturesIfNeeded(db); // đúng thứ tự máy chạy lúc khởi động
   assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM themes WHERE slug IN (${ph}) AND active = 0`).get(...hidden).n, 3);
-  assert.equal((await api('GET', '/themes')).body.themes.length, 10);
+  assert.equal((await api('GET', '/themes')).body.themes.length, visible - 3);
   assert.ok(!(await api('GET', '/themes')).body.themes.some((t) => hidden.includes(t.slug)));
 });

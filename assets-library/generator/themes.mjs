@@ -11,7 +11,7 @@ import { flame, bolt, iceCrystal, asteroid, soccerBall, basketball } from './acc
 
 export const THEMES = [
   { slug: 'anh-hung-sieu-thu', name: { vi: 'Anh Hùng Siêu Thú', en: 'Super Beast Heroes' }, faceStyle: 'face', animation: 'bounce' },
-  { slug: 'vuong-quoc-keo-ngot', name: { vi: 'Vương Quốc Kẹo Ngọt', en: 'Candy Kingdom' }, faceStyle: 'face', animation: 'float' },
+  { slug: 'vuong-quoc-keo-ngot', name: { vi: 'Vương Quốc Bánh Kẹo', en: 'Sweets Kingdom' }, faceStyle: 'face', animation: 'float' },
   { slug: 'doi-xe-vu-tru', name: { vi: 'Đội Xe Chinh Phục Vũ Trụ', en: 'Space Vehicle Squad' }, faceStyle: 'none', animation: 'drive' },
   { slug: 'thi-tran-khung-long', name: { vi: 'Thị Trấn Khủng Long Tài Ba', en: 'Talented Dino Town' }, faceStyle: 'face', animation: 'bounce' },
   { slug: 'the-thao-trai-cay', name: { vi: 'Đại Hội Thể Thao Trái Cây', en: 'Fruit Sports Festival' }, faceStyle: 'face', animation: 'float' },
@@ -398,6 +398,23 @@ ART_THEMES.push({
       name: { vi: 'Công Chúa Váy Hoa', en: 'Flower Gown Princess' },
       pictures: [
         { slug: 'cong-chua-vay-hoa-hong', name: { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' }, file: 'cong-chua-ngan-hoa--vay-hoa-hong' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'hai-trinh-ky-dieu',
+  age: '6-8',
+  after: 'vuong-quoc-lau-dai',
+  name: { vi: 'Hải Trình Kỳ Diệu', en: 'Magical Voyage' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'tau-ngam',
+      name: { vi: 'Tàu Ngầm', en: 'Submarine' },
+      pictures: [
+        { slug: 'bong-bong-phep-thuat', name: { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' }, file: 'tau-ngam--bong-bong-phep-thuat' },
       ],
     },
   ],
