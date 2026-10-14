@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'ao-dai--hoa-sen': { vi: 'Thiếu Nữ Áo Dài Hoa Sen', en: 'Lotus Ao Dai Maiden' },
   'tau-ngam--bong-bong-phep-thuat': { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' },
 };
 
@@ -399,6 +400,13 @@ ART_THEMES.push({
       name: { vi: 'Công Chúa Váy Hoa', en: 'Flower Gown Princess' },
       pictures: [
         { slug: 'cong-chua-vay-hoa-hong', name: { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' }, file: 'cong-chua-ngan-hoa--vay-hoa-hong' },
+      ],
+    },
+    {
+      slug: 'ao-dai',
+      name: { vi: 'Thiếu Nữ Áo Dài', en: 'Ao Dai Maiden' },
+      pictures: [
+        { slug: 'hoa-sen', name: { vi: 'Thiếu Nữ Áo Dài Hoa Sen', en: 'Lotus Ao Dai Maiden' }, file: 'cong-chua-ngan-hoa--ao-dai-hoa-sen' },
       ],
     },
   ],
