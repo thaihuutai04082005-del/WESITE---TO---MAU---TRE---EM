@@ -168,6 +168,9 @@
 <path d="M 500.9 439.9 L 499.5 439.9 L 497.7 440.8 L 495.8 442.7 L 494.8 444.6 L 494.8 447.9 L 495.3 448.4 L 496.7 448.4 L 501.4 442.7 L 501.4 440.4 Z" id="r-fix-155" data-region="fix-155" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 216.0 469.0 L 215.0 468.5 L 212.7 469.0 L 209.9 471.4 L 208.5 475.1 L 208.5 476.5 L 209.4 477.5 L 211.3 477.0 L 216.0 471.4 Z" id="r-fix-163" data-region="fix-163" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 155.9 496.7 L 153.1 496.7 L 150.7 499.1 L 149.8 500.9 L 149.8 503.8 L 152.1 503.8 L 153.5 501.4 L 155.9 499.1 L 156.3 498.1 L 156.3 497.2 Z" id="r-fix-170" data-region="fix-170" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 161.5 346.9 L 160.6 346.9 L 156.3 351.2 L 158.2 364.3 L 162.4 363.8 L 164.3 362.9 L 165.3 359.6 L 168.5 353.5 L 168.5 352.6 L 167.1 351.2 Z" id="r-lai-tay-noi-trai" data-region="lai-tay-noi-trai" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 235.7 366.7 L 234.3 366.7 L 233.8 367.1 L 234.3 379.3 L 233.8 379.8 L 233.8 382.6 L 233.3 383.1 L 232.9 387.3 L 233.8 387.3 L 234.3 386.4 L 234.7 383.6 L 236.2 380.8 L 236.2 379.3 L 237.1 377.5 L 237.6 374.2 L 239.0 370.4 L 239.0 369.0 L 237.1 368.1 Z" id="r-lai-que-phai" data-region="lai-que-phai" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 192.5 331.9 L 192.5 335.7 L 197.2 335.7 L 197.7 335.2 L 200.0 335.2 L 199.5 331.9 L 198.1 331.9 L 197.7 332.4 L 194.4 332.4 L 193.9 331.9 Z" id="r-lai-cuong-tren" data-region="lai-cuong-tren" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
