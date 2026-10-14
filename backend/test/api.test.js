@@ -11,7 +11,7 @@ import { createServer } from 'node:http';
 import { io as ioc } from 'socket.io-client';
 
 const { createApp } = await import('../src/app.js');
-const { seedAll } = await import('../../database/seeds/seed.js');
+const { seedAll, seedPicturesIfNeeded } = await import('../../database/seeds/seed.js');
 const { initRealtime } = await import('../src/services/realtime.js');
 const { registerArena } = await import('../src/services/arena.js');
 const { registerCollab } = await import('../src/services/collab.js');
@@ -620,4 +620,17 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     env.paypal.clientId = '';
     env.paypal.secret = '';
   }
+});
+
+test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi catalog đánh dấu hidden, dù tranh không đổi', async () => {
+  const db = getDb();
+  const hidden = ['xu-so-do-choi', 'vuong-quoc-thien-the', 'xuong-nghe-thuat'];
+  const ph = hidden.map(() => '?').join(',');
+  // Mô phỏng máy đã có dữ liệu từ trước: 3 chủ đề này đang hiện (active = 1).
+  db.prepare(`UPDATE themes SET active = 1 WHERE slug IN (${ph})`).run(...hidden);
+  assert.equal((await api('GET', '/themes')).body.themes.length, 13);
+  seedPicturesIfNeeded(db); // đúng thứ tự máy chạy lúc khởi động
+  assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM themes WHERE slug IN (${ph}) AND active = 0`).get(...hidden).n, 3);
+  assert.equal((await api('GET', '/themes')).body.themes.length, 10);
+  assert.ok(!(await api('GET', '/themes')).body.themes.some((t) => hidden.includes(t.slug)));
 });
