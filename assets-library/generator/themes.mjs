@@ -18,11 +18,11 @@ export const THEMES = [
   // Đợt 2
   { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Ánh Sáng', en: 'Forest of Light' }, faceStyle: 'face', animation: 'sway' },
   { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
-  { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce' },
+  { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce', hidden: true },
   { slug: 'vuong-quoc-lau-dai', name: { vi: 'Xứ Sở Học Cụ', en: 'Stationery Land' }, faceStyle: 'none', animation: 'wiggle' },
-  { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true },
+  { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true, hidden: true },
   // Đợt 3
-  { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce' },
+  { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce', hidden: true },
 ];
 
 const O = (theme, slug, vi, en, opts) => ({ theme, slug, name: { vi, en }, ...opts });
