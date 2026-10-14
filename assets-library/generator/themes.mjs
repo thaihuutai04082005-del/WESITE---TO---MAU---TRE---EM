@@ -402,3 +402,20 @@ ART_THEMES.push({
     },
   ],
 });
+
+ART_THEMES.push({
+  slug: 'hai-trinh-ky-dieu',
+  age: '6-8',
+  after: 'vuong-quoc-lau-dai',
+  name: { vi: 'Hải Trình Kỳ Diệu', en: 'Magical Voyage' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'tau-ngam',
+      name: { vi: 'Tàu Ngầm', en: 'Submarine' },
+      pictures: [
+        { slug: 'bong-bong-phep-thuat', name: { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' }, file: 'tau-ngam--bong-bong-phep-thuat' },
+      ],
+    },
+  ],
+});

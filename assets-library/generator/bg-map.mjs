@@ -9,7 +9,7 @@ const M = {
   'meo-sieu-thu': { 'bong-dem': ['nightCity', 'deep'], 'leo-tuong': ['city', 'dusk'], 'nhay-sieu-cao': ['playground', 'day'], 'ria-radar': ['starField', 'night'], 'chin-mang': ['spring', 'pink'] },
   'cho-sieu-thu': { 'mui-tham-tu': ['park', 'morning'], 'cuu-ho-sieu-toc': ['river', 'day'], 'khien-xuong': ['farm', 'day'], 'chi-huy-doi': ['stationInside', 'day'], 'nhay-du-cuu-ho': ['meadow', 'day'] },
 
-  // 02 · Vương Quốc Kẹo Ngọt
+  // 02 · Vương Quốc Bánh Kẹo
   donut: { 'nha-vua': ['palaceHall', 'pink'], 'le-dang-quang': ['palaceHall', 'dusk'], 'tiec-tra-hoang-gia': ['garden', 'day'], 'dieu-hanh-hoang-gia': ['park', 'pink'], 'nguoi-dua-thu': ['rainbowHills', 'day'] },
   cupcake: { 'cong-chua': ['spring', 'day'], 'nang-tien-duong': ['cloudland', 'pink'], 'da-hoi-khieu-vu': ['stage', 'night'], 'vuon-hoa-thuong-uyen': ['garden', 'mint'], 'tiec-sinh-nhat': ['playground', 'pink'] },
   'keo-mut': { 'hoang-tu': ['meadow', 'morning'], 'hiep-si': ['forest', 'day'], 'can-ve-cam-giao': ['city', 'pink'], 'nhac-cong-ken-dong': ['stage', 'sunset'], 'phap-su-keo-ngot': ['starField', 'dusk'] },
