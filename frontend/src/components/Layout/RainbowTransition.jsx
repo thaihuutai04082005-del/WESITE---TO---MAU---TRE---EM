@@ -12,7 +12,9 @@ const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
 const SPARKLES = 18;
 const SPARKLE_MS = 560;     // thời gian lấp lánh trước khi cầu vòng hiện
 const SWEEP_MS = 950;       // một lượt quét (phủ kín, hoặc hé lộ)
-const HOLD_MS = 110;        // giữ kín màn hình một nhịp cho trang mới kịp dựng, rồi gỡ ngay
+const HOLD_MS = 110;        // tối thiểu giữ kín màn hình sau khi đổi trang
+const READY_MAX_MS = 1600;  // chờ trang mới dựng xong tối đa bấy lâu rồi gỡ dù sao (phòng mạng chậm)
+const SMOOTH_FRAMES = 6;    // cần liên tiếp ngần này khung hình đều (<= 24 ms) mới coi là trang đã ổn định
 const END_ANGLE = 186;      // quét quá 180° một chút để chắc chắn phủ kín / sạch hẳn
 const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hình
 
@@ -37,6 +39,41 @@ function sweep(ms, set, done) {
   return () => cancelAnimationFrame(raf);
 }
 
+// Đếm các yêu cầu mạng đang chờ để biết trang mới đã có đủ dữ liệu chưa (danh sách chủ đề, ảnh…).
+let pendingFetches = 0;
+if (typeof window !== 'undefined' && !window.__rbFetchPatched) {
+  window.__rbFetchPatched = true;
+  const orig = window.fetch.bind(window);
+  window.fetch = (...a) => {
+    pendingFetches += 1;
+    const done = () => { pendingFetches = Math.max(0, pendingFetches - 1); };
+    const p = orig(...a);
+    p.then(done, done);
+    return p;
+  };
+}
+
+/** Chờ trang mới dựng xong để gỡ cầu vòng không bị giật: dữ liệu đã về, ảnh đã tải, chiều cao trang hết đổi, vài khung hình liên tiếp đều. */
+function whenPageReady(minMs, maxMs, done) {
+  const t0 = performance.now();
+  let raf = 0;
+  let last = t0;
+  let calm = 0;
+  let h = -1;
+  const step = (now) => {
+    const dt = now - last;
+    last = now;
+    const height = document.documentElement.scrollHeight;
+    const imgs = [...document.images].every((im) => im.complete);
+    calm = dt <= 24 && height === h && imgs && pendingFetches === 0 ? calm + 1 : 0;
+    h = height;
+    if ((now - t0 >= minMs && calm >= SMOOTH_FRAMES) || now - t0 >= maxMs) done();
+    else raf = requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(raf);
+}
+
 export default function RainbowTransition() {
   const loc = useLocation();
   const navigate = useNavigate();
@@ -49,12 +86,13 @@ export default function RainbowTransition() {
   const busy = useRef(false);
   const pendingTo = useRef(null);
   const timers = useRef([]);
+  const cancelReady = useRef(null);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);
     timers.current.push(id);
   };
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(() => () => { timers.current.forEach(clearTimeout); cancelReady.current?.(); }, []);
 
   // Bấm vào liên kết vượt ranh giới khu vực Tô màu.
   useEffect(() => {
@@ -115,7 +153,8 @@ export default function RainbowTransition() {
           navigate(pendingTo.current);
           pendingTo.current = null;
         }
-        later(() => { setPhase(null); busy.current = false; }, HOLD_MS);
+        // Cầu vòng vẫn phủ kín trong lúc trang mới dựng; chỉ gỡ khi trang đã ổn định để không bị giật.
+        cancelReady.current = whenPageReady(HOLD_MS, READY_MAX_MS, () => { setPhase(null); busy.current = false; });
       },
     );
   }, [phase, navigate]);
