@@ -1,6 +1,6 @@
 // Hiệu ứng chuyển màn hình — chỉ dùng khi vào / ra khu vực Tô màu (/color…, /draw/…).
 //  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét MỘT LƯỢT từ trái sang phải theo đường cong
-//    phủ kín màn hình → đổi trang → cầu vòng mờ dần để hé lộ trang mới.
+//    phủ kín màn hình → đổi trang → gỡ cầu vòng NGAY, không mờ dần, không còn dư âm.
 //  • Ra khỏi Tô màu (về trang chủ…): chỉ cầu vòng, y hệt.
 // Cầu vòng là một lớp nền duy nhất (7 dải đồng tâm) + mặt nạ hình quạt quay quanh tâm, vẽ bằng requestAnimationFrame
 // với đường cong làm mượt (easeInOutSine) nên chạy mượt, không phải dựng lại 14 hình như trước.
@@ -12,8 +12,7 @@ const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
 const SPARKLES = 18;
 const SPARKLE_MS = 560;     // thời gian lấp lánh trước khi cầu vòng hiện
 const SWEEP_MS = 950;       // một lượt quét (phủ kín, hoặc hé lộ)
-const HOLD_MS = 120;        // giữ kín màn hình một nhịp cho trang mới kịp dựng
-const FADE_MS = 380;        // cầu vòng mờ dần để hé lộ trang mới
+const HOLD_MS = 110;        // giữ kín màn hình một nhịp cho trang mới kịp dựng, rồi gỡ ngay
 const END_ANGLE = 186;      // quét quá 180° một chút để chắc chắn phủ kín / sạch hẳn
 const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hình
 
@@ -41,7 +40,7 @@ function sweep(ms, set, done) {
 export default function RainbowTransition() {
   const loc = useLocation();
   const navigate = useNavigate();
-  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in' | 'fade'
+  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in'
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [spark, setSpark] = useState({ x: 0, y: 0, key: 0 });
   const overlay = useRef(null);
@@ -116,16 +115,10 @@ export default function RainbowTransition() {
           navigate(pendingTo.current);
           pendingTo.current = null;
         }
-        later(() => setPhase('fade'), HOLD_MS);
+        later(() => { setPhase(null); busy.current = false; }, HOLD_MS);
       },
     );
   }, [phase, navigate]);
-
-  // Mờ dần xong thì gỡ lớp phủ.
-  useEffect(() => {
-    if (phase !== 'fade') return;
-    later(() => { setPhase(null); busy.current = false; }, FADE_MS + 40);
-  }, [phase]);
 
   const sparkles = useMemo(
     () =>
@@ -171,7 +164,7 @@ export default function RainbowTransition() {
           ))}
         </div>
       )}
-      {(phase === 'in' || phase === 'fade') && (
+      {phase === 'in' && (
         <div
           ref={overlay}
           className="fixed inset-0 z-[9999]"
@@ -183,8 +176,7 @@ export default function RainbowTransition() {
             background: `radial-gradient(circle at ${center}, ${stops})`,
             WebkitMaskImage: mask,
             maskImage: mask,
-            willChange: 'mask-image, opacity',
-            ...(phase === 'fade' ? { '--a': '190deg', opacity: 0, transition: `opacity ${FADE_MS}ms ease-out` } : null),
+            willChange: 'mask-image',
           }}
         />
       )}
