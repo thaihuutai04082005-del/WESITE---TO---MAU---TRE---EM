@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'hoodie--oai-huong': { vi: 'Cô Nàng Hoodie Oải Hương', en: 'Lavender Hoodie Girl' },
   'ao-len--hoa-ly': { vi: 'Tiểu Thư Áo Len Hoa Ly', en: 'Lily Sweater Girl' },
   'vay-ngan--huong-duong': { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' },
   'suon-xam--tu-dang': { vi: 'Thiếu Nữ Sườn Xám Tử Đằng', en: 'Wisteria Qipao Maiden' },
@@ -455,6 +456,13 @@ ART_THEMES.push({
       name: { vi: 'Tiểu Thư Áo Len', en: 'Sweater Girl' },
       pictures: [
         { slug: 'hoa-ly', name: { vi: 'Tiểu Thư Áo Len Hoa Ly', en: 'Lily Sweater Girl' }, file: 'cong-chua-ngan-hoa--ao-len-hoa-ly' },
+      ],
+    },
+    {
+      slug: 'hoodie',
+      name: { vi: 'Cô Nàng Hoodie', en: 'Hoodie Girl' },
+      pictures: [
+        { slug: 'oai-huong', name: { vi: 'Cô Nàng Hoodie Oải Hương', en: 'Lavender Hoodie Girl' }, file: 'cong-chua-ngan-hoa--hoodie-oai-huong' },
       ],
     },
   ],
