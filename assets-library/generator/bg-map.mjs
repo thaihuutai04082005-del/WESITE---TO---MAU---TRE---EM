@@ -8,6 +8,7 @@ const M = {
   'dai-bang': { 'canh-thep': ['peak', 'day'], 'mat-than-tia-x': ['galaxy', 'space'], 'loc-xoay': ['desert', 'storm'], 'long-vu-phi-tieu': ['forest', 'morning'], 'bo-nhao-sieu-toc': ['cloudland', 'sunset'] },
   'meo-sieu-thu': { 'bong-dem': ['nightCity', 'deep'], 'leo-tuong': ['city', 'dusk'], 'nhay-sieu-cao': ['playground', 'day'], 'ria-radar': ['starField', 'night'], 'chin-mang': ['spring', 'pink'] },
   'cho-sieu-thu': { 'mui-tham-tu': ['park', 'morning'], 'cuu-ho-sieu-toc': ['river', 'day'], 'khien-xuong': ['farm', 'day'], 'chi-huy-doi': ['stationInside', 'day'], 'nhay-du-cuu-ho': ['meadow', 'day'], 'sieu-thong-minh': ['stationInside', 'night'] },
+  'tho-sieu-thu': { 'sieu-toc': ['road', 'day'] },
 
   // 02 · Vương Quốc Bánh Kẹo
   donut: { 'nha-vua': ['palaceHall', 'pink'], 'le-dang-quang': ['palaceHall', 'dusk'], 'tiec-tra-hoang-gia': ['garden', 'day'], 'dieu-hanh-hoang-gia': ['park', 'pink'], 'nguoi-dua-thu': ['rainbowHills', 'day'] },

@@ -146,6 +146,12 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#1E88E5'), front: X.headset(c) }),
     }),
   ],
+  'tho-sieu-thu': [
+    V('sieu-toc', 'Siêu Tốc', 'Super Speed', {
+      scene: ['clouds', 'speed', 'motion'], transform: { rot: -8, px: 300, py: 460 },
+      acc: (c) => ({ behind: A.cape(c, '#FF5A8C'), preface: A.mask(c, '#FF5A8C') }),
+    }),
+  ],
 };
 
 function midYc(c) {
