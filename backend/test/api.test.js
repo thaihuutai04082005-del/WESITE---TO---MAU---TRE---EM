@@ -638,3 +638,21 @@ test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi cata
   assert.equal((await api('GET', '/themes')).body.themes.length, visible - 3);
   assert.ok(!(await api('GET', '/themes')).body.themes.some((t) => hidden.includes(t.slug)));
 });
+
+test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog được xếp lại theo catalog', async () => {
+  const db = getDb();
+  const slugs = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  assert.equal(slugs[4], 'suon-xam--tu-dang');
+  assert.equal(slugs[6], 'vay-yem--hoa-cuc-trang');
+  // Mô phỏng máy cũ: Váy Yếm đứng thứ 5, Sườn Xám thứ 6.
+  const set = db.prepare("UPDATE objects SET sort = ? WHERE slug = ? AND theme_id = (SELECT id FROM themes WHERE slug = 'cong-chua-ngan-hoa')");
+  set.run(4, 'vay-yem');
+  set.run(5, 'suon-xam');
+  set.run(6, 'vay-ngan');
+  const old = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  assert.equal(old[4], 'vay-yem--hoa-cuc-trang');
+  seedPicturesIfNeeded(db);
+  const now = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  assert.equal(now[4], 'suon-xam--tu-dang');
+  assert.equal(now[6], 'vay-yem--hoa-cuc-trang');
+});
