@@ -39,6 +39,8 @@ const P = {
   play: 'M7 4l13 8-13 8z',
   up: 'M12 19V5M5 12l7-7 7 7',
   down: 'M12 5v14M19 12l-7 7-7-7',
+  volume: 'M4 9v6h4l5 4V5L8 9zM16.5 9a4 4 0 010 6M19 6.5a8 8 0 010 11',
+  volumeOff: 'M4 9v6h4l5 4V5L8 9zM17 9l5 6M22 9l-5 6',
   globe: 'M12 21a9 9 0 100-18 9 9 0 000 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
   ruby: 'M6 3h12l4 6-10 12L2 9zM2 9h20M9 3l3 18M15 3l-3 18',
   lock: 'M6 11h12v10H6zM8 11V7a4 4 0 018 0v4',

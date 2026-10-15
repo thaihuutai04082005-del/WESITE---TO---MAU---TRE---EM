@@ -14,6 +14,8 @@ import EventPopup from './EventPopup';
 import UpgradeModal from './UpgradeModal';
 import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
+import SoundToggle from './SoundToggle';
+import { initMusic } from '../../lib/sound';
 import RainbowTransition from './RainbowTransition';
 
 // Mỗi mục một biểu tượng đúng nghĩa + màu riêng (khớp màu thẻ ở trang chính).
@@ -47,6 +49,9 @@ export default function Layout() {
   const navigate = useNavigate();
 
   useEffect(() => setMenu(false), [loc.pathname]);
+
+  // Nhạc nền: bắt đầu khi bé chạm vào trang lần đầu.
+  useEffect(() => initMusic(), []);
 
   // Thông báo realtime (lời mời kết bạn, đề nghị đổi thẻ, gói được kích hoạt…).
   useEffect(() => {
@@ -95,6 +100,7 @@ export default function Layout() {
             </nav>
           )}
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
+            <SoundToggle />
             <LanguageSwitch />
             {user ? (
               <>
