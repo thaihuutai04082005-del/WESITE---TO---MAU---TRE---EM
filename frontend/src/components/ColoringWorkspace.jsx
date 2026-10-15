@@ -8,6 +8,7 @@ import PictureView from './PictureView/PictureView';
 import Modal from './Modal/Modal';
 import SignaturePanel from './SignaturePanel';
 import { ensureSignatureFont, placeDefault } from '../lib/signature';
+import { playTing } from '../lib/sound';
 
 export default function ColoringWorkspace({
   picture,
@@ -82,7 +83,10 @@ export default function ColoringWorkspace({
             readOnly={readOnly}
             remoteCursors={remoteCursors}
             onCursor={onCursor}
-            onFill={(regionId) => act({ type: 'fill', regionId, color, glitter })}
+            onFill={(regionId) => {
+              playTing();
+              act({ type: 'fill', regionId, color, glitter });
+            }}
             onStroke={(stroke) => act({ type: 'stroke', stroke })}
             onStickerAdd={(sticker) => act({ type: 'sticker-add', sticker })}
             onStickerChange={(index, sticker) => act({ type: 'sticker-update', index, sticker })}
