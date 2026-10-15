@@ -47,6 +47,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Công Chúa Ngàn Hoa | Cô Nàng Váy Yếm | Cô Nàng Váy Yếm Hoa Cúc Trắng | cong-chua-ngan-hoa--vay-yem-hoa-cuc |
 | Công Chúa Ngàn Hoa | Thiếu Nữ Sườn Xám | Thiếu Nữ Sườn Xám Tử Đằng | cong-chua-ngan-hoa--suon-xam-tu-dang |
 | Công Chúa Ngàn Hoa | Tiểu Thư Váy Ngắn | Tiểu Thư Váy Ngắn Hướng Dương | cong-chua-ngan-hoa--vay-ngan-huong-duong |
+| Công Chúa Ngàn Hoa | Tiểu Thư Áo Len | Tiểu Thư Áo Len Hoa Ly | cong-chua-ngan-hoa--ao-len-hoa-ly |
 | Hải Trình Kỳ Diệu (6–8 tuổi, xếp sau Xứ Sở Học Cụ bằng `after`) | Tàu Ngầm | Tàu Ngầm Bong Bóng Phép Thuật | 160 |
 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
