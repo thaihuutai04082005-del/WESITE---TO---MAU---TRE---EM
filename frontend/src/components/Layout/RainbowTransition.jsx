@@ -6,6 +6,7 @@
 // với đường cong làm mượt (easeInOutSine) nên chạy mượt, không phải dựng lại 14 hình như trước.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { playTing } from '../../lib/sound';
 
 const RAINBOW = ['#FF4D5E', '#FF9A2E', '#FFD93B', '#4CD787', '#3DA9FC', '#5B6CFF', '#A06CFF']; // đỏ (ngoài) → tím (trong)
 const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
@@ -76,6 +77,7 @@ export default function RainbowTransition() {
         const y = e.clientY || r.top + r.height / 2;
         setSpark((s) => ({ x, y, key: s.key + 1 }));
         setPhase('sparkle');
+        playTing(); // tiếng ting khớp với lúc lấp lánh
         later(() => setPhase('in'), SPARKLE_MS);
       } else {
         setPhase('in');

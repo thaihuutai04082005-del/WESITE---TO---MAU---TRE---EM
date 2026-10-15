@@ -1,4 +1,4 @@
-// Âm thanh của web: nhạc nền êm (lặp lại) + tiếng "ting" khi bé chạm tô một vùng màu.
+// Âm thanh của web: nhạc nền êm (lặp lại) + tiếng "ting" lúc lấp lánh khi bé bấm vào Tô màu.
 // Một công tắc chung bật/tắt cả hai, nhớ lại lựa chọn của bé. Nhạc nền đã được chuẩn hoá nhỏ (~ -26 LUFS)
 // như nhạc nền của các web dành cho trẻ em, nên để âm lượng phần tử ở mức tối đa là vừa tai.
 const TING_URL = '/sounds/ting.mp3';
@@ -38,7 +38,7 @@ export function setSoundOn(on) {
 
 /* ---------- Nhạc nền ---------- */
 let music = null;
-let started = false; // trình duyệt chỉ cho phát sau khi bé chạm vào trang lần đầu
+let started = false; // cờ "được phép phát": trình duyệt có thể chặn nhạc tự phát cho tới khi bé chạm vào trang
 let fadeTimer = null;
 
 function getMusic() {
@@ -85,8 +85,11 @@ function pauseMusic() {
   fadeTo(0, 400, () => music.pause());
 }
 
-/** Gọi một lần khi mở web: nhạc bắt đầu ngay khi bé chạm vào trang lần đầu và tạm dừng khi rời tab. */
+/** Gọi một lần khi mở web: thử phát nhạc ngay; nếu trình duyệt chưa cho thì phát ở lần chạm đầu tiên. Tạm dừng khi rời tab. */
 export function initMusic() {
+  started = true; // thử phát ngay khi mở web
+  playMusic();
+  preloadTing();
   const unlock = () => {
     started = true;
     playMusic();
@@ -106,7 +109,7 @@ export function initMusic() {
 }
 
 /* ---------- Tiếng ting khi tô màu ---------- */
-// Web Audio để phát tức thì và cho phép các tiếng ting chồng lên nhau khi bé tô liên tục.
+// Web Audio để phát tức thì và cho phép các tiếng ting chồng lên nhau khi bé bấm liên tục.
 let ctx = null;
 let buffer = null;
 let loading = null;
@@ -127,6 +130,12 @@ async function load(c) {
     .then((b) => (buffer = b))
     .catch(() => null);
   return loading;
+}
+
+/** Tải sẵn tiếng ting để lần bấm đầu tiên kêu ngay, không bị trễ. */
+export function preloadTing() {
+  const c = getContext();
+  if (c) load(c);
 }
 
 export async function playTing() {
