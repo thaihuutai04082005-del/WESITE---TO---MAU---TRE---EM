@@ -19,6 +19,9 @@ function readEnabled() {
 }
 
 export const isSoundOn = () => enabled;
+/** Nhạc đang thực sự phát (khác với "đã bật": trình duyệt có thể chặn nhạc tự phát). */
+export const isMusicPlaying = () => !!music && !music.paused;
+const notify = () => listeners.forEach((fn) => fn());
 export const subscribeSound = (fn) => {
   listeners.add(fn);
   return () => listeners.delete(fn);
@@ -33,7 +36,17 @@ export function setSoundOn(on) {
   }
   if (on) playMusic();
   else pauseMusic();
-  listeners.forEach((fn) => fn());
+  notify();
+}
+
+/** Bấm nút loa: đã bật mà nhạc chưa kêu (bị trình duyệt chặn) thì bấm là cho nhạc kêu; đang kêu thì tắt; đang tắt thì bật. */
+export function toggleSound() {
+  if (enabled && !isMusicPlaying()) {
+    started = true;
+    playMusic();
+    return;
+  }
+  setSoundOn(!enabled);
 }
 
 /* ---------- Nhạc nền ---------- */
@@ -46,6 +59,8 @@ function getMusic() {
     music = new Audio(MUSIC_URL);
     music.loop = true;
     music.preload = 'auto';
+    music.addEventListener('playing', notify);
+    music.addEventListener('pause', notify);
   }
   return music;
 }
