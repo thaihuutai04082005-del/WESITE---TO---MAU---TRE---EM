@@ -434,13 +434,6 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'vay-yem',
-      name: { vi: 'Cô Nàng Váy Yếm', en: 'Pinafore Girl' },
-      pictures: [
-        { slug: 'hoa-cuc-trang', name: { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' }, file: 'cong-chua-ngan-hoa--vay-yem-hoa-cuc' },
-      ],
-    },
-    {
       slug: 'suon-xam',
       name: { vi: 'Thiếu Nữ Sườn Xám', en: 'Qipao Maiden' },
       pictures: [
@@ -452,6 +445,13 @@ ART_THEMES.push({
       name: { vi: 'Tiểu Thư Váy Ngắn', en: 'Short Dress Girl' },
       pictures: [
         { slug: 'huong-duong', name: { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' }, file: 'cong-chua-ngan-hoa--vay-ngan-huong-duong' },
+      ],
+    },
+    {
+      slug: 'vay-yem',
+      name: { vi: 'Cô Nàng Váy Yếm', en: 'Pinafore Girl' },
+      pictures: [
+        { slug: 'hoa-cuc-trang', name: { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' }, file: 'cong-chua-ngan-hoa--vay-yem-hoa-cuc' },
       ],
     },
     {
