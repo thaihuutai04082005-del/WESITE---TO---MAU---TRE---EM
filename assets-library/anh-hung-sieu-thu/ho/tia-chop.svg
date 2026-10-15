@@ -111,6 +111,7 @@
 <path d="M 415.4 235.8 L 414.5 235.8 L 414.1 236.2 L 412.7 240.7 L 414.1 240.7 L 414.5 240.3 L 416.8 239.8 L 416.8 238.0 Z" id="r-van-dau-1" data-region="van-dau-1" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 428.0 285.6 L 428.0 286.5 L 431.1 287.4 L 432.9 288.8 L 434.3 288.8 L 434.3 286.5 L 433.8 286.1 L 433.4 282.9 L 432.0 282.9 L 429.3 284.3 Z" id="r-van-dau-2" data-region="van-dau-2" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 413.6 333.2 L 413.6 334.6 L 415.4 337.7 L 415.4 338.6 L 416.3 340.4 L 416.8 344.0 L 417.2 344.9 L 418.1 344.9 L 421.3 341.8 L 421.3 340.0 L 415.9 334.1 L 414.5 333.2 Z" id="r-van-dau-3" data-region="van-dau-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 302.7 359.3 L 302.7 360.2 L 307.6 365.6 L 309.4 365.6 L 311.7 364.2 L 314.8 363.3 L 314.8 362.4 L 313.9 362.4 L 312.1 361.5 L 310.8 361.5 L 309.0 360.6 L 307.6 360.6 L 304.5 359.3 Z" id="r-sliver-co" data-region="sliver-co" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
