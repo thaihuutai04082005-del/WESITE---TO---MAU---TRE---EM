@@ -141,6 +141,10 @@ const SIEU_THU = {
       scene: ['clouds', 'sun', 'shadow'], transform: { ty: 30, scale: 0.72, px: 300, py: 480 },
       acc: (c) => ({ behind: [...A.cape(c, '#FF9F43'), ...X.parachute(c)] }),
     }),
+    V('sieu-thong-minh', 'Siêu Thông Minh', 'Super Smart', {
+      scene: [],
+      acc: (c) => ({ behind: A.cape(c, '#1E88E5'), front: X.headset(c) }),
+    }),
   ],
 };
 

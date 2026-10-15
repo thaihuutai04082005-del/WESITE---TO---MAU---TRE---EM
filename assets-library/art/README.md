@@ -30,6 +30,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Cá heo dũng sĩ biển cả (Anh Hùng Siêu Thú, thẻ riêng) | A | `src/ca-heo--a.webp` | 64 |
 | Hổ gầm vang (Anh Hùng Siêu Thú, thay biến thể Tia Chớp của Hổ; tên tranh "Hổ Gầm Vang") | – | `src/ho--gam-vang.png` | 108 |
 | Mèo nhảy siêu cao (Anh Hùng Siêu Thú, thay biến thể Nhảy Siêu Cao của Mèo; tên tranh "Mèo Nhảy Siêu Cao") | – | `src/meo--nhay-sieu-cao.png` | 97 |
+| Chó siêu thông minh (Anh Hùng Siêu Thú, biến thể mới của Chó; áo choàng xanh biển) | – | `src/cho-sieu-thu--sieu-thong-minh.png` | 114 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
