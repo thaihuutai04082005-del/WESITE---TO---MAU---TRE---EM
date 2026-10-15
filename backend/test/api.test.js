@@ -104,7 +104,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(flat.body.pictures[0].name.vi, 'Chó con ngồi ngoan');
   assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 15);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
-  assert.equal(objects.body.objects.length, 6);
+  assert.equal(objects.body.objects.length, 7);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
   assert.equal(pics.body.pictures.length, 5);
   const pic = pics.body.pictures[0];
