@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'suon-xam--tu-dang': { vi: 'Thiếu Nữ Sườn Xám Tử Đằng', en: 'Wisteria Qipao Maiden' },
   'vay-yem--hoa-cuc-trang': { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' },
   'hanbok--mau-don': { vi: 'Thiếu Nữ Hanbok Mẫu Đơn', en: 'Peony Hanbok Maiden' },
   'ballet--hoa-tulip': { vi: 'Vũ Công Ballet Hoa Tulip', en: 'Tulip Ballerina' },
@@ -431,6 +432,13 @@ ART_THEMES.push({
       name: { vi: 'Cô Nàng Váy Yếm', en: 'Pinafore Girl' },
       pictures: [
         { slug: 'hoa-cuc-trang', name: { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' }, file: 'cong-chua-ngan-hoa--vay-yem-hoa-cuc' },
+      ],
+    },
+    {
+      slug: 'suon-xam',
+      name: { vi: 'Thiếu Nữ Sườn Xám', en: 'Qipao Maiden' },
+      pictures: [
+        { slug: 'tu-dang', name: { vi: 'Thiếu Nữ Sườn Xám Tử Đằng', en: 'Wisteria Qipao Maiden' }, file: 'cong-chua-ngan-hoa--suon-xam-tu-dang' },
       ],
     },
   ],
