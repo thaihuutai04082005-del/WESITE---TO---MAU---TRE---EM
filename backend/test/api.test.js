@@ -103,6 +103,9 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(flat.body.pictures.length, 15);
   assert.equal(flat.body.pictures[0].name.vi, 'Chó con ngồi ngoan');
   assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 15);
+  // Hàng 1 của Anh Hùng Siêu Thú: 5 tranh vẽ tay sư tử, hổ, chó, mèo, thỏ.
+  const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
+  assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 7);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);

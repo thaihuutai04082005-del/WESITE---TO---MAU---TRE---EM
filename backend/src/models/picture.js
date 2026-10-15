@@ -35,7 +35,7 @@ export function listObjects(themeId) {
 /** Mọi tranh (không phải thẻ) của một chủ đề, xếp theo thứ tự đối tượng rồi tranh — bé chọn thẳng, không qua tầng đối tượng. */
 export function listThemePictures(themeId) {
   return getDb()
-    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 ORDER BY o.sort, o.id, p.sort, p.id')
+    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 ORDER BY p.theme_sort, o.sort, o.id, p.sort, p.id')
     .all(themeId);
 }
 
