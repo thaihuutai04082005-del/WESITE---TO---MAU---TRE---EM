@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'cardigan--cam-tu-cau': { vi: 'Thiếu Nữ Cardigan Cẩm Tú Cầu', en: 'Hydrangea Cardigan Maiden' },
   'hoodie--oai-huong': { vi: 'Cô Nàng Hoodie Oải Hương', en: 'Lavender Hoodie Girl' },
   'ao-len--hoa-ly': { vi: 'Tiểu Thư Áo Len Hoa Ly', en: 'Lily Sweater Girl' },
   'vay-ngan--huong-duong': { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' },
@@ -463,6 +464,13 @@ ART_THEMES.push({
       name: { vi: 'Cô Nàng Hoodie', en: 'Hoodie Girl' },
       pictures: [
         { slug: 'oai-huong', name: { vi: 'Cô Nàng Hoodie Oải Hương', en: 'Lavender Hoodie Girl' }, file: 'cong-chua-ngan-hoa--hoodie-oai-huong' },
+      ],
+    },
+    {
+      slug: 'cardigan',
+      name: { vi: 'Thiếu Nữ Cardigan', en: 'Cardigan Maiden' },
+      pictures: [
+        { slug: 'cam-tu-cau', name: { vi: 'Thiếu Nữ Cardigan Cẩm Tú Cầu', en: 'Hydrangea Cardigan Maiden' }, file: 'cong-chua-ngan-hoa--cardigan-cam-tu-cau' },
       ],
     },
   ],
