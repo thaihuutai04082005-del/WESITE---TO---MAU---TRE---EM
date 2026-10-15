@@ -97,6 +97,8 @@
 <path d="M 315.5 244.1 L 316.9 244.1 L 321.6 246.5 L 328.6 240.4 L 332.9 238.0 L 334.3 236.2 L 334.3 234.7 L 332.9 233.8 L 316.4 233.3 Z" id="r-z53" data-region="z53" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 421.6 132.4 L 421.6 136.2 L 424.4 144.1 L 425.8 146.0 L 427.2 146.0 L 428.6 144.6 L 436.2 141.3 L 439.0 139.0 L 439.0 137.6 L 437.1 136.2 L 433.3 135.7 L 425.4 132.4 Z" id="r-z23" data-region="z23" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 307.5 302.8 L 308.0 306.6 L 311.3 312.7 L 312.2 316.4 L 314.1 318.3 L 315.5 318.3 L 317.4 316.4 L 319.7 306.1 L 317.8 304.7 L 311.3 302.3 Z" id="r-z78" data-region="z78" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 324.4 176.1 L 324.4 177.9 L 326.3 181.7 L 327.2 182.6 L 328.6 182.6 L 330.5 179.3 L 331.0 176.1 Z" id="r-rang-trai" data-region="rang-trai" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 367.1 170.0 L 365.7 170.0 L 363.4 170.9 L 360.6 170.9 L 360.6 172.8 L 362.9 177.0 L 364.3 177.0 L 365.3 176.1 L 366.7 173.2 Z" id="r-rang-phai" data-region="rang-phai" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
