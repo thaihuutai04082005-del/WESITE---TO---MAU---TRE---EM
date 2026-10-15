@@ -108,6 +108,9 @@
 <path d="M 384.0 200.3 L 383.1 202.1 L 383.1 204.3 L 384.4 210.6 L 384.4 217.8 L 385.3 219.6 L 387.1 219.6 L 389.8 217.4 L 394.3 207.9 L 392.5 204.3 L 391.2 204.3 L 386.7 200.7 Z" id="r-z28" data-region="z28" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 358.4 297.8 L 357.9 302.7 L 359.7 310.8 L 360.6 311.7 L 363.3 311.7 L 366.5 309.4 L 368.3 309.0 L 370.5 304.5 L 371.0 300.0 L 364.7 299.1 L 361.1 297.8 Z" id="r-z48" data-region="z48" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 252.4 307.2 L 248.4 307.2 L 244.8 309.9 L 239.4 315.3 L 240.3 318.9 L 245.7 321.6 L 247.5 319.8 L 251.9 310.8 Z" id="r-z53" data-region="z53" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 415.4 235.8 L 414.5 235.8 L 414.1 236.2 L 412.7 240.7 L 414.1 240.7 L 414.5 240.3 L 416.8 239.8 L 416.8 238.0 Z" id="r-van-dau-1" data-region="van-dau-1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 428.0 285.6 L 428.0 286.5 L 431.1 287.4 L 432.9 288.8 L 434.3 288.8 L 434.3 286.5 L 433.8 286.1 L 433.4 282.9 L 432.0 282.9 L 429.3 284.3 Z" id="r-van-dau-2" data-region="van-dau-2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 413.6 333.2 L 413.6 334.6 L 415.4 337.7 L 415.4 338.6 L 416.3 340.4 L 416.8 344.0 L 417.2 344.9 L 418.1 344.9 L 421.3 341.8 L 421.3 340.0 L 415.9 334.1 L 414.5 333.2 Z" id="r-van-dau-3" data-region="van-dau-3" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
