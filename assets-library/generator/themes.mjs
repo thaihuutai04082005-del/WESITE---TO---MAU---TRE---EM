@@ -335,6 +335,7 @@ export const PICTURE_NAME = {
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },
+  'vay-ngan--huong-duong': { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' },
   'suon-xam--tu-dang': { vi: 'Thiếu Nữ Sườn Xám Tử Đằng', en: 'Wisteria Qipao Maiden' },
   'vay-yem--hoa-cuc-trang': { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' },
   'hanbok--mau-don': { vi: 'Thiếu Nữ Hanbok Mẫu Đơn', en: 'Peony Hanbok Maiden' },
@@ -439,6 +440,13 @@ ART_THEMES.push({
       name: { vi: 'Thiếu Nữ Sườn Xám', en: 'Qipao Maiden' },
       pictures: [
         { slug: 'tu-dang', name: { vi: 'Thiếu Nữ Sườn Xám Tử Đằng', en: 'Wisteria Qipao Maiden' }, file: 'cong-chua-ngan-hoa--suon-xam-tu-dang' },
+      ],
+    },
+    {
+      slug: 'vay-ngan',
+      name: { vi: 'Tiểu Thư Váy Ngắn', en: 'Short Dress Girl' },
+      pictures: [
+        { slug: 'huong-duong', name: { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' }, file: 'cong-chua-ngan-hoa--vay-ngan-huong-duong' },
       ],
     },
   ],
