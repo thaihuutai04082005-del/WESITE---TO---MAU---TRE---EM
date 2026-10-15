@@ -324,6 +324,7 @@ export const VARIANT_ART = {
   'xe-dua--phan-luc': 'xe-dua--phan-luc',
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
+  'ho--tia-chop': 'ho--tia-chop',
   'tao-the-thao--da-bong': 'tao-the-thao--da-bong',
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
@@ -332,6 +333,7 @@ export const VARIANT_ART = {
 
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
+  'ho--tia-chop': { vi: 'Hổ Tia Chớp', en: 'Lightning Tiger' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },

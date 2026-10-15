@@ -28,6 +28,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 |---|---|---|---|
 | Mèo giáp vàng huyền thoại (Anh Hùng Siêu Thú) | S | `src/meo-sieu-thu--s.webp` | 119 |
 | Cá heo dũng sĩ biển cả (Anh Hùng Siêu Thú, thẻ riêng) | A | `src/ca-heo--a.webp` | 64 |
+| Hổ tia chớp (Anh Hùng Siêu Thú, thay biến thể Tia Chớp của Hổ; tên tranh "Hổ Tia Chớp") | – | `src/ho--tia-chop.png` | 120 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
