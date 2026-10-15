@@ -20,12 +20,12 @@ export function seedPictures(db = getDb()) {
     'INSERT INTO objects (theme_id, slug, name_vi, name_en, sort) VALUES (?, ?, ?, ?, ?) ON CONFLICT (theme_id, slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort RETURNING id',
   );
   const upPicture = db.prepare(
-    `INSERT INTO pictures (object_id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, svg, manifest, animation, is_card, rarity, sort)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `INSERT INTO pictures (object_id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, svg, manifest, animation, is_card, rarity, sort, theme_sort)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT (slug) DO UPDATE SET object_id = excluded.object_id, variant_slug = excluded.variant_slug, name_vi = excluded.name_vi,
        name_en = excluded.name_en, variant_name_vi = excluded.variant_name_vi, variant_name_en = excluded.variant_name_en,
        svg = excluded.svg, manifest = excluded.manifest, animation = excluded.animation, is_card = excluded.is_card,
-       rarity = excluded.rarity, sort = excluded.sort`,
+       rarity = excluded.rarity, sort = excluded.sort, theme_sort = excluded.theme_sort`,
   );
   let count = 0;
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
@@ -37,7 +37,7 @@ export function seedPictures(db = getDb()) {
         o.pictures.forEach((p, pi) => {
           const svg = readFileSync(join(lib, p.file), 'utf8');
           const manifest = JSON.stringify({ palette: p.palette, regions: p.regions });
-          upPicture.run(objectId, p.slug, p.variant, p.name.vi, p.name.en, p.variantName.vi, p.variantName.en, svg, manifest, p.animation, p.isCard ? 1 : 0, p.rarity, p.cardOrder ?? pi);
+          upPicture.run(objectId, p.slug, p.variant, p.name.vi, p.name.en, p.variantName.vi, p.variantName.en, svg, manifest, p.animation, p.isCard ? 1 : 0, p.rarity, p.cardOrder ?? pi, p.themeSort ?? 1000);
           count++;
         });
       });
@@ -72,7 +72,7 @@ export function seedPicturesIfNeeded(db = getDb()) {
   const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   const themeSlugs = catalog.themes.map((t) => t.slug);
   const rows = db
-    .prepare(`SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en, o.sort AS osort FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+    .prepare(`SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en, o.sort AS osort, p.theme_sort FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
     .all(...themeSlugs);
   const sameSet = rows.length === want.size && rows.every((r) => want.has(r.slug));
   const lib = join(REPO_ROOT, 'assets-library');
@@ -83,7 +83,7 @@ export function seedPicturesIfNeeded(db = getDb()) {
     const p = pics.get(r.slug);
     // Đổi riêng màu vùng thì svg không đổi (vùng luôn trắng) → phải so cả manifest.
     // Đổi thứ tự các đối tượng trong chủ đề cũng phải nạp lại.
-    return r.osort === objectSort.get(r.slug) && r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8')
+    return r.osort === objectSort.get(r.slug) && r.theme_sort === (p.themeSort ?? 1000) && r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8')
       && r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions });
   });
   const n = same ? 0 : seedPictures(db);

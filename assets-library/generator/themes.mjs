@@ -320,6 +320,11 @@ export const CARD_ART = [
 
 
 // Tranh thường (không phải thẻ) thay bằng tranh vẽ tay: "<đối tượng>--<biến thể>" → file trong art/.
+/** Tranh đứng đầu trang chọn tranh của chủ đề (hàng 1), theo thứ tự: khoá = `<đối tượng>--<biến thể>`. */
+export const THEME_FIRST = {
+  'anh-hung-sieu-thu': ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc'],
+};
+
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
   'xe-dua--phan-luc': 'xe-dua--phan-luc',
