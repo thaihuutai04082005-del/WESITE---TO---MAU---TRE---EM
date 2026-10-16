@@ -168,6 +168,12 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5FA2') }),
     }),
   ],
+  'khi-sieu-thu': [
+    V('day-leo-than-toc', 'Dây Leo Thần Tốc', 'Lightning Vine', {
+      scene: ['sun', 'clouds'],
+      acc: (c) => ({ behind: A.cape(c, '#FFD93B') }),
+    }),
+  ],
 };
 
 function midYc(c) {
