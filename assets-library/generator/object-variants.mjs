@@ -152,6 +152,12 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FF5A8C'), preface: A.mask(c, '#FF5A8C') }),
     }),
   ],
+  'gau-sieu-thu': [
+    V('dai-luc', 'Đại Lực', 'Mighty Strength', {
+      scene: ['sun', 'clouds'],
+      acc: (c) => ({ behind: A.cape(c, '#B5491E') }),
+    }),
+  ],
 };
 
 function midYc(c) {

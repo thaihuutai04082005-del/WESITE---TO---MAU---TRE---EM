@@ -32,6 +32,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Mèo nhảy siêu cao (Anh Hùng Siêu Thú, thay biến thể Nhảy Siêu Cao của Mèo; tên tranh "Mèo Nhảy Siêu Cao") | – | `src/meo--nhay-sieu-cao.png` | 97 |
 | Chó siêu thông minh (Anh Hùng Siêu Thú, biến thể mới của Chó; áo choàng xanh biển) | – | `src/cho-sieu-thu--sieu-thong-minh.png` | 114 |
 | Thỏ siêu tốc (Anh Hùng Siêu Thú, đối tượng mới Thỏ) | – | `src/tho-sieu-thu--sieu-toc.png` | 64 |
+| Gấu nâu đại lực (Anh Hùng Siêu Thú, đối tượng mới Gấu) | – | `src/gau-sieu-thu--dai-luc.png` | 113 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
