@@ -174,6 +174,12 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#FFD93B') }),
     }),
   ],
+  'canh-cut-sieu-thu': [
+    V('bang-gia', 'Băng Giá', 'Frost', {
+      scene: ['snow'], sky: 'snow', ground: 'snow',
+      acc: (c) => ({ behind: A.cape(c, '#1E88E5') }),
+    }),
+  ],
 };
 
 function midYc(c) {
