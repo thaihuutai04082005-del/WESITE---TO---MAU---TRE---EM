@@ -162,6 +162,12 @@ const SIEU_THU = {
       acc: (c) => ({ behind: A.cape(c, '#B5491E') }),
     }),
   ],
+  'heo-sieu-thu': [
+    V('sieu-pham-an', 'Siêu Phàm Ăn', 'Super Foodie', {
+      scene: ['sun', 'clouds'],
+      acc: (c) => ({ behind: A.cape(c, '#FF5FA2') }),
+    }),
+  ],
 };
 
 function midYc(c) {

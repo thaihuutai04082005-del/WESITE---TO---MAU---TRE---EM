@@ -34,6 +34,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Thỏ siêu tốc (Anh Hùng Siêu Thú, đối tượng mới Thỏ) | – | `src/tho-sieu-thu--sieu-toc.png` | 64 |
 | Gấu nâu đại lực (Anh Hùng Siêu Thú, đối tượng mới Gấu) | – | `src/gau-sieu-thu--dai-luc.png` | 113 |
 | Đại bàng xé gió (Anh Hùng Siêu Thú, biến thể mới của Đại bàng) | – | `src/dai-bang--xe-gio.png` | 123 |
+| Heo siêu phàm ăn (Anh Hùng Siêu Thú, đối tượng mới Heo) | – | `src/heo-sieu-thu--sieu-pham-an.png` | 140 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
