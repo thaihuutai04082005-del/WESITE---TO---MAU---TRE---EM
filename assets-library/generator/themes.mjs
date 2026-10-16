@@ -49,6 +49,7 @@ export const OBJECTS = [
   reuse('anh-hung-sieu-thu', 'meo', 'meo-sieu-thu', 'Mèo', 'Cat', { neck: 334, left: 210, right: 390 }),
   reuse('anh-hung-sieu-thu', 'cho', 'cho-sieu-thu', 'Chó', 'Dog', { neck: 334, left: 208, right: 392 }),
   reuse('anh-hung-sieu-thu', 'tho', 'tho-sieu-thu', 'Thỏ', 'Rabbit', { neck: 334, left: 212, right: 388 }),
+  reuse('anh-hung-sieu-thu', 'gau', 'gau-sieu-thu', 'Gấu', 'Bear', { neck: 334, left: 208, right: 392 }),
 
   // 02 — Bánh kẹo × Hoàng gia
   O('vuong-quoc-keo-ngot', 'donut', 'Donut', 'Donut', { face: { x: 300, y: 398, s: 0.62 }, hat: { x: 300, y: 186, s: 1.2 }, build: B.donut }),
@@ -331,6 +332,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'gau-sieu-thu--dai-luc': 'gau-sieu-thu--dai-luc',
   'tho-sieu-thu--sieu-toc': 'tho-sieu-thu--sieu-toc',
   'cho-sieu-thu--sieu-thong-minh': 'cho-sieu-thu--sieu-thong-minh',
   'meo-sieu-thu--nhay-sieu-cao': 'meo--nhay-sieu-cao',
@@ -343,6 +345,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'gau-sieu-thu--dai-luc': { vi: 'Gấu Nâu Đại Lực', en: 'Mighty Brown Bear' },
   'tho-sieu-thu--sieu-toc': { vi: 'Thỏ Siêu Tốc', en: 'Super Speed Bunny' },
   'cho-sieu-thu--sieu-thong-minh': { vi: 'Chó Siêu Thông Minh', en: 'Super Smart Dog' },
   'meo-sieu-thu--nhay-sieu-cao': { vi: 'Mèo Nhảy Siêu Cao', en: 'Super Jump Cat' },
