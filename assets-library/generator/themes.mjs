@@ -330,6 +330,9 @@ export const THEME_FIRST = {
     'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
 };
 
+/** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu'];
+
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
   'xe-dua--phan-luc': 'xe-dua--phan-luc',

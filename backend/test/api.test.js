@@ -108,9 +108,12 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
   assert.deepEqual(hero.body.pictures.slice(5, 10).map((p) => p.slug), ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
-  assert.equal(objects.body.objects.length, 11);
+  assert.equal(objects.body.objects.length, 10);
+  // Chủ đề này chỉ hiện đúng 10 tranh vẽ tay; các tranh tạo tự động bị ẩn.
+  assert.equal(hero.body.pictures.length, 10);
+  assert.equal(themes.body.themes.find((t) => t.slug === 'anh-hung-sieu-thu').pictureCount, 10);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
-  assert.equal(pics.body.pictures.length, 5);
+  assert.equal(pics.body.pictures.length, 1);
   const pic = pics.body.pictures[0];
 
   // Mở tranh chưa tô → chưa tính lượt.
@@ -130,7 +133,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.ok(save.body.events.some((e) => e.type === 'mission_complete'), 'hoàn thành nhiệm vụ "Tô xong 1 tranh"');
 
   // Tranh thứ 2 trong ngày → hết lượt (402).
-  const a2 = await api('POST', '/artworks', { pictureId: pics.body.pictures[1].id, mode: 'template' }, token);
+  const a2 = await api('POST', '/artworks', { pictureId: hero.body.pictures[1].id, mode: 'template' }, token);
   const s2 = await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token);
   assert.equal(s2.status, 402);
   assert.equal(s2.body.error.code, 'quota_exceeded');

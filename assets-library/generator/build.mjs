@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync, rmSync, existsSync, readFileSync } from 'node
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LEGACY_OBJECTS, LEGACY_THEMES } from './objects.mjs';
-import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES, VARIANT_ART, PICTURE_NAME, THEME_FIRST } from './themes.mjs';
+import { THEMES, OBJECTS, THEME_VARIANTS, CARD_ART, ART_THEMES, VARIANT_ART, PICTURE_NAME, THEME_FIRST, THEME_ONLY_FIRST } from './themes.mjs';
 import { OBJECT_VARIANTS } from './object-variants.mjs';
 import { buildBackground } from './backgrounds.mjs';
 import { bgFor, checkBgMap } from './bg-map.mjs';
@@ -498,6 +498,7 @@ function main() {
         if (artIdx >= 0) meta.cardOrder = artIdx + 1; // thứ tự hiện trên trang Bóc thẻ = thứ tự chủ web gửi
         const first = isCard ? -1 : (THEME_FIRST[theme.slug] || []).indexOf(`${obj.slug}--${variant.slug}`);
         if (first >= 0) meta.themeSort = first; // đứng đầu trang chọn tranh của chủ đề
+        if (!isCard && first < 0 && THEME_ONLY_FIRST.includes(theme.slug)) meta.hidden = true; // chủ đề chỉ giữ các tranh vẽ tay
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
         writeFileSync(out, svg);

@@ -6,10 +6,10 @@ const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`$
 export function listThemes() {
   return getDb()
     .prepare(
-      `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0)) AS object_count,
-        (SELECT COUNT(*) FROM pictures q JOIN objects o ON o.id = q.object_id WHERE o.theme_id = t.id AND q.is_card = 0) AS picture_count,
+      `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0 AND q.hidden = 0)) AS object_count,
+        (SELECT COUNT(*) FROM pictures q JOIN objects o ON o.id = q.object_id WHERE o.theme_id = t.id AND q.is_card = 0 AND q.hidden = 0) AS picture_count,
         (SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id
-          WHERE o.theme_id = t.id AND p.is_card = 0 ORDER BY o.sort, p.sort LIMIT 1) AS cover_id
+          WHERE o.theme_id = t.id AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.theme_sort, o.sort, p.sort LIMIT 1) AS cover_id
        FROM themes t WHERE t.active = 1 ORDER BY t.sort, t.id`,
     )
     .all();
@@ -25,9 +25,9 @@ export const ACTIVE_PICTURE = 'p.object_id IN (SELECT o.id FROM objects o JOIN t
 export function listObjects(themeId) {
   return getDb()
     .prepare(
-      `SELECT o.*, (SELECT COUNT(*) FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0) AS picture_count,
-        (SELECT p.id FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 ORDER BY p.sort LIMIT 1) AS cover_id
-       FROM objects o WHERE o.theme_id = ? AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0) ORDER BY o.sort, o.id`, // bỏ đối tượng chỉ có thẻ
+      `SELECT o.*, (SELECT COUNT(*) FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 AND p.hidden = 0) AS picture_count,
+        (SELECT p.id FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.sort LIMIT 1) AS cover_id
+       FROM objects o WHERE o.theme_id = ? AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0 AND q.hidden = 0) ORDER BY o.sort, o.id`, // bỏ đối tượng chỉ có thẻ
     )
     .all(themeId);
 }
@@ -35,7 +35,7 @@ export function listObjects(themeId) {
 /** Mọi tranh (không phải thẻ) của một chủ đề, xếp theo thứ tự đối tượng rồi tranh — bé chọn thẳng, không qua tầng đối tượng. */
 export function listThemePictures(themeId) {
   return getDb()
-    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 ORDER BY p.theme_sort, o.sort, o.id, p.sort, p.id')
+    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.theme_sort, o.sort, o.id, p.sort, p.id')
     .all(themeId);
 }
 
@@ -43,7 +43,7 @@ export const findObject = (themeId, slug) => getDb().prepare('SELECT * FROM obje
 
 export function listPictures(objectId, { cards = false } = {}) {
   return getDb()
-    .prepare('SELECT id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, animation, is_card, rarity FROM pictures WHERE object_id = ? AND is_card = ? ORDER BY sort, id')
+    .prepare('SELECT id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, animation, is_card, rarity FROM pictures WHERE object_id = ? AND is_card = ? AND hidden = 0 ORDER BY sort, id')
     .all(objectId, cards ? 1 : 0);
 }
 
@@ -94,7 +94,7 @@ export function cardPool() {
 }
 
 export function randomPictureForArena() {
-  return getDb().prepare(`SELECT p.id FROM pictures p WHERE p.is_card = 0 AND ${ACTIVE_PICTURE} ORDER BY RANDOM() LIMIT 1`).get();
+  return getDb().prepare(`SELECT p.id FROM pictures p WHERE p.is_card = 0 AND p.hidden = 0 AND ${ACTIVE_PICTURE} ORDER BY RANDOM() LIMIT 1`).get();
 }
 
 export { lang };
