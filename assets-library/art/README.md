@@ -36,6 +36,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Đại bàng xé gió (Anh Hùng Siêu Thú, biến thể mới của Đại bàng) | – | `src/dai-bang--xe-gio.png` | 123 |
 | Heo siêu phàm ăn (Anh Hùng Siêu Thú, đối tượng mới Heo) | – | `src/heo-sieu-thu--sieu-pham-an.png` | 140 |
 | Khỉ dây leo thần tốc (Anh Hùng Siêu Thú, đối tượng mới Khỉ) | – | `src/khi-sieu-thu--day-leo-than-toc.png` | 188 |
+| Chim cánh cụt băng giá (Anh Hùng Siêu Thú, đối tượng mới Chim cánh cụt) | – | `src/canh-cut-sieu-thu--bang-gia.png` | 142 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
