@@ -107,7 +107,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
   assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
-  assert.equal(objects.body.objects.length, 8);
+  assert.equal(objects.body.objects.length, 9);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
   assert.equal(pics.body.pictures.length, 5);
   const pic = pics.body.pictures[0];

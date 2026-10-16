@@ -50,6 +50,7 @@ export const OBJECTS = [
   reuse('anh-hung-sieu-thu', 'cho', 'cho-sieu-thu', 'Chó', 'Dog', { neck: 334, left: 208, right: 392 }),
   reuse('anh-hung-sieu-thu', 'tho', 'tho-sieu-thu', 'Thỏ', 'Rabbit', { neck: 334, left: 212, right: 388 }),
   reuse('anh-hung-sieu-thu', 'gau', 'gau-sieu-thu', 'Gấu', 'Bear', { neck: 334, left: 208, right: 392 }),
+  O('anh-hung-sieu-thu', 'heo-sieu-thu', 'Heo', 'Pig', { face: { x: 300, y: 250, s: 1 }, hat: { x: 300, y: 176, s: 0.9 }, neck: 334, left: 208, right: 392, build: () => [] }),
 
   // 02 — Bánh kẹo × Hoàng gia
   O('vuong-quoc-keo-ngot', 'donut', 'Donut', 'Donut', { face: { x: 300, y: 398, s: 0.62 }, hat: { x: 300, y: 186, s: 1.2 }, build: B.donut }),
@@ -332,6 +333,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'heo-sieu-thu--sieu-pham-an': 'heo-sieu-thu--sieu-pham-an',
   'dai-bang--xe-gio': 'dai-bang--xe-gio',
   'gau-sieu-thu--dai-luc': 'gau-sieu-thu--dai-luc',
   'tho-sieu-thu--sieu-toc': 'tho-sieu-thu--sieu-toc',
@@ -346,6 +348,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'heo-sieu-thu--sieu-pham-an': { vi: 'Heo Siêu Phàm Ăn', en: 'Super Foodie Pig' },
   'dai-bang--xe-gio': { vi: 'Đại Bàng Xé Gió', en: 'Windslicer Eagle' },
   'gau-sieu-thu--dai-luc': { vi: 'Gấu Nâu Đại Lực', en: 'Mighty Brown Bear' },
   'tho-sieu-thu--sieu-toc': { vi: 'Thỏ Siêu Tốc', en: 'Super Speed Bunny' },
