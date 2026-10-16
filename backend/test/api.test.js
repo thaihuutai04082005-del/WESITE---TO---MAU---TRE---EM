@@ -103,10 +103,10 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(flat.body.pictures.length, 15);
   assert.equal(flat.body.pictures[0].name.vi, 'Chó con ngồi ngoan');
   assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 15);
-  // Hàng 1 của Anh Hùng Siêu Thú: 5 tranh vẽ tay sư tử, hổ, chó, mèo, thỏ; hàng 2: gấu, đại bàng, heo.
+  // Hàng 1 của Anh Hùng Siêu Thú: 5 tranh vẽ tay sư tử, hổ, chó, mèo, thỏ; hàng 2: gấu, đại bàng, heo, khỉ, chim cánh cụt.
   const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
   assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
-  assert.deepEqual(hero.body.pictures.slice(5, 8).map((p) => p.slug), ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an']);
+  assert.deepEqual(hero.body.pictures.slice(5, 10).map((p) => p.slug), ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 11);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);

@@ -327,7 +327,7 @@ export const CARD_ART = [
 /** Tranh đứng đầu trang chọn tranh của chủ đề (hàng 1 = 5 tranh đầu, hàng 2 = 5 tranh kế), theo thứ tự: khoá = `<đối tượng>--<biến thể>`. */
 export const THEME_FIRST = {
   'anh-hung-sieu-thu': ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc',
-    'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an'],
+    'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
 };
 
 export const VARIANT_ART = {
