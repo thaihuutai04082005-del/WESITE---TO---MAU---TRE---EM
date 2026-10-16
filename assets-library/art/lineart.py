@@ -16,6 +16,31 @@ from scipy import ndimage
 SIZE = 600          # khung tranh của web (viewBox 600×600)
 MIN_AREA = 80       # vùng nhỏ hơn (px ảnh nguồn) coi như một phần nét, không tô
 
+def curve_polygon(pts):
+    """Từ đường tâm [[x, y, w], ...] dựng đa giác nét: nội suy mượt rồi lệch hai bên theo độ dày."""
+    p = np.array(pts, float)
+    n = max(len(p) * 6, 24)
+    s = np.r_[0, np.cumsum(np.hypot(*np.diff(p[:, :2], axis=0).T))]
+    u = np.linspace(0, s[-1], n)
+    x, y, w = (np.interp(u, s, p[:, i]) for i in range(3))
+    k = 5  # làm trơn đường tâm và độ dày
+    ker = np.ones(k) / k
+    x, y, w = (np.convolve(np.pad(v, k, mode='edge'), ker, 'same')[k:-k] for v in (x, y, w))
+    dx, dy = np.gradient(x), np.gradient(y)
+    ln = np.hypot(dx, dy) + 1e-9
+    nx, ny = -dy / ln, dx / ln
+    left = np.column_stack([x + nx * w / 2, y + ny * w / 2])
+    right = np.column_stack([x - nx * w / 2, y - ny * w / 2])
+    return np.vstack([left, right[::-1]])
+
+
+def draw_curve(gray, d):
+    poly = curve_polygon(d['curve'])
+    sh = 3  # độ chính xác dưới điểm ảnh (1/8 px)
+    cv2.fillPoly(gray, [np.round(poly * (1 << sh)).astype(np.int32)], d.get('v', 0), cv2.LINE_AA, sh)
+
+
+
 def main():
     src, colors_file, out = sys.argv[1:4]
     preview = sys.argv[sys.argv.index('--preview') + 1] if '--preview' in sys.argv else None
@@ -41,6 +66,9 @@ def main():
     # "draw": vẽ lại nét đen trơn (nối các nét sau khi xoá) — {"line": [[x, y], ...], "w": độ dày, "v": độ xám 0–255 (mặc định 0 = đen; lớn hơn thì nét nhạt hơn)}.
     for d in cfg.get('draw', []):
         cv2.polylines(gray, [np.array(d['line'], np.int32)], False, d.get('v', 0), d.get('w', 8), cv2.LINE_AA)
+    # "curve": nét cong mượt có độ dày thay đổi — {"curve": [[x, y, độ dày], ...], "v": độ xám}. Vẽ thành một mảng liền, toạ độ lẻ (không răng cưa, không bậc).
+    for d in cfg.get('curve', []):
+        draw_curve(gray, d)
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0

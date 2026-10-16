@@ -11,6 +11,7 @@ const M = {
   'tho-sieu-thu': { 'sieu-toc': ['road', 'day'] },
   'gau-sieu-thu': { 'dai-luc': ['mountainDawn', 'day'] },
   'heo-sieu-thu': { 'sieu-pham-an': ['park', 'noon'] },
+  'khi-sieu-thu': { 'day-leo-than-toc': ['jungle', 'dusk'] },
 
   // 02 · Vương Quốc Bánh Kẹo
   donut: { 'nha-vua': ['palaceHall', 'pink'], 'le-dang-quang': ['palaceHall', 'dusk'], 'tiec-tra-hoang-gia': ['garden', 'day'], 'dieu-hanh-hoang-gia': ['park', 'pink'], 'nguoi-dua-thu': ['rainbowHills', 'day'] },

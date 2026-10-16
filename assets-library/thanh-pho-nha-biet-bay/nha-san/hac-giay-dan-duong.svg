@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="nha-san--hac-giay-dan-duong">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<polygon points="540,110 542.4,116.8 549.5,116.9 543.8,121.2 545.9,128.1 540,124 534.1,128.1 536.2,121.2 530.5,116.9 537.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 64 110 Q 40 110 46.4 90 Q 41.6 62 76 62 Q 84 35.6 113.6 42 Q 134.4 19.6 158.4 46 Q 193.6 40.4 188.8 75.6 Q 203.2 110 176 110 Z" id="r-may-mua-1" data-region="may-mua-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
 <ellipse cx="40" cy="330" rx="90" ry="40" transform="rotate(-50 40 330)" id="r-la-to-1" data-region="la-to-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="560" cy="300" rx="90" ry="40" transform="rotate(50 560 300)" id="r-la-to-2" data-region="la-to-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="70" cy="430" rx="70" ry="30" transform="rotate(20 70 430)" id="r-la-to-3" data-region="la-to-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
