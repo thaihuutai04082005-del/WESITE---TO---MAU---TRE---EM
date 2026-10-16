@@ -332,6 +332,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'dai-bang--xe-gio': 'dai-bang--xe-gio',
   'gau-sieu-thu--dai-luc': 'gau-sieu-thu--dai-luc',
   'tho-sieu-thu--sieu-toc': 'tho-sieu-thu--sieu-toc',
   'cho-sieu-thu--sieu-thong-minh': 'cho-sieu-thu--sieu-thong-minh',
@@ -345,6 +346,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'dai-bang--xe-gio': { vi: 'Đại Bàng Xé Gió', en: 'Windslicer Eagle' },
   'gau-sieu-thu--dai-luc': { vi: 'Gấu Nâu Đại Lực', en: 'Mighty Brown Bear' },
   'tho-sieu-thu--sieu-toc': { vi: 'Thỏ Siêu Tốc', en: 'Super Speed Bunny' },
   'cho-sieu-thu--sieu-thong-minh': { vi: 'Chó Siêu Thông Minh', en: 'Super Smart Dog' },

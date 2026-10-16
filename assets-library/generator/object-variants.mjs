@@ -97,6 +97,10 @@ const SIEU_THU = {
       scene: ['clouds', 'speed'], transform: { rot: 28, scale: 0.85, px: 300, py: 330 },
       acc: (c) => ({ behind: A.cape(c, '#FF9F43'), preface: A.mask(c, '#E65100') }),
     }),
+    V('xe-gio', 'Xé Gió', 'Windslicer', {
+      scene: ['clouds', 'speed'], transform: { rot: -10, px: 300, py: 330 },
+      acc: (c) => ({ behind: A.cape(c, '#E53935'), preface: A.mask(c, '#E53935') }),
+    }),
   ],
   'meo-sieu-thu': [
     V('bong-dem', 'Bóng Đêm', 'Shadow Night', {
