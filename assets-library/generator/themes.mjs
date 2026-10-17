@@ -345,6 +345,8 @@ export const THEME_FIRST = {
 };
 
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
+/** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
+export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
 export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru'];
 
 export const VARIANT_ART = {
@@ -356,7 +358,7 @@ export const VARIANT_ART = {
   'khung-long-dau-vom--giao-vien': 'khung-long-dau-vom--giao-vien',
   'khung-long-mao-ken--tho-lam-vuon': 'khung-long-mao-ken--tho-lam-vuon',
   'khung-long-boc-giap--tho-xay': 'khung-long-boc-giap--tho-xay',
-  'duc-long--phi-cong': 'duc-long--phi-cong',
+  'duc-long--dua-thu': 'duc-long--dua-thu',
   'khung-long-gai-lung--nong-dan': 'khung-long-gai-lung--nong-dan',
   'khung-long-ba-sung--bac-si': 'khung-long-ba-sung--bac-si',
   'khung-long-co-dai--tho-lau-kinh': 'khung-long-co-dai--tho-lau-kinh',
@@ -398,7 +400,7 @@ export const PICTURE_NAME = {
   'khung-long-dau-vom--giao-vien': { vi: 'Khủng Long Đầu Vòm Giáo Viên', en: 'Dome-head Teacher' },
   'khung-long-mao-ken--tho-lam-vuon': { vi: 'Khủng Long Mỏ Vịt Thợ Làm Vườn', en: 'Duck-bill Gardener' },
   'khung-long-boc-giap--tho-xay': { vi: 'Khủng Long Bọc Giáp Thợ Xây', en: 'Armored Dino Builder' },
-  'duc-long--phi-cong': { vi: 'Dực Long Phi Công', en: 'Pterosaur Pilot' },
+  'duc-long--dua-thu': { vi: 'Dực Long Đưa Thư', en: 'Pterosaur Mail Carrier' },
   'khung-long-gai-lung--nong-dan': { vi: 'Khủng Long Lưng Gai Nông Dân', en: 'Stegosaurus Farmer' },
   'khung-long-ba-sung--bac-si': { vi: 'Khủng Long Ba Sừng Bác Sĩ', en: 'Triceratops Doctor' },
   'khung-long-co-dai--tho-lau-kinh': { vi: 'Khủng Long Cổ Dài Lau Kính Toàn Nhà', en: 'Long-neck Window Washer' },

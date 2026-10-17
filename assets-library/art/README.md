@@ -83,7 +83,7 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Khủng Long Cổ Dài Lau Kính Toàn Nhà (Thị Trấn Khủng Long) | – | `src/khung-long-co-dai--tho-lau-kinh.png` | ghi trong file |
 | Khủng Long Ba Sừng Bác Sĩ (Thị Trấn Khủng Long) | – | `src/khung-long-ba-sung--bac-si.png` | ghi trong file |
 | Khủng Long Lưng Gai Nông Dân (Thị Trấn Khủng Long) | – | `src/khung-long-gai-lung--nong-dan.png` | ghi trong file |
-| Dực Long Phi Công (Thị Trấn Khủng Long) | – | `src/duc-long--phi-cong.png` | ghi trong file |
+| Dực Long Đưa Thư (Thị Trấn Khủng Long) | – | `src/duc-long--dua-thu.png` | ghi trong file |
 | Khủng Long Bọc Giáp Thợ Xây (Thị Trấn Khủng Long, đối tượng mới Khủng long bọc giáp) | – | `src/khung-long-boc-giap--tho-xay.png` | ghi trong file |
 | Khủng Long Mỏ Vịt Thợ Làm Vườn (Thị Trấn Khủng Long) | – | `src/khung-long-mao-ken--tho-lam-vuon.png` | ghi trong file |
 | Khủng Long Đầu Vòm Giáo Viên (Thị Trấn Khủng Long, đối tượng mới Khủng long đầu vòm) | – | `src/khung-long-dau-vom--giao-vien.png` | ghi trong file |
