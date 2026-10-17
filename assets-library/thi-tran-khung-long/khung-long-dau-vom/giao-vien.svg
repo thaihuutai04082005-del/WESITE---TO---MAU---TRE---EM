@@ -128,6 +128,7 @@
 <path d="M 387.3 136.6 L 387.3 141.3 L 390.6 147.9 L 397.7 146.9 L 401.4 148.8 L 403.3 148.4 L 404.7 145.5 L 404.7 141.8 L 402.8 139.0 L 401.4 138.0 L 391.5 137.6 Z" id="r-z21" data-region="z21" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 378.9 121.1 L 378.4 124.4 L 384.5 135.2 L 386.4 137.1 L 388.3 137.1 L 390.1 129.6 L 390.1 125.8 L 388.7 122.1 L 386.9 121.1 Z" id="r-z16" data-region="z16" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 296.2 293.0 L 294.8 292.0 L 290.6 292.0 L 285.9 293.0 L 284.0 294.8 L 283.6 300.0 L 285.9 305.2 L 289.7 305.2 L 291.5 304.2 L 292.0 301.9 L 295.8 295.8 Z" id="r-z58" data-region="z58" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 347.9 215.5 L 343.2 215.5 L 340.4 217.8 L 339.9 224.4 L 341.3 227.7 L 342.7 229.1 L 344.6 229.1 L 346.9 227.7 L 350.2 223.5 L 350.2 218.8 Z" id="r-cham-mat" data-region="cham-mat" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
