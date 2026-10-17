@@ -73,3 +73,4 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |
 | Xe Cứu Hỏa Dập Lửa Thiên Hà (Đội Xe Vũ Trụ) | – | `src/xe-cuu-hoa--dap-lua-thien-thach.png` | ghi trong file |
+| Tàu Hỏa Đường Ray Ngân Hà (Đội Xe Vũ Trụ) | – | `src/tau-hoa-vu-tru--duong-ray-ngan-ha.png` | ghi trong file |
