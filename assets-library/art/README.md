@@ -44,6 +44,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Bánh kem nhiều tầng hoàng hậu (Vương Quốc Bánh Kẹo, thay biến thể Hoàng Hậu của Bánh kem) | – | `src/banh-kem--hoang-hau.png` | 44 |
 | Hiệp sĩ kẹo dẻo (Vương Quốc Bánh Kẹo, thay biến thể Hiệp Sĩ của Kẹo mút; tên tranh "Hiệp Sĩ Kẹo Dẻo") | – | `src/keo-mut--hiep-si.png` | 76 |
 | Cung nữ macaron (Vương Quốc Bánh Kẹo, đối tượng mới Macaron) | – | `src/macaron--cung-nu.png` | 82 |
+| Đầu bếp bánh gừng (Vương Quốc Bánh Kẹo, đối tượng mới Bánh gừng) | – | `src/banh-gung--dau-bep.png` | 79 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
