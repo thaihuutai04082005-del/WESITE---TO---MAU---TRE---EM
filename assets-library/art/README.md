@@ -77,3 +77,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Máy Bay Vòng Quanh Hành Tinh (Đội Xe Vũ Trụ) | – | `src/may-bay-vu-tru--bay-qua-vong-hanh-tinh.png` | ghi trong file |
 | Trực Thăng Thả Dù Tiếp Tế (Đội Xe Vũ Trụ) | – | `src/truc-thang--tha-du-tiep-te.png` | ghi trong file |
 | Xe Tải Giao Hàng Liên Hành Tinh (Đội Xe Vũ Trụ, đối tượng mới Xe tải) | – | `src/xe-tai-vu-tru--giao-hang-lien-hanh-tinh.png` | ghi trong file |
+| Xe Xúc Đào Kho Báu Thiên Thạch (Đội Xe Vũ Trụ, đối tượng mới Xe xúc) | – | `src/xe-xuc-vu-tru--dao-kho-bau-thien-thach.png` | ghi trong file |
