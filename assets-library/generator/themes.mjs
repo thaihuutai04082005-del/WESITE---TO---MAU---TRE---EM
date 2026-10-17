@@ -85,6 +85,7 @@ export const OBJECTS = [
   O('thi-tran-khung-long', 'duc-long', 'Dực long', 'Pterosaur', { face: { x: 300, y: 228, s: 0.7 }, mouth: false, hat: { x: 300, y: 182, s: 0.75 }, animation: 'fly', left: 180, right: 420, build: B.khungLongDucLong }),
   O('thi-tran-khung-long', 'khung-long-mao-ken', 'Khủng long mào kèn', 'Parasaurolophus', { face: { x: 300, y: 248, s: 0.95 }, hat: { x: 316, y: 184, s: 0.85 }, left: 208, right: 392, build: B.khungLongMaoKen }),
   O('thi-tran-khung-long', 'khung-long-boc-giap', 'Khủng long bọc giáp', 'Ankylosaurus', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
+  O('thi-tran-khung-long', 'khung-long-dau-vom', 'Khủng long đầu vòm', 'Dome-head dino', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 08 — Trái cây × Thể thao
   reuse('the-thao-trai-cay', 'tao', 'tao-the-thao', 'Táo', 'Apple'),
@@ -352,6 +353,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'khung-long-dau-vom--giao-vien': 'khung-long-dau-vom--giao-vien',
   'khung-long-mao-ken--tho-lam-vuon': 'khung-long-mao-ken--tho-lam-vuon',
   'khung-long-boc-giap--tho-xay': 'khung-long-boc-giap--tho-xay',
   'duc-long--phi-cong': 'duc-long--phi-cong',
@@ -393,6 +395,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'khung-long-dau-vom--giao-vien': { vi: 'Khủng Long Đầu Vòm Giáo Viên', en: 'Dome-head Teacher' },
   'khung-long-mao-ken--tho-lam-vuon': { vi: 'Khủng Long Mỏ Vịt Thợ Làm Vườn', en: 'Duck-bill Gardener' },
   'khung-long-boc-giap--tho-xay': { vi: 'Khủng Long Bọc Giáp Thợ Xây', en: 'Armored Dino Builder' },
   'duc-long--phi-cong': { vi: 'Dực Long Phi Công', en: 'Pterosaur Pilot' },
