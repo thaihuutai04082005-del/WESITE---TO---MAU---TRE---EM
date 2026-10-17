@@ -28,6 +28,7 @@ const M = {
   // 03 · Đội Xe Chinh Phục Vũ Trụ
   'xe-dua': { 'phan-luc': ['marsDesert', 'space'], 'dua-vong-quanh-hanh-tinh': ['nebula', 'space'], 'dua-tren-duong-sao': ['galaxy', 'deep'], 'vuot-mua-thien-thach': ['asteroidBelt', 'space'], 've-dich-ngan-ha': ['moonSurface', 'nebula'] },
   'xe-buyt-vu-tru': { 'cho-phi-hanh-gia': ['moonSurface', 'space'], 'kinh-vom-khong-gian': ['alienJungle', 'alien'], 'nhun-nhay-hanh-tinh-la': ['marsDesert', 'nebula'], 'tram-dung-vu-tru': ['moonSurface', 'deep'], 'chay-tren-vanh-dai': ['ringPlanet', 'space'] },
+  'xe-tai-vu-tru': { 'giao-hang-lien-hanh-tinh': ['galaxy', 'mint'] },
   'xe-cuu-hoa': { 'dap-lua-thien-thach': ['marsDesert', 'deep'], 'thang-len-tram': ['moonSurface', 'alien'], 'cuu-ho-tau-vu-tru': ['nebula', 'nebula'], 'phun-bot': ['stationInside', 'space'], 'tuan-tra-hanh-tinh-la': ['alienJungle', 'deep'] },
   'tau-hoa-vu-tru': { 'duong-ray-ngan-ha': ['galaxy', 'dusk'], 'toc-hanh-xuyen-sao': ['nebula', 'deep'], 'cho-hang-len-tram': ['asteroidBelt', 'nebula'], 'duong-ham-vu-tru': ['galaxy', 'nebula'], 'toa-kinh-ngam-sao': ['starField', 'space'] },
   'may-bay-vu-tru': { 'canh-ten-lua': ['ringPlanet', 'nebula'], 'bay-qua-vong-hanh-tinh': ['nebula', 'alien'], 'nhao-lon-giua-sao': ['galaxy', 'alien'], 'tiep-nhien-lieu': ['asteroidBelt', 'deep'], 'ha-canh-hanh-tinh-la': ['marsDesert', 'alien'] },

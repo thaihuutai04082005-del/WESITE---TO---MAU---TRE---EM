@@ -72,6 +72,7 @@ export const OBJECTS = [
   reuse('doi-xe-vu-tru', 'tau-hoa', 'tau-hoa-vu-tru', 'Tàu hỏa', 'Train'),
   reuse('doi-xe-vu-tru', 'may-bay', 'may-bay-vu-tru', 'Máy bay', 'Airplane'),
   O('doi-xe-vu-tru', 'truc-thang', 'Trực thăng', 'Helicopter', { face: { x: 300, y: 372, s: 0.5 }, hat: { x: 310, y: 226, s: 0.6 }, animation: 'fly', build: B.trucThang }),
+  O('doi-xe-vu-tru', 'xe-tai-vu-tru', 'Xe tải', 'Truck', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 07 — Khủng long × Nghề nghiệp
   O('thi-tran-khung-long', 'khung-long-bao-chua', 'Khủng long bạo chúa', 'T-Rex', { face: { x: 300, y: 248, s: 1 }, hat: { x: 300, y: 172, s: 0.95 }, left: 208, right: 392, build: B.khungLongBaoChua }),
@@ -344,6 +345,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
   'truc-thang--tha-du-tiep-te': 'truc-thang--tha-du-tiep-te',
   'may-bay-vu-tru--bay-qua-vong-hanh-tinh': 'may-bay-vu-tru--bay-qua-vong-hanh-tinh',
   'tau-hoa-vu-tru--duong-ray-ngan-ha': 'tau-hoa-vu-tru--duong-ray-ngan-ha',
@@ -375,6 +377,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': { vi: 'Xe Tải Giao Hàng Liên Hành Tinh', en: 'Interplanetary Delivery Truck' },
   'truc-thang--tha-du-tiep-te': { vi: 'Trực Thăng Thả Dù Tiếp Tế', en: 'Supply Drop Helicopter' },
   'may-bay-vu-tru--bay-qua-vong-hanh-tinh': { vi: 'Máy Bay Vòng Quanh Hành Tinh', en: 'Around the Planet Plane' },
   'tau-hoa-vu-tru--duong-ray-ngan-ha': { vi: 'Tàu Hỏa Đường Ray Ngân Hà', en: 'Galaxy Railway Train' },
