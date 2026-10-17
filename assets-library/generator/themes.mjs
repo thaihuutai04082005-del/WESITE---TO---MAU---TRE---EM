@@ -329,8 +329,8 @@ export const CARD_ART = [
 // Tranh thường (không phải thẻ) thay bằng tranh vẽ tay: "<đối tượng>--<biến thể>" → file trong art/.
 /** Tranh đứng đầu trang chọn tranh của chủ đề (hàng 1 = 5 tranh đầu, hàng 2 = 5 tranh kế), theo thứ tự: khoá = `<đối tượng>--<biến thể>`. */
 export const THEME_FIRST = {
-  'vuong-quoc-keo-ngot': ['donut--nha-vua', 'cupcake--cong-chua', 'keo-mut--hoang-tu', 'kem-oc-que--nu-hoang-bang-gia', 'banh-quy--linh-gac',
-    'banh-kem--hoang-hau', 'keo-mut--hiep-si', 'macaron--cung-nu', 'banh-gung--dau-bep', 'socola--te-tuong'],
+  'vuong-quoc-keo-ngot': ['donut--nha-vua', 'cupcake--cong-chua', 'keo-mut--hoang-tu', 'kem-oc-que--nu-hoang-bang-gia', 'banh-kem--hoang-hau',
+    'banh-quy--linh-gac', 'keo-mut--hiep-si', 'macaron--cung-nu', 'banh-gung--dau-bep', 'socola--te-tuong'],
   'anh-hung-sieu-thu': ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc',
     'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
 };

@@ -110,6 +110,8 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   // Vương Quốc Bánh Kẹo: chỉ hiện 10 tranh vẽ tay, tên theo công thức "bánh/kẹo + chức vụ".
   const sweets = await api('GET', '/themes/vuong-quoc-keo-ngot/pictures');
   assert.equal(sweets.body.pictures.length, 10);
+  assert.equal(sweets.body.pictures[4].slug, 'banh-kem--hoang-hau');
+  assert.equal(sweets.body.pictures[5].slug, 'banh-quy--linh-gac'); // đầu hàng 2
   assert.deepEqual(sweets.body.pictures.slice(6).map((p) => p.name.vi), ['Kẹo Dẻo Hiệp Sĩ', 'Macaron Cung Nữ', 'Bánh Gừng Đầu Bếp', 'Socola Tể Tướng']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 10);
