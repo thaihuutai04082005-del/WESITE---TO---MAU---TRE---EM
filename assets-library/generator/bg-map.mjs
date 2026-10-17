@@ -20,6 +20,7 @@ const M = {
   'keo-mut': { 'hoang-tu': ['meadow', 'morning'], 'hiep-si': ['forest', 'day'], 'can-ve-cam-giao': ['city', 'pink'], 'nhac-cong-ken-dong': ['stage', 'sunset'], 'phap-su-keo-ngot': ['starField', 'dusk'] },
   'kem-oc-que': { 'nu-hoang-bang-gia': ['aurora', 'dusk'], 'thi-nu-quat-long': ['spring', 'sunset'], 'tho-lam-vuon': ['garden', 'morning'], 'dau-bep-hoang-gia': ['kitchen', 'day'], 'ngu-trua-goi-nhung': ['bedroom', 'night'] },
   'banh-quy': { 'linh-gac': ['snowVillage', 'day'], 'thu-kho-chia-khoa': ['workshop', 'morning'], 'thu-thu-hoang-gia': ['library', 'day'], 'nguoi-gac-chuong': ['meadow', 'sunset'], 'xa-thu-cung-ten': ['forest', 'sunset'] },
+  'socola': { 'te-tuong': ['palaceHall', 'peach'] },
   'banh-gung': { 'dau-bep': ['kitchen', 'morning'] },
   'macaron': { 'cung-nu': ['palaceHall', 'morning'] },
   'banh-kem': { 'hoang-hau': ['palaceHall', 'mint'], 'dam-cuoi-co-tich': ['spring', 'mint'], 'dem-hoi-anh-nen': ['starField', 'deep'], 'yen-tiec-hoang-cung': ['meadow', 'dusk'], 'qua-mung-sinh-nhat-vua': ['rainbowHills', 'sunset'] },

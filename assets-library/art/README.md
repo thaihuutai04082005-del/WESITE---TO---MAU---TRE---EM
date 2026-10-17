@@ -45,6 +45,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Hiệp sĩ kẹo dẻo (Vương Quốc Bánh Kẹo, thay biến thể Hiệp Sĩ của Kẹo mút; tên tranh "Hiệp Sĩ Kẹo Dẻo") | – | `src/keo-mut--hiep-si.png` | 76 |
 | Cung nữ macaron (Vương Quốc Bánh Kẹo, đối tượng mới Macaron) | – | `src/macaron--cung-nu.png` | 82 |
 | Đầu bếp bánh gừng (Vương Quốc Bánh Kẹo, đối tượng mới Bánh gừng) | – | `src/banh-gung--dau-bep.png` | 79 |
+| Tể tướng socola (Vương Quốc Bánh Kẹo, đối tượng mới Socola) | – | `src/socola--te-tuong.png` | 102 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
