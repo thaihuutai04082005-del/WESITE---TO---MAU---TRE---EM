@@ -270,6 +270,9 @@ const XE = {
     SV('tram-dung-vu-tru', 'Trạm Dừng Vũ Trụ', 'Space Bus Stop', { scene: ['station'], transform: { tx: 40, scale: 0.9, px: 300, py: 480 }, acc: () => ({ mid: X.busStop(70, 480) }) }),
     SV('chay-tren-vanh-dai', 'Chạy Trên Vành Đai Hành Tinh', 'Planet Ring Road', { transform: { ty: -30, scale: 0.8, px: 300, py: 480 }, acc: () => ({ back: X.bigPlanet(300, 520, 150, '#FFB74D'), mid: X.ringRoad() }) }),
   ],
+  'xe-tai-vu-tru': [
+    V('giao-hang-lien-hanh-tinh', 'Giao Hàng Liên Hành Tinh', 'Interplanetary Delivery', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'xe-cuu-hoa': [
     SV('dap-lua-thien-thach', 'Dập Lửa Thiên Thạch', 'Meteor Firefighter', { acc: () => ({ fg: [...X.flamingMeteor(110, 160), ...X.waterJet(330, 380, 150, 200, [270, 170], '#4FC3F7', false)] }) }),
     SV('thang-len-tram', 'Thang Lên Trạm Vũ Trụ', 'Ladder to the Station', { scene: ['station'], acc: () => ({ mid: X.ladderUp(260, 300, 200, 150) }) }),
