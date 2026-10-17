@@ -388,7 +388,7 @@ h3,
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-9px);
+    transform: translateY(-7px);
   }
 }
 @keyframes cloud-bob {
@@ -397,7 +397,7 @@ h3,
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-7px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
