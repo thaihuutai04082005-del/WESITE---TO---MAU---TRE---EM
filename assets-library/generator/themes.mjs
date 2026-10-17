@@ -344,6 +344,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'truc-thang--tha-du-tiep-te': 'truc-thang--tha-du-tiep-te',
   'may-bay-vu-tru--bay-qua-vong-hanh-tinh': 'may-bay-vu-tru--bay-qua-vong-hanh-tinh',
   'tau-hoa-vu-tru--duong-ray-ngan-ha': 'tau-hoa-vu-tru--duong-ray-ngan-ha',
   'xe-cuu-hoa--dap-lua-thien-thach': 'xe-cuu-hoa--dap-lua-thien-thach',
@@ -374,6 +375,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'truc-thang--tha-du-tiep-te': { vi: 'Trực Thăng Thả Dù Tiếp Tế', en: 'Supply Drop Helicopter' },
   'may-bay-vu-tru--bay-qua-vong-hanh-tinh': { vi: 'Máy Bay Vòng Quanh Hành Tinh', en: 'Around the Planet Plane' },
   'tau-hoa-vu-tru--duong-ray-ngan-ha': { vi: 'Tàu Hỏa Đường Ray Ngân Hà', en: 'Galaxy Railway Train' },
   'xe-cuu-hoa--dap-lua-thien-thach': { vi: 'Xe Cứu Hỏa Dập Lửa Thiên Hà', en: 'Galaxy Fire Truck' },
