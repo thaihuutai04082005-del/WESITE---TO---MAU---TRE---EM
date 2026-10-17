@@ -61,6 +61,7 @@ export const OBJECTS = [
   O('vuong-quoc-keo-ngot', 'kem-oc-que', 'Kem ốc quế', 'Ice cream cone', { face: { x: 300, y: 276, s: 0.62 }, hat: { x: 300, y: 156, s: 1.05 }, build: B.kemOcQue }),
   O('vuong-quoc-keo-ngot', 'banh-quy', 'Bánh quy', 'Cookie', { face: { x: 300, y: 318, s: 0.9 }, hat: { x: 300, y: 180, s: 1.25 }, build: B.banhQuy }),
   O('vuong-quoc-keo-ngot', 'banh-kem', 'Bánh kem nhiều tầng', 'Layer cake', { face: { x: 300, y: 428, s: 0.6 }, hat: { x: 300, y: 234, s: 0.9 }, build: B.banhKem }),
+  O('vuong-quoc-keo-ngot', 'macaron', 'Macaron', 'Macaron', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 03 — Phương tiện × Không gian
   O('doi-xe-vu-tru', 'xe-dua', 'Xe đua', 'Race car', { face: { x: 440, y: 386, s: 0.42 }, hat: { x: 318, y: 306, s: 0.7 }, glow: ['den-truoc'], build: B.xeDua }),
@@ -339,6 +340,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'macaron--cung-nu': 'macaron--cung-nu',
   'keo-mut--hiep-si': 'keo-mut--hiep-si',
   'banh-kem--hoang-hau': 'banh-kem--hoang-hau',
   'banh-quy--linh-gac': 'banh-quy--linh-gac',
@@ -362,6 +364,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'macaron--cung-nu': { vi: 'Cung Nữ Macaron', en: 'Macaron Maid' },
   'keo-mut--hiep-si': { vi: 'Hiệp Sĩ Kẹo Dẻo', en: 'Gummy Knight' },
   'canh-cut-sieu-thu--bang-gia': { vi: 'Chim Cánh Cụt Băng Giá', en: 'Frost Penguin' },
   'khi-sieu-thu--day-leo-than-toc': { vi: 'Khỉ Dây Leo Thần Tốc', en: 'Lightning Vine Monkey' },
