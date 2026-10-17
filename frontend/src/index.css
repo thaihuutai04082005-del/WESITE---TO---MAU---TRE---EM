@@ -402,16 +402,15 @@ h3,
 }
 /* Gấu chào: chớp mắt thường xuyên, thỉnh thoảng giơ cọ và bảng màu lên */
 .bear-eyes {
-  transform-box: fill-box;
-  transform-origin: center;
+  transform-origin: 50% 30.3%;
   animation: bear-blink 4.5s infinite;
 }
 .bear-arm-l {
-  transform-origin: 395px 720px;
+  transform-origin: 25.2% 57.4%;
   animation: bear-raise-l 14s ease-in-out infinite;
 }
 .bear-arm-r {
-  transform-origin: 830px 730px;
+  transform-origin: 67.2% 58.3%;
   animation: bear-raise-r 14s ease-in-out 0.4s infinite;
 }
 @keyframes bear-blink {
@@ -433,13 +432,13 @@ h3,
   }
   64%,
   72% {
-    transform: rotate(38deg);
+    transform: rotate(26deg);
   }
   68% {
-    transform: rotate(30deg);
+    transform: rotate(20deg);
   }
   76% {
-    transform: rotate(34deg);
+    transform: rotate(23deg);
   }
 }
 @keyframes bear-raise-r {
@@ -451,13 +450,13 @@ h3,
   }
   64%,
   72% {
-    transform: rotate(-32deg);
+    transform: rotate(-30deg);
   }
   68% {
-    transform: rotate(-24deg);
+    transform: rotate(-23deg);
   }
   76% {
-    transform: rotate(-28deg);
+    transform: rotate(-27deg);
   }
 }
 @media (prefers-reduced-motion: reduce) {
