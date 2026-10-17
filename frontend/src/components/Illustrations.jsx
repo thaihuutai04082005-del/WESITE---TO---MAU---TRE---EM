@@ -171,6 +171,12 @@ export function SunCloud({ className = '' }) {
   return (
     <svg viewBox="0 0 160 110" className={className} aria-hidden="true">
       <g className="sun-bob">
+        <g stroke="#FFC94D" strokeWidth="5" strokeLinecap="round">
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
+            const r = (a * Math.PI) / 180;
+            return <path key={a} d={`M${60 + 32 * Math.cos(r)} ${42 + 32 * Math.sin(r)} L${60 + 42 * Math.cos(r)} ${42 + 42 * Math.sin(r)}`} />;
+          })}
+        </g>
         <circle cx="60" cy="42" r="24" fill="#FFD54F" />
       </g>
       <path className="cloud-bob" d="M70 96 Q52 96 56 80 Q56 64 76 66 Q84 48 104 54 Q122 46 130 64 Q150 64 146 82 Q152 96 136 96 Z" fill="#FFFFFF" opacity="0.95" />
