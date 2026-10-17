@@ -82,3 +82,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Xe Cảnh Sát Tuần Tra Ngân Hà (Đội Xe Vũ Trụ, đối tượng mới Xe cảnh sát) | – | `src/xe-canh-sat-vu-tru--tuan-tra-ngan-ha.png` | ghi trong file |
 | Khủng Long Cổ Dài Lau Kính Toàn Nhà (Thị Trấn Khủng Long) | – | `src/khung-long-co-dai--tho-lau-kinh.png` | ghi trong file |
 | Khủng Long Ba Sừng Bác Sĩ (Thị Trấn Khủng Long) | – | `src/khung-long-ba-sung--bac-si.png` | ghi trong file |
+| Khủng Long Lưng Gai Nông Dân (Thị Trấn Khủng Long) | – | `src/khung-long-gai-lung--nong-dan.png` | ghi trong file |
