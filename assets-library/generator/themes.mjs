@@ -75,6 +75,7 @@ export const OBJECTS = [
   O('doi-xe-vu-tru', 'xe-tai-vu-tru', 'Xe tải', 'Truck', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('doi-xe-vu-tru', 'xe-xuc-vu-tru', 'Xe xúc', 'Excavator', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('doi-xe-vu-tru', 'xe-tuk-tuk-vu-tru', 'Xe túc túc', 'Tuk-tuk', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
+  O('doi-xe-vu-tru', 'xe-canh-sat-vu-tru', 'Xe cảnh sát', 'Police car', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 07 — Khủng long × Nghề nghiệp
   O('thi-tran-khung-long', 'khung-long-bao-chua', 'Khủng long bạo chúa', 'T-Rex', { face: { x: 300, y: 248, s: 1 }, hat: { x: 300, y: 172, s: 0.95 }, left: 208, right: 392, build: B.khungLongBaoChua }),
@@ -347,6 +348,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'xe-canh-sat-vu-tru--tuan-tra-ngan-ha': 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha',
   'xe-tuk-tuk-vu-tru--di-dao-thien-ha': 'xe-tuk-tuk-vu-tru--di-dao-thien-ha',
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': 'xe-xuc-vu-tru--dao-kho-bau-thien-thach',
   'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
@@ -381,6 +383,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'xe-canh-sat-vu-tru--tuan-tra-ngan-ha': { vi: 'Xe Cảnh Sát Tuần Tra Ngân Hà', en: 'Galaxy Patrol Police Car' },
   'xe-tuk-tuk-vu-tru--di-dao-thien-ha': { vi: 'Xe Túc Túc Đi Dạo Thiên Hà', en: 'Galaxy Stroll Tuk-tuk' },
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': { vi: 'Xe Xúc Đào Kho Báu Thiên Thạch', en: 'Asteroid Treasure Excavator' },
   'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': { vi: 'Xe Tải Giao Hàng Liên Hành Tinh', en: 'Interplanetary Delivery Truck' },
