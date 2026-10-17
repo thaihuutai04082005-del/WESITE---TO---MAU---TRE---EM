@@ -344,6 +344,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'xe-buyt-vu-tru--cho-phi-hanh-gia': 'xe-buyt-vu-tru--cho-phi-hanh-gia',
   'socola--te-tuong': 'socola--te-tuong',
   'banh-gung--dau-bep': 'banh-gung--dau-bep',
   'macaron--cung-nu': 'macaron--cung-nu',
@@ -370,6 +371,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'xe-buyt-vu-tru--cho-phi-hanh-gia': { vi: 'Xe Buýt Chở Phi Hành Gia', en: 'Astronaut Bus' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
