@@ -74,6 +74,7 @@ export const OBJECTS = [
   O('doi-xe-vu-tru', 'truc-thang', 'Trực thăng', 'Helicopter', { face: { x: 300, y: 372, s: 0.5 }, hat: { x: 310, y: 226, s: 0.6 }, animation: 'fly', build: B.trucThang }),
   O('doi-xe-vu-tru', 'xe-tai-vu-tru', 'Xe tải', 'Truck', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('doi-xe-vu-tru', 'xe-xuc-vu-tru', 'Xe xúc', 'Excavator', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
+  O('doi-xe-vu-tru', 'xe-tuk-tuk-vu-tru', 'Xe túc túc', 'Tuk-tuk', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 07 — Khủng long × Nghề nghiệp
   O('thi-tran-khung-long', 'khung-long-bao-chua', 'Khủng long bạo chúa', 'T-Rex', { face: { x: 300, y: 248, s: 1 }, hat: { x: 300, y: 172, s: 0.95 }, left: 208, right: 392, build: B.khungLongBaoChua }),
@@ -346,6 +347,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'xe-tuk-tuk-vu-tru--di-dao-thien-ha': 'xe-tuk-tuk-vu-tru--di-dao-thien-ha',
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': 'xe-xuc-vu-tru--dao-kho-bau-thien-thach',
   'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
   'truc-thang--tha-du-tiep-te': 'truc-thang--tha-du-tiep-te',
@@ -379,6 +381,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'xe-tuk-tuk-vu-tru--di-dao-thien-ha': { vi: 'Xe Túc Túc Đi Dạo Thiên Hà', en: 'Galaxy Stroll Tuk-tuk' },
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': { vi: 'Xe Xúc Đào Kho Báu Thiên Thạch', en: 'Asteroid Treasure Excavator' },
   'xe-tai-vu-tru--giao-hang-lien-hanh-tinh': { vi: 'Xe Tải Giao Hàng Liên Hành Tinh', en: 'Interplanetary Delivery Truck' },
   'truc-thang--tha-du-tiep-te': { vi: 'Trực Thăng Thả Dù Tiếp Tế', en: 'Supply Drop Helicopter' },

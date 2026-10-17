@@ -270,6 +270,9 @@ const XE = {
     SV('tram-dung-vu-tru', 'Trạm Dừng Vũ Trụ', 'Space Bus Stop', { scene: ['station'], transform: { tx: 40, scale: 0.9, px: 300, py: 480 }, acc: () => ({ mid: X.busStop(70, 480) }) }),
     SV('chay-tren-vanh-dai', 'Chạy Trên Vành Đai Hành Tinh', 'Planet Ring Road', { transform: { ty: -30, scale: 0.8, px: 300, py: 480 }, acc: () => ({ back: X.bigPlanet(300, 520, 150, '#FFB74D'), mid: X.ringRoad() }) }),
   ],
+  'xe-tuk-tuk-vu-tru': [
+    V('di-dao-thien-ha', 'Đi Dạo Thiên Hà', 'Galaxy Stroll', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'xe-xuc-vu-tru': [
     V('dao-kho-bau-thien-thach', 'Đào Kho Báu Thiên Thạch', 'Asteroid Treasure Dig', { scene: ['stars'], acc: () => ({}) }),
   ],
