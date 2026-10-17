@@ -174,7 +174,7 @@ export function SunCloud({ className = '' }) {
         {/* Mặt trời đặt thấp xuống để luôn dính một phần vào đám mây dù đang nhún lên */}
         <g transform="translate(0 14)">
           <g stroke="#FFC94D" strokeWidth="5" strokeLinecap="round">
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
+            {[0, 135, 180, 225, 270, 315].map((a) => {
               const r = (a * Math.PI) / 180;
               return <path key={a} d={`M${60 + 32 * Math.cos(r)} ${42 + 32 * Math.sin(r)} L${60 + 42 * Math.cos(r)} ${42 + 42 * Math.sin(r)}`} />;
             })}
