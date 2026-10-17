@@ -42,6 +42,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Kem ốc quế nữ hoàng băng giá (Vương Quốc Bánh Kẹo, thay biến thể Nữ Hoàng Băng Giá của Kem ốc quế) | – | `src/kem-oc-que--nu-hoang-bang-gia.png` | 36 |
 | Bánh quy lính gác (Vương Quốc Bánh Kẹo, thay biến thể Lính Gác của Bánh quy) | – | `src/banh-quy--linh-gac.png` | 48 |
 | Bánh kem nhiều tầng hoàng hậu (Vương Quốc Bánh Kẹo, thay biến thể Hoàng Hậu của Bánh kem) | – | `src/banh-kem--hoang-hau.png` | 44 |
+| Hiệp sĩ kẹo dẻo (Vương Quốc Bánh Kẹo, thay biến thể Hiệp Sĩ của Kẹo mút; tên tranh "Hiệp Sĩ Kẹo Dẻo") | – | `src/keo-mut--hiep-si.png` | 76 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
