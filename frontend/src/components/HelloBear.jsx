@@ -1,41 +1,9 @@
-import { useEffect, useRef } from 'react';
-import { isSoundOn } from '../lib/sound';
-
-const VOICE_URL = '/sounds/xin-chao.mp3';
-
-/** Gấu họa sĩ ở trang chủ: luôn nhúc nhích nhẹ, chớp mắt, thỉnh thoảng giơ cọ và chào bằng giọng nói (không hiện chữ). */
+/** Gấu họa sĩ ở trang chủ: luôn nhúc nhích nhẹ, chớp mắt, thỉnh thoảng giơ cọ lên. */
 export default function HelloBear({ className = '' }) {
-  const voice = useRef(null);
-
-  const speak = () => {
-    try {
-      if (!isSoundOn()) return;
-      if (!voice.current) voice.current = new Audio(VOICE_URL);
-      const a = voice.current;
-      if (!a.paused) return;
-      a.currentTime = 0;
-      // Trình duyệt chặn tiếng tự phát khi bé chưa chạm vào trang: lần này bỏ qua, lần chào sau sẽ kêu
-      a.play().catch(() => {});
-    } catch {
-      /* bỏ qua */
-    }
-  };
-
-  useEffect(() => {
-    const first = setTimeout(speak, 6000);
-    const loop = setInterval(speak, 45000);
-    return () => {
-      clearTimeout(first);
-      clearInterval(loop);
-      voice.current?.pause();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={`relative ${className}`}>
       {/* Ảnh gốc được cắt thành lớp: thân, đầu (kèm mắt), tay cầm cọ, tay cầm bảng màu — để từng phần cử động riêng */}
-      <div className="relative mx-auto h-full cursor-pointer" style={{ aspectRatio: '640 / 751' }} onClick={speak} role="img" aria-label="Bear painter">
+      <div className="relative mx-auto h-full" style={{ aspectRatio: '640 / 751' }} role="img" aria-label="Bear painter">
         <div className="bear-sway absolute inset-0">
           <div className="bear-breathe absolute inset-0">
             <div className="bear-leg-l absolute inset-0">
