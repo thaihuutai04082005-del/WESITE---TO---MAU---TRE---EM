@@ -356,6 +356,7 @@ const KHUNG_LONG = {
     V('tho-xay', 'Thợ Xây', 'Builder', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
   'khung-long-mao-ken': [
+    V('tho-lam-vuon', 'Thợ Làm Vườn', 'Gardener', { scene: ['sun', 'flowers'], acc: () => ({}) }),
     V('nha-tham-hiem', 'Nhà Thám Hiểm', 'Explorer', { scene: ['sun', 'clouds', 'flowers', 'butterfly'], acc: (c) => ({ behind: A.backpack(c), front: A.safariHat(c) }) }),
     V('nhac-cong-ken', 'Nhạc Công Kèn', 'Horn Player', { scene: ['clouds'], acc: (c) => ({ front: [...X.beret(c, '#7D5FFF'), ...X.trumpet(c.right - 30, c.face.y + 40), ...X.musicNotes('not-nhac', [[490, 120], [540, 200], [90, 160]])] }) }),
     V('nha-khao-co', 'Nhà Khảo Cổ', 'Archaeologist', { scene: ['sun', 'volcano'], acc: (c) => ({ front: A.safariHat({ ...c, hat: { ...c.hat, s: c.hat.s * 0.9 } }), fg: X.fossil(430, 540) }) }),
