@@ -166,11 +166,11 @@ export function MissionArt() {
   );
 }
 
-/** Mặt trời + mây trang trí góc phải lời chào: mặt trời xoay chậm, đám mây nhún lên xuống nhẹ. */
+/** Mặt trời + mây trang trí góc phải lời chào: mặt trời và đám mây nhún lên xuống. */
 export function SunCloud({ className = '' }) {
   return (
     <svg viewBox="0 0 160 110" className={className} aria-hidden="true">
-      <g className="sun-spin">
+      <g className="sun-bob">
         <g stroke="#FFC94D" strokeWidth="5" strokeLinecap="round">
           {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
             const r = (a * Math.PI) / 180;
