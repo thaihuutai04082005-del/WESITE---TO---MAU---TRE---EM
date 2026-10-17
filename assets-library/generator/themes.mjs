@@ -351,6 +351,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'duc-long--phi-cong': 'duc-long--phi-cong',
   'khung-long-gai-lung--nong-dan': 'khung-long-gai-lung--nong-dan',
   'khung-long-ba-sung--bac-si': 'khung-long-ba-sung--bac-si',
   'khung-long-co-dai--tho-lau-kinh': 'khung-long-co-dai--tho-lau-kinh',
@@ -389,6 +390,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'duc-long--phi-cong': { vi: 'Dực Long Phi Công', en: 'Pterosaur Pilot' },
   'khung-long-gai-lung--nong-dan': { vi: 'Khủng Long Lưng Gai Nông Dân', en: 'Stegosaurus Farmer' },
   'khung-long-ba-sung--bac-si': { vi: 'Khủng Long Ba Sừng Bác Sĩ', en: 'Triceratops Doctor' },
   'khung-long-co-dai--tho-lau-kinh': { vi: 'Khủng Long Cổ Dài Lau Kính Toàn Nhà', en: 'Long-neck Window Washer' },
