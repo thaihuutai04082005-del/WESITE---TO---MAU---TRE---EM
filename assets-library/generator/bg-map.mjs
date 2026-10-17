@@ -44,7 +44,7 @@ const M = {
   'khung-long-gai-lung': { 'nong-dan': ['farm', 'morning'], 'tho-lam-vuon': ['garden', 'dusk'], 'tho-gom': ['workshop', 'sunset'], 'tho-dan-len': ['snowVillage', 'morning'], 'nguoi-quet-la': ['autumn', 'sunset'] },
   'duc-long': { 'phi-cong': ['cloudland', 'morning'], 'nha-du-bao-thoi-tiet': ['rainyStreet', 'dusk'], 'nhiep-anh-gia': ['jungle', 'day'], 'nguoi-lam-dieu': ['meadow', 'pink'], 'cuu-ho-bo-bien': ['beach', 'day'] },
   'khung-long-boc-giap': { 'tho-xay': ['tinyTown', 'mint'] },
-  'khung-long-mao-ken': { 'nha-tham-hiem': ['jungle', 'morning'], 'nhac-cong-ken': ['stage', 'morning'], 'nha-khao-co': ['desert', 'sunset'], 'huong-dan-vien': ['waterfall', 'morning'], 'tham-tu': ['library', 'dusk'] },
+  'khung-long-mao-ken': { 'tho-lam-vuon': ['garden', 'noon'], 'nha-tham-hiem': ['jungle', 'morning'], 'nhac-cong-ken': ['stage', 'morning'], 'nha-khao-co': ['desert', 'sunset'], 'huong-dan-vien': ['waterfall', 'morning'], 'tham-tu': ['library', 'dusk'] },
 
   // 08 · Đại Hội Thể Thao Trái Cây
   'tao-the-thao': { 'da-bong': ['stadium', 'day'], 'chay-tiep-suc': ['stadium', 'morning'], 'ban-cung': ['park', 'sunset'], 'dau-kiem': ['gym', 'day'], 'cu-ta': ['gym', 'pink'] },

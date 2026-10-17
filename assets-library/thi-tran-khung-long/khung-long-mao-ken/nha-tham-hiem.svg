@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="khung-long-mao-ken--nha-tham-hiem">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="110" rx="44" ry="44" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 56.5 93.8 Q 40 93.8 44.4 80 Q 41.1 60.8 64.8 60.8 Q 70.3 42.6 90.6 47 Q 104.9 31.6 121.4 49.8 Q 145.6 45.9 142.3 70.1 Q 152.2 93.8 133.5 93.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
+<path d="M 466.5 93.8 Q 450 93.8 454.4 80 Q 451.1 60.8 474.8 60.8 Q 480.3 42.6 500.6 47 Q 514.9 31.6 531.4 49.8 Q 555.6 45.9 552.3 70.1 Q 562.2 93.8 543.5 93.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="40" cy="330" rx="90" ry="40" transform="rotate(-50 40 330)" id="r-la-to-1" data-region="la-to-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="560" cy="300" rx="90" ry="40" transform="rotate(50 560 300)" id="r-la-to-2" data-region="la-to-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <ellipse cx="70" cy="430" rx="70" ry="30" transform="rotate(20 70 430)" id="r-la-to-3" data-region="la-to-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>

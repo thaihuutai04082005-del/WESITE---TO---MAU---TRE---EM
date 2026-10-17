@@ -352,6 +352,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'khung-long-mao-ken--tho-lam-vuon': 'khung-long-mao-ken--tho-lam-vuon',
   'khung-long-boc-giap--tho-xay': 'khung-long-boc-giap--tho-xay',
   'duc-long--phi-cong': 'duc-long--phi-cong',
   'khung-long-gai-lung--nong-dan': 'khung-long-gai-lung--nong-dan',
@@ -392,6 +393,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'khung-long-mao-ken--tho-lam-vuon': { vi: 'Khủng Long Mỏ Vịt Thợ Làm Vườn', en: 'Duck-bill Gardener' },
   'khung-long-boc-giap--tho-xay': { vi: 'Khủng Long Bọc Giáp Thợ Xây', en: 'Armored Dino Builder' },
   'duc-long--phi-cong': { vi: 'Dực Long Phi Công', en: 'Pterosaur Pilot' },
   'khung-long-gai-lung--nong-dan': { vi: 'Khủng Long Lưng Gai Nông Dân', en: 'Stegosaurus Farmer' },
