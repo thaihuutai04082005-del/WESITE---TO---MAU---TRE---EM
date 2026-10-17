@@ -339,6 +339,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'banh-kem--hoang-hau': 'banh-kem--hoang-hau',
   'banh-quy--linh-gac': 'banh-quy--linh-gac',
   'kem-oc-que--nu-hoang-bang-gia': 'kem-oc-que--nu-hoang-bang-gia',
   'keo-mut--hoang-tu': 'keo-mut--hoang-tu',
