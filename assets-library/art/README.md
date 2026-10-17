@@ -37,6 +37,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Heo siêu phàm ăn (Anh Hùng Siêu Thú, đối tượng mới Heo) | – | `src/heo-sieu-thu--sieu-pham-an.png` | 140 |
 | Khỉ dây leo thần tốc (Anh Hùng Siêu Thú, đối tượng mới Khỉ) | – | `src/khi-sieu-thu--day-leo-than-toc.png` | 188 |
 | Chim cánh cụt băng giá (Anh Hùng Siêu Thú, đối tượng mới Chim cánh cụt) | – | `src/canh-cut-sieu-thu--bang-gia.png` | 142 |
+| Cupcake công chúa (Vương Quốc Bánh Kẹo, thay biến thể Công Chúa của Cupcake) | – | `src/cupcake--cong-chua.png` | 71 |
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
