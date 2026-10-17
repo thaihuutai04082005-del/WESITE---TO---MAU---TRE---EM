@@ -84,3 +84,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Khủng Long Ba Sừng Bác Sĩ (Thị Trấn Khủng Long) | – | `src/khung-long-ba-sung--bac-si.png` | ghi trong file |
 | Khủng Long Lưng Gai Nông Dân (Thị Trấn Khủng Long) | – | `src/khung-long-gai-lung--nong-dan.png` | ghi trong file |
 | Dực Long Phi Công (Thị Trấn Khủng Long) | – | `src/duc-long--phi-cong.png` | ghi trong file |
+| Khủng Long Bọc Giáp Thợ Xây (Thị Trấn Khủng Long, đối tượng mới Khủng long bọc giáp) | – | `src/khung-long-boc-giap--tho-xay.png` | ghi trong file |
