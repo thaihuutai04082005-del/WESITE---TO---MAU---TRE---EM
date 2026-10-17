@@ -339,6 +339,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'keo-mut--hiep-si': 'keo-mut--hiep-si',
   'banh-kem--hoang-hau': 'banh-kem--hoang-hau',
   'banh-quy--linh-gac': 'banh-quy--linh-gac',
   'kem-oc-que--nu-hoang-bang-gia': 'kem-oc-que--nu-hoang-bang-gia',
@@ -361,6 +362,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'keo-mut--hiep-si': { vi: 'Hiệp Sĩ Kẹo Dẻo', en: 'Gummy Knight' },
   'canh-cut-sieu-thu--bang-gia': { vi: 'Chim Cánh Cụt Băng Giá', en: 'Frost Penguin' },
   'khi-sieu-thu--day-leo-than-toc': { vi: 'Khỉ Dây Leo Thần Tốc', en: 'Lightning Vine Monkey' },
   'heo-sieu-thu--sieu-pham-an': { vi: 'Heo Siêu Phàm Ăn', en: 'Super Foodie Pig' },
