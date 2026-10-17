@@ -234,6 +234,9 @@ const KEO = {
     V('nguoi-gac-chuong', 'Người Gác Chuông', 'Bell Keeper', { scene: ['clouds'], transform: { tx: -60, scale: 0.85, px: 300, py: 480 }, acc: () => ({ fg: X.bell(470, 250) }) }),
     V('xa-thu-cung-ten', 'Xạ Thủ Cung Tên', 'Archer', { scene: ['clouds'], transform: { tx: -40, px: 300, py: 480 }, acc: (c) => ({ front: [...A.safariHat(c), ...X.bowAndArrow(c.right + 20, (c.bb[1] + c.bb[3]) / 2)] }) }),
   ],
+  'macaron': [
+    V('cung-nu', 'Cung Nữ', 'Palace Maid', { scene: ['hearts', 'candyCanes'], acc: () => ({}) }),
+  ],
   'banh-kem': [
     V('hoang-hau', 'Hoàng Hậu', 'Queen', { scene: ['sun', 'candyCanes'], acc: (c) => ({ behind: X.robe(c, '#7D5FFF'), front: [...A.crown(c, '#FFD700', '#7DE2FF'), ...X.necklace(c)] }) }),
     V('dam-cuoi-co-tich', 'Đám Cưới Cổ Tích', 'Fairytale Wedding', { scene: ['hearts', 'flowers'], acc: (c) => ({ back: X.flowerArch(), front: X.bouquet(c.right + 40, c.bb[3] - 80) }) }),
