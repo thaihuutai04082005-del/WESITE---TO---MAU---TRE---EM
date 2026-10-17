@@ -351,6 +351,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'khung-long-co-dai--tho-lau-kinh': 'khung-long-co-dai--tho-lau-kinh',
   'xe-canh-sat-vu-tru--tuan-tra-ngan-ha': 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha',
   'xe-tuk-tuk-vu-tru--di-dao-thien-ha': 'xe-tuk-tuk-vu-tru--di-dao-thien-ha',
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': 'xe-xuc-vu-tru--dao-kho-bau-thien-thach',
@@ -386,6 +387,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'khung-long-co-dai--tho-lau-kinh': { vi: 'Khủng Long Cổ Dài Lau Kính Toàn Nhà', en: 'Long-neck Window Washer' },
   'xe-canh-sat-vu-tru--tuan-tra-ngan-ha': { vi: 'Xe Cảnh Sát Tuần Tra Ngân Hà', en: 'Galaxy Patrol Police Car' },
   'xe-tuk-tuk-vu-tru--di-dao-thien-ha': { vi: 'Xe Túc Túc Đi Dạo Thiên Hà', en: 'Galaxy Stroll Tuk-tuk' },
   'xe-xuc-vu-tru--dao-kho-bau-thien-thach': { vi: 'Xe Xúc Đào Kho Báu Thiên Thạch', en: 'Asteroid Treasure Excavator' },
