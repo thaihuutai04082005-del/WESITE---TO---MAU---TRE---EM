@@ -107,6 +107,12 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
   assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
   assert.deepEqual(hero.body.pictures.slice(5, 10).map((p) => p.slug), ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia']);
+  // Vương Quốc Bánh Kẹo: chỉ hiện 10 tranh vẽ tay, tên theo công thức "bánh/kẹo + chức vụ".
+  const sweets = await api('GET', '/themes/vuong-quoc-keo-ngot/pictures');
+  assert.equal(sweets.body.pictures.length, 10);
+  assert.equal(sweets.body.pictures[4].slug, 'banh-kem--hoang-hau');
+  assert.equal(sweets.body.pictures[5].slug, 'banh-quy--linh-gac'); // đầu hàng 2
+  assert.deepEqual(sweets.body.pictures.slice(6).map((p) => p.name.vi), ['Kẹo Dẻo Hiệp Sĩ', 'Macaron Cung Nữ', 'Bánh Gừng Đầu Bếp', 'Socola Tể Tướng']);
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 10);
   // Chủ đề này chỉ hiện đúng 10 tranh vẽ tay; các tranh tạo tự động bị ẩn.

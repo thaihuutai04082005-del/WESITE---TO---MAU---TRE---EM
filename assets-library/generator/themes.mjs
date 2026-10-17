@@ -329,12 +329,14 @@ export const CARD_ART = [
 // Tranh thường (không phải thẻ) thay bằng tranh vẽ tay: "<đối tượng>--<biến thể>" → file trong art/.
 /** Tranh đứng đầu trang chọn tranh của chủ đề (hàng 1 = 5 tranh đầu, hàng 2 = 5 tranh kế), theo thứ tự: khoá = `<đối tượng>--<biến thể>`. */
 export const THEME_FIRST = {
+  'vuong-quoc-keo-ngot': ['donut--nha-vua', 'cupcake--cong-chua', 'keo-mut--hoang-tu', 'kem-oc-que--nu-hoang-bang-gia', 'banh-kem--hoang-hau',
+    'banh-quy--linh-gac', 'keo-mut--hiep-si', 'macaron--cung-nu', 'banh-gung--dau-bep', 'socola--te-tuong'],
   'anh-hung-sieu-thu': ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc',
     'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
 };
 
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
-export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu'];
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot'];
 
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
@@ -368,10 +370,10 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
-  'socola--te-tuong': { vi: 'Tể Tướng Socola', en: 'Chocolate Chancellor' },
-  'banh-gung--dau-bep': { vi: 'Đầu Bếp Bánh Gừng', en: 'Gingerbread Chef' },
-  'macaron--cung-nu': { vi: 'Cung Nữ Macaron', en: 'Macaron Maid' },
-  'keo-mut--hiep-si': { vi: 'Hiệp Sĩ Kẹo Dẻo', en: 'Gummy Knight' },
+  'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
+  'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
+  'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
+  'keo-mut--hiep-si': { vi: 'Kẹo Dẻo Hiệp Sĩ', en: 'Gummy Knight' },
   'canh-cut-sieu-thu--bang-gia': { vi: 'Chim Cánh Cụt Băng Giá', en: 'Frost Penguin' },
   'khi-sieu-thu--day-leo-than-toc': { vi: 'Khỉ Dây Leo Thần Tốc', en: 'Lightning Vine Monkey' },
   'heo-sieu-thu--sieu-pham-an': { vi: 'Heo Siêu Phàm Ăn', en: 'Super Foodie Pig' },
