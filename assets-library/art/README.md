@@ -74,3 +74,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |
 | Xe Cứu Hỏa Dập Lửa Thiên Hà (Đội Xe Vũ Trụ) | – | `src/xe-cuu-hoa--dap-lua-thien-thach.png` | ghi trong file |
 | Tàu Hỏa Đường Ray Ngân Hà (Đội Xe Vũ Trụ) | – | `src/tau-hoa-vu-tru--duong-ray-ngan-ha.png` | ghi trong file |
+| Máy Bay Vòng Quanh Hành Tinh (Đội Xe Vũ Trụ) | – | `src/may-bay-vu-tru--bay-qua-vong-hanh-tinh.png` | ghi trong file |
