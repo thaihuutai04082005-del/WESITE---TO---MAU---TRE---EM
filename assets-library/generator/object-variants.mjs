@@ -352,6 +352,9 @@ const KHUNG_LONG = {
     V('nguoi-lam-dieu', 'Người Làm Diều', 'Kite Maker', { scene: ['clouds'], acc: () => ({ fg: [line('M 520 222 Q 530 190 500 150', 2.5), ...X.kite(470, 90)] }) }),
     V('cuu-ho-bo-bien', 'Cứu Hộ Bờ Biển', 'Lifeguard', { scene: ['sun'], ground: 'water', acc: (c) => ({ front: [...X.cap(c, '#FF5F5F', '#C0392B'), ...X.whistle(c), ...X.ringBuoy(c.right + 30, hy(c) - 20)] }) }),
   ],
+  'khung-long-dau-vom': [
+    V('giao-vien', 'Giáo Viên', 'Teacher', { scene: ['clouds'], acc: () => ({}) }),
+  ],
   'khung-long-boc-giap': [
     V('tho-xay', 'Thợ Xây', 'Builder', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
