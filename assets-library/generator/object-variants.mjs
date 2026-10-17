@@ -346,6 +346,7 @@ const KHUNG_LONG = {
     V('nguoi-quet-la', 'Người Quét Lá', 'Leaf Sweeper', { scene: ['wind'], sky: 'sunset', acc: (c) => ({ front: [...X.bucketHat(c, '#FFC94D'), ...X.broom(c.right + 20, c.bb[3])], fg: X.leaves('la-roi', [[80, 200, 20], [140, 300, -30], [500, 180, 40], [540, 330, -10], [110, 520, 10], [480, 540, 30]]) }) }),
   ],
   'duc-long': [
+    V('dua-thu', 'Đưa Thư', 'Mail Carrier', { scene: ['clouds', 'sun'], acc: () => ({}) }),
     V('phi-cong', 'Phi Công', 'Pilot', { scene: ['clouds', 'sun'], transform: { ty: -30, px: 300, py: 400 }, acc: (c) => ({ front: [...X.pilotCap(c), ...X.scarf(c, '#FF5F5F')] }) }),
     V('nha-du-bao-thoi-tiet', 'Nhà Dự Báo Thời Tiết', 'Weather Reporter', { scene: ['rain'], acc: (c) => ({ front: X.umbrella(c.cx, c.bb[1] - 30) }) }),
     V('nhiep-anh-gia', 'Nhiếp Ảnh Gia', 'Photographer', { scene: ['sun', 'butterfly'], acc: (c) => ({ front: [...X.beret(c, '#2F3640'), ...X.camera(c.right + 20, hy(c) - 60)] }) }),
