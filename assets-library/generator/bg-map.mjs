@@ -28,6 +28,7 @@ const M = {
   // 03 · Đội Xe Chinh Phục Vũ Trụ
   'xe-dua': { 'phan-luc': ['marsDesert', 'space'], 'dua-vong-quanh-hanh-tinh': ['nebula', 'space'], 'dua-tren-duong-sao': ['galaxy', 'deep'], 'vuot-mua-thien-thach': ['asteroidBelt', 'space'], 've-dich-ngan-ha': ['moonSurface', 'nebula'] },
   'xe-buyt-vu-tru': { 'cho-phi-hanh-gia': ['moonSurface', 'space'], 'kinh-vom-khong-gian': ['alienJungle', 'alien'], 'nhun-nhay-hanh-tinh-la': ['marsDesert', 'nebula'], 'tram-dung-vu-tru': ['moonSurface', 'deep'], 'chay-tren-vanh-dai': ['ringPlanet', 'space'] },
+  'xe-tuk-tuk-vu-tru': { 'di-dao-thien-ha': ['galaxy', 'pink'] },
   'xe-xuc-vu-tru': { 'dao-kho-bau-thien-thach': ['asteroidBelt', 'mint'] },
   'xe-tai-vu-tru': { 'giao-hang-lien-hanh-tinh': ['galaxy', 'mint'] },
   'xe-cuu-hoa': { 'dap-lua-thien-thach': ['marsDesert', 'deep'], 'thang-len-tram': ['moonSurface', 'alien'], 'cuu-ho-tau-vu-tru': ['nebula', 'nebula'], 'phun-bot': ['stationInside', 'space'], 'tuan-tra-hanh-tinh-la': ['alienJungle', 'deep'] },
