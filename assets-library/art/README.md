@@ -80,3 +80,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Xe Xúc Đào Kho Báu Thiên Thạch (Đội Xe Vũ Trụ, đối tượng mới Xe xúc) | – | `src/xe-xuc-vu-tru--dao-kho-bau-thien-thach.png` | ghi trong file |
 | Xe Túc Túc Đi Dạo Thiên Hà (Đội Xe Vũ Trụ, đối tượng mới Xe túc túc) | – | `src/xe-tuk-tuk-vu-tru--di-dao-thien-ha.png` | ghi trong file |
 | Xe Cảnh Sát Tuần Tra Ngân Hà (Đội Xe Vũ Trụ, đối tượng mới Xe cảnh sát) | – | `src/xe-canh-sat-vu-tru--tuan-tra-ngan-ha.png` | ghi trong file |
+| Khủng Long Cổ Dài Lau Kính Toàn Nhà (Thị Trấn Khủng Long) | – | `src/khung-long-co-dai--tho-lau-kinh.png` | ghi trong file |
