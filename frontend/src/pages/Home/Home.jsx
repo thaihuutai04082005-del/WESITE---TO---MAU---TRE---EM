@@ -9,6 +9,7 @@ import Icon from '../../components/Icon';
 import { PlanBadge } from '../Payment/Plans';
 import ModeGuide from '../../components/ModeGuide';
 import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
+import HelloBear from '../../components/HelloBear';
 import { ColorArt, TrophyArt, TogetherArt, GachaArt, BookArt, MissionArt, SunCloud } from '../../components/Illustrations';
 
 function Landing() {
@@ -119,22 +120,7 @@ function Dashboard() {
         {/* Lời chào + linh vật */}
         <section className="relative flex items-center gap-3 pt-2 sm:gap-6">
           <div className="relative h-28 w-24 shrink-0 sm:h-40 sm:w-36">
-            <img src="/mascots/gau.svg" alt="" className="h-full w-full object-contain drop-shadow" draggable={false} />
-            <svg viewBox="0 0 60 80" className="absolute -right-3 bottom-2 h-16 w-12 sm:h-20 sm:w-14" aria-hidden="true">
-              <g transform="rotate(28 30 40)" stroke="#1B2A38" strokeWidth="2.5" strokeLinejoin="round">
-                <rect x="20" y="8" width="16" height="52" rx="4" fill="#2B9BF4" />
-                <polygon points="20,60 36,60 28,76" fill="#F3D9B1" />
-                <polygon points="25,70 31,70 28,76" fill="#1B2A38" />
-                <rect x="20" y="16" width="16" height="6" fill="#FFFFFF" opacity="0.6" stroke="none" />
-              </g>
-            </svg>
-            <svg viewBox="0 0 40 40" className="absolute -right-8 top-2 h-8 w-8 sm:-right-10 sm:h-10 sm:w-10" aria-hidden="true">
-              <g stroke="#FFC94D" strokeWidth="4" strokeLinecap="round">
-                <path d="M6 8 L14 14" />
-                <path d="M4 22 L14 22" />
-                <path d="M6 36 L14 30" />
-              </g>
-            </svg>
+            <HelloBear className="h-full w-full" />
           </div>
           <div className="min-w-0 flex-1">
             <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" data-testid="home-hello">

@@ -400,7 +400,70 @@ h3,
     transform: translateY(-7px);
   }
 }
+/* Gấu chào: chớp mắt thường xuyên, thỉnh thoảng giơ cọ và bảng màu lên */
+.bear-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bear-blink 4.5s infinite;
+}
+.bear-arm-l {
+  transform-origin: 395px 720px;
+  animation: bear-raise-l 14s ease-in-out infinite;
+}
+.bear-arm-r {
+  transform-origin: 830px 730px;
+  animation: bear-raise-r 14s ease-in-out 0.4s infinite;
+}
+@keyframes bear-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+@keyframes bear-raise-l {
+  0%,
+  58%,
+  80%,
+  100% {
+    transform: rotate(0);
+  }
+  64%,
+  72% {
+    transform: rotate(38deg);
+  }
+  68% {
+    transform: rotate(30deg);
+  }
+  76% {
+    transform: rotate(34deg);
+  }
+}
+@keyframes bear-raise-r {
+  0%,
+  58%,
+  80%,
+  100% {
+    transform: rotate(0);
+  }
+  64%,
+  72% {
+    transform: rotate(-32deg);
+  }
+  68% {
+    transform: rotate(-24deg);
+  }
+  76% {
+    transform: rotate(-28deg);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .bear-eyes,
+  .bear-arm-l,
+  .bear-arm-r,
   .sun-bob,
   .cloud-bob {
     animation: none;
