@@ -19,6 +19,7 @@ const CAY = {
     V('vuong-mien-la-than', 'Vương Miện Lá Thần', 'Magic Leaf Crown', { acc: (c) => ({ front: Y.leafCrown(c.hat.x, c.hat.y, 1.1) }) }),
   ],
   'cay-thong': [
+    V('ngoi-sao-tuyet', 'Ngôi Sao Tuyết', 'Snowy Star', { scene: ['stars'], acc: () => ({}) }),
     V('den-long-tien', 'Đèn Lồng Tiên', 'Fairy Lanterns', { acc: () => ({ front: Y.hangingLanterns([[230, 250], [370, 250], [200, 350], [400, 350], [300, 200]]) }) }),
     V('ngoi-sao-uoc-nguyen', 'Ngôi Sao Ước Nguyện', 'Wishing Star', { acc: () => ({ front: [star('sao-dinh-thong', 300, 100, 44, 18, '#FFD54F')], fg: X.sparkles('lap-lanh', [[180, 110, 14], [420, 130, 14]]) }) }),
     V('tuyet-phep-mau', 'Tuyết Phép Màu', 'Magic Snow', { scene: ['snow'], acc: () => ({ front: Y.snowCaps() }) }),
