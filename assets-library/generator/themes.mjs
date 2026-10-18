@@ -359,6 +359,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'dua--luot-song': 'dua--luot-song',
   'dua-hau-the-thao--nang-ta': 'dua-hau-the-thao--nang-ta',
   'dau-tay-the-thao--nhay-day': 'dau-tay-the-thao--nhay-day',
   'chuoi-the-thao--bong-ro': 'chuoi-the-thao--bong-ro',
@@ -406,6 +407,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'dua--luot-song': { vi: 'Dứa Vàng Lướt Sóng', en: 'Pineapple Surfer' },
   'dua-hau-the-thao--nang-ta': { vi: 'Dưa Hấu Nâng Tạ', en: 'Watermelon Weightlifter' },
   'dau-tay-the-thao--nhay-day': { vi: 'Dâu Tây Chơi Nhảy Dây', en: 'Strawberry Jump Rope' },
   'chuoi-the-thao--bong-ro': { vi: 'Chuối Vàng Chơi Bóng Rổ', en: 'Banana Basketball' },

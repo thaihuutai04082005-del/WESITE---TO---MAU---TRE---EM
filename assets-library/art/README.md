@@ -92,3 +92,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Chuối Vàng Chơi Bóng Rổ (Đại Hội Thể Thao Trái Cây) | – | `src/chuoi-the-thao--bong-ro.png` | ghi trong file |
 | Dâu Tây Chơi Nhảy Dây (Đại Hội Thể Thao Trái Cây) | – | `src/dau-tay-the-thao--nhay-day.png` | ghi trong file |
 | Dưa Hấu Nâng Tạ (Đại Hội Thể Thao Trái Cây) | – | `src/dua-hau-the-thao--nang-ta.png` | ghi trong file |
+| Dứa Vàng Lướt Sóng (Đại Hội Thể Thao Trái Cây) | – | `src/dua--luot-song.png` | ghi trong file |
