@@ -422,6 +422,9 @@ const TRAI_CAY = {
     SP('karate', 'Karate', 'Karate', { expr: 'angry', scene: ['clouds'], transform: { tx: -40, px: 300, py: 480 }, acc: (c) => ({ front: X.karate(c), fg: X.brokenBoard(500, 300) }) }),
     SP('bong-chay', 'Bóng Chày', 'Baseball', { scene: ['sun'], acc: (c) => ({ front: [...X.cap(c, '#FF5F5F', '#C0392B'), ...X.baseball(c)] }) }),
   ],
+  'xoai-the-thao': [
+    SP('tennis', 'Chơi Tennis', 'Tennis', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+  ],
   'cam-the-thao': [
     SP('vuot-rao', 'Chạy Vượt Rào', 'Hurdles', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     SP('truot-van', 'Trượt Ván', 'Skateboard', { expr: 'tongue', scene: ['clouds', 'motion'], transform: { ty: -36, rot: -6, scale: 0.9, px: 300, py: 420 }, acc: (c) => ({ front: A.skateboard(c) }) }),
