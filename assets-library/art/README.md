@@ -91,3 +91,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Khủng Long Hai Mào Họa Sĩ (Thị Trấn Khủng Long, đối tượng mới Khủng long hai mào) | – | `src/khung-long-hai-mao--hoa-si.png` | ghi trong file |
 | Chuối Vàng Chơi Bóng Rổ (Đại Hội Thể Thao Trái Cây) | – | `src/chuoi-the-thao--bong-ro.png` | ghi trong file |
 | Dâu Tây Chơi Nhảy Dây (Đại Hội Thể Thao Trái Cây) | – | `src/dau-tay-the-thao--nhay-day.png` | ghi trong file |
+| Dưa Hấu Nâng Tạ (Đại Hội Thể Thao Trái Cây) | – | `src/dua-hau-the-thao--nang-ta.png` | ghi trong file |
