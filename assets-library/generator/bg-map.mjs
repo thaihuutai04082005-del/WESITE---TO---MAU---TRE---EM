@@ -43,6 +43,7 @@ const M = {
   'khung-long-ba-sung': { 'bac-si': ['park', 'mint'], 'tho-cat-toc': ['workshop', 'pink'], 'nguoi-ban-hoa': ['garden', 'sunset'], 'tho-moc': ['workshop', 'day'], 'nhac-truong': ['stage', 'pink'] },
   'khung-long-gai-lung': { 'nong-dan': ['farm', 'morning'], 'tho-lam-vuon': ['garden', 'dusk'], 'tho-gom': ['workshop', 'sunset'], 'tho-dan-len': ['snowVillage', 'morning'], 'nguoi-quet-la': ['autumn', 'sunset'] },
   'duc-long': { 'phi-cong': ['cloudland', 'morning'], 'dua-thu': ['mountainDawn', 'peach'], 'nha-du-bao-thoi-tiet': ['rainyStreet', 'dusk'], 'nhiep-anh-gia': ['jungle', 'day'], 'nguoi-lam-dieu': ['meadow', 'pink'], 'cuu-ho-bo-bien': ['beach', 'day'] },
+  'khung-long-hai-mao': { 'hoa-si': ['garden', 'peach'] },
   'bo-sat-bien': { 'ngu-dan': ['seaHorizon', 'storm|mint'] },
   'khung-long-dau-vom': { 'giao-vien': ['classroom', 'mint'] },
   'khung-long-boc-giap': { 'tho-xay': ['tinyTown', 'mint'] },

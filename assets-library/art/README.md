@@ -88,3 +88,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Khủng Long Mỏ Vịt Thợ Làm Vườn (Thị Trấn Khủng Long) | – | `src/khung-long-mao-ken--tho-lam-vuon.png` | ghi trong file |
 | Khủng Long Đầu Vòm Giáo Viên (Thị Trấn Khủng Long, đối tượng mới Khủng long đầu vòm) | – | `src/khung-long-dau-vom--giao-vien.png` | ghi trong file |
 | Bò Sát Biển Cổ Dài Ngư Dân (Thị Trấn Khủng Long, đối tượng mới Bò sát biển cổ dài; ảnh gốc chữ nhật được đệm trời/nước cho vuông) | – | `src/bo-sat-bien--ngu-dan.png` | ghi trong file |
+| Khủng Long Hai Mào Họa Sĩ (Thị Trấn Khủng Long, đối tượng mới Khủng long hai mào) | – | `src/khung-long-hai-mao--hoa-si.png` | ghi trong file |
