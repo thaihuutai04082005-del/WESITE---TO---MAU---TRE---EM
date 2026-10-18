@@ -422,6 +422,9 @@ const TRAI_CAY = {
     SP('karate', 'Karate', 'Karate', { expr: 'angry', scene: ['clouds'], transform: { tx: -40, px: 300, py: 480 }, acc: (c) => ({ front: X.karate(c), fg: X.brokenBoard(500, 300) }) }),
     SP('bong-chay', 'Bóng Chày', 'Baseball', { scene: ['sun'], acc: (c) => ({ front: [...X.cap(c, '#FF5F5F', '#C0392B'), ...X.baseball(c)] }) }),
   ],
+  ngo: [
+    SP('karate', 'Tập Võ Karate', 'Karate', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+  ],
   'dua-nau': [
     SP('quyen-anh', 'Tập Quyền Anh', 'Boxing', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
