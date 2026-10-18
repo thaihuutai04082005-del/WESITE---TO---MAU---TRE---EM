@@ -96,3 +96,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Cam Ngọt Chạy Vượt Rào (Đại Hội Thể Thao Trái Cây) | – | `src/cam-the-thao--vuot-rao.png` | ghi trong file |
 | Xoài Vàng Chơi Tennis (Đại Hội Thể Thao Trái Cây) | – | `src/xoai-the-thao--tennis.png` | ghi trong file |
 | Lê Xanh Tập Bắn Cung (Đại Hội Thể Thao Trái Cây) | – | `src/le-the-thao--ban-cung.png` | ghi trong file |
+| Dừa Nâu Tập Quyền Anh (Đại Hội Thể Thao Trái Cây) | – | `src/dua-nau--quyen-anh.png` | ghi trong file |

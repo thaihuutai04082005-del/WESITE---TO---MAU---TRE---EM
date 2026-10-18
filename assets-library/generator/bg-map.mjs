@@ -55,6 +55,7 @@ const M = {
   'dau-tay-the-thao': { 'the-duc-ruy-bang': ['gym', 'mint'], 'truot-bang-nghe-thuat': ['iceRink', 'pink'], 'cau-long': ['gym', 'morning'], 'nhay-day': ['playground', 'morning'], yoga: ['beach', 'morning'] },
   'dua-hau-the-thao': { 'nang-ta': ['gym', 'lemon|peach'], 'bong-ro': ['playground', 'mint'], 'bong-chuyen-bai-bien': ['beach', 'sunset'], bowling: ['gym', 'night'], 'boi-loi': ['sunsetSea', 'day'], 'keo-co': ['meadow', 'storm'] },
   dua: { 'luot-song': ['sunsetSea', 'pink'], 'quan-vot': ['stadium', 'pink'], 'bong-ban': ['gym', 'dusk'], golf: ['rainbowHills', 'morning'], karate: ['gym', 'storm'], 'bong-chay': ['stadium', 'dusk'] },
+  'dua-nau': { 'quyen-anh': ['ring', 'day'] },
   'le-the-thao': { 'ban-cung': ['sunflowerField', 'day'] },
   'xoai-the-thao': { tennis: ['stadium', 'lemon'] },
   'cam-the-thao': { 'vuot-rao': ['stadium', 'mint'], 'truot-van': ['playground', 'sunset'], 'quyen-anh': ['stage', 'day'], 'khuc-con-cau': ['iceRink', 'day'], 'truot-patin': ['river', 'sunset'], 'nhay-bat-lo-xo': ['playground', 'dusk'] },
