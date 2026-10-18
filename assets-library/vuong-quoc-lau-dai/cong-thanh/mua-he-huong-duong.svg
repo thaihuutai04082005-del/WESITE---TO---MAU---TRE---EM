@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="cong-thanh--mua-he-huong-duong">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="110" rx="44" ry="44" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<path d="M 56.5 93.8 Q 40 93.8 44.4 80 Q 41.1 60.8 64.8 60.8 Q 70.3 42.6 90.6 47 Q 104.9 31.6 121.4 49.8 Q 145.6 45.9 142.3 70.1 Q 152.2 93.8 133.5 93.8 Z" id="r-may-1" data-region="may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+
+<ellipse cx="95" cy="90" rx="90" ry="14" id="r-dai-may-1" data-region="dai-may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="60,374 63.9,385.5 73,377.5 70.6,389.4 82.5,387 74.5,396.1 86,400 74.5,403.9 82.5,413 70.6,410.6 73,422.5 63.9,414.5 60,426 56.1,414.5 47,422.5 49.4,410.6 37.5,413 45.5,403.9 34,400 45.5,396.1 37.5,387 49.4,389.4 47,377.5 56.1,385.5" id="r-huong-duong-xa-1" data-region="huong-duong-xa-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="220,394 223.9,405.5 233,397.5 230.6,409.4 242.5,407 234.5,416.1 246,420 234.5,423.9 242.5,433 230.6,430.6 233,442.5 223.9,434.5 220,446 216.1,434.5 207,442.5 209.4,430.6 197.5,433 205.5,423.9 194,420 205.5,416.1 197.5,407 209.4,409.4 207,397.5 216.1,405.5" id="r-huong-duong-xa-2" data-region="huong-duong-xa-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="380,374 383.9,385.5 393,377.5 390.6,389.4 402.5,387 394.5,396.1 406,400 394.5,403.9 402.5,413 390.6,410.6 393,422.5 383.9,414.5 380,426 376.1,414.5 367,422.5 369.4,410.6 357.5,413 365.5,403.9 354,400 365.5,396.1 357.5,387 369.4,389.4 367,377.5 376.1,385.5" id="r-huong-duong-xa-3" data-region="huong-duong-xa-3" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
