@@ -248,6 +248,9 @@
 <path d="M 449.3 302.8 L 449.3 304.7 L 452.1 309.4 L 463.4 308.5 L 461.5 302.3 Z" id="r-z61" data-region="z61" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 458.7 369.5 L 459.6 377.5 L 469.5 377.5 L 468.5 369.5 Z" id="r-z180" data-region="z180" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 459.2 369.5 L 456.8 369.0 L 450.2 370.0 L 451.2 376.5 L 454.0 377.5 L 460.1 377.5 Z" id="r-z179" data-region="z179" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 430.5 304.7 L 430.5 306.1 L 434.3 309.4 L 440.8 309.4 L 440.8 308.0 L 439.4 306.6 L 438.5 304.7 Z" id="r-luoi-1" data-region="luoi-1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 570.0 325.8 L 569.5 326.3 L 569.5 327.2 L 570.0 327.7 L 570.4 337.6 L 573.2 337.6 L 573.2 325.8 Z" id="r-luoi-2" data-region="luoi-2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 571.8 338.0 L 570.9 338.5 L 571.4 350.2 L 573.2 350.2 L 573.2 338.5 L 572.8 338.0 Z" id="r-luoi-3" data-region="luoi-3" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
