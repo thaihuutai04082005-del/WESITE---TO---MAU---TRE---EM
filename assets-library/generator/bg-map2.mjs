@@ -3,7 +3,7 @@
 export const M2 = {
   // 04 · Khu Rừng Cây Thần
   'cay-co-thu': { 'canh-cua-bi-mat': ['forest', 'dusk|morning'], 'qua-tao-vang': ['orchard', 'day'], 'xich-du-phep-thuat': ['meadow', 'night|deep'], 're-cay-biet-di': ['jungle', 'mint|pink'], 'vuong-mien-la-than': ['rainbowHills', 'mint|dusk'] },
-  'cay-thong': { 'den-long-tien': ['forest', 'night|deep'], 'ngoi-sao-uoc-nguyen': ['starField', 'lavender|peach'], 'tuyet-phep-mau': ['snowVillage', 'night|pink|mint'], 'qua-bat-ngo': ['snowVillage', 'dusk|storm'], 'chuong-gio-pha-le': ['peak', 'dusk|pink'] },
+  'cay-thong': { 'ngoi-sao-tuyet': ['snowVillage', 'day'], 'den-long-tien': ['forest', 'night|deep'], 'ngoi-sao-uoc-nguyen': ['starField', 'lavender|peach'], 'tuyet-phep-mau': ['snowVillage', 'night|pink|mint'], 'qua-bat-ngo': ['snowVillage', 'dusk|storm'], 'chuong-gio-pha-le': ['peak', 'dusk|pink'] },
   'cay-dua': { 'dao-ngoc-thien-duong': ['beach', 'day'], 'vong-may': ['beach', 'morning|mint'], 'qua-dua-biet-nhay': ['beach', 'pink|dusk'], 'la-quat-bay': ['cloudland', 'mint|dusk'], 'suoi-nuoc-than': ['jungle', 'day|sunset'], 'dao-hoang-hon': ['seaHorizon', 'sunset'] },
   'cay-xuong-rong': { 'oc-dao-anh-sao': ['desert', 'day'], 'no-hoa-ngu-sac': ['desert', 'morning|pink'], 'doi-mu-phu-thuy': ['desert', 'night|dusk'], 'oc-dao-than-ky': ['desert', 'mint|sunset'], 'gai-ngoc-lap-lanh': ['crystalCave', 'dusk|night'], 'o-hoa-sa-mac': ['canyon', 'pink|mint'] },
   'cay-lieu': { 'toc-lieu-tet-hoa': ['spring', 'morning|dusk'], 'dom-dom-thap-sang': ['lake', 'night|deep'], 'soi-guong-mat-ho': ['lake', 'morning|sunset'], 'mua-cung-gio': ['meadow', 'storm|day'], 'chiec-noi-la': ['garden', 'dusk|storm'] },
