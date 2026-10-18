@@ -412,6 +412,7 @@ export const VARIANT_ART = {
   'tao-the-thao--da-bong': 'tao-the-thao--da-bong',
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
+  'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
 };
 
@@ -457,6 +458,7 @@ export const PICTURE_NAME = {
   'tho-sieu-thu--sieu-toc': { vi: 'Thỏ Siêu Tốc', en: 'Super Speed Bunny' },
   'cho-sieu-thu--sieu-thong-minh': { vi: 'Chó Siêu Thông Minh', en: 'Super Smart Dog' },
   'meo-sieu-thu--nhay-sieu-cao': { vi: 'Mèo Nhảy Siêu Cao', en: 'Super Jump Cat' },
+  'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },
   'lau-dai-huyen-bi--mua-xuan-hoa-no': { vi: 'Lâu Đài Bút Chì Cầu Vồng', en: 'Rainbow Pencil Castle' },

@@ -26,6 +26,7 @@ const CAY = {
     V('chuong-gio-pha-le', 'Chuông Gió Pha Lê', 'Crystal Wind Chimes', { acc: () => ({ front: Y.bells([[220, 336], [380, 336], [250, 236], [350, 236]]) }) }),
   ],
   'cay-dua': [
+    V('dao-ngoc-thien-duong', 'Đảo Ngọc Thiên Đường', 'Paradise Jewel Island', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('vong-may', 'Võng Mây', 'Cloud Hammock', { transform: { tx: -60, px: 300, py: 480 }, acc: () => ({ fg: Y.hammock(250, 380, 530, 380) }) }),
     V('qua-dua-biet-nhay', 'Quả Dừa Biết Nhảy', 'Bouncing Coconuts', { scene: ['motion'], acc: () => ({ fg: [C('dua-nhay-1', 140, 440, 26, '#8D6E63'), C('dua-nhay-2', 470, 400, 26, '#8D6E63'), C('dua-nhay-3', 520, 480, 22, '#A1887F')] }) }),
     V('la-quat-bay', 'Bay Bằng Lá Quạt', 'Leaf-Fan Flight', { transform: FLY, acc: () => ({ mid: [...Y.cloudBase(300, 470, 1.2)] }) }),
