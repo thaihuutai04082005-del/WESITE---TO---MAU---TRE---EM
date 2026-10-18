@@ -186,6 +186,18 @@
 <path d="M 178.9 480.8 L 178.9 485.4 L 180.3 485.4 L 184.0 483.1 L 184.0 482.2 L 182.2 481.2 Z" id="r-gai-38" data-region="gai-38" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 321.6 488.7 L 322.5 488.7 L 324.4 486.9 L 324.9 486.9 L 326.3 485.4 L 326.3 484.0 L 321.1 484.0 Z" id="r-gai-39" data-region="gai-39" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 208.0 491.1 L 208.0 492.5 L 209.9 493.9 L 210.8 495.3 L 212.2 495.3 L 212.2 492.0 L 212.7 491.5 L 212.7 490.6 Z" id="r-gai-40" data-region="gai-40" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 209.4 81.2 L 207.5 83.6 L 207.5 86.4 L 208.5 87.8 L 209.4 88.3 L 212.7 88.3 L 214.1 86.9 L 214.1 83.1 L 213.6 82.2 L 212.2 81.2 Z" id="r-nhuy-0" data-region="nhuy-0" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 224.4 85.4 L 222.5 87.8 L 222.5 89.7 L 223.9 92.0 L 227.7 92.0 L 229.1 90.6 L 229.1 86.9 L 227.7 85.4 Z" id="r-nhuy-1" data-region="nhuy-1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 240.8 93.0 L 239.0 94.4 L 238.5 95.3 L 238.5 97.7 L 239.9 99.5 L 242.3 100.0 L 242.7 99.5 L 243.7 99.5 L 245.1 97.7 L 245.1 94.8 L 244.6 93.9 L 243.2 93.0 Z" id="r-nhuy-2" data-region="nhuy-2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 222.5 100.9 L 221.6 100.9 L 221.1 102.8 L 218.8 107.5 L 218.8 108.5 L 217.8 110.3 L 217.8 111.7 L 217.4 112.2 L 217.4 116.0 L 220.2 115.5 L 221.6 112.7 Z" id="r-nhuy-3" data-region="nhuy-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 214.6 101.4 L 214.1 101.9 L 214.1 105.2 L 215.5 107.5 L 215.5 108.5 L 216.0 108.9 L 216.9 108.9 L 217.8 107.0 L 217.8 105.2 L 216.4 103.8 L 216.0 101.9 L 215.5 101.4 Z" id="r-nhuy-4" data-region="nhuy-4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 338.5 228.6 L 336.6 230.0 L 336.6 233.8 L 337.6 234.7 L 340.8 234.7 L 342.3 232.9 L 342.3 230.5 L 341.3 229.1 L 340.4 228.6 Z" id="r-nhuy-5" data-region="nhuy-5" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 349.3 239.0 L 347.9 240.8 L 347.9 242.7 L 348.4 243.7 L 349.8 244.6 L 352.1 244.6 L 353.1 244.1 L 354.0 242.3 L 353.5 239.9 L 352.6 239.0 Z" id="r-nhuy-6" data-region="nhuy-6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 334.3 244.6 L 333.3 244.6 L 331.5 248.4 L 331.5 253.1 L 332.9 253.1 L 334.7 251.2 Z" id="r-nhuy-7" data-region="nhuy-7" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 79.3 374.2 L 77.5 375.6 L 77.0 376.5 L 77.0 378.4 L 78.4 380.3 L 81.7 380.3 L 82.6 379.8 L 83.1 378.9 L 83.1 375.6 L 81.7 374.2 Z" id="r-nhuy-8" data-region="nhuy-8" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 64.8 377.0 L 63.4 378.4 L 63.4 381.2 L 64.8 382.6 L 68.1 382.6 L 69.0 381.7 L 69.0 378.4 L 68.5 377.5 L 67.6 377.0 Z" id="r-nhuy-9" data-region="nhuy-9" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 54.0 388.3 L 53.1 388.7 L 52.1 390.1 L 52.1 393.0 L 53.1 394.4 L 55.9 394.8 L 57.7 393.4 L 57.7 390.1 L 56.8 388.7 L 55.9 388.3 Z" id="r-nhuy-10" data-region="nhuy-10" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 70.9 392.0 L 71.4 395.3 L 70.4 395.8 L 70.4 397.7 L 71.8 397.7 L 73.7 399.5 L 75.1 399.5 L 75.1 398.6 L 74.6 398.1 L 74.6 395.3 L 74.2 394.4 L 72.3 392.5 L 72.3 392.0 Z" id="r-nhuy-11" data-region="nhuy-11" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-sway"></g>
 <g class="scene-front">
