@@ -87,6 +87,7 @@ export const OBJECTS = [
   O('thi-tran-khung-long', 'khung-long-boc-giap', 'Khủng long bọc giáp', 'Ankylosaurus', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('thi-tran-khung-long', 'khung-long-dau-vom', 'Khủng long đầu vòm', 'Dome-head dino', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('thi-tran-khung-long', 'bo-sat-bien', 'Bò sát biển cổ dài', 'Plesiosaur', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
+  O('thi-tran-khung-long', 'khung-long-hai-mao', 'Khủng long hai mào', 'Twin-crest dino', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
 
   // 08 — Trái cây × Thể thao
   reuse('the-thao-trai-cay', 'tao', 'tao-the-thao', 'Táo', 'Apple'),
@@ -341,7 +342,7 @@ export const THEME_FIRST = {
   'anh-hung-sieu-thu': ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc',
     'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
   'thi-tran-khung-long': ['khung-long-bao-chua--dau-bep', 'khung-long-co-dai--tho-lau-kinh', 'khung-long-ba-sung--bac-si', 'khung-long-gai-lung--nong-dan',
-    'duc-long--dua-thu', 'khung-long-mao-ken--tho-lam-vuon', 'khung-long-boc-giap--tho-xay', 'khung-long-dau-vom--giao-vien', 'bo-sat-bien--ngu-dan'],
+    'duc-long--dua-thu', 'khung-long-mao-ken--tho-lam-vuon', 'khung-long-boc-giap--tho-xay', 'khung-long-dau-vom--giao-vien', 'bo-sat-bien--ngu-dan', 'khung-long-hai-mao--hoa-si'],
   'doi-xe-vu-tru': ['xe-dua--phan-luc', 'xe-buyt-vu-tru--cho-phi-hanh-gia', 'xe-cuu-hoa--dap-lua-thien-thach', 'tau-hoa-vu-tru--duong-ray-ngan-ha',
     'may-bay-vu-tru--bay-qua-vong-hanh-tinh', 'truc-thang--tha-du-tiep-te', 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
     'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
@@ -358,6 +359,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'khung-long-hai-mao--hoa-si': 'khung-long-hai-mao--hoa-si',
   'bo-sat-bien--ngu-dan': 'bo-sat-bien--ngu-dan',
   'khung-long-dau-vom--giao-vien': 'khung-long-dau-vom--giao-vien',
   'khung-long-mao-ken--tho-lam-vuon': 'khung-long-mao-ken--tho-lam-vuon',
@@ -401,6 +403,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'khung-long-hai-mao--hoa-si': { vi: 'Khủng Long Hai Mào Họa Sĩ', en: 'Twin-crest Painter' },
   'bo-sat-bien--ngu-dan': { vi: 'Bò Sát Biển Cổ Dài Ngư Dân', en: 'Plesiosaur Fisherman' },
   'khung-long-dau-vom--giao-vien': { vi: 'Khủng Long Đầu Vòm Giáo Viên', en: 'Dome-head Teacher' },
   'khung-long-mao-ken--tho-lam-vuon': { vi: 'Khủng Long Mỏ Vịt Thợ Làm Vườn', en: 'Duck-bill Gardener' },
