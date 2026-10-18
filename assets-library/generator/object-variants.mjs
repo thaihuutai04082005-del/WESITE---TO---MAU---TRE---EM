@@ -415,6 +415,7 @@ const TRAI_CAY = {
     SP('keo-co', 'Kéo Co', 'Tug of War', { scene: ['clouds', 'motion'], transform: { tx: 60, rot: 8, px: 300, py: 480 }, acc: (c) => ({ front: X.tugRope(c) }) }),
   ],
   dua: [
+    SP('luot-song', 'Lướt Sóng', 'Surfing', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     SP('quan-vot', 'Quần Vợt', 'Tennis', { scene: ['sun'], ground: 'court', transform: { tx: 40, px: 300, py: 480 }, acc: (c) => ({ front: X.racket(c, '#4FA3E0', 'vot-tennis'), back: X.net(), fg: X.tennisBall(160, 150) }) }),
     SP('bong-ban', 'Bóng Bàn', 'Table Tennis', { scene: ['clouds'], transform: { tx: -90, scale: 0.9, px: 300, py: 480 }, acc: (c) => ({ front: X.paddle(c), fg: X.pingPongTable() }) }),
     SP('golf', 'Golf', 'Golf', { scene: ['sun', 'clouds'], transform: { tx: -60, scale: 0.9, px: 300, py: 480 }, acc: (c) => ({ front: X.golf(c) }) }),
