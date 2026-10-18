@@ -392,6 +392,7 @@ const TRAI_CAY = {
     SP('cu-ta', 'Cử Tạ', 'Weightlifting', { scene: ['sun', 'confetti'], transform: { ty: 30, scale: 0.85, px: 300, py: 480 }, acc: (c) => ({ front: X.barbell(c) }) }),
   ],
   'chuoi-the-thao': [
+    SP('bong-ro', 'Chơi Bóng Rổ', 'Basketball', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     SP('luot-song', 'Lướt Sóng', 'Surfing', { scene: ['sun'], ground: 'water', transform: { ty: -40, rot: -10, scale: 0.85, px: 300, py: 420 }, acc: (c) => ({ front: X.surf(c), back: X.bigWave() }) }),
     SP('cheo-thuyen-kayak', 'Chèo Thuyền Kayak', 'Kayaking', { scene: ['sun', 'clouds'], ground: 'water', transform: { ty: 10, scale: 0.85, px: 300, py: 460 }, acc: (c) => ({ front: X.kayak(c) }) }),
     SP('truot-tuyet', 'Trượt Tuyết', 'Skiing', { scene: ['snow'], sky: 'snow', ground: 'snow', transform: { rot: 10, scale: 0.9, px: 300, py: 440 }, acc: (c) => ({ front: X.skis(c), back: X.mountains() }) }),
