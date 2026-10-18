@@ -359,6 +359,7 @@ export const VARIANT_ART = {
   'khung-long-bao-chua--dau-bep': 'khung-long-bao-chua--dau-bep',
   'su-tu--ruc-lua': 'su-tu--ruc-lua',
   'ho--tia-chop': 'ho--gam-vang',
+  'chuoi-the-thao--bong-ro': 'chuoi-the-thao--bong-ro',
   'khung-long-hai-mao--hoa-si': 'khung-long-hai-mao--hoa-si',
   'bo-sat-bien--ngu-dan': 'bo-sat-bien--ngu-dan',
   'khung-long-dau-vom--giao-vien': 'khung-long-dau-vom--giao-vien',
@@ -403,6 +404,7 @@ export const VARIANT_ART = {
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
+  'chuoi-the-thao--bong-ro': { vi: 'Chuối Vàng Chơi Bóng Rổ', en: 'Banana Basketball' },
   'khung-long-hai-mao--hoa-si': { vi: 'Khủng Long Hai Mào Họa Sĩ', en: 'Twin-crest Painter' },
   'bo-sat-bien--ngu-dan': { vi: 'Bò Sát Biển Cổ Dài Ngư Dân', en: 'Plesiosaur Fisherman' },
   'khung-long-dau-vom--giao-vien': { vi: 'Khủng Long Đầu Vòm Giáo Viên', en: 'Dome-head Teacher' },

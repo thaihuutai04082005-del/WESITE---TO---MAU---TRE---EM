@@ -51,7 +51,7 @@ const M = {
 
   // 08 · Đại Hội Thể Thao Trái Cây
   'tao-the-thao': { 'da-bong': ['stadium', 'day'], 'chay-tiep-suc': ['stadium', 'morning'], 'ban-cung': ['park', 'sunset'], 'dau-kiem': ['gym', 'day'], 'cu-ta': ['gym', 'pink'] },
-  'chuoi-the-thao': { 'luot-song': ['sunsetSea', 'sunset'], 'cheo-thuyen-kayak': ['river', 'morning'], 'truot-tuyet': ['snowVillage', 'dusk'], 'nhay-sao': ['stadium', 'sunset'], 'leo-nui': ['peak', 'storm'] },
+  'chuoi-the-thao': { 'bong-ro': ['park', 'peach'], 'luot-song': ['sunsetSea', 'sunset'], 'cheo-thuyen-kayak': ['river', 'morning'], 'truot-tuyet': ['snowVillage', 'dusk'], 'nhay-sao': ['stadium', 'sunset'], 'leo-nui': ['peak', 'storm'] },
   'dau-tay-the-thao': { 'the-duc-ruy-bang': ['gym', 'mint'], 'truot-bang-nghe-thuat': ['iceRink', 'pink'], 'cau-long': ['gym', 'morning'], 'nhay-day': ['playground', 'morning'], yoga: ['beach', 'morning'] },
   'dua-hau-the-thao': { 'bong-ro': ['playground', 'mint'], 'bong-chuyen-bai-bien': ['beach', 'sunset'], bowling: ['gym', 'night'], 'boi-loi': ['sunsetSea', 'day'], 'keo-co': ['meadow', 'storm'] },
   dua: { 'quan-vot': ['stadium', 'pink'], 'bong-ban': ['gym', 'dusk'], golf: ['rainbowHills', 'morning'], karate: ['gym', 'storm'], 'bong-chay': ['stadium', 'dusk'] },
