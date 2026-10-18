@@ -34,6 +34,7 @@ const CAY = {
     V('dao-hoang-hon', 'Đảo Hoàng Hôn', 'Sunset Island', { acc: () => ({ mid: [E('dao-cat', 300, 500, 200, 40, '#F6D98B'), star('sao-bien', 180, 505, 16, 7, '#FF8A65')] }) }),
   ],
   'cay-xuong-rong': [
+    V('oc-dao-anh-sao', 'Ốc Đảo Ánh Sao', 'Starlight Oasis', { scene: ['stars'], acc: () => ({}) }),
     V('no-hoa-ngu-sac', 'Nở Hoa Ngũ Sắc', 'Rainbow Blossoms', { acc: () => ({ front: Y.flowersAt([[193, 280], [407, 250], [300, 180], [250, 330], [350, 370]]) }) }),
     V('doi-mu-phu-thuy', 'Đội Mũ Phù Thủy', 'Wizard Hat', { acc: (c) => ({ front: [...X.wizardHat(c), ...X.fairyWand(c.right + 20, c.bb[3] - 220)] }) }),
     V('oc-dao-than-ky', 'Ốc Đảo Thần Kỳ', 'Magic Oasis', { transform: { tx: -60, px: 300, py: 480 }, acc: () => ({ fg: [...Y.pool('oc-dao', 470, 520, 110, 26), ...X.sparkles('lap-lanh', [[470, 450, 14]])] }) }),

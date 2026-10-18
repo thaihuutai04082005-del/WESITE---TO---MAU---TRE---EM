@@ -99,3 +99,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Dừa Nâu Tập Quyền Anh (Đại Hội Thể Thao Trái Cây) | – | `src/dua-nau--quyen-anh.png` | ghi trong file |
 | Ngô Tập Võ Karate (Đại Hội Thể Thao Trái Cây) | – | `src/ngo--karate.png` | ghi trong file |
 | Cây Dừa Đảo Ngọc Thiên Đường (Khu Rừng Ánh Sáng) | – | `src/cay-dua--dao-ngoc-thien-duong.png` | ghi trong file |
+| Xương Rồng Ốc Đảo Ánh Sao (Khu Rừng Ánh Sáng) | – | `src/cay-xuong-rong--oc-dao-anh-sao.png` | ghi trong file |
