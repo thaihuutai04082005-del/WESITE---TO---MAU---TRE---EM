@@ -90,3 +90,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Bò Sát Biển Cổ Dài Ngư Dân (Thị Trấn Khủng Long, đối tượng mới Bò sát biển cổ dài; ảnh gốc chữ nhật được đệm trời/nước cho vuông) | – | `src/bo-sat-bien--ngu-dan.png` | ghi trong file |
 | Khủng Long Hai Mào Họa Sĩ (Thị Trấn Khủng Long, đối tượng mới Khủng long hai mào) | – | `src/khung-long-hai-mao--hoa-si.png` | ghi trong file |
 | Chuối Vàng Chơi Bóng Rổ (Đại Hội Thể Thao Trái Cây) | – | `src/chuoi-the-thao--bong-ro.png` | ghi trong file |
+| Dâu Tây Chơi Nhảy Dây (Đại Hội Thể Thao Trái Cây) | – | `src/dau-tay-the-thao--nhay-day.png` | ghi trong file |
