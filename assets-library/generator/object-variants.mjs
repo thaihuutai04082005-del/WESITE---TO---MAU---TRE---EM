@@ -407,6 +407,7 @@ const TRAI_CAY = {
     SP('yoga', 'Yoga', 'Yoga', { expr: 'sleep', scene: ['sun', 'flowers', 'butterfly'], transform: { ty: -20, scale: 0.9, px: 300, py: 460 }, acc: (c) => ({ mid: X.yogaMat(c), fg: X.sparkles('thu-gian', [[120, 200, 16], [480, 200, 16]], '#B39DDB') }) }),
   ],
   'dua-hau-the-thao': [
+    SP('nang-ta', 'Nâng Tạ', 'Weightlifting', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     SP('bong-ro', 'Bóng Rổ', 'Basketball', { scene: ['clouds', 'hoop'], acc: (c) => ({ front: A.basketball('bong-ro', c.right + 30, c.bb[3] - 70, 42) }) }),
     SP('bong-chuyen-bai-bien', 'Bóng Chuyền Bãi Biển', 'Beach Volleyball', { scene: ['sun'], ground: 'sand', transform: { tx: 40, px: 300, py: 480 }, acc: () => ({ back: X.net(470, 250), fg: X.volleyball(400, 130) }) }),
     SP('bowling', 'Bowling', 'Bowling', { scene: ['stars'], sky: 'night', ground: 'court', transform: { tx: -80, scale: 0.9, px: 300, py: 480 }, acc: (c) => ({ front: X.bowlingBall(c.right + 40, c.bb[3] - 10), fg: X.bowling(460, 520) }) }),
