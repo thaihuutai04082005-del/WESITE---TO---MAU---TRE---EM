@@ -413,6 +413,7 @@ export const VARIANT_ART = {
   'lau-dai-huyen-bi--mua-xuan-hoa-no': 'lau-dai-huyen-bi--mua-xuan-hoa-no',
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
+  'khom-tre--rung-ngoc-bich': 'khom-tre--rung-ngoc-bich',
   'cay-xuong-rong--oc-dao-anh-sao': 'cay-xuong-rong--oc-dao-anh-sao',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
 };
@@ -460,6 +461,7 @@ export const PICTURE_NAME = {
   'cho-sieu-thu--sieu-thong-minh': { vi: 'Chó Siêu Thông Minh', en: 'Super Smart Dog' },
   'meo-sieu-thu--nhay-sieu-cao': { vi: 'Mèo Nhảy Siêu Cao', en: 'Super Jump Cat' },
   'cay-xuong-rong--oc-dao-anh-sao': { vi: 'Xương Rồng Ốc Đảo Ánh Sao', en: 'Starlight Oasis Cactus' },
+  'khom-tre--rung-ngoc-bich': { vi: 'Rừng Tre Ngọc Bích', en: 'Jade Bamboo Forest' },
   'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
   'vay-hoa--cong-chua-vay-hoa-hong': { vi: 'Công Chúa Váy Hoa Hồng', en: 'Rose Gown Princess' },

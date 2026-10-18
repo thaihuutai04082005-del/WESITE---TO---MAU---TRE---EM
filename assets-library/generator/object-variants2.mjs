@@ -49,6 +49,7 @@ const CAY = {
     V('chiec-noi-la', 'Chiếc Nôi Lá', 'Leaf Cradle', { acc: () => ({ front: Y.leafCradle(420, 410) }) }),
   ],
   'khom-tre': [
+    V('rung-ngoc-bich', 'Rừng Ngọc Bích', 'Jade Forest', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('sao-truc-than', 'Sáo Trúc Thần', 'Magic Bamboo Flute', { acc: () => ({ front: [...Y.flute(300, 420), ...X.musicNotes('not-nhac', [[110, 200], [480, 160], [520, 280]])] }) }),
     V('cay-cau-tre', 'Cây Cầu Tre', 'Bamboo Bridge', { transform: { ty: -40, scale: 0.9, px: 300, py: 480 }, acc: () => ({ fg: Y.bambooBridge(540) }) }),
     V('mang-non-lon-vu', 'Măng Non Lớn Vù', 'Speedy Bamboo Shoots', { acc: () => ({ fg: Y.shoots([[120, 500, 70], [470, 500, 90], [530, 510, 50], [80, 510, 40]]) }) }),
