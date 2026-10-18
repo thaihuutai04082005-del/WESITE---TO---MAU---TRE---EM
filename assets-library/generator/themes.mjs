@@ -96,6 +96,7 @@ export const OBJECTS = [
   reuse('the-thao-trai-cay', 'dua-hau', 'dua-hau-the-thao', 'Dưa hấu', 'Watermelon'),
   O('the-thao-trai-cay', 'dua', 'Dứa', 'Pineapple', { face: { x: 300, y: 370, s: 0.8 }, hat: { x: 300, y: 150, s: 0.7 }, build: B.dua }),
   reuse('the-thao-trai-cay', 'cam', 'cam-the-thao', 'Cam', 'Orange'),
+  O('the-thao-trai-cay', 'le-the-thao', 'Lê', 'Pear', { face: { x: 300, y: 340, s: 0.8 }, hat: { x: 300, y: 170, s: 0.8 }, build: () => [] }),
   O('the-thao-trai-cay', 'xoai-the-thao', 'Xoài', 'Mango', { face: { x: 300, y: 330, s: 0.8 }, hat: { x: 300, y: 170, s: 0.8 }, build: () => [] }),
 
   // 04 — Cây × Phép thuật
@@ -362,6 +363,7 @@ export const VARIANT_ART = {
   'ho--tia-chop': 'ho--gam-vang',
   'cam-the-thao--vuot-rao': 'cam-the-thao--vuot-rao',
   'xoai-the-thao--tennis': 'xoai-the-thao--tennis',
+  'le-the-thao--ban-cung': 'le-the-thao--ban-cung',
   'dua--luot-song': 'dua--luot-song',
   'dua-hau-the-thao--nang-ta': 'dua-hau-the-thao--nang-ta',
   'dau-tay-the-thao--nhay-day': 'dau-tay-the-thao--nhay-day',
@@ -411,6 +413,7 @@ export const VARIANT_ART = {
 export const PICTURE_NAME = {
   'ho--tia-chop': { vi: 'Hổ Gầm Vang', en: 'Roaring Tiger' },
   'cam-the-thao--vuot-rao': { vi: 'Cam Ngọt Chạy Vượt Rào', en: 'Orange Hurdler' },
+  'le-the-thao--ban-cung': { vi: 'Lê Xanh Tập Bắn Cung', en: 'Pear Archer' },
   'xoai-the-thao--tennis': { vi: 'Xoài Vàng Chơi Tennis', en: 'Mango Tennis' },
   'dua--luot-song': { vi: 'Dứa Vàng Lướt Sóng', en: 'Pineapple Surfer' },
   'dua-hau-the-thao--nang-ta': { vi: 'Dưa Hấu Nâng Tạ', en: 'Watermelon Weightlifter' },
