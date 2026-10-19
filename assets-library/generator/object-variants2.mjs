@@ -51,6 +51,9 @@ const CAY = {
     V('mua-cung-gio', 'Múa Cùng Gió', 'Dancing in the Wind', { scene: ['wind'], transform: { rot: 6, px: 300, py: 480 }, acc: () => ({ fg: X.leaves('la-bay', [[90, 200, 20], [520, 170, -30], [540, 300, 10]]) }) }),
     V('chiec-noi-la', 'Chiếc Nôi Lá', 'Leaf Cradle', { acc: () => ({ front: Y.leafCradle(420, 410) }) }),
   ],
+  'cay-anh-dao': [
+    V('mua-sao-hong', 'Mưa Sao Hồng', 'Pink Star Shower', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+  ],
   'khom-tre': [
     V('rung-ngoc-bich', 'Rừng Ngọc Bích', 'Jade Forest', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('sao-truc-than', 'Sáo Trúc Thần', 'Magic Bamboo Flute', { acc: () => ({ front: [...Y.flute(300, 420), ...X.musicNotes('not-nhac', [[110, 200], [480, 160], [520, 280]])] }) }),

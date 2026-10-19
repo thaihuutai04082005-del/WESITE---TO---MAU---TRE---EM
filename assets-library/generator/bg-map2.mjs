@@ -7,6 +7,7 @@ export const M2 = {
   'cay-dua': { 'dao-ngoc-thien-duong': ['beach', 'day'], 'vong-may': ['beach', 'morning|mint'], 'qua-dua-biet-nhay': ['beach', 'pink|dusk'], 'la-quat-bay': ['cloudland', 'mint|dusk'], 'suoi-nuoc-than': ['jungle', 'day|sunset'], 'dao-hoang-hon': ['seaHorizon', 'sunset'] },
   'cay-xuong-rong': { 'oc-dao-anh-sao': ['desert', 'day'], 'no-hoa-ngu-sac': ['desert', 'morning|pink'], 'doi-mu-phu-thuy': ['desert', 'night|dusk'], 'oc-dao-than-ky': ['desert', 'mint|sunset'], 'gai-ngoc-lap-lanh': ['crystalCave', 'dusk|night'], 'o-hoa-sa-mac': ['canyon', 'pink|mint'] },
   'cay-lieu': { 'ren-trang': ['lake', 'day'], 'toc-lieu-tet-hoa': ['spring', 'morning|dusk'], 'dom-dom-thap-sang': ['lake', 'night|deep'], 'soi-guong-mat-ho': ['lake', 'morning|sunset'], 'mua-cung-gio': ['meadow', 'storm|day'], 'chiec-noi-la': ['garden', 'dusk|storm'] },
+  'cay-anh-dao': { 'mua-sao-hong': ['garden', 'day'] },
   'khom-tre': { 'rung-ngoc-bich': ['forest', 'day'], 'sao-truc-than': ['terraces', 'morning'], 'cay-cau-tre': ['river', 'dusk|pink'], 'mang-non-lon-vu': ['forest', 'mint|storm'], 'chuon-chuon-tre': ['terraces', 'day'], 'dem-trang-ram': ['terraces', 'night'] },
 
   // 05 · Thành Phố Nhà Biết Bay
