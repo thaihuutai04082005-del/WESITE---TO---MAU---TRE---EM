@@ -44,6 +44,7 @@ const CAY = {
     V('o-hoa-sa-mac', 'Chiếc Ô Hoa Sa Mạc', 'Desert Flower Umbrella', { acc: () => ({ front: X.umbrella(470, 170, '#FF9EC0') }) }),
   ],
   'cay-lieu': [
+    V('ren-trang', 'Rèm Trăng', 'Moonlit Curtain', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('toc-lieu-tet-hoa', 'Tóc Liễu Tết Hoa', 'Flower-Braided Willow', { acc: () => ({ front: Y.flowersAt([[150, 360], [190, 390], [410, 390], [450, 360], [230, 330], [370, 330]]) }) }),
     V('dom-dom-thap-sang', 'Đom Đóm Thắp Sáng', 'Firefly Lights', { acc: () => ({ fg: Y.fireflies([[90, 200], [140, 300], [480, 220], [520, 320], [110, 420], [500, 430], [300, 110]]) }) }),
     V('soi-guong-mat-ho', 'Soi Gương Mặt Hồ', 'Lake Mirror', { acc: () => ({ mid: Y.lilyPond(300, 530) }) }),
