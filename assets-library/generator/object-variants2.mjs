@@ -12,6 +12,7 @@ const FLY = { ty: -70, scale: 0.78, px: 300, py: 300 };
 // ======================= 04 · KHU RỪNG CÂY THẦN =======================
 const CAY = {
   'cay-co-thu': [
+    V('cong-troi', 'Cổng Trời', 'Sky Gate', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('canh-cua-bi-mat', 'Cánh Cửa Bí Mật', 'Secret Door', { acc: () => ({ front: Y.treeDoor(300, 470) }) }),
     V('qua-tao-vang', 'Quả Táo Vàng', 'Golden Apples', { acc: () => ({ front: [...Y.fruitsOn('tao-vang', [[222, 250], [370, 190], [385, 292], [250, 318], [300, 160]], '#FFD54F'), ...X.sparkles('lap-lanh', [[120, 200, 16], [480, 160, 14]])] }) }),
     V('xich-du-phep-thuat', 'Xích Đu Phép Thuật', 'Magic Swing', { transform: { tx: -50, px: 300, py: 480 }, acc: () => ({ fg: [...Y.swing(470, 330, 440), ...X.sparkles('lap-lanh', [[520, 250, 14], [560, 360, 12]])] }) }),

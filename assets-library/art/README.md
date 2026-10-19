@@ -102,3 +102,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Xương Rồng Ốc Đảo Ánh Sao (Khu Rừng Ánh Sáng) | – | `src/cay-xuong-rong--oc-dao-anh-sao.png` | ghi trong file |
 | Rừng Tre Ngọc Bích (Khu Rừng Ánh Sáng) | – | `src/khom-tre--rung-ngoc-bich.png` | ghi trong file |
 | Cây Thông Ngôi Sao Tuyết (Khu Rừng Ánh Sáng) | – | `src/cay-thong--ngoi-sao-tuyet.png` | ghi trong file |
+| Cây Đa Cổng Trời (Khu Rừng Ánh Sáng) | – | `src/cay-co-thu--cong-troi.png` | ghi trong file |
