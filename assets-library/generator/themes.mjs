@@ -109,6 +109,7 @@ export const OBJECTS = [
   O('khu-rung-cay-than', 'cay-lieu', 'Cây liễu', 'Willow tree', { face: { x: 300, y: 214, s: 0.8 }, hat: { x: 300, y: 122, s: 0.9 }, build: B2.cayLieu }),
   O('khu-rung-cay-than', 'cay-anh-dao', 'Cây anh đào', 'Cherry blossom', { face: { x: 300, y: 330, s: 0.7 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
   O('khu-rung-cay-than', 'cay-phong', 'Cây phong', 'Maple tree', { face: { x: 300, y: 330, s: 0.7 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
+  O('khu-rung-cay-than', 'cay-bao-bap', 'Cây bao báp', 'Baobab tree', { face: { x: 300, y: 330, s: 0.8 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
   O('khu-rung-cay-than', 'khom-tre', 'Khóm tre', 'Bamboo grove', { face: { x: 300, y: 310, s: 0.62 }, hat: { x: 300, y: 124, s: 0.6 }, build: B2.khomTre }),
 
   // 05 — Nhà × Bay lượn
@@ -416,6 +417,7 @@ export const VARIANT_ART = {
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'cay-co-thu--cong-troi': 'cay-co-thu--cong-troi',
   'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
+  'cay-bao-bap--sa-mac-nang-vang': 'cay-bao-bap--sa-mac-nang-vang',
   'cay-phong--la-lua-thien-thu': 'cay-phong--la-lua-thien-thu',
   'cay-anh-dao--mua-sao-hong': 'cay-anh-dao--mua-sao-hong',
   'cay-lieu--ren-trang': 'cay-lieu--ren-trang',
@@ -473,6 +475,7 @@ export const PICTURE_NAME = {
   'cay-lieu--ren-trang': { vi: 'Cây Liễu Rèm Trăng', en: 'Moonlit Willow Curtain' },
   'cay-anh-dao--mua-sao-hong': { vi: 'Cây Anh Đào Mưa Sao Hồng', en: 'Pink Star-Shower Cherry Tree' },
   'cay-phong--la-lua-thien-thu': { vi: 'Cây Phong Lá Lửa Thiên Thu', en: 'Autumn Fire Maple' },
+  'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
   'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--cong-troi': { vi: 'Cây Đa Cổng Trời', en: 'Sky Gate Banyan' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },

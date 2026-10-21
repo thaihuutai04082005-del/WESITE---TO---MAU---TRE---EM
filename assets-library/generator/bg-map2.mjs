@@ -9,6 +9,7 @@ export const M2 = {
   'cay-lieu': { 'ren-trang': ['lake', 'day'], 'toc-lieu-tet-hoa': ['spring', 'morning|dusk'], 'dom-dom-thap-sang': ['lake', 'night|deep'], 'soi-guong-mat-ho': ['lake', 'morning|sunset'], 'mua-cung-gio': ['meadow', 'storm|day'], 'chiec-noi-la': ['garden', 'dusk|storm'] },
   'cay-anh-dao': { 'mua-sao-hong': ['garden', 'day'] },
   'cay-phong': { 'la-lua-thien-thu': ['orchard', 'sunset'] },
+  'cay-bao-bap': { 'sa-mac-nang-vang': ['desert', 'lemon'] },
   'khom-tre': { 'rung-ngoc-bich': ['forest', 'day'], 'sao-truc-than': ['terraces', 'morning'], 'cay-cau-tre': ['river', 'dusk|pink'], 'mang-non-lon-vu': ['forest', 'mint|storm'], 'chuon-chuon-tre': ['terraces', 'day'], 'dem-trang-ram': ['terraces', 'night'] },
 
   // 05 · Thành Phố Nhà Biết Bay

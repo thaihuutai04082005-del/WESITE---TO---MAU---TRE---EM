@@ -57,6 +57,9 @@ const CAY = {
   'cay-phong': [
     V('la-lua-thien-thu', 'Lá Lửa Thiên Thu', 'Autumn Fire Leaves', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
+  'cay-bao-bap': [
+    V('sa-mac-nang-vang', 'Sa Mạc Nắng Vàng', 'Golden Desert', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+  ],
   'khom-tre': [
     V('rung-ngoc-bich', 'Rừng Ngọc Bích', 'Jade Forest', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('sao-truc-than', 'Sáo Trúc Thần', 'Magic Bamboo Flute', { acc: () => ({ front: [...Y.flute(300, 420), ...X.musicNotes('not-nhac', [[110, 200], [480, 160], [520, 280]])] }) }),
