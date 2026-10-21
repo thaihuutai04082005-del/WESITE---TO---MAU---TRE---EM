@@ -234,6 +234,7 @@ const LAU_DAI = {
     V('le-hoi-bong-bay', 'Lễ Hội Bóng Bay', 'Balloon Festival', { scene: ['balloons', 'confetti'], acc: () => ({}) }),
   ],
   'thap-co': [
+    V('dong-ho-got-but', 'Đồng Hồ Gọt Bút', 'Pencil-Sharpener Clock', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('mua-thu-la-roi', 'Mùa Thu Lá Rơi', 'Falling Leaves', { acc: () => ({ fg: X.leaves('la-roi', [[120, 150, 20], [480, 200, -30], [160, 330, 10], [460, 380, 40], [520, 100, 0]]) }) }),
     V('dem-sao-bang', 'Đêm Sao Băng', 'Shooting Star Night', { acc: () => ({ back: X.starStreaks() }) }),
     V('mua-xuan-day-leo', 'Mùa Xuân Dây Leo', 'Spring Vines', { acc: (c) => ({ front: [...Y.vines(c), ...Y.flowersAt([[270, 260], [260, 360]])] }) }),
