@@ -109,6 +109,7 @@ export const OBJECTS = [
   O('khu-rung-cay-than', 'cay-lieu', 'Cây liễu', 'Willow tree', { face: { x: 300, y: 214, s: 0.8 }, hat: { x: 300, y: 122, s: 0.9 }, build: B2.cayLieu }),
   O('khu-rung-cay-than', 'cay-anh-dao', 'Cây anh đào', 'Cherry blossom', { face: { x: 300, y: 330, s: 0.7 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
   O('khu-rung-cay-than', 'cay-phong', 'Cây phong', 'Maple tree', { face: { x: 300, y: 330, s: 0.7 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
+  O('khu-rung-cay-than', 'cay-bao-bap', 'Cây bao báp', 'Baobab tree', { face: { x: 300, y: 330, s: 0.8 }, hat: { x: 300, y: 150, s: 0.8 }, build: () => [] }),
   O('khu-rung-cay-than', 'khom-tre', 'Khóm tre', 'Bamboo grove', { face: { x: 300, y: 310, s: 0.62 }, hat: { x: 300, y: 124, s: 0.6 }, build: B2.khomTre }),
 
   // 05 — Nhà × Bay lượn
@@ -352,6 +353,8 @@ export const THEME_FIRST = {
   'doi-xe-vu-tru': ['xe-dua--phan-luc', 'xe-buyt-vu-tru--cho-phi-hanh-gia', 'xe-cuu-hoa--dap-lua-thien-thach', 'tau-hoa-vu-tru--duong-ray-ngan-ha',
     'may-bay-vu-tru--bay-qua-vong-hanh-tinh', 'truc-thang--tha-du-tiep-te', 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
     'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
+  'khu-rung-cay-than': ['cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
+    'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
   'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
 };
@@ -359,7 +362,7 @@ export const THEME_FIRST = {
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
 /** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
 export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
-export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay'];
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than'];
 
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
@@ -416,6 +419,7 @@ export const VARIANT_ART = {
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'cay-co-thu--cong-troi': 'cay-co-thu--cong-troi',
   'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
+  'cay-bao-bap--sa-mac-nang-vang': 'cay-bao-bap--sa-mac-nang-vang',
   'cay-phong--la-lua-thien-thu': 'cay-phong--la-lua-thien-thu',
   'cay-anh-dao--mua-sao-hong': 'cay-anh-dao--mua-sao-hong',
   'cay-lieu--ren-trang': 'cay-lieu--ren-trang',
@@ -473,6 +477,7 @@ export const PICTURE_NAME = {
   'cay-lieu--ren-trang': { vi: 'Cây Liễu Rèm Trăng', en: 'Moonlit Willow Curtain' },
   'cay-anh-dao--mua-sao-hong': { vi: 'Cây Anh Đào Mưa Sao Hồng', en: 'Pink Star-Shower Cherry Tree' },
   'cay-phong--la-lua-thien-thu': { vi: 'Cây Phong Lá Lửa Thiên Thu', en: 'Autumn Fire Maple' },
+  'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
   'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--cong-troi': { vi: 'Cây Đa Cổng Trời', en: 'Sky Gate Banyan' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
