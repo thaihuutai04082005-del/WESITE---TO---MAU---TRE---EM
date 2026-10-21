@@ -353,7 +353,7 @@ export const THEME_FIRST = {
   'doi-xe-vu-tru': ['xe-dua--phan-luc', 'xe-buyt-vu-tru--cho-phi-hanh-gia', 'xe-cuu-hoa--dap-lua-thien-thach', 'tau-hoa-vu-tru--duong-ray-ngan-ha',
     'may-bay-vu-tru--bay-qua-vong-hanh-tinh', 'truc-thang--tha-du-tiep-te', 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
     'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
-  'khu-rung-cay-than': ['cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
+  'khu-rung-cay-than': ['cay-co-thu--canh-cua-bi-mat', 'cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
     'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
   'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
