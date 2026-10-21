@@ -109,3 +109,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Cây Bao Báp Giữa Sa Mạc Nắng Vàng (Khu Rừng Ánh Sáng) | – | `src/cay-bao-bap--sa-mac-nang-vang.png` | ghi trong file |
 | Thư Viện Sách Mở Thần Kỳ (Xứ Sở Học Cụ) | – | `src/thu-vien--sach-mo-than-ky.png` | ghi trong file |
 | Cầu Vồng Thước Kẻ Ánh Dương (Xứ Sở Học Cụ) | – | `src/cau-da--cau-vong-thuoc-ke.png` | ghi trong file |
+| Tháp Đồng Hồ Gọt Bút Thời Gian (Xứ Sở Học Cụ) | – | `src/thap-co--dong-ho-got-but.png` | ghi trong file |
