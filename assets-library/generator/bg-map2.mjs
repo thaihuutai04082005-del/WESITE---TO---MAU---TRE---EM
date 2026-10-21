@@ -38,6 +38,7 @@ export const M2 = {
 
   // 12 · Vương Quốc Lâu Đài Huyền Bí
   'lau-dai-huyen-bi': { 'mua-xuan-hoa-no': ['spring', 'pink|mint'], 'mua-dong-tuyet-phu': ['snowVillage', 'storm|deep'], 'dem-phao-hoa': ['nightCity', 'nebula|night'], 'le-hoi-den-long': ['river', 'night|deep'], 'tren-doi-may': ['cloudland', 'pink|alien'] },
+  'thu-vien': { 'sach-mo-than-ky': ['library', 'day'] },
   'cung-dien': { 'tet-nguyen-dan': ['garden', 'pink'], 'mua-he-dai-phun-nuoc': ['desert', 'storm|day'], 'dem-trang-ram': ['desert', 'deep|space'], 'mua-thu-la-vang': ['autumn', 'morning|day'], 'le-hoi-bong-bay': ['meadow', 'space|morning'] },
   'thap-co': { 'mua-thu-la-roi': ['autumn', 'dusk|storm'], 'dem-sao-bang': ['peak', 'deep|space'], 'mua-xuan-day-leo': ['spring', 'sunset|storm'], 'le-hoi-tha-dieu': ['orchard', 'pink'], 'cau-vong-sau-mua': ['meadow', 'alien|space'] },
   'cong-thanh': { 'le-hoi-co-hoa': ['city', 'space|alien'], 'mua-dong-nguoi-tuyet': ['snowVillage', 'space|alien'], 'mua-he-huong-duong': ['sunflowerField', 'morning'], 'dem-hoi-anh-nen': ['forest', 'space|alien'], 'mua-thu-bi-ngo': ['pumpkinPatch', 'sunset'] },

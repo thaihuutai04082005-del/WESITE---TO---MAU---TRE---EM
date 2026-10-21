@@ -107,3 +107,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Cây Anh Đào Mưa Sao Hồng (Khu Rừng Ánh Sáng) | – | `src/cay-anh-dao--mua-sao-hong.png` | ghi trong file |
 | Cây Phong Lá Lửa Thiên Thu (Khu Rừng Ánh Sáng) | – | `src/cay-phong--la-lua-thien-thu.png` | ghi trong file |
 | Cây Bao Báp Giữa Sa Mạc Nắng Vàng (Khu Rừng Ánh Sáng) | – | `src/cay-bao-bap--sa-mac-nang-vang.png` | ghi trong file |
+| Thư Viện Sách Mở Thần Kỳ (Xứ Sở Học Cụ) | – | `src/thu-vien--sach-mo-than-ky.png` | ghi trong file |

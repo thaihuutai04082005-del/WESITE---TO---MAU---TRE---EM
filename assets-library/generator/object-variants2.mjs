@@ -223,6 +223,9 @@ const LAU_DAI = {
     V('le-hoi-den-long', 'Lễ Hội Đèn Lồng', 'Lantern Festival', { acc: () => ({ fg: Y.lanternString(90) }) }),
     V('tren-doi-may', 'Trên Đồi Mây', 'Castle on the Clouds', { transform: { ty: -40, scale: 0.85, px: 300, py: 400 }, acc: () => ({ fg: Y.cloudBase(300, 480, 2) }) }),
   ],
+  'thu-vien': [
+    V('sach-mo-than-ky', 'Sách Mở Thần Kỳ', 'Magic Open Book', { scene: ['sun', 'clouds'], acc: () => ({}) }),
+  ],
   'cung-dien': [
     V('tet-nguyen-dan', 'Tết Nguyên Đán', 'Lunar New Year', { acc: () => ({ fg: [...Y.lanternString(80), ...Y.apricot(40, 520)] }) }),
     V('mua-he-dai-phun-nuoc', 'Mùa Hè Đài Phun Nước', 'Summer Fountain', { transform: { tx: 60, scale: 0.85, px: 300, py: 480 }, acc: () => ({ fg: Y.fountain(90, 520) }) }),
