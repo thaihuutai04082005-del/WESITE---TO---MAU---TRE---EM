@@ -105,3 +105,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Cây Đa Cổng Trời (Khu Rừng Ánh Sáng) | – | `src/cay-co-thu--cong-troi.png` | ghi trong file |
 | Cây Liễu Rèm Trăng (Khu Rừng Ánh Sáng) | – | `src/cay-lieu--ren-trang.png` | ghi trong file |
 | Cây Anh Đào Mưa Sao Hồng (Khu Rừng Ánh Sáng) | – | `src/cay-anh-dao--mua-sao-hong.png` | ghi trong file |
+| Cây Phong Lá Lửa Thiên Thu (Khu Rừng Ánh Sáng) | – | `src/cay-phong--la-lua-thien-thu.png` | ghi trong file |
