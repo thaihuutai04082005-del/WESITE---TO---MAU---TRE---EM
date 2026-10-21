@@ -103,6 +103,33 @@ export default function RainbowTransition() {
     setPhase('in');
   }, [loc.pathname]);
 
+  // Khoá cuộn trang từ lúc bấm (kể cả lúc lấp lánh, khi cầu vòng chưa che hết màn hình) cho tới khi hiệu ứng kết thúc.
+  useEffect(() => {
+    if (!phase) return undefined;
+    const html = document.documentElement;
+    const body = document.body;
+    const prev = { ho: html.style.overflow, bo: body.style.overflow, bp: body.style.paddingRight };
+    const sb = window.innerWidth - html.clientWidth;        // bề rộng thanh cuộn: bù lại để trang không bị giật ngang
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    if (sb > 0) body.style.paddingRight = `${sb}px`;
+    const stop = (e) => e.preventDefault();
+    const stopKey = (e) => {
+      if ([' ', 'PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) e.preventDefault();
+    };
+    window.addEventListener('wheel', stop, { passive: false });
+    window.addEventListener('touchmove', stop, { passive: false });
+    window.addEventListener('keydown', stopKey);
+    return () => {
+      html.style.overflow = prev.ho;
+      body.style.overflow = prev.bo;
+      body.style.paddingRight = prev.bp;
+      window.removeEventListener('wheel', stop);
+      window.removeEventListener('touchmove', stop);
+      window.removeEventListener('keydown', stopKey);
+    };
+  }, [phase]);
+
   // Chạy các lượt quét theo pha.
   useEffect(() => {
     const el = overlay.current;
