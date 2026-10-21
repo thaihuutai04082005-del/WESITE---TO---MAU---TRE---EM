@@ -138,6 +138,7 @@ export const OBJECTS = [
 
   // 12 — Công trình cổ tích × Bốn mùa & lễ hội
   reuse('vuong-quoc-lau-dai', 'lau-dai', 'lau-dai-huyen-bi', 'Lâu đài', 'Castle'),
+  O('vuong-quoc-lau-dai', 'thu-vien', 'Thư viện', 'Library', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'cung-dien', 'Cung điện mái vòm', 'Domed palace', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: B2.cungDien }),
   O('vuong-quoc-lau-dai', 'thap-co', 'Tháp cổ', 'Ancient tower', { face: null, hat: { x: 300, y: 62, s: 0.6 }, build: B2.thapCo }),
   O('vuong-quoc-lau-dai', 'cong-thanh', 'Cổng thành', 'Castle gate', { face: null, hat: { x: 300, y: 250, s: 0.8 }, build: B2.congThanh }),
@@ -419,6 +420,7 @@ export const VARIANT_ART = {
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'cay-co-thu--cong-troi': 'cay-co-thu--cong-troi',
   'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
+  'thu-vien--sach-mo-than-ky': 'thu-vien--sach-mo-than-ky',
   'cay-bao-bap--sa-mac-nang-vang': 'cay-bao-bap--sa-mac-nang-vang',
   'cay-phong--la-lua-thien-thu': 'cay-phong--la-lua-thien-thu',
   'cay-anh-dao--mua-sao-hong': 'cay-anh-dao--mua-sao-hong',
@@ -478,6 +480,7 @@ export const PICTURE_NAME = {
   'cay-anh-dao--mua-sao-hong': { vi: 'Cây Anh Đào Mưa Sao Hồng', en: 'Pink Star-Shower Cherry Tree' },
   'cay-phong--la-lua-thien-thu': { vi: 'Cây Phong Lá Lửa Thiên Thu', en: 'Autumn Fire Maple' },
   'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
+  'thu-vien--sach-mo-than-ky': { vi: 'Thư Viện Sách Mở Thần Kỳ', en: 'Magic Open-Book Library' },
   'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--cong-troi': { vi: 'Cây Đa Cổng Trời', en: 'Sky Gate Banyan' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
