@@ -248,6 +248,7 @@ const LAU_DAI = {
     V('mua-thu-bi-ngo', 'Mùa Thu Bí Ngô', 'Pumpkin Autumn', { acc: () => ({ fg: Y.pumpkins([[80, 520, 1.1], [520, 525, 1], [160, 545, 0.7]]) }) }),
   ],
   'cau-da': [
+    V('cau-vong-thuoc-ke', 'Cầu Vồng Thước Kẻ', 'Ruler Rainbow Bridge', { scene: ['sun', 'clouds'], acc: () => ({}) }),
     V('mua-xuan-hoa-dao', 'Mùa Xuân Hoa Đào', 'Peach Blossom Spring', { acc: () => ({ fg: Y.peachBranch(590, 170) }) }),
     V('mua-he-thuyen-giay', 'Mùa Hè Thuyền Giấy', 'Paper Boat Summer', { acc: () => ({ fg: [P('thuyen-giay-1', [[140, 540], [220, 540], [200, 560], [160, 560]], '#FFFFFF'), P('buom-giay-1', [[180, 540], [196, 500], [206, 540]], '#FFF3D6'), P('thuyen-giay-2', [[400, 560], [470, 560], [452, 578], [418, 578]], '#FFFFFF')] }) }),
     V('mua-dong-bang-gia', 'Mùa Đông Băng Giá', 'Frozen Winter', { scene: ['snow'], acc: () => ({ front: [R('tuyet-lan-can', 60, 290, 480, 14, 6, '#FFFFFF')] }) }),
