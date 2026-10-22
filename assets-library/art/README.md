@@ -110,3 +110,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Thư Viện Sách Mở Thần Kỳ (Xứ Sở Học Cụ) | – | `src/thu-vien--sach-mo-than-ky.png` | ghi trong file |
 | Cầu Vồng Thước Kẻ Ánh Dương (Xứ Sở Học Cụ) | – | `src/cau-da--cau-vong-thuoc-ke.png` | ghi trong file |
 | Tháp Đồng Hồ Gọt Bút Thời Gian (Xứ Sở Học Cụ) | – | `src/thap-co--dong-ho-got-but.png` | ghi trong file |
+| Nhà Ga Hộp Bút Phiêu Lưu (Xứ Sở Học Cụ) | – | `src/nha-ga--hop-but-phieu-luu.png` | ghi trong file |
