@@ -72,6 +72,9 @@ const CAY = {
 
 // ======================= 05 · THÀNH PHỐ NHÀ BIẾT BAY =======================
 const NHA = {
+  'nha-tam-giac': [
+    V('may-trang', 'Mây Trắng', 'White Clouds', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-go-biet-bay': [
     V('khinh-khi-cau', 'Khinh Khí Cầu', 'Hot-Air Balloon', { transform: { ty: 60, scale: 0.7, px: 300, py: 480 }, acc: () => ({ back: [...Y.hotAirBalloon(300, 110, 90), Y.ropesTo([[262, 245], [338, 355]], 205, 371)] }) }),
     V('doi-canh-chim', 'Đôi Cánh Chim', 'Bird Wings', { transform: FLY, acc: (c) => ({ behind: A.wings(c) }) }),

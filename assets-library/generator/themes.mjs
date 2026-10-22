@@ -114,6 +114,7 @@ export const OBJECTS = [
 
   // 05 — Nhà × Bay lượn
   reuse('thanh-pho-nha-biet-bay', 'nha-go', 'nha-go-biet-bay', 'Nhà gỗ', 'Cottage'),
+  O('thanh-pho-nha-biet-bay', 'nha-tam-giac', 'Nhà gỗ tam giác', 'A-frame cabin', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('thanh-pho-nha-biet-bay', 'nha-pho', 'Nhà phố', 'Townhouse', { face: null, hat: { x: 300, y: 124, s: 0.9 }, build: B2.nhaPho }),
   reuse('thanh-pho-nha-biet-bay', 'chung-cu', 'chung-cu-biet-bay', 'Chung cư', 'Apartment'),
   O('thanh-pho-nha-biet-bay', 'nha-san', 'Nhà sàn', 'Stilt house', { face: null, hat: { x: 300, y: 152, s: 0.9 }, build: B2.nhaSan }),
@@ -445,6 +446,7 @@ export const VARIANT_ART = {
   'khom-tre--rung-ngoc-bich': 'khom-tre--rung-ngoc-bich',
   'cay-xuong-rong--oc-dao-anh-sao': 'cay-xuong-rong--oc-dao-anh-sao',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
+  'nha-tam-giac--may-trang': 'nha-tam-giac--may-trang',
 };
 
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
@@ -496,6 +498,7 @@ export const PICTURE_NAME = {
   'cay-anh-dao--mua-sao-hong': { vi: 'Cây Anh Đào Mưa Sao Hồng', en: 'Pink Star-Shower Cherry Tree' },
   'cay-phong--la-lua-thien-thu': { vi: 'Cây Phong Lá Lửa Thiên Thu', en: 'Autumn Fire Maple' },
   'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
+  'nha-tam-giac--may-trang': { vi: 'Nhà Gỗ Tam Giác Mây Trắng', en: 'White Cloud A-Frame Cabin' },
   'thu-vien--sach-mo-than-ky': { vi: 'Thư Viện Sách Mở Thần Kỳ', en: 'Magic Open-Book Library' },
   'cau-da--cau-vong-thuoc-ke': { vi: 'Cầu Vồng Thước Kẻ Ánh Dương', en: 'Sunny Ruler Rainbow Bridge' },
   'thap-co--dong-ho-got-but': { vi: 'Tháp Đồng Hồ Gọt Bút Thời Gian', en: 'Pencil-Sharpener Clock Tower' },
