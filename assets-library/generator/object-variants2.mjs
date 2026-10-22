@@ -229,6 +229,9 @@ const LAU_DAI = {
   'cong-vien': [
     V('keo-than-ky', 'Kéo Thần Kỳ', 'Magic Scissors', { scene: ['stars'], acc: () => ({}) }),
   ],
+  'bao-tang': [
+    V('bang-mau', 'Bảng Màu Sáng Tạo', 'Creative Palette', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-ga': [
     V('hop-but-phieu-luu', 'Hộp Bút Phiêu Lưu', 'Pencil-Case Adventure', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],

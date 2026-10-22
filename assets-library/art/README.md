@@ -113,3 +113,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Nhà Ga Hộp Bút Phiêu Lưu (Xứ Sở Học Cụ) | – | `src/nha-ga--hop-but-phieu-luu.png` | ghi trong file |
 | Đài Thiên Văn Compa Ngân Hà (Xứ Sở Học Cụ) | – | `src/dai-thien-van--compa-ngan-ha.png` | ghi trong file |
 | Cổng Công Viên Kéo Thần Kỳ (Xứ Sở Học Cụ) | – | `src/cong-vien--keo-than-ky.png` | ghi trong file |
+| Bảo Tàng Bảng Màu Sáng Tạo (Xứ Sở Học Cụ) | – | `src/bao-tang--bang-mau.png` | ghi trong file |
