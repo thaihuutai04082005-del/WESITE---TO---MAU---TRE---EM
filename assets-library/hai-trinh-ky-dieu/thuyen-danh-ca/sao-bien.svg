@@ -184,6 +184,8 @@
 <path d="M 478.4 389.7 L 478.9 392.0 L 480.3 393.0 L 490.1 393.4 L 490.1 392.5 L 489.2 392.5 L 487.3 391.5 L 485.9 391.5 L 485.4 391.1 Z" id="r-nho-158" data-region="nho-158" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 353.5 547.9 L 353.1 548.8 L 353.5 550.7 L 355.4 550.7 L 355.9 550.2 L 355.9 548.4 L 355.4 547.9 Z" id="r-nho-196" data-region="nho-196" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 285.4 560.1 L 285.0 561.0 L 285.0 562.9 L 285.9 564.8 L 288.3 566.2 L 291.1 566.2 L 293.0 565.3 L 293.9 563.8 L 293.9 560.1 L 291.5 558.2 L 287.3 558.2 Z" id="r-vang-194" data-region="vang-194" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 461.0 373.7 L 461.0 383.6 L 463.4 383.6 L 463.4 382.6 L 462.9 382.2 L 462.9 378.9 L 462.4 378.4 L 462.4 374.6 L 462.0 373.7 Z" id="r-chi-100" data-region="chi-100" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 461.0 385.4 L 461.0 390.6 L 463.8 391.1 L 464.3 390.6 L 464.3 389.7 L 463.8 389.2 L 463.8 386.4 L 462.9 385.4 Z" id="r-chi-112" data-region="chi-112" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
