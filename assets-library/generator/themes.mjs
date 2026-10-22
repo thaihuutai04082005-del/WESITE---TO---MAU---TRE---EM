@@ -142,6 +142,7 @@ export const OBJECTS = [
   O('vuong-quoc-lau-dai', 'cong-vien', 'Cổng công viên', 'Park gate', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'bao-tang', 'Bảo tàng', 'Museum', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'chung-cu', 'Chung cư', 'Apartment building', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('vuong-quoc-lau-dai', 'hai-dang', 'Hải đăng', 'Lighthouse', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'nha-ga', 'Nhà ga', 'Train station', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'thu-vien', 'Thư viện', 'Library', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'cung-dien', 'Cung điện mái vòm', 'Domed palace', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: B2.cungDien }),
@@ -361,6 +362,8 @@ export const THEME_FIRST = {
     'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
   'khu-rung-cay-than': ['cay-co-thu--canh-cua-bi-mat', 'cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
     'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
+  'vuong-quoc-lau-dai': ['lau-dai-huyen-bi--mua-xuan-hoa-no', 'thu-vien--sach-mo-than-ky', 'cau-da--cau-vong-thuoc-ke', 'thap-co--dong-ho-got-but', 'nha-ga--hop-but-phieu-luu',
+    'dai-thien-van--compa-ngan-ha', 'cong-vien--keo-than-ky', 'bao-tang--bang-mau', 'chung-cu--so-tay-xoan-oc', 'hai-dang--ho-dan-anh-sao'],
   'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
 };
@@ -368,7 +371,7 @@ export const THEME_FIRST = {
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
 /** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
 export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
-export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than'];
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than', 'vuong-quoc-lau-dai'];
 
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
@@ -428,6 +431,7 @@ export const VARIANT_ART = {
   'dai-thien-van--compa-ngan-ha': 'dai-thien-van--compa-ngan-ha',
   'cong-vien--keo-than-ky': 'cong-vien--keo-than-ky',
   'nha-ga--hop-but-phieu-luu': 'nha-ga--hop-but-phieu-luu',
+  'hai-dang--ho-dan-anh-sao': 'hai-dang--ho-dan-anh-sao',
   'chung-cu--so-tay-xoan-oc': 'chung-cu--so-tay-xoan-oc',
   'bao-tang--bang-mau': 'bao-tang--bang-mau',
   'thap-co--dong-ho-got-but': 'thap-co--dong-ho-got-but',
@@ -497,6 +501,7 @@ export const PICTURE_NAME = {
   'thap-co--dong-ho-got-but': { vi: 'Tháp Đồng Hồ Gọt Bút Thời Gian', en: 'Pencil-Sharpener Clock Tower' },
   'bao-tang--bang-mau': { vi: 'Bảo Tàng Bảng Màu Sáng Tạo', en: 'Creative Palette Museum' },
   'chung-cu--so-tay-xoan-oc': { vi: 'Chung Cư Sổ Tay Xoắn Ốc', en: 'Spiral Notebook Apartments' },
+  'hai-dang--ho-dan-anh-sao': { vi: 'Hải Đăng Hồ Dán Ánh Sao', en: 'Glue-Stick Starlight Lighthouse' },
   'nha-ga--hop-but-phieu-luu': { vi: 'Nhà Ga Hộp Bút Phiêu Lưu', en: 'Pencil-Case Adventure Station' },
   'cong-vien--keo-than-ky': { vi: 'Cổng Công Viên Kéo Thần Kỳ', en: 'Magic Scissors Park Gate' },
   'dai-thien-van--compa-ngan-ha': { vi: 'Đài Thiên Văn Compa Ngân Hà', en: 'Compass Galaxy Observatory' },
