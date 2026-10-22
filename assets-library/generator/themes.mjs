@@ -691,5 +691,12 @@ ART_THEMES.push({
         { slug: 'bong-bong-phep-thuat', name: { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' }, file: 'tau-ngam--bong-bong-phep-thuat' },
       ],
     },
+    {
+      slug: 'thuyen-buom',
+      name: { vi: 'Thuyền Buồm', en: 'Sailboat' },
+      pictures: [
+        { slug: 'canh-buom', name: { vi: 'Thuyền Buồm Cánh Bướm Biển', en: 'Sea Butterfly Sailboat' }, file: 'thuyen-buom--canh-buom' },
+      ],
+    },
   ],
 });
