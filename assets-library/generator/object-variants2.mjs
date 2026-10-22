@@ -72,6 +72,30 @@ const CAY = {
 
 // ======================= 05 · THÀNH PHỐ NHÀ BIẾT BAY =======================
 const NHA = {
+  'coi-xay-chong-chong': [
+    V('chong-chong', 'Chong Chóng', 'Pinwheel', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'biet-thu': [
+    V('truc-thang', 'Trực Thăng', 'Helicopter', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'nha-san-canh-chim': [
+    V('canh-chim', 'Cánh Chim', 'Bird Wings', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'nha-ong-ten-lua': [
+    V('ten-lua', 'Tên Lửa', 'Rocket', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'nha-tuyet-du': [
+    V('cau-vong', 'Dù Cầu Vồng', 'Rainbow Parachute', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'lau-dai-canh-rong': [
+    V('canh-rong', 'Cánh Rồng', 'Dragon Wings', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'nha-kinh-drone': [
+    V('bay', 'Drone Bay', 'Flying Drone', { scene: ['stars'], acc: () => ({}) }),
+  ],
+  'nha-tam-giac': [
+    V('may-trang', 'Mây Trắng', 'White Clouds', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-go-biet-bay': [
     V('khinh-khi-cau', 'Khinh Khí Cầu', 'Hot-Air Balloon', { transform: { ty: 60, scale: 0.7, px: 300, py: 480 }, acc: () => ({ back: [...Y.hotAirBalloon(300, 110, 90), Y.ropesTo([[262, 245], [338, 355]], 205, 371)] }) }),
     V('doi-canh-chim', 'Đôi Cánh Chim', 'Bird Wings', { transform: FLY, acc: (c) => ({ behind: A.wings(c) }) }),

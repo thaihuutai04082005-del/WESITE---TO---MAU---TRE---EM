@@ -129,6 +129,29 @@ def main():
                 continue
             d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
             regions.append({'n': -1, 'id': name, 'd': d, 'color': color, 'area': int(mask.sum())})
+    # "paint": [{"rect": [x0, y0, x1, y1], "color": "#màu", "name": "tên", "all": true = lấy cả phần trắng rộng}] — tô riêng các khe trắng quá hẹp (chỗ nét chụm lại) trong khung rect:
+    # lấy phần trắng "mỏng" (không còn sau khi co 1px) của nét gốc, thêm thành vùng tô vẽ đè lên trên.
+    if cfg.get('paint'):
+        white = ~line
+        core = ndimage.binary_erosion(white, structure=np.ones((3, 3)))
+        thin = white & ~ndimage.binary_dilation(core, structure=np.ones((3, 3)))
+        for p in cfg['paint']:
+            x0, y0, x1, y1 = p['rect']
+            win = np.zeros(gray.shape, bool)
+            win[y0:y1 + 1, x0:x1 + 1] = True
+            mask = cv2.dilate(((white if p.get('all') else thin) & win).astype(np.uint8), np.ones((3, 3), np.uint8))
+            if p.get('clip'):  # "clip": [[x, y], ...] — chỉ tô phần nằm trong đa giác này
+                cm = np.zeros(gray.shape, np.uint8)
+                cv2.fillPoly(cm, [np.array(p['clip'], np.int32)], 1)
+                mask &= cm
+            cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            if not cs:
+                continue
+            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.6, True).reshape(-1, 2)
+            if len(c) < 3:
+                continue
+            d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
+            regions.append({'n': -1, 'id': p['name'], 'd': d, 'color': p['color'], 'area': int(mask.sum())})
     # Tên trùng → đánh số.
     seen = {}
     for r in regions:

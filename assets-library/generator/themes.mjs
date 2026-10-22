@@ -114,6 +114,14 @@ export const OBJECTS = [
 
   // 05 — Nhà × Bay lượn
   reuse('thanh-pho-nha-biet-bay', 'nha-go', 'nha-go-biet-bay', 'Nhà gỗ', 'Cottage'),
+  O('thanh-pho-nha-biet-bay', 'nha-tam-giac', 'Nhà gỗ tam giác', 'A-frame cabin', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'coi-xay-chong-chong', 'Cối xay gió chong chóng', 'Pinwheel windmill', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'biet-thu', 'Biệt thự', 'Villa', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'nha-san-canh-chim', 'Nhà sàn cánh chim', 'Winged stilt house', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'nha-ong-ten-lua', 'Nhà ống tên lửa', 'Rocket townhouse', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'nha-tuyet-du', 'Nhà tuyết dù', 'Parachute igloo', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'lau-dai-canh-rong', 'Lâu đài cánh rồng', 'Dragon-wing castle', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'nha-kinh-drone', 'Nhà kính drone', 'Drone greenhouse', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('thanh-pho-nha-biet-bay', 'nha-pho', 'Nhà phố', 'Townhouse', { face: null, hat: { x: 300, y: 124, s: 0.9 }, build: B2.nhaPho }),
   reuse('thanh-pho-nha-biet-bay', 'chung-cu', 'chung-cu-biet-bay', 'Chung cư', 'Apartment'),
   O('thanh-pho-nha-biet-bay', 'nha-san', 'Nhà sàn', 'Stilt house', { face: null, hat: { x: 300, y: 152, s: 0.9 }, build: B2.nhaSan }),
@@ -364,6 +372,8 @@ export const THEME_FIRST = {
     'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
   'vuong-quoc-lau-dai': ['lau-dai-huyen-bi--mua-xuan-hoa-no', 'thu-vien--sach-mo-than-ky', 'cau-da--cau-vong-thuoc-ke', 'thap-co--dong-ho-got-but', 'nha-ga--hop-but-phieu-luu',
     'dai-thien-van--compa-ngan-ha', 'cong-vien--keo-than-ky', 'bao-tang--bang-mau', 'chung-cu--so-tay-xoan-oc', 'hai-dang--ho-dan-anh-sao'],
+  'thanh-pho-nha-biet-bay': ['nha-go-biet-bay--khinh-khi-cau', 'nha-tam-giac--may-trang', 'coi-xay-chong-chong--chong-chong', 'biet-thu--truc-thang', 'nha-san-canh-chim--canh-chim',
+    'nha-ong-ten-lua--ten-lua', 'nha-tuyet-du--cau-vong', 'lau-dai-canh-rong--canh-rong', 'nha-kinh-drone--bay'],
   'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
 };
@@ -371,7 +381,7 @@ export const THEME_FIRST = {
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
 /** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
 export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
-export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than', 'vuong-quoc-lau-dai'];
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than', 'vuong-quoc-lau-dai', 'thanh-pho-nha-biet-bay'];
 
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
@@ -445,6 +455,14 @@ export const VARIANT_ART = {
   'khom-tre--rung-ngoc-bich': 'khom-tre--rung-ngoc-bich',
   'cay-xuong-rong--oc-dao-anh-sao': 'cay-xuong-rong--oc-dao-anh-sao',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
+  'nha-tam-giac--may-trang': 'nha-tam-giac--may-trang',
+  'nha-kinh-drone--bay': 'nha-kinh-drone--bay',
+  'lau-dai-canh-rong--canh-rong': 'lau-dai-canh-rong--canh-rong',
+  'nha-tuyet-du--cau-vong': 'nha-tuyet-du--cau-vong',
+  'nha-ong-ten-lua--ten-lua': 'nha-ong-ten-lua--ten-lua',
+  'nha-san-canh-chim--canh-chim': 'nha-san-canh-chim--canh-chim',
+  'biet-thu--truc-thang': 'biet-thu--truc-thang',
+  'coi-xay-chong-chong--chong-chong': 'coi-xay-chong-chong--chong-chong',
 };
 
 // Tên riêng cho tranh vẽ tay (thay tên ghép "đối tượng + biến thể"): "<đối tượng>--<biến thể>" → tên.
@@ -496,6 +514,14 @@ export const PICTURE_NAME = {
   'cay-anh-dao--mua-sao-hong': { vi: 'Cây Anh Đào Mưa Sao Hồng', en: 'Pink Star-Shower Cherry Tree' },
   'cay-phong--la-lua-thien-thu': { vi: 'Cây Phong Lá Lửa Thiên Thu', en: 'Autumn Fire Maple' },
   'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
+  'coi-xay-chong-chong--chong-chong': { vi: 'Nhà Cối Xay Gió Chong Chóng', en: 'Pinwheel Windmill House' },
+  'biet-thu--truc-thang': { vi: 'Biệt Thự Trực Thăng', en: 'Helicopter Villa' },
+  'nha-san-canh-chim--canh-chim': { vi: 'Nhà Sàn Cánh Chim', en: 'Winged Stilt House' },
+  'nha-ong-ten-lua--ten-lua': { vi: 'Nhà Ống Tên Lửa', en: 'Rocket Townhouse' },
+  'nha-tuyet-du--cau-vong': { vi: 'Nhà Tuyết Dù Cầu Vồng', en: 'Rainbow Parachute Igloo' },
+  'lau-dai-canh-rong--canh-rong': { vi: 'Lâu Đài Cánh Rồng', en: 'Dragon-Wing Castle' },
+  'nha-kinh-drone--bay': { vi: 'Nhà Kính Drone Bay', en: 'Flying Drone Greenhouse' },
+  'nha-tam-giac--may-trang': { vi: 'Nhà Gỗ Tam Giác Mây Trắng', en: 'White Cloud A-Frame Cabin' },
   'thu-vien--sach-mo-than-ky': { vi: 'Thư Viện Sách Mở Thần Kỳ', en: 'Magic Open-Book Library' },
   'cau-da--cau-vong-thuoc-ke': { vi: 'Cầu Vồng Thước Kẻ Ánh Dương', en: 'Sunny Ruler Rainbow Bridge' },
   'thap-co--dong-ho-got-but': { vi: 'Tháp Đồng Hồ Gọt Bút Thời Gian', en: 'Pencil-Sharpener Clock Tower' },

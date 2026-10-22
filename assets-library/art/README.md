@@ -116,3 +116,11 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Bảo Tàng Bảng Màu Sáng Tạo (Xứ Sở Học Cụ) | – | `src/bao-tang--bang-mau.png` | ghi trong file |
 | Chung Cư Sổ Tay Xoắn Ốc (Xứ Sở Học Cụ) | – | `src/chung-cu--so-tay-xoan-oc.png` | ghi trong file |
 | Hải Đăng Hồ Dán Ánh Sao (Xứ Sở Học Cụ) | – | `src/hai-dang--ho-dan-anh-sao.png` | ghi trong file |
+| Nhà Gỗ Tam Giác Mây Trắng (Thành Phố Nhà Biết Bay) | – | `src/nha-tam-giac--may-trang.png` | ghi trong file |
+| Nhà Cối Xay Gió Chong Chóng (Thành Phố Nhà Biết Bay) | – | `src/coi-xay-chong-chong--chong-chong.png` | ghi trong file |
+| Biệt Thự Trực Thăng (Thành Phố Nhà Biết Bay) | – | `src/biet-thu--truc-thang.png` | ghi trong file |
+| Nhà Sàn Cánh Chim (Thành Phố Nhà Biết Bay) | – | `src/nha-san-canh-chim--canh-chim.png` | ghi trong file |
+| Nhà Ống Tên Lửa (Thành Phố Nhà Biết Bay) | – | `src/nha-ong-ten-lua--ten-lua.png` | ghi trong file |
+| Nhà Tuyết Dù Cầu Vồng (Thành Phố Nhà Biết Bay) | – | `src/nha-tuyet-du--cau-vong.png` | ghi trong file |
+| Lâu Đài Cánh Rồng (Thành Phố Nhà Biết Bay) | – | `src/lau-dai-canh-rong--canh-rong.png` | ghi trong file |
+| Nhà Kính Drone Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-kinh-drone--bay.png` | ghi trong file |
