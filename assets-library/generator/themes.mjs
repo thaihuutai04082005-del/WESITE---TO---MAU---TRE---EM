@@ -698,5 +698,12 @@ ART_THEMES.push({
         { slug: 'canh-buom', name: { vi: 'Thuyền Buồm Cánh Bướm Biển', en: 'Sea Butterfly Sailboat' }, file: 'thuyen-buom--canh-buom' },
       ],
     },
+    {
+      slug: 'tau-cuop-bien',
+      name: { vi: 'Tàu Cướp Biển', en: 'Pirate Ship' },
+      pictures: [
+        { slug: 'ngoc-trai', name: { vi: 'Tàu Cướp Biển Ngọc Trai', en: 'Pearl Pirate Ship' }, file: 'tau-cuop-bien--ngoc-trai' },
+      ],
+    },
   ],
 });

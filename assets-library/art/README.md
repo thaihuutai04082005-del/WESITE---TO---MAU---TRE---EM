@@ -125,3 +125,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Lâu Đài Cánh Rồng (Thành Phố Nhà Biết Bay) | – | `src/lau-dai-canh-rong--canh-rong.png` | ghi trong file |
 | Nhà Kính Drone Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-kinh-drone--bay.png` | ghi trong file |
 | Thuyền Buồm Cánh Bướm Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-buom--canh-buom.png` | ghi trong file |
+| Tàu Cướp Biển Ngọc Trai (Hải Trình Kỳ Diệu) | – | `src/tau-cuop-bien--ngoc-trai.png` | ghi trong file |
