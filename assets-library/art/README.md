@@ -124,3 +124,12 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Nhà Tuyết Dù Cầu Vồng (Thành Phố Nhà Biết Bay) | – | `src/nha-tuyet-du--cau-vong.png` | ghi trong file |
 | Lâu Đài Cánh Rồng (Thành Phố Nhà Biết Bay) | – | `src/lau-dai-canh-rong--canh-rong.png` | ghi trong file |
 | Nhà Kính Drone Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-kinh-drone--bay.png` | ghi trong file |
+| Thuyền Buồm Cánh Bướm Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-buom--canh-buom.png` | ghi trong file |
+| Tàu Cướp Biển Ngọc Trai (Hải Trình Kỳ Diệu) | – | `src/tau-cuop-bien--ngoc-trai.png` | ghi trong file |
+| Thuyền Gondola Vỏ Sò (Hải Trình Kỳ Diệu) | – | `src/thuyen-gondola--vo-so.png` | ghi trong file |
+| Tàu Hơi Nước San Hô (Hải Trình Kỳ Diệu) | – | `src/tau-hoi-nuoc--san-ho.png` | ghi trong file |
+| Thuyền Đánh Cá Sao Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-danh-ca--sao-bien.png` | ghi trong file |
+| Ca Nô Sóng Thần Kì (Hải Trình Kỳ Diệu) | – | `src/ca-no--song-than.png` | ghi trong file |
+| Thuyền Hai Thân Sứa Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-hai-than--sua-bien.png` | ghi trong file |
+| Bè Gỗ Rùa Biển Thần Kì (Hải Trình Kỳ Diệu) | – | `src/be-go--rua-bien.png` | ghi trong file |
+| Thuyền Kayak Cá Heo (Hải Trình Kỳ Diệu) | – | `src/thuyen-kayak--ca-heo.png` | ghi trong file |

@@ -691,5 +691,68 @@ ART_THEMES.push({
         { slug: 'bong-bong-phep-thuat', name: { vi: 'Tàu Ngầm Bong Bóng Phép Thuật', en: 'Magic Bubble Submarine' }, file: 'tau-ngam--bong-bong-phep-thuat' },
       ],
     },
+    {
+      slug: 'thuyen-buom',
+      name: { vi: 'Thuyền Buồm', en: 'Sailboat' },
+      pictures: [
+        { slug: 'canh-buom', name: { vi: 'Thuyền Buồm Cánh Bướm Biển', en: 'Sea Butterfly Sailboat' }, file: 'thuyen-buom--canh-buom' },
+      ],
+    },
+    {
+      slug: 'tau-cuop-bien',
+      name: { vi: 'Tàu Cướp Biển', en: 'Pirate Ship' },
+      pictures: [
+        { slug: 'ngoc-trai', name: { vi: 'Tàu Cướp Biển Ngọc Trai', en: 'Pearl Pirate Ship' }, file: 'tau-cuop-bien--ngoc-trai' },
+      ],
+    },
+    {
+      slug: 'thuyen-gondola',
+      name: { vi: 'Thuyền Gondola', en: 'Gondola' },
+      pictures: [
+        { slug: 'vo-so', name: { vi: 'Thuyền Gondola Vỏ Sò', en: 'Seashell Gondola' }, file: 'thuyen-gondola--vo-so' },
+      ],
+    },
+    {
+      slug: 'tau-hoi-nuoc',
+      name: { vi: 'Tàu Hơi Nước', en: 'Steamboat' },
+      pictures: [
+        { slug: 'san-ho', name: { vi: 'Tàu Hơi Nước San Hô', en: 'Coral Steamboat' }, file: 'tau-hoi-nuoc--san-ho' },
+      ],
+    },
+    {
+      slug: 'thuyen-danh-ca',
+      name: { vi: 'Thuyền Đánh Cá', en: 'Fishing Boat' },
+      pictures: [
+        { slug: 'sao-bien', name: { vi: 'Thuyền Đánh Cá Sao Biển', en: 'Starfish Fishing Boat' }, file: 'thuyen-danh-ca--sao-bien' },
+      ],
+    },
+    {
+      slug: 'ca-no',
+      name: { vi: 'Ca Nô', en: 'Speedboat' },
+      pictures: [
+        { slug: 'song-than', name: { vi: 'Ca Nô Sóng Thần Kì', en: 'Magic Tidal Wave Speedboat' }, file: 'ca-no--song-than' },
+      ],
+    },
+    {
+      slug: 'thuyen-hai-than',
+      name: { vi: 'Thuyền Hai Thân', en: 'Catamaran' },
+      pictures: [
+        { slug: 'sua-bien', name: { vi: 'Thuyền Hai Thân Sứa Biển', en: 'Jellyfish Catamaran' }, file: 'thuyen-hai-than--sua-bien' },
+      ],
+    },
+    {
+      slug: 'be-go',
+      name: { vi: 'Bè Gỗ', en: 'Wooden Raft' },
+      pictures: [
+        { slug: 'rua-bien', name: { vi: 'Bè Gỗ Rùa Biển Thần Kì', en: 'Magic Sea Turtle Raft' }, file: 'be-go--rua-bien' },
+      ],
+    },
+    {
+      slug: 'thuyen-kayak',
+      name: { vi: 'Thuyền Kayak', en: 'Kayak' },
+      pictures: [
+        { slug: 'ca-heo', name: { vi: 'Thuyền Kayak Cá Heo', en: 'Dolphin Kayak' }, file: 'thuyen-kayak--ca-heo' },
+      ],
+    },
   ],
 });
