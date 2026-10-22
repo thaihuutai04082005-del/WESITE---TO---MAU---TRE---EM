@@ -740,5 +740,12 @@ ART_THEMES.push({
         { slug: 'sua-bien', name: { vi: 'Thuyền Hai Thân Sứa Biển', en: 'Jellyfish Catamaran' }, file: 'thuyen-hai-than--sua-bien' },
       ],
     },
+    {
+      slug: 'be-go',
+      name: { vi: 'Bè Gỗ', en: 'Wooden Raft' },
+      pictures: [
+        { slug: 'rua-bien', name: { vi: 'Bè Gỗ Rùa Biển Thần Kì', en: 'Magic Sea Turtle Raft' }, file: 'be-go--rua-bien' },
+      ],
+    },
   ],
 });
