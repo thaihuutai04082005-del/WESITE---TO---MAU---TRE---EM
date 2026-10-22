@@ -198,6 +198,8 @@
 <path d="M 292.0 265.7 L 289.7 267.6 L 289.7 271.8 L 290.6 273.2 L 292.5 274.2 L 295.3 274.2 L 298.1 271.4 L 298.1 268.1 L 295.8 265.7 Z" id="r-z45" data-region="z45" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 307.0 245.5 L 304.7 247.4 L 304.7 252.1 L 307.0 254.0 L 310.3 254.0 L 312.7 252.1 L 313.1 248.4 L 310.8 245.5 Z" id="r-z38" data-region="z38" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 550.7 348.8 L 550.7 349.8 L 552.1 352.6 L 552.1 354.0 L 553.5 354.0 L 553.1 348.8 Z" id="r-nho-78" data-region="nho-78" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 290.1 246.9 L 290.1 250.2 L 290.6 251.2 L 291.5 251.6 L 294.8 251.6 L 295.8 251.2 L 296.2 250.2 L 296.2 246.9 L 294.8 245.5 L 292.0 245.5 Z" id="r-cham-do" data-region="cham-do" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 282.6 256.8 L 282.2 257.7 L 282.2 261.0 L 283.1 262.4 L 286.9 262.4 L 288.3 261.0 L 288.3 257.7 L 286.9 256.3 L 283.6 256.3 Z" id="r-cham-xanh" data-region="cham-xanh" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-wiggle"></g>
 <g class="scene-front">
