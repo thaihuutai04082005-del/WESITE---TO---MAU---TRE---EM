@@ -366,9 +366,10 @@ export const THEME_FIRST = {
     'gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
   'thi-tran-khung-long': ['khung-long-bao-chua--dau-bep', 'khung-long-co-dai--tho-lau-kinh', 'khung-long-ba-sung--bac-si', 'khung-long-gai-lung--nong-dan',
     'duc-long--dua-thu', 'khung-long-mao-ken--tho-lam-vuon', 'khung-long-boc-giap--tho-xay', 'khung-long-dau-vom--giao-vien', 'bo-sat-bien--ngu-dan', 'khung-long-hai-mao--hoa-si'],
-  'doi-xe-vu-tru': ['xe-dua--phan-luc', 'xe-buyt-vu-tru--cho-phi-hanh-gia', 'xe-cuu-hoa--dap-lua-thien-thach', 'tau-hoa-vu-tru--duong-ray-ngan-ha',
-    'may-bay-vu-tru--bay-qua-vong-hanh-tinh', 'truc-thang--tha-du-tiep-te', 'xe-tai-vu-tru--giao-hang-lien-hanh-tinh',
-    'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
+  'doi-xe-vu-tru': [
+    'xe-dua--phan-luc', 'xe-buyt-vu-tru--cho-phi-hanh-gia', 'xe-cuu-hoa--dap-lua-thien-thach', 'tau-hoa-vu-tru--duong-ray-ngan-ha', 'may-bay-vu-tru--bay-qua-vong-hanh-tinh',
+    'xe-tai-vu-tru--giao-hang-lien-hanh-tinh', 'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'truc-thang--tha-du-tiep-te', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'
+  ],
   'khu-rung-cay-than': ['cay-co-thu--canh-cua-bi-mat', 'cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
     'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
   'vuong-quoc-lau-dai': ['lau-dai-huyen-bi--mua-xuan-hoa-no', 'thu-vien--sach-mo-than-ky', 'cau-da--cau-vong-thuoc-ke', 'thap-co--dong-ho-got-but', 'nha-ga--hop-but-phieu-luu',
