@@ -719,5 +719,12 @@ ART_THEMES.push({
         { slug: 'san-ho', name: { vi: 'Tàu Hơi Nước San Hô', en: 'Coral Steamboat' }, file: 'tau-hoi-nuoc--san-ho' },
       ],
     },
+    {
+      slug: 'thuyen-danh-ca',
+      name: { vi: 'Thuyền Đánh Cá', en: 'Fishing Boat' },
+      pictures: [
+        { slug: 'sao-bien', name: { vi: 'Thuyền Đánh Cá Sao Biển', en: 'Starfish Fishing Boat' }, file: 'thuyen-danh-ca--sao-bien' },
+      ],
+    },
   ],
 });
