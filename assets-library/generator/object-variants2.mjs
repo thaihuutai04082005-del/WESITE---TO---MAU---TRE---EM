@@ -72,6 +72,9 @@ const CAY = {
 
 // ======================= 05 · THÀNH PHỐ NHÀ BIẾT BAY =======================
 const NHA = {
+  'coi-xay-chong-chong': [
+    V('chong-chong', 'Chong Chóng', 'Pinwheel', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-tam-giac': [
     V('may-trang', 'Mây Trắng', 'White Clouds', { scene: ['stars'], acc: () => ({}) }),
   ],

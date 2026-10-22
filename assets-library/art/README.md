@@ -117,3 +117,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Chung Cư Sổ Tay Xoắn Ốc (Xứ Sở Học Cụ) | – | `src/chung-cu--so-tay-xoan-oc.png` | ghi trong file |
 | Hải Đăng Hồ Dán Ánh Sao (Xứ Sở Học Cụ) | – | `src/hai-dang--ho-dan-anh-sao.png` | ghi trong file |
 | Nhà Gỗ Tam Giác Mây Trắng (Thành Phố Nhà Biết Bay) | – | `src/nha-tam-giac--may-trang.png` | ghi trong file |
+| Nhà Cối Xay Gió Chong Chóng (Thành Phố Nhà Biết Bay) | – | `src/coi-xay-chong-chong--chong-chong.png` | ghi trong file |
