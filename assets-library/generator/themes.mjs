@@ -375,8 +375,8 @@ export const THEME_FIRST = {
     'dai-thien-van--compa-ngan-ha', 'cong-vien--keo-than-ky', 'bao-tang--bang-mau', 'chung-cu--so-tay-xoan-oc', 'hai-dang--ho-dan-anh-sao'],
   'thanh-pho-nha-biet-bay': ['nha-go-biet-bay--khinh-khi-cau', 'nha-tam-giac--may-trang', 'coi-xay-chong-chong--chong-chong', 'biet-thu--truc-thang', 'nha-san-canh-chim--canh-chim',
     'nha-ong-ten-lua--ten-lua', 'nha-tuyet-du--cau-vong', 'lau-dai-canh-rong--canh-rong', 'nha-kinh-drone--bay', 'nha-mai-vom--bong-bay'],
-  'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
-    'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
+  'the-thao-trai-cay': ['ngo--karate', 'tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
+    'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh'],
 };
 
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
