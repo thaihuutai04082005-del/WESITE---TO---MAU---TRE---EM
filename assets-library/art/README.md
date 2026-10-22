@@ -133,3 +133,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Thuyền Hai Thân Sứa Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-hai-than--sua-bien.png` | ghi trong file |
 | Bè Gỗ Rùa Biển Thần Kì (Hải Trình Kỳ Diệu) | – | `src/be-go--rua-bien.png` | ghi trong file |
 | Thuyền Kayak Cá Heo (Hải Trình Kỳ Diệu) | – | `src/thuyen-kayak--ca-heo.png` | ghi trong file |
+| Nhà Mái Vòm Bóng Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-mai-vom--bong-bay.png` | ghi trong file |
