@@ -119,3 +119,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Nhà Gỗ Tam Giác Mây Trắng (Thành Phố Nhà Biết Bay) | – | `src/nha-tam-giac--may-trang.png` | ghi trong file |
 | Nhà Cối Xay Gió Chong Chóng (Thành Phố Nhà Biết Bay) | – | `src/coi-xay-chong-chong--chong-chong.png` | ghi trong file |
 | Biệt Thự Trực Thăng (Thành Phố Nhà Biết Bay) | – | `src/biet-thu--truc-thang.png` | ghi trong file |
+| Nhà Sàn Cánh Chim (Thành Phố Nhà Biết Bay) | – | `src/nha-san-canh-chim--canh-chim.png` | ghi trong file |

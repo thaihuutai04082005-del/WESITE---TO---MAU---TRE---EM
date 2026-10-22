@@ -117,6 +117,7 @@ export const OBJECTS = [
   O('thanh-pho-nha-biet-bay', 'nha-tam-giac', 'Nhà gỗ tam giác', 'A-frame cabin', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('thanh-pho-nha-biet-bay', 'coi-xay-chong-chong', 'Cối xay gió chong chóng', 'Pinwheel windmill', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('thanh-pho-nha-biet-bay', 'biet-thu', 'Biệt thự', 'Villa', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
+  O('thanh-pho-nha-biet-bay', 'nha-san-canh-chim', 'Nhà sàn cánh chim', 'Winged stilt house', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('thanh-pho-nha-biet-bay', 'nha-pho', 'Nhà phố', 'Townhouse', { face: null, hat: { x: 300, y: 124, s: 0.9 }, build: B2.nhaPho }),
   reuse('thanh-pho-nha-biet-bay', 'chung-cu', 'chung-cu-biet-bay', 'Chung cư', 'Apartment'),
   O('thanh-pho-nha-biet-bay', 'nha-san', 'Nhà sàn', 'Stilt house', { face: null, hat: { x: 300, y: 152, s: 0.9 }, build: B2.nhaSan }),
@@ -449,6 +450,7 @@ export const VARIANT_ART = {
   'cay-xuong-rong--oc-dao-anh-sao': 'cay-xuong-rong--oc-dao-anh-sao',
   'nha-go-biet-bay--khinh-khi-cau': 'nha-go-biet-bay--khinh-khi-cau',
   'nha-tam-giac--may-trang': 'nha-tam-giac--may-trang',
+  'nha-san-canh-chim--canh-chim': 'nha-san-canh-chim--canh-chim',
   'biet-thu--truc-thang': 'biet-thu--truc-thang',
   'coi-xay-chong-chong--chong-chong': 'coi-xay-chong-chong--chong-chong',
 };
@@ -504,6 +506,7 @@ export const PICTURE_NAME = {
   'cay-bao-bap--sa-mac-nang-vang': { vi: 'Cây Bao Báp Giữa Sa Mạc Nắng Vàng', en: 'Golden Desert Baobab' },
   'coi-xay-chong-chong--chong-chong': { vi: 'Nhà Cối Xay Gió Chong Chóng', en: 'Pinwheel Windmill House' },
   'biet-thu--truc-thang': { vi: 'Biệt Thự Trực Thăng', en: 'Helicopter Villa' },
+  'nha-san-canh-chim--canh-chim': { vi: 'Nhà Sàn Cánh Chim', en: 'Winged Stilt House' },
   'nha-tam-giac--may-trang': { vi: 'Nhà Gỗ Tam Giác Mây Trắng', en: 'White Cloud A-Frame Cabin' },
   'thu-vien--sach-mo-than-ky': { vi: 'Thư Viện Sách Mở Thần Kỳ', en: 'Magic Open-Book Library' },
   'cau-da--cau-vong-thuoc-ke': { vi: 'Cầu Vồng Thước Kẻ Ánh Dương', en: 'Sunny Ruler Rainbow Bridge' },
