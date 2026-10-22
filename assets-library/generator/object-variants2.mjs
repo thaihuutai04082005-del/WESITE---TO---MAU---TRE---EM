@@ -226,6 +226,9 @@ const LAU_DAI = {
   'dai-thien-van': [
     V('compa-ngan-ha', 'Compa Ngân Hà', 'Compass Galaxy', { scene: ['stars'], acc: () => ({}) }),
   ],
+  'cong-vien': [
+    V('keo-than-ky', 'Kéo Thần Kỳ', 'Magic Scissors', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-ga': [
     V('hop-but-phieu-luu', 'Hộp Bút Phiêu Lưu', 'Pencil-Case Adventure', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
