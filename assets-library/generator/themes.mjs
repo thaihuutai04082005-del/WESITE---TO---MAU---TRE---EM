@@ -705,5 +705,12 @@ ART_THEMES.push({
         { slug: 'ngoc-trai', name: { vi: 'Tàu Cướp Biển Ngọc Trai', en: 'Pearl Pirate Ship' }, file: 'tau-cuop-bien--ngoc-trai' },
       ],
     },
+    {
+      slug: 'thuyen-gondola',
+      name: { vi: 'Thuyền Gondola', en: 'Gondola' },
+      pictures: [
+        { slug: 'vo-so', name: { vi: 'Thuyền Gondola Vỏ Sò', en: 'Seashell Gondola' }, file: 'thuyen-gondola--vo-so' },
+      ],
+    },
   ],
 });
