@@ -90,6 +90,13 @@
 <path d="M 257.3 451.2 L 257.3 454.5 L 258.2 456.3 L 262.4 458.7 L 267.6 458.2 L 270.0 456.8 L 270.9 454.9 L 270.9 452.1 L 267.1 449.3 L 260.6 448.4 L 258.7 449.3 Z" id="r-z96" data-region="z96" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 391.5 298.1 L 391.5 299.1 L 394.4 300.9 L 400.9 301.4 L 407.0 303.8 L 409.9 303.3 L 408.5 298.1 L 407.0 296.2 L 403.8 294.4 L 399.5 294.4 L 393.0 296.7 Z" id="r-z33" data-region="z33" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 195.3 403.8 L 195.3 405.2 L 196.7 406.1 L 200.9 406.1 L 201.4 405.6 L 202.8 405.6 L 202.8 403.8 L 201.4 402.8 L 196.7 402.8 Z" id="r-nho-62" data-region="nho-62" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 195.3 403.8 L 195.3 405.2 L 196.7 406.1 L 200.9 406.1 L 201.4 405.6 L 202.8 405.6 L 202.8 403.8 L 201.4 402.8 L 196.7 402.8 Z" id="r-nut1" data-region="nut1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 193.9 406.1 L 193.9 409.4 L 196.7 411.3 L 200.9 411.3 L 202.8 410.3 L 202.8 408.9 L 201.9 407.5 L 198.1 408.0 L 195.8 407.0 L 194.8 406.1 Z" id="r-nut2" data-region="nut2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 179.8 421.6 L 179.8 423.5 L 180.8 424.4 L 181.7 424.4 L 182.2 424.9 L 185.0 424.9 L 187.8 423.5 L 187.8 422.1 L 185.0 420.7 L 182.6 420.7 L 182.2 421.1 Z" id="r-nut3" data-region="nut3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 177.9 424.4 L 177.9 428.2 L 179.3 429.6 L 180.3 429.6 L 180.8 430.0 L 185.9 430.0 L 188.7 428.2 L 188.7 425.4 L 187.3 425.4 L 185.9 426.3 L 183.1 426.8 L 182.6 426.3 L 180.3 425.8 L 178.9 424.4 Z" id="r-nut4" data-region="nut4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 289.7 423.5 L 289.7 424.9 L 291.1 426.3 L 292.0 426.3 L 292.5 426.8 L 295.3 426.8 L 297.2 425.8 L 297.2 423.9 L 295.3 422.5 L 291.1 422.5 Z" id="r-nut5" data-region="nut5" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 287.8 426.3 L 287.8 429.1 L 288.3 430.0 L 292.0 431.9 L 294.8 431.9 L 295.3 431.5 L 296.2 431.5 L 298.6 429.6 L 298.6 427.2 L 297.2 427.2 L 295.8 428.2 L 292.0 428.2 L 291.5 427.7 L 290.6 427.7 L 289.2 426.3 Z" id="r-nut6" data-region="nut6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 260.6 448.4 L 260.6 449.8 L 262.4 451.6 L 263.4 451.6 L 263.8 452.1 L 267.1 451.6 L 268.5 450.2 L 268.5 449.3 L 266.7 447.4 L 262.0 447.4 Z" id="r-nut7" data-region="nut7" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
