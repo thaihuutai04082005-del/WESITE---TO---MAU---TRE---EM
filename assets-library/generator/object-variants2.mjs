@@ -75,6 +75,9 @@ const NHA = {
   'coi-xay-chong-chong': [
     V('chong-chong', 'Chong Chóng', 'Pinwheel', { scene: ['stars'], acc: () => ({}) }),
   ],
+  'biet-thu': [
+    V('truc-thang', 'Trực Thăng', 'Helicopter', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-tam-giac': [
     V('may-trang', 'Mây Trắng', 'White Clouds', { scene: ['stars'], acc: () => ({}) }),
   ],
