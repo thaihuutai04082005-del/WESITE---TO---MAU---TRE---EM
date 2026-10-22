@@ -747,5 +747,12 @@ ART_THEMES.push({
         { slug: 'rua-bien', name: { vi: 'Bè Gỗ Rùa Biển Thần Kì', en: 'Magic Sea Turtle Raft' }, file: 'be-go--rua-bien' },
       ],
     },
+    {
+      slug: 'thuyen-kayak',
+      name: { vi: 'Thuyền Kayak', en: 'Kayak' },
+      pictures: [
+        { slug: 'ca-heo', name: { vi: 'Thuyền Kayak Cá Heo', en: 'Dolphin Kayak' }, file: 'thuyen-kayak--ca-heo' },
+      ],
+    },
   ],
 });
