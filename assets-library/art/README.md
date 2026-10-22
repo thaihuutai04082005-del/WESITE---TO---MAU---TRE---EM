@@ -115,3 +115,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Cổng Công Viên Kéo Thần Kỳ (Xứ Sở Học Cụ) | – | `src/cong-vien--keo-than-ky.png` | ghi trong file |
 | Bảo Tàng Bảng Màu Sáng Tạo (Xứ Sở Học Cụ) | – | `src/bao-tang--bang-mau.png` | ghi trong file |
 | Chung Cư Sổ Tay Xoắn Ốc (Xứ Sở Học Cụ) | – | `src/chung-cu--so-tay-xoan-oc.png` | ghi trong file |
+| Hải Đăng Hồ Dán Ánh Sao (Xứ Sở Học Cụ) | – | `src/hai-dang--ho-dan-anh-sao.png` | ghi trong file |

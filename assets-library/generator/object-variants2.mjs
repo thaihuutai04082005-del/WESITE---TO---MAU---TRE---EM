@@ -235,6 +235,9 @@ const LAU_DAI = {
   'chung-cu': [
     V('so-tay-xoan-oc', 'Sổ Tay Xoắn Ốc', 'Spiral Notebook', { scene: ['stars'], acc: () => ({}) }),
   ],
+  'hai-dang': [
+    V('ho-dan-anh-sao', 'Hồ Dán Ánh Sao', 'Glue Starlight', { scene: ['stars'], acc: () => ({}) }),
+  ],
   'nha-ga': [
     V('hop-but-phieu-luu', 'Hộp Bút Phiêu Lưu', 'Pencil-Case Adventure', { scene: ['sun', 'clouds'], acc: () => ({}) }),
   ],
