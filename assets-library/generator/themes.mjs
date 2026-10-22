@@ -644,20 +644,6 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'vay-ngan',
-      name: { vi: 'Tiểu Thư Váy Ngắn', en: 'Short Dress Girl' },
-      pictures: [
-        { slug: 'huong-duong', name: { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' }, file: 'cong-chua-ngan-hoa--vay-ngan-huong-duong' },
-      ],
-    },
-    {
-      slug: 'vay-yem',
-      name: { vi: 'Cô Nàng Váy Yếm', en: 'Pinafore Girl' },
-      pictures: [
-        { slug: 'hoa-cuc-trang', name: { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' }, file: 'cong-chua-ngan-hoa--vay-yem-hoa-cuc' },
-      ],
-    },
-    {
       slug: 'ao-len',
       name: { vi: 'Tiểu Thư Áo Len', en: 'Sweater Girl' },
       pictures: [
@@ -665,10 +651,24 @@ ART_THEMES.push({
       ],
     },
     {
+      slug: 'vay-ngan',
+      name: { vi: 'Tiểu Thư Váy Ngắn', en: 'Short Dress Girl' },
+      pictures: [
+        { slug: 'huong-duong', name: { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' }, file: 'cong-chua-ngan-hoa--vay-ngan-huong-duong' },
+      ],
+    },
+    {
       slug: 'hoodie',
       name: { vi: 'Cô Nàng Hoodie', en: 'Hoodie Girl' },
       pictures: [
         { slug: 'oai-huong', name: { vi: 'Cô Nàng Hoodie Oải Hương', en: 'Lavender Hoodie Girl' }, file: 'cong-chua-ngan-hoa--hoodie-oai-huong' },
+      ],
+    },
+    {
+      slug: 'vay-yem',
+      name: { vi: 'Cô Nàng Váy Yếm', en: 'Pinafore Girl' },
+      pictures: [
+        { slug: 'hoa-cuc-trang', name: { vi: 'Cô Nàng Váy Yếm Hoa Cúc Trắng', en: 'Daisy Pinafore Girl' }, file: 'cong-chua-ngan-hoa--vay-yem-hoa-cuc' },
       ],
     },
     {
