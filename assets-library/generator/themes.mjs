@@ -726,5 +726,12 @@ ART_THEMES.push({
         { slug: 'sao-bien', name: { vi: 'Thuyền Đánh Cá Sao Biển', en: 'Starfish Fishing Boat' }, file: 'thuyen-danh-ca--sao-bien' },
       ],
     },
+    {
+      slug: 'ca-no',
+      name: { vi: 'Ca Nô', en: 'Speedboat' },
+      pictures: [
+        { slug: 'song-than', name: { vi: 'Ca Nô Sóng Thần Kì', en: 'Magic Tidal Wave Speedboat' }, file: 'ca-no--song-than' },
+      ],
+    },
   ],
 });
