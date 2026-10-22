@@ -41,6 +41,7 @@ export const M2 = {
   'dai-thien-van': { 'compa-ngan-ha': ['stars', 'night'] },
   'cong-vien': { 'keo-than-ky': ['park', 'sunny'] },
   'bao-tang': { 'bang-mau': ['park', 'sky'] },
+  'chung-cu': { 'so-tay-xoan-oc': ['stage', 'sky'] },
   'nha-ga': { 'hop-but-phieu-luu': ['park', 'lemon'] },
   'thu-vien': { 'sach-mo-than-ky': ['library', 'day'] },
   'cung-dien': { 'tet-nguyen-dan': ['garden', 'pink'], 'mua-he-dai-phun-nuoc': ['desert', 'storm|day'], 'dem-trang-ram': ['desert', 'deep|space'], 'mua-thu-la-vang': ['autumn', 'morning|day'], 'le-hoi-bong-bay': ['meadow', 'space|morning'] },
