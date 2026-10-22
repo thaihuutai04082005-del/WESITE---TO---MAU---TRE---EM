@@ -733,5 +733,12 @@ ART_THEMES.push({
         { slug: 'song-than', name: { vi: 'Ca Nô Sóng Thần Kì', en: 'Magic Tidal Wave Speedboat' }, file: 'ca-no--song-than' },
       ],
     },
+    {
+      slug: 'thuyen-hai-than',
+      name: { vi: 'Thuyền Hai Thân', en: 'Catamaran' },
+      pictures: [
+        { slug: 'sua-bien', name: { vi: 'Thuyền Hai Thân Sứa Biển', en: 'Jellyfish Catamaran' }, file: 'thuyen-hai-than--sua-bien' },
+      ],
+    },
   ],
 });

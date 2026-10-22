@@ -130,3 +130,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Tàu Hơi Nước San Hô (Hải Trình Kỳ Diệu) | – | `src/tau-hoi-nuoc--san-ho.png` | ghi trong file |
 | Thuyền Đánh Cá Sao Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-danh-ca--sao-bien.png` | ghi trong file |
 | Ca Nô Sóng Thần Kì (Hải Trình Kỳ Diệu) | – | `src/ca-no--song-than.png` | ghi trong file |
+| Thuyền Hai Thân Sứa Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-hai-than--sua-bien.png` | ghi trong file |
