@@ -20,6 +20,7 @@ export const M2 = {
   'nha-tuyet-du': { 'cau-vong': ['mountainDawn', 'sky'] },
   'lau-dai-canh-rong': { 'canh-rong': ['mountainDawn', 'sky'] },
   'nha-kinh-drone': { 'bay': ['mountainDawn', 'sky'] },
+  'nha-mai-vom': { 'bong-bay': ['mountainDawn', 'sky'] },
   'nha-tam-giac': { 'may-trang': ['cloudland', 'sky'] },
   'nha-go-biet-bay': { 'khinh-khi-cau': ['meadow', 'dusk|pink'], 'doi-canh-chim': ['cloudland', 'dusk|storm'], 'cuoi-dam-may': ['mountainDawn', 'morning'], 'dieu-keo-nha': ['farm', 'mint|pink'], 'bay-qua-cau-vong': ['rainbowHills', 'storm|dusk'] },
   'nha-pho': { 'canh-quat-truc-thang': ['city', 'night|dusk'], 'chum-bong-bay': ['rooftops', 'day'], 'ten-lua-day': ['rooftops', 'sunset'], 'bay-giua-sao-dem': ['nightCity', 'deep|dusk'], 'ha-canh-tren-may': ['cloudland', 'sunset|pink'] },
