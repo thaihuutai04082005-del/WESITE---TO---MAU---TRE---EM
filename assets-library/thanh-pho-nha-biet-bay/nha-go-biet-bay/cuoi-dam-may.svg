@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" data-picture="nha-go-biet-bay--cuoi-dam-may">
 <g class="scene-back">
 <rect x="0" y="0" width="600" height="600" rx="0" id="r-nen-troi" data-region="nen-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="505" cy="150" rx="54" ry="54" id="r-mat-troi" data-region="mat-troi" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
-<ellipse cx="95" cy="90" rx="90" ry="14" id="r-dai-may-1" data-region="dai-may-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="90,58 92.9,66 101.4,66.3 94.8,71.5 97.1,79.7 90,75 82.9,79.7 85.2,71.5 78.6,66.3 87.1,66" id="r-sao-1" data-region="sao-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="492,110 494.4,116.8 501.5,116.9 495.8,121.2 497.9,128.1 492,124 486.1,128.1 488.2,121.2 482.5,116.9 489.6,116.8" id="r-sao-2" data-region="sao-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="505" cy="80" rx="26" ry="26" id="r-trang-chieu" data-region="trang-chieu" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="-40,470 140,290 320,470" id="r-nui-binh-minh-1" data-region="nui-binh-minh-1" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <polygon points="260,470 460,270 660,470" id="r-nui-binh-minh-2" data-region="nui-binh-minh-2" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
 <path d="M 0 470 Q 150 440 300 465 Q 450 490 600 455 L 600 600 L 0 600 Z" id="r-nen-dat" data-region="nen-dat" class="region" fill="#FFFFFF" stroke="#1B2A38" stroke-width="3" stroke-linejoin="round"/>
