@@ -218,6 +218,7 @@
 <path d="M 166.2 382.2 L 163.8 382.2 L 163.4 382.6 L 161.5 382.6 L 161.0 383.1 L 161.0 384.0 L 161.5 384.5 L 161.5 390.6 L 162.4 390.6 L 166.2 383.1 Z" id="r-nho-137" data-region="nho-137" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 449.3 393.0 L 449.3 400.0 L 449.8 400.5 L 451.2 400.5 L 451.2 393.0 Z" id="r-nho-146" data-region="nho-146" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 321.1 165.7 L 321.6 172.3 L 322.1 172.8 L 322.1 177.0 L 322.5 177.9 L 324.4 177.9 L 324.4 176.5 L 324.9 176.1 L 324.9 172.8 L 325.4 172.3 L 325.4 168.5 L 325.8 168.1 L 325.8 167.1 L 324.9 167.1 L 322.5 165.7 Z" id="r-ngach-a" data-region="ngach-a" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 431.9 382.2 L 431.9 383.1 L 433.3 385.9 L 434.3 386.9 L 436.2 391.1 L 436.6 391.5 L 437.6 391.5 L 437.6 388.3 L 437.1 387.8 L 437.6 386.9 L 437.6 383.1 L 436.6 382.6 L 434.7 382.6 L 434.3 382.2 Z" id="r-ngach-b" data-region="ngach-b" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-wiggle"></g>
 <g class="scene-front">
