@@ -644,17 +644,17 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'ao-len',
-      name: { vi: 'Tiểu Thư Áo Len', en: 'Sweater Girl' },
-      pictures: [
-        { slug: 'hoa-ly', name: { vi: 'Tiểu Thư Áo Len Hoa Ly', en: 'Lily Sweater Girl' }, file: 'cong-chua-ngan-hoa--ao-len-hoa-ly' },
-      ],
-    },
-    {
       slug: 'vay-ngan',
       name: { vi: 'Tiểu Thư Váy Ngắn', en: 'Short Dress Girl' },
       pictures: [
         { slug: 'huong-duong', name: { vi: 'Tiểu Thư Váy Ngắn Hướng Dương', en: 'Sunflower Short Dress Girl' }, file: 'cong-chua-ngan-hoa--vay-ngan-huong-duong' },
+      ],
+    },
+    {
+      slug: 'ao-len',
+      name: { vi: 'Tiểu Thư Áo Len', en: 'Sweater Girl' },
+      pictures: [
+        { slug: 'hoa-ly', name: { vi: 'Tiểu Thư Áo Len Hoa Ly', en: 'Lily Sweater Girl' }, file: 'cong-chua-ngan-hoa--ao-len-hoa-ly' },
       ],
     },
     {
