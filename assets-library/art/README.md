@@ -121,3 +121,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Biệt Thự Trực Thăng (Thành Phố Nhà Biết Bay) | – | `src/biet-thu--truc-thang.png` | ghi trong file |
 | Nhà Sàn Cánh Chim (Thành Phố Nhà Biết Bay) | – | `src/nha-san-canh-chim--canh-chim.png` | ghi trong file |
 | Nhà Ống Tên Lửa (Thành Phố Nhà Biết Bay) | – | `src/nha-ong-ten-lua--ten-lua.png` | ghi trong file |
+| Nhà Tuyết Dù Cầu Vồng (Thành Phố Nhà Biết Bay) | – | `src/nha-tuyet-du--cau-vong.png` | ghi trong file |
