@@ -38,6 +38,8 @@ export const M2 = {
 
   // 12 · Vương Quốc Lâu Đài Huyền Bí
   'lau-dai-huyen-bi': { 'mua-xuan-hoa-no': ['spring', 'pink|mint'], 'mua-dong-tuyet-phu': ['snowVillage', 'storm|deep'], 'dem-phao-hoa': ['nightCity', 'nebula|night'], 'le-hoi-den-long': ['river', 'night|deep'], 'tren-doi-may': ['cloudland', 'pink|alien'] },
+  'dai-thien-van': { 'compa-ngan-ha': ['stars', 'night'] },
+  'cong-vien': { 'keo-than-ky': ['park', 'sunny'] },
   'nha-ga': { 'hop-but-phieu-luu': ['park', 'lemon'] },
   'thu-vien': { 'sach-mo-than-ky': ['library', 'day'] },
   'cung-dien': { 'tet-nguyen-dan': ['garden', 'pink'], 'mua-he-dai-phun-nuoc': ['desert', 'storm|day'], 'dem-trang-ram': ['desert', 'deep|space'], 'mua-thu-la-vang': ['autumn', 'morning|day'], 'le-hoi-bong-bay': ['meadow', 'space|morning'] },
