@@ -198,6 +198,20 @@
 <path d="M 485.4 508.0 L 485.4 508.9 L 488.7 508.9 L 489.2 508.5 L 489.2 507.5 L 488.3 507.5 L 487.8 507.0 L 485.9 507.0 Z" id="r-nho-167" data-region="nho-167" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 246.5 538.5 L 246.5 539.9 L 247.4 540.4 L 249.8 540.4 L 249.8 539.0 L 248.8 538.5 Z" id="r-nho-184" data-region="nho-184" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 430.5 423.5 L 430.5 428.6 L 431.0 429.1 L 431.0 438.0 L 432.4 438.0 L 432.9 437.6 L 434.3 437.6 L 434.3 435.2 L 433.8 434.7 L 433.8 432.9 L 432.4 429.1 L 432.4 427.2 L 431.9 426.8 L 431.5 423.5 Z" id="r-sp-133" data-region="sp-133" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 170.4 311.7 L 170.4 313.1 L 171.4 314.1 L 172.8 316.9 L 174.6 316.9 L 174.6 315.5 L 172.3 311.7 Z" id="r-khe-day-4" data-region="khe-day-4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 162.0 310.8 L 162.0 311.7 L 166.7 316.4 L 167.1 316.4 L 172.8 322.1 L 174.2 322.1 L 174.2 321.1 L 163.8 310.3 Z" id="r-khe-day-5" data-region="khe-day-5" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 179.8 316.4 L 179.8 318.3 L 181.7 318.3 L 181.2 316.4 Z" id="r-khe-day-6" data-region="khe-day-6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 191.1 316.4 L 189.2 316.4 L 188.7 317.4 L 188.7 319.2 L 190.1 319.2 L 190.6 318.8 Z" id="r-khe-day-7" data-region="khe-day-7" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 174.6 318.8 L 174.6 319.7 L 175.6 320.7 L 177.0 320.7 L 176.5 318.3 Z" id="r-khe-day-8" data-region="khe-day-8" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 420.2 305.2 L 419.7 305.6 L 419.7 307.5 L 421.1 307.5 L 421.6 307.0 L 421.6 305.2 Z" id="r-khe-day-10" data-region="khe-day-10" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 420.7 308.5 L 419.2 308.5 L 418.8 308.9 L 418.3 312.7 L 419.7 312.7 L 420.2 312.2 Z" id="r-khe-day-12" data-region="khe-day-12" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 417.8 313.6 L 417.4 314.1 L 417.4 316.0 L 418.8 316.0 L 419.2 315.5 L 419.2 313.6 Z" id="r-khe-day-15" data-region="khe-day-15" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 406.1 316.0 L 406.1 316.9 L 407.5 319.2 L 408.9 319.2 L 408.9 317.4 L 408.0 315.5 Z" id="r-khe-day-16" data-region="khe-day-16" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 425.8 315.5 L 423.9 315.0 L 421.6 318.8 L 421.6 320.7 L 423.0 320.7 L 425.8 316.4 Z" id="r-khe-day-17" data-region="khe-day-17" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 432.4 314.6 L 430.5 314.6 L 424.4 321.1 L 424.4 322.5 L 425.4 322.5 L 432.4 315.5 Z" id="r-khe-day-18" data-region="khe-day-18" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 173.2 316.4 L 173.2 317.4 L 174.2 319.2 L 176.5 319.2 L 176.5 318.3 L 175.1 316.4 Z" id="r-dau-day-380" data-region="dau-day-380" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 424.9 317.4 L 423.0 316.4 L 422.1 317.8 L 422.1 319.2 L 423.9 319.2 Z" id="r-dau-day-873" data-region="dau-day-873" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 419.2 311.3 L 418.3 311.3 L 418.3 312.2 L 417.4 314.1 L 417.4 315.5 L 416.9 316.0 L 416.9 318.3 L 418.3 318.3 L 418.8 317.4 L 418.8 316.0 L 419.2 315.5 Z" id="r-khe-day-16b" data-region="khe-day-16b" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
