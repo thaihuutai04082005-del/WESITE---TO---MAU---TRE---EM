@@ -362,6 +362,8 @@ export const THEME_FIRST = {
     'xe-xuc-vu-tru--dao-kho-bau-thien-thach', 'xe-tuk-tuk-vu-tru--di-dao-thien-ha', 'xe-canh-sat-vu-tru--tuan-tra-ngan-ha'],
   'khu-rung-cay-than': ['cay-co-thu--canh-cua-bi-mat', 'cay-co-thu--cong-troi', 'cay-dua--dao-ngoc-thien-duong', 'cay-xuong-rong--oc-dao-anh-sao', 'cay-lieu--ren-trang', 'khom-tre--rung-ngoc-bich',
     'cay-thong--ngoi-sao-tuyet', 'cay-anh-dao--mua-sao-hong', 'cay-phong--la-lua-thien-thu', 'cay-bao-bap--sa-mac-nang-vang'],
+  'vuong-quoc-lau-dai': ['lau-dai-huyen-bi--mua-xuan-hoa-no', 'thu-vien--sach-mo-than-ky', 'cau-da--cau-vong-thuoc-ke', 'thap-co--dong-ho-got-but', 'nha-ga--hop-but-phieu-luu',
+    'dai-thien-van--compa-ngan-ha', 'cong-vien--keo-than-ky', 'bao-tang--bang-mau', 'chung-cu--so-tay-xoan-oc', 'hai-dang--ho-dan-anh-sao'],
   'the-thao-trai-cay': ['tao-the-thao--da-bong', 'chuoi-the-thao--bong-ro', 'dau-tay-the-thao--nhay-day', 'dua-hau-the-thao--nang-ta', 'dua--luot-song',
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh', 'ngo--karate'],
 };
@@ -369,7 +371,7 @@ export const THEME_FIRST = {
 /** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
 /** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
 export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
-export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than'];
+export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than', 'vuong-quoc-lau-dai'];
 
 export const VARIANT_ART = {
   'donut--nha-vua': 'donut--nha-vua',
