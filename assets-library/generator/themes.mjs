@@ -712,5 +712,12 @@ ART_THEMES.push({
         { slug: 'vo-so', name: { vi: 'Thuyền Gondola Vỏ Sò', en: 'Seashell Gondola' }, file: 'thuyen-gondola--vo-so' },
       ],
     },
+    {
+      slug: 'tau-hoi-nuoc',
+      name: { vi: 'Tàu Hơi Nước', en: 'Steamboat' },
+      pictures: [
+        { slug: 'san-ho', name: { vi: 'Tàu Hơi Nước San Hô', en: 'Coral Steamboat' }, file: 'tau-hoi-nuoc--san-ho' },
+      ],
+    },
   ],
 });

@@ -127,3 +127,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Thuyền Buồm Cánh Bướm Biển (Hải Trình Kỳ Diệu) | – | `src/thuyen-buom--canh-buom.png` | ghi trong file |
 | Tàu Cướp Biển Ngọc Trai (Hải Trình Kỳ Diệu) | – | `src/tau-cuop-bien--ngoc-trai.png` | ghi trong file |
 | Thuyền Gondola Vỏ Sò (Hải Trình Kỳ Diệu) | – | `src/thuyen-gondola--vo-so.png` | ghi trong file |
+| Tàu Hơi Nước San Hô (Hải Trình Kỳ Diệu) | – | `src/tau-hoi-nuoc--san-ho.png` | ghi trong file |
