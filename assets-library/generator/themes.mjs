@@ -138,6 +138,7 @@ export const OBJECTS = [
 
   // 12 — Công trình cổ tích × Bốn mùa & lễ hội
   reuse('vuong-quoc-lau-dai', 'lau-dai', 'lau-dai-huyen-bi', 'Lâu đài', 'Castle'),
+  O('vuong-quoc-lau-dai', 'dai-thien-van', 'Đài thiên văn', 'Observatory', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'nha-ga', 'Nhà ga', 'Train station', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'thu-vien', 'Thư viện', 'Library', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: () => [] }),
   O('vuong-quoc-lau-dai', 'cung-dien', 'Cung điện mái vòm', 'Domed palace', { face: null, hat: { x: 300, y: 112, s: 0.6 }, build: B2.cungDien }),
@@ -421,6 +422,7 @@ export const VARIANT_ART = {
   'cay-co-thu--canh-cua-bi-mat': 'cay-co-thu--canh-cua-bi-mat',
   'cay-co-thu--cong-troi': 'cay-co-thu--cong-troi',
   'cay-dua--dao-ngoc-thien-duong': 'cay-dua--dao-ngoc-thien-duong',
+  'dai-thien-van--compa-ngan-ha': 'dai-thien-van--compa-ngan-ha',
   'nha-ga--hop-but-phieu-luu': 'nha-ga--hop-but-phieu-luu',
   'thap-co--dong-ho-got-but': 'thap-co--dong-ho-got-but',
   'cau-da--cau-vong-thuoc-ke': 'cau-da--cau-vong-thuoc-ke',
@@ -488,6 +490,7 @@ export const PICTURE_NAME = {
   'cau-da--cau-vong-thuoc-ke': { vi: 'Cầu Vồng Thước Kẻ Ánh Dương', en: 'Sunny Ruler Rainbow Bridge' },
   'thap-co--dong-ho-got-but': { vi: 'Tháp Đồng Hồ Gọt Bút Thời Gian', en: 'Pencil-Sharpener Clock Tower' },
   'nha-ga--hop-but-phieu-luu': { vi: 'Nhà Ga Hộp Bút Phiêu Lưu', en: 'Pencil-Case Adventure Station' },
+  'dai-thien-van--compa-ngan-ha': { vi: 'Đài Thiên Văn Compa Ngân Hà', en: 'Compass Galaxy Observatory' },
   'cay-dua--dao-ngoc-thien-duong': { vi: 'Cây Dừa Đảo Ngọc Thiên Đường', en: 'Paradise Jewel Island Palm' },
   'cay-co-thu--cong-troi': { vi: 'Cây Đa Cổng Trời', en: 'Sky Gate Banyan' },
   'cay-co-thu--canh-cua-bi-mat': { vi: 'Cây Cổ Thụ Thiên Đường', en: 'Paradise Ancient Tree' },
