@@ -168,6 +168,16 @@
 <path d="M 162.0 431.5 L 158.2 433.8 L 158.2 444.1 L 159.6 445.1 L 162.9 445.5 L 164.8 445.1 L 164.8 433.3 L 164.3 431.9 Z" id="r-z153" data-region="z153" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 118.8 397.2 L 117.4 399.5 L 117.4 401.4 L 122.5 403.8 L 124.9 404.2 L 124.9 402.8 L 119.7 397.2 Z" id="r-nho-98" data-region="nho-98" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 441.3 509.9 L 441.3 510.8 L 442.3 510.8 L 442.3 509.9 Z" id="r-dot-160" data-region="dot-160" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 122.1 393.4 L 120.7 394.8 L 120.7 396.2 L 126.3 402.3 L 126.3 402.8 L 127.2 403.8 L 128.2 403.8 L 129.6 402.3 L 129.6 401.4 L 123.5 393.4 Z" id="r-banh-lai-6" data-region="banh-lai-6" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 116.0 402.8 L 116.0 403.8 L 115.5 404.2 L 115.5 407.0 L 124.4 410.3 L 125.8 410.3 L 126.3 406.6 L 121.1 404.2 L 120.2 404.2 L 117.8 402.8 Z" id="r-banh-lai-9" data-region="banh-lai-9" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 134.7 388.3 L 134.7 399.5 L 137.6 399.5 L 137.6 397.2 L 138.0 396.7 L 138.0 388.3 Z" id="r-banh-lai-4" data-region="banh-lai-4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 150.2 393.9 L 148.8 393.9 L 146.9 396.7 L 142.7 401.4 L 142.7 402.8 L 143.7 403.8 L 145.1 403.8 L 151.6 397.2 L 151.6 395.3 Z" id="r-banh-lai-8" data-region="banh-lai-8" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 156.3 408.9 L 155.9 408.5 L 154.9 408.5 L 154.5 408.9 L 146.0 408.9 L 146.0 411.7 L 149.3 411.7 L 149.8 412.2 L 155.9 412.2 Z" id="r-banh-lai-12" data-region="banh-lai-12" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 118.8 397.2 L 117.4 399.5 L 117.4 401.4 L 122.5 403.8 L 124.9 404.2 L 124.9 402.8 L 119.7 397.2 Z" id="r-banh-lai-5" data-region="banh-lai-5" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 132.9 388.3 L 130.0 388.7 L 124.9 391.1 L 124.9 393.0 L 131.0 400.9 L 132.9 400.5 Z" id="r-banh-lai-3" data-region="banh-lai-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 139.9 388.7 L 139.4 400.5 L 141.3 400.9 L 147.9 393.4 L 147.9 391.5 L 144.6 389.7 L 143.7 389.7 L 141.8 388.7 Z" id="r-banh-lai-7" data-region="banh-lai-7" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 154.0 399.1 L 153.5 398.6 L 152.1 398.6 L 145.5 405.2 L 145.5 407.0 L 154.0 407.0 L 154.5 406.6 L 155.9 406.6 L 155.4 402.3 Z" id="r-banh-lai-11" data-region="banh-lai-11" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 145.1 413.6 L 144.6 416.4 L 146.0 417.8 L 152.1 420.2 L 154.0 420.2 L 155.4 416.4 L 155.4 414.1 L 152.6 414.1 L 152.1 413.6 L 146.9 413.6 L 146.5 413.1 L 145.5 413.1 Z" id="r-banh-lai-13" data-region="banh-lai-13" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-float"></g>
 <g class="scene-front">
