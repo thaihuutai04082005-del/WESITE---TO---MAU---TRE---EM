@@ -476,7 +476,7 @@ export const PICTURE_NAME = {
   'dua-nau--quyen-anh': { vi: 'Dừa Nâu Tập Quyền Anh', en: 'Coconut Boxer' },
   'le-the-thao--ban-cung': { vi: 'Lê Xanh Tập Bắn Cung', en: 'Pear Archer' },
   'xoai-the-thao--tennis': { vi: 'Xoài Vàng Chơi Tennis', en: 'Mango Tennis' },
-  'dua--luot-song': { vi: 'Dứa Vàng Lướt Sóng', en: 'Pineapple Surfer' },
+  'dua--luot-song': { vi: 'Đào Hồng Lướt Sóng', en: 'Pink Peach Surfer' },
   'dua-hau-the-thao--nang-ta': { vi: 'Dưa Hấu Nâng Tạ', en: 'Watermelon Weightlifter' },
   'dau-tay-the-thao--nhay-day': { vi: 'Dâu Tây Chơi Nhảy Dây', en: 'Strawberry Jump Rope' },
   'chuoi-the-thao--bong-ro': { vi: 'Chuối Vàng Chơi Bóng Rổ', en: 'Banana Basketball' },
