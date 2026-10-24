@@ -43,7 +43,7 @@
 | # | Chủ đề | 6 đối tượng |
 |---|---|---|
 | 01 | Anh Hùng Siêu Thú | 🦁 Sư tử · 🐯 Hổ · 🐘 Voi · 🦅 Đại bàng · 🐱 Mèo · 🐶 Chó |
-| 02 | Vương Quốc Bánh Kẹo | 🍩 Donut · 🧁 Cupcake · 🍭 Kẹo mút · 🍦 Kem ốc quế · 🍪 Bánh quy · 🎂 Bánh kem nhiều tầng |
+| 02 | Vương Quốc Bánh Kẹo | 🍩 Donut · 🧁 Cupcake · 🍭 Kẹo mút · 🍦 Kem ốc quế · 🍪 Bánh quy · 🎂 Bánh kem |
 | 03 | Đội Xe Chinh Phục Vũ Trụ | 🏎️ Xe đua · 🚌 Xe buýt · 🚒 Xe cứu hỏa · 🚂 Tàu hỏa · ✈️ Máy bay · 🚁 Trực thăng |
 | 04 | Khu Rừng Ánh Sáng | 🌳 Cây cổ thụ · 🌲 Cây thông · 🌴 Cây dừa · 🌵 Cây xương rồng · 🌿 Cây liễu · 🎋 Khóm tre |
 | 05 | Thành Phố Nhà Biết Bay | 🏠 Nhà gỗ · 🏘️ Nhà phố · 🏢 Chung cư · 🛖 Nhà sàn · ❄️ Nhà tuyết (igloo) · 🌬️ Nhà cối xay gió |
@@ -139,7 +139,7 @@ Hình dáng các đối tượng cũ có trong bộ tạo tranh (mèo, chó, tá
 | | Kẹo mút | Hoàng Tử · Hiệp Sĩ · Cận Vệ Cầm Giáo · Nhạc Công Kèn Đồng · Pháp Sư Kẹo Ngọt |
 | | Kem ốc quế | Nữ Hoàng Băng Giá · Thị Nữ Quạt Lông · Thợ Làm Vườn Hoàng Gia · Đầu Bếp Hoàng Gia · Ngủ Trưa Gối Nhung |
 | | Bánh quy | Lính Gác · Thủ Kho Chìa Khóa · Thủ Thư Hoàng Gia · Người Gác Chuông · Xạ Thủ Cung Tên |
-| | Bánh kem nhiều tầng | Hoàng Hậu · Đám Cưới Cổ Tích · Đêm Hội Ánh Nến · Yến Tiệc Hoàng Cung · Quà Mừng Sinh Nhật Vua |
+| | Bánh kem | Hoàng Hậu · Đám Cưới Cổ Tích · Đêm Hội Ánh Nến · Yến Tiệc Hoàng Cung · Quà Mừng Sinh Nhật Vua |
 | 🚀 Đội Xe Chinh Phục Vũ Trụ | Xe đua | Phản Lực · Đua Vòng Quanh Hành Tinh · Đua Trên Đường Sao · Vượt Mưa Thiên Thạch · Về Đích Ngân Hà |
 | | Xe buýt | Chở Phi Hành Gia Đi Học · Kính Vòm Không Gian · Nhún Nhảy Trên Hành Tinh Lạ · Trạm Dừng Vũ Trụ · Chạy Trên Vành Đai Hành Tinh |
 | | Xe cứu hỏa | Dập Lửa Thiên Thạch · Thang Lên Trạm Vũ Trụ · Cứu Hộ Tàu Vũ Trụ · Phun Bọt Không Trọng Lực · Tuần Tra Hành Tinh Lạ |

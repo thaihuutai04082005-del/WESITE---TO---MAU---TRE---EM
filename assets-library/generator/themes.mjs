@@ -60,7 +60,7 @@ export const OBJECTS = [
   O('vuong-quoc-keo-ngot', 'keo-mut', 'Kẹo mút', 'Lollipop', { face: { x: 300, y: 226, s: 0.62 }, hat: { x: 300, y: 118, s: 1.15 }, build: B.keoMut }),
   O('vuong-quoc-keo-ngot', 'kem-oc-que', 'Kem ốc quế', 'Ice cream cone', { face: { x: 300, y: 276, s: 0.62 }, hat: { x: 300, y: 156, s: 1.05 }, build: B.kemOcQue }),
   O('vuong-quoc-keo-ngot', 'banh-quy', 'Bánh quy', 'Cookie', { face: { x: 300, y: 318, s: 0.9 }, hat: { x: 300, y: 180, s: 1.25 }, build: B.banhQuy }),
-  O('vuong-quoc-keo-ngot', 'banh-kem', 'Bánh kem nhiều tầng', 'Layer cake', { face: { x: 300, y: 428, s: 0.6 }, hat: { x: 300, y: 234, s: 0.9 }, build: B.banhKem }),
+  O('vuong-quoc-keo-ngot', 'banh-kem', 'Bánh kem', 'Cake', { face: { x: 300, y: 428, s: 0.6 }, hat: { x: 300, y: 234, s: 0.9 }, build: B.banhKem }),
   O('vuong-quoc-keo-ngot', 'macaron', 'Macaron', 'Macaron', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('vuong-quoc-keo-ngot', 'banh-gung', 'Bánh gừng', 'Gingerbread', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
   O('vuong-quoc-keo-ngot', 'socola', 'Socola', 'Chocolate', { face: { x: 300, y: 300, s: 0.7 }, hat: { x: 300, y: 190, s: 1 }, build: () => [] }),
