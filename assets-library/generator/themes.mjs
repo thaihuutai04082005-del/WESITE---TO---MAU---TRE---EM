@@ -507,7 +507,7 @@ export const PICTURE_NAME = {
   'khi-sieu-thu--day-leo-than-toc': { vi: 'Khỉ Dây Leo Thần Tốc', en: 'Lightning Vine Monkey' },
   'heo-sieu-thu--sieu-pham-an': { vi: 'Heo Siêu Phàm Ăn', en: 'Super Foodie Pig' },
   'dai-bang--xe-gio': { vi: 'Đại Bàng Xé Gió', en: 'Windslicer Eagle' },
-  'gau-sieu-thu--dai-luc': { vi: 'Gấu Nâu Đại Lực', en: 'Mighty Brown Bear' },
+  'gau-sieu-thu--dai-luc': { vi: 'Gấu Trắng Đại Lực', en: 'Mighty Polar Bear' },
   'tho-sieu-thu--sieu-toc': { vi: 'Thỏ Siêu Tốc', en: 'Super Speed Bunny' },
   'cho-sieu-thu--sieu-thong-minh': { vi: 'Chó Siêu Thông Minh', en: 'Super Smart Dog' },
   'meo-sieu-thu--nhay-sieu-cao': { vi: 'Mèo Nhảy Siêu Cao', en: 'Super Jump Cat' },
