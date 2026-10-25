@@ -124,6 +124,11 @@
 <path d="M 376.5 370.4 L 373.7 370.0 L 363.4 376.1 L 359.2 379.3 L 358.7 381.7 L 362.9 382.6 L 372.8 381.2 L 374.6 379.8 L 374.6 377.0 L 376.5 372.8 Z" id="r-z81" data-region="z81" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 364.3 323.0 L 361.0 323.0 L 356.8 324.4 L 355.4 325.8 L 355.4 329.6 L 357.7 335.2 L 362.4 335.7 L 366.2 332.9 L 367.6 329.6 L 367.6 326.8 L 366.2 323.9 Z" id="r-z67" data-region="z67" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 360.1 231.5 L 356.3 234.7 L 356.3 236.2 L 359.2 241.8 L 360.1 246.0 L 361.5 247.4 L 362.4 247.4 L 364.3 246.0 L 368.1 237.6 L 368.5 234.3 L 362.4 231.5 Z" id="r-z33" data-region="z33" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 332.4 318.3 L 332.4 319.2 L 333.3 321.1 L 333.3 324.9 L 334.7 324.9 L 337.1 323.5 L 337.1 322.5 L 334.3 319.7 L 333.8 318.3 Z" id="r-khe-chan-1" data-region="khe-chan-1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 347.9 313.6 L 346.0 313.6 L 346.0 317.4 L 344.6 320.2 L 343.7 321.1 L 343.7 322.1 L 347.4 322.1 L 346.9 317.8 L 347.4 317.4 Z" id="r-khe-chan-2" data-region="khe-chan-2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 358.7 322.5 L 357.7 322.5 L 356.3 324.4 L 354.5 325.4 L 353.1 325.4 L 353.1 326.8 L 353.5 326.8 L 355.4 329.1 L 356.3 329.1 L 357.3 326.3 L 358.7 324.9 Z" id="r-khe-chan-3" data-region="khe-chan-3" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 361.5 318.8 L 359.6 318.8 L 359.6 319.7 L 357.7 323.0 L 356.3 324.4 L 354.9 324.9 L 354.9 327.2 L 356.8 327.2 L 358.7 324.4 L 361.5 322.5 Z" id="r-khe-chan-4" data-region="khe-chan-4" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 345.1 319.2 L 343.7 321.1 L 343.7 322.1 L 347.4 322.5 L 347.4 320.2 L 346.9 319.2 Z" id="r-khe-chan-5" data-region="khe-chan-5" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
