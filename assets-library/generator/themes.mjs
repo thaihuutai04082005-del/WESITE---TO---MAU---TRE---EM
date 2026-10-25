@@ -498,6 +498,7 @@ export const PICTURE_NAME = {
   'tau-hoa-vu-tru--duong-ray-ngan-ha': { vi: 'Tàu Hỏa Đường Ray Ngân Hà', en: 'Galaxy Railway Train' },
   'xe-cuu-hoa--dap-lua-thien-thach': { vi: 'Xe Cứu Hỏa Dập Lửa Thiên Hà', en: 'Galaxy Fire Truck' },
   'xe-buyt-vu-tru--cho-phi-hanh-gia': { vi: 'Xe Buýt Chở Phi Hành Gia', en: 'Astronaut Bus' },
+  'kem-oc-que--nu-hoang-bang-gia': { vi: 'Bánh Quế Cuộn Quân Sư', en: 'Wafer Roll Strategist' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },

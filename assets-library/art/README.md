@@ -39,7 +39,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 | Chim cánh cụt băng giá (Anh Hùng Siêu Thú, đối tượng mới Chim cánh cụt) | – | `src/canh-cut-sieu-thu--bang-gia.png` | 142 |
 | Cupcake công chúa (Vương Quốc Bánh Kẹo, thay biến thể Công Chúa của Cupcake) | – | `src/cupcake--cong-chua.png` | 71 |
 | Kẹo mút hoàng tử (Vương Quốc Bánh Kẹo, thay biến thể Hoàng Tử của Kẹo mút) | – | `src/keo-mut--hoang-tu.png` | 48 |
-| Kem ốc quế nữ hoàng băng giá (Vương Quốc Bánh Kẹo, thay biến thể Nữ Hoàng Băng Giá của Kem ốc quế) | – | `src/kem-oc-que--nu-hoang-bang-gia.png` | 36 |
+| Bánh quế cuộn quân sư (Vương Quốc Bánh Kẹo, thay biến thể Nữ Hoàng Băng Giá của Kem ốc quế; tên tranh "Bánh Quế Cuộn Quân Sư") | – | `src/kem-oc-que--nu-hoang-bang-gia.png` | 36 |
 | Bánh quy lính gác (Vương Quốc Bánh Kẹo, thay biến thể Lính Gác của Bánh quy) | – | `src/banh-quy--linh-gac.png` | 48 |
 | Bánh kem hoàng hậu (Vương Quốc Bánh Kẹo, thay biến thể Hoàng Hậu của Bánh kem) | – | `src/banh-kem--hoang-hau.png` | 44 |
 | Hiệp sĩ kẹo dẻo (Vương Quốc Bánh Kẹo, thay biến thể Hiệp Sĩ của Kẹo mút; tên tranh "Hiệp Sĩ Kẹo Dẻo") | – | `src/keo-mut--hiep-si.png` | 76 |
