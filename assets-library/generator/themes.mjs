@@ -519,6 +519,8 @@ export const PICTURE_NAME = {
   'dua-thom--dua-thom': { vi: 'Dứa', en: 'Pineapple' },
   'o-to--o-to': { vi: 'Ô tô', en: 'Car' },
   'xe-buyt--xe-buyt': { vi: 'Xe buýt', en: 'Bus' },
+  'xe-tai--xe-tai': { vi: 'Xe tải', en: 'Truck' },
+  'may-bay--may-bay': { vi: 'Máy bay', en: 'Airplane' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -771,6 +773,20 @@ ART_THEMES.push({
       name: { vi: 'Xe buýt', en: 'Bus' },
       pictures: [
         { slug: 'xe-buyt', name: { vi: 'Xe buýt', en: 'Bus' }, file: 'xe-buyt--xe-buyt' },
+      ],
+    },
+    {
+      slug: 'xe-tai',
+      name: { vi: 'Xe tải', en: 'Truck' },
+      pictures: [
+        { slug: 'xe-tai', name: { vi: 'Xe tải', en: 'Truck' }, file: 'xe-tai--xe-tai' },
+      ],
+    },
+    {
+      slug: 'may-bay',
+      name: { vi: 'Máy bay', en: 'Airplane' },
+      pictures: [
+        { slug: 'may-bay', name: { vi: 'Máy bay', en: 'Airplane' }, file: 'may-bay--may-bay' },
       ],
     },
   ],
