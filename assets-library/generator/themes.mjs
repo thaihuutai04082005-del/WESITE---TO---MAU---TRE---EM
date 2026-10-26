@@ -508,6 +508,8 @@ export const PICTURE_NAME = {
   'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
   'buom--buom': { vi: 'Bướm', en: 'Butterfly' },
   'tao--tao': { vi: 'Táo', en: 'Apple' },
+  'chuoi--chuoi': { vi: 'Chuối', en: 'Banana' },
+  'cam--cam': { vi: 'Cam', en: 'Orange' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -674,6 +676,20 @@ ART_THEMES.push({
       name: { vi: 'Táo', en: 'Apple' },
       pictures: [
         { slug: 'tao', name: { vi: 'Táo', en: 'Apple' }, file: 'tao--tao' },
+      ],
+    },
+    {
+      slug: 'chuoi',
+      name: { vi: 'Chuối', en: 'Banana' },
+      pictures: [
+        { slug: 'chuoi', name: { vi: 'Chuối', en: 'Banana' }, file: 'chuoi--chuoi' },
+      ],
+    },
+    {
+      slug: 'cam',
+      name: { vi: 'Cam', en: 'Orange' },
+      pictures: [
+        { slug: 'cam', name: { vi: 'Cam', en: 'Orange' }, file: 'cam--cam' },
       ],
     },
   ],
