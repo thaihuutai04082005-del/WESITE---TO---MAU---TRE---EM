@@ -506,6 +506,7 @@ export const PICTURE_NAME = {
   'bo-sua--bo-sua': { vi: 'Bò sữa', en: 'Dairy cow' },
   'ca-vang--ca-vang': { vi: 'Cá vàng', en: 'Goldfish' },
   'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
+  'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
@@ -587,6 +588,7 @@ export const ART_THEMES = [
         slug: 'meo-con',
         name: { vi: 'Mèo con', en: 'Kitten' },
         pictures: [
+          { slug: 'meo-con', name: { vi: 'Mèo con', en: 'Kitten' }, file: 'meo-con--meo-con' },
           { slug: 'ngoi-xinh', name: { vi: 'Ngồi xinh', en: 'Sitting pretty' }, file: 'meo-con--ngoi-xinh', hidden: true },
           { slug: 'choi-cuon-len', name: { vi: 'Chơi cuộn len', en: 'Playing with yarn' }, file: 'meo-con--choi-cuon-len', hidden: true },
           { slug: 'uong-sua', name: { vi: 'Uống sữa', en: 'Drinking milk' }, file: 'meo-con--uong-sua', hidden: true },
