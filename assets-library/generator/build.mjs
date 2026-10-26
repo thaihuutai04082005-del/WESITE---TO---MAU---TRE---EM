@@ -404,6 +404,7 @@ function buildArtPicture(theme, obj, variant, file, isCard = true) {
       rarity: variant.rarity || null,
       animation,
       art: true,
+      hidden: !!variant.hidden,
       file: join(theme.slug, obj.slug, `${variant.slug}.svg`),
       palette,
       regions: manifestRegions,
