@@ -523,6 +523,8 @@ export const PICTURE_NAME = {
   'may-bay--may-bay': { vi: 'Máy bay', en: 'Airplane' },
   'xe-lua--xe-lua': { vi: 'Xe lửa', en: 'Train' },
   'xe-canh-sat--xe-canh-sat': { vi: 'Xe cảnh sát', en: 'Police car' },
+  'xe-dap--xe-dap': { vi: 'Xe đạp', en: 'Bicycle' },
+  'xe-cuu-thuong--xe-cuu-thuong': { vi: 'Xe cứu thương', en: 'Ambulance' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -803,6 +805,20 @@ ART_THEMES.push({
       name: { vi: 'Xe cảnh sát', en: 'Police car' },
       pictures: [
         { slug: 'xe-canh-sat', name: { vi: 'Xe cảnh sát', en: 'Police car' }, file: 'xe-canh-sat--xe-canh-sat' },
+      ],
+    },
+    {
+      slug: 'xe-dap',
+      name: { vi: 'Xe đạp', en: 'Bicycle' },
+      pictures: [
+        { slug: 'xe-dap', name: { vi: 'Xe đạp', en: 'Bicycle' }, file: 'xe-dap--xe-dap' },
+      ],
+    },
+    {
+      slug: 'xe-cuu-thuong',
+      name: { vi: 'Xe cứu thương', en: 'Ambulance' },
+      pictures: [
+        { slug: 'xe-cuu-thuong', name: { vi: 'Xe cứu thương', en: 'Ambulance' }, file: 'xe-cuu-thuong--xe-cuu-thuong' },
       ],
     },
   ],

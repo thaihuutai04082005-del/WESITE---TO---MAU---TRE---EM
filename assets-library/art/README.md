@@ -75,6 +75,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Xe Cộ (3–5 tuổi) | Máy bay | Máy bay (mới, đang hiện) | 35 |
 | Xe Cộ (3–5 tuổi) | Xe lửa | Xe lửa (mới, đang hiện) | 86 |
 | Xe Cộ (3–5 tuổi) | Xe cảnh sát | Xe cảnh sát (mới, đang hiện) | 47 |
+| Xe Cộ (3–5 tuổi) | Xe đạp | Xe đạp (mới, đang hiện) | 63 |
+| Xe Cộ (3–5 tuổi) | Xe cứu thương | Xe cứu thương (mới, đang hiện) | 52 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
@@ -93,7 +95,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Công Chúa Ngàn Hoa | Thiếu Nữ Cardigan | Thiếu Nữ Cardigan Cẩm Tú Cầu | cong-chua-ngan-hoa--cardigan-cam-tu-cau |
 | Hải Trình Kỳ Diệu (6–8 tuổi, xếp sau Xứ Sở Học Cụ bằng `after`) | Tàu Ngầm | Tàu Ngầm Bong Bóng Phép Thuật | 160 |
 
-Chủ đề Xe Cộ (3–5 tuổi) có tranh "Ô tô", "Xe buýt", "Xe tải", "Máy bay", "Xe lửa" và "Xe cảnh sát". Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho", "Dâu tây", "Đu đủ", "Dừa" và "Dứa". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
+Chủ đề Xe Cộ (3–5 tuổi) có tranh "Ô tô", "Xe buýt", "Xe tải", "Máy bay", "Xe lửa", "Xe cảnh sát", "Xe đạp" và "Xe cứu thương". Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho", "Dâu tây", "Đu đủ", "Dừa" và "Dứa". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |
