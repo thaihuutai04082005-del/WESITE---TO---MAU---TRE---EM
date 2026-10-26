@@ -499,6 +499,7 @@ export const PICTURE_NAME = {
   'xe-cuu-hoa--dap-lua-thien-thach': { vi: 'Xe Cứu Hỏa Dập Lửa Thiên Hà', en: 'Galaxy Fire Truck' },
   'xe-buyt-vu-tru--cho-phi-hanh-gia': { vi: 'Xe Buýt Chở Phi Hành Gia', en: 'Astronaut Bus' },
   'kem-oc-que--nu-hoang-bang-gia': { vi: 'Bánh Quế Cuộn Quân Sư', en: 'Wafer Roll Strategist' },
+  'tho-con--tho-con': { vi: 'Thỏ con', en: 'Bunny' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
@@ -591,6 +592,7 @@ export const ART_THEMES = [
         slug: 'tho-con',
         name: { vi: 'Thỏ con', en: 'Bunny' },
         pictures: [
+          { slug: 'tho-con', name: { vi: 'Thỏ con', en: 'Bunny' }, file: 'tho-con--tho-con' },
           { slug: 'ngoi-ngoan', name: { vi: 'Ngồi ngoan', en: 'Sitting nicely' }, file: 'tho-con--ngoi-ngoan', hidden: true },
           { slug: 'an-ca-rot', name: { vi: 'Ăn cà rốt', en: 'Eating a carrot' }, file: 'tho-con--an-ca-rot', hidden: true },
           { slug: 'nhay-vui', name: { vi: 'Nhảy vui', en: 'Happy hopping' }, file: 'tho-con--nhay-vui', hidden: true },
