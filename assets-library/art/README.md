@@ -57,6 +57,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 |---|---|---|---|
 | Động Vật (3–5 tuổi) | Chó con | Bên nhà cún (mới, đang hiện) · Ngồi ngoan · Vẫy đuôi · Chơi bóng · Ăn thức ăn · Nằm nghỉ | 16 · 15 · 23 · 38 · 14 |
 | Động Vật (3–5 tuổi) | Mèo con | Ngồi xinh · Chơi cuộn len · Uống sữa · Rửa mặt · Nằm ngủ | 19 · 45 · 23 · 19 · 17 |
+| Động Vật (3–5 tuổi) | Vịt con | Vịt con (mới, đang hiện) | 30 |
 | Động Vật (3–5 tuổi) | Gà con | Gà con (mới, đang hiện) | 61 |
 | Động Vật (3–5 tuổi) | Thỏ con | Thỏ con (mới, đang hiện) · Ngồi ngoan · Ăn cà rốt · Nhảy vui · Ngửi hoa · Nằm nghỉ | 25 · 26 · 29 · 26 · 26 |
 | Công Chúa Ngàn Hoa (6–8 tuổi, đứng sau Xứ Sở Đồ Chơi bằng `after`) | Công Chúa Váy Hoa | Công Chúa Váy Hoa Hồng | 426 |
@@ -71,7 +72,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Công Chúa Ngàn Hoa | Thiếu Nữ Cardigan | Thiếu Nữ Cardigan Cẩm Tú Cầu | cong-chua-ngan-hoa--cardigan-cam-tu-cau |
 | Hải Trình Kỳ Diệu (6–8 tuổi, xếp sau Xứ Sở Học Cụ bằng `after`) | Tàu Ngầm | Tàu Ngầm Bong Bóng Phép Thuật | 160 |
 
-Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con" và "Gà con" hiện; chờ chủ web gửi tranh mới.
+Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con" và "Vịt con" hiện; chờ chủ web gửi tranh mới.
 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |
