@@ -507,6 +507,15 @@ export const PICTURE_NAME = {
   'ca-vang--ca-vang': { vi: 'Cá vàng', en: 'Goldfish' },
   'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
   'buom--buom': { vi: 'Bướm', en: 'Butterfly' },
+  'tao--tao': { vi: 'Táo', en: 'Apple' },
+  'chuoi--chuoi': { vi: 'Chuối', en: 'Banana' },
+  'cam--cam': { vi: 'Cam', en: 'Orange' },
+  'xoai--xoai': { vi: 'Xoài', en: 'Mango' },
+  'dua-hau--dua-hau': { vi: 'Dưa hấu', en: 'Watermelon' },
+  'nho--nho': { vi: 'Nho', en: 'Grapes' },
+  'dau-tay--dau-tay': { vi: 'Dâu tây', en: 'Strawberry' },
+  'du-du--du-du': { vi: 'Đu đủ', en: 'Papaya' },
+  'dua--dua': { vi: 'Dừa', en: 'Coconut' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -661,6 +670,78 @@ export const ART_THEMES = [
     ],
   },
 ];
+
+ART_THEMES.push({
+  slug: 'trai-cay-3-5',
+  age: '3-5',
+  name: { vi: 'Trái Cây', en: 'Fruits' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'tao',
+      name: { vi: 'Táo', en: 'Apple' },
+      pictures: [
+        { slug: 'tao', name: { vi: 'Táo', en: 'Apple' }, file: 'tao--tao' },
+      ],
+    },
+    {
+      slug: 'chuoi',
+      name: { vi: 'Chuối', en: 'Banana' },
+      pictures: [
+        { slug: 'chuoi', name: { vi: 'Chuối', en: 'Banana' }, file: 'chuoi--chuoi' },
+      ],
+    },
+    {
+      slug: 'cam',
+      name: { vi: 'Cam', en: 'Orange' },
+      pictures: [
+        { slug: 'cam', name: { vi: 'Cam', en: 'Orange' }, file: 'cam--cam' },
+      ],
+    },
+    {
+      slug: 'xoai',
+      name: { vi: 'Xoài', en: 'Mango' },
+      pictures: [
+        { slug: 'xoai', name: { vi: 'Xoài', en: 'Mango' }, file: 'xoai--xoai' },
+      ],
+    },
+    {
+      slug: 'dua-hau',
+      name: { vi: 'Dưa hấu', en: 'Watermelon' },
+      pictures: [
+        { slug: 'dua-hau', name: { vi: 'Dưa hấu', en: 'Watermelon' }, file: 'dua-hau--dua-hau' },
+      ],
+    },
+    {
+      slug: 'nho',
+      name: { vi: 'Nho', en: 'Grapes' },
+      pictures: [
+        { slug: 'nho', name: { vi: 'Nho', en: 'Grapes' }, file: 'nho--nho' },
+      ],
+    },
+    {
+      slug: 'dau-tay',
+      name: { vi: 'Dâu tây', en: 'Strawberry' },
+      pictures: [
+        { slug: 'dau-tay', name: { vi: 'Dâu tây', en: 'Strawberry' }, file: 'dau-tay--dau-tay' },
+      ],
+    },
+    {
+      slug: 'du-du',
+      name: { vi: 'Đu đủ', en: 'Papaya' },
+      pictures: [
+        { slug: 'du-du', name: { vi: 'Đu đủ', en: 'Papaya' }, file: 'du-du--du-du' },
+      ],
+    },
+    {
+      slug: 'dua',
+      name: { vi: 'Dừa', en: 'Coconut' },
+      pictures: [
+        { slug: 'dua', name: { vi: 'Dừa', en: 'Coconut' }, file: 'dua--dua' },
+      ],
+    },
+  ],
+});
 
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
