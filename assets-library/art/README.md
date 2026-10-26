@@ -57,7 +57,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 |---|---|---|---|
 | Động Vật (3–5 tuổi) | Chó con | Bên nhà cún (mới, đang hiện) · Ngồi ngoan · Vẫy đuôi · Chơi bóng · Ăn thức ăn · Nằm nghỉ | 16 · 15 · 23 · 38 · 14 |
 | Động Vật (3–5 tuổi) | Mèo con | Ngồi xinh · Chơi cuộn len · Uống sữa · Rửa mặt · Nằm ngủ | 19 · 45 · 23 · 19 · 17 |
-| Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô bằng `patches` + mặt nạ) | 81 |
+| Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
 | Động Vật (3–5 tuổi) | Vịt con | Vịt con (mới, đang hiện) | 30 |
 | Động Vật (3–5 tuổi) | Gà con | Gà con (mới, đang hiện) | 61 |
