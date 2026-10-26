@@ -517,6 +517,16 @@ export const PICTURE_NAME = {
   'du-du--du-du': { vi: 'Đu đủ', en: 'Papaya' },
   'dua--dua': { vi: 'Dừa', en: 'Coconut' },
   'dua-thom--dua-thom': { vi: 'Dứa', en: 'Pineapple' },
+  'o-to--o-to': { vi: 'Ô tô', en: 'Car' },
+  'xe-buyt--xe-buyt': { vi: 'Xe buýt', en: 'Bus' },
+  'xe-tai--xe-tai': { vi: 'Xe tải', en: 'Truck' },
+  'may-bay--may-bay': { vi: 'Máy bay', en: 'Airplane' },
+  'xe-lua--xe-lua': { vi: 'Xe lửa', en: 'Train' },
+  'xe-canh-sat--xe-canh-sat': { vi: 'Xe cảnh sát', en: 'Police car' },
+  'xe-dap--xe-dap': { vi: 'Xe đạp', en: 'Bicycle' },
+  'xe-cuu-thuong--xe-cuu-thuong': { vi: 'Xe cứu thương', en: 'Ambulance' },
+  'may-keo--may-keo': { vi: 'Máy kéo', en: 'Tractor' },
+  'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -746,6 +756,85 @@ ART_THEMES.push({
       name: { vi: 'Dứa', en: 'Pineapple' },
       pictures: [
         { slug: 'dua-thom', name: { vi: 'Dứa', en: 'Pineapple' }, file: 'dua-thom--dua-thom' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'xe-co-3-5',
+  age: '3-5',
+  name: { vi: 'Xe Cộ', en: 'Vehicles' },
+  animation: 'drive',
+  objects: [
+    {
+      slug: 'o-to',
+      name: { vi: 'Ô tô', en: 'Car' },
+      pictures: [
+        { slug: 'o-to', name: { vi: 'Ô tô', en: 'Car' }, file: 'o-to--o-to' },
+      ],
+    },
+    {
+      slug: 'xe-buyt',
+      name: { vi: 'Xe buýt', en: 'Bus' },
+      pictures: [
+        { slug: 'xe-buyt', name: { vi: 'Xe buýt', en: 'Bus' }, file: 'xe-buyt--xe-buyt' },
+      ],
+    },
+    {
+      slug: 'xe-tai',
+      name: { vi: 'Xe tải', en: 'Truck' },
+      pictures: [
+        { slug: 'xe-tai', name: { vi: 'Xe tải', en: 'Truck' }, file: 'xe-tai--xe-tai' },
+      ],
+    },
+    {
+      slug: 'may-bay',
+      name: { vi: 'Máy bay', en: 'Airplane' },
+      pictures: [
+        { slug: 'may-bay', name: { vi: 'Máy bay', en: 'Airplane' }, file: 'may-bay--may-bay' },
+      ],
+    },
+    {
+      slug: 'xe-lua',
+      name: { vi: 'Xe lửa', en: 'Train' },
+      pictures: [
+        { slug: 'xe-lua', name: { vi: 'Xe lửa', en: 'Train' }, file: 'xe-lua--xe-lua' },
+      ],
+    },
+    {
+      slug: 'xe-canh-sat',
+      name: { vi: 'Xe cảnh sát', en: 'Police car' },
+      pictures: [
+        { slug: 'xe-canh-sat', name: { vi: 'Xe cảnh sát', en: 'Police car' }, file: 'xe-canh-sat--xe-canh-sat' },
+      ],
+    },
+    {
+      slug: 'xe-dap',
+      name: { vi: 'Xe đạp', en: 'Bicycle' },
+      pictures: [
+        { slug: 'xe-dap', name: { vi: 'Xe đạp', en: 'Bicycle' }, file: 'xe-dap--xe-dap' },
+      ],
+    },
+    {
+      slug: 'xe-cuu-thuong',
+      name: { vi: 'Xe cứu thương', en: 'Ambulance' },
+      pictures: [
+        { slug: 'xe-cuu-thuong', name: { vi: 'Xe cứu thương', en: 'Ambulance' }, file: 'xe-cuu-thuong--xe-cuu-thuong' },
+      ],
+    },
+    {
+      slug: 'may-keo',
+      name: { vi: 'Máy kéo', en: 'Tractor' },
+      pictures: [
+        { slug: 'may-keo', name: { vi: 'Máy kéo', en: 'Tractor' }, file: 'may-keo--may-keo' },
+      ],
+    },
+    {
+      slug: 'xe-may',
+      name: { vi: 'Xe máy', en: 'Scooter' },
+      pictures: [
+        { slug: 'xe-may', name: { vi: 'Xe máy', en: 'Scooter' }, file: 'xe-may--xe-may' },
       ],
     },
   ],
