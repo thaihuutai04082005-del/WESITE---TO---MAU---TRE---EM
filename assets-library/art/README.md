@@ -66,6 +66,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Trái Cây (3–5 tuổi) | Dưa hấu | Dưa hấu (mới, đang hiện) | 32 |
 | Trái Cây (3–5 tuổi) | Nho | Nho (mới, đang hiện) | 78 |
 | Trái Cây (3–5 tuổi) | Dâu tây | Dâu tây (mới, đang hiện) | 52 |
+| Trái Cây (3–5 tuổi) | Đu đủ | Đu đủ (mới, đang hiện) | 46 |
+| Trái Cây (3–5 tuổi) | Dừa | Dừa (mới, đang hiện) | 21 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
@@ -84,7 +86,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Công Chúa Ngàn Hoa | Thiếu Nữ Cardigan | Thiếu Nữ Cardigan Cẩm Tú Cầu | cong-chua-ngan-hoa--cardigan-cam-tu-cau |
 | Hải Trình Kỳ Diệu (6–8 tuổi, xếp sau Xứ Sở Học Cụ bằng `after`) | Tàu Ngầm | Tàu Ngầm Bong Bóng Phép Thuật | 160 |
 
-Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho" và "Dâu tây". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
+Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho", "Dâu tây", "Đu đủ" và "Dừa". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |

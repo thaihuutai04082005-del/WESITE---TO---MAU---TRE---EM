@@ -514,6 +514,8 @@ export const PICTURE_NAME = {
   'dua-hau--dua-hau': { vi: 'Dưa hấu', en: 'Watermelon' },
   'nho--nho': { vi: 'Nho', en: 'Grapes' },
   'dau-tay--dau-tay': { vi: 'Dâu tây', en: 'Strawberry' },
+  'du-du--du-du': { vi: 'Đu đủ', en: 'Papaya' },
+  'dua--dua': { vi: 'Dừa', en: 'Coconut' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -722,6 +724,20 @@ ART_THEMES.push({
       name: { vi: 'Dâu tây', en: 'Strawberry' },
       pictures: [
         { slug: 'dau-tay', name: { vi: 'Dâu tây', en: 'Strawberry' }, file: 'dau-tay--dau-tay' },
+      ],
+    },
+    {
+      slug: 'du-du',
+      name: { vi: 'Đu đủ', en: 'Papaya' },
+      pictures: [
+        { slug: 'du-du', name: { vi: 'Đu đủ', en: 'Papaya' }, file: 'du-du--du-du' },
+      ],
+    },
+    {
+      slug: 'dua',
+      name: { vi: 'Dừa', en: 'Coconut' },
+      pictures: [
+        { slug: 'dua', name: { vi: 'Dừa', en: 'Coconut' }, file: 'dua--dua' },
       ],
     },
   ],
