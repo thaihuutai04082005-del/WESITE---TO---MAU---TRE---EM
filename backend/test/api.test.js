@@ -93,12 +93,12 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ chưa có chủ đề.
   assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5']);
   assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 10);
-  // Động Vật (3–5 tuổi): 15 tranh cũ đã ẩn, chỉ hiện tranh mới của Chó con và Thỏ con.
+  // Động Vật (3–5 tuổi): 15 tranh cũ đã ẩn, chỉ hiện tranh mới của Chó con, Thỏ con và Gà con.
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
   assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó con bên nhà cún']);
   const flat = await api('GET', '/themes/dong-vat-3-4/pictures');
-  assert.deepEqual(flat.body.pictures.map((p) => p.name.vi), ['Chó con bên nhà cún', 'Thỏ con']);
-  assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 2);
+  assert.deepEqual(flat.body.pictures.map((p) => p.name.vi), ['Chó con bên nhà cún', 'Thỏ con', 'Gà con']);
+  assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 3);
   // Hàng 1 của Anh Hùng Siêu Thú: 5 tranh vẽ tay sư tử, hổ, chó, mèo, thỏ; hàng 2: gấu, đại bàng, heo, khỉ, chim cánh cụt.
   const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
   assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);

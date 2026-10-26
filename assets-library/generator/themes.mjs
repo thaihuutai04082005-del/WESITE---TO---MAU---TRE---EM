@@ -500,6 +500,7 @@ export const PICTURE_NAME = {
   'xe-buyt-vu-tru--cho-phi-hanh-gia': { vi: 'Xe Buýt Chở Phi Hành Gia', en: 'Astronaut Bus' },
   'kem-oc-que--nu-hoang-bang-gia': { vi: 'Bánh Quế Cuộn Quân Sư', en: 'Wafer Roll Strategist' },
   'tho-con--tho-con': { vi: 'Thỏ con', en: 'Bunny' },
+  'ga-con--ga-con': { vi: 'Gà con', en: 'Chick' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
@@ -598,6 +599,13 @@ export const ART_THEMES = [
           { slug: 'nhay-vui', name: { vi: 'Nhảy vui', en: 'Happy hopping' }, file: 'tho-con--nhay-vui', hidden: true },
           { slug: 'ngui-hoa', name: { vi: 'Ngửi hoa', en: 'Smelling a flower' }, file: 'tho-con--ngui-hoa', hidden: true },
           { slug: 'nam-nghi', name: { vi: 'Nằm nghỉ', en: 'Resting' }, file: 'tho-con--nam-nghi', hidden: true },
+        ],
+      },
+      {
+        slug: 'ga-con',
+        name: { vi: 'Gà con', en: 'Chick' },
+        pictures: [
+          { slug: 'ga-con', name: { vi: 'Gà con', en: 'Chick' }, file: 'ga-con--ga-con' },
         ],
       },
     ],
