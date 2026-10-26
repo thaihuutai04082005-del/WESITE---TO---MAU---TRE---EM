@@ -510,6 +510,8 @@ export const PICTURE_NAME = {
   'tao--tao': { vi: 'Táo', en: 'Apple' },
   'chuoi--chuoi': { vi: 'Chuối', en: 'Banana' },
   'cam--cam': { vi: 'Cam', en: 'Orange' },
+  'xoai--xoai': { vi: 'Xoài', en: 'Mango' },
+  'dua-hau--dua-hau': { vi: 'Dưa hấu', en: 'Watermelon' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -690,6 +692,20 @@ ART_THEMES.push({
       name: { vi: 'Cam', en: 'Orange' },
       pictures: [
         { slug: 'cam', name: { vi: 'Cam', en: 'Orange' }, file: 'cam--cam' },
+      ],
+    },
+    {
+      slug: 'xoai',
+      name: { vi: 'Xoài', en: 'Mango' },
+      pictures: [
+        { slug: 'xoai', name: { vi: 'Xoài', en: 'Mango' }, file: 'xoai--xoai' },
+      ],
+    },
+    {
+      slug: 'dua-hau',
+      name: { vi: 'Dưa hấu', en: 'Watermelon' },
+      pictures: [
+        { slug: 'dua-hau', name: { vi: 'Dưa hấu', en: 'Watermelon' }, file: 'dua-hau--dua-hau' },
       ],
     },
   ],
