@@ -517,6 +517,8 @@ export const PICTURE_NAME = {
   'du-du--du-du': { vi: 'Đu đủ', en: 'Papaya' },
   'dua--dua': { vi: 'Dừa', en: 'Coconut' },
   'dua-thom--dua-thom': { vi: 'Dứa', en: 'Pineapple' },
+  'o-to--o-to': { vi: 'Ô tô', en: 'Car' },
+  'xe-buyt--xe-buyt': { vi: 'Xe buýt', en: 'Bus' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -746,6 +748,29 @@ ART_THEMES.push({
       name: { vi: 'Dứa', en: 'Pineapple' },
       pictures: [
         { slug: 'dua-thom', name: { vi: 'Dứa', en: 'Pineapple' }, file: 'dua-thom--dua-thom' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'xe-co-3-5',
+  age: '3-5',
+  name: { vi: 'Xe Cộ', en: 'Vehicles' },
+  animation: 'drive',
+  objects: [
+    {
+      slug: 'o-to',
+      name: { vi: 'Ô tô', en: 'Car' },
+      pictures: [
+        { slug: 'o-to', name: { vi: 'Ô tô', en: 'Car' }, file: 'o-to--o-to' },
+      ],
+    },
+    {
+      slug: 'xe-buyt',
+      name: { vi: 'Xe buýt', en: 'Bus' },
+      pictures: [
+        { slug: 'xe-buyt', name: { vi: 'Xe buýt', en: 'Bus' }, file: 'xe-buyt--xe-buyt' },
       ],
     },
   ],
