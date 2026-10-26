@@ -507,6 +507,7 @@ export const PICTURE_NAME = {
   'ca-vang--ca-vang': { vi: 'Cá vàng', en: 'Goldfish' },
   'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
   'buom--buom': { vi: 'Bướm', en: 'Butterfly' },
+  'tao--tao': { vi: 'Táo', en: 'Apple' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -661,6 +662,22 @@ export const ART_THEMES = [
     ],
   },
 ];
+
+ART_THEMES.push({
+  slug: 'trai-cay-3-5',
+  age: '3-5',
+  name: { vi: 'Trái Cây', en: 'Fruits' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'tao',
+      name: { vi: 'Táo', en: 'Apple' },
+      pictures: [
+        { slug: 'tao', name: { vi: 'Táo', en: 'Apple' }, file: 'tao--tao' },
+      ],
+    },
+  ],
+});
 
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
