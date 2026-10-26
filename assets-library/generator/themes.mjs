@@ -506,6 +506,7 @@ export const PICTURE_NAME = {
   'bo-sua--bo-sua': { vi: 'Bò sữa', en: 'Dairy cow' },
   'ca-vang--ca-vang': { vi: 'Cá vàng', en: 'Goldfish' },
   'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
+  'buom--buom': { vi: 'Bướm', en: 'Butterfly' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -648,6 +649,13 @@ export const ART_THEMES = [
         name: { vi: 'Chim con', en: 'Little bird' },
         pictures: [
           { slug: 'chim-con', name: { vi: 'Chim con', en: 'Little bird' }, file: 'chim-con--chim-con' },
+        ],
+      },
+      {
+        slug: 'buom',
+        name: { vi: 'Bướm', en: 'Butterfly' },
+        pictures: [
+          { slug: 'buom', name: { vi: 'Bướm', en: 'Butterfly' }, file: 'buom--buom' },
         ],
       },
     ],
