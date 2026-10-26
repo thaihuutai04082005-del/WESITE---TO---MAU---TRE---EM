@@ -500,6 +500,14 @@ export const PICTURE_NAME = {
   'xe-buyt-vu-tru--cho-phi-hanh-gia': { vi: 'Xe Buýt Chở Phi Hành Gia', en: 'Astronaut Bus' },
   'kem-oc-que--nu-hoang-bang-gia': { vi: 'Bánh Quế Cuộn Quân Sư', en: 'Wafer Roll Strategist' },
   'tho-con--tho-con': { vi: 'Thỏ con', en: 'Bunny' },
+  'ga-con--ga-con': { vi: 'Gà con', en: 'Chick' },
+  'vit-con--vit-con': { vi: 'Vịt con', en: 'Duckling' },
+  'heo-con--heo-con': { vi: 'Heo con', en: 'Piglet' },
+  'bo-sua--bo-sua': { vi: 'Bò sữa', en: 'Dairy cow' },
+  'ca-vang--ca-vang': { vi: 'Cá vàng', en: 'Goldfish' },
+  'chim-con--chim-con': { vi: 'Chim con', en: 'Little bird' },
+  'buom--buom': { vi: 'Bướm', en: 'Butterfly' },
+  'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
   'macaron--cung-nu': { vi: 'Macaron Cung Nữ', en: 'Macaron Maid' },
@@ -581,6 +589,7 @@ export const ART_THEMES = [
         slug: 'meo-con',
         name: { vi: 'Mèo con', en: 'Kitten' },
         pictures: [
+          { slug: 'meo-con', name: { vi: 'Mèo con', en: 'Kitten' }, file: 'meo-con--meo-con' },
           { slug: 'ngoi-xinh', name: { vi: 'Ngồi xinh', en: 'Sitting pretty' }, file: 'meo-con--ngoi-xinh', hidden: true },
           { slug: 'choi-cuon-len', name: { vi: 'Chơi cuộn len', en: 'Playing with yarn' }, file: 'meo-con--choi-cuon-len', hidden: true },
           { slug: 'uong-sua', name: { vi: 'Uống sữa', en: 'Drinking milk' }, file: 'meo-con--uong-sua', hidden: true },
@@ -598,6 +607,55 @@ export const ART_THEMES = [
           { slug: 'nhay-vui', name: { vi: 'Nhảy vui', en: 'Happy hopping' }, file: 'tho-con--nhay-vui', hidden: true },
           { slug: 'ngui-hoa', name: { vi: 'Ngửi hoa', en: 'Smelling a flower' }, file: 'tho-con--ngui-hoa', hidden: true },
           { slug: 'nam-nghi', name: { vi: 'Nằm nghỉ', en: 'Resting' }, file: 'tho-con--nam-nghi', hidden: true },
+        ],
+      },
+      {
+        slug: 'ga-con',
+        name: { vi: 'Gà con', en: 'Chick' },
+        pictures: [
+          { slug: 'ga-con', name: { vi: 'Gà con', en: 'Chick' }, file: 'ga-con--ga-con' },
+        ],
+      },
+      {
+        slug: 'vit-con',
+        name: { vi: 'Vịt con', en: 'Duckling' },
+        pictures: [
+          { slug: 'vit-con', name: { vi: 'Vịt con', en: 'Duckling' }, file: 'vit-con--vit-con' },
+        ],
+      },
+      {
+        slug: 'heo-con',
+        name: { vi: 'Heo con', en: 'Piglet' },
+        pictures: [
+          { slug: 'heo-con', name: { vi: 'Heo con', en: 'Piglet' }, file: 'heo-con--heo-con' },
+        ],
+      },
+      {
+        slug: 'bo-sua',
+        name: { vi: 'Bò sữa', en: 'Dairy cow' },
+        pictures: [
+          { slug: 'bo-sua', name: { vi: 'Bò sữa', en: 'Dairy cow' }, file: 'bo-sua--bo-sua' },
+        ],
+      },
+      {
+        slug: 'ca-vang',
+        name: { vi: 'Cá vàng', en: 'Goldfish' },
+        pictures: [
+          { slug: 'ca-vang', name: { vi: 'Cá vàng', en: 'Goldfish' }, file: 'ca-vang--ca-vang' },
+        ],
+      },
+      {
+        slug: 'chim-con',
+        name: { vi: 'Chim con', en: 'Little bird' },
+        pictures: [
+          { slug: 'chim-con', name: { vi: 'Chim con', en: 'Little bird' }, file: 'chim-con--chim-con' },
+        ],
+      },
+      {
+        slug: 'buom',
+        name: { vi: 'Bướm', en: 'Butterfly' },
+        pictures: [
+          { slug: 'buom', name: { vi: 'Bướm', en: 'Butterfly' }, file: 'buom--buom' },
         ],
       },
     ],

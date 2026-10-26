@@ -129,6 +129,37 @@ def main():
                 continue
             d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
             regions.append({'n': -1, 'id': name, 'd': d, 'color': color, 'area': int(mask.sum())})
+    # "patches": [{"mask": "file.png", "color": "#màu", "name": "tên"}] — đốm màu (vd. đốm bò) mà ranh giới của đốm không có nét:
+    # mặt nạ (ảnh trắng đen cùng cỡ ảnh nguồn) chỉ cần đúng ở chỗ ranh giới tự do; chỗ sát nét thì đốm được kéo tới tận nét.
+    # Trong mỗi vùng bị mặt nạ cắt, điểm nào gần phần "chắc chắn trong đốm" hơn "chắc chắn ngoài đốm" thì thuộc đốm.
+    for pi, pt in enumerate(cfg.get('patches', [])):
+        pm = (cv2.imread(pt['mask'], 0) > 127).astype(np.uint8)
+        for rid in np.unique(full[pm > 0]):
+            if rid == 0:
+                continue
+            reg = full == rid
+            if (reg & (pm > 0)).sum() < 300:
+                continue
+            sure_in = reg & (cv2.erode(pm, np.ones((5, 5), np.uint8)) > 0)
+            sure_out = reg & (cv2.dilate(pm, np.ones((19, 19), np.uint8)) == 0)
+            if sure_in.sum() < 50:
+                continue
+            d_in = ndimage.distance_transform_edt(~sure_in)
+            d_out = ndimage.distance_transform_edt(~sure_out) if sure_out.any() else np.full(d_in.shape, 1e9)
+            piece = (reg & (d_in < d_out)).astype(np.uint8)
+            piece = cv2.morphologyEx(piece, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+            lab_p, n_p = ndimage.label(piece)
+            for j in range(1, n_p + 1):
+                comp = (lab_p == j).astype(np.uint8)
+                if comp.sum() < 120:
+                    continue
+                comp = cv2.dilate(comp, np.ones((3, 3), np.uint8))   # chồng nhẹ xuống dưới nét, không lộ khe trắng
+                cs, _ = cv2.findContours(comp, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+                c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.6, True).reshape(-1, 2)
+                if len(c) < 3:
+                    continue
+                d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
+                regions.append({'n': -1, 'id': f"{pt.get('name', 'dom')}-{pi}-{rid}-{j}", 'd': d, 'color': pt['color'], 'area': int(comp.sum())})
     # "paint": [{"rect": [x0, y0, x1, y1], "color": "#màu", "name": "tên", "all": true = lấy cả phần trắng rộng}] — tô riêng các khe trắng quá hẹp (chỗ nét chụm lại) trong khung rect:
     # lấy phần trắng "mỏng" (không còn sau khi co 1px) của nét gốc, thêm thành vùng tô vẽ đè lên trên.
     if cfg.get('paint'):
