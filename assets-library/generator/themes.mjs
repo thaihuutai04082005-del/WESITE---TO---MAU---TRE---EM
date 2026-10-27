@@ -550,6 +550,13 @@ export const PICTURE_NAME = {
   'ga-ran--ga-ran': { vi: 'Gà rán', en: 'Fried chicken' },
   'pizza--pizza': { vi: 'Pizza', en: 'Pizza' },
   'hamburger--hamburger': { vi: 'Hamburger', en: 'Hamburger' },
+  'kem-oc-que-3-5--kem-oc-que-3-5': { vi: 'Kem ốc quế', en: 'Ice cream cone' },
+  'keo-mut-3-5--keo-mut-3-5': { vi: 'Kẹo mút', en: 'Lollipop' },
+  'bap-rang--bap-rang': { vi: 'Bắp rang bơ', en: 'Popcorn' },
+  'mi-y--mi-y': { vi: 'Mì Ý', en: 'Spaghetti' },
+  'banh-pudding--banh-pudding': { vi: 'Bánh pudding', en: 'Pudding' },
+  'cupcake-dau--cupcake-dau': { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
+  'banh-kem-3-tang--banh-kem-3-tang': { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1028,6 +1035,55 @@ ART_THEMES.push({
   animation: 'float',
   objects: [
     {
+      slug: 'cupcake-dau',
+      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
+      pictures: [
+        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
+      ],
+    },
+    {
+      slug: 'banh-pudding',
+      name: { vi: 'Bánh pudding', en: 'Pudding' },
+      pictures: [
+        { slug: 'banh-pudding', name: { vi: 'Bánh pudding', en: 'Pudding' }, file: 'banh-pudding--banh-pudding' },
+      ],
+    },
+    {
+      slug: 'banh-kem-3-tang',
+      name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
+      pictures: [
+        { slug: 'banh-kem-3-tang', name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' }, file: 'banh-kem-3-tang--banh-kem-3-tang' },
+      ],
+    },
+    {
+      slug: 'kem-oc-que-3-5',
+      name: { vi: 'Kem ốc quế', en: 'Ice cream cone' },
+      pictures: [
+        { slug: 'kem-oc-que-3-5', name: { vi: 'Kem ốc quế', en: 'Ice cream cone' }, file: 'kem-oc-que-3-5--kem-oc-que-3-5' },
+      ],
+    },
+    {
+      slug: 'keo-mut-3-5',
+      name: { vi: 'Kẹo mút', en: 'Lollipop' },
+      pictures: [
+        { slug: 'keo-mut-3-5', name: { vi: 'Kẹo mút', en: 'Lollipop' }, file: 'keo-mut-3-5--keo-mut-3-5' },
+      ],
+    },
+    {
+      slug: 'bap-rang',
+      name: { vi: 'Bắp rang bơ', en: 'Popcorn' },
+      pictures: [
+        { slug: 'bap-rang', name: { vi: 'Bắp rang bơ', en: 'Popcorn' }, file: 'bap-rang--bap-rang' },
+      ],
+    },
+    {
+      slug: 'mi-y',
+      name: { vi: 'Mì Ý', en: 'Spaghetti' },
+      pictures: [
+        { slug: 'mi-y', name: { vi: 'Mì Ý', en: 'Spaghetti' }, file: 'mi-y--mi-y' },
+      ],
+    },
+    {
       slug: 'ga-ran',
       name: { vi: 'Gà rán', en: 'Fried chicken' },
       pictures: [
@@ -1048,6 +1104,7 @@ ART_THEMES.push({
         { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
       ],
     },
+
   ],
 });
 
