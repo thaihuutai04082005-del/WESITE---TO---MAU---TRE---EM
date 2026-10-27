@@ -537,6 +537,8 @@ export const PICTURE_NAME = {
   'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
   'compa--compa': { vi: 'Compa', en: 'Compass' },
   'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
+  'gau-bong--gau-bong': { vi: 'Gấu bông', en: 'Teddy bear' },
+  'bup-be--bup-be': { vi: 'Búp bê', en: 'Doll' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -924,6 +926,29 @@ ART_THEMES.push({
       name: { vi: 'Keo dán giấy', en: 'Glue stick' },
       pictures: [
         { slug: 'keo-dan', name: { vi: 'Keo dán giấy', en: 'Glue stick' }, file: 'keo-dan--keo-dan' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'do-choi-3-5',
+  age: '3-5',
+  name: { vi: 'Đồ Chơi', en: 'Toys' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'gau-bong',
+      name: { vi: 'Gấu bông', en: 'Teddy bear' },
+      pictures: [
+        { slug: 'gau-bong', name: { vi: 'Gấu bông', en: 'Teddy bear' }, file: 'gau-bong--gau-bong' },
+      ],
+    },
+    {
+      slug: 'bup-be',
+      name: { vi: 'Búp bê', en: 'Doll' },
+      pictures: [
+        { slug: 'bup-be', name: { vi: 'Búp bê', en: 'Doll' }, file: 'bup-be--bup-be' },
       ],
     },
   ],
