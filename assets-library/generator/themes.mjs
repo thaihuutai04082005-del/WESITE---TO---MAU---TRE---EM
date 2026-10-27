@@ -1035,13 +1035,6 @@ ART_THEMES.push({
   animation: 'float',
   objects: [
     {
-      slug: 'cupcake-dau',
-      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
-      pictures: [
-        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
-      ],
-    },
-    {
       slug: 'banh-pudding',
       name: { vi: 'Bánh pudding', en: 'Pudding' },
       pictures: [
@@ -1049,10 +1042,10 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'banh-kem-3-tang',
-      name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
+      slug: 'cupcake-dau',
+      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
       pictures: [
-        { slug: 'banh-kem-3-tang', name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' }, file: 'banh-kem-3-tang--banh-kem-3-tang' },
+        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
       ],
     },
     {
@@ -1060,6 +1053,13 @@ ART_THEMES.push({
       name: { vi: 'Kem ốc quế', en: 'Ice cream cone' },
       pictures: [
         { slug: 'kem-oc-que-3-5', name: { vi: 'Kem ốc quế', en: 'Ice cream cone' }, file: 'kem-oc-que-3-5--kem-oc-que-3-5' },
+      ],
+    },
+    {
+      slug: 'banh-kem-3-tang',
+      name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
+      pictures: [
+        { slug: 'banh-kem-3-tang', name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' }, file: 'banh-kem-3-tang--banh-kem-3-tang' },
       ],
     },
     {
