@@ -529,6 +529,8 @@ export const PICTURE_NAME = {
   'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
   'cap--cap': { vi: 'Cặp', en: 'Backpack' },
   'but-chi--but-chi': { vi: 'Bút chì', en: 'Pencil' },
+  'hop-but--hop-but': { vi: 'Hộp bút', en: 'Pencil case' },
+  'quyen-sach--quyen-sach': { vi: 'Quyển sách', en: 'Book' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -860,6 +862,20 @@ ART_THEMES.push({
       name: { vi: 'Bút chì', en: 'Pencil' },
       pictures: [
         { slug: 'but-chi', name: { vi: 'Bút chì', en: 'Pencil' }, file: 'but-chi--but-chi' },
+      ],
+    },
+    {
+      slug: 'hop-but',
+      name: { vi: 'Hộp bút', en: 'Pencil case' },
+      pictures: [
+        { slug: 'hop-but', name: { vi: 'Hộp bút', en: 'Pencil case' }, file: 'hop-but--hop-but' },
+      ],
+    },
+    {
+      slug: 'quyen-sach',
+      name: { vi: 'Quyển sách', en: 'Book' },
+      pictures: [
+        { slug: 'quyen-sach', name: { vi: 'Quyển sách', en: 'Book' }, file: 'quyen-sach--quyen-sach' },
       ],
     },
   ],
