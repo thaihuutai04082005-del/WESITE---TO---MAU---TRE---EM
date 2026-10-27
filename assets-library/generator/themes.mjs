@@ -527,6 +527,7 @@ export const PICTURE_NAME = {
   'xe-cuu-thuong--xe-cuu-thuong': { vi: 'Xe cứu thương', en: 'Ambulance' },
   'may-keo--may-keo': { vi: 'Máy kéo', en: 'Tractor' },
   'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
+  'cap--cap': { vi: 'Cặp', en: 'Backpack' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -835,6 +836,22 @@ ART_THEMES.push({
       name: { vi: 'Xe máy', en: 'Scooter' },
       pictures: [
         { slug: 'xe-may', name: { vi: 'Xe máy', en: 'Scooter' }, file: 'xe-may--xe-may' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'do-dung-hoc-tap-3-5',
+  age: '3-5',
+  name: { vi: 'Đồ Dùng Học Tập', en: 'School Supplies' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'cap',
+      name: { vi: 'Cặp', en: 'Backpack' },
+      pictures: [
+        { slug: 'cap', name: { vi: 'Cặp', en: 'Backpack' }, file: 'cap--cap' },
       ],
     },
   ],
