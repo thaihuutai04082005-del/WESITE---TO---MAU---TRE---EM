@@ -547,6 +547,9 @@ export const PICTURE_NAME = {
   'bowling--bowling': { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
   'xe-xuc--xe-xuc': { vi: 'Xe xúc đồ chơi', en: 'Toy loader' },
   'may-bay-do-choi--may-bay-do-choi': { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
+  'ga-ran--ga-ran': { vi: 'Gà rán', en: 'Fried chicken' },
+  'pizza--pizza': { vi: 'Pizza', en: 'Pizza' },
+  'hamburger--hamburger': { vi: 'Hamburger', en: 'Hamburger' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1013,6 +1016,36 @@ ART_THEMES.push({
       name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
       pictures: [
         { slug: 'may-bay-do-choi', name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' }, file: 'may-bay-do-choi--may-bay-do-choi' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'do-an-3-5',
+  age: '3-5',
+  name: { vi: 'Đồ Ăn', en: 'Food' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'ga-ran',
+      name: { vi: 'Gà rán', en: 'Fried chicken' },
+      pictures: [
+        { slug: 'ga-ran', name: { vi: 'Gà rán', en: 'Fried chicken' }, file: 'ga-ran--ga-ran' },
+      ],
+    },
+    {
+      slug: 'pizza',
+      name: { vi: 'Pizza', en: 'Pizza' },
+      pictures: [
+        { slug: 'pizza', name: { vi: 'Pizza', en: 'Pizza' }, file: 'pizza--pizza' },
+      ],
+    },
+    {
+      slug: 'hamburger',
+      name: { vi: 'Hamburger', en: 'Hamburger' },
+      pictures: [
+        { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
       ],
     },
   ],
