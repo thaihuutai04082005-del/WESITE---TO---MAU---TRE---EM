@@ -541,6 +541,8 @@ export const PICTURE_NAME = {
   'bup-be--bup-be': { vi: 'Búp bê', en: 'Doll' },
   'ngua-go--ngua-go': { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
   'xep-hinh--xep-hinh': { vi: 'Bộ xếp hình', en: 'Building blocks' },
+  'con-quay--con-quay': { vi: 'Con quay đồ chơi', en: 'Spinning top' },
+  'dieu--dieu': { vi: 'Chiếc diều', en: 'Kite' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -965,6 +967,20 @@ ART_THEMES.push({
       name: { vi: 'Bộ xếp hình', en: 'Building blocks' },
       pictures: [
         { slug: 'xep-hinh', name: { vi: 'Bộ xếp hình', en: 'Building blocks' }, file: 'xep-hinh--xep-hinh' },
+      ],
+    },
+    {
+      slug: 'con-quay',
+      name: { vi: 'Con quay đồ chơi', en: 'Spinning top' },
+      pictures: [
+        { slug: 'con-quay', name: { vi: 'Con quay đồ chơi', en: 'Spinning top' }, file: 'con-quay--con-quay' },
+      ],
+    },
+    {
+      slug: 'dieu',
+      name: { vi: 'Chiếc diều', en: 'Kite' },
+      pictures: [
+        { slug: 'dieu', name: { vi: 'Chiếc diều', en: 'Kite' }, file: 'dieu--dieu' },
       ],
     },
   ],
