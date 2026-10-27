@@ -543,6 +543,8 @@ export const PICTURE_NAME = {
   'xep-hinh--xep-hinh': { vi: 'Bộ xếp hình', en: 'Building blocks' },
   'con-quay--con-quay': { vi: 'Con quay đồ chơi', en: 'Spinning top' },
   'dieu--dieu': { vi: 'Chiếc diều', en: 'Kite' },
+  'trong--trong': { vi: 'Trống đồ chơi', en: 'Toy drum' },
+  'robot--robot': { vi: 'Robot đồ chơi', en: 'Toy robot' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -981,6 +983,20 @@ ART_THEMES.push({
       name: { vi: 'Chiếc diều', en: 'Kite' },
       pictures: [
         { slug: 'dieu', name: { vi: 'Chiếc diều', en: 'Kite' }, file: 'dieu--dieu' },
+      ],
+    },
+    {
+      slug: 'trong',
+      name: { vi: 'Trống đồ chơi', en: 'Toy drum' },
+      pictures: [
+        { slug: 'trong', name: { vi: 'Trống đồ chơi', en: 'Toy drum' }, file: 'trong--trong' },
+      ],
+    },
+    {
+      slug: 'robot',
+      name: { vi: 'Robot đồ chơi', en: 'Toy robot' },
+      pictures: [
+        { slug: 'robot', name: { vi: 'Robot đồ chơi', en: 'Toy robot' }, file: 'robot--robot' },
       ],
     },
   ],
