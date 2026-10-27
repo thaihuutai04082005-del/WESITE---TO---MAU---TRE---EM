@@ -102,7 +102,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Đồ Ăn (3–5 tuổi) | Gà rán | Gà rán (mới, đang hiện) | 42 |
 | Đồ Ăn (3–5 tuổi) | Pizza | Pizza (mới, đang hiện) | 55 |
 | Đồ Ăn (3–5 tuổi) | Hamburger | Hamburger (mới, đang hiện) | 42 |
-| Đồ Ăn (3–5 tuổi) | Kem ốc quế | Kem ốc quế (mới, đang hiện) | 31 |
+| Đồ Ăn (3–5 tuổi) | Kem ốc quế | Kem ốc quế (mới, đang hiện; nét đã làm mảnh về ~10px) | 31 |
 | Đồ Ăn (3–5 tuổi) | Kẹo mút | Kẹo mút (mới, đang hiện) | 17 |
 | Đồ Ăn (3–5 tuổi) | Bắp rang bơ | Bắp rang bơ (mới, đang hiện) | 28 |
 | Đồ Ăn (3–5 tuổi) | Mì Ý | Mì Ý (mới, đang hiện) | 34 |
