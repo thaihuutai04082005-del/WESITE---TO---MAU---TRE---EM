@@ -527,6 +527,16 @@ export const PICTURE_NAME = {
   'xe-cuu-thuong--xe-cuu-thuong': { vi: 'Xe cứu thương', en: 'Ambulance' },
   'may-keo--may-keo': { vi: 'Máy kéo', en: 'Tractor' },
   'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
+  'cap--cap': { vi: 'Cặp', en: 'Backpack' },
+  'but-chi--but-chi': { vi: 'Bút chì', en: 'Pencil' },
+  'hop-but--hop-but': { vi: 'Hộp bút', en: 'Pencil case' },
+  'quyen-sach--quyen-sach': { vi: 'Quyển sách', en: 'Book' },
+  'thuoc--thuoc': { vi: 'Thước', en: 'Ruler' },
+  'but-mau--but-mau': { vi: 'Bút màu', en: 'Crayons' },
+  'bang--bang': { vi: 'Bảng', en: 'Blackboard' },
+  'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
+  'compa--compa': { vi: 'Compa', en: 'Compass' },
+  'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -835,6 +845,85 @@ ART_THEMES.push({
       name: { vi: 'Xe máy', en: 'Scooter' },
       pictures: [
         { slug: 'xe-may', name: { vi: 'Xe máy', en: 'Scooter' }, file: 'xe-may--xe-may' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'do-dung-hoc-tap-3-5',
+  age: '3-5',
+  name: { vi: 'Đồ Dùng Học Tập', en: 'School Supplies' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'cap',
+      name: { vi: 'Cặp', en: 'Backpack' },
+      pictures: [
+        { slug: 'cap', name: { vi: 'Cặp', en: 'Backpack' }, file: 'cap--cap' },
+      ],
+    },
+    {
+      slug: 'but-chi',
+      name: { vi: 'Bút chì', en: 'Pencil' },
+      pictures: [
+        { slug: 'but-chi', name: { vi: 'Bút chì', en: 'Pencil' }, file: 'but-chi--but-chi' },
+      ],
+    },
+    {
+      slug: 'hop-but',
+      name: { vi: 'Hộp bút', en: 'Pencil case' },
+      pictures: [
+        { slug: 'hop-but', name: { vi: 'Hộp bút', en: 'Pencil case' }, file: 'hop-but--hop-but' },
+      ],
+    },
+    {
+      slug: 'quyen-sach',
+      name: { vi: 'Quyển sách', en: 'Book' },
+      pictures: [
+        { slug: 'quyen-sach', name: { vi: 'Quyển sách', en: 'Book' }, file: 'quyen-sach--quyen-sach' },
+      ],
+    },
+    {
+      slug: 'thuoc',
+      name: { vi: 'Thước', en: 'Ruler' },
+      pictures: [
+        { slug: 'thuoc', name: { vi: 'Thước', en: 'Ruler' }, file: 'thuoc--thuoc' },
+      ],
+    },
+    {
+      slug: 'but-mau',
+      name: { vi: 'Bút màu', en: 'Crayons' },
+      pictures: [
+        { slug: 'but-mau', name: { vi: 'Bút màu', en: 'Crayons' }, file: 'but-mau--but-mau' },
+      ],
+    },
+    {
+      slug: 'bang',
+      name: { vi: 'Bảng', en: 'Blackboard' },
+      pictures: [
+        { slug: 'bang', name: { vi: 'Bảng', en: 'Blackboard' }, file: 'bang--bang' },
+      ],
+    },
+    {
+      slug: 'keo-thu-cong',
+      name: { vi: 'Kéo thủ công', en: 'Craft scissors' },
+      pictures: [
+        { slug: 'keo-thu-cong', name: { vi: 'Kéo thủ công', en: 'Craft scissors' }, file: 'keo-thu-cong--keo-thu-cong' },
+      ],
+    },
+    {
+      slug: 'compa',
+      name: { vi: 'Compa', en: 'Compass' },
+      pictures: [
+        { slug: 'compa', name: { vi: 'Compa', en: 'Compass' }, file: 'compa--compa' },
+      ],
+    },
+    {
+      slug: 'keo-dan',
+      name: { vi: 'Keo dán giấy', en: 'Glue stick' },
+      pictures: [
+        { slug: 'keo-dan', name: { vi: 'Keo dán giấy', en: 'Glue stick' }, file: 'keo-dan--keo-dan' },
       ],
     },
   ],
