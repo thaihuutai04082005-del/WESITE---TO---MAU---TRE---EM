@@ -554,6 +554,8 @@ export const PICTURE_NAME = {
   'keo-mut-3-5--keo-mut-3-5': { vi: 'Kẹo mút', en: 'Lollipop' },
   'bap-rang--bap-rang': { vi: 'Bắp rang bơ', en: 'Popcorn' },
   'mi-y--mi-y': { vi: 'Mì Ý', en: 'Spaghetti' },
+  'banh-pudding--banh-pudding': { vi: 'Bánh pudding', en: 'Pudding' },
+  'cupcake-dau--cupcake-dau': { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1078,6 +1080,20 @@ ART_THEMES.push({
       name: { vi: 'Mì Ý', en: 'Spaghetti' },
       pictures: [
         { slug: 'mi-y', name: { vi: 'Mì Ý', en: 'Spaghetti' }, file: 'mi-y--mi-y' },
+      ],
+    },
+    {
+      slug: 'banh-pudding',
+      name: { vi: 'Bánh pudding', en: 'Pudding' },
+      pictures: [
+        { slug: 'banh-pudding', name: { vi: 'Bánh pudding', en: 'Pudding' }, file: 'banh-pudding--banh-pudding' },
+      ],
+    },
+    {
+      slug: 'cupcake-dau',
+      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
+      pictures: [
+        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
       ],
     },
   ],
