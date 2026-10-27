@@ -535,6 +535,8 @@ export const PICTURE_NAME = {
   'but-mau--but-mau': { vi: 'Bút màu', en: 'Crayons' },
   'bang--bang': { vi: 'Bảng', en: 'Blackboard' },
   'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
+  'compa--compa': { vi: 'Compa', en: 'Compass' },
+  'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -908,6 +910,20 @@ ART_THEMES.push({
       name: { vi: 'Kéo thủ công', en: 'Craft scissors' },
       pictures: [
         { slug: 'keo-thu-cong', name: { vi: 'Kéo thủ công', en: 'Craft scissors' }, file: 'keo-thu-cong--keo-thu-cong' },
+      ],
+    },
+    {
+      slug: 'compa',
+      name: { vi: 'Compa', en: 'Compass' },
+      pictures: [
+        { slug: 'compa', name: { vi: 'Compa', en: 'Compass' }, file: 'compa--compa' },
+      ],
+    },
+    {
+      slug: 'keo-dan',
+      name: { vi: 'Keo dán giấy', en: 'Glue stick' },
+      pictures: [
+        { slug: 'keo-dan', name: { vi: 'Keo dán giấy', en: 'Glue stick' }, file: 'keo-dan--keo-dan' },
       ],
     },
   ],
