@@ -541,11 +541,12 @@ export const PICTURE_NAME = {
   'bup-be--bup-be': { vi: 'Búp bê', en: 'Doll' },
   'ngua-go--ngua-go': { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
   'xep-hinh--xep-hinh': { vi: 'Bộ xếp hình', en: 'Building blocks' },
-  'con-quay--con-quay': { vi: 'Con quay đồ chơi', en: 'Spinning top' },
   'dieu--dieu': { vi: 'Chiếc diều', en: 'Kite' },
   'trong--trong': { vi: 'Trống đồ chơi', en: 'Toy drum' },
   'robot--robot': { vi: 'Robot đồ chơi', en: 'Toy robot' },
   'bowling--bowling': { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
+  'xe-xuc--xe-xuc': { vi: 'Xe xúc đồ chơi', en: 'Toy loader' },
+  'may-bay-do-choi--may-bay-do-choi': { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -973,13 +974,6 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'con-quay',
-      name: { vi: 'Con quay đồ chơi', en: 'Spinning top' },
-      pictures: [
-        { slug: 'con-quay', name: { vi: 'Con quay đồ chơi', en: 'Spinning top' }, file: 'con-quay--con-quay' },
-      ],
-    },
-    {
       slug: 'dieu',
       name: { vi: 'Chiếc diều', en: 'Kite' },
       pictures: [
@@ -1005,6 +999,20 @@ ART_THEMES.push({
       name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
       pictures: [
         { slug: 'bowling', name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' }, file: 'bowling--bowling' },
+      ],
+    },
+    {
+      slug: 'xe-xuc',
+      name: { vi: 'Xe xúc đồ chơi', en: 'Toy loader' },
+      pictures: [
+        { slug: 'xe-xuc', name: { vi: 'Xe xúc đồ chơi', en: 'Toy loader' }, file: 'xe-xuc--xe-xuc' },
+      ],
+    },
+    {
+      slug: 'may-bay-do-choi',
+      name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
+      pictures: [
+        { slug: 'may-bay-do-choi', name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' }, file: 'may-bay-do-choi--may-bay-do-choi' },
       ],
     },
   ],
