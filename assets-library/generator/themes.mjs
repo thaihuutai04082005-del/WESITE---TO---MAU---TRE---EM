@@ -549,6 +549,7 @@ export const PICTURE_NAME = {
   'may-bay-do-choi--may-bay-do-choi': { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
   'ga-ran--ga-ran': { vi: 'Gà rán', en: 'Fried chicken' },
   'pizza--pizza': { vi: 'Pizza', en: 'Pizza' },
+  'hamburger--hamburger': { vi: 'Hamburger', en: 'Hamburger' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1038,6 +1039,13 @@ ART_THEMES.push({
       name: { vi: 'Pizza', en: 'Pizza' },
       pictures: [
         { slug: 'pizza', name: { vi: 'Pizza', en: 'Pizza' }, file: 'pizza--pizza' },
+      ],
+    },
+    {
+      slug: 'hamburger',
+      name: { vi: 'Hamburger', en: 'Hamburger' },
+      pictures: [
+        { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
       ],
     },
   ],
