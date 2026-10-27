@@ -557,6 +557,7 @@ export const PICTURE_NAME = {
   'banh-pudding--banh-pudding': { vi: 'Bánh pudding', en: 'Pudding' },
   'cupcake-dau--cupcake-dau': { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
   'banh-kem-3-tang--banh-kem-3-tang': { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
+  'cau-truot--cau-truot': { vi: 'Cầu trượt', en: 'Slide' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1105,6 +1106,22 @@ ART_THEMES.push({
       ],
     },
 
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'khu-vui-choi-3-5',
+  age: '3-5',
+  name: { vi: 'Khu Vui Chơi', en: 'Playground' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'cau-truot',
+      name: { vi: 'Cầu trượt', en: 'Slide' },
+      pictures: [
+        { slug: 'cau-truot', name: { vi: 'Cầu trượt', en: 'Slide' }, file: 'cau-truot--cau-truot' },
+      ],
+    },
   ],
 });
 
