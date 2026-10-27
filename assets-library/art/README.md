@@ -107,7 +107,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Đồ Ăn (3–5 tuổi) | Bắp rang bơ | Bắp rang bơ (mới, đang hiện) | 28 |
 | Đồ Ăn (3–5 tuổi) | Mì Ý | Mì Ý (mới, đang hiện) | 34 |
 | Đồ Ăn (3–5 tuổi) | Bánh pudding | Bánh pudding (mới, đang hiện) | 11 |
-| Đồ Ăn (3–5 tuổi) | Bánh cupcake dâu tây | Bánh cupcake dâu tây (mới, đang hiện) | 49 |
+| Đồ Ăn (3–5 tuổi) | Bánh cupcake dâu tây | Bánh cupcake dâu tây (mới, đang hiện) | 53 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
