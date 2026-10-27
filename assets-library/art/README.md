@@ -92,7 +92,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Đồ Chơi (3–5 tuổi) | Gấu bông | Gấu bông (mới, đang hiện) | 32 |
 | Đồ Chơi (3–5 tuổi) | Búp bê | Búp bê (mới, đang hiện) | 77 |
 | Đồ Chơi (3–5 tuổi) | Ngựa gỗ bập bênh | Ngựa gỗ bập bênh (mới, đang hiện) | 53 |
-| Đồ Chơi (3–5 tuổi) | Bộ xếp hình | Bộ xếp hình (mới, đang hiện) | 61 |
+| Đồ Chơi (3–5 tuổi) | Bộ xếp hình | Bộ xếp hình (mới, đang hiện) | 42 |
 | Đồ Chơi (3–5 tuổi) | Chiếc diều | Chiếc diều (mới, đang hiện) | 61 |
 | Đồ Chơi (3–5 tuổi) | Trống đồ chơi | Trống đồ chơi (mới, đang hiện) | 41 |
 | Đồ Chơi (3–5 tuổi) | Robot đồ chơi | Robot đồ chơi (mới, đang hiện) | 86 |
