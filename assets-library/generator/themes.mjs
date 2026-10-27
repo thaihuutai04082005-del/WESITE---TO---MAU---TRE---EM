@@ -550,6 +550,8 @@ export const PICTURE_NAME = {
   'ga-ran--ga-ran': { vi: 'Gà rán', en: 'Fried chicken' },
   'pizza--pizza': { vi: 'Pizza', en: 'Pizza' },
   'hamburger--hamburger': { vi: 'Hamburger', en: 'Hamburger' },
+  'kem-oc-que-3-5--kem-oc-que-3-5': { vi: 'Kem ốc quế', en: 'Ice cream cone' },
+  'keo-mut-3-5--keo-mut-3-5': { vi: 'Kẹo mút', en: 'Lollipop' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1046,6 +1048,20 @@ ART_THEMES.push({
       name: { vi: 'Hamburger', en: 'Hamburger' },
       pictures: [
         { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
+      ],
+    },
+    {
+      slug: 'kem-oc-que-3-5',
+      name: { vi: 'Kem ốc quế', en: 'Ice cream cone' },
+      pictures: [
+        { slug: 'kem-oc-que-3-5', name: { vi: 'Kem ốc quế', en: 'Ice cream cone' }, file: 'kem-oc-que-3-5--kem-oc-que-3-5' },
+      ],
+    },
+    {
+      slug: 'keo-mut-3-5',
+      name: { vi: 'Kẹo mút', en: 'Lollipop' },
+      pictures: [
+        { slug: 'keo-mut-3-5', name: { vi: 'Kẹo mút', en: 'Lollipop' }, file: 'keo-mut-3-5--keo-mut-3-5' },
       ],
     },
   ],
