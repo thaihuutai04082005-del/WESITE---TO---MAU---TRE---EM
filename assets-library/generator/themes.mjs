@@ -531,6 +531,8 @@ export const PICTURE_NAME = {
   'but-chi--but-chi': { vi: 'Bút chì', en: 'Pencil' },
   'hop-but--hop-but': { vi: 'Hộp bút', en: 'Pencil case' },
   'quyen-sach--quyen-sach': { vi: 'Quyển sách', en: 'Book' },
+  'thuoc--thuoc': { vi: 'Thước', en: 'Ruler' },
+  'but-mau--but-mau': { vi: 'Bút màu', en: 'Crayons' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -876,6 +878,20 @@ ART_THEMES.push({
       name: { vi: 'Quyển sách', en: 'Book' },
       pictures: [
         { slug: 'quyen-sach', name: { vi: 'Quyển sách', en: 'Book' }, file: 'quyen-sach--quyen-sach' },
+      ],
+    },
+    {
+      slug: 'thuoc',
+      name: { vi: 'Thước', en: 'Ruler' },
+      pictures: [
+        { slug: 'thuoc', name: { vi: 'Thước', en: 'Ruler' }, file: 'thuoc--thuoc' },
+      ],
+    },
+    {
+      slug: 'but-mau',
+      name: { vi: 'Bút màu', en: 'Crayons' },
+      pictures: [
+        { slug: 'but-mau', name: { vi: 'Bút màu', en: 'Crayons' }, file: 'but-mau--but-mau' },
       ],
     },
   ],
