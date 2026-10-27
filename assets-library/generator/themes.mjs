@@ -533,6 +533,8 @@ export const PICTURE_NAME = {
   'quyen-sach--quyen-sach': { vi: 'Quyển sách', en: 'Book' },
   'thuoc--thuoc': { vi: 'Thước', en: 'Ruler' },
   'but-mau--but-mau': { vi: 'Bút màu', en: 'Crayons' },
+  'bang--bang': { vi: 'Bảng', en: 'Blackboard' },
+  'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -892,6 +894,20 @@ ART_THEMES.push({
       name: { vi: 'Bút màu', en: 'Crayons' },
       pictures: [
         { slug: 'but-mau', name: { vi: 'Bút màu', en: 'Crayons' }, file: 'but-mau--but-mau' },
+      ],
+    },
+    {
+      slug: 'bang',
+      name: { vi: 'Bảng', en: 'Blackboard' },
+      pictures: [
+        { slug: 'bang', name: { vi: 'Bảng', en: 'Blackboard' }, file: 'bang--bang' },
+      ],
+    },
+    {
+      slug: 'keo-thu-cong',
+      name: { vi: 'Kéo thủ công', en: 'Craft scissors' },
+      pictures: [
+        { slug: 'keo-thu-cong', name: { vi: 'Kéo thủ công', en: 'Craft scissors' }, file: 'keo-thu-cong--keo-thu-cong' },
       ],
     },
   ],
