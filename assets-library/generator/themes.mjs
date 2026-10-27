@@ -537,6 +537,16 @@ export const PICTURE_NAME = {
   'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
   'compa--compa': { vi: 'Compa', en: 'Compass' },
   'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
+  'gau-bong--gau-bong': { vi: 'Gấu bông', en: 'Teddy bear' },
+  'bup-be--bup-be': { vi: 'Búp bê', en: 'Doll' },
+  'ngua-go--ngua-go': { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
+  'xep-hinh--xep-hinh': { vi: 'Bộ xếp hình', en: 'Building blocks' },
+  'dieu--dieu': { vi: 'Chiếc diều', en: 'Kite' },
+  'trong--trong': { vi: 'Trống đồ chơi', en: 'Toy drum' },
+  'robot--robot': { vi: 'Robot đồ chơi', en: 'Toy robot' },
+  'bowling--bowling': { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
+  'xe-xuc--xe-xuc': { vi: 'Xe xúc đồ chơi', en: 'Toy loader' },
+  'may-bay-do-choi--may-bay-do-choi': { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -924,6 +934,85 @@ ART_THEMES.push({
       name: { vi: 'Keo dán giấy', en: 'Glue stick' },
       pictures: [
         { slug: 'keo-dan', name: { vi: 'Keo dán giấy', en: 'Glue stick' }, file: 'keo-dan--keo-dan' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'do-choi-3-5',
+  age: '3-5',
+  name: { vi: 'Đồ Chơi', en: 'Toys' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'gau-bong',
+      name: { vi: 'Gấu bông', en: 'Teddy bear' },
+      pictures: [
+        { slug: 'gau-bong', name: { vi: 'Gấu bông', en: 'Teddy bear' }, file: 'gau-bong--gau-bong' },
+      ],
+    },
+    {
+      slug: 'bup-be',
+      name: { vi: 'Búp bê', en: 'Doll' },
+      pictures: [
+        { slug: 'bup-be', name: { vi: 'Búp bê', en: 'Doll' }, file: 'bup-be--bup-be' },
+      ],
+    },
+    {
+      slug: 'ngua-go',
+      name: { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
+      pictures: [
+        { slug: 'ngua-go', name: { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' }, file: 'ngua-go--ngua-go' },
+      ],
+    },
+    {
+      slug: 'xep-hinh',
+      name: { vi: 'Bộ xếp hình', en: 'Building blocks' },
+      pictures: [
+        { slug: 'xep-hinh', name: { vi: 'Bộ xếp hình', en: 'Building blocks' }, file: 'xep-hinh--xep-hinh' },
+      ],
+    },
+    {
+      slug: 'dieu',
+      name: { vi: 'Chiếc diều', en: 'Kite' },
+      pictures: [
+        { slug: 'dieu', name: { vi: 'Chiếc diều', en: 'Kite' }, file: 'dieu--dieu' },
+      ],
+    },
+    {
+      slug: 'trong',
+      name: { vi: 'Trống đồ chơi', en: 'Toy drum' },
+      pictures: [
+        { slug: 'trong', name: { vi: 'Trống đồ chơi', en: 'Toy drum' }, file: 'trong--trong' },
+      ],
+    },
+    {
+      slug: 'robot',
+      name: { vi: 'Robot đồ chơi', en: 'Toy robot' },
+      pictures: [
+        { slug: 'robot', name: { vi: 'Robot đồ chơi', en: 'Toy robot' }, file: 'robot--robot' },
+      ],
+    },
+    {
+      slug: 'bowling',
+      name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
+      pictures: [
+        { slug: 'bowling', name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' }, file: 'bowling--bowling' },
+      ],
+    },
+    {
+      slug: 'xe-xuc',
+      name: { vi: 'Xe xúc đồ chơi', en: 'Toy loader' },
+      pictures: [
+        { slug: 'xe-xuc', name: { vi: 'Xe xúc đồ chơi', en: 'Toy loader' }, file: 'xe-xuc--xe-xuc' },
+      ],
+    },
+    {
+      slug: 'may-bay-do-choi',
+      name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' },
+      pictures: [
+        { slug: 'may-bay-do-choi', name: { vi: 'Máy bay đồ chơi', en: 'Toy airplane' }, file: 'may-bay-do-choi--may-bay-do-choi' },
       ],
     },
   ],
