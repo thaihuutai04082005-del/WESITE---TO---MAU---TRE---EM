@@ -539,6 +539,8 @@ export const PICTURE_NAME = {
   'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
   'gau-bong--gau-bong': { vi: 'Gấu bông', en: 'Teddy bear' },
   'bup-be--bup-be': { vi: 'Búp bê', en: 'Doll' },
+  'ngua-go--ngua-go': { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
+  'xep-hinh--xep-hinh': { vi: 'Bộ xếp hình', en: 'Building blocks' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -949,6 +951,20 @@ ART_THEMES.push({
       name: { vi: 'Búp bê', en: 'Doll' },
       pictures: [
         { slug: 'bup-be', name: { vi: 'Búp bê', en: 'Doll' }, file: 'bup-be--bup-be' },
+      ],
+    },
+    {
+      slug: 'ngua-go',
+      name: { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' },
+      pictures: [
+        { slug: 'ngua-go', name: { vi: 'Ngựa gỗ bập bênh', en: 'Rocking horse' }, file: 'ngua-go--ngua-go' },
+      ],
+    },
+    {
+      slug: 'xep-hinh',
+      name: { vi: 'Bộ xếp hình', en: 'Building blocks' },
+      pictures: [
+        { slug: 'xep-hinh', name: { vi: 'Bộ xếp hình', en: 'Building blocks' }, file: 'xep-hinh--xep-hinh' },
       ],
     },
   ],
