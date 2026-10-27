@@ -97,6 +97,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Đồ Chơi (3–5 tuổi) | Chiếc diều | Chiếc diều (mới, đang hiện) | 61 |
 | Đồ Chơi (3–5 tuổi) | Trống đồ chơi | Trống đồ chơi (mới, đang hiện) | 41 |
 | Đồ Chơi (3–5 tuổi) | Robot đồ chơi | Robot đồ chơi (mới, đang hiện) | 86 |
+| Đồ Chơi (3–5 tuổi) | Bộ bowling mini | Bộ bowling mini (mới, đang hiện) | 18 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
@@ -115,7 +116,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Công Chúa Ngàn Hoa | Thiếu Nữ Cardigan | Thiếu Nữ Cardigan Cẩm Tú Cầu | cong-chua-ngan-hoa--cardigan-cam-tu-cau |
 | Hải Trình Kỳ Diệu (6–8 tuổi, xếp sau Xứ Sở Học Cụ bằng `after`) | Tàu Ngầm | Tàu Ngầm Bong Bóng Phép Thuật | 160 |
 
-Chủ đề Đồ Chơi (3–5 tuổi) có tranh "Gấu bông", "Búp bê", "Ngựa gỗ bập bênh", "Bộ xếp hình", "Con quay đồ chơi", "Chiếc diều", "Trống đồ chơi" và "Robot đồ chơi". Chủ đề Đồ Dùng Học Tập (3–5 tuổi) có tranh "Cặp", "Bút chì", "Hộp bút", "Quyển sách", "Thước", "Bút màu", "Bảng", "Kéo thủ công", "Compa" và "Keo dán giấy". Chủ đề Xe Cộ (3–5 tuổi) có tranh "Ô tô", "Xe buýt", "Xe tải", "Máy bay", "Xe lửa", "Xe cảnh sát", "Xe đạp", "Xe cứu thương", "Máy kéo" và "Xe máy". Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho", "Dâu tây", "Đu đủ", "Dừa" và "Dứa". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
+Chủ đề Đồ Chơi (3–5 tuổi) có tranh "Gấu bông", "Búp bê", "Ngựa gỗ bập bênh", "Bộ xếp hình", "Con quay đồ chơi", "Chiếc diều", "Trống đồ chơi", "Robot đồ chơi" và "Bộ bowling mini". Chủ đề Đồ Dùng Học Tập (3–5 tuổi) có tranh "Cặp", "Bút chì", "Hộp bút", "Quyển sách", "Thước", "Bút màu", "Bảng", "Kéo thủ công", "Compa" và "Keo dán giấy". Chủ đề Xe Cộ (3–5 tuổi) có tranh "Ô tô", "Xe buýt", "Xe tải", "Máy bay", "Xe lửa", "Xe cảnh sát", "Xe đạp", "Xe cứu thương", "Máy kéo" và "Xe máy". Chủ đề Trái Cây (3–5 tuổi) có tranh "Táo", "Chuối", "Cam", "Xoài", "Dưa hấu", "Nho", "Dâu tây", "Đu đủ", "Dừa" và "Dứa". Các tranh Động Vật cũ (15 tranh) đã ẩn bằng `hidden: true` trong `ART_THEMES`, chỉ còn tranh mới "Chó con bên nhà cún", "Thỏ con", "Gà con", "Vịt con", "Heo con", "Bò sữa", "Cá vàng", "Chim con", "Mèo con" và "Bướm" hiện; chờ chủ web gửi tranh mới.
 
 Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh màu (điểm ảnh rất tối), viền màu (giọt nước, dấu chân, mặt nước) được vẽ thêm theo mép mảng màu.
 | Xe Buýt Chở Phi Hành Gia (Đội Xe Vũ Trụ) | – | `src/xe-buyt-vu-tru--cho-phi-hanh-gia.png` | 153 |

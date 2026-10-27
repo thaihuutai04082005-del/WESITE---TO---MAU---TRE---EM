@@ -545,6 +545,7 @@ export const PICTURE_NAME = {
   'dieu--dieu': { vi: 'Chiếc diều', en: 'Kite' },
   'trong--trong': { vi: 'Trống đồ chơi', en: 'Toy drum' },
   'robot--robot': { vi: 'Robot đồ chơi', en: 'Toy robot' },
+  'bowling--bowling': { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -997,6 +998,13 @@ ART_THEMES.push({
       name: { vi: 'Robot đồ chơi', en: 'Toy robot' },
       pictures: [
         { slug: 'robot', name: { vi: 'Robot đồ chơi', en: 'Toy robot' }, file: 'robot--robot' },
+      ],
+    },
+    {
+      slug: 'bowling',
+      name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' },
+      pictures: [
+        { slug: 'bowling', name: { vi: 'Bộ bowling mini', en: 'Mini bowling set' }, file: 'bowling--bowling' },
       ],
     },
   ],
