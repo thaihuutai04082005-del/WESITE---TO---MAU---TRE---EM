@@ -552,6 +552,8 @@ export const PICTURE_NAME = {
   'hamburger--hamburger': { vi: 'Hamburger', en: 'Hamburger' },
   'kem-oc-que-3-5--kem-oc-que-3-5': { vi: 'Kem ốc quế', en: 'Ice cream cone' },
   'keo-mut-3-5--keo-mut-3-5': { vi: 'Kẹo mút', en: 'Lollipop' },
+  'bap-rang--bap-rang': { vi: 'Bắp rang bơ', en: 'Popcorn' },
+  'mi-y--mi-y': { vi: 'Mì Ý', en: 'Spaghetti' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1062,6 +1064,20 @@ ART_THEMES.push({
       name: { vi: 'Kẹo mút', en: 'Lollipop' },
       pictures: [
         { slug: 'keo-mut-3-5', name: { vi: 'Kẹo mút', en: 'Lollipop' }, file: 'keo-mut-3-5--keo-mut-3-5' },
+      ],
+    },
+    {
+      slug: 'bap-rang',
+      name: { vi: 'Bắp rang bơ', en: 'Popcorn' },
+      pictures: [
+        { slug: 'bap-rang', name: { vi: 'Bắp rang bơ', en: 'Popcorn' }, file: 'bap-rang--bap-rang' },
+      ],
+    },
+    {
+      slug: 'mi-y',
+      name: { vi: 'Mì Ý', en: 'Spaghetti' },
+      pictures: [
+        { slug: 'mi-y', name: { vi: 'Mì Ý', en: 'Spaghetti' }, file: 'mi-y--mi-y' },
       ],
     },
   ],
