@@ -528,6 +528,7 @@ export const PICTURE_NAME = {
   'may-keo--may-keo': { vi: 'Máy kéo', en: 'Tractor' },
   'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
   'cap--cap': { vi: 'Cặp', en: 'Backpack' },
+  'but-chi--but-chi': { vi: 'Bút chì', en: 'Pencil' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -852,6 +853,13 @@ ART_THEMES.push({
       name: { vi: 'Cặp', en: 'Backpack' },
       pictures: [
         { slug: 'cap', name: { vi: 'Cặp', en: 'Backpack' }, file: 'cap--cap' },
+      ],
+    },
+    {
+      slug: 'but-chi',
+      name: { vi: 'Bút chì', en: 'Pencil' },
+      pictures: [
+        { slug: 'but-chi', name: { vi: 'Bút chì', en: 'Pencil' }, file: 'but-chi--but-chi' },
       ],
     },
   ],
