@@ -556,6 +556,7 @@ export const PICTURE_NAME = {
   'mi-y--mi-y': { vi: 'Mì Ý', en: 'Spaghetti' },
   'banh-pudding--banh-pudding': { vi: 'Bánh pudding', en: 'Pudding' },
   'cupcake-dau--cupcake-dau': { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
+  'banh-kem-3-tang--banh-kem-3-tang': { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1034,24 +1035,24 @@ ART_THEMES.push({
   animation: 'float',
   objects: [
     {
-      slug: 'ga-ran',
-      name: { vi: 'Gà rán', en: 'Fried chicken' },
+      slug: 'cupcake-dau',
+      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
       pictures: [
-        { slug: 'ga-ran', name: { vi: 'Gà rán', en: 'Fried chicken' }, file: 'ga-ran--ga-ran' },
+        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
       ],
     },
     {
-      slug: 'pizza',
-      name: { vi: 'Pizza', en: 'Pizza' },
+      slug: 'banh-pudding',
+      name: { vi: 'Bánh pudding', en: 'Pudding' },
       pictures: [
-        { slug: 'pizza', name: { vi: 'Pizza', en: 'Pizza' }, file: 'pizza--pizza' },
+        { slug: 'banh-pudding', name: { vi: 'Bánh pudding', en: 'Pudding' }, file: 'banh-pudding--banh-pudding' },
       ],
     },
     {
-      slug: 'hamburger',
-      name: { vi: 'Hamburger', en: 'Hamburger' },
+      slug: 'banh-kem-3-tang',
+      name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
       pictures: [
-        { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
+        { slug: 'banh-kem-3-tang', name: { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' }, file: 'banh-kem-3-tang--banh-kem-3-tang' },
       ],
     },
     {
@@ -1083,19 +1084,27 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'banh-pudding',
-      name: { vi: 'Bánh pudding', en: 'Pudding' },
+      slug: 'ga-ran',
+      name: { vi: 'Gà rán', en: 'Fried chicken' },
       pictures: [
-        { slug: 'banh-pudding', name: { vi: 'Bánh pudding', en: 'Pudding' }, file: 'banh-pudding--banh-pudding' },
+        { slug: 'ga-ran', name: { vi: 'Gà rán', en: 'Fried chicken' }, file: 'ga-ran--ga-ran' },
       ],
     },
     {
-      slug: 'cupcake-dau',
-      name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
+      slug: 'pizza',
+      name: { vi: 'Pizza', en: 'Pizza' },
       pictures: [
-        { slug: 'cupcake-dau', name: { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' }, file: 'cupcake-dau--cupcake-dau' },
+        { slug: 'pizza', name: { vi: 'Pizza', en: 'Pizza' }, file: 'pizza--pizza' },
       ],
     },
+    {
+      slug: 'hamburger',
+      name: { vi: 'Hamburger', en: 'Hamburger' },
+      pictures: [
+        { slug: 'hamburger', name: { vi: 'Hamburger', en: 'Hamburger' }, file: 'hamburger--hamburger' },
+      ],
+    },
+
   ],
 });
 
