@@ -122,6 +122,9 @@ export default function Layout() {
                 <Link to="/shop" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" title="Ruby" data-testid="ruby-chip">
                   <Icon name="ruby" size={18} /> {user.ruby}
                 </Link>
+                <Link to="/gacha" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" style={{ background: '#EEE7FF', color: '#5B3FD6' }} title={t('gacha.points', { n: user.gachaPoints ?? 0 })} data-testid="gacha-chip">
+                  <Icon name="gift" size={18} strokeWidth={2.4} /> {user.gachaPoints ?? 0}
+                </Link>
                 <NotificationBell />
                 <Link to="/profile" className="flex items-center gap-2" data-testid="nav-profile">
                   <Avatar avatar={user.avatar} frame={user.avatarFrame} size={42} />
