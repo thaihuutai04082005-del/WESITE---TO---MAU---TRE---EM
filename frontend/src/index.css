@@ -1613,11 +1613,11 @@ h3,
 /* ===== Mở rèm vào Hội trường triển lãm (ExhibitTransition): hai cánh rèm xanh viền vàng trượt sang hai bên ===== */
 .sb-curtain-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 300ms ease-in-out; }
 .sb-curtain-root.sb-curtain-leave { opacity: 0; pointer-events: none; }
-/* Rèm phủ KÍN màn hình (có cả diềm vàng trên, gấu vàng dưới và sàn kem như ảnh gốc): màn rộng hơn 16:9 thì kéo vừa khít chiều cao, màn đứng thì phủ kiểu "cover". */
+/* Rèm phủ KÍN màn hình từ diềm vàng trên cùng tới gấu vàng ở đáy (không lấy phần sàn kem của ảnh gốc): màn rộng hơn 1672:899 thì kéo vừa khít, màn đứng thì phủ kiểu "cover". */
 .sb-curtain { position: absolute; top: 0; height: 100vh; width: 50vw; }
 .sb-curtain img { display: block; width: 100%; height: 100%; object-fit: fill; user-select: none; pointer-events: none; }
-@media (max-aspect-ratio: 16 / 9) {
-  .sb-curtain { top: 0; height: 100vh; width: max(50vw, 88.9vh); }
+@media (max-aspect-ratio: 1672 / 846) {
+  .sb-curtain { top: 0; height: 100vh; width: max(50vw, 98.8vh); }
   .sb-curtain img { object-fit: cover; }
 }
 .sb-curtain-l { right: 50%; }
