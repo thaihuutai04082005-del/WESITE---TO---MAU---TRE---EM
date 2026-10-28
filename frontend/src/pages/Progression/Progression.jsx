@@ -48,8 +48,12 @@ export default function Progression() {
   const user = useAuth((s) => s.user);
   const [p, setP] = useState(null);
   useEffect(() => {
-    api.get('/progression').then(setP);
+    api.get('/progression').then(setP).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
   }, []);
+  // Báo cho hiệu ứng chuyển màn hình (MissionTransition) biết trang đã sẵn sàng.
+  useEffect(() => {
+    if (p) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [p]);
   if (!p) return <div className="page text-muted">{t('common.loading')}</div>;
   const done = p.missions.filter((m) => m.completed).length;
   const rankIdx = p.tiers.findIndex((x) => x.key === p.rank.key);

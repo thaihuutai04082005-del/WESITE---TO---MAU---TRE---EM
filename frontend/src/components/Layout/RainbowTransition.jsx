@@ -71,7 +71,7 @@ export default function RainbowTransition() {
       if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
       const url = new URL(a.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      if (busy.current || url.pathname === '/arena' || url.pathname.startsWith('/arena/') || url.pathname === '/gacha' || url.pathname.startsWith('/gacha/') || url.pathname === '/storybooks' || url.pathname === '/together') return;
+      if (busy.current || url.pathname === '/arena' || url.pathname.startsWith('/arena/') || url.pathname === '/gacha' || url.pathname.startsWith('/gacha/') || url.pathname === '/storybooks' || url.pathname === '/together' || url.pathname === '/missions') return;
       const target = modeOf(url.pathname);
       if (target && !crosses(window.location.pathname, url.pathname) && modeOf(window.location.pathname) !== target) {
         // Vào một chế độ chơi: lấp lánh + tiếng ting rồi chuyển trang luôn.
