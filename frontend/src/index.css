@@ -1613,12 +1613,15 @@ h3,
 /* ===== Mở rèm vào Hội trường triển lãm (ExhibitTransition): hai cánh rèm xanh viền vàng trượt sang hai bên ===== */
 .sb-curtain-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 300ms ease-in-out; }
 .sb-curtain-root.sb-curtain-leave { opacity: 0; pointer-events: none; }
-/* Khung rèm phủ kín màn hình (như background-size: cover); hai cánh mỗi cánh rộng một nửa khung. */
-.sb-curtain { position: absolute; top: calc((100vh - max(100vh, 56.3vw)) / 2); height: max(100vh, 56.3vw); width: max(50vw, 88.9vh); }
-.sb-curtain img { display: block; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+/* Rèm phủ KÍN màn hình (có cả diềm vàng trên, gấu vàng dưới và sàn kem như ảnh gốc): màn rộng hơn 16:9 thì kéo vừa khít chiều cao, màn đứng thì phủ kiểu "cover". */
+.sb-curtain { position: absolute; top: 0; height: 100vh; width: 50vw; }
+.sb-curtain img { display: block; width: 100%; height: 100%; object-fit: fill; user-select: none; pointer-events: none; }
+@media (max-aspect-ratio: 16 / 9) {
+  .sb-curtain { top: 0; height: 100vh; width: max(50vw, 88.9vh); }
+  .sb-curtain img { object-fit: cover; }
+}
 .sb-curtain-l { right: 50%; }
 .sb-curtain-r { left: 50%; }
-.sb-curtain-l img { object-position: right top; }
 .sb-curtain-open .sb-curtain-l { animation: sb-curtain-l 2000ms both; }
 .sb-curtain-open .sb-curtain-r { animation: sb-curtain-r 2000ms both; }
 /* 0–0,6s hé khe chậm (ease-in) · 0,6–1,5s kéo rộng, giảm tốc · 1,5–2,0s nảy nhẹ rồi nằm yên. Mỗi cánh trượt 84% bề rộng của nó → còn một dải ~16% ở mép (có dây buộc + tua). */
