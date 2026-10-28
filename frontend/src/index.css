@@ -1312,23 +1312,23 @@ h3,
 .at-wave-tl { left: 0; top: 0; animation: at-wave-tl 600ms ease-out 320ms both; }
 .at-wave-br { right: 0; bottom: 0; animation: at-wave-br 600ms ease-out 360ms both; }
 .at-wave-bl { left: 0; bottom: 0; width: min(26vw, 330px); height: min(16vw, 210px); animation: at-wave-bl 600ms ease-out 400ms both; }
-.at-star { position: absolute; opacity: 0; transform: translate(-50%, -50%) scale(0); filter: drop-shadow(0 2px 3px rgba(214, 120, 20, 0.35)); will-change: transform, opacity;
+.at-star { position: absolute; opacity: 0; transform: translate(-50%, -50%) scale(0); filter: drop-shadow(0 2px 3px rgba(214, 120, 20, 0.35));
   animation: at-star-in 460ms cubic-bezier(0.3, 1.5, 0.5, 1) var(--d) both, at-twinkle 2400ms ease-in-out calc(var(--d) + 700ms) infinite; }
 .at-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.at-cluster { position: relative; width: clamp(250px, 44vw, 640px); aspect-ratio: 575 / 478; }
+.at-cluster { position: relative; width: clamp(250px, 44vw, 760px); aspect-ratio: 639 / 532; }
 .at-glow { position: absolute; left: 50%; top: 50%; width: 130%; aspect-ratio: 1; margin: -65% 0 0 -65%; border-radius: 9999px; opacity: 0; transform: scale(0.4);
   background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 224, 140, 0.5) 40%, transparent 70%); animation: at-glow 900ms ease-out 1050ms both; }
-.at-float { position: absolute; inset: 0; animation: at-float 2200ms ease-in-out 1650ms infinite; will-change: transform; }
-.at-pop { position: absolute; inset: 0; opacity: 0; transform: translateY(8%) scale(0.3) rotate(-6deg); transform-origin: 50% 60%; will-change: transform, opacity;
+.at-float { position: absolute; inset: 0; animation: at-float 2200ms ease-in-out 1650ms infinite; }
+.at-pop { position: absolute; inset: 0; opacity: 0; transform: translateY(8%) scale(0.3) rotate(-6deg); transform-origin: 50% 60%;
   animation: at-pop 700ms cubic-bezier(0.2, 1, 0.3, 1) 650ms both; }
-.at-cup { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; filter: drop-shadow(0 10px 14px rgba(180, 90, 20, 0.28)); }
+.at-cup { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; image-rendering: auto; backface-visibility: hidden; filter: drop-shadow(0 10px 14px rgba(180, 90, 20, 0.28)); }
 .at-shine { position: absolute; inset: 0; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;
   background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.6) 50%, transparent 58%); background-size: 260% 100%; background-position: 120% 0; opacity: 0;
   animation: at-shine 700ms ease-in-out 1250ms both; }
 .at-shadow { position: absolute; left: 50%; bottom: -9%; width: 74%; height: 7%; margin-left: -37%; border-radius: 9999px; background: rgba(176, 96, 40, 0.22); filter: blur(6px);
   opacity: 0; transform: scaleX(0.6); animation: at-shadow-in 600ms ease-out 900ms both, at-shadow-float 2200ms ease-in-out 1650ms infinite; }
 .at-drop { position: absolute; left: calc(50% + var(--dx)); top: calc(50% + var(--dy)); width: clamp(22px, 4vw, 50px); height: auto; margin: -2.2vw 0 0 -2vw; opacity: 0; transform: scale(0);
-  filter: drop-shadow(0 2px 2px rgba(120, 60, 20, 0.2)); will-change: transform, opacity; animation: at-drop 620ms cubic-bezier(0.25, 1, 0.4, 1) var(--d) both; }
+  filter: drop-shadow(0 2px 2px rgba(120, 60, 20, 0.2)); animation: at-drop 620ms cubic-bezier(0.25, 1, 0.4, 1) var(--d) both; }
 
 @keyframes at-fade-in { to { opacity: 1; } }
 @keyframes at-bg-open { 0% { transform: scale(0); } 100% { transform: scale(1); } }
