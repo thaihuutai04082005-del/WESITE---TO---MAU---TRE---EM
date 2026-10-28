@@ -1364,7 +1364,7 @@ h3,
 .at-lite .at-burst { animation-duration: 1ms; }
 
 /* ===== Chuyển màn hình Bóc thẻ (GachaTransition): hộp quà tím mở ra ba thẻ bí ẩn (2,8 giây) ===== */
-.gt-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 450ms ease-in-out; }
+.gt-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 350ms ease-in-out; }
 .gt-root.gt-leaving { opacity: 0; pointer-events: none; }
 .gt-bg { position: absolute; inset: 0; opacity: 0; background: radial-gradient(circle at 50% 48%, #E1D9FD 0%, #DAD1FC 38%, #D2C7FC 70%); animation: gt-fade 200ms ease-out both; }
 .gt-rings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
