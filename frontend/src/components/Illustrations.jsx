@@ -29,22 +29,11 @@ export function TrophyArt() {
   );
 }
 
-/** Tô cùng nhau: 3 bạn đứng thẳng hàng sau cùng một tờ tranh cầu vồng — gọn, dễ nhìn, thấy ngay là nhóm. */
+/** Tô cùng nhau: mèo, gấu, thỏ cùng tô một tờ tranh cầu vồng (hình tách từ ảnh gốc, /public/mascots/tocungnhau.webp). */
 export function TogetherArt() {
   return (
-    <svg viewBox="0 0 164 150" className="h-full w-full" aria-hidden="true">
-      <path d="M82 22 C74 16 76 6 82 11 C88 6 90 16 82 22 Z" fill="#FF7AA2" stroke={INK} strokeWidth="1.8" strokeLinejoin="round" />
-      <image href="/mascots/meo.svg" x="0" y="32" width="58" height="80" preserveAspectRatio="xMidYMax meet" />
-      <image href="/mascots/gau.svg" x="51" y="26" width="62" height="86" preserveAspectRatio="xMidYMax meet" />
-      <image href="/mascots/tho.svg" x="108" y="12" width="56" height="100" preserveAspectRatio="xMidYMax meet" />
-      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <rect x="6" y="100" width="152" height="44" rx="10" fill="#FFFFFF" />
-        <path d="M44 136 A38 24 0 0 1 120 136" fill="none" stroke="#FF7AA2" strokeWidth="8" />
-        <path d="M56 136 A26 16 0 0 1 108 136" fill="none" stroke="#FFD54F" strokeWidth="8" />
-        <path d="M68 136 A14 9 0 0 1 96 136" fill="none" stroke="#4FA3E0" strokeWidth="8" />
-      </g>
-      {/* 1 cây bút tượng trưng: gấu đang tô dải cầu vồng */}
-      <Crayon x={66.5} y={85.2} rot={62} scale={0.62} color="#FFD54F" />
+    <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
+      <image href="/mascots/tocungnhau.webp" x="8" y="6" width="204" height="138" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
