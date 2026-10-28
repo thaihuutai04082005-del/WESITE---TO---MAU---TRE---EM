@@ -1,20 +1,22 @@
-// Hiệu ứng chuyển màn hình riêng cho Truyện tranh: quyển sách vàng đóng kín trồi lên, nằm xuống rồi tự mở, chú gấu nâu bật lên
-// từ giữa hai trang, bong bóng hội thoại có trái tim hồng hiện ra bên phải, rồi vào đúng trang Truyện tranh thật.
+// Hiệu ứng chuyển màn hình riêng cho Truyện tranh: quyển sách vàng có ngôi sao đóng kín trồi lên, tự mở ra, chú gấu nâu bật lên
+// từ giữa hai trang, bong bóng hội thoại hiện ra phía trên bên phải, rồi vào đúng trang Truyện tranh thật.
 //
 // Cách chạy (giống ArenaTransition / GachaTransition):
 //  1. Bé bấm vào liên kết /storybooks (thẻ trên trang chủ hoặc nút trên thanh menu) → chặn điều hướng, thu thẻ nhẹ về 96%,
 //     dựng lớp phủ toàn màn hình (position: fixed) và phát tiếng ting.
 //  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `sb-`). Toàn bộ cảnh dài khoảng 2,3 giây:
-//       0,00–0,38  sách ĐÓNG kín trồi lên từ dưới, nảy nhẹ; nét trang trí vàng cam hiện quanh sách
-//       0,38–0,62  sách nằm xuống (xoay thẳng, dẹt lại)    | 0,62–1,00  bìa sách lật mở sang trái, hai trang xòe ra cân đối
-//       1,00–1,55  chú gấu bật lên từ khe giữa hai trang (thân dưới bị trang sách phía trước che)
-//       1,55–1,95  bong bóng hội thoại nảy ra, trái tim hồng hiện trễ 0,1 giây | 1,95–2,25  gấu nhún, bong bóng lắc nhẹ, tim đập
+//       0,00–0,40  sách ĐÓNG kín trồi lên từ dưới, nảy nhẹ; bốn nét "bật" vàng cam hiện quanh sách
+//       0,60–1,05  bìa sách lật mở: sách đóng gập về gáy, sách mở bung ra ở giữa; nét bật cũ tan đi
+//       1,00–1,60  chú gấu bật lên từ giữa hai trang (thân dưới bị trang sách phía trước che), nét bật mới hiện
+//       1,55–2,00  bong bóng hội thoại nảy ra ở phía trên bên phải gấu
+//       2,00–2,30  gấu nhún, bong bóng lắc nhẹ rồi đứng yên (khung hình cuối = ảnh tham chiếu thứ ba)
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Truyện tranh NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
-// Hình minh hoạ nằm trong /public/story/ (tách từ hai ảnh gốc 1673×940): bg.webp (nền + đường cong góc), closed.webp (sách đóng),
-// bookback/bookfront.webp (sách mở: phần sau và phần trước chú gấu), bear.webp, bubble.webp, heart.webp, tA*/tB* (nét trang trí).
-// Đổi hình: thay file cùng tên (WebP/PNG nền trong suốt, cùng tỷ lệ); vị trí/kích thước nằm ở các hằng số bên dưới (pixel trong ảnh gốc).
+// Hình minh hoạ nằm trong /public/story2/ (tách từ ba ảnh gốc 1673×940): bg.webp (nền vàng kem + sóng góc, đã xoá chủ thể),
+// closed (sách đóng), a0–a3 (nét bật quanh sách đóng), bookback/bookfront (sách mở: phần sau và phần trước chú gấu), bear, bubble,
+// b0–b3 (nét bật quanh gấu). Toạ độ (x, y, w, h) tính theo pixel trong ảnh gốc ở hằng số FRAME / SPR bên dưới.
+// Đổi hình: thay file cùng tên (WebP nền trong suốt, cùng tỷ lệ) và cập nhật toạ độ ở SPR.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
@@ -30,85 +32,61 @@ const isStory = (p) => p === '/storybooks';
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwareConcurrency || 8) <= 2 || (navigator.deviceMemory || 8) <= 2);
 
-// ---- Toạ độ pixel trong ảnh gốc 1673×940. Cụm trung tâm đặt theo phần trăm của CLUSTER (co giãn theo màn hình). ----
-// Ảnh "sách mở" gốc là ảnh khác (836 rộng); OPEN_DX dịch nó về giữa khung 16:9 để gáy sách trùng trục giữa.
-const OPEN_DX = 418;
-const CLUSTER = { x: 340, y: 140, w: 1000, h: 710 };
-const pct = (v, total) => `${((v / total) * 100).toFixed(3)}%`;
-const rel = (o) => ({ left: pct(o.x - CLUSTER.x, CLUSTER.w), top: pct(o.y - CLUSTER.y, CLUSTER.h), width: pct(o.w, CLUSTER.w) });
-const relBox = (o) => ({ ...rel(o), height: pct(o.h, CLUSTER.h) });
-const cq = (v) => ((v / CLUSTER.w) * 100).toFixed(2); // pixel ảnh gốc → cqw (đơn vị theo bề rộng cụm)
-const open = (o) => ({ ...o, x: o.x + OPEN_DX });
-
-const CLOSED = { x: 495, y: 172, w: 696, h: 668 };
-const SPINE = { x: 838, y: 692 };                       // trục gáy sách khi mở (tâm xoay của bìa)
-const BOOK_BACK = open({ x: 150, y: 570, w: 541, h: 133 });
-const BOOK_FRONT = open({ x: 87, y: 612, w: 678, h: 227 });
-const BEAR = open({ x: 167, y: 310, w: 412, h: 348 });
-const BUBBLE = open({ x: 464, y: 150, w: 297, h: 255 });
-const HEART = open({ x: 545, y: 213, w: 142, h: 123 });
-const BEAR_CENTER = { x: 395 + OPEN_DX, y: 450 };
-// Nét trang trí vàng cam: nhóm A quanh sách đóng, nhóm B quanh chú gấu (d = độ trễ, ms).
-const TICKS_A = [
-  { src: '/story/tA3.webp', o: { x: 363, y: 359, w: 126, h: 98 }, d: 150 },
-  { src: '/story/tA4.webp', o: { x: 364, y: 472, w: 117, h: 71 }, d: 190 },
-  { src: '/story/tA1.webp', o: { x: 1131, y: 254, w: 102, h: 121 }, d: 230 },
-  { src: '/story/tA2.webp', o: { x: 1177, y: 335, w: 130, h: 80 }, d: 270 },
+// ---- Toạ độ pixel trong ảnh gốc 1673×940 ----
+const FW = 1673;
+const FH = 940;
+const SPR = {
+  closed: { x: 496, y: 166, w: 679, h: 673 },
+  bookback: { x: 455, y: 379, w: 807, h: 468 },
+  bookfront: { x: 455, y: 379, w: 807, h: 468 },
+  bear: { x: 566, y: 179, w: 509, h: 381 },
+  bubble: { x: 982, y: 91, w: 319, h: 261 },
+  a0: { x: 361, y: 465, w: 118, h: 72 },
+  a1: { x: 360, y: 354, w: 129, h: 101 },
+  a2: { x: 1114, y: 284, w: 99, h: 121 },
+  a3: { x: 1157, y: 358, w: 125, h: 84 },
+  b0: { x: 390, y: 374, w: 115, h: 69 },
+  b1: { x: 429, y: 283, w: 106, h: 101 },
+  b2: { x: 1194, y: 333, w: 102, h: 98 },
+  b3: { x: 1221, y: 414, w: 110, h: 65 },
+};
+const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
+// Tâm nở của nét bật: bay ra từ giữa sách / giữa gấu (đơn vị cqw của khung).
+const burst = (k, cx, cy) => ({
+  '--ox': ((((cx - (SPR[k].x + SPR[k].w / 2)) / FW) * 100)).toFixed(2),
+  '--oy': ((((cy - (SPR[k].y + SPR[k].h / 2)) / FW) * 100)).toFixed(2),
+});
+const A_SPARKS = [
+  { k: 'a1', d: 300 },
+  { k: 'a0', d: 340 },
+  { k: 'a2', d: 380 },
+  { k: 'a3', d: 420 },
 ];
-const TICKS_B = [
-  { src: '/story/tB2.webp', o: open({ x: 227, y: 283, w: 68, h: 65 }), d: 1060 },
-  { src: '/story/tB1.webp', o: open({ x: 289, y: 237, w: 53, h: 88 }), d: 1090 },
-  { src: '/story/tB5.webp', o: open({ x: 101, y: 483, w: 81, h: 58 }), d: 1120 },
-  { src: '/story/tB3.webp', o: open({ x: 583, y: 399, w: 64, h: 79 }), d: 1150 },
-  { src: '/story/tB4.webp', o: open({ x: 611, y: 456, w: 74, h: 53 }), d: 1180 },
+const B_SPARKS = [
+  { k: 'b1', d: 1180 },
+  { k: 'b0', d: 1220 },
+  { k: 'b2', d: 1260 },
+  { k: 'b3', d: 1300 },
 ];
 
 function Overlay({ lite, leaving }) {
-  const ticksB = lite ? TICKS_B.slice(0, 3) : TICKS_B;
-  const backP = ((SPINE.x - BOOK_BACK.x) / BOOK_BACK.w) * 100;
-  const frontP = ((SPINE.x - BOOK_FRONT.x) / BOOK_FRONT.w) * 100;
-  const half = (p, side) => (side === 'l' ? { clipPath: `inset(0 ${(100 - p).toFixed(2)}% 0 0)` } : { clipPath: `inset(0 0 0 ${(p - 0.15).toFixed(2)}%)` });
-  const swingOrigin = { transformOrigin: `${(((SPINE.x - CLUSTER.x) / CLUSTER.w) * 100).toFixed(2)}% ${(((SPINE.y - CLUSTER.y) / CLUSTER.h) * 100).toFixed(2)}%` };
+  const img = (k, cls, style = {}) => <img key={k} className={cls} src={`/story2/${k}.webp`} alt="" draggable="false" style={{ ...at(k), ...style }} />;
   return (
     <div className={`sb-root${lite ? ' sb-lite' : ''}${leaving ? ' sb-leaving' : ''}`} data-testid="storybook-transition" aria-hidden="true">
       <div className="sb-bg" />
-      <span className="sb-ring sb-ring-2" />
-      <span className="sb-ring sb-ring-1" />
-      <div className="sb-stage">
-        <div className="sb-cluster">
-          <span className="sb-floor" />
-          {TICKS_A.map((t, i) => (
-            <img key={i} className="sb-tick-a" src={t.src} alt="" draggable="false" style={{ ...rel(t.o), '--d': `${t.d}ms`, '--ox': cq(843 - (t.o.x + t.o.w / 2)), '--oy': cq(500 - (t.o.y + t.o.h / 2)) }} />
-          ))}
-          {/* Sách mở (ẩn tới lúc bìa lật): phần sau → gấu → phần trước. Nửa trái xoay vào từ gáy sau khi bìa lật tới mép. */}
-          <img className="sb-show sb-half" src="/story/bookback.webp" alt="" draggable="false" style={{ ...relBox(BOOK_BACK), ...half(backP, 'r') }} />
-          <div className="sb-flip" style={swingOrigin}>
-            <img className="sb-half" src="/story/bookback.webp" alt="" draggable="false" style={{ ...relBox(BOOK_BACK), ...half(backP, 'l') }} />
+      <div className="sb-frame">
+        <span className="sb-floor" />
+        {A_SPARKS.map(({ k, d }) => img(k, 'sb-spark sb-spark-a', { '--d': `${d}ms`, ...burst(k, 835, 500) }))}
+        <img className="sb-closed" src="/story2/closed.webp" alt="" draggable="false" style={at('closed')} />
+        <div className="sb-open">
+          {img('bookback', 'sb-layer')}
+          <div className="sb-bear-wrap" style={{ left: 0, top: 0, width: '100%', height: '100%' }}>
+            {img('bear', 'sb-bear')}
           </div>
-          <div className="sb-bearclip">
-            <img className="sb-bear" src="/story/bear.webp" alt="" draggable="false" style={relBox(BEAR)} />
-          </div>
-          <img className="sb-show sb-half" src="/story/bookfront.webp" alt="" draggable="false" style={{ ...relBox(BOOK_FRONT), ...half(frontP, 'r') }} />
-          <div className="sb-flip" style={swingOrigin}>
-            <img className="sb-half" src="/story/bookfront.webp" alt="" draggable="false" style={{ ...relBox(BOOK_FRONT), ...half(frontP, 'l') }} />
-          </div>
-          {/* Sách đóng: trồi lên, nằm xuống rồi bìa lật quanh gáy. */}
-          <div className="sb-swing" style={swingOrigin}>
-            <img className="sb-closed" src="/story/closed.webp" alt="" draggable="false" style={relBox(CLOSED)} />
-          </div>
-          {ticksB.map((t, i) => (
-            <img
-              key={i}
-              className="sb-tick-b"
-              src={t.src}
-              alt=""
-              draggable="false"
-              style={{ ...rel(t.o), '--d': `${t.d}ms`, '--ox': cq(BEAR_CENTER.x - (t.o.x + t.o.w / 2)), '--oy': cq(BEAR_CENTER.y - (t.o.y + t.o.h / 2)) }}
-            />
-          ))}
-          <img className="sb-bubble" src="/story/bubble.webp" alt="" draggable="false" style={relBox(BUBBLE)} />
-          <img className="sb-heart" src="/story/heart.webp" alt="" draggable="false" style={relBox(HEART)} />
+          {img('bookfront', 'sb-layer sb-front')}
         </div>
+        {!lite && B_SPARKS.map(({ k, d }) => img(k, 'sb-spark sb-spark-b', { '--d': `${d}ms`, ...burst(k, 830, 430) }))}
+        {img('bubble', 'sb-bubble')}
       </div>
     </div>
   );
