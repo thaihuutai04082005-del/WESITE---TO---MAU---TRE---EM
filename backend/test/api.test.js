@@ -453,6 +453,11 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'love' }, B.token)).body.counts.love, 1);
   const r2 = await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'star' }, B.token);
   assert.deepEqual([r2.body.counts.love, r2.body.counts.star, r2.body.mine], [0, 1, 'star']);
+  // Tường tranh ở sảnh: tranh vòng hiện tại có mặt, kèm cảm xúc của chính người xem; phân trang theo offset.
+  const wallRes = await api('GET', '/exhibition/wall?offset=0&limit=5', null, B.token);
+  const onWall = wallRes.body.entries.find((x) => x.id === entry.id);
+  assert.ok(onWall && onWall.mine === 'star' && onWall.final === false && wallRes.body.total >= 1);
+  assert.deepEqual((await api('GET', `/exhibition/wall?offset=${wallRes.body.total}&limit=5`, null, B.token)).body.entries, []);
   assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'heart' }, A.token)).body.error.code, 'exhibit_own');
   assert.equal((await api('DELETE', `/exhibition/entries/${entry.id}`, null, A.token)).body.error.code, 'exhibit_cannot_withdraw');
   assert.equal(db.prepare('SELECT round_key FROM exhibition_entries WHERE id = ?').get(e3.body.entry.id).round_key, '2026-10-12');

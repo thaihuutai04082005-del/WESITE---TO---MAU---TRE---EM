@@ -1552,31 +1552,50 @@ h3,
 
 /* ===== Hội trường triển lãm (Hall): cảnh phòng tranh ===== */
 .hall-scene { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #FFE9A8; min-height: calc(100vh - 73px - 64px); }
-@media (min-width: 1024px) { .hall-scene { min-height: calc(100vh - 73px); } }
-.hall-ceiling { position: relative; height: 44px; background: linear-gradient(#58BDFF, #3FAEF5); border-bottom: 8px solid #2D9BE6; }
-.hall-ceiling span { position: absolute; top: 12px; width: 78px; height: 20px; border-radius: 9999px; background: #FFF0C9; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35); }
+@media (min-width: 1024px) { .hall-scene { height: calc(100vh - 73px); min-height: 0; } }
+.hall-zoom { flex: 0 0 auto; }
+.hall-scene .hall-floor-fill { flex: 1 1 auto; height: auto; min-height: 0; border-top: 0; box-shadow: none; }
+.hall-ceiling { position: relative; height: 36px; background: linear-gradient(#58BDFF, #3FAEF5); border-bottom: 8px solid #2D9BE6; }
+.hall-ceiling span { position: absolute; top: 8px; width: 78px; height: 18px; border-radius: 9999px; background: #FFF0C9; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35); }
 .hall-ceiling span:nth-child(1) { left: 8%; }
 .hall-ceiling span:nth-child(2) { left: 33%; }
 .hall-ceiling span:nth-child(3) { left: 58%; }
 .hall-ceiling span:nth-child(4) { left: 83%; }
-.hall-wall { position: relative; display: flex; flex: 1 1 auto; flex-direction: column; padding: 16px 12px 6px; background: repeating-linear-gradient(90deg, #FFE9A8 0 46px, #FFF0BF 46px 92px); }
-.hall-rail { flex: 0 0 auto; height: 22px; margin: 16px -12px 0; background: linear-gradient(#C26B26, #A85A1B); border-top: 3px solid #D58A45; border-bottom: 5px solid #8A4A15; }
-.hall-beam { width: 70px; height: 56px; margin-top: -2px; background: linear-gradient(rgba(255, 244, 200, 0.85), rgba(255, 244, 200, 0)); clip-path: polygon(34% 0, 66% 0, 100% 100%, 0 100%); }
+.hall-wall { position: relative; display: flex; flex: 1 1 auto; flex-direction: column; padding: 10px 12px 6px; background: repeating-linear-gradient(90deg, #FFE9A8 0 46px, #FFF0BF 46px 92px); }
+.hall-rail { flex: 0 0 auto; height: 22px; margin: 10px -12px 0; background: linear-gradient(#C26B26, #A85A1B); border-top: 3px solid #D58A45; border-bottom: 5px solid #8A4A15; }
+.hall-beam { position: absolute; left: 50%; top: 30px; z-index: 0; margin-left: -35px; width: 70px; height: 56px; background: linear-gradient(rgba(255, 244, 200, 0.85), rgba(255, 244, 200, 0)); clip-path: polygon(34% 0, 66% 0, 100% 100%, 0 100%); }
 .hall-frame { display: block; padding: 10px; border-radius: 8px; background: linear-gradient(145deg, #C9772C, #B0601B 55%, #C9772C); box-shadow: 0 8px 14px -6px rgba(60, 30, 5, 0.55); }
 .hall-knob { position: absolute; width: 14px; height: 14px; border-radius: 9999px; background: #C9772C; box-shadow: inset 0 0 0 2px #A85A1B; }
 .hall-frame > .hall-knob { margin: -3px; }
+.hall-react { min-height: 62px; width: 100%; margin-top: 6px; display: flex; flex-direction: column; align-items: center; }
+.hall-arrow { position: absolute; top: 38%; z-index: 20; display: flex; width: 60px; height: 60px; align-items: center; justify-content: center; border-radius: 9999px; border: 4px solid #fff; color: #fff; cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(60, 30, 5, 0.55), inset 0 -4px 0 rgba(0, 0, 0, 0.12); transition: filter 150ms; }
+.hall-arrow:hover { filter: brightness(1.08); }
+.hall-arrow-r { right: 4px; background: linear-gradient(#FFB05A, #FF7A2F); animation: hall-nudge-r 1.8s ease-in-out infinite; }
+.hall-arrow-l { left: 4px; background: linear-gradient(#69C6FF, #2B9BF4); animation: hall-nudge-l 1.8s ease-in-out infinite; }
+@keyframes hall-nudge-r { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes hall-nudge-l { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-6px); } }
+.hall-gallery { position: relative; }
+.hall-row-in { position: absolute; inset: 0; }
+.hall-out-next { animation: hall-out-l 560ms cubic-bezier(0.55, 0, 0.35, 1) both; }
+.hall-in-next { animation: hall-in-r 560ms cubic-bezier(0.55, 0, 0.35, 1) both; }
+.hall-out-prev { animation: hall-out-r 560ms cubic-bezier(0.55, 0, 0.35, 1) both; }
+.hall-in-prev { animation: hall-in-l 560ms cubic-bezier(0.55, 0, 0.35, 1) both; }
+@keyframes hall-out-l { to { transform: translateX(-125%); } }
+@keyframes hall-out-r { to { transform: translateX(125%); } }
+@keyframes hall-in-r { from { transform: translateX(125%); } }
+@keyframes hall-in-l { from { transform: translateX(-125%); } }
+@media (prefers-reduced-motion: reduce) { .hall-arrow { animation: none; } .hall-out-next, .hall-in-next, .hall-out-prev, .hall-in-prev { animation-duration: 1ms; } }
+@media (min-width: 1024px) { .hall-arrow { width: 68px; height: 68px; } }
 .hall-plaque { height: 22px; border-radius: 4px; background: #FFE08A; border: 2px solid #E5B83A; display: flex; align-items: center; justify-content: center; }
-.hall-window { width: 104px; height: 230px; border-radius: 52px 52px 0 0; border: 8px solid #FFDC8C; border-bottom: 0; background: linear-gradient(#5CC0FF, #A8DEFF); overflow: hidden; }
-.hall-window-hill { position: absolute; left: -20%; right: -20%; bottom: -30px; height: 100px; border-radius: 50% 50% 0 0; background: linear-gradient(#8ADB4B, #4FB84A); }
-.hall-window-cloud { position: absolute; left: 14px; top: 70px; width: 50px; height: 20px; border-radius: 9999px; background: #fff; box-shadow: 14px -8px 0 2px #fff; }
-.hall-floor { flex: 0 0 auto; height: 96px; background-color: #A8672F; background-image:
+.hall-floor { flex: 0 0 auto; height: 72px; background-color: #A8672F; background-image:
   linear-gradient(135deg, rgba(255, 255, 255, 0.07) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.07) 75%),
   linear-gradient(135deg, rgba(255, 255, 255, 0.07) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.07) 75%);
   background-size: 120px 120px; background-position: 0 0, 60px 60px; border-top: 8px solid #7C4519; box-shadow: inset 0 14px 18px -10px rgba(40, 20, 0, 0.5); }
 @media (min-width: 640px) {
-  .hall-wall { padding: 20px 20px 6px; }
+  .hall-wall { padding: 12px 20px 6px; }
   .hall-rail { margin-left: -20px; margin-right: -20px; }
-  .hall-floor { height: 14vh; min-height: 110px; }
+  .hall-floor { height: 10vh; min-height: 72px; }
 }
 
 /* Trang Đấu trường vừa mở xong: các khối chính bay lên nhẹ lần lượt. */

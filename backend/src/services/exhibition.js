@@ -345,6 +345,30 @@ export function room(board, viewerId) {
   return { schedule: s, board, entries: rows.map((r) => toClient(r, viewerId)), pictures: picturesFor(rows) };
 }
 
+/**
+ * Tường tranh ở sảnh, phân trang theo trang 5 tranh: tranh thắng giải vòng vừa rồi đứng đầu (đã chốt, không thả thêm cảm xúc),
+ * rồi tới các tranh đã duyệt của vòng hiện tại (mới nhất trước) để bé thả cảm xúc.
+ */
+export function wall(viewerId, offset = 0, limit = 5) {
+  maintain();
+  const s = schedule();
+  const db = getDb();
+  const last = db.prepare('SELECT round_key FROM exhibition_rounds ORDER BY round_key DESC LIMIT 1').get();
+  const winners = last && last.round_key !== s.current ? db.prepare(`${ENTRY_SQL} WHERE e.round_key = ? AND e.award = 1 AND e.hidden = 0 ORDER BY e.board`).all(last.round_key) : [];
+  const current = db.prepare(`${ENTRY_SQL} WHERE e.round_key = ? AND e.status = 'approved' AND e.hidden = 0 ORDER BY e.id DESC`).all(s.current);
+  const rows = [...winners, ...current];
+  const start = Math.max(0, Math.floor(offset) || 0);
+  const size = Math.min(10, Math.max(1, Math.floor(limit) || 5));
+  const page = rows.slice(start, start + size);
+  return {
+    schedule: s,
+    total: rows.length,
+    offset: start,
+    entries: page.map((r) => ({ ...toClient(r, viewerId), final: r.round_key !== s.current })),
+    pictures: picturesFor(page),
+  };
+}
+
 /** Các lần gửi của chính bé (mới nhất theo từng tranh). */
 export function mine(userId) {
   maintain();
