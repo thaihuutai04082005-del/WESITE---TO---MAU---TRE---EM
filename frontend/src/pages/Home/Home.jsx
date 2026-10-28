@@ -127,7 +127,7 @@ function Dashboard() {
             <HelloBear className="h-full w-full" />
           </div>
           <div className="min-w-0 flex-1">
-            <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" style={{ WebkitTextStroke: "8px #fff", paintOrder: "stroke fill", strokeLinejoin: "round" }} data-testid="home-hello">
+            <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" style={{ WebkitTextStroke: "4px #fff", paintOrder: "stroke fill", strokeLinejoin: "round" }} data-testid="home-hello">
               {t('home.hello', { name: user.nickname })}
             </h1>
             <p className="mt-2 text-lg text-muted sm:text-2xl">{t('home.subtitle')}</p>
