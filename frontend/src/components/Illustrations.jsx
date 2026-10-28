@@ -33,7 +33,7 @@ export function TrophyArt() {
 export function TogetherArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/tocungnhau.webp" x="8" y="6" width="204" height="138" preserveAspectRatio="xMidYMid meet" />
+      <image href="/mascots/tocungnhau.webp" x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -51,7 +51,7 @@ export function GachaArt() {
 export function BookArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/truyentranh.webp" x="4" y="10" width="212" height="126" preserveAspectRatio="xMidYMid meet" />
+      <image href="/mascots/truyentranh.webp" x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
