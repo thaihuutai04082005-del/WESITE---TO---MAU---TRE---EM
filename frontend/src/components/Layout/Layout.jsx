@@ -6,7 +6,6 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { getSocket } from '../../services/socket';
 import Avatar from '../Avatar/Avatar';
-import RankBadge from '../RankBadge';
 import { formatDateTime } from '../../lib/format';
 import Icon from '../Icon';
 import Toasts from './Toasts';
@@ -36,8 +35,11 @@ export const NAV = [
   { to: '/together', icon: 'heart', key: 'together', color: '#2FA65A' },
   { to: '/storybooks', icon: 'book', key: 'storybooks', color: '#D99A00' },
 ];
-const MOBILE_MAIN = ['home', 'color', 'arena', 'history'];
-const DESKTOP_MAIN = ['color', 'history', 'arena', 'missions', 'gacha'];
+// Thanh điều hướng chính (đúng thứ tự hiển thị): Bộ sưu tập, Cửa hàng, Bạn bè, Lịch sử. Các mục khác vào từ trang chủ / menu.
+const MAIN_NAV = ['collection', 'shop', 'friends', 'history'];
+const MOBILE_MAIN = MAIN_NAV;
+const DESKTOP_MAIN = MAIN_NAV;
+const navOf = (keys) => keys.map((k) => NAV.find((n) => n.key === k)).filter(Boolean);
 // Các sự kiện này đã có popup phần thưởng riêng → không hiện thêm toast.
 const POPUP_TYPES = new Set(['mission_complete', 'level_up', 'rank_up']);
 
@@ -89,7 +91,7 @@ export default function Layout() {
           </Link>
           {user && (
             <nav className="ml-3 hidden flex-1 items-center gap-1 lg:flex">
-              {NAV.filter((n) => DESKTOP_MAIN.includes(n.key)).map((n) => (
+              {navOf(DESKTOP_MAIN).map((n) => (
                 <NavLink
                   key={n.to}
                   to={n.to}
@@ -110,7 +112,6 @@ export default function Layout() {
             <LanguageSwitch />
             {user ? (
               <>
-                <RankBadge rank={user.rank} points={user.rankPoints} compact />
                 <Link to="/shop" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" title="Ruby" data-testid="ruby-chip">
                   <Icon name="ruby" size={18} /> {user.ruby}
                 </Link>
@@ -142,7 +143,7 @@ export default function Layout() {
 
       {user && (
         <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
-          {NAV.filter((n) => MOBILE_MAIN.includes(n.key)).map((n) => (
+          {navOf(MOBILE_MAIN).map((n) => (
             <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
               <Icon name={n.icon} />
               {t(`nav.${n.key}`)}
