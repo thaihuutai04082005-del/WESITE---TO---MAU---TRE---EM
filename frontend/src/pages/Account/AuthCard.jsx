@@ -3,7 +3,7 @@
 // Trang dài (đăng ký) giữ cỡ thật và cuộn bình thường khi thu phóng sẽ quá nhỏ.
 import { useLayoutEffect, useRef } from 'react';
 
-const MIN_SCALE = 0.72;
+const MIN_SCALE = 0.6;
 
 export default function AuthCard({ title, subtitle, children }) {
   const wrap = useRef(null);
@@ -16,7 +16,7 @@ export default function AuthCard({ title, subtitle, children }) {
     const fit = () => {
       w.style.zoom = '1';
       const header = document.querySelector('header')?.offsetHeight || 72;
-      const avail = window.innerHeight - header - 16;
+      const avail = window.innerHeight - header - 2 - 56;   // trừ 2px viền, rồi chừa đều ~28px trên và dưới
       const need = w.offsetHeight;
       const s = Math.min(1, avail / need);
       if (s >= MIN_SCALE) {
