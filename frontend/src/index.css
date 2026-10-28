@@ -1552,7 +1552,9 @@ h3,
 
 /* ===== Hội trường triển lãm (Hall): cảnh phòng tranh ===== */
 .hall-scene { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #FFE9A8; min-height: calc(100vh - 73px - 64px); }
-@media (min-width: 1024px) { .hall-scene { min-height: calc(100vh - 73px); } }
+@media (min-width: 1024px) { .hall-scene { height: calc(100vh - 73px); min-height: 0; } }
+.hall-zoom { flex: 0 0 auto; }
+.hall-scene .hall-floor-fill { flex: 1 1 auto; height: auto; min-height: 0; border-top: 0; box-shadow: none; }
 .hall-ceiling { position: relative; height: 44px; background: linear-gradient(#58BDFF, #3FAEF5); border-bottom: 8px solid #2D9BE6; }
 .hall-ceiling span { position: absolute; top: 12px; width: 78px; height: 20px; border-radius: 9999px; background: #FFF0C9; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35); }
 .hall-ceiling span:nth-child(1) { left: 8%; }

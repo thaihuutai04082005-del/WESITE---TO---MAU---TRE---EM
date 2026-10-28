@@ -1,5 +1,5 @@
-// Sảnh Hội trường triển lãm: lịch vòng tuần này, 4 phòng tranh, tranh được yêu thích nhất tuần trước, nội quy.
-import { useEffect, useRef, useState } from 'react';
+// Sảnh Hội trường triển lãm: cảnh phòng tranh phủ kín màn hình (máy tính tự thu phóng để thấy trọn phòng, không phải cuộn), 5 khung tranh được yêu thích nhất vòng vừa rồi, nội quy, lịch triển lãm.
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -114,11 +114,37 @@ function ScheduleMenu({ schedule }) {
   );
 }
 
+/** Máy tính: thu phóng cả cảnh (CSS zoom) cho vừa đúng chiều cao còn lại của màn hình, nên thấy trọn phòng mà không phải cuộn. */
+function useFitHall(ready) {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!ready || !el) return undefined;
+    const fit = () => {
+      if (window.innerWidth < 1024) {
+        el.style.zoom = '';
+        return;
+      }
+      el.style.zoom = '1';
+      const natural = el.offsetHeight;
+      const top = document.querySelector('header')?.offsetHeight || 73;
+      const avail = window.innerHeight - top;
+      const s = Math.min(1.3, Math.max(0.4, avail / natural));
+      el.style.zoom = String(s);
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, [ready]);
+  return ref;
+}
+
 export default function Hall() {
   const { t, i18n } = useTranslation();
   const user = useAuth((s) => s.user);
   const [d, setD] = useState(null);
   const [open, setOpen] = useState(null);
+  const zoomRef = useFitHall(!!d && !d.error);
 
   useEffect(() => {
     api.get('/exhibition').then(setD).catch(() => setD({ error: true }));
@@ -133,6 +159,7 @@ export default function Hall() {
   return (
     <div>
       <div className="hall-scene" data-testid="exhibit-hall">
+       <div ref={zoomRef} className="hall-zoom">
         {/* Trần xanh + đèn tròn */}
         <div className="hall-ceiling">
           <span /><span /><span /><span />
@@ -184,6 +211,9 @@ export default function Hall() {
 
         {/* Sàn gạch */}
         <div className="hall-floor" aria-hidden="true" />
+       </div>
+        {/* Phần sàn kéo dài xuống đáy khi màn hình cao hơn cảnh */}
+        <div className="hall-floor hall-floor-fill" aria-hidden="true" />
       </div>
 
       {open && <EntryModal entry={{ ...open, final: true }} picture={d.pictures[open.pictureId]} reactionsOpen={false} onClose={() => setOpen(null)} />}
