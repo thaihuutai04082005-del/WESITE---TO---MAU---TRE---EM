@@ -20,6 +20,7 @@ function Landing() {
   }, []);
   const features = ['creative', 'arena', 'gacha', 'together', 'storybook', 'safe'];
   return (
+    <div className="bg-[#CFEAFF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: "url(/home-bg.webp)" }}>
     <div className="page">
       <section className="grid items-center gap-6 py-6 md:grid-cols-2 md:py-12">
         <div>
@@ -50,6 +51,7 @@ function Landing() {
           </div>
         ))}
       </section>
+    </div>
     </div>
   );
 }
@@ -115,7 +117,7 @@ function Dashboard() {
   const rank = prog?.rank;
 
   return (
-    <div className="bg-gradient-to-b from-[#EEF7FF] via-[#F7FBFF] to-white">
+    <div className="bg-[#CFEAFF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: "url(/home-bg.webp)" }}>
       <div className="page max-w-7xl space-y-6">
         {/* Lời chào + linh vật */}
         <section className="relative flex items-center gap-3 pt-2 sm:gap-6">
