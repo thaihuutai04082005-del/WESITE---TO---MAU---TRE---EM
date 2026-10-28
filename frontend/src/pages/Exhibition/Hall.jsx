@@ -131,7 +131,7 @@ export default function Hall() {
   const slots = Array.from({ length: Math.max(FRAME_SLOTS, 0) }, (_, i) => d.winners[i] || null);
 
   return (
-    <div className="page">
+    <div>
       <div className="hall-scene" data-testid="exhibit-hall">
         {/* Trần xanh + đèn tròn */}
         <div className="hall-ceiling">
@@ -140,10 +140,10 @@ export default function Hall() {
 
         {/* Tường: thanh tiêu đề, thanh gỗ, đèn + khung tranh, hàng cột ruy băng */}
         <div className="hall-wall">
-          <ArchWindow className="absolute -left-2 top-28 hidden lg:block" />
-          <ArchWindow className="absolute -right-2 top-28 hidden scale-x-[-1] lg:block" />
+          <ArchWindow className="absolute left-0 top-32 hidden lg:block" />
+          <ArchWindow className="absolute right-0 top-32 hidden scale-x-[-1] lg:block" />
 
-          <header className="relative z-20 mx-auto flex max-w-[1180px] flex-wrap items-center gap-3 rounded-[28px] bg-white px-4 py-3 shadow-soft sm:gap-4 sm:px-6">
+          <header className="relative z-20 mx-auto flex max-w-[1180px] 2xl:max-w-[1500px] flex-wrap items-center gap-3 rounded-[28px] bg-white px-4 py-3 shadow-soft sm:gap-4 sm:px-6">
             <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] sm:h-16 sm:w-16">
               <Icon name="museum" size={34} strokeWidth={2.3} />
             </span>
@@ -164,7 +164,7 @@ export default function Hall() {
 
           <div className="hall-rail" />
 
-          <section className="mx-auto mt-1 max-w-[1180px] px-2 lg:px-24">
+          <section className="mx-auto my-auto w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 py-3 lg:px-24">
             <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
               {slots.map((w, i) => (
                 <HallFrame key={w ? w.id : `empty${i}`} entry={w} picture={w ? d.pictures[w.pictureId] : null} onOpen={() => setOpen(w)} lang={lang} />
@@ -175,11 +175,11 @@ export default function Hall() {
             </p>
           </section>
 
-          <div className="relative mx-auto mt-4 max-w-[1180px] px-2 lg:px-12">
+          <div className="relative mx-auto mt-4 w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 lg:px-12">
             <RopeLine />
-            <Plant className="absolute -left-1 bottom-0 hidden h-28 w-24 lg:block xl:-left-8 xl:h-36 xl:w-32" />
-            <Plant flip className="absolute -right-1 bottom-0 hidden h-28 w-24 lg:block xl:-right-8 xl:h-36 xl:w-32" />
           </div>
+          <Plant className="absolute bottom-0 left-2 hidden h-32 w-28 lg:block xl:h-44 xl:w-40" />
+          <Plant flip className="absolute bottom-0 right-2 hidden h-32 w-28 lg:block xl:h-44 xl:w-40" />
         </div>
 
         {/* Sàn gạch */}
