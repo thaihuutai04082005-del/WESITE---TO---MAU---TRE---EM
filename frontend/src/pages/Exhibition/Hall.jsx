@@ -5,52 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useAuth } from '../../store/auth';
 import { formatVnTime } from '../../lib/format';
-import { BOARDS } from '../../lib/exhibition';
 import { EntryModal, RulesButton } from '../../components/Exhibition';
 import { ArchWindow, HallFrame, Plant, RopeLine } from '../../components/HallScene';
 import Icon from '../../components/Icon';
-
-/** Màu thẻ phòng ở sảnh (pastel theo tông web): nền chuyển màu + màu nhấn cho chip & nút. */
-const ROOM_STYLE = {
-  S: { from: '#FFF6D6', to: '#FFE9A8', accent: '#E0A800', text: '#9A6A00' },
-  A: { from: '#EAF6FF', to: '#CFE8FF', accent: '#2B9BF4', text: '#1769B5' },
-  B: { from: '#FFEFE6', to: '#FFD9C7', accent: '#F07B4F', text: '#B8532C' },
-  free: { from: '#F3EFFF', to: '#E2D9FF', accent: '#7D5FFF', text: '#5B3FD6' },
-};
-
-/** Biểu tượng từng phòng: vương miện / kim cương / ngôi sao / bảng màu. */
-function RoomIcon({ board }) {
-  const ink = '#1B2A38';
-  return (
-    <svg viewBox="0 0 64 64" className="h-16 w-16" aria-hidden="true">
-      <g stroke={ink} strokeWidth="2.5" strokeLinejoin="round">
-        {board === 'S' && (
-          <>
-            <path d="M10 46 L8 20 L22 32 L32 12 L42 32 L56 20 L54 46 Z" fill="#FFD54F" />
-            <rect x="10" y="46" width="44" height="8" rx="3" fill="#FFC21A" />
-            <circle cx="32" cy="36" r="4.5" fill="#FF5F7E" strokeWidth="2" />
-          </>
-        )}
-        {board === 'A' && (
-          <>
-            <path d="M12 24 L22 12 H42 L52 24 L32 54 Z" fill="#7DC4FF" />
-            <path d="M12 24 H52 M22 12 L28 24 L32 54 M42 12 L36 24 L32 54 M28 24 L32 12 L36 24" fill="none" strokeWidth="2" />
-          </>
-        )}
-        {board === 'B' && <polygon points="32,8 39,24 56,25 43,37 47,54 32,45 17,54 21,37 8,25 25,24" fill="#FFC94D" />}
-        {board === 'free' && (
-          <>
-            <path d="M32 8C18 8 8 18 8 30c0 11 9 20 20 20 3 0 5-2 5-5 0-2-1-3-1-5 0-2 2-4 4-4h6c8 0 14-5 14-13C56 14 45 8 32 8z" fill="#FFF3D6" />
-            <circle cx="20" cy="28" r="4.5" fill="#FF5F7E" strokeWidth="2" />
-            <circle cx="26" cy="17" r="4.5" fill="#FFC94D" strokeWidth="2" />
-            <circle cx="39" cy="16" r="4.5" fill="#4FA3E0" strokeWidth="2" />
-            <circle cx="47" cy="26" r="4.5" fill="#4CD787" strokeWidth="2" />
-          </>
-        )}
-      </g>
-    </svg>
-  );
-}
 
 function IconBubble({ name, bg, color }) {
   return (
@@ -225,41 +182,8 @@ export default function Hall() {
           </div>
         </div>
 
-        {/* Sàn gạch: 4 phòng tranh */}
-        <div className="hall-floor">
-          <h2 className="mb-3 flex items-center justify-center gap-2 font-display text-xl font-extrabold text-white drop-shadow sm:text-2xl">
-            <Icon name="palette" size={24} /> {t('exhibition.rooms')}
-          </h2>
-          <div className="mx-auto grid max-w-[1000px] grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {BOARDS.map((b) => {
-              const st = ROOM_STYLE[b.key];
-              return (
-                <Link
-                  key={b.key}
-                  to={`/exhibition/${b.key}`}
-                  className="group rounded-[28px] p-2.5 shadow-pop transition hover:-translate-y-1"
-                  style={{ background: `linear-gradient(180deg, ${st.from}, ${st.to})` }}
-                  data-testid={`room-${b.key}`}
-                >
-                  <div className="flex h-full flex-col items-center gap-2 rounded-t-[80px] rounded-b-[20px] bg-white/60 px-3 pb-3 pt-5 text-center">
-                    <span className="transition group-hover:scale-110">
-                      <RoomIcon board={b.key} />
-                    </span>
-                    <span className="font-display text-lg font-extrabold leading-tight sm:text-xl">{t(`exhibition.boards.${b.key}`)}</span>
-                    <div className="mt-auto flex w-full items-center justify-center gap-2 pt-1">
-                      <span className="whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-xs font-bold shadow-soft sm:px-3 sm:text-sm" style={{ color: st.text }}>
-                        {t('exhibition.pictures', { count: d.counts[b.key] || 0 })}
-                      </span>
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white transition group-hover:translate-x-0.5 sm:h-8 sm:w-8" style={{ background: st.accent }}>
-                        <Icon name="arrow" size={18} strokeWidth={3} />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        {/* Sàn gạch */}
+        <div className="hall-floor" aria-hidden="true" />
       </div>
 
       {open && <EntryModal entry={{ ...open, final: true }} picture={d.pictures[open.pictureId]} reactionsOpen={false} onClose={() => setOpen(null)} />}
