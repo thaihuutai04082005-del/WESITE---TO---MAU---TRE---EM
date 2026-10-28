@@ -73,7 +73,7 @@ function HomeCard({ card, onInfo }) {
   const { Art } = card;
   return (
     <div
-      className="group relative grid min-h-44 grid-cols-[auto_minmax(0,1fr)] gap-3 overflow-hidden rounded-[28px] p-5 shadow-soft transition hover:-translate-y-1 hover:shadow-pop"
+      className="group relative grid min-h-44 grid-cols-[auto_minmax(0,1fr)] gap-3 overflow-hidden rounded-[28px] p-5 ring-[3px] ring-white/90 shadow-[0_16px_34px_-10px_rgba(30,90,160,0.5)] transition hover:-translate-y-1 hover:shadow-pop"
       style={{ background: card.bg }}
     >
       {/* Cả ô là 1 liên kết; nút "i" nằm trên cùng, tách riêng để không lồng nút trong liên kết. */}
@@ -127,7 +127,7 @@ function Dashboard() {
           <div className="relative h-28 w-24 shrink-0 sm:h-40 sm:w-36">
             <HelloBear className="h-full w-full" />
           </div>
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1" style={{ textShadow: "0 1px 10px rgba(255,255,255,0.95)" }}>
             <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" data-testid="home-hello">
               {t('home.hello', { name: user.nickname })}
             </h1>
@@ -152,7 +152,7 @@ function Dashboard() {
         <ModeGuide card={guide} onClose={() => setGuide(null)} />
 
         {/* Lối vào Hội trường triển lãm: nền xanh dương sáng + mây mờ góc phải + ngôi sao vàng */}
-        <Link to="/exhibition" className="group relative flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#2C66AE] via-[#3478BD] to-[#4F90CF] p-4 shadow-soft transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
+        <Link to="/exhibition" className="group relative flex items-center gap-4 overflow-hidden rounded-[28px] bg-gradient-to-r from-[#2C66AE] via-[#3478BD] to-[#4F90CF] p-4 ring-[3px] ring-white/90 shadow-[0_16px_34px_-10px_rgba(30,90,160,0.5)] transition hover:-translate-y-1 hover:shadow-pop sm:p-5" data-testid="home-exhibition">
           <svg viewBox="0 0 300 100" preserveAspectRatio="xMaxYMax slice" className="pointer-events-none absolute inset-y-0 right-0 h-full w-72 sm:w-96" aria-hidden="true">
             <path d="M40 100 Q60 62 110 70 Q130 34 180 44 Q215 18 255 36 Q300 30 300 60 L300 100 Z" fill="#FFFFFF" opacity="0.1" />
             <path d="M110 100 Q130 78 170 82 Q190 58 230 64 Q262 48 300 66 L300 100 Z" fill="#FFFFFF" opacity="0.12" />
