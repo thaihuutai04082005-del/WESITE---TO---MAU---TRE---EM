@@ -17,11 +17,11 @@ import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
 
 export const CUP_IMAGE = '/arena/cup-brushes.webp';
-const NAVIGATE_MS = 2250;   // chuyển sang trang Đấu trường (đang nằm dưới lớp phủ)
-const MIN_MS = 3100;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi
-const MAX_WAIT_MS = 8000;   // trần chờ trang đích tải xong
-const FADE_MS = 600;        // lớp phủ mờ dần
-const ENTER_MS = 1300;       // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
+const NAVIGATE_MS = 1500;   // chuyển sang trang Đấu trường (đang nằm dưới lớp phủ)
+const MIN_MS = 2050;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi
+const MAX_WAIT_MS = 6000;   // trần chờ trang đích tải xong
+const FADE_MS = 380;        // lớp phủ mờ dần
+const ENTER_MS = 900;       // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
 
 const isArena = (p) => p === '/arena' || p.startsWith('/arena/');
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -40,26 +40,26 @@ const fly = (o) => ({
   '--oy': (((CLUSTER.y + CLUSTER.h / 2 - (o.y + o.h / 2)) / CLUSTER.w) * 100).toFixed(1),
 });
 const DROPS = [
-  { src: '/arena/drop-bl.webp', o: { x: 510, y: 608, w: 110, h: 72 }, d: 1500, r: -14 },
-  { src: '/arena/drop-pr.webp', o: { x: 1102, y: 550, w: 112, h: 61 }, d: 1620, r: 12 },
-  { src: '/arena/drop-yl.webp', o: { x: 424, y: 536, w: 128, h: 64 }, d: 1740, r: -10 },
-  { src: '/arena/drop-yr.webp', o: { x: 1046, y: 610, w: 99, h: 74 }, d: 1860, r: 10 },
+  { src: '/arena/drop-bl.webp', o: { x: 510, y: 608, w: 110, h: 72 }, d: 1000, r: -14 },
+  { src: '/arena/drop-pr.webp', o: { x: 1102, y: 550, w: 112, h: 61 }, d: 1080, r: 12 },
+  { src: '/arena/drop-yl.webp', o: { x: 424, y: 536, w: 128, h: 64 }, d: 1160, r: -10 },
+  { src: '/arena/drop-yr.webp', o: { x: 1046, y: 610, w: 99, h: 74 }, d: 1240, r: 10 },
 ];
 const BURST = { x: 735, y: 191, w: 200, h: 103 };
 // Ngôi sao: (cx, cy) là tâm trong ảnh gốc, w là bề rộng, d là độ trễ xuất hiện (ms). `near` = ngôi sao sát chiếc cúp, đặt theo cụm cúp (đi cùng cụm khi co giãn).
 const STARS = [
-  { cx: 172.2, cy: 267.8, w: 61, src: '/arena/star-a.webp', d: 570 },
-  { cx: 1474.0, cy: 115.5, w: 85, src: '/arena/star-b.webp', d: 780 },
-  { cx: 503.7, cy: 437.6, w: 84, src: '/arena/star-a.webp', d: 960, near: true },
-  { cx: 1166.9, cy: 409.3, w: 52, src: '/arena/star-b.webp', d: 1050, near: true },
-  { cx: 1239.8, cy: 484.8, w: 92, src: '/arena/star-a.webp', d: 1230, near: true },
-  { cx: 1498.4, cy: 603.5, w: 54, src: '/arena/star-b.webp', d: 1410 },
-  { cx: 247.9, cy: 697.8, w: 57, src: '/arena/star-a.webp', d: 1530 },
+  { cx: 172.2, cy: 267.8, w: 61, src: '/arena/star-a.webp', d: 380 },
+  { cx: 1474.0, cy: 115.5, w: 85, src: '/arena/star-b.webp', d: 520 },
+  { cx: 503.7, cy: 437.6, w: 84, src: '/arena/star-a.webp', d: 640, near: true },
+  { cx: 1166.9, cy: 409.3, w: 52, src: '/arena/star-b.webp', d: 700, near: true },
+  { cx: 1239.8, cy: 484.8, w: 92, src: '/arena/star-a.webp', d: 820, near: true },
+  { cx: 1498.4, cy: 603.5, w: 54, src: '/arena/star-b.webp', d: 940 },
+  { cx: 247.9, cy: 697.8, w: 57, src: '/arena/star-a.webp', d: 1020 },
 ];
 const WAVES = [
-  { cls: 'at-wave-tl', src: '/arena/wave-tl.webp', w: 400, delay: 480 },
-  { cls: 'at-wave-br', src: '/arena/wave-br.webp', w: 436, delay: 540 },
-  { cls: 'at-wave-bl', src: '/arena/wave-bl.webp', w: 414, delay: 600 },
+  { cls: 'at-wave-tl', src: '/arena/wave-tl.webp', w: 400, delay: 320 },
+  { cls: 'at-wave-br', src: '/arena/wave-br.webp', w: 436, delay: 360 },
+  { cls: 'at-wave-bl', src: '/arena/wave-bl.webp', w: 414, delay: 400 },
 ];
 
 function Overlay({ lite, leaving }) {
