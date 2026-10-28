@@ -4,10 +4,10 @@
 // Cách chạy (giống ArenaTransition):
 //  1. Bé bấm vào liên kết /gacha (thẻ trên trang chủ hoặc nút trên thanh menu) → chặn điều hướng, thu thẻ nhẹ về 96%,
 //     dựng lớp phủ toàn màn hình (position: fixed) và phát tiếng ting.
-//  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `gt-`). Toàn bộ cảnh dài 2,8 giây:
-//       0,0–0,4  hộp xuất hiện từ dưới lên, nảy nhẹ      | 0,4–0,8  hộp rung 2 nhịp rồi nén xuống
-//       0,8–1,2  nắp bật mở, ánh sáng + hạt màu bung ra  | 1,2–1,9  ba thẻ bay lên lần lượt (hồng → xanh → vàng)
-//       1,9–2,5  sơn màu và ngôi sao bung ra, nơ nảy     | 2,5–2,8  mọi thứ giảm tốc rồi đứng yên (khung hình cuối)
+//  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `gt-`). Toàn bộ cảnh dài 2,5 giây:
+//       0,00–0,38  hộp quà ĐÓNG kín trồi lên từ dưới, nảy nhẹ   | 0,38–0,80  hộp rung 2 nhịp rồi nén xuống
+//       0,80–1,70  nắp bật mở và NỔ RA CÙNG LÚC: ba thẻ, giọt sơn, ngôi sao, hạt màu, ánh sáng
+//       1,70–2,50  nơ nảy, thẻ vàng nhún, mọi thứ giảm tốc rồi đứng yên (khung hình cuối)
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Bóc thẻ NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
@@ -19,12 +19,12 @@ import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
 
-const NAVIGATE_MS = 2400;   // chuyển sang trang Bóc thẻ (đang nằm dưới lớp phủ)
-const MIN_MS = 3200;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi (2,8 giây cảnh + giữ khung cuối)
+const NAVIGATE_MS = 2100;   // chuyển sang trang Bóc thẻ (đang nằm dưới lớp phủ)
+const MIN_MS = 2700;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi (2,5 giây cảnh + giữ khung cuối)
 const MAX_WAIT_MS = 8000;   // trần chờ trang đích tải xong
 const FADE_MS = 450;        // lớp phủ mờ dần
 const ENTER_MS = 1000;      // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
-const DING_MS = 1450;       // tiếng ting thứ hai khi thẻ vàng xuất hiện
+const DING_MS = 830;        // tiếng ting thứ hai lúc nắp bật mở và ba thẻ nổ ra
 
 const isGacha = (p) => p === '/gacha' || p.startsWith('/gacha/');
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -46,50 +46,50 @@ const BOX = { x: 520, y: 470, w: 630, h: 380 };
 // (tx, ty) = độ dịch (pixel ảnh gốc) từ vị trí cuối về chỗ ẩn sau hộp, s0 = tỷ lệ lúc mới bay lên.
 const CARDS = [
   {
-    id: 'pink', rect: { x: 472, y: 247, w: 266, h: 320 }, pivot: { x: 608, y: 432 }, rot: -15, d: 1200, dur: 640, tx: 229, ty: 222, s0: 0.72, over: { x: -12, y: -16 },
+    id: 'pink', rect: { x: 472, y: 247, w: 266, h: 320 }, pivot: { x: 608, y: 432 }, rot: -15, d: 800, dur: 720, tx: 229, ty: 296, s0: 0.66, over: { x: -12, y: -16 },
     frame: '#FC6F9B', line: '#7D050F', sym: { src: '/gacha/sym-pink.webp', x: 64, y: 72, w: 128, h: 181 },
   },
   {
-    id: 'blue', rect: { x: 931, y: 247, w: 266, h: 320 }, pivot: { x: 1062, y: 432 }, rot: 15, d: 1300, dur: 640, tx: -229, ty: 222, s0: 0.72, over: { x: 12, y: -16 },
+    id: 'blue', rect: { x: 931, y: 247, w: 266, h: 320 }, pivot: { x: 1062, y: 432 }, rot: 15, d: 840, dur: 720, tx: -229, ty: 296, s0: 0.66, over: { x: 12, y: -16 },
     frame: '#40B6FF', line: '#012586', rim: '#0791F4', sym: { src: '/gacha/sym-blue.webp', x: 75, y: 77, w: 125, h: 176 },
   },
   {
-    id: 'gold', rect: { x: 702, y: 166, w: 272, h: 400 }, pivot: { x: 835, y: 366 }, rot: 0, d: 1400, dur: 560, tx: -3, ty: 283, s0: 0.62, over: { x: 0, y: -34 },
+    id: 'gold', rect: { x: 702, y: 166, w: 272, h: 400 }, pivot: { x: 835, y: 366 }, rot: 0, d: 880, dur: 720, tx: -3, ty: 346, s0: 0.55, over: { x: 0, y: -34 },
     frame: '#FFD53F', line: '#6F2904', sym: { src: '/gacha/sym-star.webp', x: 42, y: 97, w: 184, h: 176 },
   },
 ];
 
 // Giọt sơn: o = ô chứa trong ảnh gốc, d = độ trễ (ms), r = góc xoay lúc bay.
 const DROPS = [
-  { src: '/gacha/dl2.webp', o: { x: 312, y: 314, w: 128, h: 114 }, d: 1880, r: -16 },
-  { src: '/gacha/dr2.webp', o: { x: 1195, y: 404, w: 127, h: 104 }, d: 1905, r: 14 },
-  { src: '/gacha/dl1.webp', o: { x: 470, y: 165, w: 75, h: 85 }, d: 1930, r: -12 },
-  { src: '/gacha/dr1.webp', o: { x: 1155, y: 195, w: 73, h: 71 }, d: 1955, r: 12 },
-  { src: '/gacha/dl3.webp', o: { x: 340, y: 446, w: 142, h: 94 }, d: 1980, r: -10 },
-  { src: '/gacha/dr3.webp', o: { x: 1152, y: 520, w: 154, h: 100 }, d: 2005, r: 10 },
-  { src: '/gacha/dl4.webp', o: { x: 415, y: 563, w: 95, h: 67 }, d: 2030, r: -8 },
-  { src: '/gacha/dr4.webp', o: { x: 1118, y: 646, w: 100, h: 74 }, d: 2055, r: 8 },
+  { src: '/gacha/dl2.webp', o: { x: 312, y: 314, w: 128, h: 114 }, d: 830, r: -16 },
+  { src: '/gacha/dr2.webp', o: { x: 1195, y: 404, w: 127, h: 104 }, d: 848, r: 14 },
+  { src: '/gacha/dl1.webp', o: { x: 470, y: 165, w: 75, h: 85 }, d: 866, r: -12 },
+  { src: '/gacha/dr1.webp', o: { x: 1155, y: 195, w: 73, h: 71 }, d: 884, r: 12 },
+  { src: '/gacha/dl3.webp', o: { x: 340, y: 446, w: 142, h: 94 }, d: 902, r: -10 },
+  { src: '/gacha/dr3.webp', o: { x: 1152, y: 520, w: 154, h: 100 }, d: 920, r: 10 },
+  { src: '/gacha/dl4.webp', o: { x: 415, y: 563, w: 95, h: 67 }, d: 938, r: -8 },
+  { src: '/gacha/dr4.webp', o: { x: 1118, y: 646, w: 100, h: 74 }, d: 956, r: 8 },
 ];
 // Ngôi sao: (x, y, w, h) là ô chứa trong ảnh gốc. `near` = nằm trong cụm trung tâm (đi cùng cụm khi co giãn); còn lại đặt theo màn hình.
 const STARS = [
-  { src: '/gacha/s3.webp', o: { x: 473, y: 656, w: 89, h: 86 }, d: 520, near: true, early: true },
-  { src: '/gacha/s5.webp', o: { x: 1312, y: 306, w: 80, h: 82 }, d: 600, near: true, early: true },
-  { src: '/gacha/s1.webp', o: { x: 182, y: 195, w: 94, h: 89 }, d: 1950 },
-  { src: '/gacha/s4.webp', o: { x: 1430, y: 68, w: 92, h: 90 }, d: 1990 },
-  { src: '/gacha/s2.webp', o: { x: 205, y: 578, w: 86, h: 82 }, d: 2030 },
-  { src: '/gacha/s6.webp', o: { x: 1454, y: 589, w: 86, h: 83 }, d: 2070 },
+  { src: '/gacha/s3.webp', o: { x: 473, y: 656, w: 89, h: 86 }, d: 860, near: true, r: 18 },
+  { src: '/gacha/s5.webp', o: { x: 1312, y: 306, w: 80, h: 82 }, d: 890, near: true, r: -18 },
+  { src: '/gacha/s1.webp', o: { x: 182, y: 195, w: 94, h: 89 }, d: 845 },
+  { src: '/gacha/s4.webp', o: { x: 1430, y: 68, w: 92, h: 90 }, d: 910 },
+  { src: '/gacha/s2.webp', o: { x: 205, y: 578, w: 86, h: 82 }, d: 940 },
+  { src: '/gacha/s6.webp', o: { x: 1454, y: 589, w: 86, h: 83 }, d: 970 },
 ];
 // Ngôi sao nhỏ và hạt màu bay lên theo vòng cung lúc nắp bật mở (dx, dy theo pixel ảnh gốc, tính từ miệng hộp).
 const SPARKS = [
-  { type: 'star', src: '/gacha/s3.webp', w: 46, dx: -250, dy: -250, d: 830 },
-  { type: 'star', src: '/gacha/s5.webp', w: 42, dx: 270, dy: -270, d: 860 },
-  { type: 'star', src: '/gacha/s2.webp', w: 36, dx: -60, dy: -330, d: 900 },
-  { type: 'dot', c: '#FF6F9B', w: 22, dx: -330, dy: -120, d: 820 },
+  { type: 'star', src: '/gacha/s3.webp', w: 46, dx: -250, dy: -250, d: 810 },
+  { type: 'star', src: '/gacha/s5.webp', w: 42, dx: 270, dy: -270, d: 825 },
+  { type: 'star', src: '/gacha/s2.webp', w: 36, dx: -60, dy: -330, d: 815 },
+  { type: 'dot', c: '#FF6F9B', w: 22, dx: -330, dy: -120, d: 805 },
   { type: 'dot', c: '#40B6FF', w: 24, dx: 340, dy: -140, d: 840 },
-  { type: 'dot', c: '#FFD53F', w: 20, dx: 130, dy: -330, d: 870 },
+  { type: 'dot', c: '#FFD53F', w: 20, dx: 130, dy: -330, d: 830 },
   { type: 'dot', c: '#FFD53F', w: 18, dx: -170, dy: -310, d: 880 },
-  { type: 'dot', c: '#FF6F9B', w: 18, dx: 220, dy: -230, d: 900 },
-  { type: 'dot', c: '#40B6FF', w: 18, dx: -290, dy: -30, d: 920 },
+  { type: 'dot', c: '#FF6F9B', w: 18, dx: 220, dy: -230, d: 860 },
+  { type: 'dot', c: '#40B6FF', w: 18, dx: -290, dy: -30, d: 875 },
 ];
 const WAVES = [
   { cls: 'gt-wave-tl', src: '/gacha/wtl.webp', w: 410, delay: 120 },
@@ -150,7 +150,14 @@ function Overlay({ lite, leaving }) {
           <span className="gt-floor" />
           {!lite &&
             near.map((s, i) => (
-              <img key={i} className="gt-star gt-star-near" src={s.src} alt="" draggable="false" style={{ ...rel(s.o), '--d': `${s.d}ms` }} />
+              <img
+                key={i}
+                className="gt-star-near"
+                src={s.src}
+                alt=""
+                draggable="false"
+                style={{ ...rel(s.o), '--ox': cq(MOUTH.x - (s.o.x + s.o.w / 2)), '--oy': cq(MOUTH.y - (s.o.y + s.o.h / 2)), '--r': `${s.r}deg`, '--d': `${s.d}ms` }}
+              />
             ))}
           {drops.map((p, i) => (
             <img
@@ -192,6 +199,12 @@ function Overlay({ lite, leaving }) {
                 </div>
               </div>
             ))}
+            <svg className="gt-closed" style={boxStyle} viewBox="0 0 630 380" preserveAspectRatio="none">
+              <rect x="98" y="142" width="434" height="226" rx="20" fill="#977EFC" stroke="#32207A" strokeWidth="7" />
+              <rect x="101" y="190" width="428" height="26" fill="#7C62EC" />
+              <rect x="84" y="126" width="462" height="72" rx="20" fill="#A992FF" stroke="#32207A" strokeWidth="7" />
+              <path d="M 104 142 L 250 142" fill="none" stroke="#fff" strokeOpacity="0.4" strokeWidth="6" strokeLinecap="round" />
+            </svg>
             <img className="gt-body" src="/gacha/body.webp" alt="" draggable="false" style={boxStyle} />
             <img className="gt-flap gt-flap-l" src="/gacha/flap-l.webp" alt="" draggable="false" style={boxStyle} />
             <img className="gt-flap gt-flap-r" src="/gacha/flap-r.webp" alt="" draggable="false" style={boxStyle} />
