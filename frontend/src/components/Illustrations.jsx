@@ -11,25 +11,11 @@ function Crayon({ x, y, rot, color, scale = 1 }) {
   );
 }
 
-/** Tô màu: tờ giấy có bông hoa đang tô dở + 1 cây bút sáp + mèo ngồi bên cạnh — bố cục gọn, không đè chéo. */
+/** Tô màu: bảng màu có 5 viên màu + cây cọ xanh (hình tách từ ảnh gốc, /public/mascots/tomau.webp). */
 export function ColorArt() {
-  const petal = (k) => {
-    const a = ((k * 72 - 90) * Math.PI) / 180;
-    return { cx: 60 + 15 * Math.cos(a), cy: 70 + 15 * Math.sin(a) };
-  };
   return (
     <svg viewBox="0 0 200 150" className="h-full w-full" aria-hidden="true">
-      <g transform="rotate(-4 62 88)" stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <rect x="12" y="34" width="100" height="104" rx="8" fill="#FFFFFF" />
-        <path d="M60 84 V124" fill="none" stroke="#4CAF50" strokeWidth="3.5" strokeLinecap="round" />
-        <path d="M60 108 Q76 98 84 104 Q74 116 60 112 Z" fill="#8BD17C" strokeWidth="2" />
-        {[0, 1, 2, 3, 4].map((k) => (
-          <circle key={k} {...petal(k)} r="11" fill={k < 3 ? '#FF9EC0' : '#FFFFFF'} strokeWidth="2" />
-        ))}
-        <circle cx="60" cy="70" r="8" fill="#FFD54F" strokeWidth="2" />
-      </g>
-      <Crayon x={18} y={134} rot={-4} color="#FF7AA2" />
-      <image href="/mascots/meo.svg" x="102" y="18" width="96" height="124" preserveAspectRatio="xMidYMax meet" />
+      <image href="/mascots/tomau.webp" x="4" y="2" width="192" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
