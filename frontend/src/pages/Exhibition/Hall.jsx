@@ -179,6 +179,12 @@ export default function Hall() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Báo cho hiệu ứng mở rèm (ExhibitTransition) biết hội trường đã dựng xong (có dữ liệu sảnh + trang tranh đầu).
+  const ready = !!d && (d.error || !!pages[0]);
+  useEffect(() => {
+    if (ready) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [ready]);
+
   if (!d) return <div className="page text-center text-muted">{t('common.loading')}</div>;
   if (d.error) return <div className="page text-center text-muted">{t('errors.server_error')}</div>;
 
