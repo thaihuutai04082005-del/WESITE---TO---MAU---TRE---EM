@@ -210,6 +210,10 @@
     "homeHint": "See friends’ pictures, send hearts and show off yours every week!",
     "submitCta": "Send a picture",
     "rooms": "Rooms",
+    "comingSoon": "Coming soon",
+    "reactSchedule": "Reaction schedule",
+    "gateTime": "Gate times",
+    "scheduleBtn": "Exhibition schedule",
     "pictures": "{{count}} pictures",
     "boards": {
       "S": "Legend room (S)",

@@ -210,6 +210,10 @@
     "homeHint": "Xem tranh của các bạn, thả tim và khoe tranh của bé mỗi tuần!",
     "submitCta": "Gửi tranh triển lãm",
     "rooms": "Các phòng tranh",
+    "comingSoon": "Sắp ra mắt",
+    "reactSchedule": "Lịch thả cảm xúc",
+    "gateTime": "Thời gian mở cổng",
+    "scheduleBtn": "Lịch triển lãm",
     "pictures": "{{count}} bức tranh",
     "boards": {
       "S": "Phòng Huyền thoại (S)",
