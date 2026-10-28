@@ -8,7 +8,9 @@
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Đấu trường NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
-// Đổi ảnh chiếc cúp: thay file /public/arena/cup-brushes.webp (PNG/WebP nền trong suốt, cùng tỷ lệ càng tốt).
+// Hình minh hoạ nằm trong /public/arena/: cup-brushes.webp (cúp + hai cây cọ), burst.webp (vạch sáng trên đỉnh cúp), drop-*.webp (giọt sơn),
+// star-*.webp (ngôi sao), wave-*.webp (đường cong ở góc). Đổi hình: thay file cùng tên (WebP/PNG nền trong suốt, cùng tỷ lệ) — vị trí/kích thước
+// tương ứng nằm ở các hằng số CLUSTER, DROPS, BURST, STARS, WAVES bên dưới (toạ độ pixel trong ảnh gốc 1672×941).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
@@ -25,26 +27,46 @@ const isArena = (p) => p === '/arena' || p.startsWith('/arena/');
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwareConcurrency || 8) <= 2 || (navigator.deviceMemory || 8) <= 2);
 
-// Ngôi sao (x, y theo % khung hình, kích thước px, độ trễ ms).
-const STARS = [
-  { x: 9, y: 28, s: 30, d: 380 }, { x: 88, y: 12, s: 34, d: 520 }, { x: 18, y: 78, s: 24, d: 700 },
-  { x: 91, y: 70, s: 28, d: 640 }, { x: 36, y: 14, s: 22, d: 460 }, { x: 66, y: 8, s: 20, d: 800 },
-  { x: 29, y: 52, s: 26, d: 1000 }, { x: 72, y: 50, s: 26, d: 1060 }, { x: 55, y: 22, s: 18, d: 1120 },
-  { x: 47, y: 86, s: 18, d: 900 },
-];
-// Giọt sơn: dx/dy = nơi dừng so với tâm (đơn vị %-chiều rộng cụm), c = màu.
+// ---- Hình minh hoạ: tách từ ảnh gốc 1672×941 (cúp + cọ, vạch sáng, giọt sơn, ngôi sao, đường cong góc) ----
+// Toạ độ là pixel trong ảnh gốc; cụm trung tâm (cúp + hai cây cọ) là mốc để đặt vạch sáng và giọt sơn theo phần trăm.
+const ART_W = 1672;
+const ART_H = 941;
+const CLUSTER = { x: 496, y: 196, w: 679, h: 554 };
+const pct = (v, total) => `${((v / total) * 100).toFixed(2)}%`;
+const rel = (o) => ({ left: pct(o.x - CLUSTER.x, CLUSTER.w), top: pct(o.y - CLUSTER.y, CLUSTER.h), width: pct(o.w, CLUSTER.w) });
+// (ox, oy) = độ lệch từ giữa cụm tới giọt, đơn vị cqw: giọt bay ra từ sau chiếc cúp tới đúng vị trí gốc.
+const fly = (o) => ({
+  '--ox': (((CLUSTER.x + CLUSTER.w / 2 - (o.x + o.w / 2)) / CLUSTER.w) * 100).toFixed(1),
+  '--oy': (((CLUSTER.y + CLUSTER.h / 2 - (o.y + o.h / 2)) / CLUSTER.w) * 100).toFixed(1),
+});
 const DROPS = [
-  { dx: -46, dy: 24, c: '#3DA9FC', r: -30, d: 1000 }, { dx: 44, dy: 18, c: '#3DA9FC', r: 25, d: 1050 },
-  { dx: -30, dy: 44, c: '#FF6FB5', r: -60, d: 1150 }, { dx: 36, dy: 40, c: '#FF6FB5', r: 50, d: 1200 },
-  { dx: -50, dy: -8, c: '#FFD93B', r: -80, d: 1100 }, { dx: 48, dy: -12, c: '#FFD93B', r: 70, d: 1250 },
-  { dx: -22, dy: -36, c: '#A06CFF', r: -20, d: 1300 }, { dx: 26, dy: -34, c: '#A06CFF', r: 20, d: 1350 },
+  { src: '/arena/drop-bl.webp', o: { x: 510, y: 608, w: 110, h: 72 }, d: 1000, r: -14 },
+  { src: '/arena/drop-pr.webp', o: { x: 1102, y: 550, w: 112, h: 61 }, d: 1080, r: 12 },
+  { src: '/arena/drop-yl.webp', o: { x: 424, y: 536, w: 128, h: 64 }, d: 1160, r: -10 },
+  { src: '/arena/drop-yr.webp', o: { x: 1046, y: 610, w: 99, h: 74 }, d: 1240, r: 10 },
 ];
-const DROP_PATH = 'M12 1 C12 1 3 12 3 18 a9 9 0 0 0 18 0 C21 12 12 1 12 1 Z';
-const STAR_PATH = 'M12 0 L14.6 9.4 L24 12 L14.6 14.6 L12 24 L9.4 14.6 L0 12 L9.4 9.4 Z';
+const BURST = { x: 735, y: 191, w: 200, h: 103 };
+// Ngôi sao: (cx, cy) là tâm trong ảnh gốc, w là bề rộng, d là độ trễ xuất hiện (ms). `near` = ngôi sao sát chiếc cúp, đặt theo cụm cúp (đi cùng cụm khi co giãn).
+const STARS = [
+  { cx: 172.2, cy: 267.8, w: 61, src: '/arena/star-a.webp', d: 380 },
+  { cx: 1474.0, cy: 115.5, w: 85, src: '/arena/star-b.webp', d: 520 },
+  { cx: 503.7, cy: 437.6, w: 84, src: '/arena/star-a.webp', d: 640, near: true },
+  { cx: 1166.9, cy: 409.3, w: 52, src: '/arena/star-b.webp', d: 700, near: true },
+  { cx: 1239.8, cy: 484.8, w: 92, src: '/arena/star-a.webp', d: 820, near: true },
+  { cx: 1498.4, cy: 603.5, w: 54, src: '/arena/star-b.webp', d: 940 },
+  { cx: 247.9, cy: 697.8, w: 57, src: '/arena/star-a.webp', d: 1020 },
+];
+const WAVES = [
+  { cls: 'at-wave-tl', src: '/arena/wave-tl.webp', w: 400, delay: 320 },
+  { cls: 'at-wave-br', src: '/arena/wave-br.webp', w: 436, delay: 360 },
+  { cls: 'at-wave-bl', src: '/arena/wave-bl.webp', w: 414, delay: 400 },
+];
 
 function Overlay({ lite, leaving }) {
-  const stars = lite ? STARS.slice(0, 5) : STARS;
-  const drops = lite ? DROPS.slice(0, 4) : DROPS;
+  const far = STARS.filter((x) => !x.near);
+  const near = STARS.filter((x) => x.near);
+  const stars = lite ? far.slice(0, 3) : far;
+  const drops = lite ? DROPS.slice(0, 2) : DROPS;
   return (
     <div className={`at-root${lite ? ' at-lite' : ''}${leaving ? ' at-leaving' : ''}`} data-testid="arena-transition" aria-hidden="true">
       <div className="at-bg" />
@@ -53,37 +75,42 @@ function Overlay({ lite, leaving }) {
         <span className="at-ring at-ring-2" />
         <span className="at-ring at-ring-1" />
       </div>
-      <svg className="at-wave at-wave-tl" viewBox="0 0 400 260" preserveAspectRatio="none">
-        <path d="M0 0 H400 C330 40 300 110 220 150 C140 190 60 190 0 230 Z" fill="#FDAA6A" />
-        <path d="M400 0 C330 40 300 110 220 150 C140 190 60 190 0 230" fill="none" stroke="#FFE9A8" strokeWidth="5" strokeLinecap="round" />
-      </svg>
-      <svg className="at-wave at-wave-br" viewBox="0 0 400 260" preserveAspectRatio="none">
-        <path d="M400 260 H0 C70 220 100 150 180 110 C260 70 340 70 400 30 Z" fill="#FDAA6A" />
-        <path d="M0 260 C70 220 100 150 180 110 C260 70 340 70 400 30" fill="none" stroke="#FFE9A8" strokeWidth="5" strokeLinecap="round" />
-      </svg>
-      <svg className="at-wave at-wave-bl" viewBox="0 0 300 200" preserveAspectRatio="none">
-        <path d="M0 200 V60 C60 70 90 120 150 150 C200 175 250 175 300 200 Z" fill="#FDB982" />
-        <path d="M0 60 C60 70 90 120 150 150 C200 175 250 175 300 200" fill="none" stroke="#FFE9A8" strokeWidth="4" strokeLinecap="round" />
-      </svg>
+      {WAVES.map((w) => (
+        <img key={w.cls} className={`at-wave ${w.cls}`} src={w.src} alt="" draggable="false" style={{ '--w': `${((w.w / ART_W) * 100).toFixed(2)}vw`, animationDelay: `${w.delay}ms` }} />
+      ))}
       {stars.map((s, i) => (
-        <svg key={i} className="at-star" viewBox="0 0 24 24" style={{ left: `${s.x}%`, top: `${s.y}%`, width: Math.round(s.s * 1.4), height: Math.round(s.s * 1.4), '--d': `${s.d}ms`, '--tw': `${(i % 4) * 300}ms` }}>
-          <path d={STAR_PATH} fill={i % 3 === 1 ? '#FFE27A' : '#FFD13B'} />
-        </svg>
+        <img
+          key={i}
+          className="at-star"
+          src={s.src}
+          alt=""
+          draggable="false"
+          style={{ left: pct(s.cx, ART_W), top: pct(s.cy, ART_H), '--sw': `${((s.w / ART_W) * 100 * 1.08).toFixed(2)}vw`, '--d': `${s.d}ms`, '--tw': `${(i % 4) * 300}ms` }}
+        />
       ))}
       <div className="at-stage">
         <div className="at-cluster">
           <span className="at-glow" />
+          {!lite &&
+            near.map((s, i) => (
+              <img
+                key={i}
+                className="at-star at-star-near"
+                src={s.src}
+                alt=""
+                draggable="false"
+                style={{ ...rel({ x: s.cx - s.w / 2, y: s.cy - s.w / 2, w: s.w * 1.08 }), '--d': `${s.d}ms`, '--tw': `${(i % 4) * 300}ms` }}
+              />
+            ))}
           {drops.map((p, i) => (
-            <svg key={i} className="at-drop" viewBox="0 0 24 24" style={{ '--dx': `${p.dx}%`, '--dy': `${p.dy}%`, '--r': `${p.r}deg`, '--d': `${p.d}ms` }}>
-              <path d={DROP_PATH} fill={p.c} />
-              <ellipse cx="9" cy="16" rx="2" ry="3" fill="#FFFFFF" opacity="0.55" transform="rotate(20 9 16)" />
-            </svg>
+            <img key={i} className="at-drop" src={p.src} alt="" draggable="false" style={{ ...rel(p.o), ...fly(p.o), '--r': `${p.r}deg`, '--d': `${p.d}ms` }} />
           ))}
           <div className="at-float">
             <div className="at-pop">
               <img className="at-cup" src={CUP_IMAGE} alt="" draggable="false" />
               <span className="at-shine" style={{ WebkitMaskImage: `url(${CUP_IMAGE})`, maskImage: `url(${CUP_IMAGE})` }} />
             </div>
+            <img className="at-burst" src="/arena/burst.webp" alt="" draggable="false" style={rel(BURST)} />
           </div>
           <span className="at-shadow" />
         </div>
