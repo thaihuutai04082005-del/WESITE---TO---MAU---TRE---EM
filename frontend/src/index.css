@@ -1476,57 +1476,92 @@ h3,
 }
 .gt-lite .gt-glow, .gt-lite .gt-ring-2 { display: none; }
 
-/* ===== Chuyển màn hình Truyện tranh (StoryTransition): sách đóng → tự mở → gấu bật lên → hai khung truyện nảy ra (3 giây) ===== */
-.sb-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 350ms ease-in-out; }
-.sb-root.sb-leaving { opacity: 0; pointer-events: none; }
-.sb-bg { position: absolute; inset: 0; opacity: 0; background: #FDEC99 url(/story3/bg.webp) center / cover no-repeat; animation: sb-fade 200ms ease-out both; }
-/* Khung 1672×941: rộng vừa phủ màn hình trên máy tính, trên điện thoại thì to hơn bề ngang để chủ thể vừa màn. */
-.sb-frame { position: absolute; left: 50%; top: 50%; width: min(140vw, 177.7vh); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); container-type: inline-size; }
-.sb-frame img { position: absolute; height: auto; user-select: none; pointer-events: none; }
-.sb-floor { position: absolute; left: 17%; top: 82.3%; width: 66%; height: 4.4%; border-radius: 9999px; background: rgba(253, 220, 110, 0.55); opacity: 0; animation: sb-fade 300ms ease-out 100ms both; }
-.sb-closed { transform-origin: 50% 80%; opacity: 0; animation: sb-rise 400ms cubic-bezier(0.2, 0.8, 0.3, 1) 0ms both, sb-shut 340ms ease-in 540ms forwards; }
-.sb-open { position: absolute; inset: 0; opacity: 0; transform-origin: 50% 75%; animation: sb-unfold 560ms cubic-bezier(0.2, 0.85, 0.3, 1.05) 640ms both; }
-.sb-book { }
-.sb-bearmask { position: absolute; inset: 0; -webkit-mask: url(/story3/cmask.webp) center / 100% 100% no-repeat; mask: url(/story3/cmask.webp) center / 100% 100% no-repeat; }
-.sb-bear { transform-origin: 50% 100%; opacity: 0; animation: sb-bear 620ms cubic-bezier(0.2, 0.8, 0.3, 1) 1200ms both, sb-nhun 360ms ease-in-out 2450ms; }
-.sb-pop { opacity: 0; }
-.sb-pop-l { animation: sb-pop-l 560ms cubic-bezier(0.2, 0.9, 0.3, 1.1) 1800ms both; }
-.sb-pop-r { animation: sb-pop-r 560ms cubic-bezier(0.2, 0.9, 0.3, 1.1) 1900ms both; }
-
-@keyframes sb-fade { to { opacity: 1; } }
-@keyframes sb-rise {
-  0% { opacity: 0; transform: translateY(42cqw) scale(0.9); }
-  35% { opacity: 1; }
-  68% { opacity: 1; transform: translateY(-2.2cqw) scale(1.02); }
-  86% { transform: translateY(0.5cqw) scale(0.995); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+/* ===== Chuyển màn hình Truyện tranh (StoryTransition): sách mở sẵn nhún → giọt màu, sao bung ra → hai bong bóng thoại bật lên (3 giây) ===== */
+.sb-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; background: linear-gradient(#FDEFA8, #FCE58C); animation: sb-fade 180ms ease-out both; transition: opacity 350ms ease-in-out; }
+.sb-root.sb-leaving { opacity: 0; animation: none; pointer-events: none; }
+.sb-frame { position: absolute; left: 50%; top: 50%; width: max(100vw, min(140vw, 177.7vh)); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); container-type: inline-size; }
+.sb-frame .sb-bg { position: absolute; left: 0; top: 0; width: 100%; height: auto; user-select: none; pointer-events: none; }
+@media (max-aspect-ratio: 5/4) {
+  .sb-frame .sb-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
-@keyframes sb-shut { 0% { opacity: 1; transform: scale(1, 1); } 100% { opacity: 0; transform: scale(1.12, 0.9) translateY(2cqw); } }
-@keyframes sb-unfold {
-  0% { opacity: 0; transform: scaleX(0.55) scaleY(0.82); }
-  20% { opacity: 1; }
-  75% { opacity: 1; transform: scaleX(1.03) scaleY(1.01); }
-  100% { opacity: 1; transform: scaleX(1) scaleY(1); }
+.sb-img { position: absolute; height: auto; user-select: none; pointer-events: none; }
+.sb-book { transform-origin: 50% 98%; animation: sb-book 3000ms ease-in-out both; }
+.sb-lite .sb-img { animation: none !important; opacity: 1 !important; }
+@keyframes sb-fade { from { opacity: 0; } }
+@keyframes sb-book {
+  0%, 13.3% { transform: scale(1, 1); }
+  18% { transform: scale(1.004, 0.985); }
+  23% { transform: scale(1, 1); }
+  28% { transform: scale(1.01, 0.968); }
+  33.3% { transform: scale(1, 1); }
+  36.7% { transform: scale(0.996, 1.016); }
+  43%, 100% { transform: scale(1, 1); }
 }
-@keyframes sb-bear {
-  0% { opacity: 1; transform: translateY(29cqw) scale(0.94, 1); }
-  58% { transform: translateY(-1.6cqw) scale(0.98, 1.05); }
-  80% { transform: translateY(0.5cqw) scale(1.03, 0.97); }
-  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
+.sb-drop1 { animation: sb-drop1 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1000ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-drop1 {
+  0% { opacity: 0; transform: translate(26.50cqw, 13.10cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(3.18cqw, 0.37cqw) scale(1.1) rotate(0deg); }
+  80% { transform: translate(-0.40cqw, -0.26cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
-@keyframes sb-nhun { 0%, 100% { transform: translateY(0) scale(1, 1); } 45% { transform: translateY(-1cqw) scale(0.99, 1.025); } }
-@keyframes sb-pop-l {
-  0% { opacity: 0; transform: translate(3.8cqw, 19.5cqw) scale(0.85); }
-  22% { opacity: 1; }
-  68% { opacity: 1; transform: translate(-0.8cqw, -1.1cqw) scale(1.04); }
-  100% { opacity: 1; transform: translate(0, 0) scale(1); }
+.sb-dropP { animation: sb-dropP 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1040ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-dropP {
+  0% { opacity: 0; transform: translate(-24.58cqw, 12.14cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(-2.95cqw, 0.26cqw) scale(1.1) rotate(0deg); }
+  80% { transform: translate(0.37cqw, -0.24cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
-@keyframes sb-pop-r {
-  0% { opacity: 0; transform: translate(-3.8cqw, 17.5cqw) scale(0.85); }
-  22% { opacity: 1; }
-  68% { opacity: 1; transform: translate(0.8cqw, -1.1cqw) scale(1.04); }
-  100% { opacity: 1; transform: translate(0, 0) scale(1); }
+.sb-drop2 { animation: sb-drop2 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1080ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-drop2 {
+  0% { opacity: 0; transform: translate(25.72cqw, 8.07cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(3.09cqw, 0.07cqw) scale(1.1) rotate(0deg); }
+  80% { transform: translate(-0.39cqw, -0.16cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
+.sb-dot { animation: sb-dot 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1100ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-dot {
+  0% { opacity: 0; transform: translate(5.08cqw, 10.83cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(0.61cqw, 0.40cqw) scale(1.12) rotate(0deg); }
+  80% { transform: translate(-0.08cqw, -0.22cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.sb-starL { animation: sb-starL 720ms cubic-bezier(0.25, 0.9, 0.35, 1) 1140ms both, sb-nhun 360ms ease-in-out 2230ms; }
+@keyframes sb-starL {
+  0% { opacity: 0; transform: translate(28.17cqw, -0.18cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(3.38cqw, -1.07cqw) scale(1.1) rotate(0deg); }
+  80% { transform: translate(-0.42cqw, 0.00cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.sb-starR { animation: sb-starR 720ms cubic-bezier(0.25, 0.9, 0.35, 1) 1180ms both, sb-nhun 360ms ease-in-out 2230ms; }
+@keyframes sb-starR {
+  0% { opacity: 0; transform: translate(-27.24cqw, 6.16cqw) scale(0.4) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(-3.27cqw, -0.31cqw) scale(1.1) rotate(0deg); }
+  80% { transform: translate(0.41cqw, -0.12cqw) scale(0.99) rotate(0.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.sb-bubL { animation: sb-bubL 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1400ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-bubL {
+  0% { opacity: 0; transform: translate(15.58cqw, 13.58cqw) scale(0.65) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(1.87cqw, 1.63cqw) scale(1.05) rotate(-5deg); }
+  80% { transform: translate(-0.23cqw, -0.27cqw) scale(0.99) rotate(-1.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+.sb-bubR { animation: sb-bubR 700ms cubic-bezier(0.25, 0.9, 0.35, 1) 1500ms both, sb-nhun 360ms ease-in-out 2150ms; }
+@keyframes sb-bubR {
+  0% { opacity: 0; transform: translate(-14.03cqw, 12.71cqw) scale(0.65) rotate(0deg); }
+  10% { opacity: 1; }
+  58% { opacity: 1; transform: translate(-1.68cqw, 1.53cqw) scale(1.05) rotate(5deg); }
+  80% { transform: translate(0.21cqw, -0.25cqw) scale(0.99) rotate(1.00deg); }
+  100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+@keyframes sb-nhun { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-0.7cqw); } }
 
 /* ===== Hội trường triển lãm (Hall): cảnh phòng tranh ===== */
 .hall-scene { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #FFE9A8; min-height: calc(100vh - 73px - 64px); }
