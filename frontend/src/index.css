@@ -1610,6 +1610,33 @@ h3,
 .nav-pill:hover { transform: translateY(-2px); filter: brightness(1.03); }
 .nav-pill-on { border-color: #F2A71B; background: linear-gradient(#FFEFB8, #FFDD78); box-shadow: inset 0 -3px 0 rgba(242, 167, 27, 0.55), 0 4px 10px -4px rgba(180, 110, 0, 0.6); }
 
+/* ===== Mở rèm vào Hội trường triển lãm (ExhibitTransition): hai cánh rèm xanh viền vàng trượt sang hai bên ===== */
+.sb-curtain-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; transition: opacity 300ms ease-in-out; }
+.sb-curtain-root.sb-curtain-leave { opacity: 0; pointer-events: none; }
+/* Khung rèm phủ kín màn hình (như background-size: cover); hai cánh mỗi cánh rộng một nửa khung. */
+.sb-curtain { position: absolute; top: calc((100vh - max(100vh, 56.3vw)) / 2); height: max(100vh, 56.3vw); width: max(50vw, 88.9vh); }
+.sb-curtain img { display: block; width: 100%; height: 100%; user-select: none; pointer-events: none; }
+.sb-curtain-l { right: 50%; }
+.sb-curtain-r { left: 50%; }
+.sb-curtain-l img { object-position: right top; }
+.sb-curtain-open .sb-curtain-l { animation: sb-curtain-l 2000ms both; }
+.sb-curtain-open .sb-curtain-r { animation: sb-curtain-r 2000ms both; }
+/* 0–0,6s hé khe chậm (ease-in) · 0,6–1,5s kéo rộng, giảm tốc · 1,5–2,0s nảy nhẹ rồi nằm yên. Mỗi cánh trượt 84% bề rộng của nó → còn một dải ~16% ở mép (có dây buộc + tua). */
+@keyframes sb-curtain-l {
+  0% { transform: translateX(0); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  30% { transform: translateX(-9%); animation-timing-function: cubic-bezier(0.25, 0.6, 0.35, 1); }
+  75% { transform: translateX(-86%); animation-timing-function: ease-in-out; }
+  88% { transform: translateX(-83%); animation-timing-function: ease-in-out; }
+  100% { transform: translateX(-84%); }
+}
+@keyframes sb-curtain-r {
+  0% { transform: translateX(0); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  30% { transform: translateX(9%); animation-timing-function: cubic-bezier(0.25, 0.6, 0.35, 1); }
+  75% { transform: translateX(86%); animation-timing-function: ease-in-out; }
+  88% { transform: translateX(83%); animation-timing-function: ease-in-out; }
+  100% { transform: translateX(84%); }
+}
+
 /* Trang Đấu trường vừa mở xong: các khối chính bay lên nhẹ lần lượt. */
 @keyframes at-rise { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
 html[data-arena-enter] main .page > * { animation: at-rise 380ms cubic-bezier(0.2, 0.8, 0.3, 1) both; }
