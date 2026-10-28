@@ -63,7 +63,7 @@ const HOME_CARDS = [
   { to: '/arena', key: 'arena', icon: 'trophy', Art: TrophyArt, bg: 'linear-gradient(135deg,#FFE7D3 0%,#FFC8A2 100%)', accent: '#F07B2E' },
   { to: '/together', key: 'together', icon: 'heart', Art: TogetherArt, artSpace: '-mb-2 -mt-4 -ml-5 mr-10', bg: 'linear-gradient(135deg,#DDF7E2 0%,#A9E8B6 100%)', accent: '#2FA65A' },
   { to: '/gacha', key: 'gacha', icon: 'gift', Art: GachaArt, bg: 'linear-gradient(135deg,#EEE7FF 0%,#D2C2FF 100%)', accent: '#7D5FFF' },
-  { to: '/storybooks', key: 'storybooks', icon: 'book', Art: BookArt, artSpace: '-mb-1 -mt-3 mr-8', bg: 'linear-gradient(135deg,#FFF5CF 0%,#FFE08F 100%)', accent: '#D99A00' },
+  { to: '/storybooks', key: 'storybooks', icon: 'book', Art: BookArt, artSpace: '-mb-1 -mt-3 mr-14', bg: 'linear-gradient(135deg,#FFF5CF 0%,#FFE08F 100%)', accent: '#D99A00' },
   { to: '/missions', key: 'missions', icon: 'target', Art: MissionArt, bg: 'linear-gradient(135deg,#DDF4FF 0%,#B4E4FF 100%)', accent: '#138FA8' },
 ];
 
