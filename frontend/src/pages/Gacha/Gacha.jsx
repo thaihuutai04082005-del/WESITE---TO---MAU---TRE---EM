@@ -40,10 +40,14 @@ export default function Gacha() {
   const [busy, setBusy] = useState(false);
 
   const load = () => {
-    api.get('/gacha').then(setInfo);
-    api.get('/gacha/catalog').then(setDeck);
+    api.get('/gacha').then(setInfo).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
+    api.get('/gacha/catalog').then(setDeck).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
   };
   useEffect(load, []);
+  // Báo cho hiệu ứng chuyển màn hình (GachaTransition) biết trang đã sẵn sàng.
+  useEffect(() => {
+    if (info && deck) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [info, deck]);
 
   async function pull(count) {
     setBusy(true);
