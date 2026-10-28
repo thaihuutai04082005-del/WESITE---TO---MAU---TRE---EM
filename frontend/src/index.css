@@ -1657,9 +1657,12 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 /* ---- Hiệu ứng chuyển màn hình Tô cùng nhau (TogetherTransition): 3 giây, tiền tố tg- ---- */
 .tg-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; background: linear-gradient(#DDF6D2, #C5EEB4); animation: tg-fade 180ms ease-out both; transition: opacity 350ms ease-in-out; }
 .tg-root.tg-leaving { opacity: 0; animation: none; pointer-events: none; }
-.tg-frame { position: absolute; left: 50%; top: 50%; width: max(100vw, min(140vw, 177.7vh)); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); }
+.tg-frame { position: absolute; left: 50%; top: 50%; width: min(140vw, 177.7vh); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); }
 .tg-frame img { position: absolute; height: auto; user-select: none; pointer-events: none; }
 .tg-frame .tg-bg { left: 0; top: 0; width: 100%; }
+@media (min-aspect-ratio: 17/9) {
+  .tg-frame .tg-bg { -webkit-mask: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); mask: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+}
 @media (max-aspect-ratio: 5/4) {
   .tg-frame .tg-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
@@ -1726,8 +1729,11 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 /* ---- Hiệu ứng chuyển màn hình Nhiệm vụ (MissionTransition): 3 giây, tiền tố mi- ---- */
 .mi-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; background: linear-gradient(#C9EFFD, #A9E5FB); animation: mi-fade 180ms ease-out both; transition: opacity 350ms ease-in-out; }
 .mi-root.mi-leaving { opacity: 0; animation: none; pointer-events: none; }
-.mi-frame { position: absolute; left: 50%; top: 50%; width: max(100vw, min(140vw, 177.7vh)); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); container-type: inline-size; }
+.mi-frame { position: absolute; left: 50%; top: 50%; width: min(140vw, 177.7vh); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); container-type: inline-size; }
 .mi-frame .mi-bg { position: absolute; left: 0; top: 0; width: 100%; height: auto; user-select: none; pointer-events: none; }
+@media (min-aspect-ratio: 17/9) {
+  .mi-frame .mi-bg { -webkit-mask: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); mask: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+}
 @media (max-aspect-ratio: 5/4) {
   .mi-frame .mi-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
