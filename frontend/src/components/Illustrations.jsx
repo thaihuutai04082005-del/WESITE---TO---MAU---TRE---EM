@@ -51,28 +51,9 @@ export function TogetherArt() {
 
 /** Bốc thẻ: 3 thẻ xoè + hộp quà. */
 export function GachaArt() {
-  const card = (x, rot, color, mark) => (
-    <g transform={`translate(${x} 18) rotate(${rot} 30 44)`} stroke={INK} strokeWidth="2.5">
-      <rect width="60" height="84" rx="9" fill={color} />
-      <rect x="6" y="6" width="48" height="72" rx="6" fill="none" stroke="#FFFFFF" strokeWidth="2.5" />
-      {mark === '?' ? (
-        <text x="30" y="56" textAnchor="middle" fontSize="38" fontWeight="900" fontFamily="Viet Hook, Baloo 2, Nunito, sans-serif" fill="#FFFFFF" stroke="none">?</text>
-      ) : (
-        <polygon points="30,24 36,38 51,39 39,48 43,63 30,55 17,63 21,48 9,39 24,38" fill="#FFFFFF" strokeWidth="1.5" />
-      )}
-    </g>
-  );
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      {card(46, -18, '#FF7AA2', 'star')}
-      {card(86, -4, '#4FA3E0', '?')}
-      {card(126, 12, '#5DADE2', '?')}
-      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <rect x="70" y="92" width="80" height="50" rx="5" fill="#9B6BFF" />
-        <rect x="64" y="80" width="92" height="18" rx="5" fill="#B38BFF" />
-        <rect x="102" y="80" width="16" height="62" fill="#FFD54F" />
-        <path d="M110 80 C96 60 78 66 88 78 Z M110 80 C124 60 142 66 132 78 Z" fill="#FFD54F" />
-      </g>
+      <image href="/mascots/bocthe.webp" x="22" y="2" width="176" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
