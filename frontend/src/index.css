@@ -1598,6 +1598,44 @@ h3,
   .hall-floor { height: 10vh; min-height: 72px; }
 }
 
+/* ===== Trang đăng nhập / đăng ký (AuthCard): nền như trang chủ + thẻ kem viền vàng ===== */
+.auth-bg { min-height: calc(100vh - 72px); display: flex; align-items: flex-start; justify-content: center; padding: 112px 16px 48px; background: #BFE8FF url(/home-bg.webp) center / cover no-repeat; }
+.auth-card { position: relative; width: 100%; max-width: 560px; padding: 84px 28px 26px; text-align: center; border-radius: 38px; background: #FCF9EF; border: 12px solid #FFD844; box-shadow: 0 22px 40px -16px rgba(20, 70, 140, 0.45); }
+.auth-bear { position: absolute; left: 50%; top: -88px; width: 150px; height: 150px; margin-left: -75px; border-radius: 9999px; }
+.auth-title { font-family: var(--font-display, inherit); font-size: 2.4rem; line-height: 1.1; font-weight: 800; color: #0F4C98; }
+.auth-sub { margin-top: 6px; font-size: 1.15rem; color: #48679A; }
+.auth-body { margin-top: 22px; text-align: left; }
+.auth-label { display: block; margin: 0 4px 8px; font-size: 1.05rem; font-weight: 800; color: #134264; }
+.auth-field { position: relative; display: flex; align-items: center; height: 58px; border-radius: 9999px; border: 2px solid #BFDDF6; background: #E1EFFC; transition: box-shadow 150ms, border-color 150ms; }
+.auth-field:focus-within { border-color: #2B9BF4; box-shadow: 0 0 0 4px rgba(43, 155, 244, 0.25); }
+.auth-ico { flex: 0 0 auto; width: 26px; height: 26px; margin-left: 20px; color: #1E88F0; }
+.auth-input { flex: 1 1 auto; min-width: 0; height: 100%; padding: 0 56px 0 18px; border: 0; outline: 0; background: transparent; font-size: 1.2rem; color: #14202B; }
+.auth-eye { position: absolute; right: 14px; top: 50%; display: flex; width: 40px; height: 40px; margin-top: -20px; align-items: center; justify-content: center; border-radius: 9999px; color: #2E5F8F; transition: background 150ms; }
+.auth-eye:hover { background: rgba(43, 155, 244, 0.15); }
+.auth-btn { width: 100%; height: 58px; border-radius: 9999px; background: #1E93F6; color: #fff; font-size: 1.3rem; font-weight: 800; box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12), 0 8px 16px -8px rgba(30, 147, 246, 0.8); transition: transform 150ms, filter 150ms; }
+.auth-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
+.auth-btn:disabled { opacity: 0.6; }
+.auth-links { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 1rem; font-weight: 700; color: #1E88F0; }
+.auth-links a { color: #1E88F0; }
+.auth-sep { width: 1px; height: 22px; background: #D3C9B0; }
+/* Các trang đăng ký / quên mật khẩu dùng lại ô nhập cũ nhưng bo tròn + màu xanh nhạt cho cùng phong cách. */
+.auth-card .input { border-radius: 9999px; border: 2px solid #BFDDF6; background: #E1EFFC; }
+.auth-card .label { font-weight: 800; color: #134264; }
+.auth-card .btn-primary { border-radius: 9999px; }
+@media (max-width: 640px) {
+  .auth-bg { padding-top: 108px; padding-bottom: 96px; }
+  .auth-card { padding: 76px 18px 20px; border-width: 10px; }
+  .auth-title { font-size: 2rem; }
+  .auth-links { flex-wrap: wrap; justify-content: center; }
+  .auth-sep { display: none; }
+}
+
+/* ===== Thanh điều hướng: viên thuốc kem – viền cam ===== */
+.nav-pill { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; padding: 6px 20px 6px 14px; border-radius: 20px; white-space: nowrap; font-weight: 800; font-size: 1.05rem; color: #3A2A12;
+  background: linear-gradient(#FFF7D9, #FFEBA6); border: 2px solid #F7C458; box-shadow: inset 0 -3px 0 rgba(245, 184, 61, 0.4), 0 3px 8px -4px rgba(180, 110, 0, 0.45); transition: transform 150ms, filter 150ms; }
+.nav-pill:hover { transform: translateY(-2px); filter: brightness(1.03); }
+.nav-pill-on { border-color: #F2A71B; background: linear-gradient(#FFEFB8, #FFDD78); box-shadow: inset 0 -3px 0 rgba(242, 167, 27, 0.55), 0 4px 10px -4px rgba(180, 110, 0, 0.6); }
+
 /* Trang Đấu trường vừa mở xong: các khối chính bay lên nhẹ lần lượt. */
 @keyframes at-rise { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
 html[data-arena-enter] main .page > * { animation: at-rise 380ms cubic-bezier(0.2, 0.8, 0.3, 1) both; }

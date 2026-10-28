@@ -96,13 +96,20 @@ export default function Layout() {
                   key={n.to}
                   to={n.to}
                   title={t(`nav.${n.key}`)}
-                  className={({ isActive }) => `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`}
+                  className={({ isActive }) => `nav-pill${isActive ? ' nav-pill-on' : ''}`}
                   data-testid={`nav-${n.key}`}
                 >
-                  <span style={{ color: n.color }}>
-                    <Icon name={n.icon} size={22} strokeWidth={2.4} />
-                  </span>
-                  <span className="hidden xl:inline">{t(`nav.${n.key}`)}</span>
+                  {n.key === 'collection' ? (
+                    <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden="true">
+                      <path d="M16 3.2l3.7 7.6 8.3 1.2-6 5.9 1.4 8.3L16 22.2 8.6 26.2 10 17.9 4 12l8.3-1.2z" fill="#FFC21A" stroke="#E8860B" strokeWidth="2.4" strokeLinejoin="round" />
+                      <path d="M12.6 11.8l2-.6" stroke="#FFE690" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  ) : (
+                    <span className="shrink-0" style={{ color: n.color }}>
+                      <Icon name={n.icon} size={26} strokeWidth={2.6} />
+                    </span>
+                  )}
+                  <span className="hidden lg:inline">{t(`nav.${n.key}`)}</span>
                 </NavLink>
               ))}
             </nav>

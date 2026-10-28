@@ -1,15 +1,12 @@
+// Khung đăng nhập / đăng ký / quên mật khẩu: nền cảnh trời xanh đồi cỏ như trang chủ, thẻ kem viền vàng, gấu cầm bút sáp nhô lên ở trên.
 export default function AuthCard({ title, subtitle, children }) {
   return (
-    <div className="page flex justify-center">
-      <div className="card w-full max-w-md p-6">
-        <div className="mb-4 flex items-center gap-3">
-          <img src="/avatars/tho.svg" alt="" className="h-14 w-14 rounded-full" />
-          <div>
-            <h1 className="font-display text-3xl font-extrabold leading-tight">{title}</h1>
-            {subtitle && <p className="text-muted">{subtitle}</p>}
-          </div>
-        </div>
-        {children}
+    <div className="auth-bg">
+      <div className="auth-card">
+        <img src="/mascots/login-bear.webp" alt="" className="auth-bear" />
+        <h1 className="auth-title">{title}</h1>
+        {subtitle && <p className="auth-sub">{subtitle}</p>}
+        <div className="auth-body">{children}</div>
       </div>
     </div>
   );
