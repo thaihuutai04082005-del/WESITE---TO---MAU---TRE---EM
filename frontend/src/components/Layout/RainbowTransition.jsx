@@ -2,13 +2,14 @@
 //  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét MỘT LƯỢT từ trái sang phải theo đường cong
 //    phủ kín màn hình → đổi trang → gỡ cầu vòng NGAY, không mờ dần, không còn dư âm.
 //  • Ra khỏi Tô màu (về trang chủ…): chỉ cầu vòng, y hệt.
-//  • Vào Đấu trường / Tô cùng nhau / Bóc thẻ / Truyện tranh: chỉ lấp lánh quanh chỗ bấm + tiếng ting (giống lúc vào Tô màu),
-//    rồi chuyển trang ngay — chưa có cầu vòng (hiệu ứng chuyển màn hình riêng sẽ bổ sung sau).
+//  • Vào Tô cùng nhau / Bóc thẻ / Truyện tranh: chỉ lấp lánh quanh chỗ bấm + tiếng ting (giống lúc vào Tô màu),
+//    rồi chuyển trang ngay — chưa có cầu vòng (hiệu ứng chuyển màn hình riêng sẽ bổ sung sau). Đấu trường: xem ArenaTransition.jsx.
 // Cầu vòng là một lớp nền duy nhất (7 dải đồng tâm) + mặt nạ hình quạt quay quanh tâm, vẽ bằng requestAnimationFrame
 // với đường cong làm mượt (easeInOutSine) nên chạy mượt, không phải dựng lại 14 hình như trước.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
+import { transitionBus } from '../../lib/transitionBus';
 
 const RAINBOW = ['#FF4D5E', '#FF9A2E', '#FFD93B', '#4CD787', '#3DA9FC', '#5B6CFF', '#A06CFF']; // đỏ (ngoài) → tím (trong)
 const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
@@ -22,7 +23,7 @@ const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hì
 /** Thuộc khu vực Tô màu: chọn chủ đề/đối tượng/tư thế và màn hình tô. */
 export const isColoringPath = (p) => p === '/color' || p.startsWith('/color/') || p.startsWith('/draw/');
 /** Các chế độ chơi chỉ có lấp lánh + tiếng ting khi bấm vào (chưa có hiệu ứng chuyển màn hình). */
-const SPARKLE_MODES = ['/arena', '/together', '/gacha', '/storybooks'];
+const SPARKLE_MODES = ['/together', '/gacha', '/storybooks'];   // Đấu trường có hiệu ứng riêng: ArenaTransition
 const modeOf = (p) => SPARKLE_MODES.find((m) => p === m || p.startsWith(`${m}/`)) || null;
 const crosses = (from, to) => isColoringPath(from) !== isColoringPath(to);
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -70,7 +71,7 @@ export default function RainbowTransition() {
       if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
       const url = new URL(a.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      if (busy.current) return;
+      if (busy.current || url.pathname === '/arena' || url.pathname.startsWith('/arena/')) return;
       const target = modeOf(url.pathname);
       if (target && !crosses(window.location.pathname, url.pathname) && modeOf(window.location.pathname) !== target) {
         // Vào một chế độ chơi: lấp lánh + tiếng ting rồi chuyển trang luôn.
@@ -121,7 +122,7 @@ export default function RainbowTransition() {
       handled.current = false;
       return;
     }
-    if (from === loc.pathname || !crosses(from, loc.pathname) || reduceMotion() || busy.current) return;
+    if (from === loc.pathname || !crosses(from, loc.pathname) || reduceMotion() || busy.current || transitionBus.skipRainbow) return;
     busy.current = true;
     pendingTo.current = null;
     setSize({ w: window.innerWidth, h: window.innerHeight });
