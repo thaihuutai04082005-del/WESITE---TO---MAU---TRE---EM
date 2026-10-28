@@ -1,14 +1,13 @@
 // Hiệu ứng chuyển màn hình riêng cho Tô cùng nhau: mèo cam, gấu nâu, thỏ trắng cầm bút sáp quanh tờ giấy có cầu vồng chưa tô;
-// ba dải màu đỏ → vàng → xanh dương lần lượt chạy dọc theo đường cong từ trái sang phải, rồi cả ba nhún vui mừng và vào đúng trang Tô cùng nhau thật.
+// ba dải màu đỏ, vàng, xanh dương cùng chạy một lượt dọc theo đường cong từ trái sang phải, rồi cả ba nhún vui mừng và vào đúng trang Tô cùng nhau thật.
 //
 // Cách chạy (giống ArenaTransition / GachaTransition / StoryTransition):
 //  1. Bé bấm vào liên kết /together → chặn điều hướng, thu thẻ nhẹ về 96%, dựng lớp phủ toàn màn hình (position: fixed), phát tiếng ting.
 //  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `tg-`). Toàn bộ cảnh dài 3 giây:
 //       0,0–0,5  ba bạn nhún nhẹ một lần, bút nghiêng về phía cầu vồng
-//       0,5–1,0  dải ĐỎ (ngoài cùng) chạy từ trái sang phải; mèo nghiêng người tô rồi nhún
-//       1,0–1,5  dải VÀNG (giữa); gấu nhấc bút rồi nhún
-//       1,5–2,1  dải XANH DƯƠNG (trong cùng); thỏ nghiêng người tô
-//       2,1–2,6  cả ba cùng nhún một lần (mèo nghiêng đầu phải, thỏ nghiêng trái), tờ giấy nảy nhẹ
+//       0,6–1,7  CẢ BA dải màu (đỏ ngoài cùng, vàng giữa, xanh dương trong cùng) chạy MỘT LƯỢT từ trái sang phải theo đường cong; ba bạn nghiêng người tô
+//       1,7–2,1  cầu vồng tô xong, ba bạn nhún mừng một lần
+//       2,1–2,6  cả ba nhún thêm lần nữa (mèo nghiêng đầu phải, thỏ nghiêng trái), tờ giấy nảy nhẹ
 //       2,6–3,0  mọi thứ dừng dần; khung hình cuối = ảnh tham chiếu với cầu vồng đã tô đủ ba màu
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Tô cùng nhau NGAY DƯỚI lớp phủ để trang tự tải.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
@@ -53,9 +52,11 @@ function Overlay({ lite, leaving }) {
         <img className="tg-bg" src="/together/bg.webp" alt="" draggable="false" />
         <div className="tg-paper">
           {img('paper', 'tg-paper-img')}
-          <div className="tg-sweep tg-sweep-red">{img('band-red', 'tg-band')}</div>
-          <div className="tg-sweep tg-sweep-yellow">{img('band-yellow', 'tg-band')}</div>
-          <div className="tg-sweep tg-sweep-blue">{img('band-blue', 'tg-band')}</div>
+          <div className="tg-sweep">
+            {img('band-red', 'tg-band')}
+            {img('band-yellow', 'tg-band')}
+            {img('band-blue', 'tg-band')}
+          </div>
         </div>
         {img('cat', 'tg-char tg-cat')}
         {img('bear', 'tg-char tg-bear')}

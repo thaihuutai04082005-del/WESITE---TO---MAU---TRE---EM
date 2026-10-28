@@ -1664,10 +1664,7 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   .tg-frame .tg-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
 .tg-paper { position: absolute; inset: 0; transform-origin: 50% 86.6%; animation: tg-paper 3000ms ease-in-out both; }
-.tg-sweep { position: absolute; inset: 0; clip-path: polygon(50% 87.4%, 50% 87.4%); animation: tg-sweep 500ms linear both; }
-.tg-sweep-red { animation-delay: 500ms; }
-.tg-sweep-yellow { animation-delay: 1000ms; }
-.tg-sweep-blue { animation-delay: 1500ms; animation-duration: 600ms; }
+.tg-sweep { position: absolute; inset: 0; clip-path: polygon(50% 87.4%, 50% 87.4%); animation: tg-sweep 1100ms linear 600ms both; }
 .tg-char { transform-origin: 50% 100%; }
 .tg-cat { animation: tg-cat 3000ms ease-in-out both; }
 .tg-bear { animation: tg-bear 3000ms ease-in-out both; }
@@ -1691,10 +1688,10 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   0% { transform: rotate(0deg) scale(1, 1); }
   6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
   16.67% { transform: rotate(0deg) scale(1, 1); }
-  21.67% { transform: rotate(1.6deg) scale(1, 1); }
-  30% { transform: rotate(1.6deg) scale(1, 1); }
-  33.3% { transform: rotate(0deg) scale(1.01, 1.03); }
-  40% { transform: rotate(0deg) scale(1, 1); }
+  24% { transform: rotate(1.6deg) scale(1, 1); }
+  52% { transform: rotate(1.6deg) scale(1, 1); }
+  58% { transform: rotate(0deg) scale(1.01, 1.03); }
+  66% { transform: rotate(0deg) scale(1, 1); }
   76.7% { transform: rotate(-1.6deg) scale(1.01, 1.03); }
   86.7% { transform: rotate(0deg) scale(1, 1); }
 }
@@ -1702,11 +1699,10 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   0% { transform: rotate(0deg) scale(1, 1); }
   6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
   16.67% { transform: rotate(0deg) scale(1, 1); }
-  38.3% { transform: rotate(0deg) scale(1, 1); }
-  43% { transform: rotate(-1.4deg) scale(1, 1.025); }
-  50% { transform: rotate(-1.4deg) scale(1, 1.025); }
-  53% { transform: rotate(0deg) scale(1.01, 1.03); }
-  60% { transform: rotate(0deg) scale(1, 1); }
+  26% { transform: rotate(-1.4deg) scale(1, 1.025); }
+  52% { transform: rotate(-1.4deg) scale(1, 1.025); }
+  58% { transform: rotate(0deg) scale(1.01, 1.03); }
+  66% { transform: rotate(0deg) scale(1, 1); }
   76.7% { transform: rotate(0deg) scale(1.012, 1.035); }
   86.7% { transform: rotate(0deg) scale(1, 1); }
 }
@@ -1714,12 +1710,11 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   0% { transform: rotate(0deg) scale(1, 1); }
   6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
   16.67% { transform: rotate(0deg) scale(1, 1); }
-  55% { transform: rotate(0deg) scale(1, 1); }
-  60% { transform: rotate(-1.6deg) scale(1, 1); }
-  68% { transform: rotate(-1.6deg) scale(1, 1); }
-  71% { transform: rotate(0deg) scale(1.01, 1.03); }
-  76.7% { transform: rotate(0deg) scale(1, 1); }
-  79% { transform: rotate(1.6deg) scale(1.01, 1.03); }
+  24% { transform: rotate(-1.6deg) scale(1, 1); }
+  52% { transform: rotate(-1.6deg) scale(1, 1); }
+  58% { transform: rotate(0deg) scale(1.01, 1.03); }
+  66% { transform: rotate(0deg) scale(1, 1); }
+  76.7% { transform: rotate(1.6deg) scale(1.01, 1.03); }
   86.7% { transform: rotate(0deg) scale(1, 1); }
 }
 @keyframes tg-paper {
