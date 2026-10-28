@@ -24,7 +24,6 @@ const MIN_MS = 2000;        // tối thiểu trước khi lớp phủ mờ đi: 
 const MAX_WAIT_MS = 8000;   // trần chờ trang đích tải xong
 const FADE_MS = 350;        // lớp phủ mờ dần
 const ENTER_MS = 1000;      // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
-const DING_MS = 830;        // tiếng ting thứ hai lúc nắp bật mở và ba thẻ nổ ra
 
 const isGacha = (p) => p === '/gacha' || p.startsWith('/gacha/');
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -278,7 +277,6 @@ export default function GachaTransition() {
 
       setPhase('run');
       playTing();
-      later(playTing, DING_MS);
 
       const finish = () => {
         if (st.finished) return;
