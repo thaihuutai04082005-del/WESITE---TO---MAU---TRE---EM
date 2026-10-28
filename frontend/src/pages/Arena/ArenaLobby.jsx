@@ -59,10 +59,15 @@ export default function ArenaLobby() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    api.get('/arena').then(setInfo);
+    api.get('/arena').then(setInfo).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
     // Đang ở trong phòng (ví dụ tải lại trang) → quay lại phòng.
     emitAck(getSocket(token), 'arena:state').then((r) => r?.room && navigate('/arena/room')).catch(() => {});
   }, [token, navigate]);
+
+  // Báo cho hiệu ứng chuyển màn hình (ArenaTransition) biết trang đã có dữ liệu để dựng xong.
+  useEffect(() => {
+    if (info) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [info]);
 
   const go = async (event, payload) => {
     setBusy(true);
