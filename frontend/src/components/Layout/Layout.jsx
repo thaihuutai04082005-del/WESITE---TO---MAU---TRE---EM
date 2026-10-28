@@ -96,7 +96,7 @@ export default function Layout() {
                   key={n.to}
                   to={n.to}
                   title={t(`nav.${n.key}`)}
-                  className={({ isActive }) => `nav-pill${isActive ? ' nav-pill-on' : ''}`}
+                  className={({ isActive }) => (n.key === 'collection' ? `nav-pill${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
                   data-testid={`nav-${n.key}`}
                 >
                   {n.key === 'collection' ? (
@@ -106,7 +106,7 @@ export default function Layout() {
                     </svg>
                   ) : (
                     <span className="shrink-0" style={{ color: n.color }}>
-                      <Icon name={n.icon} size={26} strokeWidth={2.6} />
+                      <Icon name={n.icon} size={22} strokeWidth={2.4} />
                     </span>
                   )}
                   <span className="hidden lg:inline">{t(`nav.${n.key}`)}</span>
