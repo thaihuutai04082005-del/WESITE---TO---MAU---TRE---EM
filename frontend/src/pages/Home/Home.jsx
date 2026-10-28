@@ -20,6 +20,7 @@ function Landing() {
   }, []);
   const features = ['creative', 'arena', 'gacha', 'together', 'storybook', 'safe'];
   return (
+    <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
     <div className="page">
       <section className="grid items-center gap-6 py-6 md:grid-cols-2 md:py-12">
         <div>
@@ -51,8 +52,11 @@ function Landing() {
         ))}
       </section>
     </div>
+    </div>
   );
 }
+
+const HOME_BG = 'url(/home-bg.webp)';
 
 const HOME_CARDS = [
   { to: '/color', key: 'color', icon: 'palette', Art: ColorArt, bg: 'linear-gradient(135deg,#DDEFFF 0%,#B7DCFF 100%)', accent: '#2B9BF4' },
@@ -115,7 +119,7 @@ function Dashboard() {
   const rank = prog?.rank;
 
   return (
-    <div className="bg-gradient-to-b from-[#EEF7FF] via-[#F7FBFF] to-white">
+    <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
       <div className="page max-w-7xl space-y-6">
         {/* Lời chào + linh vật */}
         <section className="relative flex items-center gap-3 pt-2 sm:gap-6">
@@ -123,7 +127,7 @@ function Dashboard() {
             <HelloBear className="h-full w-full" />
           </div>
           <div className="min-w-0 flex-1">
-            <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" data-testid="home-hello">
+            <h1 className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl" style={{ WebkitTextStroke: "6px #fff", paintOrder: "stroke fill", strokeLinejoin: "round" }} data-testid="home-hello">
               {t('home.hello', { name: user.nickname })}
             </h1>
             <p className="mt-2 text-lg text-muted sm:text-2xl">{t('home.subtitle')}</p>
