@@ -62,6 +62,7 @@ export default function Login() {
   const [form, setForm] = useState({ username: loc.state?.username || '', password: '' });
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
+  const [show, setShow] = useState(false);
 
   const onSession = (s) => {
     applySession(s);
@@ -85,20 +86,34 @@ export default function Login() {
     <AuthCard title={t('auth.login')} subtitle={loc.state?.registered ? t('auth.registeredOk') : t('auth.loginSubtitle')}>
       <form onSubmit={submit} className="space-y-4">
         <div>
-          <label className="label" htmlFor="username">{t('auth.username')}</label>
-          <input id="username" className="input" autoComplete="username" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} required />
+          <label className="auth-label" htmlFor="username">{t('auth.username')}</label>
+          <div className="auth-field">
+            <svg viewBox="0 0 24 24" className="auth-ico" aria-hidden="true"><circle cx="12" cy="8" r="4.2" fill="currentColor" /><path d="M3.8 21c0-4.6 3.7-7.2 8.2-7.2s8.2 2.6 8.2 7.2z" fill="currentColor" /></svg>
+            <input id="username" className="auth-input" autoComplete="username" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} required />
+          </div>
         </div>
         <div>
-          <label className="label" htmlFor="password">{t('auth.password')}</label>
-          <input id="password" type="password" className="input" autoComplete="current-password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
+          <label className="auth-label" htmlFor="password">{t('auth.password')}</label>
+          <div className="auth-field">
+            <svg viewBox="0 0 24 24" className="auth-ico" aria-hidden="true"><path d="M7.5 10V7.5a4.5 4.5 0 019 0V10" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" /><rect x="4.5" y="10" width="15" height="11" rx="3" fill="currentColor" /><circle cx="12" cy="15" r="1.6" fill="#E1EFFC" /></svg>
+            <input id="password" type={show ? 'text' : 'password'} className="auth-input" autoComplete="current-password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
+            <button type="button" className="auth-eye" onClick={() => setShow((v) => !v)} aria-label={show ? t('auth.hidePassword') : t('auth.showPassword')} aria-pressed={show}>
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M2 12s3.8-7 10-7 10 7 10 7-3.8 7-10 7S2 12 2 12z" />
+                <circle cx="12" cy="12" r="3" />
+                {!show && <path d="M4 4l16 16" />}
+              </svg>
+            </button>
+          </div>
         </div>
         {err && <p className="font-bold text-danger" role="alert">{err}</p>}
-        <button type="submit" className="btn-primary w-full" disabled={busy} data-testid="login-submit">
+        <button type="submit" className="auth-btn" disabled={busy} data-testid="login-submit">
           {t('auth.login')}
         </button>
-        <div className="flex justify-between text-sm font-bold">
-          <Link to="/forgot" className="text-primary">{t('auth.forgot')}</Link>
-          <Link to="/register" className="text-primary">{t('auth.noAccount')}</Link>
+        <div className="auth-links">
+          <Link to="/forgot">{t('auth.forgot')}</Link>
+          <span className="auth-sep" aria-hidden="true" />
+          <Link to="/register">{t('auth.noAccount')}</Link>
         </div>
       </form>
       <GoogleLogin clientId={meta?.googleClientId} onSession={onSession} />

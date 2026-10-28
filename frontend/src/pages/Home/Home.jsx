@@ -61,9 +61,9 @@ const HOME_BG = 'url(/home-bg.webp)';
 const HOME_CARDS = [
   { to: '/color', key: 'color', icon: 'palette', Art: ColorArt, bg: 'linear-gradient(135deg,#DDEFFF 0%,#B7DCFF 100%)', accent: '#2B9BF4' },
   { to: '/arena', key: 'arena', icon: 'trophy', Art: TrophyArt, bg: 'linear-gradient(135deg,#FFE7D3 0%,#FFC8A2 100%)', accent: '#F07B2E' },
-  { to: '/together', key: 'together', icon: 'heart', Art: TogetherArt, bg: 'linear-gradient(135deg,#DDF7E2 0%,#A9E8B6 100%)', accent: '#2FA65A' },
+  { to: '/together', key: 'together', icon: 'heart', Art: TogetherArt, artSpace: '-mb-2 -mt-4 -ml-5 mr-10', bg: 'linear-gradient(135deg,#DDF7E2 0%,#A9E8B6 100%)', accent: '#2FA65A' },
   { to: '/gacha', key: 'gacha', icon: 'gift', Art: GachaArt, bg: 'linear-gradient(135deg,#EEE7FF 0%,#D2C2FF 100%)', accent: '#7D5FFF' },
-  { to: '/storybooks', key: 'storybooks', icon: 'book', Art: BookArt, bg: 'linear-gradient(135deg,#FFF5CF 0%,#FFE08F 100%)', accent: '#D99A00' },
+  { to: '/storybooks', key: 'storybooks', icon: 'book', Art: BookArt, artSpace: '-mb-1 -mt-3 mr-14', bg: 'linear-gradient(135deg,#FFF5CF 0%,#FFE08F 100%)', accent: '#D99A00' },
   { to: '/missions', key: 'missions', icon: 'target', Art: MissionArt, bg: 'linear-gradient(135deg,#DDF4FF 0%,#B4E4FF 100%)', accent: '#138FA8' },
 ];
 
@@ -83,9 +83,9 @@ function HomeCard({ card, onInfo }) {
         </span>
         <span className="whitespace-nowrap font-display text-[26px] font-extrabold leading-[1.1] text-ink">{t(`nav.${card.key}`)}</span>
       </div>
-      <div className="pointer-events-none relative -my-2 mr-12">
+      <div className={`pointer-events-none relative ${card.artSpace || '-my-2 mr-12'}`}>
         <div className="absolute inset-0 transition duration-300 group-hover:scale-105">
-          <Art bubble={t('home.bookBubble')} />
+          <Art />
         </div>
       </div>
       <button
@@ -168,10 +168,10 @@ function Dashboard() {
           </span>
         </Link>
 
-        {/* Cấp độ & Rank */}
+        {/* Cấp độ & Rank: chỉ để bé xem cấp và điểm hiện tại (không bấm chuyển trang) */}
         {prog && (
           <section className="card grid gap-5 p-5 md:grid-cols-2 md:gap-8">
-            <Link to="/missions" className="flex items-center gap-4" data-testid="home-level">
+            <div className="flex items-center gap-4" data-testid="home-level">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#E4F6E8] text-[#2FA65A]">
                 <Icon name="mountain" size={32} strokeWidth={2.4} />
               </span>
@@ -184,8 +184,8 @@ function Dashboard() {
                 </div>
                 <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#4CD787,#2FA65A)" height={12} />
               </div>
-            </Link>
-            <Link to="/missions" className="flex items-center gap-4" data-testid="home-rank">
+            </div>
+            <div className="flex items-center gap-4" data-testid="home-rank">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl" style={{ background: RANK_STYLE[rank.key].bg }}>
                 <RankMedal rank={rank.key} size={40} />
               </span>
@@ -205,7 +205,7 @@ function Dashboard() {
                   height={12}
                 />
               </div>
-            </Link>
+            </div>
           </section>
         )}
       </div>

@@ -6,7 +6,6 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { getSocket } from '../../services/socket';
 import Avatar from '../Avatar/Avatar';
-import RankBadge from '../RankBadge';
 import { formatDateTime } from '../../lib/format';
 import Icon from '../Icon';
 import Toasts from './Toasts';
@@ -36,8 +35,11 @@ export const NAV = [
   { to: '/together', icon: 'heart', key: 'together', color: '#2FA65A' },
   { to: '/storybooks', icon: 'book', key: 'storybooks', color: '#D99A00' },
 ];
-const MOBILE_MAIN = ['home', 'color', 'arena', 'history'];
-const DESKTOP_MAIN = ['color', 'history', 'arena', 'missions', 'gacha'];
+// Thanh điều hướng chính (đúng thứ tự hiển thị): Bộ sưu tập, Cửa hàng, Bạn bè, Lịch sử. Các mục khác vào từ trang chủ / menu.
+const MAIN_NAV = ['collection', 'shop', 'friends', 'history'];
+const MOBILE_MAIN = MAIN_NAV;
+const DESKTOP_MAIN = MAIN_NAV;
+const navOf = (keys) => keys.map((k) => NAV.find((n) => n.key === k)).filter(Boolean);
 // Các sự kiện này đã có popup phần thưởng riêng → không hiện thêm toast.
 const POPUP_TYPES = new Set(['mission_complete', 'level_up', 'rank_up']);
 
@@ -88,19 +90,26 @@ export default function Layout() {
             <span className="hidden whitespace-nowrap sm:inline">{t('app.name')}</span>
           </Link>
           {user && (
-            <nav className="ml-3 hidden flex-1 items-center gap-1 lg:flex">
-              {NAV.filter((n) => DESKTOP_MAIN.includes(n.key)).map((n) => (
+            <nav className="mx-4 hidden flex-1 items-center justify-evenly gap-1 lg:flex">
+              {navOf(DESKTOP_MAIN).map((n) => (
                 <NavLink
                   key={n.to}
                   to={n.to}
                   title={t(`nav.${n.key}`)}
-                  className={({ isActive }) => `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`}
+                  className={({ isActive }) => `nav-pill${isActive ? ' nav-pill-on' : ''}`}
                   data-testid={`nav-${n.key}`}
                 >
-                  <span style={{ color: n.color }}>
-                    <Icon name={n.icon} size={22} strokeWidth={2.4} />
-                  </span>
-                  <span className="hidden xl:inline">{t(`nav.${n.key}`)}</span>
+                  {n.key === 'collection' ? (
+                    <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden="true">
+                      <path d="M16 3.2l3.7 7.6 8.3 1.2-6 5.9 1.4 8.3L16 22.2 8.6 26.2 10 17.9 4 12l8.3-1.2z" fill="#FFC21A" stroke="#E8860B" strokeWidth="2.4" strokeLinejoin="round" />
+                      <path d="M12.6 11.8l2-.6" stroke="#FFE690" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  ) : (
+                    <span className="shrink-0" style={{ color: n.color }}>
+                      <Icon name={n.icon} size={26} strokeWidth={2.6} />
+                    </span>
+                  )}
+                  <span className="hidden lg:inline">{t(`nav.${n.key}`)}</span>
                 </NavLink>
               ))}
             </nav>
@@ -110,7 +119,6 @@ export default function Layout() {
             <LanguageSwitch />
             {user ? (
               <>
-                <RankBadge rank={user.rank} points={user.rankPoints} compact />
                 <Link to="/shop" className="chip hidden min-h-11 px-3 text-base sm:inline-flex" title="Ruby" data-testid="ruby-chip">
                   <Icon name="ruby" size={18} /> {user.ruby}
                 </Link>
@@ -142,7 +150,7 @@ export default function Layout() {
 
       {user && (
         <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
-          {NAV.filter((n) => MOBILE_MAIN.includes(n.key)).map((n) => (
+          {navOf(MOBILE_MAIN).map((n) => (
             <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
               <Icon name={n.icon} />
               {t(`nav.${n.key}`)}

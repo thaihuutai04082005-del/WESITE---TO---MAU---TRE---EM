@@ -17,11 +17,12 @@ export default function LanguageSwitch() {
     if (user) updateProfile({ language: next }).catch(() => {});
   };
   return (
-    <button type="button" onClick={change} className="btn-ghost min-h-11 min-w-11 gap-1 rounded-full px-2 text-base sm:px-3" aria-label={t('nav.language')} data-testid="lang-switch">
+    <button type="button" onClick={change} className="btn-ghost min-h-11 min-w-11 gap-1.5 whitespace-nowrap rounded-full px-2 text-base sm:min-w-[8.5rem] sm:px-5" aria-label={t('nav.language')} data-testid="lang-switch">
       <span className="hidden sm:inline">
         <Icon name="globe" size={20} />
       </span>
-      {i18n.language.toUpperCase()}
+      <span className="sm:hidden">{i18n.language.toUpperCase()}</span>
+      <span className="hidden sm:inline">{i18n.language === 'vi' ? 'Tiếng Việt' : 'English'}</span>
     </button>
   );
 }

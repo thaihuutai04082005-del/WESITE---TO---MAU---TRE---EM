@@ -90,6 +90,8 @@
     "username": "Tên đăng nhập",
     "usernameHint": "4–20 ký tự: chữ không dấu, số, dấu _ hoặc dấu chấm.",
     "password": "Mật khẩu",
+    "showPassword": "Hiện mật khẩu",
+    "hidePassword": "Ẩn mật khẩu",
     "confirmPassword": "Nhập lại mật khẩu",
     "passwordHint": "Ít nhất 6 ký tự, có cả chữ và số.",
     "passwordMismatch": "Hai mật khẩu chưa giống nhau.",

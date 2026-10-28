@@ -90,6 +90,8 @@
     "username": "Username",
     "usernameHint": "4–20 characters: letters, numbers, _ or dot.",
     "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "confirmPassword": "Repeat password",
     "passwordHint": "At least 6 characters with letters and numbers.",
     "passwordMismatch": "The passwords don't match.",
