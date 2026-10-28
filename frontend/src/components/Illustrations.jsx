@@ -24,16 +24,7 @@ export function ColorArt() {
 export function TrophyArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <g stroke={INK} strokeWidth="3" strokeLinejoin="round">
-        <path d="M78 34 Q50 34 52 58 Q55 80 84 82" fill="none" stroke="#E6A817" strokeWidth="9" strokeLinecap="round" />
-        <path d="M142 34 Q170 34 168 58 Q165 80 136 82" fill="none" stroke="#E6A817" strokeWidth="9" strokeLinecap="round" />
-        <path d="M72 22 H148 Q150 84 110 96 Q70 84 72 22 Z" fill="#FFD54F" />
-        <path d="M84 30 Q86 70 104 84" fill="none" stroke="#FFF3B0" strokeWidth="6" strokeLinecap="round" />
-        <rect x="100" y="94" width="20" height="18" fill="#E6A817" />
-        <rect x="82" y="110" width="56" height="12" rx="4" fill="#FFC94D" />
-        <rect x="74" y="120" width="72" height="16" rx="5" fill="#8B5A2B" />
-        <polygon points="110,38 116,52 131,53 119,62 123,77 110,68 97,77 101,62 89,53 104,52" fill="#FFF3B0" strokeWidth="2.5" />
-      </g>
+      <image href="/mascots/daututruong.webp" x="26" y="2" width="168" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
