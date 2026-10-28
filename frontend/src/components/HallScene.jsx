@@ -1,7 +1,10 @@
 // Cảnh Hội trường triển lãm vẽ bằng SVG/CSS (co giãn theo màn hình): trần xanh có đèn, tường kem kẻ sọc,
-// thanh treo tranh bằng gỗ, đèn rọi + khung tranh + bảng tên, hàng cột ruy băng đỏ, chậu cây, cửa sổ vòm, sàn gạch nâu.
+// thanh treo tranh bằng gỗ, đèn rọi + khung tranh + bảng tên, hàng cột ruy băng đỏ, chậu cây, sàn gạch nâu; mỗi tranh có thẻ thả cảm xúc kiểu mạng xã hội; hai nút mũi tên lướt sang 5 tranh khác.
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { REACTIONS } from '../lib/exhibition';
 import { ArtworkImage } from './Exhibition';
+import Icon from './Icon';
 
 /** Đèn rọi treo trên thanh gỗ: chụp đèn nâu + chùm sáng toả xuống khung tranh. */
 function Lamp() {
@@ -28,13 +31,105 @@ function Hanger() {
   );
 }
 
-/** Một ô tranh trên tường: có tranh thật (thắng giải) hoặc ô trống "Sắp ra mắt". */
-export function HallFrame({ entry, picture, onOpen, lang }) {
+/** Thẻ cảm xúc dưới mỗi tranh (kiểu Facebook): dòng tóm tắt (vài cảm xúc nhiều nhất + tổng) và nút "Thả cảm xúc" mở bảng 5 cảm xúc. */
+function ReactBar({ entry, reactionsOpen, onReact }) {
+  const { t } = useTranslation();
+  const [pick, setPick] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const box = useRef(null);
+  useEffect(() => {
+    if (!pick) return undefined;
+    const close = (e) => {
+      if (box.current && !box.current.contains(e.target)) setPick(false);
+    };
+    document.addEventListener('pointerdown', close);
+    return () => document.removeEventListener('pointerdown', close);
+  }, [pick]);
+
+  const canReact = reactionsOpen && !entry.own && !entry.final;
+  const top = REACTIONS.filter((r) => entry.reactions[r.key] > 0)
+    .sort((a, b) => entry.reactions[b.key] - entry.reactions[a.key])
+    .slice(0, 3);
+  const mine = REACTIONS.find((r) => r.key === entry.mine);
+  const hint = entry.own ? t('exhibition.ownHint') : !reactionsOpen || entry.final ? t('exhibition.lockedHint') : undefined;
+
+  async function choose(key) {
+    if (busy) return;
+    setBusy(true);
+    try {
+      await onReact(entry, key);
+    } finally {
+      setBusy(false);
+      setPick(false);
+    }
+  }
+
+  return (
+    <div ref={box} className="hall-react relative" data-testid={`wall-react-${entry.id}`}>
+      <div className="flex h-6 items-center justify-center gap-1.5 text-xs font-extrabold text-[#6B4A0D]">
+        {entry.total > 0 && (
+          <>
+            <span className="flex -space-x-1.5">
+              {top.map((r) => (
+                <span key={r.key} className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-[13px] leading-none shadow-soft">
+                  {r.emoji}
+                </span>
+              ))}
+            </span>
+            <span data-testid={`wall-total-${entry.id}`}>{entry.total}</span>
+          </>
+        )}
+      </div>
+      <button
+        type="button"
+        disabled={!canReact}
+        onClick={() => setPick((v) => !v)}
+        title={hint}
+        aria-expanded={pick}
+        className={`mx-auto flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-extrabold shadow-soft transition enabled:hover:-translate-y-0.5 disabled:opacity-60 sm:text-sm ${mine ? 'bg-primary-light text-primary-dark' : 'bg-white text-[#6B4A0D]'}`}
+      >
+        {mine ? (
+          <>
+            <span className="text-base leading-none">{mine.emoji}</span>
+            <span className="truncate">{t(`exhibition.reactions.${mine.key}`)}</span>
+          </>
+        ) : (
+          <>
+            <span className="text-base leading-none">🤍</span>
+            <span className="truncate">{t('exhibition.reactBtn')}</span>
+          </>
+        )}
+      </button>
+      {pick && (
+        <div className="absolute bottom-full left-1/2 z-30 mb-1 flex -translate-x-1/2 gap-1 rounded-full bg-white p-1.5 shadow-pop" role="menu">
+          {REACTIONS.map((r) => (
+            <button
+              key={r.key}
+              type="button"
+              role="menuitem"
+              onClick={() => choose(r.key)}
+              disabled={busy}
+              aria-pressed={entry.mine === r.key}
+              title={t(`exhibition.reactions.${r.key}`)}
+              data-testid={`wall-pick-${r.key}`}
+              className={`flex h-9 w-9 items-center justify-center rounded-full text-2xl leading-none transition hover:scale-125 ${entry.mine === r.key ? 'bg-primary-light' : ''}`}
+            >
+              {r.emoji}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Một ô tranh trên tường: có tranh thật hoặc ô trống "Sắp ra mắt"; bên dưới là bảng tên + thẻ cảm xúc. */
+export function HallFrame({ entry, picture, onOpen, lang, reactionsOpen, onReact }) {
   const { t } = useTranslation();
   const filled = !!entry;
   const Wrap = filled ? 'button' : 'div';
   return (
-    <div className="flex min-w-0 flex-col items-center">
+    <div className="hall-slot flex min-w-0 flex-col items-center">
       <Lamp />
       <Hanger />
       <Wrap
@@ -71,7 +166,17 @@ export function HallFrame({ entry, picture, onOpen, lang }) {
       <div className="hall-plaque mt-4 w-24 max-w-[80%] sm:w-28" title={filled ? `${entry.name[lang]} · ${entry.author.nickname}` : undefined}>
         {filled && <span className="block truncate px-1 text-[10px] font-extrabold text-[#6B4A0D] sm:text-xs">{entry.author.nickname}</span>}
       </div>
+      {filled ? <ReactBar entry={entry} reactionsOpen={reactionsOpen} onReact={onReact} /> : <div className="hall-react" aria-hidden="true" />}
     </div>
+  );
+}
+
+/** Nút mũi tên màu lướt sang 5 tranh khác; nhún nhẹ để thu hút bé bấm. */
+export function HallArrow({ dir, onClick, label }) {
+  return (
+    <button type="button" onClick={onClick} aria-label={label} title={label} className={`hall-arrow ${dir === 'next' ? 'hall-arrow-r' : 'hall-arrow-l'}`} data-testid={`hall-${dir}`}>
+      <Icon name="chevronRight" size={34} strokeWidth={4} className={dir === 'next' ? '' : 'rotate-180'} />
+    </button>
   );
 }
 
@@ -111,12 +216,3 @@ export function Plant({ flip = false, className = '' }) {
   );
 }
 
-/** Cửa sổ vòm nhìn ra trời xanh, đồi cỏ và mây. */
-export function ArchWindow({ className = '' }) {
-  return (
-    <div className={`hall-window ${className}`} aria-hidden="true">
-      <span className="hall-window-cloud" />
-      <span className="hall-window-hill" />
-    </div>
-  );
-}

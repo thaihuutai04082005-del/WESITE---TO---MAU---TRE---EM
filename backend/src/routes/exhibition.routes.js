@@ -5,6 +5,7 @@ import { requireAuth, requireAdmin, requireNickname } from '../middlewares/auth.
 const r = Router();
 r.use(requireAuth);
 r.get('/', c.hall);
+r.get('/wall', c.wall);
 r.get('/mine', c.mine);
 r.get('/rooms/:board', c.room);
 r.post('/entries', requireNickname, c.submit);
