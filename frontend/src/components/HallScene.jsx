@@ -134,7 +134,7 @@ export function HallFrame({ entry, picture, onOpen, lang, reactionsOpen, onReact
       <Hanger />
       <Wrap
         {...(filled ? { type: 'button', onClick: onOpen, 'data-testid': `entry-${entry.id}` } : {})}
-        className={`hall-frame group relative w-full max-w-[210px] 2xl:max-w-[270px] ${filled ? 'cursor-pointer transition hover:-translate-y-1' : ''}`}
+        className={`hall-frame group relative w-full max-w-[210px] lg:max-w-[260px] 2xl:max-w-[310px] ${filled ? 'cursor-pointer transition hover:-translate-y-1' : ''}`}
       >
         <span className="hall-knob left-0 top-0" />
         <span className="hall-knob right-0 top-0" />

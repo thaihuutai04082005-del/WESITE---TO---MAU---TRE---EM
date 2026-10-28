@@ -217,7 +217,7 @@ export default function Hall() {
   const renderRow = (p, extra) => {
     const data = pages[p];
     return (
-      <div className={`grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 ${extra}`}>
+      <div className={`grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-4 lg:grid-cols-5 lg:gap-x-8 ${extra}`}>
         {Array.from({ length: PAGE }, (_, i) => {
           const w = data?.entries[i] || null;
           return (
@@ -247,8 +247,8 @@ export default function Hall() {
 
         {/* Tường: thanh tiêu đề, thanh gỗ, đèn + khung tranh, hàng cột ruy băng */}
         <div className="hall-wall">
-          <header className="relative z-20 mx-auto flex max-w-[1180px] 2xl:max-w-[1500px] flex-wrap items-center gap-3 rounded-[28px] bg-white px-4 py-3 shadow-soft sm:gap-4 sm:px-6">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] sm:h-16 sm:w-16">
+          <header className="relative z-20 mx-auto flex max-w-[1180px] 2xl:max-w-[1500px] flex-wrap items-center gap-3 rounded-[28px] bg-white px-4 py-2 shadow-soft sm:gap-4 sm:px-6">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] sm:h-14 sm:w-14">
               <Icon name="museum" size={34} strokeWidth={2.3} />
             </span>
             <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-[#16324F] sm:text-4xl">{t('exhibition.title')}</h1>
@@ -268,7 +268,7 @@ export default function Hall() {
 
           <div className="hall-rail" />
 
-          <section className="relative mx-auto my-auto w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 py-3 lg:px-24" data-testid="hall-wall">
+          <section className="relative mx-auto my-auto w-full max-w-[1180px] px-2 py-3 lg:max-w-[1420px] lg:px-24 2xl:max-w-[1660px]" data-testid="hall-wall">
             <div className="hall-gallery">
               {renderRow(page, slide ? `hall-out-${slide.dir}` : '')}
               {slide && <div className="hall-row-in">{renderRow(slide.to, `hall-in-${slide.dir}`)}</div>}
@@ -277,7 +277,7 @@ export default function Hall() {
             {hasNext && <HallArrow dir="next" onClick={() => go('next')} label={t('exhibition.nextPictures')} />}
           </section>
 
-          <div className="relative mx-auto mt-4 w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 lg:px-12">
+          <div className="relative mx-auto mt-2 w-full max-w-[900px] px-2">
             <RopeLine />
           </div>
           <Plant className="absolute bottom-0 left-2 hidden h-32 w-28 lg:block xl:h-44 xl:w-40" />
