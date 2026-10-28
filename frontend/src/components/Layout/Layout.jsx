@@ -19,6 +19,7 @@ import RainbowTransition from './RainbowTransition';
 import ArenaTransition from './ArenaTransition';
 import GachaTransition from './GachaTransition';
 import StoryTransition from './StoryTransition';
+import TogetherTransition from './TogetherTransition';
 import ExhibitTransition from './ExhibitTransition';
 
 // Mỗi mục một biểu tượng đúng nghĩa + màu riêng (khớp màu thẻ ở trang chính).
@@ -84,6 +85,7 @@ export default function Layout() {
       <ArenaTransition />
       <GachaTransition />
       <StoryTransition />
+      <TogetherTransition />
       <ExhibitTransition />
       <header className="no-print sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-2 px-4">

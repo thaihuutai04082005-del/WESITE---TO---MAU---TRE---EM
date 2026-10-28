@@ -1653,3 +1653,77 @@ html[data-arena-enter] main .page > *:nth-child(2) { animation-delay: 70ms; }
 html[data-arena-enter] main .page > *:nth-child(3) { animation-delay: 140ms; }
 html[data-arena-enter] main .page > *:nth-child(4) { animation-delay: 210ms; }
 html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
+
+/* ---- Hiệu ứng chuyển màn hình Tô cùng nhau (TogetherTransition): 3 giây, tiền tố tg- ---- */
+.tg-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; background: linear-gradient(#DDF6D2, #C5EEB4); animation: tg-fade 180ms ease-out both; transition: opacity 350ms ease-in-out; }
+.tg-root.tg-leaving { opacity: 0; animation: none; pointer-events: none; }
+.tg-frame { position: absolute; left: 50%; top: 50%; width: max(100vw, min(140vw, 177.7vh)); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); }
+.tg-frame img { position: absolute; height: auto; user-select: none; pointer-events: none; }
+.tg-frame .tg-bg { left: 0; top: 0; width: 100%; }
+@media (max-aspect-ratio: 5/4) {
+  .tg-frame .tg-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
+}
+.tg-paper { position: absolute; inset: 0; transform-origin: 50% 86.6%; animation: tg-paper 3000ms ease-in-out both; }
+.tg-sweep { position: absolute; inset: 0; clip-path: polygon(50% 87.4%, 50% 87.4%); animation: tg-sweep 500ms linear both; }
+.tg-sweep-red { animation-delay: 500ms; }
+.tg-sweep-yellow { animation-delay: 1000ms; }
+.tg-sweep-blue { animation-delay: 1500ms; animation-duration: 600ms; }
+.tg-char { transform-origin: 50% 100%; }
+.tg-cat { animation: tg-cat 3000ms ease-in-out both; }
+.tg-bear { animation: tg-bear 3000ms ease-in-out both; }
+.tg-rabbit { animation: tg-rabbit 3000ms ease-in-out both; }
+.tg-lite .tg-char, .tg-lite .tg-paper { animation: none; }
+@keyframes tg-fade { from { opacity: 0; } }
+@keyframes tg-sweep {
+  0% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%, 32.85% 69.93%); }
+  10% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 33.21% 68.85%, 33.60% 67.79%, 34.01% 66.76%, 34.44% 65.76%, 34.88% 64.78%, 35.35% 63.84%, 35.84% 62.92%, 36.34% 62.04%); }
+  20% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 33.58% 67.84%, 34.40% 65.85%, 35.29% 63.96%, 36.25% 62.19%, 37.29% 60.55%, 38.38% 59.04%, 39.53% 57.66%, 40.73% 56.44%); }
+  30% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 33.95% 66.90%, 35.23% 64.09%, 36.65% 61.53%, 38.22% 59.24%, 39.92% 57.25%, 41.72% 55.58%, 43.60% 54.25%, 45.56% 53.27%); }
+  40% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 34.32% 66.03%, 36.06% 62.52%, 38.06% 59.46%, 40.27% 56.89%, 42.65% 54.87%, 45.16% 53.44%, 47.75% 52.61%, 50.39% 52.40%); }
+  50% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 34.67% 65.24%, 36.90% 61.14%, 39.47% 57.74%, 42.31% 55.12%, 45.36% 53.35%, 48.53% 52.48%, 51.73% 52.54%, 54.89% 53.51%); }
+  60% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 35.01% 64.53%, 37.70% 59.95%, 40.83% 56.35%, 44.29% 53.86%, 47.95% 52.57%, 51.68% 52.53%, 55.34% 53.73%, 58.82% 56.14%); }
+  70% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 35.32% 63.89%, 38.46% 58.93%, 42.12% 55.26%, 46.13% 53.05%, 50.32% 52.40%, 54.49% 53.33%, 58.45% 55.82%, 62.03% 59.73%); }
+  80% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 35.61% 63.35%, 39.15% 58.10%, 43.28% 54.45%, 47.77% 52.60%, 52.39% 52.66%, 56.87% 54.62%, 60.97% 58.38%, 64.47% 63.72%); }
+  90% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 35.84% 62.92%, 39.72% 57.46%, 44.24% 53.89%, 49.12% 52.42%, 54.05% 53.16%, 58.72% 56.05%, 62.84% 60.92%, 66.15% 67.46%); }
+  100% { clip-path: polygon(49.94% 87.46%, 32.85% 69.93%, 35.98% 62.66%, 40.07% 57.09%, 44.83% 53.59%, 49.94% 52.39%, 55.05% 53.59%, 59.81% 57.09%, 63.90% 62.66%, 67.03% 69.93%); }
+}
+@keyframes tg-cat {
+  0% { transform: rotate(0deg) scale(1, 1); }
+  6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
+  16.67% { transform: rotate(0deg) scale(1, 1); }
+  21.67% { transform: rotate(1.6deg) scale(1, 1); }
+  30% { transform: rotate(1.6deg) scale(1, 1); }
+  33.3% { transform: rotate(0deg) scale(1.01, 1.03); }
+  40% { transform: rotate(0deg) scale(1, 1); }
+  76.7% { transform: rotate(-1.6deg) scale(1.01, 1.03); }
+  86.7% { transform: rotate(0deg) scale(1, 1); }
+}
+@keyframes tg-bear {
+  0% { transform: rotate(0deg) scale(1, 1); }
+  6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
+  16.67% { transform: rotate(0deg) scale(1, 1); }
+  38.3% { transform: rotate(0deg) scale(1, 1); }
+  43% { transform: rotate(-1.4deg) scale(1, 1.025); }
+  50% { transform: rotate(-1.4deg) scale(1, 1.025); }
+  53% { transform: rotate(0deg) scale(1.01, 1.03); }
+  60% { transform: rotate(0deg) scale(1, 1); }
+  76.7% { transform: rotate(0deg) scale(1.012, 1.035); }
+  86.7% { transform: rotate(0deg) scale(1, 1); }
+}
+@keyframes tg-rabbit {
+  0% { transform: rotate(0deg) scale(1, 1); }
+  6.67% { transform: rotate(0deg) scale(1.01, 1.03); }
+  16.67% { transform: rotate(0deg) scale(1, 1); }
+  55% { transform: rotate(0deg) scale(1, 1); }
+  60% { transform: rotate(-1.6deg) scale(1, 1); }
+  68% { transform: rotate(-1.6deg) scale(1, 1); }
+  71% { transform: rotate(0deg) scale(1.01, 1.03); }
+  76.7% { transform: rotate(0deg) scale(1, 1); }
+  79% { transform: rotate(1.6deg) scale(1.01, 1.03); }
+  86.7% { transform: rotate(0deg) scale(1, 1); }
+}
+@keyframes tg-paper {
+  0%, 69% { transform: scale(1); }
+  77% { transform: scale(1.012); }
+  87%, 100% { transform: scale(1); }
+}

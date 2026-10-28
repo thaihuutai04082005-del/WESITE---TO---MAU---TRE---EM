@@ -1,5 +1,5 @@
 // Tô màu cùng nhau (Mục 10.1): tạo phòng rồi chia sẻ mã, hoặc nhập mã bạn gửi. Không có danh sách phòng công khai.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getSocket, emitAck } from '../../services/socket';
@@ -38,6 +38,11 @@ export default function Together() {
   const navigate = useNavigate();
   const [picking, setPicking] = useState(false);
   const [code, setCode] = useState('');
+
+  // Báo cho hiệu ứng chuyển màn hình (TogetherTransition) biết trang đã sẵn sàng.
+  useEffect(() => {
+    window.dispatchEvent(new Event('btm:page-ready'));
+  }, []);
 
   const create = async (picture) => {
     setPicking(false);
