@@ -104,10 +104,7 @@ export default function Layout() {
                   data-testid={`nav-${n.key}`}
                 >
                   {n.key === 'collection' ? (
-                    <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden="true">
-                      <path d="M16 3.2l3.7 7.6 8.3 1.2-6 5.9 1.4 8.3L16 22.2 8.6 26.2 10 17.9 4 12l8.3-1.2z" fill="#FFC21A" stroke="#E8860B" strokeWidth="2.4" strokeLinejoin="round" />
-                      <path d="M12.6 11.8l2-.6" stroke="#FFE690" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
+                    <img src="/mascots/suutap.webp" alt="" className="h-8 w-auto shrink-0" draggable="false" />
                   ) : (
                     <span className="shrink-0" style={{ color: n.color }}>
                       <Icon name={n.icon} size={22} strokeWidth={2.4} />
