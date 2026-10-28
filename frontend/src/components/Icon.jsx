@@ -53,6 +53,7 @@ const P = {
   chevronDown: 'M6 9l6 6 6-6',
   chevronRight: 'M9 6l6 6-6 6',
   signature: 'M3 19c2.5-3 4-3 5 0s2.5 3 5 0M14 4.5l5.5 5.5M16.5 2l5.5 5.5-9.5 9.5H9v-3.5z',
+  clock: 'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5.5l3.5 2',
   museum: 'M3 21h18M4 18h16M5 10h14M12 3l9 5H3zM6.5 10v8M10 10v8M14 10v8M17.5 10v8',
   collection: 'M4 7h16v13H4zM7 4h10M9 11l2 2 4-4M8 17h8',
   sun: 'M12 16a4 4 0 100-8 4 4 0 000 8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',

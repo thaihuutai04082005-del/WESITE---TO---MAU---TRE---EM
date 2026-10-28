@@ -1,55 +1,13 @@
 // Sảnh Hội trường triển lãm: lịch vòng tuần này, 4 phòng tranh, tranh được yêu thích nhất tuần trước, nội quy.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useAuth } from '../../store/auth';
 import { formatVnTime } from '../../lib/format';
-import { BOARDS } from '../../lib/exhibition';
-import { EntryModal, FramedArtwork, RulesButton } from '../../components/Exhibition';
+import { EntryModal, RulesButton } from '../../components/Exhibition';
+import { ArchWindow, HallFrame, Plant, RopeLine } from '../../components/HallScene';
 import Icon from '../../components/Icon';
-
-/** Màu thẻ phòng ở sảnh (pastel theo tông web): nền chuyển màu + màu nhấn cho chip & nút. */
-const ROOM_STYLE = {
-  S: { from: '#FFF6D6', to: '#FFE9A8', accent: '#E0A800', text: '#9A6A00' },
-  A: { from: '#EAF6FF', to: '#CFE8FF', accent: '#2B9BF4', text: '#1769B5' },
-  B: { from: '#FFEFE6', to: '#FFD9C7', accent: '#F07B4F', text: '#B8532C' },
-  free: { from: '#F3EFFF', to: '#E2D9FF', accent: '#7D5FFF', text: '#5B3FD6' },
-};
-
-/** Biểu tượng từng phòng: vương miện / kim cương / ngôi sao / bảng màu. */
-function RoomIcon({ board }) {
-  const ink = '#1B2A38';
-  return (
-    <svg viewBox="0 0 64 64" className="h-16 w-16" aria-hidden="true">
-      <g stroke={ink} strokeWidth="2.5" strokeLinejoin="round">
-        {board === 'S' && (
-          <>
-            <path d="M10 46 L8 20 L22 32 L32 12 L42 32 L56 20 L54 46 Z" fill="#FFD54F" />
-            <rect x="10" y="46" width="44" height="8" rx="3" fill="#FFC21A" />
-            <circle cx="32" cy="36" r="4.5" fill="#FF5F7E" strokeWidth="2" />
-          </>
-        )}
-        {board === 'A' && (
-          <>
-            <path d="M12 24 L22 12 H42 L52 24 L32 54 Z" fill="#7DC4FF" />
-            <path d="M12 24 H52 M22 12 L28 24 L32 54 M42 12 L36 24 L32 54 M28 24 L32 12 L36 24" fill="none" strokeWidth="2" />
-          </>
-        )}
-        {board === 'B' && <polygon points="32,8 39,24 56,25 43,37 47,54 32,45 17,54 21,37 8,25 25,24" fill="#FFC94D" />}
-        {board === 'free' && (
-          <>
-            <path d="M32 8C18 8 8 18 8 30c0 11 9 20 20 20 3 0 5-2 5-5 0-2-1-3-1-5 0-2 2-4 4-4h6c8 0 14-5 14-13C56 14 45 8 32 8z" fill="#FFF3D6" />
-            <circle cx="20" cy="28" r="4.5" fill="#FF5F7E" strokeWidth="2" />
-            <circle cx="26" cy="17" r="4.5" fill="#FFC94D" strokeWidth="2" />
-            <circle cx="39" cy="16" r="4.5" fill="#4FA3E0" strokeWidth="2" />
-            <circle cx="47" cy="26" r="4.5" fill="#4CD787" strokeWidth="2" />
-          </>
-        )}
-      </g>
-    </svg>
-  );
-}
 
 function IconBubble({ name, bg, color }) {
   return (
@@ -104,6 +62,58 @@ export function ScheduleBanner({ schedule, compact = false }) {
   );
 }
 
+const FRAME_SLOTS = 5;
+
+/** Nút đồng hồ trên thanh tiêu đề: chấm đỏ khi cổng/thả cảm xúc đang mở; bấm ra bảng lịch triển lãm. */
+function ScheduleMenu({ schedule }) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const [open, setOpen] = useState(false);
+  const box = useRef(null);
+  useEffect(() => {
+    if (!open) return undefined;
+    const close = (e) => {
+      if (box.current && !box.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', close);
+    return () => document.removeEventListener('pointerdown', close);
+  }, [open]);
+  const live = schedule.reactionsOpen || schedule.submitOpen;
+  return (
+    <div className="relative" ref={box}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#FBEFD8] text-[#16324F] transition hover:scale-105 sm:h-14 sm:w-14"
+        aria-label={t('exhibition.scheduleBtn')}
+        aria-expanded={open}
+        data-testid="exhibit-schedule-btn"
+      >
+        <Icon name="clock" size={28} strokeWidth={2.6} />
+        {live && <span className="absolute -right-0.5 -top-0.5 h-4 w-4 rounded-full border-2 border-white bg-[#FF4D3D]" />}
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full z-30 mt-2 w-64 space-y-3 rounded-2xl bg-white p-4 text-left shadow-pop" data-testid="exhibit-schedule">
+          <div className="flex items-start gap-3">
+            <span className="mt-0.5 text-[#16324F]"><Icon name="calendar" size={22} strokeWidth={2.4} /></span>
+            <div className="min-w-0">
+              <div className="text-sm font-extrabold text-[#16324F]">{t('exhibition.reactSchedule')}</div>
+              <div className="text-xs font-bold text-muted">{schedule.reactionsOpen ? t('exhibition.reactUntil', { date: formatVnTime(schedule.lockAt, lang) }) : t('exhibition.judging', { date: formatVnTime(schedule.nextRoundStart, lang) })}</div>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="mt-0.5 text-[#16324F]"><Icon name="hourglass" size={22} strokeWidth={2.4} /></span>
+            <div className="min-w-0">
+              <div className="text-sm font-extrabold text-[#16324F]">{t('exhibition.gateTime')}</div>
+              <div className="text-xs font-bold text-muted">{schedule.submitOpen ? t('exhibition.submitOpenUntil', { date: formatVnTime(schedule.submitClosesAt, lang) }) : t('exhibition.submitOpensAt', { date: formatVnTime(schedule.submitOpensAt, lang) })}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Hall() {
   const { t, i18n } = useTranslation();
   const user = useAuth((s) => s.user);
@@ -117,89 +127,64 @@ export default function Hall() {
   if (!d) return <div className="page text-center text-muted">{t('common.loading')}</div>;
   if (d.error) return <div className="page text-center text-muted">{t('errors.server_error')}</div>;
 
+  const lang = i18n.language;
+  const slots = Array.from({ length: Math.max(FRAME_SLOTS, 0) }, (_, i) => d.winners[i] || null);
+
   return (
-    <div className="page space-y-6">
-      {/* Đầu trang: biểu tượng bảo tàng + tên + 2 nút */}
-      <section className="flex flex-wrap items-center gap-3 sm:gap-5">
-        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] shadow-soft sm:h-20 sm:w-20">
-          <Icon name="museum" size={38} strokeWidth={2.3} />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-4xl">{t('exhibition.title')}</h1>
+    <div>
+      <div className="hall-scene" data-testid="exhibit-hall">
+        {/* Trần xanh + đèn tròn */}
+        <div className="hall-ceiling">
+          <span /><span /><span /><span />
         </div>
-        <div className="flex w-full flex-wrap gap-2 sm:w-auto">
-          <RulesButton className="btn-ghost flex-1 whitespace-nowrap bg-white px-3 sm:flex-none sm:px-6" />
-          <Link to="/collection?tab=artworks" className="btn-primary flex-[1.6] whitespace-nowrap px-3 sm:flex-none sm:px-6" data-testid="go-submit">
-            <Icon name="send" size={20} /> {t('exhibition.submitCta')}
-          </Link>
-          {user?.role === 'admin' && (
-            <Link to="/exhibition/review" className="btn-ghost bg-white">
-              <Icon name="shield" size={20} /> {t('exhibition.review.title')}
-            </Link>
-          )}
-        </div>
-      </section>
 
-      <ScheduleBanner schedule={d.schedule} />
+        {/* Tường: thanh tiêu đề, thanh gỗ, đèn + khung tranh, hàng cột ruy băng */}
+        <div className="hall-wall">
+          <ArchWindow className="absolute left-0 top-32 hidden lg:block" />
+          <ArchWindow className="absolute right-0 top-32 hidden scale-x-[-1] lg:block" />
 
-      {/* 4 phòng tranh: khung vòm pastel, biểu tượng giữa, chip số tranh + nút mũi tên */}
-      <section>
-        <h2 className="mb-3 flex items-center gap-2 font-display text-2xl font-extrabold">
-          <Icon name="palette" size={26} className="text-primary" /> {t('exhibition.rooms')}
-        </h2>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {BOARDS.map((b) => {
-            const st = ROOM_STYLE[b.key];
-            return (
-              <Link
-                key={b.key}
-                to={`/exhibition/${b.key}`}
-                className="group rounded-[28px] p-2.5 shadow-soft transition hover:-translate-y-1 hover:shadow-pop"
-                style={{ background: `linear-gradient(180deg, ${st.from}, ${st.to})` }}
-                data-testid={`room-${b.key}`}
-              >
-                <div className="flex h-full flex-col items-center gap-2 rounded-t-[80px] rounded-b-[20px] bg-white/60 px-3 pb-3 pt-5 text-center">
-                  <span className="transition group-hover:scale-110">
-                    <RoomIcon board={b.key} />
-                  </span>
-                  <span className="font-display text-lg font-extrabold leading-tight sm:text-xl">{t(`exhibition.boards.${b.key}`)}</span>
-                  <div className="mt-auto flex w-full items-center justify-center gap-2 pt-1">
-                    <span className="whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-xs font-bold shadow-soft sm:px-3 sm:text-sm" style={{ color: st.text }}>
-                      {t('exhibition.pictures', { count: d.counts[b.key] || 0 })}
-                    </span>
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white sm:h-8 sm:w-8 transition group-hover:translate-x-0.5" style={{ background: st.accent }}>
-                      <Icon name="arrow" size={18} strokeWidth={3} />
-                    </span>
-                  </div>
-                </div>
+          <header className="relative z-20 mx-auto flex max-w-[1180px] 2xl:max-w-[1500px] flex-wrap items-center gap-3 rounded-[28px] bg-white px-4 py-3 shadow-soft sm:gap-4 sm:px-6">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFD54F] text-[#1F3A6B] sm:h-16 sm:w-16">
+              <Icon name="museum" size={34} strokeWidth={2.3} />
+            </span>
+            <h1 className="min-w-0 flex-1 font-display text-2xl font-extrabold leading-tight text-[#16324F] sm:text-4xl">{t('exhibition.title')}</h1>
+            <div className="flex w-full flex-nowrap items-center justify-end gap-2 sm:w-auto sm:gap-3">
+              <RulesButton className="btn-ghost whitespace-nowrap bg-white px-3 text-sm sm:px-6 sm:text-base [&_svg]:shrink-0" />
+              <Link to="/collection?tab=artworks" className="btn-primary whitespace-nowrap px-3 text-sm sm:px-6 sm:text-base [&_svg]:shrink-0" data-testid="go-submit">
+                <Icon name="send" size={20} /> {t('exhibition.submitCta')}
               </Link>
-            );
-          })}
-        </div>
-      </section>
+              {user?.role === 'admin' && (
+                <Link to="/exhibition/review" className="btn-ghost bg-white" aria-label={t('exhibition.review.title')} title={t('exhibition.review.title')}>
+                  <Icon name="shield" size={20} />
+                </Link>
+              )}
+              <ScheduleMenu schedule={d.schedule} />
+            </div>
+          </header>
 
-      {/* Vinh danh vòng vừa rồi */}
-      <section className="rounded-[28px] bg-white p-5 shadow-soft">
-        <div className="flex items-center gap-3">
-          <IconBubble name="trophy" bg="#FFF4CC" color="#E0A800" />
-          <div className="min-w-0 flex-1">
-            <h2 className="font-display text-xl font-extrabold leading-tight sm:text-2xl">{t('exhibition.winnersTitle')}</h2>
-            <p className="text-sm text-muted">
-              {d.winners.length ? t('exhibition.winnersWeek', { date: formatVnTime(`${d.lastRound}T12:00:00Z`, i18n.language, { time: false }) }) : t('exhibition.noWinners')}
+          <div className="hall-rail" />
+
+          <section className="mx-auto my-auto w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 py-3 lg:px-24">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
+              {slots.map((w, i) => (
+                <HallFrame key={w ? w.id : `empty${i}`} entry={w} picture={w ? d.pictures[w.pictureId] : null} onOpen={() => setOpen(w)} lang={lang} />
+              ))}
+            </div>
+            <p className="mt-3 text-center text-xs font-bold text-[#7A5A12] sm:text-sm">
+              {d.winners.length ? `${t('exhibition.winnersTitle')} · ${t('exhibition.winnersWeek', { date: formatVnTime(`${d.lastRound}T12:00:00Z`, lang, { time: false }) })}` : t('exhibition.noWinners')}
             </p>
+          </section>
+
+          <div className="relative mx-auto mt-4 w-full max-w-[1180px] 2xl:max-w-[1500px] px-2 lg:px-12">
+            <RopeLine />
           </div>
+          <Plant className="absolute bottom-0 left-2 hidden h-32 w-28 lg:block xl:h-44 xl:w-40" />
+          <Plant flip className="absolute bottom-0 right-2 hidden h-32 w-28 lg:block xl:h-44 xl:w-40" />
         </div>
-        {d.winners.length > 0 && (
-          <div className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
-            {d.winners.map((w) => (
-              <div key={w.id} className="space-y-4">
-                <div className="text-center text-xs font-extrabold text-muted">{t(`exhibition.boards.${w.board}`)}</div>
-                <FramedArtwork entry={w} picture={d.pictures[w.pictureId]} onClick={() => setOpen(w)} />
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+
+        {/* Sàn gạch */}
+        <div className="hall-floor" aria-hidden="true" />
+      </div>
 
       {open && <EntryModal entry={{ ...open, final: true }} picture={d.pictures[open.pictureId]} reactionsOpen={false} onClose={() => setOpen(null)} />}
     </div>
