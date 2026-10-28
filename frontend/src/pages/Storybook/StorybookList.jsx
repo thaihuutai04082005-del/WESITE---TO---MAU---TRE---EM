@@ -8,8 +8,12 @@ export default function StorybookList() {
   const { t } = useTranslation();
   const [books, setBooks] = useState(null);
   useEffect(() => {
-    api.get('/storybooks').then((r) => setBooks(r.storybooks));
+    api.get('/storybooks').then((r) => setBooks(r.storybooks)).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
   }, []);
+  // Báo cho hiệu ứng chuyển màn hình (StoryTransition) biết trang đã sẵn sàng.
+  useEffect(() => {
+    if (books) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [books]);
   return (
     <div className="page space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
