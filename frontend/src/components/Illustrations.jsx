@@ -56,29 +56,11 @@ export function BookArt() {
   );
 }
 
-/** Nhiệm vụ: ngôi sao cười + bảng nhiệm vụ có dấu tick. */
+/** Nhiệm vụ: ngôi sao cười + bảng nhiệm vụ có dấu tick (hình tách từ ảnh gốc, /public/mascots/nhiemvu.webp). */
 export function MissionArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        <g transform="translate(0 -10) rotate(-12 80 108)">
-          <rect x="44" y="66" width="72" height="82" rx="8" fill="#FFFFFF" />
-          <rect x="64" y="60" width="32" height="14" rx="4" fill="#4FA3E0" />
-          {[0, 1, 2].map((k) => (
-            <g key={k} transform={`translate(0 ${k * 22})`}>
-              <rect x="54" y="84" width="14" height="14" rx="3" fill={k < 2 ? '#4CD787' : '#FFFFFF'} />
-              {k < 2 && <path d="M57 91 L60 95 L66 87" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />}
-              <path d={`M74 91 H${104 - k * 6}`} stroke="#8FA8BF" strokeWidth="3" strokeLinecap="round" />
-            </g>
-          ))}
-        </g>
-        <polygon points="150,8 166,44 205,47 175,72 185,110 150,90 115,110 125,72 95,47 134,44" fill="#FFD54F" strokeWidth="3" />
-      </g>
-      <circle cx="140" cy="58" r="4.5" fill={INK} />
-      <circle cx="160" cy="58" r="4.5" fill={INK} />
-      <ellipse cx="131" cy="68" rx="6" ry="4" fill="#FFB3C1" />
-      <ellipse cx="169" cy="68" rx="6" ry="4" fill="#FFB3C1" />
-      <path d="M142 68 Q150 78 158 68" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <image href="/mascots/nhiemvu.webp" x="24" y="2" width="172" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
