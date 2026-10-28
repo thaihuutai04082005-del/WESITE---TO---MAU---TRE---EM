@@ -7,7 +7,7 @@
 //  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `gt-`). Toàn bộ cảnh dài 2,5 giây:
 //       0,00–0,38  hộp quà ĐÓNG kín trồi lên từ dưới, nảy nhẹ   | 0,38–0,80  hộp rung 2 nhịp rồi nén xuống
 //       0,80–1,70  nắp bật mở và NỔ RA CÙNG LÚC: ba thẻ, giọt sơn, ngôi sao, hạt màu, ánh sáng
-//       1,70–2,50  nơ nảy, thẻ vàng nhún, mọi thứ giảm tốc rồi đứng yên (khung hình cuối)
+//       1,70–2,00  nơ nảy, thẻ vàng nhún rồi lớp phủ mờ đi vào trang Bóc thẻ
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Bóc thẻ NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
@@ -19,10 +19,10 @@ import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
 
-const NAVIGATE_MS = 2100;   // chuyển sang trang Bóc thẻ (đang nằm dưới lớp phủ)
-const MIN_MS = 2700;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi (2,5 giây cảnh + giữ khung cuối)
+const NAVIGATE_MS = 1500;   // chuyển sang trang Bóc thẻ (đang nằm dưới lớp phủ)
+const MIN_MS = 2000;        // tối thiểu trước khi lớp phủ mờ đi: ba thẻ đã đứng yên, không giữ khung cuối lâu
 const MAX_WAIT_MS = 8000;   // trần chờ trang đích tải xong
-const FADE_MS = 450;        // lớp phủ mờ dần
+const FADE_MS = 350;        // lớp phủ mờ dần
 const ENTER_MS = 1000;      // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
 const DING_MS = 830;        // tiếng ting thứ hai lúc nắp bật mở và ba thẻ nổ ra
 
