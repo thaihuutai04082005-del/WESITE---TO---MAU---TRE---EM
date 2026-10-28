@@ -85,7 +85,7 @@ function HomeCard({ card, onInfo }) {
       </div>
       <div className="pointer-events-none relative -my-2 mr-12">
         <div className="absolute inset-0 transition duration-300 group-hover:scale-105">
-          <Art bubble={t('home.bookBubble')} />
+          <Art />
         </div>
       </div>
       <button

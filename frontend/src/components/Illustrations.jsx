@@ -58,41 +58,11 @@ export function GachaArt() {
   );
 }
 
-/** Truyện tranh: cuốn truyện mở — trang trái là tranh chú gấu, trang phải là lời thoại & chú thích. */
-export function BookArt({ bubble = 'Xin chào!' }) {
+/** Truyện tranh: cuốn truyện mở — trang trái là tranh chú gấu, trang phải là lời thoại "Xin chào!" (hình tách từ ảnh gốc, /public/mascots/truyentranh.webp). */
+export function BookArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <g stroke={INK} strokeWidth="2.5" strokeLinejoin="round">
-        {/* bìa + gáy sách */}
-        <path d="M8 40 Q60 26 110 42 Q160 26 212 40 L212 146 Q160 134 110 148 Q60 134 8 146 Z" fill="#FF8A65" />
-        {/* hai trang giấy */}
-        <path d="M16 34 Q62 22 110 38 L110 140 Q62 128 16 140 Z" fill="#FFFDF6" />
-        <path d="M204 34 Q158 22 110 38 L110 140 Q158 128 204 140 Z" fill="#FFFDF6" />
-        {/* dải đánh dấu trang */}
-        <path d="M184 27 L184 58 L191 51 L198 58 L198 25" fill="#FF5F7E" strokeWidth="2" />
-        {/* trang trái: khung tranh có chú gấu */}
-        <rect x="26" y="42" width="76" height="72" rx="6" fill="#BDE6FF" />
-        <path d="M26 98 Q50 90 72 98 T102 96 L102 108 Q102 114 96 114 L32 114 Q26 114 26 108 Z" fill="#8BD17C" strokeWidth="2" />
-        <circle cx="90" cy="54" r="6" fill="#FFD54F" strokeWidth="2" />
-      </g>
-      <image href="/mascots/gau.svg" x="36" y="47" width="52" height="66" preserveAspectRatio="xMidYMax meet" />
-      <g stroke="#8FA8BF" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M30 124 H96" />
-        <path d="M30 131 H78" />
-      </g>
-      {/* trang phải: bong bóng lời thoại chỉ về chú gấu + chú thích */}
-      <g stroke={INK} strokeWidth="2.2" strokeLinejoin="round">
-        <path d="M122 46 H192 Q198 46 198 52 V76 Q198 82 192 82 H132 L118 92 L124 80 Q118 80 118 74 V52 Q118 46 122 46 Z" fill="#FFFFFF" />
-      </g>
-      <text x="158" y="69" textAnchor="middle" fontSize="13" fontWeight="800" fontFamily="Viet Hook, Baloo 2, Nunito, sans-serif" fill={INK}>
-        {bubble}
-      </text>
-      <g stroke="#8FA8BF" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M122 100 H196" />
-        <path d="M122 110 H190" />
-        <path d="M122 120 H172" />
-      </g>
-      <circle cx="194" cy="128" r="6" fill="#FFD54F" stroke={INK} strokeWidth="1.8" />
+      <image href="/mascots/truyentranh.webp" x="4" y="10" width="212" height="126" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
