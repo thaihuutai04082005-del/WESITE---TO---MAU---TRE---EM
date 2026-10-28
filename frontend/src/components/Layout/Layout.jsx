@@ -90,13 +90,13 @@ export default function Layout() {
             <span className="hidden whitespace-nowrap sm:inline">{t('app.name')}</span>
           </Link>
           {user && (
-            <nav className="ml-3 hidden flex-1 items-center gap-1 lg:flex">
+            <nav className="mx-4 hidden flex-1 items-center justify-evenly gap-1 lg:flex">
               {navOf(DESKTOP_MAIN).map((n) => (
                 <NavLink
                   key={n.to}
                   to={n.to}
                   title={t(`nav.${n.key}`)}
-                  className={({ isActive }) => `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`}
+                  className={({ isActive }) => `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`}
                   data-testid={`nav-${n.key}`}
                 >
                   <span style={{ color: n.color }}>
