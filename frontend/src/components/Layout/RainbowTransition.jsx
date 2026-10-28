@@ -23,7 +23,7 @@ const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hì
 /** Thuộc khu vực Tô màu: chọn chủ đề/đối tượng/tư thế và màn hình tô. */
 export const isColoringPath = (p) => p === '/color' || p.startsWith('/color/') || p.startsWith('/draw/');
 /** Các chế độ chơi chỉ có lấp lánh + tiếng ting khi bấm vào (chưa có hiệu ứng chuyển màn hình). */
-const SPARKLE_MODES = ['/together', '/storybooks'];   // Đấu trường và Bóc thẻ có hiệu ứng riêng: ArenaTransition, GachaTransition
+const SPARKLE_MODES = ['/together', '/storybooks'];   // Đấu trường, Bóc thẻ, Truyện tranh (trang danh sách) có hiệu ứng riêng: ArenaTransition, GachaTransition, StoryTransition
 const modeOf = (p) => SPARKLE_MODES.find((m) => p === m || p.startsWith(`${m}/`)) || null;
 const crosses = (from, to) => isColoringPath(from) !== isColoringPath(to);
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -71,7 +71,7 @@ export default function RainbowTransition() {
       if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
       const url = new URL(a.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      if (busy.current || url.pathname === '/arena' || url.pathname.startsWith('/arena/') || url.pathname === '/gacha' || url.pathname.startsWith('/gacha/')) return;
+      if (busy.current || url.pathname === '/arena' || url.pathname.startsWith('/arena/') || url.pathname === '/gacha' || url.pathname.startsWith('/gacha/') || url.pathname === '/storybooks') return;
       const target = modeOf(url.pathname);
       if (target && !crosses(window.location.pathname, url.pathname) && modeOf(window.location.pathname) !== target) {
         // Vào một chế độ chơi: lấp lánh + tiếng ting rồi chuyển trang luôn.
