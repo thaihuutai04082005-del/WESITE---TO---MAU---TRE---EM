@@ -1484,8 +1484,9 @@ h3,
 @media (max-aspect-ratio: 5/4) {
   .sb-frame .sb-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
-.sb-img { position: absolute; height: auto; user-select: none; pointer-events: none; }
-.sb-book { transform-origin: 50% 98%; animation: sb-book 3000ms ease-in-out both; }
+.sb-img { position: absolute; height: auto; user-select: none; pointer-events: none; will-change: transform, opacity; backface-visibility: hidden; }
+.sb-bookgroup { will-change: transform; }
+.sb-bookgroup { position: absolute; inset: 0; transform-origin: 50% 90%; animation: sb-book 3000ms ease-in-out both; }
 .sb-lite .sb-img { animation: none !important; opacity: 1 !important; }
 @keyframes sb-fade { from { opacity: 0; } }
 @keyframes sb-book {
@@ -1693,7 +1694,8 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .tg-root { position: fixed; inset: 0; z-index: 9999; overflow: hidden; pointer-events: auto; opacity: 1; background: linear-gradient(#DDF6D2, #C5EEB4); animation: tg-fade 180ms ease-out both; transition: opacity 350ms ease-in-out; }
 .tg-root.tg-leaving { opacity: 0; animation: none; pointer-events: none; }
 .tg-frame { position: absolute; left: 50%; top: 50%; width: max(100vw, min(140vw, 177.7vh)); aspect-ratio: 1672 / 941; transform: translate(-50%, -50%); }
-.tg-frame img { position: absolute; height: auto; user-select: none; pointer-events: none; }
+.tg-frame img { position: absolute; height: auto; user-select: none; pointer-events: none; backface-visibility: hidden; }
+.tg-char, .tg-paper { will-change: transform; }
 .tg-frame .tg-bg { left: 0; top: 0; width: 100%; }
 @media (max-aspect-ratio: 5/4) {
   .tg-frame .tg-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
@@ -1767,9 +1769,11 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   .mi-frame .mi-bg { -webkit-mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); mask: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent); }
 }
 .mi-board, .mi-star, .mi-pop { position: absolute; inset: 0; }
-.mi-img { position: absolute; height: auto; user-select: none; pointer-events: none; }
+.mi-img { position: absolute; height: auto; user-select: none; pointer-events: none; backface-visibility: hidden; }
+.mi-board, .mi-star, .mi-pop { will-change: transform, opacity; }
 .mi-board { transform-origin: 46% 92%; animation: mi-board-in 500ms cubic-bezier(0.2, 0.8, 0.3, 1) both, mi-board-nhun 260ms ease-in-out 1350ms; }
 .mi-star { transform-origin: 74% 66%; animation: mi-star-pop 700ms cubic-bezier(0.3, 1.25, 0.5, 1) 1500ms both, mi-star-nhun 400ms ease-in-out 2200ms; }
+.mi-shs { animation: mi-shfade 350ms ease-out 1900ms both; }
 .mi-ok { animation-duration: 170ms; animation-timing-function: ease-out; animation-fill-mode: both; }
 .mi-ck { animation-timing-function: ease-out; animation-fill-mode: both; }
 .mi-lite .mi-board, .mi-lite .mi-star { animation: none; }
@@ -1783,10 +1787,11 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 @keyframes mi-board-nhun { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.014, 1.012); } }
 @keyframes mi-star-pop {
   0% { opacity: 0; transform: translate(-7cqw, 6cqw) scale(0.85) rotate(0deg); }
-  14% { opacity: 1; }
+  5% { opacity: 1; }
   62% { opacity: 1; transform: translate(0.8cqw, -1cqw) scale(1.04) rotate(-5deg); }
   100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
+@keyframes mi-shfade { from { opacity: 0; } }
 @keyframes mi-star-nhun { 0%, 100% { transform: translateY(0) scale(1, 1); } 40% { transform: translateY(-1.8cqw) scale(0.99, 1.02); } }
 .mi-ok1 { animation-name: mi-ok1; animation-delay: 500ms; }
 @keyframes mi-ok1 { from { clip-path: circle(0% at 49.6% 49.4%); } to { clip-path: circle(85% at 49.6% 49.4%); } }
