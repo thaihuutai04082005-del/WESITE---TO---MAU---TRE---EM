@@ -168,10 +168,10 @@ function Dashboard() {
           </span>
         </Link>
 
-        {/* Cấp độ & Rank */}
+        {/* Cấp độ & Rank: chỉ để bé xem cấp và điểm hiện tại (không bấm chuyển trang) */}
         {prog && (
           <section className="card grid gap-5 p-5 md:grid-cols-2 md:gap-8">
-            <Link to="/missions" className="flex items-center gap-4" data-testid="home-level">
+            <div className="flex items-center gap-4" data-testid="home-level">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#E4F6E8] text-[#2FA65A]">
                 <Icon name="mountain" size={32} strokeWidth={2.4} />
               </span>
@@ -184,8 +184,8 @@ function Dashboard() {
                 </div>
                 <ProgressBar value={done} max={prog.missions.length} color="linear-gradient(90deg,#4CD787,#2FA65A)" height={12} />
               </div>
-            </Link>
-            <Link to="/missions" className="flex items-center gap-4" data-testid="home-rank">
+            </div>
+            <div className="flex items-center gap-4" data-testid="home-rank">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl" style={{ background: RANK_STYLE[rank.key].bg }}>
                 <RankMedal rank={rank.key} size={40} />
               </span>
@@ -205,7 +205,7 @@ function Dashboard() {
                   height={12}
                 />
               </div>
-            </Link>
+            </div>
           </section>
         )}
       </div>
