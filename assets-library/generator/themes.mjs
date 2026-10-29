@@ -1150,6 +1150,20 @@ ART_THEMES.push({
         { slug: 'ho-boi-phao', name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' }, file: 'ho-boi-phao--ho-boi-phao' },
       ],
     },
+    {
+      slug: 'may-gap-thu-bong',
+      name: { vi: 'Máy gắp thú bông', en: 'Claw Machine' },
+      pictures: [
+        { slug: 'may-gap-thu-bong', name: { vi: 'Máy gắp thú bông', en: 'Claw Machine' }, file: 'may-gap-thu-bong--may-gap-thu-bong' },
+      ],
+    },
+    {
+      slug: 'duong-ham-cau-vong',
+      name: { vi: 'Đường hầm cầu vồng', en: 'Rainbow Tunnel' },
+      pictures: [
+        { slug: 'duong-ham-cau-vong', name: { vi: 'Đường hầm cầu vồng', en: 'Rainbow Tunnel' }, file: 'duong-ham-cau-vong--duong-ham-cau-vong' },
+      ],
+    },
   ],
 });
 
