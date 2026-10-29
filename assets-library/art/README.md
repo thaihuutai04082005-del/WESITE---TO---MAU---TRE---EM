@@ -109,7 +109,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Đồ Ăn (3–5 tuổi) | Bánh pudding | Bánh pudding (mới, đang hiện) | 11 |
 | Đồ Ăn (3–5 tuổi) | Bánh cupcake dâu tây | Bánh cupcake dâu tây (mới, đang hiện) | 53 |
 | Đồ Ăn (3–5 tuổi) | Bánh kem ba tầng | Bánh kem ba tầng (mới, đang hiện) | 56 |
-| Khu Vui Chơi (3–5 tuổi) | Cầu trượt | Cầu trượt (mới, đang hiện; do Claude tự chọn màu, không có ảnh mẫu) | 43 |
+| Khu Vui Chơi (3–5 tuổi) | Cầu trượt | Cầu trượt (mới, đang hiện; màu lấy theo ảnh mẫu chủ web gửi) | 49 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |
