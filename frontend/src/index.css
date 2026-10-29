@@ -1749,7 +1749,6 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .mi-board, .mi-star, .mi-pop { will-change: transform, opacity; }
 .mi-board { transform-origin: 46% 92%; animation: mi-board-in 500ms cubic-bezier(0.2, 0.8, 0.3, 1) both, mi-board-nhun 260ms ease-in-out 1350ms; }
 .mi-star { transform-origin: 74% 66%; animation: mi-star-pop 700ms cubic-bezier(0.3, 1.25, 0.5, 1) 1500ms both, mi-star-nhun 400ms ease-in-out 2200ms; }
-.mi-shs { animation: mi-shfade 350ms ease-out 1900ms both; }
 .mi-ok { animation-duration: 170ms; animation-timing-function: ease-out; animation-fill-mode: both; }
 .mi-ck { animation-timing-function: ease-out; animation-fill-mode: both; }
 .mi-lite .mi-board, .mi-lite .mi-star { animation: none; }
@@ -1767,7 +1766,6 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   62% { opacity: 1; transform: translate(0.8cqw, -1cqw) scale(1.04) rotate(-5deg); }
   100% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
 }
-@keyframes mi-shfade { from { opacity: 0; } }
 @keyframes mi-star-nhun { 0%, 100% { transform: translateY(0) scale(1, 1); } 40% { transform: translateY(-1.8cqw) scale(0.99, 1.02); } }
 .mi-ok1 { animation-name: mi-ok1; animation-delay: 500ms; }
 @keyframes mi-ok1 { from { clip-path: circle(0% at 49.6% 49.4%); } to { clip-path: circle(85% at 49.6% 49.4%); } }
