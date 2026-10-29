@@ -50,11 +50,11 @@ const SPR = {
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
 function Overlay({ lite, leaving }) {
-  const img = (k, cls = '') => <img className={`mi-img ${cls}`} src={`/mission/${k}.webp`} alt="" draggable="false" style={at(k)} />;
+  const img = (k, cls = '') => <img className={`mi-img ${cls}`} src={`/mission/${k}.webp?v=3`} alt="" draggable="false" style={at(k)} />;
   return (
     <div className={`mi-root${lite ? ' mi-lite' : ''}${leaving ? ' mi-leaving' : ''}`} data-testid="mission-transition" aria-hidden="true">
       <div className="mi-frame">
-        <img className="mi-bg" src="/mission/bg.webp" alt="" draggable="false" />
+        <img className="mi-bg" src="/mission/bg.webp?v=3" alt="" draggable="false" />
         <div className="mi-board">
           {img('shadow-board')}
           {img('board')}
@@ -85,7 +85,7 @@ export default function MissionTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
-  useEffect(() => preloadImages([`/mission/bg.webp`, ...Object.keys(SPR).map((k) => `/mission/${k}.webp`)]), []);
+  useEffect(() => preloadImages([`/mission/bg.webp?v=3`, ...Object.keys(SPR).map((k) => `/mission/${k}.webp?v=3`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);
