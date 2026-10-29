@@ -1164,6 +1164,13 @@ ART_THEMES.push({
         { slug: 'duong-ham-cau-vong', name: { vi: 'Đường hầm cầu vồng', en: 'Rainbow Tunnel' }, file: 'duong-ham-cau-vong--duong-ham-cau-vong' },
       ],
     },
+    {
+      slug: 'cau-ca-do-choi',
+      name: { vi: 'Câu cá đồ chơi', en: 'Toy Fishing' },
+      pictures: [
+        { slug: 'cau-ca-do-choi', name: { vi: 'Câu cá đồ chơi', en: 'Toy Fishing' }, file: 'cau-ca-do-choi--cau-ca-do-choi' },
+      ],
+    },
   ],
 });
 
