@@ -44,8 +44,8 @@ const SPR = {
   'ok2': { x: 503, y: 466, w: 140, h: 129 },
   'ck2a': { x: 520, y: 517, w: 48, h: 54 },
   'ck2b': { x: 558, y: 486, w: 64, h: 85 },
-  'shadow-star': { x: 909, y: 805, w: 435, h: 102 },
-  'star': { x: 866, y: 349, w: 546, h: 524 },
+  'shadow-star': { x: 909, y: 804, w: 435, h: 104 },
+  'star': { x: 871, y: 354, w: 537, h: 515 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
@@ -69,8 +69,8 @@ function Overlay({ lite, leaving }) {
             {img('ck2b', 'mi-ck mi-ck2b')}
           </div>
         </div>
+        {img('shadow-star', 'mi-shs')}
         <div className="mi-star">
-          {img('shadow-star', 'mi-shs')}
           {img('star')}
         </div>
       </div>
