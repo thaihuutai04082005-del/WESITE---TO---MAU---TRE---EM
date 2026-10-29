@@ -36,8 +36,8 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  'shadow-board': { x: 443, y: 814, w: 483, h: 79 },
-  'board': { x: 341, y: 67, w: 784, h: 812 },
+  'shadow-board': { x: 444, y: 194, w: 691, h: 698 },
+  'board': { x: 341, y: 67, w: 790, h: 812 },
   'ok1': { x: 477, y: 310, w: 139, h: 128 },
   'ck1a': { x: 494, y: 358, w: 48, h: 57 },
   'ck1b': { x: 532, y: 328, w: 63, h: 85 },
