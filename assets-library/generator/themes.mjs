@@ -1136,6 +1136,20 @@ ART_THEMES.push({
         { slug: 'nha-banh', name: { vi: 'Nhà banh', en: 'Ball House' }, file: 'nha-banh--nha-banh' },
       ],
     },
+    {
+      slug: 'bap-benh',
+      name: { vi: 'Bập bênh', en: 'Seesaw' },
+      pictures: [
+        { slug: 'bap-benh', name: { vi: 'Bập bênh', en: 'Seesaw' }, file: 'bap-benh--bap-benh' },
+      ],
+    },
+    {
+      slug: 'ho-boi-phao',
+      name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' },
+      pictures: [
+        { slug: 'ho-boi-phao', name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' }, file: 'ho-boi-phao--ho-boi-phao' },
+      ],
+    },
   ],
 });
 
