@@ -12,8 +12,10 @@
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Tô cùng nhau NGAY DƯỚI lớp phủ để trang tự tải.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
-// Hình minh hoạ nằm trong /public/together/ (tách từ ảnh tham chiếu 1672×941): bg (nền + giấy, đã xoá ba bạn), paper (tờ giấy riêng để nảy),
-// band-red / band-yellow / band-blue (ba dải màu, có sẵn viền đậm), cat / bear / rabbit (từng bạn kèm bút sáp). Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc).
+// Hình minh hoạ nằm trong /public/together/ (tách từ ảnh tham chiếu 1672×941, WebP không nén): bg (nền xanh, đã xoá ba bạn + tờ giấy, vòng tròn sáng dựng lại),
+// shadow (bóng đổ dưới chân, đứng yên), paper (tờ giấy + viền, dựng bằng toán học nên liền nét), band-red / band-yellow / band-blue (ba dải màu phẳng, kéo dài xuống dưới đám mây
+// và dưới chân các bạn nên lúc các bạn xê dịch không hở lỗ trắng), lines (các vạch cầu vồng + hai đám mây, nằm TRÊN dải màu), cat / bear / rabbit (từng bạn kèm bút sáp,
+// viền bút đã vẽ lại mượt, KHÔNG dính nét của bức tranh). Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc).
 // Dải màu lộ ra bằng clip-path hình quạt quay quanh tâm cầu vồng (835, 823) nên đầu màu luôn vuông góc với dải và chạy đúng theo đường cong.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,13 +37,15 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  paper: { x: 415, y: 513, w: 827, h: 311 },
-  'band-red': { x: 607, y: 568, w: 454, h: 119 },
-  'band-yellow': { x: 647, y: 607, w: 373, h: 97 },
-  'band-blue': { x: 692, y: 646, w: 284, h: 81 },
-  cat: { x: 260, y: 239, w: 398, h: 439 },
-  bear: { x: 668, y: 146, w: 393, h: 429 },
-  rabbit: { x: 1030, y: 210, w: 375, h: 484 },
+  shadow: { x: 311, y: 199, w: 1037, h: 513 },
+  paper: { x: 410, y: 507, w: 836, h: 319 },
+  'band-red': { x: 598, y: 568, w: 472, h: 205 },
+  'band-yellow': { x: 648, y: 606, w: 371, h: 168 },
+  'band-blue': { x: 693, y: 645, w: 282, h: 130 },
+  lines: { x: 430, y: 526, w: 798, h: 285 },
+  cat: { x: 264, y: 243, w: 393, h: 433 },
+  bear: { x: 670, y: 150, w: 387, h: 426 },
+  rabbit: { x: 1035, y: 213, w: 367, h: 479 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
@@ -51,6 +55,7 @@ function Overlay({ lite, leaving }) {
     <div className={`tg-root${lite ? ' tg-lite' : ''}${leaving ? ' tg-leaving' : ''}`} data-testid="together-transition" aria-hidden="true">
       <div className="tg-frame">
         <img className="tg-bg" src="/together/bg.webp" alt="" draggable="false" />
+        {img('shadow', 'tg-shadow')}
         <div className="tg-paper">
           {img('paper', 'tg-paper-img')}
           <div className="tg-sweep">
@@ -58,6 +63,7 @@ function Overlay({ lite, leaving }) {
             {img('band-yellow', 'tg-band')}
             {img('band-blue', 'tg-band')}
           </div>
+          {img('lines', 'tg-lines')}
         </div>
         {img('cat', 'tg-char tg-cat')}
         {img('bear', 'tg-char tg-bear')}
