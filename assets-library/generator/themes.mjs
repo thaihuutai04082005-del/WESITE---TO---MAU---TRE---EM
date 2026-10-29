@@ -1165,13 +1165,6 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 'cau-ca-do-choi',
-      name: { vi: 'Câu cá đồ chơi', en: 'Toy Fishing' },
-      pictures: [
-        { slug: 'cau-ca-do-choi', name: { vi: 'Câu cá đồ chơi', en: 'Toy Fishing' }, file: 'cau-ca-do-choi--cau-ca-do-choi' },
-      ],
-    },
-    {
       slug: 'xe-dien-dung',
       name: { vi: 'Xe điện đụng', en: 'Bumper Cars' },
       pictures: [
