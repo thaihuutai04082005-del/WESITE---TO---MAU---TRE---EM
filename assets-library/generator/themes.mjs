@@ -1150,6 +1150,41 @@ ART_THEMES.push({
         { slug: 'ho-boi-phao', name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' }, file: 'ho-boi-phao--ho-boi-phao' },
       ],
     },
+    {
+      slug: 'may-gap-thu-bong',
+      name: { vi: 'Máy gắp thú bông', en: 'Claw Machine' },
+      pictures: [
+        { slug: 'may-gap-thu-bong', name: { vi: 'Máy gắp thú bông', en: 'Claw Machine' }, file: 'may-gap-thu-bong--may-gap-thu-bong' },
+      ],
+    },
+    {
+      slug: 'duong-ham-cau-vong',
+      name: { vi: 'Đường hầm cầu vồng', en: 'Rainbow Tunnel' },
+      pictures: [
+        { slug: 'duong-ham-cau-vong', name: { vi: 'Đường hầm cầu vồng', en: 'Rainbow Tunnel' }, file: 'duong-ham-cau-vong--duong-ham-cau-vong' },
+      ],
+    },
+    {
+      slug: 'xe-dien-dung',
+      name: { vi: 'Xe điện đụng', en: 'Bumper Cars' },
+      pictures: [
+        { slug: 'xe-dien-dung', name: { vi: 'Xe điện đụng', en: 'Bumper Cars' }, file: 'xe-dien-dung--xe-dien-dung' },
+      ],
+    },
+    {
+      slug: 'vong-du-quay',
+      name: { vi: 'Vòng đu quay', en: 'Ferris Wheel' },
+      pictures: [
+        { slug: 'vong-du-quay', name: { vi: 'Vòng đu quay', en: 'Ferris Wheel' }, file: 'vong-du-quay--vong-du-quay' },
+      ],
+    },
+    {
+      slug: 'nem-vong-trung-dich',
+      name: { vi: 'Ném vòng trúng đích', en: 'Ring Toss' },
+      pictures: [
+        { slug: 'nem-vong-trung-dich', name: { vi: 'Ném vòng trúng đích', en: 'Ring Toss' }, file: 'nem-vong-trung-dich--nem-vong-trung-dich' },
+      ],
+    },
   ],
 });
 
