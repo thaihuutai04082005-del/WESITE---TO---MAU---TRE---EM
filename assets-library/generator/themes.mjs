@@ -557,6 +557,7 @@ export const PICTURE_NAME = {
   'banh-pudding--banh-pudding': { vi: 'Bánh pudding', en: 'Pudding' },
   'cupcake-dau--cupcake-dau': { vi: 'Bánh cupcake dâu tây', en: 'Strawberry cupcake' },
   'banh-kem-3-tang--banh-kem-3-tang': { vi: 'Bánh kem ba tầng', en: 'Three-tier cake' },
+  'cau-truot--cau-truot': { vi: 'Cầu trượt', en: 'Slide' },
   'meo-con--meo-con': { vi: 'Mèo con', en: 'Kitten' },
   'socola--te-tuong': { vi: 'Socola Tể Tướng', en: 'Chocolate Chancellor' },
   'banh-gung--dau-bep': { vi: 'Bánh Gừng Đầu Bếp', en: 'Gingerbread Chef' },
@@ -1105,6 +1106,50 @@ ART_THEMES.push({
       ],
     },
 
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'khu-vui-choi-3-5',
+  age: '3-5',
+  name: { vi: 'Khu Vui Chơi', en: 'Playground' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'cau-truot',
+      name: { vi: 'Cầu trượt', en: 'Slide' },
+      pictures: [
+        { slug: 'cau-truot', name: { vi: 'Cầu trượt', en: 'Slide' }, file: 'cau-truot--cau-truot' },
+      ],
+    },
+    {
+      slug: 'xich-du',
+      name: { vi: 'Xích đu', en: 'Swing' },
+      pictures: [
+        { slug: 'xich-du', name: { vi: 'Xích đu', en: 'Swing' }, file: 'xich-du--xich-du' },
+      ],
+    },
+    {
+      slug: 'nha-banh',
+      name: { vi: 'Nhà banh', en: 'Ball House' },
+      pictures: [
+        { slug: 'nha-banh', name: { vi: 'Nhà banh', en: 'Ball House' }, file: 'nha-banh--nha-banh' },
+      ],
+    },
+    {
+      slug: 'bap-benh',
+      name: { vi: 'Bập bênh', en: 'Seesaw' },
+      pictures: [
+        { slug: 'bap-benh', name: { vi: 'Bập bênh', en: 'Seesaw' }, file: 'bap-benh--bap-benh' },
+      ],
+    },
+    {
+      slug: 'ho-boi-phao',
+      name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' },
+      pictures: [
+        { slug: 'ho-boi-phao', name: { vi: 'Hồ bơi phao', en: 'Inflatable Pool' }, file: 'ho-boi-phao--ho-boi-phao' },
+      ],
+    },
   ],
 });
 
