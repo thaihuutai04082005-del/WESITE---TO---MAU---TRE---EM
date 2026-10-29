@@ -7,8 +7,8 @@
 //     dựng lớp phủ toàn màn hình (position: fixed) và phát tiếng ting.
 //  2. Lớp phủ tự chạy bằng CSS (keyframes trong index.css, tiền tố `sb-`). Toàn bộ cảnh dài 3 giây:
 //       0,0–0,4  sách mở sẵn, đứng yên                      | 0,4–1,0  sách nhún hai nhịp (nhịp sau sâu hơn, nén xuống như tích năng lượng)
-//       1,0–1,4  sách bật lại; giọt màu xanh/hồng, hình tròn vàng, hai ngôi sao bay lên từ khe giữa hai trang theo đường cong, toả sang hai bên
-//       1,4–2,1  bong bóng xanh (trái) rồi bong bóng hồng (phải, trễ 0,1s) bật lên từ sau trang sách: 65% → 105% → 100%, xoay nhẹ 5°
+//       1,0–1,7  sách bật lại; TẤT CẢ cùng văng ra một lúc từ khe giữa hai trang theo đường cong, toả sang hai bên: giọt màu xanh/hồng, hình tròn vàng,
+//                hai ngôi sao và hai bong bóng thoại (xanh trái, hồng phải; 65% → 105% → 100%, xoay nhẹ 5°)
 //       2,1–2,6  mọi thứ nhún nhẹ rồi ổn định; sách đứng yên      | 2,6–3,0  giữ khung hình cuối = ảnh tham chiếu, không lặp lại
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Truyện tranh NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
