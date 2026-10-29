@@ -19,6 +19,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
+import { preloadImages } from '../../lib/preloadImages';
 
 const NAVIGATE_MS = 2000;   // chuyển sang trang Tô cùng nhau (đang nằm dưới lớp phủ)
 const MIN_MS = 3000;        // tối thiểu trước khi lớp phủ mờ đi: cảnh 3 giây, mọi thứ đã đứng yên
@@ -34,13 +35,13 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  paper: { x: 416, y: 511, w: 825, h: 312 },
-  'band-red': { x: 608, y: 568, w: 452, h: 119 },
+  paper: { x: 415, y: 513, w: 827, h: 311 },
+  'band-red': { x: 607, y: 568, w: 454, h: 119 },
   'band-yellow': { x: 647, y: 607, w: 373, h: 97 },
   'band-blue': { x: 692, y: 646, w: 284, h: 81 },
-  cat: { x: 259, y: 238, w: 400, h: 441 },
-  bear: { x: 667, y: 145, w: 395, h: 431 },
-  rabbit: { x: 1029, y: 209, w: 377, h: 486 },
+  cat: { x: 260, y: 239, w: 398, h: 439 },
+  bear: { x: 668, y: 146, w: 393, h: 429 },
+  rabbit: { x: 1030, y: 210, w: 375, h: 484 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
@@ -73,6 +74,7 @@ export default function TogetherTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
+  useEffect(() => preloadImages([`/together/bg.webp`, ...Object.keys(SPR).map((k) => `/together/${k}.webp`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);

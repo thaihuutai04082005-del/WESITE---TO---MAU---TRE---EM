@@ -14,12 +14,13 @@
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
 // Hình minh hoạ nằm trong /public/story4/ (tách từ ảnh tham chiếu 1672×941): bg (nền + vòng tròn sáng đã vẽ lại, không có sách/bong bóng/giọt/sao),
-// book (sách + bóng đổ), bubL / bubR (bong bóng), drop1 / drop2 / dropP (giọt màu), dot (hình tròn vàng), starL / starR (ngôi sao).
+// book (sách) + bookshadow (bóng đổ mềm dưới sách, tách riêng), bubL / bubR (bong bóng), drop1 / drop2 / dropP (giọt màu), dot (hình tròn vàng), starL / starR (ngôi sao).
 // Các chi tiết nằm DƯỚI sách nên lúc mới bay ra chúng ẩn sau trang sách, rồi nhô lên khỏi mép sách. Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
+import { preloadImages } from '../../lib/preloadImages';
 
 const NAVIGATE_MS = 2000;   // chuyển sang trang Truyện tranh (đang nằm dưới lớp phủ)
 const MIN_MS = 3000;        // tối thiểu trước khi lớp phủ mờ đi: cảnh 3 giây, mọi thứ đã đứng yên
@@ -35,15 +36,16 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  bubL: { x: 440, y: 178, w: 269, h: 200 },
-  bubR: { x: 945, y: 197, w: 249, h: 191 },
-  drop1: { x: 351, y: 241, w: 82, h: 90 },
-  drop2: { x: 367, y: 343, w: 76, h: 54 },
-  dropP: { x: 1206, y: 262, w: 80, h: 80 },
-  dot: { x: 716, y: 290, w: 68, h: 68 },
-  starL: { x: 308, y: 452, w: 112, h: 112 },
-  starR: { x: 1232, y: 344, w: 117, h: 116 },
-  book: { x: 315, y: 388, w: 1050, h: 466 },
+  bubL: { x: 440, y: 177, w: 270, h: 201 },
+  bubR: { x: 944, y: 196, w: 250, h: 193 },
+  drop1: { x: 350, y: 240, w: 84, h: 92 },
+  drop2: { x: 366, y: 342, w: 78, h: 56 },
+  dropP: { x: 1205, y: 261, w: 82, h: 82 },
+  dot: { x: 715, y: 289, w: 70, h: 70 },
+  starL: { x: 309, y: 451, w: 112, h: 112 },
+  starR: { x: 1231, y: 343, w: 119, h: 118 },
+  bookshadow: { x: 315, y: 388, w: 1066, h: 466 },
+  book: { x: 315, y: 389, w: 1050, h: 459 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
@@ -61,7 +63,10 @@ function Overlay({ lite, leaving }) {
         {img('starR')}
         {img('bubL')}
         {img('bubR')}
-        {img('book')}
+        <div className="sb-bookgroup">
+          {img('bookshadow')}
+          {img('book')}
+        </div>
       </div>
     </div>
   );
@@ -74,6 +79,7 @@ export default function StoryTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
+  useEffect(() => preloadImages([`/story4/bg.webp`, ...Object.keys(SPR).map((k) => `/story4/${k}.webp`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);

@@ -20,6 +20,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
+import { preloadImages } from '../../lib/preloadImages';
 
 const NAVIGATE_MS = 2000;   // chuyển sang trang Nhiệm vụ (đang nằm dưới lớp phủ)
 const MIN_MS = 3000;        // tối thiểu trước khi lớp phủ mờ đi: cảnh 3 giây, mọi thứ đã đứng yên
@@ -35,8 +36,8 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  'shadow-board': { x: 443, y: 814, w: 483, h: 79 },
-  'board': { x: 343, y: 69, w: 782, h: 808 },
+  'shadow-board': { x: 444, y: 194, w: 691, h: 698 },
+  'board': { x: 341, y: 67, w: 790, h: 812 },
   'ok1': { x: 477, y: 310, w: 139, h: 128 },
   'ck1a': { x: 494, y: 358, w: 48, h: 57 },
   'ck1b': { x: 532, y: 328, w: 63, h: 85 },
@@ -44,7 +45,7 @@ const SPR = {
   'ck2a': { x: 520, y: 517, w: 48, h: 54 },
   'ck2b': { x: 558, y: 486, w: 64, h: 85 },
   'shadow-star': { x: 909, y: 805, w: 435, h: 102 },
-  'star': { x: 867, y: 350, w: 543, h: 521 },
+  'star': { x: 866, y: 349, w: 546, h: 524 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
@@ -69,7 +70,7 @@ function Overlay({ lite, leaving }) {
           </div>
         </div>
         <div className="mi-star">
-          {img('shadow-star')}
+          {img('shadow-star', 'mi-shs')}
           {img('star')}
         </div>
       </div>
@@ -84,6 +85,7 @@ export default function MissionTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
+  useEffect(() => preloadImages([`/mission/bg.webp`, ...Object.keys(SPR).map((k) => `/mission/${k}.webp`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);
