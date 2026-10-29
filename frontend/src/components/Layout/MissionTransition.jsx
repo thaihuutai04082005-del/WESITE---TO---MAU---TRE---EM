@@ -15,7 +15,7 @@
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
 // Hình minh hoạ nằm trong /public/mission/ (tách từ ảnh tham chiếu 1672×941): bg (nền, đã xoá bảng + sao + bóng đổ, vòng tròn sáng vẽ lại),
 // board (bảng đủ cả phần bị sao che, ba ô TRỐNG), shadow-board (bóng đổ dưới bảng), ok1 / ok2 (nền xanh lá của ô), ck1a, ck1b, ck2a, ck2b (hai nét dấu tích trắng),
-// shadow-star (bóng đổ của sao trên nền, đi cùng sao), star. Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc). Dấu tích hiện bằng clip-path quét theo hướng từng nét (keyframes `mi-ck…`).
+// star (không có bóng đổ dưới chân sao). Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc). Dấu tích hiện bằng clip-path quét theo hướng từng nét (keyframes `mi-ck…`).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
@@ -44,17 +44,16 @@ const SPR = {
   'ok2': { x: 503, y: 466, w: 140, h: 129 },
   'ck2a': { x: 520, y: 517, w: 48, h: 54 },
   'ck2b': { x: 558, y: 486, w: 64, h: 85 },
-  'shadow-star': { x: 909, y: 380, w: 504, h: 519 },
   'star': { x: 871, y: 354, w: 537, h: 515 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
 function Overlay({ lite, leaving }) {
-  const img = (k, cls = '') => <img className={`mi-img ${cls}`} src={`/mission/${k}.webp?v=3`} alt="" draggable="false" style={at(k)} />;
+  const img = (k, cls = '') => <img className={`mi-img ${cls}`} src={`/mission/${k}.webp?v=4`} alt="" draggable="false" style={at(k)} />;
   return (
     <div className={`mi-root${lite ? ' mi-lite' : ''}${leaving ? ' mi-leaving' : ''}`} data-testid="mission-transition" aria-hidden="true">
       <div className="mi-frame">
-        <img className="mi-bg" src="/mission/bg.webp?v=3" alt="" draggable="false" />
+        <img className="mi-bg" src="/mission/bg.webp?v=4" alt="" draggable="false" />
         <div className="mi-board">
           {img('shadow-board')}
           {img('board')}
@@ -70,7 +69,6 @@ function Overlay({ lite, leaving }) {
           </div>
         </div>
         <div className="mi-star">
-          {img('shadow-star')}
           {img('star')}
         </div>
       </div>
@@ -85,7 +83,7 @@ export default function MissionTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
-  useEffect(() => preloadImages([`/mission/bg.webp?v=3`, ...Object.keys(SPR).map((k) => `/mission/${k}.webp?v=3`)]), []);
+  useEffect(() => preloadImages([`/mission/bg.webp?v=4`, ...Object.keys(SPR).map((k) => `/mission/${k}.webp?v=4`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);
