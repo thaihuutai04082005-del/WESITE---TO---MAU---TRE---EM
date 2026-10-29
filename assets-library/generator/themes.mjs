@@ -1185,6 +1185,13 @@ ART_THEMES.push({
         { slug: 'vong-du-quay', name: { vi: 'Vòng đu quay', en: 'Ferris Wheel' }, file: 'vong-du-quay--vong-du-quay' },
       ],
     },
+    {
+      slug: 'nem-vong-trung-dich',
+      name: { vi: 'Ném vòng trúng đích', en: 'Ring Toss' },
+      pictures: [
+        { slug: 'nem-vong-trung-dich', name: { vi: 'Ném vòng trúng đích', en: 'Ring Toss' }, file: 'nem-vong-trung-dich--nem-vong-trung-dich' },
+      ],
+    },
   ],
 });
 
