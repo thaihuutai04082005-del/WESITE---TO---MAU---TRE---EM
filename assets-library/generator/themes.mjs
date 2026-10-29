@@ -1122,6 +1122,20 @@ ART_THEMES.push({
         { slug: 'cau-truot', name: { vi: 'Cầu trượt', en: 'Slide' }, file: 'cau-truot--cau-truot' },
       ],
     },
+    {
+      slug: 'xich-du',
+      name: { vi: 'Xích đu', en: 'Swing' },
+      pictures: [
+        { slug: 'xich-du', name: { vi: 'Xích đu', en: 'Swing' }, file: 'xich-du--xich-du' },
+      ],
+    },
+    {
+      slug: 'nha-banh',
+      name: { vi: 'Nhà banh', en: 'Ball House' },
+      pictures: [
+        { slug: 'nha-banh', name: { vi: 'Nhà banh', en: 'Ball House' }, file: 'nha-banh--nha-banh' },
+      ],
+    },
   ],
 });
 
