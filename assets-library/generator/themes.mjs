@@ -1171,6 +1171,20 @@ ART_THEMES.push({
         { slug: 'cau-ca-do-choi', name: { vi: 'Câu cá đồ chơi', en: 'Toy Fishing' }, file: 'cau-ca-do-choi--cau-ca-do-choi' },
       ],
     },
+    {
+      slug: 'xe-dien-dung',
+      name: { vi: 'Xe điện đụng', en: 'Bumper Cars' },
+      pictures: [
+        { slug: 'xe-dien-dung', name: { vi: 'Xe điện đụng', en: 'Bumper Cars' }, file: 'xe-dien-dung--xe-dien-dung' },
+      ],
+    },
+    {
+      slug: 'vong-du-quay',
+      name: { vi: 'Vòng đu quay', en: 'Ferris Wheel' },
+      pictures: [
+        { slug: 'vong-du-quay', name: { vi: 'Vòng đu quay', en: 'Ferris Wheel' }, file: 'vong-du-quay--vong-du-quay' },
+      ],
+    },
   ],
 });
 
