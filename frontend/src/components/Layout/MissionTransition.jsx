@@ -15,7 +15,7 @@
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
 // Hình minh hoạ nằm trong /public/mission/ (tách từ ảnh tham chiếu 1672×941): bg (nền, đã xoá bảng + sao + bóng đổ, vòng tròn sáng vẽ lại),
 // board (bảng đủ cả phần bị sao che, ba ô TRỐNG), shadow-board (bóng đổ dưới bảng), ok1 / ok2 (nền xanh lá của ô), ck1a, ck1b, ck2a, ck2b (hai nét dấu tích trắng),
-// star. Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc). Dấu tích hiện bằng clip-path quét theo hướng từng nét (keyframes `mi-ck…`).
+// shadow-star (bóng đổ của sao trên nền, đi cùng sao), star. Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc). Dấu tích hiện bằng clip-path quét theo hướng từng nét (keyframes `mi-ck…`).
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playTing } from '../../lib/sound';
@@ -36,14 +36,15 @@ const weakDevice = () => typeof navigator !== 'undefined' && ((navigator.hardwar
 const FW = 1672;
 const FH = 941;
 const SPR = {
-  'shadow-board': { x: 444, y: 194, w: 691, h: 698 },
-  'board': { x: 341, y: 67, w: 790, h: 812 },
+  'shadow-board': { x: 444, y: 194, w: 692, h: 698 },
+  'board': { x: 341, y: 67, w: 791, h: 812 },
   'ok1': { x: 477, y: 310, w: 139, h: 128 },
   'ck1a': { x: 494, y: 358, w: 48, h: 57 },
   'ck1b': { x: 532, y: 328, w: 63, h: 85 },
   'ok2': { x: 503, y: 466, w: 140, h: 129 },
   'ck2a': { x: 520, y: 517, w: 48, h: 54 },
   'ck2b': { x: 558, y: 486, w: 64, h: 85 },
+  'shadow-star': { x: 909, y: 380, w: 504, h: 519 },
   'star': { x: 871, y: 354, w: 537, h: 515 },
 };
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
@@ -69,6 +70,7 @@ function Overlay({ lite, leaving }) {
           </div>
         </div>
         <div className="mi-star">
+          {img('shadow-star')}
           {img('star')}
         </div>
       </div>
