@@ -1153,6 +1153,22 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'chien-binh-bien-hinh-9',
+  age: '9+',
+  name: { vi: 'Chiến Binh Biến Hình', en: 'Transformer Warriors' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'chien-binh-sieu-toc',
+      name: { vi: 'Chiến Binh Siêu Tốc', en: 'Speed Warrior' },
+      pictures: [
+        { slug: 'chien-binh-sieu-toc', name: { vi: 'Chiến Binh Siêu Tốc', en: 'Speed Warrior' }, file: 'chien-binh-sieu-toc--chien-binh-sieu-toc' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',
