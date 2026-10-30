@@ -1329,6 +1329,20 @@ ART_THEMES.push({
         { slug: 'hoa-loa-ken', name: { vi: 'Hoa loa kèn', en: 'Lily' }, file: 'hoa-loa-ken--hoa-loa-ken' },
       ],
     },
+    {
+      slug: 'hoa-mai',
+      name: { vi: 'Hoa mai', en: 'Apricot Blossom' },
+      pictures: [
+        { slug: 'hoa-mai', name: { vi: 'Hoa mai', en: 'Apricot Blossom' }, file: 'hoa-mai--hoa-mai' },
+      ],
+    },
+    {
+      slug: 'hoa-dam-but',
+      name: { vi: 'Hoa dâm bụt', en: 'Hibiscus' },
+      pictures: [
+        { slug: 'hoa-dam-but', name: { vi: 'Hoa dâm bụt', en: 'Hibiscus' }, file: 'hoa-dam-but--hoa-dam-but' },
+      ],
+    },
   ],
 });
 

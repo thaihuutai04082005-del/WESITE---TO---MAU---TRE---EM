@@ -137,6 +137,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Các Loài Hoa (3–5 tuổi) | Hoa lưu ly | Hoa lưu ly (mới, đang hiện; màu theo ảnh mẫu) | 21 |
 | Các Loài Hoa (3–5 tuổi) | Hoa păng-xê | Hoa păng-xê (mới, đang hiện; màu theo ảnh mẫu) | 29 |
 | Các Loài Hoa (3–5 tuổi) | Hoa loa kèn | Hoa loa kèn (mới, đang hiện; màu theo ảnh mẫu) | 24 |
+| Các Loài Hoa (3–5 tuổi) | Hoa mai | Hoa mai (mới, đang hiện; màu theo ảnh mẫu) | 26 |
+| Các Loài Hoa (3–5 tuổi) | Hoa dâm bụt | Hoa dâm bụt (mới, đang hiện; màu theo ảnh mẫu) | 23 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
