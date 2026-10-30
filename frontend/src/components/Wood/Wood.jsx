@@ -82,8 +82,8 @@ export function WoodSign({ title, hint }) {
           </defs>
           <g style={{ filter: 'drop-shadow(0 5px 4px rgba(90,46,10,0.35))' }}>
             {/* tấm gỗ */}
-            <path d="M16 70 C8 40 28 14 70 14 C250 22 520 22 690 14 C714 16 730 32 734 48 L734 100 C730 116 714 124 690 124 C520 134 250 134 60 124 C26 122 10 98 16 70 Z" fill="url(#ws-plank)" stroke="#A8581C" strokeWidth="3.2" strokeLinejoin="round" />
-            <path d="M16 70 C8 40 28 14 70 14 C250 22 520 22 690 14 C714 16 730 32 734 48 L734 100 C730 116 714 124 690 124 C520 134 250 134 60 124 C26 122 10 98 16 70 Z" fill="url(#ws-glow)" />
+            <path d="M16 70 C8 40 28 14 70 14 C250 22 520 22 690 14 C712 14 722 28 728 46 L746 101 C740 116 722 124 690 124 C520 134 250 134 60 124 C26 122 10 98 16 70 Z" fill="url(#ws-plank)" stroke="#A8581C" strokeWidth="3.2" strokeLinejoin="round" />
+            <path d="M16 70 C8 40 28 14 70 14 C250 22 520 22 690 14 C712 14 722 28 728 46 L746 101 C740 116 722 124 690 124 C520 134 250 134 60 124 C26 122 10 98 16 70 Z" fill="url(#ws-glow)" />
             <g stroke="#C9772C" strokeWidth="1.8" strokeLinecap="round" fill="none" opacity="0.55">
               <path d="M26 62 C80 58 120 64 180 60" />
               <path d="M40 96 C110 92 150 98 230 94" />
@@ -92,7 +92,7 @@ export function WoodSign({ title, hint }) {
               <path d="M300 106 C360 103 420 108 480 105" />
             </g>
             <path d="M40 33 C200 27 420 29 660 31" stroke="#FFE3A0" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
-            <g transform="rotate(-24 738 76)">
+            <g transform="rotate(-18 738 76)">
             {/* vành kim loại */}
             <path d="M738 47 Q734.5 45 738 44 L769 49 Q773 49.5 773.4 53 L774.5 94 Q774.5 98 771 98.6 L742 106 Q737.5 106.8 737.5 102 Z" fill="url(#ws-ferrule)" stroke="#B5651F" strokeWidth="2.4" strokeLinejoin="round" />
             <path d="M745 52 L745 100" stroke="#FFF0CC" strokeWidth="5" strokeLinecap="round" opacity="0.7" />
