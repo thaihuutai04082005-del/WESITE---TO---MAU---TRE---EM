@@ -1011,67 +1011,59 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .mi-pop2 { transform-origin: 34.2% 56.3%; animation: mi-pop 160ms ease-in-out 1430ms; }
 @keyframes mi-pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 
-/* ===== Cảnh bảng gỗ chọn tranh tô màu (nền như trang chủ) ===== */
+/* ===== Trang chọn tranh tô màu: nền như trang chủ, biển trắng viền xanh, bảng trắng, thẻ tranh trắng ===== */
 .wood-scene { position: relative; min-height: calc(100vh - 73px); overflow: hidden; }
 .wood-scene-in { position: relative; margin: 0 auto; max-width: 1760px; padding: 8px 14px 48px; }
 @media (min-width: 1024px) { .wood-scene-in { padding: 8px 28px 56px; } }
+
 .wood-back { margin-top: 4px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 20px 0 14px; border-radius: 9999px; background: #fff; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: #17365D; box-shadow: 0 4px 14px rgba(43, 90, 140, 0.18); transition: transform 0.15s; }
 @media (min-width: 1100px) { .wood-back { position: absolute; left: 28px; top: 12px; z-index: 6; margin: 0; } }
 .wood-back:hover { transform: translateX(-2px); }
 
 .wood-sign-wrap { position: relative; margin: 0 auto; max-width: 920px; padding-top: 14px; text-align: center; }
 .wood-sign2 { position: relative; container-type: inline-size; width: 100%; aspect-ratio: 900 / 160; }
-/* Màn rộng: dịch cả biển sang phải để tấm gỗ (không tính đầu cọ) nằm chính giữa, thẳng hàng với dây và các biển nhóm tuổi. */
+/* Màn rộng: dịch cả biển sang phải để tấm biển (không tính đầu cọ) nằm chính giữa, thẳng hàng với dây và các biển nhóm tuổi. */
 @media (min-width: 1200px) { .wood-sign2 { transform: translateX(8.6%); } }
 .wood-sign-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.wood-rope { position: absolute; z-index: 2; top: -4px; width: 9px; height: 60px; margin-left: -4px; border-radius: 4px; background: repeating-linear-gradient(115deg, #D79A55 0 4px, #8A4A15 4px 7px); box-shadow: 0 0 0 1.5px #7A3F10; }
-.wood-sign-title { position: absolute; left: 3%; top: 28.8%; bottom: 0; width: 76.8%; z-index: 3; display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0.28em; font-family: var(--font-display); font-weight: 800; line-height: 1; white-space: nowrap; -webkit-text-stroke: 1.1cqw #fff; paint-order: stroke fill; stroke-linejoin: round; filter: drop-shadow(0 0.5cqw 0 rgba(150, 80, 10, 0.35)) drop-shadow(0 0.9cqw 0.6cqw rgba(90, 46, 10, 0.25)); }
+.wood-rope { position: absolute; z-index: 2; top: -4px; width: 9px; height: 62px; margin-left: -4px; border-radius: 4px; background: repeating-linear-gradient(115deg, #C98A4B 0 4px, #8A4A15 4px 7px); box-shadow: 0 0 0 1.5px #7A3F10; }
+.wood-rope::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 22px; height: 16px; margin-left: -11px; border-radius: 9999px; border: 3px solid #8A4A15; background: #E7B06A; }
+.wood-sign-title { position: absolute; left: 3%; top: 31.2%; bottom: 0; width: 76.8%; z-index: 3; display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0.28em; font-family: var(--font-display); font-weight: 800; line-height: 1; white-space: nowrap; -webkit-text-stroke: 1.1cqw #fff; paint-order: stroke fill; stroke-linejoin: round; filter: drop-shadow(0 0.5cqw 0 rgba(40, 90, 160, 0.25)); }
 .wood-hint { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.2vw, 22px); color: #17365D; text-shadow: 0 0 6px #fff, 0 0 3px #fff; }
 
-.wood-tabs { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; margin: 34px auto -30px; max-width: 1000px; padding: 0 8px; }
-.wood-tab { position: relative; padding: 0; background: none; border: 0; cursor: pointer; transition: transform 0.15s, filter 0.15s; }
-.wood-tab:hover { transform: translateY(-2px); filter: brightness(1.06); }
-.wood-tab-icon { position: absolute; z-index: 0; top: -34px; left: 50%; font-size: 46px; line-height: 1; transform: translateX(-50%); filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.2)); }
-.wood-tab-body { position: relative; z-index: 1; display: block; min-width: 190px; padding: 16px 26px 20px; border-radius: 22px / 18px; border: 3px solid #5A2A0E; background:
-  repeating-linear-gradient(176deg, rgba(255, 255, 255, 0.07) 0 3px, rgba(255, 255, 255, 0) 3px 12px),
-  linear-gradient(#C98240, #BA7436 45%, #B06A30);
-  box-shadow: inset 0 3px 0 rgba(255, 220, 170, 0.45), 0 4px 0 #6B3512, 0 8px 12px rgba(60, 30, 5, 0.28); }
-.wood-tab-label { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(18px, 1.9vw, 25px); line-height: 1.1; color: #fff; -webkit-text-stroke: 5px #5A2A0E; paint-order: stroke fill; white-space: nowrap; }
-.wood-tab-on .wood-tab-body { border-color: #D98A1A; background:
-  repeating-linear-gradient(176deg, rgba(255, 255, 255, 0.25) 0 3px, rgba(255, 255, 255, 0) 3px 12px),
-  linear-gradient(#FFE27A, #F9B72E);
-  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.65), 0 5px 0 #B8650F, 0 0 24px 6px rgba(255, 210, 90, 0.7); }
-.wood-tab-on .wood-tab-label { color: #fff; -webkit-text-stroke: 5px #A8560A; }
+/* Ba biển nhóm tuổi: viên thuốc, có con vật bên trong, gác lên mép bảng */
+.wood-tabs { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; margin: 22px auto -26px; max-width: 1060px; padding: 0 8px; }
+.wood-tab { position: relative; padding: 0; background: none; border: 0; cursor: pointer; transition: transform 0.15s; }
+.wood-tab:hover { transform: translateY(-2px); }
+.wood-tab-body { display: flex; align-items: center; gap: 12px; min-width: 230px; padding: 10px 28px 10px 16px; border-radius: 9999px; border: 3px solid #D9DFF4; background: rgba(255, 255, 255, 0.88); box-shadow: 0 6px 16px rgba(40, 90, 160, 0.16); }
+.wood-tab-icon { font-size: 40px; line-height: 1; }
+.wood-tab-label { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(18px, 1.7vw, 24px); line-height: 1.1; color: #1B2A4A; white-space: nowrap; }
+.wood-tab-on .wood-tab-body { border-color: #FFC93C; background: #FFF4C6; box-shadow: 0 0 0 3px rgba(255, 224, 120, 0.5), 0 8px 18px rgba(200, 140, 0, 0.22); }
 
-.wood-board { position: relative; margin: 0 auto; max-width: 1700px; padding: 20px 20px 22px; border-radius: 34px; border: 3px solid #CC9150; background:
-  repeating-linear-gradient(90deg, rgba(170, 100, 35, 0.05) 0 2px, rgba(255, 255, 255, 0) 2px 38px),
-  repeating-linear-gradient(0deg, rgba(255, 245, 210, 0.22) 0 5px, rgba(255, 255, 255, 0) 5px 19px),
-  linear-gradient(#F1C482, #F1C482);
-  box-shadow: inset 0 4px 0 rgba(255, 248, 215, 0.75), inset 0 -4px 0 rgba(255, 248, 215, 0.6), 0 10px 0 -4px #C98F4C, 0 18px 26px rgba(90, 50, 10, 0.16); }
-.wood-bolt { position: absolute; z-index: 2; width: 24px; height: 24px; border-radius: 9999px; background: radial-gradient(circle at 35% 30%, #F1F1F1, #A3A5A8 55%, #66686B); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 0 0 2px rgba(80, 80, 85, 0.35); }
-.wood-board-in { position: relative; border-radius: 24px; padding: 38px 22px 28px; background: #FBF0DB; box-shadow: inset 0 3px 6px rgba(150, 100, 40, 0.16), inset 0 0 0 3px #F1DDB3; }
+/* Bảng trắng lớn */
+.wood-board { position: relative; margin: 0 auto; max-width: 1700px; padding: 0; border-radius: 42px; border: 6px solid rgba(255, 255, 255, 0.92); background: #F6F8FD; box-shadow: 0 16px 36px rgba(30, 70, 130, 0.22); }
+.wood-board-in { position: relative; padding: 44px 22px 26px; }
 
 .wood-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-@media (min-width: 768px) { .wood-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 24px; } }
+@media (min-width: 768px) { .wood-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 22px; } }
 @media (min-width: 1024px) { .wood-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 1280px) { .wood-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px 22px; } }
-.wood-frame { position: relative; display: flex; flex-direction: column; padding: 10px; border-radius: 22px; background: #fff; box-shadow: 0 0 0 1px #F0E3C8, 0 6px 14px rgba(150, 100, 40, 0.16); transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; }
-.wood-frame:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px #CFE3F4, 0 14px 24px rgba(80, 50, 10, 0.26); }
+@media (min-width: 1280px) { .wood-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 20px; } }
+.wood-frame { position: relative; display: flex; flex-direction: column; padding: 10px; border-radius: 22px; background: #fff; box-shadow: 0 0 0 1px #ECEFF7, 0 4px 14px rgba(30, 60, 120, 0.1); transition: transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+.wood-frame:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px #D5E6FA, 0 12px 22px rgba(30, 60, 120, 0.16); }
 .wood-frame:active { transform: scale(0.98); }
 .wood-paper { overflow: hidden; border-radius: 14px; background: #fff; }
 .wood-label { margin: 10px 4px 0; min-height: 1.2em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-family: var(--font-display); font-weight: 800; font-size: 18px; line-height: 1.2; color: #17365D; }
 .wood-foot { margin-top: auto; padding-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .wood-sub { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #5E7A8C; }
-.wood-go { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 9999px; background: linear-gradient(#3AA0FF, #1E73E8); color: #fff; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45), 0 3px 0 #1553B0; transition: transform 0.15s; }
-.wood-frame:hover .wood-go { transform: scale(1.1); }
+.wood-go { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 9999px; background: #E3F0FF; color: #2F86E8; transition: transform 0.15s, background 0.15s; }
+.wood-frame:hover .wood-go { transform: scale(1.1); background: #CFE5FF; }
 @media (max-width: 640px) {
-  .wood-board { padding: 10px; border-radius: 26px; }
-  .wood-board-in { padding: 28px 10px 18px; }
-  .wood-tabs { flex-wrap: nowrap; gap: 6px; margin-top: 40px; margin-bottom: -24px; padding: 0 2px; }
+  .wood-board { border-width: 4px; border-radius: 30px; }
+  .wood-board-in { padding: 34px 10px 18px; }
+  .wood-tabs { flex-wrap: nowrap; gap: 6px; margin-top: 30px; margin-bottom: -22px; padding: 0 2px; }
   .wood-tab { flex: 1 1 0; min-width: 0; }
-  .wood-tab-body { min-width: 0; padding: 12px 4px 16px; border-width: 3px; border-radius: 16px; }
-  .wood-tab-label { font-size: 13.5px; white-space: normal; text-align: center; -webkit-text-stroke-width: 4px; }
-  .wood-tab-icon { top: -26px; font-size: 34px; }
+  .wood-tab-body { min-width: 0; flex-direction: column; gap: 2px; padding: 8px 4px 10px; border-radius: 22px; border-width: 2px; }
+  .wood-tab-icon { font-size: 30px; }
+  .wood-tab-label { font-size: 13px; white-space: normal; text-align: center; }
   .wood-grid { gap: 14px 12px; }
   .wood-label { font-size: 16px; }
 }

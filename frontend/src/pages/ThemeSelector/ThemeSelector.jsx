@@ -6,7 +6,7 @@ import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
 const AGE_GROUPS = ['3-5', '6-8', '9+'];
-const AGE_ICON = { '3-5': '🐣', '6-8': '🦊', '9+': '🐻' };
+const AGE_ICON = { '3-5': '🐥', '6-8': '🐱', '9+': '🐻' };
 const AGE_KEY = 'colorAge';
 
 function loadAge() {
