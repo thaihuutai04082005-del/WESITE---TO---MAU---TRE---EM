@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID } from '../../components/Wood/Wood';
-import { useAuth } from '../../store/auth';
-import { PlanBadge } from '../Payment/Plans';
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
 const AGE_GROUPS = ['3-5', '6-8', '9+'];
@@ -22,7 +20,6 @@ function loadAge() {
 
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
-  const plan = useAuth((s) => s.plan);
   const [themes, setThemes] = useState(null);
   const [age, setAge] = useState(loadAge);
   useEffect(() => {
@@ -39,10 +36,7 @@ export default function ThemeSelector() {
   const list = (themes || []).filter((th) => (th.age || '6-8') === age);
   return (
     <WoodScene>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <WoodBack to="/" label={t('common.back')} />
-        <PlanBadge plan={plan} />
-      </div>
+      <WoodBack to="/" label={t('common.back')} />
       <WoodSign title={t('select.boardTitle')} />
       <WoodTabs
         value={age}
