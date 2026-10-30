@@ -1090,7 +1090,7 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .mode-btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 64px; margin-top: 12px; padding: 6px 16px; border-radius: 9999px; cursor: pointer; font-family: var(--font-display); font-weight: 800; font-size: clamp(20px, 2.8vw, 30px); color: #12285A; transition: transform 0.15s, filter 0.15s; }
 .mode-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.04); }
 .mode-btn:disabled { opacity: 0.6; cursor: default; }
-.mode-btn-icon { width: 46px; height: 46px; flex: none; }
+.mode-btn-icon { width: 52px; height: 52px; flex: none; margin: -4px 0; }
 .mode-btn-template { border: 3px solid #D9951A; background: linear-gradient(#FFE070, #FFC93C); box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6), 0 4px 0 #C98410; }
 .mode-btn-free { border: 3px solid #2F86E8; background: linear-gradient(#CBE8FF, #A9D6FA); box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.7), 0 4px 0 #2468C0; }
 @media (max-width: 600px) {
