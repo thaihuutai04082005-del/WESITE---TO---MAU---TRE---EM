@@ -1,8 +1,8 @@
 // Tầng 1: Chủ đề lớn — bảng gỗ có 3 biển nhóm tuổi treo phía trên.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
-import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID } from '../../components/Wood/Wood';
+import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID, useFitRows } from '../../components/Wood/Wood';
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
 const AGE_GROUPS = ['3-5', '6-8', '9+'];
@@ -34,6 +34,8 @@ export default function ThemeSelector() {
     }
   };
   const list = (themes || []).filter((th) => (th.age || '6-8') === age);
+  const gridRef = useRef(null);
+  useFitRows(gridRef, [themes, age]);
   return (
     <WoodScene>
       <WoodBack to="/" label={t('common.back')} />
@@ -50,7 +52,7 @@ export default function ThemeSelector() {
               {t('select.ageEmpty')}
             </p>
           )}
-          <div className={WOOD_GRID}>
+          <div ref={gridRef} className={WOOD_GRID}>
             {list.map((th) => (
               <PicFrame
                 key={th.slug}

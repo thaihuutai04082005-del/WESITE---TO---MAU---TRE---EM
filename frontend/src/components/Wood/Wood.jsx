@@ -1,4 +1,5 @@
 // Bộ khung cho các trang chọn tranh tô màu: nền như trang chủ, biển tiêu đề treo, ba biển nhóm tuổi, bảng trắng, thẻ tranh.
+import { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PictureView from '../PictureView/PictureView';
 import Icon from '../Icon';
@@ -206,3 +207,34 @@ export function WoodBack({ to, label }) {
 }
 
 export const WOOD_GRID = 'wood-grid';
+
+/**
+ * Màn hình rộng: nếu mép trên hàng tranh thứ hai chỉ vừa ló ra ở đáy màn hình, nới khoảng cách giữa hai hàng
+ * để đáy màn hình rơi đúng vào khoảng trống giữa hai hàng (hàng đầu vẫn hiện trọn, không lộ "mí" hàng sau).
+ */
+export function useFitRows(ref, deps = []) {
+  useLayoutEffect(() => {
+    const grid = ref.current;
+    if (!grid) return undefined;
+    const fit = () => {
+      grid.style.rowGap = '';
+      if (window.innerWidth < 1024) return;
+      const kids = [...grid.children];
+      if (kids.length < 2) return;
+      const y = window.scrollY;
+      const top1 = kids[0].getBoundingClientRect().top;
+      const next = kids.find((k) => k.getBoundingClientRect().top > top1 + 5);
+      if (!next) return;
+      const row1Bottom = Math.max(...kids.filter((k) => Math.abs(k.getBoundingClientRect().top - top1) < 5).map((k) => k.getBoundingClientRect().bottom)) + y;
+      const row2Top = next.getBoundingClientRect().top + y;
+      const vh = window.innerHeight;
+      const room = vh - row1Bottom;
+      if (row2Top < vh && room >= 2 && room < 64) grid.style.rowGap = `${vh + 2 - row1Bottom}px`;
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    document.fonts?.ready.then(fit);
+    return () => window.removeEventListener('resize', fit);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+}
