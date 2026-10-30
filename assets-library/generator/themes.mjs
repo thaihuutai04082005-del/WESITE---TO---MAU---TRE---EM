@@ -1250,6 +1250,20 @@ ART_THEMES.push({
         { slug: 'trai-dat', name: { vi: 'Trái đất', en: 'Earth' }, file: 'trai-dat--trai-dat' },
       ],
     },
+    {
+      slug: 'sao-hoa',
+      name: { vi: 'Sao Hỏa', en: 'Mars' },
+      pictures: [
+        { slug: 'sao-hoa', name: { vi: 'Sao Hỏa', en: 'Mars' }, file: 'sao-hoa--sao-hoa' },
+      ],
+    },
+    {
+      slug: 'tau-vu-tru',
+      name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' },
+      pictures: [
+        { slug: 'tau-vu-tru', name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' }, file: 'tau-vu-tru--tau-vu-tru' },
+      ],
+    },
   ],
 });
 
