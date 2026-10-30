@@ -1208,6 +1208,20 @@ ART_THEMES.push({
         { slug: 'dia-bay', name: { vi: 'Đĩa bay', en: 'Flying Saucer' }, file: 'dia-bay--dia-bay' },
       ],
     },
+    {
+      slug: 'phi-hanh-gia',
+      name: { vi: 'Phi hành gia', en: 'Astronaut' },
+      pictures: [
+        { slug: 'phi-hanh-gia', name: { vi: 'Phi hành gia', en: 'Astronaut' }, file: 'phi-hanh-gia--phi-hanh-gia' },
+      ],
+    },
+    {
+      slug: 've-tinh',
+      name: { vi: 'Vệ tinh', en: 'Satellite' },
+      pictures: [
+        { slug: 've-tinh', name: { vi: 'Vệ tinh', en: 'Satellite' }, file: 've-tinh--ve-tinh' },
+      ],
+    },
   ],
 });
 
