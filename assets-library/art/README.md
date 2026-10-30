@@ -131,6 +131,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Du Hành Vũ Trụ (3–5 tuổi) | Tàu vũ trụ | Tàu vũ trụ (mới, đang hiện; màu theo ảnh mẫu) | 28 |
 | Các Loài Hoa (3–5 tuổi) | Hoa cúc | Hoa cúc (mới, đang hiện; màu theo ảnh mẫu) | 30 |
 | Các Loài Hoa (3–5 tuổi) | Hoa hướng dương | Hoa hướng dương (mới, đang hiện; màu theo ảnh mẫu) | 32 |
+| Các Loài Hoa (3–5 tuổi) | Hoa tulip | Hoa tulip (mới, đang hiện; màu theo ảnh mẫu) | 22 |
+| Các Loài Hoa (3–5 tuổi) | Hoa hồng | Hoa hồng (mới, đang hiện; màu theo ảnh mẫu) | 23 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |

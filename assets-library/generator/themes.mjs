@@ -1287,6 +1287,20 @@ ART_THEMES.push({
         { slug: 'hoa-huong-duong', name: { vi: 'Hoa hướng dương', en: 'Sunflower' }, file: 'hoa-huong-duong--hoa-huong-duong' },
       ],
     },
+    {
+      slug: 'hoa-tulip',
+      name: { vi: 'Hoa tulip', en: 'Tulip' },
+      pictures: [
+        { slug: 'hoa-tulip', name: { vi: 'Hoa tulip', en: 'Tulip' }, file: 'hoa-tulip--hoa-tulip' },
+      ],
+    },
+    {
+      slug: 'hoa-hong',
+      name: { vi: 'Hoa hồng', en: 'Rose' },
+      pictures: [
+        { slug: 'hoa-hong', name: { vi: 'Hoa hồng', en: 'Rose' }, file: 'hoa-hong--hoa-hong' },
+      ],
+    },
   ],
 });
 
