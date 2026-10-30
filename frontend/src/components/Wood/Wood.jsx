@@ -30,12 +30,25 @@ export function WoodSign({ title, hint }) {
             </span>
           ))}
         </h1>
-        <svg className="wood-brush" viewBox="0 0 150 70" aria-hidden="true">
-          <rect x="2" y="26" width="38" height="20" rx="4" fill="#F2C16B" stroke="#8A4A15" strokeWidth="3" />
-          <rect x="30" y="22" width="14" height="28" rx="3" fill="#E6A93F" stroke="#8A4A15" strokeWidth="3" />
-          <path d="M44 20 Q80 2 128 6 Q148 10 144 28 Q146 52 126 62 Q84 72 44 50 Z" fill="#B0601B" stroke="#6B3410" strokeWidth="3.5" strokeLinejoin="round" />
-          <path d="M96 12 Q132 6 140 20 Q138 40 118 44 Q104 34 96 12 Z" fill="#FF5A6E" />
-          <path d="M60 28 Q84 20 110 24 M58 40 Q86 46 112 40" stroke="#8A4A15" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+        <svg className="wood-brush" viewBox="-2 -2 156 74" aria-hidden="true">
+          <defs>
+            <clipPath id="wood-brush-head">
+              <path d="M36 15 C50 6 70 7 92 5 C114 3 134 0 149 5 C148 19 141 35 129 48 C110 66 66 68 36 55 Z" />
+            </clipPath>
+          </defs>
+          {/* cán gỗ + vành kim loại nối với biển */}
+          <rect x="0" y="22" width="14" height="26" fill="#F0B35A" />
+          <rect x="10" y="12" width="28" height="46" rx="6" fill="#F6C46D" stroke="#B5651F" strokeWidth="3" />
+          <path d="M18 16 V54 M26 15 V55" stroke="#E0953A" strokeWidth="3" strokeLinecap="round" />
+          {/* đầu cọ: lông kem, gốc nâu răng cưa, ngọn hồng */}
+          <g clipPath="url(#wood-brush-head)">
+            <rect x="30" y="0" width="122" height="70" fill="#F9DDAA" />
+            <path d="M30 0 H78 L70 12 L84 20 L68 28 L86 38 L68 46 L82 56 L68 70 H30 Z" fill="#E9A85A" />
+            <path d="M30 0 H62 L56 11 L68 19 L54 27 L70 37 L54 45 L66 55 L56 70 H30 Z" fill="#8A4A1F" />
+            <path d="M110 0 H152 V22 C141 26 135 38 127 50 C125 32 119 14 110 0 Z" fill="#FF5C7C" />
+            <path d="M122 4 C134 4 142 6 146 12" stroke="#FFB3C2" strokeWidth="3" fill="none" strokeLinecap="round" />
+          </g>
+          <path d="M36 15 C50 6 70 7 92 5 C114 3 134 0 149 5 C148 19 141 35 129 48 C110 66 66 68 36 55 Z" fill="none" stroke="#7A3F12" strokeWidth="3.5" strokeLinejoin="round" />
         </svg>
       </div>
       {hint && <p className="wood-hint">{hint}</p>}
