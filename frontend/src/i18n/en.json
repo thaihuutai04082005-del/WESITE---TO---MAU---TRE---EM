@@ -348,6 +348,9 @@
     "empty": "No exhibited pictures yet."
   },
   "select": {
+    "boardTitle": "Pick a picture to color",
+    "sign1": "Let's color",
+    "sign2": "together!",
     "themes": "Pick a theme",
     "ageEmpty": "New pictures coming soon for this age group!",
     "themesHint": "What would you like to color today?",

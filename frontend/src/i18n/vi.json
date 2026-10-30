@@ -348,6 +348,9 @@
     "empty": "Bạn ấy chưa có tranh nào đi triển lãm."
   },
   "select": {
+    "boardTitle": "Chọn tranh tô màu",
+    "sign1": "Cùng tô màu",
+    "sign2": "thật vui nhé!",
     "themes": "Chọn chủ đề",
     "themesHint": "Bé thích tô gì hôm nay?",
     "ageEmpty": "Sắp có tranh mới cho nhóm tuổi này!",

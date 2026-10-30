@@ -1,83 +1,69 @@
-// Tầng 1: Chủ đề lớn.
-import { useEffect, useRef, useState } from 'react';
+// Tầng 1: Chủ đề lớn — bảng gỗ có 3 biển nhóm tuổi treo phía trên.
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
-import ThemeTile from '../../components/ThemeCard/ThemeTile';
-import useOneLineTitles, { GRID_CLASS } from '../../components/ThemeCard/useOneLineTitles';
-import { PainterBear } from '../../components/Illustrations';
-import { useAuth } from '../../store/auth';
-import { PlanBadge } from '../Payment/Plans';
-
-/** Đám mây mờ trang trí nền. */
-function Cloud({ className }) {
-  return (
-    <svg viewBox="0 0 200 90" className={`pointer-events-none absolute ${className}`} aria-hidden="true">
-      <path d="M30 88 Q0 88 6 64 Q8 44 34 46 Q42 16 76 22 Q96 0 124 16 Q156 10 160 40 Q196 42 194 68 Q192 88 166 88 Z" fill="#FFFFFF" />
-    </svg>
-  );
-}
-
-function Sparkle({ className, color }) {
-  return (
-    <svg viewBox="0 0 24 24" className={`pointer-events-none absolute ${className}`} aria-hidden="true">
-      <path d="M12 2l2.9 6.2 6.8.8-5 4.7 1.3 6.7L12 17l-6 3.4 1.3-6.7-5-4.7 6.8-.8z" fill={color} stroke="#1B2A38" strokeWidth="1.4" strokeLinejoin="round" />
-    </svg>
-  );
-}
+import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID } from '../../components/Wood/Wood';
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
 const AGE_GROUPS = ['3-5', '6-8', '9+'];
-const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟' };
+const AGE_ICON = { '3-5': '🐣', '6-8': '🦊', '9+': '🐻' };
+const AGE_KEY = 'colorAge';
+
+function loadAge() {
+  try {
+    const v = sessionStorage.getItem(AGE_KEY);
+    return AGE_GROUPS.includes(v) ? v : AGE_GROUPS[0];
+  } catch {
+    return AGE_GROUPS[0];
+  }
+}
 
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
-  const plan = useAuth((s) => s.plan);
   const [themes, setThemes] = useState(null);
+  const [age, setAge] = useState(loadAge);
   useEffect(() => {
     api.get('/themes').then((r) => setThemes(r.themes));
   }, []);
-  const gridRef = useRef(null);
-  useOneLineTitles(gridRef, i18n.language, [themes]);
+  const pickAge = (a) => {
+    setAge(a);
+    try {
+      sessionStorage.setItem(AGE_KEY, a);
+    } catch {
+      /* không lưu được thì thôi */
+    }
+  };
+  const list = (themes || []).filter((th) => (th.age || '6-8') === age);
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#EEF7FF] to-[#F5FAFF]">
-      <Cloud className="-left-10 top-40 w-56 opacity-70" />
-      <Cloud className="-right-12 top-24 w-64 opacity-80" />
-      <Cloud className="-left-16 bottom-4 w-72 opacity-70" />
-      <Cloud className="-right-10 bottom-24 w-60 opacity-70" />
-      <div className="page relative px-3 sm:px-4 lg:max-w-[1320px]">
-        <div className="relative mb-6 flex flex-wrap items-center gap-3 md:gap-5">
-          <div className="h-20 w-24 shrink-0 md:h-40 md:w-44">
-            <PainterBear />
+    <WoodScene>
+      <WoodBack to="/" label={t('common.back')} />
+      <WoodSign title={t('select.boardTitle')} />
+      <WoodTabs
+        value={age}
+        onChange={pickAge}
+        tabs={AGE_GROUPS.map((a) => ({ key: a, icon: AGE_ICON[a], label: t(`select.age.${a}`) }))}
+      />
+      <WoodBoard testId={`age-${age}`}>
+        <div>
+          {themes && !list.length && (
+            <p className="rounded-2xl bg-white/70 px-4 py-10 text-center font-display text-xl font-extrabold text-[#7A430F]" data-testid={`age-empty-${age}`}>
+              {t('select.ageEmpty')}
+            </p>
+          )}
+          <div className={WOOD_GRID}>
+            {list.map((th) => (
+              <PicFrame
+                key={th.slug}
+                to={`/color/${th.slug}`}
+                picture={th.cover}
+                title={th.name[i18n.language]}
+                subtitle={t('select.pictureCount', { n: th.pictureCount })}
+                testId={`theme-${th.slug}`}
+              />
+            ))}
           </div>
-          <div className="min-w-0 flex-1">
-            <h1 className="font-display whitespace-nowrap text-[34px] font-extrabold leading-none text-[#17365D] md:text-6xl">{t('select.themes')}</h1>
-            <p className="mt-1 text-sm text-muted md:mt-2 md:text-lg">{t('select.themesHint')}</p>
-          </div>
-          <PlanBadge plan={plan} />
-          <Sparkle className="right-2 -top-2 hidden h-9 w-9 md:block" color="#FFD54F" />
-          <Sparkle className="-right-6 top-8 hidden h-5 w-5 md:block" color="#7FC8C8" />
         </div>
-        <div ref={gridRef} className="space-y-8">
-          {AGE_GROUPS.map((age) => {
-            const list = (themes || []).filter((th) => (th.age || '6-8') === age);
-            if (!list.length && !themes) return null;
-            return (
-              <section key={age} data-testid={`age-${age}`}>
-                <h2 className="font-display mb-3 flex items-center gap-2 text-2xl font-extrabold text-[#17365D] md:text-3xl">
-                  <span aria-hidden="true">{AGE_ICON[age]}</span>
-                  {t(`select.age.${age}`)}
-                </h2>
-                {!list.length && <p className="rounded-2xl bg-white/70 px-4 py-6 text-center font-bold text-[#17365D]/70" data-testid={`age-empty-${age}`}>{t('select.ageEmpty')}</p>}
-                <div className={GRID_CLASS}>
-                  {list.map((th) => (
-                    <ThemeTile key={th.slug} to={`/color/${th.slug}`} picture={th.cover} title={th.name[i18n.language]} subtitle={t('select.pictureCount', { n: th.pictureCount })} testId={`theme-${th.slug}`} />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+      </WoodBoard>
+    </WoodScene>
   );
 }
