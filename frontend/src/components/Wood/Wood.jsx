@@ -1,20 +1,16 @@
 // Bộ khung cho các trang chọn tranh tô màu: nền như trang chủ, biển tiêu đề treo, ba biển nhóm tuổi, bảng trắng, thẻ tranh.
 import { Link } from 'react-router-dom';
 import PictureView from '../PictureView/PictureView';
-import HelloBear from '../HelloBear';
 import Icon from '../Icon';
 
 const HOME_BG = 'url(/home-bg.webp)';
 
-/** Nền (cùng ảnh với trang chủ) + gấu họa sĩ góc trái khi màn hình rộng. */
+/** Nền (cùng ảnh với trang chủ). */
 export function WoodScene({ children }) {
   return (
     <div className="wood-scene bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
       <div className="wood-scene-in">
         {children}
-        <div className="wood-bear" aria-hidden="true">
-          <HelloBear className="h-full w-full" />
-        </div>
       </div>
     </div>
   );
