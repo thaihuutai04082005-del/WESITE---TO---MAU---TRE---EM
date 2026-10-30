@@ -1,12 +1,10 @@
 // Tầng 2: Danh sách tranh của chủ đề — bé chọn thẳng một tranh rồi chọn chế độ tô.
-import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
-import ThemeCard from '../../components/ThemeCard/ThemeCard';
-import useOneLineTitles, { GRID_CLASS } from '../../components/ThemeCard/useOneLineTitles';
+import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WOOD_GRID } from '../../components/Wood/Wood';
 import ModePicker from '../../components/ModePicker';
-import Icon from '../../components/Icon';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
@@ -18,20 +16,20 @@ export default function ObjectSelector() {
     api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
   const lang = i18n.language;
-  const gridRef = useRef(null);
-  useOneLineTitles(gridRef, lang, [data], { shared: false });
   return (
-    <div className="page px-3 sm:px-4 lg:max-w-[1320px]">
-      <Link to="/color" className="mb-2 inline-flex items-center gap-1 font-bold text-primary">
-        <Icon name="back" size={20} /> {t('select.themes')}
-      </Link>
-      <h1 className="page-title mb-4">{data?.theme.name[lang]}</h1>
-      <div ref={gridRef} className={GRID_CLASS}>
-        {(data?.pictures || []).map((p) => (
-          <ThemeCard key={p.id} onClick={() => setPicked(p)} picture={p} title={p.name[lang]} testId={`pose-${p.slug}`} />
-        ))}
+    <WoodScene sign={false}>
+      <WoodBack to="/color" label={t('select.themes')} />
+      <WoodSign title={data?.theme.name[lang] || ' '} hint={t('select.pictures')} />
+      <div className="mt-8">
+        <WoodBoard>
+          <div className={WOOD_GRID}>
+            {(data?.pictures || []).map((p) => (
+              <PicFrame key={p.id} onClick={() => setPicked(p)} picture={p} title={p.name[lang]} testId={`pose-${p.slug}`} />
+            ))}
+          </div>
+        </WoodBoard>
       </div>
       {picked && <ModePicker picture={picked} onClose={() => setPicked(null)} />}
-    </div>
+    </WoodScene>
   );
 }
