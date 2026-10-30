@@ -1373,6 +1373,13 @@ ART_THEMES.push({
         { slug: 've-binh-cong-ly', name: { vi: 'Vệ Binh Công Lý', en: 'Justice Guardian' }, file: 've-binh-cong-ly--ve-binh-cong-ly' },
       ],
     },
+    {
+      slug: 'chien-binh-cuu-hoa',
+      name: { vi: 'Chiến Binh Cứu Hỏa', en: 'Fire Rescue Warrior' },
+      pictures: [
+        { slug: 'chien-binh-cuu-hoa', name: { vi: 'Chiến Binh Cứu Hỏa', en: 'Fire Rescue Warrior' }, file: 'chien-binh-cuu-hoa--chien-binh-cuu-hoa' },
+      ],
+    },
   ],
 });
 

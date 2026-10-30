@@ -99,14 +99,20 @@ def main():
 
     k = SIZE / w
     regions = []
+    comp_lab, _ = ndimage.label(~line)   # ô trắng thật (không bịt khe) — dùng cho clip_to_ink
     for i in ids:
         mask = (full == i).astype(np.uint8)
         # "grow": N — nở mỗi vùng thêm N px (chồng nhẹ lên vùng kề, nằm dưới nét) để không lộ khe trắng giữa các vùng bên dưới nét mảnh.
         if cfg.get('grow'):
             mask = cv2.dilate(mask, np.ones((2 * int(cfg['grow']) + 1,) * 2, np.uint8))
+            # "clip_to_ink": true — vùng nở chỉ được phủ lên nét hoặc ô của chính nó, không đè lên ô khác
+            # (nét dày ở chỗ giao nhau làm vùng nở tràn qua dải hẹp bên kia nét → lem màu).
+            if cfg.get('clip_to_ink'):
+                own = np.unique(comp_lab[labels == i])
+                mask = mask & ((line | np.isin(comp_lab, own[own > 0])).astype(np.uint8))
         cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         c = max(cs, key=cv2.contourArea)
-        c = cv2.approxPolyDP(c, 1.0, True).reshape(-1, 2)
+        c = cv2.approxPolyDP(c, 0.35 if cfg.get('clip_to_ink') else 1.0, True).reshape(-1, 2)
         if len(c) < 3:
             continue
         d = 'M ' + ' L '.join(f'{x * k:.1f} {y * k:.1f}' for x, y in c) + ' Z'
