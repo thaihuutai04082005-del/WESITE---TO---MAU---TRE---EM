@@ -14,15 +14,13 @@ export function WoodScene({ children }) {
   );
 }
 
-// Màu chữ: hai từ đầu xanh dương, các chữ cái sau đó lần lượt hồng – vàng – xanh lá – tím – tím.
-const WORD_BLUE = '#1E8BF2';
-const LETTER_COLORS = ['#FF3B6B', '#FFAE0F', '#18C45E', '#8B5CF6', '#8B5CF6'];
+// Màu chữ theo từng từ: xanh dương – vàng cam – đỏ – xanh lá (lặp lại nếu tên dài hơn 4 từ).
+const WORD_COLORS = ['#2F9BF5', '#FFB01A', '#F0504F', '#33C45A'];
 
 function colorLetters(title) {
-  let n = 0;
   return String(title).split(' ').map((w, wi) => ({
     word: w,
-    letters: [...w].map((ch) => ({ ch, color: wi < 2 ? WORD_BLUE : LETTER_COLORS[n++ % LETTER_COLORS.length] })),
+    letters: [...w].map((ch) => ({ ch, color: WORD_COLORS[wi % WORD_COLORS.length] })),
   }));
 }
 
