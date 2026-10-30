@@ -1315,6 +1315,20 @@ ART_THEMES.push({
         { slug: 'hoa-luu-ly', name: { vi: 'Hoa lưu ly', en: 'Forget-me-not' }, file: 'hoa-luu-ly--hoa-luu-ly' },
       ],
     },
+    {
+      slug: 'hoa-pang-xe',
+      name: { vi: 'Hoa păng-xê', en: 'Pansy' },
+      pictures: [
+        { slug: 'hoa-pang-xe', name: { vi: 'Hoa păng-xê', en: 'Pansy' }, file: 'hoa-pang-xe--hoa-pang-xe' },
+      ],
+    },
+    {
+      slug: 'hoa-loa-ken',
+      name: { vi: 'Hoa loa kèn', en: 'Lily' },
+      pictures: [
+        { slug: 'hoa-loa-ken', name: { vi: 'Hoa loa kèn', en: 'Lily' }, file: 'hoa-loa-ken--hoa-loa-ken' },
+      ],
+    },
   ],
 });
 
