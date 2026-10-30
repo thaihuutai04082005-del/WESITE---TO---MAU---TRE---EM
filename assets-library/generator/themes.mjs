@@ -1301,6 +1301,20 @@ ART_THEMES.push({
         { slug: 'hoa-hong', name: { vi: 'Hoa hồng', en: 'Rose' }, file: 'hoa-hong--hoa-hong' },
       ],
     },
+    {
+      slug: 'hoa-su',
+      name: { vi: 'Hoa sứ', en: 'Frangipani' },
+      pictures: [
+        { slug: 'hoa-su', name: { vi: 'Hoa sứ', en: 'Frangipani' }, file: 'hoa-su--hoa-su' },
+      ],
+    },
+    {
+      slug: 'hoa-luu-ly',
+      name: { vi: 'Hoa lưu ly', en: 'Forget-me-not' },
+      pictures: [
+        { slug: 'hoa-luu-ly', name: { vi: 'Hoa lưu ly', en: 'Forget-me-not' }, file: 'hoa-luu-ly--hoa-luu-ly' },
+      ],
+    },
   ],
 });
 
