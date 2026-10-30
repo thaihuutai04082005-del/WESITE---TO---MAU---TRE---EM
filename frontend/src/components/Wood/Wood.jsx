@@ -138,10 +138,14 @@ export function WoodSign({ title, hint }) {
   );
 }
 
-/** Bảng trắng lớn chứa lưới tranh. */
+/** Bảng gỗ sáng lớn chứa lưới tranh. */
 export function WoodBoard({ children, className = '', testId }) {
   return (
     <div className={`wood-board ${className}`} data-testid={testId}>
+      <span className="wood-bolt" style={{ left: 10, top: 10 }} />
+      <span className="wood-bolt" style={{ right: 10, top: 10 }} />
+      <span className="wood-bolt" style={{ left: 10, bottom: 10 }} />
+      <span className="wood-bolt" style={{ right: 10, bottom: 10 }} />
       <div className="wood-board-in">{children}</div>
     </div>
   );
