@@ -51,7 +51,7 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 
 Chủ đề cho bé **3–5 tuổi** dùng tranh vẽ tay, khai báo trong `ART_THEMES` (`generator/themes.mjs`):
 chủ đề (`age`: `'3-5'`) → đối tượng → từng tranh (`file` trong thư mục này). Cách tạo file `.json` giống thẻ ở trên.
-Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm **6–8 tuổi**; nhóm **9 tuổi trở lên** mới có chủ đề Chiến Binh Biến Hình (1 tranh).
+Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm **6–8 tuổi**; nhóm **9 tuổi trở lên** mới có chủ đề Chiến Binh Biến Hình (2 tranh).
 
 | Chủ đề | Đối tượng | Tranh | Vùng tô |
 |---|---|---|---|
@@ -120,6 +120,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Khu Vui Chơi (3–5 tuổi) | Vòng đu quay | Vòng đu quay (mới, đang hiện; màu theo ảnh mẫu) | 47 |
 | Khu Vui Chơi (3–5 tuổi) | Ném vòng trúng đích | Ném vòng trúng đích (mới, đang hiện; màu theo ảnh mẫu) | 35 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
+| Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |

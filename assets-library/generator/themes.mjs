@@ -1201,6 +1201,13 @@ ART_THEMES.push({
         { slug: 'chien-binh-sieu-toc', name: { vi: 'Chiến Binh Siêu Tốc', en: 'Speed Warrior' }, file: 'chien-binh-sieu-toc--chien-binh-sieu-toc' },
       ],
     },
+    {
+      slug: 'thu-linh-thep',
+      name: { vi: 'Thủ Lĩnh Thép', en: 'Steel Leader' },
+      pictures: [
+        { slug: 'thu-linh-thep', name: { vi: 'Thủ Lĩnh Thép', en: 'Steel Leader' }, file: 'thu-linh-thep--thu-linh-thep' },
+      ],
+    },
   ],
 });
 
