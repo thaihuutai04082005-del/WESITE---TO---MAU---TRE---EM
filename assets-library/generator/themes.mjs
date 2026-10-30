@@ -1366,6 +1366,13 @@ ART_THEMES.push({
         { slug: 'thu-linh-thep', name: { vi: 'Thủ Lĩnh Thép', en: 'Steel Leader' }, file: 'thu-linh-thep--thu-linh-thep' },
       ],
     },
+    {
+      slug: 've-binh-cong-ly',
+      name: { vi: 'Vệ Binh Công Lý', en: 'Justice Guardian' },
+      pictures: [
+        { slug: 've-binh-cong-ly', name: { vi: 'Vệ Binh Công Lý', en: 'Justice Guardian' }, file: 've-binh-cong-ly--ve-binh-cong-ly' },
+      ],
+    },
   ],
 });
 
