@@ -76,6 +76,9 @@ export function WoodSign({ title, hint }) {
               <stop offset="0" stopColor="#FF7F9A" />
               <stop offset="1" stopColor="#F23E5E" />
             </linearGradient>
+            <clipPath id="ws-brown">
+              <path d="M764 25 L803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99 L816 108 L764 113 Z" />
+            </clipPath>
             <clipPath id="ws-head">
               <path d="M773 51 C777 42 783 38 793 33 C805 27 817 22 834 22 C850 22 866 29 884 28 C891 27.5 896 26 897 29 C897 42 890 60 879 72 C866 86 850 97 833 102.5 C818 107 797 106 785 100 C777 96 774 92 773 90 Z" />
             </clipPath>
@@ -101,12 +104,12 @@ export function WoodSign({ title, hint }) {
             <g clipPath="url(#ws-head)">
               <rect x="765" y="15" width="135" height="100" fill="url(#ws-tan)" />
               <path d="M764 25 L803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99 L816 108 L764 113 Z" fill="#92491F" />
-              <g stroke="#6F3414" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.55">
+              <g clipPath="url(#ws-brown)" stroke="#6F3414" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.55">
                 <path d="M776 45 C790 44 800 46 812 50" />
                 <path d="M776 62 C792 60 806 62 818 68" />
                 <path d="M777 80 C792 80 806 82 816 90" />
               </g>
-              <path d="M803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99" fill="none" stroke="#D98F40" strokeWidth="2" strokeLinejoin="round" />
+              <path d="M764 25 L803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99 L816 108" fill="none" stroke="#D98F40" strokeWidth="2" strokeLinejoin="round" />
               <path d="M842 30 C852 35 858 45 860 56 C861 64 858 70 857 74 C858 79 860 83 864 86 L900 100 L900 10 L842 10 Z" fill="url(#ws-pink)" />
               <path d="M852 36 C864 32 876 31 888 33" stroke="#FFC2CF" strokeWidth="3.4" strokeLinecap="round" fill="none" opacity="0.85" />
             </g>
