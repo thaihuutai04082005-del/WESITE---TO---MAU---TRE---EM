@@ -124,7 +124,8 @@ def main():
                 continue
             mask = cv2.dilate((spot_lab == sid).astype(np.uint8), np.ones((3, 3), np.uint8))
             cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.6, True).reshape(-1, 2)
+            # ô rất nhỏ/dài chéo: giữ nhiều điểm để đa giác bám đúng ô (epsilon lớn biến ô thành tam giác méo)
+            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.25, True).reshape(-1, 2)
             if len(c) < 3:
                 continue
             d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'
