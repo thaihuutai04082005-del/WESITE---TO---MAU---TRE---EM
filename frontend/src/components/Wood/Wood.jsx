@@ -1,57 +1,108 @@
 // Bộ khung "bảng gỗ" cho các trang chọn tranh tô màu: nền như trang chủ, biển tiêu đề treo, bảng gỗ lớn, khung tranh.
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import PictureView from '../PictureView/PictureView';
-import HelloBear from '../HelloBear';
 import Icon from '../Icon';
 
 const HOME_BG = 'url(/home-bg.webp)';
-const WORD_COLORS = ['#2B9BF4', '#FFB020', '#EF4B4B', '#34C759'];
 
-/** Nền (cùng ảnh với trang chủ) + gấu họa sĩ và biển chỉ đường ở hai bên khi màn hình rộng. */
-export function WoodScene({ children, sign = true }) {
-  const { t } = useTranslation();
+/** Nền: cùng ảnh với trang chủ. */
+export function WoodScene({ children }) {
   return (
     <div className="wood-scene bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
-      <div className="wood-scene-in">
-        {children}
-        <div className="wood-bear" aria-hidden="true">
-          <HelloBear className="h-full w-full" />
-        </div>
-        {sign && (
-          <div className="wood-post" aria-hidden="true">
-            <span className="wood-post-pole" />
-            <span className="wood-post-plank" style={{ transform: 'rotate(-3deg)' }}>{t('select.sign1')}</span>
-            <span className="wood-post-plank" style={{ transform: 'rotate(2deg)' }}>{t('select.sign2')}</span>
-          </div>
-        )}
-      </div>
+      <div className="wood-scene-in">{children}</div>
     </div>
   );
 }
 
-/** Biển tiêu đề treo bằng dây, đầu bên phải có cây cọ. Chữ nhiều màu viền trắng. */
+// Màu chữ theo từng từ: xanh dương – vàng cam – đỏ – xanh lá (lặp lại nếu tên dài hơn 4 từ).
+const WORD_COLORS = ['#2F9BF5', '#FFB01A', '#F0504F', '#33C45A'];
+
+function colorLetters(title) {
+  return String(title).split(' ').map((w, wi) => ({
+    word: w,
+    letters: [...w].map((ch) => ({ ch, color: WORD_COLORS[wi % WORD_COLORS.length] })),
+  }));
+}
+
+/** Biển tiêu đề: tấm gỗ dài treo bằng dây, đầu bên phải thu nhỏ thành cán + đầu cọ. Chữ nhiều màu viền trắng. */
 export function WoodSign({ title, hint }) {
-  const words = String(title).split(' ');
+  const text = String(title);
+  const size = Math.min(6.9, 74 / (Math.max(text.length, 1) * 0.58));
   return (
     <div className="wood-sign-wrap">
-      <span className="wood-rope" style={{ left: '17%' }} />
-      <span className="wood-rope" style={{ right: '23%' }} />
-      <div className="wood-sign">
-        <h1 className="wood-sign-title" data-testid="wood-title">
-          {words.map((w, i) => (
-            <span key={`${w}-${i}`} style={{ color: WORD_COLORS[i % WORD_COLORS.length] }}>
-              {w}{' '}
+      <div className="wood-sign2">
+        <span className="wood-rope" style={{ left: '10%' }} />
+        <span className="wood-rope" style={{ left: '66%' }} />
+        <svg className="wood-sign-art" viewBox="0 0 900 123" aria-hidden="true">
+          <defs>
+            <linearGradient id="ws-plank" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#F6A93E" />
+              <stop offset="0.28" stopColor="#FFC25E" />
+              <stop offset="0.7" stopColor="#F9B54A" />
+              <stop offset="1" stopColor="#EC9733" />
+            </linearGradient>
+            <radialGradient id="ws-glow" cx="0.42" cy="0.55" r="0.5">
+              <stop offset="0" stopColor="#FFE8A8" stopOpacity="0.85" />
+              <stop offset="1" stopColor="#FFE8A8" stopOpacity="0" />
+            </radialGradient>
+            <linearGradient id="ws-ferrule" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stopColor="#F9D79B" />
+              <stop offset="0.45" stopColor="#F2BC70" />
+              <stop offset="1" stopColor="#E3A053" />
+            </linearGradient>
+            <linearGradient id="ws-tan" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#F9CF93" />
+              <stop offset="1" stopColor="#EDAA5B" />
+            </linearGradient>
+            <linearGradient id="ws-pink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#FF7F9A" />
+              <stop offset="1" stopColor="#F23E5E" />
+            </linearGradient>
+            <clipPath id="ws-head">
+              <path d="M773 51 C777 42 783 38 793 33 C805 27 817 22 834 22 C850 22 866 29 884 28 C891 27.5 896 26 897 29 C897 42 890 60 879 72 C866 86 850 97 833 102.5 C818 107 797 106 785 100 C777 96 774 92 773 90 Z" />
+            </clipPath>
+          </defs>
+          <g style={{ filter: 'drop-shadow(0 5px 4px rgba(90,46,10,0.35))' }}>
+            {/* tấm gỗ */}
+            <path d="M16 66 C10 48 28 26 70 25 L690 25 C712 26 728 34 734 46 L734 104 C728 112 712 118 690 118 L60 118 C28 118 12 90 16 66 Z" fill="url(#ws-plank)" stroke="#A8581C" strokeWidth="3.2" strokeLinejoin="round" />
+            <path d="M16 66 C10 48 28 26 70 25 L690 25 C712 26 728 34 734 46 L734 104 C728 112 712 118 690 118 L60 118 C28 118 12 90 16 66 Z" fill="url(#ws-glow)" />
+            <g stroke="#C9772C" strokeWidth="1.8" strokeLinecap="round" fill="none" opacity="0.55">
+              <path d="M26 62 C80 58 120 64 180 60" />
+              <path d="M40 96 C110 92 150 98 230 94" />
+              <path d="M520 98 C580 94 640 100 700 96" />
+              <path d="M560 40 C610 38 660 43 706 40" />
+              <path d="M300 106 C360 103 420 108 480 105" />
+            </g>
+            <path d="M40 33 C200 27 420 29 660 31" stroke="#FFE3A0" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
+            {/* vành kim loại */}
+            <path d="M738 47 Q734.5 45 738 44 L769 49 Q773 49.5 773.4 53 L774.5 94 Q774.5 98 771 98.6 L742 106 Q737.5 106.8 737.5 102 Z" fill="url(#ws-ferrule)" stroke="#B5651F" strokeWidth="2.4" strokeLinejoin="round" />
+            <path d="M745 52 L745 100" stroke="#FFF0CC" strokeWidth="5" strokeLinecap="round" opacity="0.7" />
+            <path d="M762 54 L763 93" stroke="#C9822F" strokeWidth="3" strokeLinecap="round" opacity="0.55" />
+            {/* đầu cọ */}
+            <g clipPath="url(#ws-head)">
+              <rect x="765" y="15" width="135" height="100" fill="url(#ws-tan)" />
+              <path d="M764 25 L803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99 L816 108 L764 113 Z" fill="#92491F" />
+              <g stroke="#6F3414" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.55">
+                <path d="M776 45 C790 44 800 46 812 50" />
+                <path d="M776 62 C792 60 806 62 818 68" />
+                <path d="M777 80 C792 80 806 82 816 90" />
+              </g>
+              <path d="M803 37 C812 42 820 50 823 57 C818 62 810 66 806 71 C814 74 823 79 827 84 C824 90 821 95 819 99" fill="none" stroke="#D98F40" strokeWidth="2" strokeLinejoin="round" />
+              <path d="M842 30 C852 35 858 45 860 56 C861 64 858 70 857 74 C858 79 860 83 864 86 L900 100 L900 10 L842 10 Z" fill="url(#ws-pink)" />
+              <path d="M852 36 C864 32 876 31 888 33" stroke="#FFC2CF" strokeWidth="3.4" strokeLinecap="round" fill="none" opacity="0.85" />
+            </g>
+            <path d="M773 51 C777 42 783 38 793 33 C805 27 817 22 834 22 C850 22 866 29 884 28 C891 27.5 896 26 897 29 C897 42 890 60 879 72 C866 86 850 97 833 102.5 C818 107 797 106 785 100 C777 96 774 92 773 90 Z" fill="none" stroke="#7A3412" strokeWidth="2.6" strokeLinejoin="round" />
+          </g>
+        </svg>
+        <h1 className="wood-sign-title" data-testid="wood-title" style={{ fontSize: `${size}cqw` }}>
+          {colorLetters(title).map(({ word, letters }, wi) => (
+            <span key={`${word}-${wi}`} className="wood-word">
+              {letters.map((l, i) => (
+                <span key={i} style={{ color: l.color }}>{l.ch}</span>
+              ))}
             </span>
           ))}
         </h1>
-        <svg className="wood-brush" viewBox="0 0 150 70" aria-hidden="true">
-          <rect x="2" y="26" width="38" height="20" rx="4" fill="#F2C16B" stroke="#8A4A15" strokeWidth="3" />
-          <rect x="30" y="22" width="14" height="28" rx="3" fill="#E6A93F" stroke="#8A4A15" strokeWidth="3" />
-          <path d="M44 20 Q80 2 128 6 Q148 10 144 28 Q146 52 126 62 Q84 72 44 50 Z" fill="#B0601B" stroke="#6B3410" strokeWidth="3.5" strokeLinejoin="round" />
-          <path d="M96 12 Q132 6 140 20 Q138 40 118 44 Q104 34 96 12 Z" fill="#FF5A6E" />
-          <path d="M60 28 Q84 20 110 24 M58 40 Q86 46 112 40" stroke="#8A4A15" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        </svg>
       </div>
       {hint && <p className="wood-hint">{hint}</p>}
     </div>
