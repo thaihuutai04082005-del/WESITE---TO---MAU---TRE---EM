@@ -119,6 +119,26 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Khu Vui Chơi (3–5 tuổi) | Xe điện đụng | Xe điện đụng (mới, đang hiện; màu theo ảnh mẫu) | 37 |
 | Khu Vui Chơi (3–5 tuổi) | Vòng đu quay | Vòng đu quay (mới, đang hiện; màu theo ảnh mẫu) | 47 |
 | Khu Vui Chơi (3–5 tuổi) | Ném vòng trúng đích | Ném vòng trúng đích (mới, đang hiện; màu theo ảnh mẫu) | 35 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Tên lửa | Tên lửa (mới, đang hiện; màu theo ảnh mẫu) | 20 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Đĩa bay | Đĩa bay (mới, đang hiện; màu theo ảnh mẫu) | 19 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Phi hành gia | Phi hành gia (mới, đang hiện; màu theo ảnh mẫu) | 50 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Vệ tinh | Vệ tinh (mới, đang hiện; màu theo ảnh mẫu) | 33 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Mặt trời | Mặt trời (mới, đang hiện; màu theo ảnh mẫu) | 18 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Sao Thổ | Sao Thổ (mới, đang hiện; màu theo ảnh mẫu) | 14 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Mặt trăng | Mặt trăng (mới, đang hiện; màu theo ảnh mẫu) | 13 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Trái đất | Trái đất (mới, đang hiện; màu theo ảnh mẫu) | 11 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Sao Hỏa | Sao Hỏa (mới, đang hiện; màu theo ảnh mẫu) | 13 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Tàu vũ trụ | Tàu vũ trụ (mới, đang hiện; màu theo ảnh mẫu) | 28 |
+| Các Loài Hoa (3–5 tuổi) | Hoa cúc | Hoa cúc (mới, đang hiện; màu theo ảnh mẫu) | 30 |
+| Các Loài Hoa (3–5 tuổi) | Hoa hướng dương | Hoa hướng dương (mới, đang hiện; màu theo ảnh mẫu) | 32 |
+| Các Loài Hoa (3–5 tuổi) | Hoa tulip | Hoa tulip (mới, đang hiện; màu theo ảnh mẫu) | 22 |
+| Các Loài Hoa (3–5 tuổi) | Hoa hồng | Hoa hồng (mới, đang hiện; màu theo ảnh mẫu) | 23 |
+| Các Loài Hoa (3–5 tuổi) | Hoa sứ | Hoa sứ (mới, đang hiện; màu theo ảnh mẫu) | 24 |
+| Các Loài Hoa (3–5 tuổi) | Hoa lưu ly | Hoa lưu ly (mới, đang hiện; màu theo ảnh mẫu) | 21 |
+| Các Loài Hoa (3–5 tuổi) | Hoa păng-xê | Hoa păng-xê (mới, đang hiện; màu theo ảnh mẫu) | 29 |
+| Các Loài Hoa (3–5 tuổi) | Hoa loa kèn | Hoa loa kèn (mới, đang hiện; màu theo ảnh mẫu) | 24 |
+| Các Loài Hoa (3–5 tuổi) | Hoa mai | Hoa mai (mới, đang hiện; màu theo ảnh mẫu; thêm 1 nét dày 10,5px nối lá trái với thân) | 27 |
+| Các Loài Hoa (3–5 tuổi) | Hoa dâm bụt | Hoa dâm bụt (mới, đang hiện; màu theo ảnh mẫu) | 23 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |

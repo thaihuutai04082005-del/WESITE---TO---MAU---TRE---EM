@@ -1189,6 +1189,164 @@ ART_THEMES.push({
 });
 
 ART_THEMES.push({
+  slug: 'du-hanh-vu-tru-3-5',
+  age: '3-5',
+  name: { vi: 'Du Hành Vũ Trụ', en: 'Space Travel' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'ten-lua',
+      name: { vi: 'Tên lửa', en: 'Rocket' },
+      pictures: [
+        { slug: 'ten-lua', name: { vi: 'Tên lửa', en: 'Rocket' }, file: 'ten-lua--ten-lua' },
+      ],
+    },
+    {
+      slug: 'dia-bay',
+      name: { vi: 'Đĩa bay', en: 'Flying Saucer' },
+      pictures: [
+        { slug: 'dia-bay', name: { vi: 'Đĩa bay', en: 'Flying Saucer' }, file: 'dia-bay--dia-bay' },
+      ],
+    },
+    {
+      slug: 'phi-hanh-gia',
+      name: { vi: 'Phi hành gia', en: 'Astronaut' },
+      pictures: [
+        { slug: 'phi-hanh-gia', name: { vi: 'Phi hành gia', en: 'Astronaut' }, file: 'phi-hanh-gia--phi-hanh-gia' },
+      ],
+    },
+    {
+      slug: 've-tinh',
+      name: { vi: 'Vệ tinh', en: 'Satellite' },
+      pictures: [
+        { slug: 've-tinh', name: { vi: 'Vệ tinh', en: 'Satellite' }, file: 've-tinh--ve-tinh' },
+      ],
+    },
+    {
+      slug: 'mat-troi',
+      name: { vi: 'Mặt trời', en: 'Sun' },
+      pictures: [
+        { slug: 'mat-troi', name: { vi: 'Mặt trời', en: 'Sun' }, file: 'mat-troi--mat-troi' },
+      ],
+    },
+    {
+      slug: 'sao-tho',
+      name: { vi: 'Sao Thổ', en: 'Saturn' },
+      pictures: [
+        { slug: 'sao-tho', name: { vi: 'Sao Thổ', en: 'Saturn' }, file: 'sao-tho--sao-tho' },
+      ],
+    },
+    {
+      slug: 'mat-trang',
+      name: { vi: 'Mặt trăng', en: 'Moon' },
+      pictures: [
+        { slug: 'mat-trang', name: { vi: 'Mặt trăng', en: 'Moon' }, file: 'mat-trang--mat-trang' },
+      ],
+    },
+    {
+      slug: 'trai-dat',
+      name: { vi: 'Trái đất', en: 'Earth' },
+      pictures: [
+        { slug: 'trai-dat', name: { vi: 'Trái đất', en: 'Earth' }, file: 'trai-dat--trai-dat' },
+      ],
+    },
+    {
+      slug: 'sao-hoa',
+      name: { vi: 'Sao Hỏa', en: 'Mars' },
+      pictures: [
+        { slug: 'sao-hoa', name: { vi: 'Sao Hỏa', en: 'Mars' }, file: 'sao-hoa--sao-hoa' },
+      ],
+    },
+    {
+      slug: 'tau-vu-tru',
+      name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' },
+      pictures: [
+        { slug: 'tau-vu-tru', name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' }, file: 'tau-vu-tru--tau-vu-tru' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'cac-loai-hoa-3-5',
+  age: '3-5',
+  name: { vi: 'Các Loài Hoa', en: 'Flowers' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'hoa-cuc',
+      name: { vi: 'Hoa cúc', en: 'Daisy' },
+      pictures: [
+        { slug: 'hoa-cuc', name: { vi: 'Hoa cúc', en: 'Daisy' }, file: 'hoa-cuc--hoa-cuc' },
+      ],
+    },
+    {
+      slug: 'hoa-huong-duong',
+      name: { vi: 'Hoa hướng dương', en: 'Sunflower' },
+      pictures: [
+        { slug: 'hoa-huong-duong', name: { vi: 'Hoa hướng dương', en: 'Sunflower' }, file: 'hoa-huong-duong--hoa-huong-duong' },
+      ],
+    },
+    {
+      slug: 'hoa-tulip',
+      name: { vi: 'Hoa tulip', en: 'Tulip' },
+      pictures: [
+        { slug: 'hoa-tulip', name: { vi: 'Hoa tulip', en: 'Tulip' }, file: 'hoa-tulip--hoa-tulip' },
+      ],
+    },
+    {
+      slug: 'hoa-hong',
+      name: { vi: 'Hoa hồng', en: 'Rose' },
+      pictures: [
+        { slug: 'hoa-hong', name: { vi: 'Hoa hồng', en: 'Rose' }, file: 'hoa-hong--hoa-hong' },
+      ],
+    },
+    {
+      slug: 'hoa-su',
+      name: { vi: 'Hoa sứ', en: 'Frangipani' },
+      pictures: [
+        { slug: 'hoa-su', name: { vi: 'Hoa sứ', en: 'Frangipani' }, file: 'hoa-su--hoa-su' },
+      ],
+    },
+    {
+      slug: 'hoa-luu-ly',
+      name: { vi: 'Hoa lưu ly', en: 'Forget-me-not' },
+      pictures: [
+        { slug: 'hoa-luu-ly', name: { vi: 'Hoa lưu ly', en: 'Forget-me-not' }, file: 'hoa-luu-ly--hoa-luu-ly' },
+      ],
+    },
+    {
+      slug: 'hoa-pang-xe',
+      name: { vi: 'Hoa păng-xê', en: 'Pansy' },
+      pictures: [
+        { slug: 'hoa-pang-xe', name: { vi: 'Hoa păng-xê', en: 'Pansy' }, file: 'hoa-pang-xe--hoa-pang-xe' },
+      ],
+    },
+    {
+      slug: 'hoa-loa-ken',
+      name: { vi: 'Hoa loa kèn', en: 'Lily' },
+      pictures: [
+        { slug: 'hoa-loa-ken', name: { vi: 'Hoa loa kèn', en: 'Lily' }, file: 'hoa-loa-ken--hoa-loa-ken' },
+      ],
+    },
+    {
+      slug: 'hoa-mai',
+      name: { vi: 'Hoa mai', en: 'Apricot Blossom' },
+      pictures: [
+        { slug: 'hoa-mai', name: { vi: 'Hoa mai', en: 'Apricot Blossom' }, file: 'hoa-mai--hoa-mai' },
+      ],
+    },
+    {
+      slug: 'hoa-dam-but',
+      name: { vi: 'Hoa dâm bụt', en: 'Hibiscus' },
+      pictures: [
+        { slug: 'hoa-dam-but', name: { vi: 'Hoa dâm bụt', en: 'Hibiscus' }, file: 'hoa-dam-but--hoa-dam-but' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
   slug: 'chien-binh-bien-hinh-9',
   age: '9+',
   name: { vi: 'Chiến Binh Biến Hình', en: 'Transformer Warriors' },
