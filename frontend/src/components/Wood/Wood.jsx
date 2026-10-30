@@ -1,31 +1,16 @@
 // Bộ khung "bảng gỗ" cho các trang chọn tranh tô màu: nền như trang chủ, biển tiêu đề treo, bảng gỗ lớn, khung tranh.
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import PictureView from '../PictureView/PictureView';
-import HelloBear from '../HelloBear';
 import Icon from '../Icon';
 
 const HOME_BG = 'url(/home-bg.webp)';
 const WORD_COLORS = ['#2B9BF4', '#FFB020', '#EF4B4B', '#34C759'];
 
-/** Nền (cùng ảnh với trang chủ) + gấu họa sĩ và biển chỉ đường ở hai bên khi màn hình rộng. */
-export function WoodScene({ children, sign = true }) {
-  const { t } = useTranslation();
+/** Nền: cùng ảnh với trang chủ. */
+export function WoodScene({ children }) {
   return (
     <div className="wood-scene bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
-      <div className="wood-scene-in">
-        {children}
-        <div className="wood-bear" aria-hidden="true">
-          <HelloBear className="h-full w-full" />
-        </div>
-        {sign && (
-          <div className="wood-post" aria-hidden="true">
-            <span className="wood-post-pole" />
-            <span className="wood-post-plank" style={{ transform: 'rotate(-3deg)' }}>{t('select.sign1')}</span>
-            <span className="wood-post-plank" style={{ transform: 'rotate(2deg)' }}>{t('select.sign2')}</span>
-          </div>
-        )}
-      </div>
+      <div className="wood-scene-in">{children}</div>
     </div>
   );
 }

@@ -17,10 +17,10 @@ export default function ObjectSelector() {
   }, [theme]);
   const lang = i18n.language;
   return (
-    <WoodScene sign={false}>
+    <WoodScene>
       <WoodBack to="/color" label={t('select.themes')} />
       <WoodSign title={data?.theme.name[lang] || ' '} hint={t('select.pictures')} />
-      <div className="mt-8">
+      <div className="mt-4">
         <WoodBoard>
           <div className={WOOD_GRID}>
             {(data?.pictures || []).map((p) => (
