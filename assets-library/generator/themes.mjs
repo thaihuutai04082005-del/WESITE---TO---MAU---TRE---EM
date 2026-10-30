@@ -1189,6 +1189,29 @@ ART_THEMES.push({
 });
 
 ART_THEMES.push({
+  slug: 'du-hanh-vu-tru-3-5',
+  age: '3-5',
+  name: { vi: 'Du Hành Vũ Trụ', en: 'Space Travel' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'ten-lua',
+      name: { vi: 'Tên lửa', en: 'Rocket' },
+      pictures: [
+        { slug: 'ten-lua', name: { vi: 'Tên lửa', en: 'Rocket' }, file: 'ten-lua--ten-lua' },
+      ],
+    },
+    {
+      slug: 'dia-bay',
+      name: { vi: 'Đĩa bay', en: 'Flying Saucer' },
+      pictures: [
+        { slug: 'dia-bay', name: { vi: 'Đĩa bay', en: 'Flying Saucer' }, file: 'dia-bay--dia-bay' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
   slug: 'chien-binh-bien-hinh-9',
   age: '9+',
   name: { vi: 'Chiến Binh Biến Hình', en: 'Transformer Warriors' },

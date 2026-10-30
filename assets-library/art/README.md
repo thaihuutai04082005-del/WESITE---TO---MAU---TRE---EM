@@ -119,6 +119,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Khu Vui Chơi (3–5 tuổi) | Xe điện đụng | Xe điện đụng (mới, đang hiện; màu theo ảnh mẫu) | 37 |
 | Khu Vui Chơi (3–5 tuổi) | Vòng đu quay | Vòng đu quay (mới, đang hiện; màu theo ảnh mẫu) | 47 |
 | Khu Vui Chơi (3–5 tuổi) | Ném vòng trúng đích | Ném vòng trúng đích (mới, đang hiện; màu theo ảnh mẫu) | 35 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Tên lửa | Tên lửa (mới, đang hiện; màu theo ảnh mẫu) | 20 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Đĩa bay | Đĩa bay (mới, đang hiện; màu theo ảnh mẫu) | 19 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |

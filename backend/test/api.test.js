@@ -88,10 +88,10 @@ test('Đăng ký: sai CAPTCHA bị từ chối, mật khẩu yếu bị từ ch�
 test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', async () => {
   const { token } = await register('bena01');
   const themes = await api('GET', '/themes');
-  assert.equal(themes.body.themes.length, 18);
+  assert.equal(themes.body.themes.length, 19);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
   // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ có chủ đề Chiến Binh Biến Hình.
-  assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '9+']);
+  assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '9+']);
   assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 10);
   // Động Vật (3–5 tuổi): 15 tranh cũ đã ẩn, chỉ hiện tranh mới của Chó con, Thỏ con, Gà con, Vịt con, Heo con, Bò sữa, Cá vàng, Chim con, Mèo con và Bướm.
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
