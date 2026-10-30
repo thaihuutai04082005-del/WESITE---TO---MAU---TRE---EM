@@ -54,13 +54,13 @@ export function WoodSign({ title, hint }) {
         <svg className="wood-sign-art" viewBox="0 -30 900 160" aria-hidden="true">
           <defs>
             <linearGradient id="ws-plank" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#EE9F36" />
-              <stop offset="0.28" stopColor="#F8B552" />
-              <stop offset="0.7" stopColor="#F2A940" />
-              <stop offset="1" stopColor="#E38D2C" />
+              <stop offset="0" stopColor="#F2A43A" />
+              <stop offset="0.28" stopColor="#FBBB58" />
+              <stop offset="0.7" stopColor="#F5AF45" />
+              <stop offset="1" stopColor="#E79230" />
             </linearGradient>
             <radialGradient id="ws-glow" cx="0.42" cy="0.55" r="0.5">
-              <stop offset="0" stopColor="#FFE8A8" stopOpacity="0.5" />
+              <stop offset="0" stopColor="#FFE8A8" stopOpacity="0.68" />
               <stop offset="1" stopColor="#FFE8A8" stopOpacity="0" />
             </radialGradient>
             <linearGradient id="ws-ferrule" x1="0" y1="0" x2="1" y2="0">
