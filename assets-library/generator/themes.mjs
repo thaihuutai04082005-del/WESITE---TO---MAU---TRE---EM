@@ -1222,6 +1222,20 @@ ART_THEMES.push({
         { slug: 've-tinh', name: { vi: 'Vệ tinh', en: 'Satellite' }, file: 've-tinh--ve-tinh' },
       ],
     },
+    {
+      slug: 'mat-troi',
+      name: { vi: 'Mặt trời', en: 'Sun' },
+      pictures: [
+        { slug: 'mat-troi', name: { vi: 'Mặt trời', en: 'Sun' }, file: 'mat-troi--mat-troi' },
+      ],
+    },
+    {
+      slug: 'sao-tho',
+      name: { vi: 'Sao Thổ', en: 'Saturn' },
+      pictures: [
+        { slug: 'sao-tho', name: { vi: 'Sao Thổ', en: 'Saturn' }, file: 'sao-tho--sao-tho' },
+      ],
+    },
   ],
 });
 
