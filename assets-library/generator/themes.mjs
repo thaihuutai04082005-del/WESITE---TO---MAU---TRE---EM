@@ -1268,6 +1268,29 @@ ART_THEMES.push({
 });
 
 ART_THEMES.push({
+  slug: 'cac-loai-hoa-3-5',
+  age: '3-5',
+  name: { vi: 'Các Loài Hoa', en: 'Flowers' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'hoa-cuc',
+      name: { vi: 'Hoa cúc', en: 'Daisy' },
+      pictures: [
+        { slug: 'hoa-cuc', name: { vi: 'Hoa cúc', en: 'Daisy' }, file: 'hoa-cuc--hoa-cuc' },
+      ],
+    },
+    {
+      slug: 'hoa-huong-duong',
+      name: { vi: 'Hoa hướng dương', en: 'Sunflower' },
+      pictures: [
+        { slug: 'hoa-huong-duong', name: { vi: 'Hoa hướng dương', en: 'Sunflower' }, file: 'hoa-huong-duong--hoa-huong-duong' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
   slug: 'chien-binh-bien-hinh-9',
   age: '9+',
   name: { vi: 'Chiến Binh Biến Hình', en: 'Transformer Warriors' },
