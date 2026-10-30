@@ -1013,14 +1013,14 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 
 /* ===== Trang chọn tranh tô màu: nền như trang chủ, biển trắng viền xanh, bảng trắng, thẻ tranh trắng ===== */
 .wood-scene { position: relative; min-height: calc(100vh - 73px); overflow: hidden; }
-.wood-scene-in { position: relative; margin: 0 auto; max-width: 1760px; padding: 8px 14px 48px; }
-@media (min-width: 1024px) { .wood-scene-in { padding: 8px 28px 56px; } }
+.wood-scene-in { position: relative; margin: 0 auto; max-width: 1760px; padding: 24px 14px 48px; }
+@media (min-width: 1024px) { .wood-scene-in { padding: 32px 28px 56px; } }
 
 .wood-back { margin-top: 4px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 20px 0 14px; border-radius: 9999px; background: #fff; font-family: var(--font-display); font-weight: 800; font-size: 18px; color: #17365D; box-shadow: 0 4px 14px rgba(43, 90, 140, 0.18); transition: transform 0.15s; }
-@media (min-width: 1100px) { .wood-back { position: absolute; left: 28px; top: 12px; z-index: 6; margin: 0; } }
+@media (min-width: 1100px) { .wood-back { position: absolute; left: 28px; top: 48px; z-index: 6; margin: 0; } }
 .wood-back:hover { transform: translateX(-2px); }
 
-.wood-sign-wrap { position: relative; margin: 0 auto; max-width: 920px; padding-top: 14px; text-align: center; }
+.wood-sign-wrap { position: relative; margin: 0 auto; max-width: 920px; padding-top: 18px; text-align: center; }
 .wood-sign2 { position: relative; container-type: inline-size; width: 100%; aspect-ratio: 900 / 160; }
 /* Màn rộng: dịch cả biển sang phải để tấm biển (không tính đầu cọ) nằm chính giữa, thẳng hàng với dây và các biển nhóm tuổi. */
 @media (min-width: 1200px) { .wood-sign2 { transform: translateX(8.6%); } }
