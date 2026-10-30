@@ -125,6 +125,8 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Du Hành Vũ Trụ (3–5 tuổi) | Vệ tinh | Vệ tinh (mới, đang hiện; màu theo ảnh mẫu) | 33 |
 | Du Hành Vũ Trụ (3–5 tuổi) | Mặt trời | Mặt trời (mới, đang hiện; màu theo ảnh mẫu) | 18 |
 | Du Hành Vũ Trụ (3–5 tuổi) | Sao Thổ | Sao Thổ (mới, đang hiện; màu theo ảnh mẫu) | 14 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Mặt trăng | Mặt trăng (mới, đang hiện; màu theo ảnh mẫu) | 13 |
+| Du Hành Vũ Trụ (3–5 tuổi) | Trái đất | Trái đất (mới, đang hiện; màu theo ảnh mẫu) | 11 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Siêu Tốc | Chiến Binh Siêu Tốc (mới, đang hiện; màu theo ảnh mẫu) | 270 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
