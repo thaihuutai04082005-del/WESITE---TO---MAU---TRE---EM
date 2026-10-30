@@ -24,37 +24,14 @@ function Leaves({ className }) {
   );
 }
 
-/** Bảng màu cầm tay: nền kem viền cam, 5 chấm màu (biểu tượng nút "Tô theo mẫu"). */
+/** Bảng màu 5 chấm (biểu tượng nút "Tô theo mẫu"). */
 function PaletteIcon() {
-  const body = 'M30 6 C14 6 4 17 4 30 C4 45 15 57 29 57 C38 57 41 51 37 46 C34 42 37 37 43 37 L48 37 C57 37 61 30 59 23 C56 13 45 6 30 6 Z';
-  return (
-    <svg viewBox="0 0 64 64" className="mode-btn-icon" aria-hidden="true">
-      <path d={body} fill="#FFF3D6" stroke="#4A2F1A" strokeWidth="6.4" strokeLinejoin="round" />
-      <path d={body} fill="#FFF3D6" stroke="#F7A93B" strokeWidth="3.6" strokeLinejoin="round" />
-      <circle cx="48" cy="46" r="0" />
-      <circle cx="21" cy="19" r="5.4" fill="#FFC93C" stroke="#4A2F1A" strokeWidth="2" />
-      <circle cx="36" cy="15" r="5.4" fill="#2F86E8" stroke="#4A2F1A" strokeWidth="2" />
-      <circle cx="12" cy="33" r="5.4" fill="#F0507A" stroke="#4A2F1A" strokeWidth="2" />
-      <circle cx="47" cy="27" r="5.4" fill="#7B4FE8" stroke="#4A2F1A" strokeWidth="2" />
-      <circle cx="19" cy="47" r="5.4" fill="#2DB560" stroke="#4A2F1A" strokeWidth="2" />
-    </svg>
-  );
+  return <img src="/icons/mode-palette.webp" alt="" className="mode-btn-icon mode-btn-palette" draggable={false} />;
 }
 
-/** Cây cọ cán xanh, vành bạc, ngọn đỏ (biểu tượng nút "Sáng tạo"). */
+/** Cây cọ cán xanh ngọn đỏ (biểu tượng nút "Sáng tạo"). */
 function CrayonIcon() {
-  return (
-    <svg viewBox="0 0 64 64" className="mode-btn-icon" aria-hidden="true">
-      <g transform="rotate(40 32 32) translate(-4.8 -4.8) scale(1.15)">
-        <path d="M26 30 H38 L36 58 Q32 62 28 58 Z" fill="#2F86E8" stroke="#13439A" strokeWidth="2.6" strokeLinejoin="round" />
-        <path d="M30 34 L30.5 54" stroke="#8CC4FF" strokeWidth="2.4" strokeLinecap="round" />
-        <rect x="25" y="23" width="14" height="9" rx="2" fill="#D9DEE8" stroke="#6B7587" strokeWidth="2.4" />
-        <path d="M27 23 V32 M32 23 V32" stroke="#9BA5B8" strokeWidth="1.6" />
-        <path d="M26 23 C24 14 28 5 32 2 C36 5 40 14 38 23 Z" fill="#8A4F2A" stroke="#4A2F1A" strokeWidth="2.6" strokeLinejoin="round" />
-        <path d="M32 2 C36 5 40 14 38 18 C34 16 30 16 26.4 18 C26 12 28.6 5 32 2 Z" fill="#F0504F" />
-      </g>
-    </svg>
-  );
+  return <img src="/icons/mode-brush.webp" alt="" className="mode-btn-icon mode-btn-brush" draggable={false} />;
 }
 
 /** Cây cọ ngọn đỏ ở đầu biển. */
