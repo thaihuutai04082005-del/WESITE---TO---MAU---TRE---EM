@@ -31,8 +31,8 @@ export function WoodSign({ title, hint }) {
   return (
     <div className="wood-sign-wrap">
       <div className="wood-sign2">
-        <span className="wood-rope" style={{ left: '10%' }} />
-        <span className="wood-rope" style={{ left: '66%' }} />
+        <span className="wood-rope" style={{ left: '13.3%' }} />
+        <span className="wood-rope" style={{ left: '69.6%' }} />
         <svg className="wood-sign-art" viewBox="0 0 900 123" aria-hidden="true">
           <defs>
             <linearGradient id="ws-plank" x1="0" y1="0" x2="0" y2="1">

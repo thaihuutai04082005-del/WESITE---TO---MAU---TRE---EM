@@ -1021,10 +1021,12 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 
 .wood-sign-wrap { position: relative; margin: 0 auto; max-width: 920px; padding-top: 40px; text-align: center; }
 .wood-sign2 { position: relative; container-type: inline-size; width: 100%; aspect-ratio: 900 / 123; }
+/* Màn rộng: dịch cả biển sang phải để tấm gỗ (không tính đầu cọ) nằm chính giữa, thẳng hàng với dây và các biển nhóm tuổi. */
+@media (min-width: 1200px) { .wood-sign2 { transform: translateX(8.6%); } }
 .wood-sign-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .wood-rope { position: absolute; z-index: 2; top: -42px; width: 11px; height: 66px; margin-left: -5px; border-radius: 4px; background: repeating-linear-gradient(115deg, #D79A55 0 4px, #8A4A15 4px 7px); box-shadow: 0 0 0 1.5px #7A3F10; }
 .wood-rope::after { content: ''; position: absolute; left: 50%; bottom: -9px; width: 30px; height: 18px; margin-left: -15px; border-radius: 9999px; border: 4px solid #8A4A15; background: #E7B06A; box-shadow: inset 0 0 0 3px #C98A4B; }
-.wood-sign-title { position: absolute; left: 3%; top: 0; bottom: 0; width: 73%; z-index: 3; display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0.28em; font-family: var(--font-display); font-weight: 800; line-height: 1; white-space: nowrap; -webkit-text-stroke: 0.95cqw #fff; paint-order: stroke fill; stroke-linejoin: round; filter: drop-shadow(0 0.3cqw 0 rgba(150, 80, 10, 0.25)); }
+.wood-sign-title { position: absolute; left: 3%; top: 0; bottom: 0; width: 76.8%; z-index: 3; display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0.28em; font-family: var(--font-display); font-weight: 800; line-height: 1; white-space: nowrap; -webkit-text-stroke: 0.95cqw #fff; paint-order: stroke fill; stroke-linejoin: round; filter: drop-shadow(0 0.3cqw 0 rgba(150, 80, 10, 0.25)); }
 .wood-hint { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.2vw, 22px); color: #17365D; text-shadow: 0 0 6px #fff, 0 0 3px #fff; }
 
 .wood-tabs { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin: 16px auto -10px; max-width: 1000px; padding: 0 8px; }
