@@ -148,6 +148,10 @@
 <path d="M 378.9 191.1 L 378.9 192.0 L 379.3 192.5 L 379.3 193.0 L 379.8 193.4 L 379.8 193.9 L 380.8 194.8 L 380.8 195.3 L 381.7 196.2 L 381.7 196.7 L 382.2 197.2 L 382.2 197.7 L 382.6 198.1 L 384.0 198.1 L 384.5 197.7 L 385.4 197.7 L 385.4 196.2 L 384.5 195.3 L 384.5 194.8 L 382.6 193.0 L 382.2 193.0 L 380.3 191.1 Z" id="r-o-4" data-region="o-4" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 316.9 173.2 L 316.9 174.2 L 317.4 174.6 L 317.8 174.6 L 318.3 175.1 L 318.8 175.1 L 319.2 175.6 L 320.2 175.6 L 320.7 176.1 L 322.5 176.1 L 322.5 175.1 L 322.1 175.1 L 321.1 174.2 L 320.7 174.2 L 319.7 173.2 Z" id="r-brow-L" data-region="brow-L" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 367.6 162.0 L 366.2 162.0 L 366.7 162.4 L 366.2 162.9 L 364.8 162.0 L 361.0 162.0 L 361.0 176.5 L 361.5 177.0 L 361.5 180.3 L 362.0 180.8 L 362.0 182.2 L 362.4 181.2 L 363.4 181.2 L 364.8 180.3 L 364.8 179.3 L 366.2 177.5 L 366.7 177.9 L 366.2 179.8 L 366.7 179.3 L 366.7 178.4 L 367.6 176.5 L 367.1 175.1 L 367.6 174.6 L 368.1 175.1 L 367.6 174.2 L 368.1 173.7 L 368.5 169.0 L 368.1 168.5 L 368.1 166.2 L 367.6 165.7 L 367.6 164.8 L 368.1 164.3 Z" id="r-tai-phai" data-region="tai-phai" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 317.4 173.2 L 317.4 174.6 L 318.3 174.6 L 320.7 176.1 L 322.5 176.1 L 322.5 175.1 L 321.1 174.6 L 319.2 173.2 Z" id="r-may-L" data-region="may-L" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 348.8 166.7 L 346.5 166.7 L 342.3 170.4 L 342.3 171.8 L 343.2 171.8 L 346.9 168.5 L 348.8 167.6 Z" id="r-may-R1" data-region="may-R1" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 342.7 171.4 L 341.3 171.4 L 340.8 171.8 L 340.8 173.2 L 341.8 173.2 L 342.7 172.3 Z" id="r-may-R2" data-region="may-R2" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 314.6 179.3 L 314.6 181.7 L 316.0 184.0 L 316.0 185.0 L 316.9 186.9 L 317.8 187.8 L 318.8 187.8 L 318.8 186.4 L 317.8 185.4 L 316.9 182.2 L 315.5 179.3 Z" id="r-sl-leftface" data-region="sl-leftface" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
