@@ -5,14 +5,13 @@ import { api } from '../../services/api';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
 
-// Cảnh giá sách (ảnh nền 1821×760): 2 kệ × 4 ô. Ô đầu tiên là "Tạo truyện mới", các ô sau là truyện của bé.
+// Cảnh giá sách (ảnh nền 1821×774): 1 kệ × 3 ô. Truyện lấp từ ô giữa ra hai bên; ô chưa có truyện để trống.
 const W = 1821;
-const H = 760;
+const H = 774;
 const SLOTS = [
-  // kệ trên (sách đứng cao)
-  [254, 150, 300, 224], [614, 150, 300, 224], [974, 150, 300, 224], [1334, 150, 300, 224],
-  // kệ dưới (sách nằm thấp)
-  [277, 436, 240, 150], [637, 436, 240, 150], [997, 436, 240, 150], [1357, 436, 240, 150],
+  [740, 167, 330, 301], // giữa (to nhất)
+  [322, 222, 262, 250], // trái
+  [1246, 222, 262, 250], // phải
 ];
 const pc = (v, total) => `${(v / total) * 100}%`;
 const box = ([x, y, w, h]) => ({ left: pc(x, W), top: pc(y, H), width: pc(w, W), height: pc(h, H) });
@@ -25,44 +24,19 @@ function Star({ className }) {
   );
 }
 
-function Spark({ className }) {
-  return <span className={`sb-spark ${className}`} aria-hidden="true" />;
-}
-
-function BookShell({ children, className = '' }) {
-  return (
-    <>
-      <span className="sb-spine" aria-hidden="true" />
-      <span className={`sb-cover ${className}`}>{children}</span>
-    </>
-  );
-}
-
 function SlotBook({ book }) {
   const { t } = useTranslation();
   return (
-    <BookShell>
-      {book.cover ? <img src={book.cover} alt="" draggable={false} className="sb-cover-img" /> : <span className="sb-cover-blank"><Icon name="book" size={48} /></span>}
-      <span className={`sb-tag${book.completed ? ' sb-tag-done' : ''}`}>{book.completed ? t('storybook.done') : t('storybook.draft')}</span>
-      <span className="sb-title">
-        <b>{book.title}</b>
-        <small>{t('storybook.pages', { n: book.pageCount })}</small>
+    <>
+      <span className="sb-spine" aria-hidden="true" />
+      <span className="sb-cover">
+        {book.cover ? <img src={book.cover} alt="" draggable={false} className="sb-cover-img" /> : <span className="sb-cover-blank"><Icon name="book" size={48} /></span>}
+        <span className={`sb-tag${book.completed ? ' sb-tag-done' : ''}`}>{book.completed ? t('storybook.done') : t('storybook.draft')}</span>
+        <span className="sb-title">
+          <b>{book.title}</b>
+        </span>
       </span>
-    </BookShell>
-  );
-}
-
-function SlotCreate() {
-  const { t } = useTranslation();
-  return (
-    <BookShell className="sb-cover-create">
-      <Star className="sb-cstar sb-cstar-tl" />
-      <Star className="sb-cstar sb-cstar-tr" />
-      <Star className="sb-cstar sb-cstar-bl" />
-      <Star className="sb-cstar sb-cstar-br" />
-      <span className="sb-plus"><Icon name="plus" size={40} strokeWidth={3.4} /></span>
-      <span className="sb-create-text">{t('storybook.new')}</span>
-    </BookShell>
+    </>
   );
 }
 
@@ -77,7 +51,7 @@ function EmptySlot() {
 function StorybookRoom({ books }) {
   const { t } = useTranslation();
   const [page, setPage] = useState(0);
-  const items = [{ create: true }, ...(books || [])];
+  const items = books || [];
   const per = SLOTS.length;
   const pages = Math.max(1, Math.ceil(items.length / per));
   const cur = Math.min(page, pages - 1);
@@ -85,19 +59,14 @@ function StorybookRoom({ books }) {
   return (
     <div className="sb-room">
       <div className="sb-stage" data-testid="storybook-room">
-        <Spark className="sb-spark-l1" />
-        <Spark className="sb-spark-l2" />
-        <Spark className="sb-spark-r1" />
-        <Spark className="sb-spark-r2" />
-        <div className="sb-sign" style={box([583, 20, 669, 96])}>
+        <div className="sb-sign" style={box([580, 13, 678, 107])}>
           <span className="sb-hook sb-hook-l" />
           <span className="sb-hook sb-hook-r" />
           <Star className="sb-sign-star sb-sign-star-l" />
           <h1 className="sb-sign-title" data-testid="storybook-title">{t('storybook.signTitle')}</h1>
           <Star className="sb-sign-star sb-sign-star-r" />
         </div>
-        <p className="sb-sub" style={box([583, 118, 669, 30])}>{t('storybook.subtitle')}</p>
-        <Link to="/storybooks/new" className="sb-new" style={box([1403, 31, 305, 70])} data-testid="storybook-new">
+        <Link to="/storybooks/new" className="sb-new" style={box([1405, 53, 303, 70])} data-testid="storybook-new">
           <Icon name="plus" size={26} strokeWidth={3.6} /> {t('storybook.new')}
         </Link>
 
@@ -105,17 +74,16 @@ function StorybookRoom({ books }) {
           const it = shown[i];
           const style = box(geo);
           if (!it) return <span key={i} className="sb-slot sb-slot-empty" style={style}><EmptySlot /></span>;
-          if (it.create) return <Link key="create" to="/storybooks/new" className="sb-slot" style={style} data-testid="storybook-new-card" aria-label={t('storybook.new')}><SlotCreate /></Link>;
           return <Link key={it.id} to={`/storybooks/${it.id}`} className="sb-slot" style={style} data-testid={`storybook-${it.id}`} aria-label={it.title}><SlotBook book={it} /></Link>;
         })}
 
         {pages > 1 && (
           <>
-            <button type="button" className="sb-arrow" style={box([520, 676, 58, 58])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="storybook-prev">
+            <button type="button" className="sb-arrow" style={box([660, 628, 58, 58])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="storybook-prev">
               <Icon name="back" size={22} strokeWidth={3.4} />
             </button>
-            <span className="sb-page" style={box([870, 690, 82, 34])}>{cur + 1}/{pages}</span>
-            <button type="button" className="sb-arrow" style={box([1244, 676, 58, 58])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="storybook-next">
+            <span className="sb-page" style={box([868, 640, 86, 34])}>{cur + 1}/{pages}</span>
+            <button type="button" className="sb-arrow" style={box([1104, 628, 58, 58])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="storybook-next">
               <Icon name="chevronRight" size={22} strokeWidth={3.4} />
             </button>
           </>
