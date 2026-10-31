@@ -230,3 +230,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Nhà Mái Vòm Bóng Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-mai-vom--bong-bay.png` | ghi trong file |
 | Ngôi nhà nhỏ (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/ngoi-nha-nho--ngoi-nha-nho.png` | 18 |
 | Chiếc giường (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/chiec-giuong--chiec-giuong.png` | 21 |
+| Ghế sofa, Tủ quần áo, Đèn bàn, Quạt máy, Tivi, Tủ lạnh, Máy giặt, Bàn ăn (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/<đối-tượng>--<đối-tượng>.png` | 17–35 |

@@ -1410,6 +1410,62 @@ ART_THEMES.push({
         { slug: 'chiec-giuong', name: { vi: 'Chiếc giường', en: 'Bed' }, file: 'chiec-giuong--chiec-giuong' },
       ],
     },
+    {
+      slug: 'ghe-sofa',
+      name: { vi: 'Ghế sofa', en: 'Sofa' },
+      pictures: [
+        { slug: 'ghe-sofa', name: { vi: 'Ghế sofa', en: 'Sofa' }, file: 'ghe-sofa--ghe-sofa' },
+      ],
+    },
+    {
+      slug: 'tu-quan-ao',
+      name: { vi: 'Tủ quần áo', en: 'Wardrobe' },
+      pictures: [
+        { slug: 'tu-quan-ao', name: { vi: 'Tủ quần áo', en: 'Wardrobe' }, file: 'tu-quan-ao--tu-quan-ao' },
+      ],
+    },
+    {
+      slug: 'den-ban',
+      name: { vi: 'Đèn bàn', en: 'Desk Lamp' },
+      pictures: [
+        { slug: 'den-ban', name: { vi: 'Đèn bàn', en: 'Desk Lamp' }, file: 'den-ban--den-ban' },
+      ],
+    },
+    {
+      slug: 'quat-may',
+      name: { vi: 'Quạt máy', en: 'Fan' },
+      pictures: [
+        { slug: 'quat-may', name: { vi: 'Quạt máy', en: 'Fan' }, file: 'quat-may--quat-may' },
+      ],
+    },
+    {
+      slug: 'tivi',
+      name: { vi: 'Tivi', en: 'TV' },
+      pictures: [
+        { slug: 'tivi', name: { vi: 'Tivi', en: 'TV' }, file: 'tivi--tivi' },
+      ],
+    },
+    {
+      slug: 'tu-lanh',
+      name: { vi: 'Tủ lạnh', en: 'Fridge' },
+      pictures: [
+        { slug: 'tu-lanh', name: { vi: 'Tủ lạnh', en: 'Fridge' }, file: 'tu-lanh--tu-lanh' },
+      ],
+    },
+    {
+      slug: 'may-giat',
+      name: { vi: 'Máy giặt', en: 'Washing Machine' },
+      pictures: [
+        { slug: 'may-giat', name: { vi: 'Máy giặt', en: 'Washing Machine' }, file: 'may-giat--may-giat' },
+      ],
+    },
+    {
+      slug: 'ban-an',
+      name: { vi: 'Bàn ăn', en: 'Dining Table' },
+      pictures: [
+        { slug: 'ban-an', name: { vi: 'Bàn ăn', en: 'Dining Table' }, file: 'ban-an--ban-an' },
+      ],
+    },
   ],
 });
 
