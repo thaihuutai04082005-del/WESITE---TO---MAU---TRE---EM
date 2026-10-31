@@ -52,15 +52,16 @@ export default function Together() {
   };
 
   return (
+    <div className="tg-meadow">
     <div className="page space-y-5">
-      {/* Đầu trang */}
-      <section className="flex items-center gap-3 sm:gap-5">
-        <div className="h-20 w-20 shrink-0 sm:h-24 sm:w-24">
-          <PaletteBadge />
-        </div>
-        <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-5xl">{t('together.title')}</h1>
-        <div className="hidden h-32 w-48 shrink-0 sm:block">
-          <TogetherArt />
+      {/* Đầu trang: bảng gỗ treo dây */}
+      <section className="tg-head">
+        <div className="tg-sign">
+          <span className="tg-rope tg-rope-l" aria-hidden="true" />
+          <span className="tg-rope tg-rope-r" aria-hidden="true" />
+          <span className="tg-sign-badge" aria-hidden="true"><PaletteBadge /></span>
+          <h1 className="tg-sign-title" data-testid="together-title">{t('together.title')}</h1>
+          <span className="tg-sign-art" aria-hidden="true"><TogetherArt /></span>
         </div>
       </section>
 
@@ -103,6 +104,7 @@ export default function Together() {
         <span className="text-xl" aria-hidden="true">⭐</span>
       </p>
       {picking && <PicturePicker onPick={create} onClose={() => setPicking(false)} />}
+    </div>
     </div>
   );
 }
