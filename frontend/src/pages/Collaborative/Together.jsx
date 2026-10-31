@@ -31,6 +31,14 @@ function PaletteBadge() {
   );
 }
 
+function TgStar({ className }) {
+  return (
+    <svg viewBox="-24 -24 48 48" className={className} aria-hidden="true">
+      <path d="M0 -20 L6 -6.5 L20 -5.5 L9.5 4 L12.5 18 L0 10.5 L-12.5 18 L-9.5 4 L-20 -5.5 L-6 -6.5 Z" fill="#FFD84D" stroke="#F3B21A" strokeWidth="4" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function Together() {
   const { t } = useTranslation();
   const token = useAuth((s) => s.token);
@@ -57,8 +65,14 @@ export default function Together() {
       {/* Đầu trang: bảng gỗ treo dây */}
       <section className="tg-head">
         <div className="tg-sign">
-          <span className="tg-rope tg-rope-l" aria-hidden="true" />
-          <span className="tg-rope tg-rope-r" aria-hidden="true" />
+          <span className="tg-rope tg-rope-l" aria-hidden="true"><i /></span>
+          <span className="tg-rope tg-rope-r" aria-hidden="true"><i /></span>
+          <TgStar className="tg-star tg-star-l" />
+          <TgStar className="tg-star tg-star-r" />
+          <i className="tg-ray tg-ray-l1" aria-hidden="true" />
+          <i className="tg-ray tg-ray-l2" aria-hidden="true" />
+          <i className="tg-ray tg-ray-r1" aria-hidden="true" />
+          <i className="tg-ray tg-ray-r2" aria-hidden="true" />
           <span className="tg-sign-badge" aria-hidden="true"><PaletteBadge /></span>
           <h1 className="tg-sign-title" data-testid="together-title">{t('together.title')}</h1>
           <span className="tg-sign-art" aria-hidden="true"><TogetherArt /></span>

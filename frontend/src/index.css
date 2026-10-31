@@ -1288,18 +1288,27 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sh-arrow:disabled { opacity: 0.35; cursor: default; }
 .sh-page { position: absolute; z-index: 5; display: grid; place-items: center; border: max(1px, 0.14cqw) solid #D9B88A; border-radius: 9999px; background: rgba(255, 248, 235, 0.95); font-family: var(--font-display); font-weight: 800; font-size: max(13px, 1.3cqw); color: #6B3A12; }
 
-/* ===== Tô cùng nhau: nền đồng cỏ + tựa là bảng gỗ treo dây ===== */
-.tg-meadow { min-height: calc(100vh - 73px); background: #D6F0B8 url(/together/meadow.webp) center bottom / cover no-repeat; background-attachment: fixed; }
-.tg-head { display: flex; justify-content: center; padding-top: 34px; }
-.tg-sign { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 12px 26px 14px; border: 4px solid #C98532; border-radius: 28px; background:
-  repeating-linear-gradient(176deg, rgba(255, 255, 255, 0.16) 0 3px, rgba(255, 255, 255, 0) 3px 14px),
-  linear-gradient(#FFD38A, #F6B15A 70%, #F0A24A);
-  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.6), 0 10px 18px rgba(90, 60, 20, 0.28); }
-.tg-rope { position: absolute; top: -34px; width: 8px; height: 40px; border-radius: 4px; background: repeating-linear-gradient(115deg, #D79A55 0 4px, #8A4A15 4px 7px); box-shadow: 0 0 0 1.5px #7A3F10; }
-.tg-rope-l { left: 18%; }
-.tg-rope-r { right: 18%; }
-.tg-sign-badge { display: block; width: 56px; height: 56px; flex: none; }
-.tg-sign-title { margin: 0; font-family: var(--font-display); font-weight: 800; line-height: 1.05; font-size: clamp(28px, 5vw, 52px); color: #6A3A0E; text-shadow: 0 2px 0 rgba(255, 235, 190, 0.7); }
-.tg-sign-art { display: none; width: 150px; height: 84px; flex: none; }
-@media (min-width: 900px) { .tg-sign-art { display: block; } .tg-sign-badge { width: 72px; height: 72px; } }
-@media (max-width: 520px) { .tg-sign { gap: 10px; padding: 10px 16px 12px; } .tg-sign-badge { width: 44px; height: 44px; } }
+/* ===== Tô cùng nhau: nền đồng cỏ + tựa là bảng gỗ sáng treo dây ===== */
+.tg-meadow { min-height: calc(100vh - 73px); background: #C8E9B9 url(/together/meadow.webp) center bottom / cover no-repeat; background-attachment: fixed; }
+.tg-head { display: flex; justify-content: center; padding-top: 40px; }
+.tg-sign { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; min-width: min(100%, 560px); padding: 14px 64px 16px; border: 3px solid #E8A53D; border-radius: 30px / 26px; background:
+  radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 55%),
+  linear-gradient(#FFE08A, #FDD07A 60%, #F9C26A);
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.7), inset 0 -3px 0 rgba(220, 150, 50, 0.35), 0 10px 18px rgba(60, 100, 40, 0.25); }
+.tg-rope { position: absolute; top: -46px; width: 9px; height: 56px; background: repeating-linear-gradient(120deg, #B97B3F 0 4px, #8A5424 4px 7px); box-shadow: 0 0 0 1.5px rgba(90, 50, 20, 0.5); }
+.tg-rope i { position: absolute; left: 50%; bottom: -6px; width: 26px; height: 20px; margin-left: -13px; border-radius: 9999px 9999px 8px 8px; background: #B97B3F; box-shadow: inset 0 0 0 3px #8A5424; }
+.tg-rope-l { left: 16%; }
+.tg-rope-r { right: 16%; }
+.tg-star { position: absolute; top: 50%; width: 30px; height: 30px; margin-top: -15px; }
+.tg-star-l { left: 14px; transform: rotate(-12deg); }
+.tg-star-r { right: 14px; transform: rotate(12deg); }
+.tg-ray { position: absolute; width: 38px; height: 11px; border-radius: 9999px; background: #FFD84D; box-shadow: 0 2px 0 #F3B21A; }
+.tg-ray-l1 { left: -52px; top: 2px; transform: rotate(32deg); }
+.tg-ray-l2 { left: -56px; top: 48%; width: 28px; height: 9px; }
+.tg-ray-r1 { right: -52px; top: 2px; transform: rotate(-32deg); }
+.tg-ray-r2 { right: -56px; top: 48%; width: 28px; height: 9px; }
+.tg-sign-badge { display: block; width: 64px; height: 64px; flex: none; }
+.tg-sign-title { margin: 0; font-family: var(--font-display); font-weight: 800; line-height: 1.05; font-size: clamp(28px, 4.6vw, 50px); color: #1B9A3C; -webkit-text-stroke: 0; text-shadow: 0 2px 0 rgba(255, 255, 255, 0.55); }
+.tg-sign-art { display: none; width: 120px; height: 72px; flex: none; }
+@media (min-width: 900px) { .tg-sign-art { display: block; } .tg-sign-badge { width: 74px; height: 74px; } }
+@media (max-width: 520px) { .tg-sign { gap: 8px; padding: 10px 40px 12px; min-width: 0; } .tg-sign-badge { width: 40px; height: 40px; } .tg-star { width: 22px; height: 22px; margin-top: -11px; } .tg-star-l { left: 8px; } .tg-star-r { right: 8px; } .tg-ray-l1, .tg-ray-l2, .tg-ray-r1, .tg-ray-r2 { display: none; } .tg-rope-l { left: 12%; } .tg-rope-r { right: 12%; } }
