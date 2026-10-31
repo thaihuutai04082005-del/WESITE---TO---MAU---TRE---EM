@@ -366,7 +366,6 @@ function RoomShell({ tab, onTab, slots, pills }) {
         </div>
         <Link to="/" className="room-back" style={box(40, 30, 202, 66)} data-testid="room-back">
           <Icon name="back" size={20} strokeWidth={3} /> {t('common.back')}
-          <Leaf className="room-leaf room-back-leaf" />
         </Link>
 
         {ROOM_SLOTS.map(([x1, y1, x2, y2], i) => {

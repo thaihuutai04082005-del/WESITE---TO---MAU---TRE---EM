@@ -1130,7 +1130,6 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .room-leaf-r { margin-left: 1.4cqw; transform: scaleX(-1); }
 .room-back { position: absolute; z-index: 6; display: flex; align-items: center; justify-content: center; gap: 0.5cqw; border: max(2px, 0.2cqw) solid #C58A4C; border-radius: 9999px; background: linear-gradient(#FCE2B8, #EDB878); box-shadow: 0 0.35cqw 0.8cqw rgba(110, 60, 15, 0.28); font-family: var(--font-display); font-weight: 800; font-size: max(14px, 1.7cqw); color: #6B3A12; transition: transform 0.15s; }
 .room-back:hover { transform: translateX(-0.3cqw); }
-.room-back-leaf { position: absolute; right: -0.9cqw; top: -1.3cqw; width: max(20px, 2.4cqw); transform: rotate(20deg); }
 
 .room-slot { position: absolute; z-index: 4; display: block; padding: 0; border: 0; background: none; cursor: pointer; transition: transform 0.18s, filter 0.18s; }
 .room-slot:hover { transform: scale(1.035); filter: drop-shadow(0 0.6cqw 0.9cqw rgba(90, 50, 10, 0.4)); z-index: 5; }
