@@ -143,6 +143,7 @@ Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm 
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Thủ Lĩnh Thép | Thủ Lĩnh Thép (mới, đang hiện; màu theo ảnh mẫu) | 276 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Vệ Binh Công Lý | Vệ Binh Công Lý (mới, đang hiện; màu theo ảnh mẫu; mỗi ô nhỏ tô riêng, 2 tay nắm cửa xe trắng) | 391 |
 | Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Cứu Hỏa | Chiến Binh Cứu Hỏa (mới, đang hiện; màu theo ảnh mẫu; thêm 2 nét: đóng nét trái chữ Λ ở giàn thang, nối cạnh cần gương; dùng clip_to_ink + paint cho các dải hẹp) | 438 |
+| Chiến Binh Biến Hình (9 tuổi trở lên) | Chiến Binh Địa Hình | Chiến Binh Địa Hình (mới, đang hiện; màu theo ảnh mẫu; clip_to_ink) | 263 |
 | Động Vật (3–5 tuổi) | Cá vàng | Cá vàng (mới, đang hiện) | 44 |
 | Động Vật (3–5 tuổi) | Bò sữa | Bò sữa (mới, đang hiện; đốm tô theo số vùng chủ web chỉ) | 59 |
 | Động Vật (3–5 tuổi) | Heo con | Heo con (mới, đang hiện) | 64 |

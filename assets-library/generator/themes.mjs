@@ -1380,6 +1380,13 @@ ART_THEMES.push({
         { slug: 'chien-binh-cuu-hoa', name: { vi: 'Chiến Binh Cứu Hỏa', en: 'Fire Rescue Warrior' }, file: 'chien-binh-cuu-hoa--chien-binh-cuu-hoa' },
       ],
     },
+    {
+      slug: 'chien-binh-dia-hinh',
+      name: { vi: 'Chiến Binh Địa Hình', en: 'Off-road Warrior' },
+      pictures: [
+        { slug: 'chien-binh-dia-hinh', name: { vi: 'Chiến Binh Địa Hình', en: 'Off-road Warrior' }, file: 'chien-binh-dia-hinh--chien-binh-dia-hinh' },
+      ],
+    },
   ],
 });
 
