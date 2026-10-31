@@ -1167,7 +1167,13 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .gs-cards { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 640px; gap: 10px; }
 .gs-cards > .gs-card { width: calc((100% - 30px) / 4); }
 .gs-card { position: relative; container-type: inline-size; aspect-ratio: 216 / 266; padding: 0; border: 0; background: none; cursor: pointer; transition: transform 0.18s, filter 0.18s; }
-.gs-card::before { content: ''; position: absolute; inset: 0; border: 3cqw solid #1E6FD8; border-radius: 12cqw; background: linear-gradient(#A5DAFF, #4FA8F4); box-shadow: inset 0 1.2cqw 0 rgba(255, 255, 255, 0.65), inset 0 -1.5cqw 0 rgba(20, 90, 190, 0.35), 0 3cqw 4cqw rgba(20, 50, 120, 0.35); }
+.gs-flip { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0.1, 0.2, 1); }
+.gs-card { perspective: 1000px; }
+.gs-flipped .gs-flip { transform: rotateY(180deg); }
+.gs-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.gs-face-b { transform: rotateY(180deg); border-radius: 11cqw; }
+.gs-face-f::before, .gs-face-b::before { content: ''; position: absolute; inset: 0; border: 3cqw solid #1E6FD8; border-radius: 12cqw; background: linear-gradient(#A5DAFF, #4FA8F4); box-shadow: inset 0 1.2cqw 0 rgba(255, 255, 255, 0.65), inset 0 -1.5cqw 0 rgba(20, 90, 190, 0.35), 0 3cqw 4cqw rgba(20, 50, 120, 0.35); }
+.gs-face-b::before { border-color: #1E6FD8; background: var(--rc, #C9BBFA); }
 .gs-card-in { position: absolute; inset: 6.5cqw; display: grid; place-items: center; border-radius: 7cqw; background:
   radial-gradient(circle at 8% 7%, #8CCBF8 0 4.2%, transparent 4.8%), radial-gradient(circle at 13% 5%, #8CCBF8 0 2.6%, transparent 3.1%), radial-gradient(circle at 5% 12%, #8CCBF8 0 2.6%, transparent 3.1%),
   radial-gradient(circle at 92% 7%, #8CCBF8 0 4.2%, transparent 4.8%), radial-gradient(circle at 87% 5%, #8CCBF8 0 2.6%, transparent 3.1%), radial-gradient(circle at 95% 12%, #8CCBF8 0 2.6%, transparent 3.1%),
@@ -1202,3 +1208,51 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
   .gs-pills { position: absolute; right: 2.2%; top: 2.6%; width: 29%; justify-content: flex-end; gap: 0.6cqw; }
   .gs-pill { padding: 0.4cqw 1.1cqw; border-width: max(1px, 0.14cqw); font-size: max(12px, 1.15cqw); gap: 0.4cqw; }
 }
+
+.gs-bk-in { position: absolute; inset: 5cqw; display: flex; flex-direction: column; gap: 2cqw; padding: 3cqw; border-radius: 7cqw; background: #FFFDF8; box-shadow: inset 0 0 0 1cqw #D6E8FA; }
+.gs-bk-top { display: flex; align-items: center; justify-content: space-between; }
+.gs-badge { display: inline-grid; place-items: center; min-width: 11cqw; height: 11cqw; padding: 0 2.5cqw; border-radius: 9999px; font-family: var(--font-display); font-weight: 800; font-size: 7.5cqw; line-height: 1; color: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.gs-badge[data-s] { background: linear-gradient(135deg, #FF5F7E, #FFB84D); }
+.gs-bk-rar { font-weight: 800; font-size: 6.5cqw; color: #4A6A8C; }
+.gs-bk-pic { display: block; overflow: hidden; border-radius: 4cqw; background: #fff; box-shadow: 0 0 0 0.6cqw #E3EEF9; }
+.gs-bk-name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin-top: auto; text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 8cqw; line-height: 1.1; color: #17365D; }
+.gs-shake { animation: gs-shake 0.18s ease-in-out 4; }
+@keyframes gs-shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-4deg); } 75% { transform: rotate(4deg); } }
+.gs-pill-go { border-color: #F3B21A; background: linear-gradient(#FFE690, #FFC93C); animation: gs-glow 1.4s ease-in-out infinite; }
+
+/* ===== Truyện tranh của bé: giá sách 1 kệ 3 ô (màn hình rộng) ===== */
+.sb-room { background: #EBD5AE; }
+.sb-stage { position: relative; width: 100%; aspect-ratio: 1821 / 774; overflow: hidden; container-type: inline-size; background: url(/storybook/room.webp) center / 100% 100% no-repeat; }
+.sb-sign { position: absolute; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 1.6cqw; border: max(2px, 0.22cqw) solid #D98B3A; border-radius: 3.2cqw; background:
+  repeating-linear-gradient(176deg, rgba(255, 255, 255, 0.14) 0 3px, rgba(255, 255, 255, 0) 3px 14px),
+  linear-gradient(#FFD38A, #F6B15A 70%, #F0A24A);
+  box-shadow: inset 0 0.2cqw 0 rgba(255, 255, 255, 0.6), 0 0.5cqw 1cqw rgba(120, 70, 20, 0.28); }
+.sb-sign-title { margin: 0; white-space: nowrap; font-family: var(--font-display); font-weight: 800; line-height: 1; font-size: max(20px, 2.55cqw); color: #6A3A0E; text-shadow: 0 0.15cqw 0 rgba(255, 235, 190, 0.7); }
+.sb-sign-star { flex: none; width: 3cqw; color: #FFD43B; filter: drop-shadow(0 0.15cqw 0 rgba(170, 100, 0, 0.5)); }
+.sb-sign-star-l { transform: rotate(-12deg); }
+.sb-sign-star-r { transform: rotate(10deg); }
+.sb-sign-star path { stroke: #F1A00A; }
+.sb-hook { position: absolute; top: -1.4cqw; width: 1.6cqw; height: 2.4cqw; border-radius: 0.6cqw; background: linear-gradient(#5B8DE8, #2F62C4); box-shadow: 0 0.2cqw 0.4cqw rgba(0, 0, 0, 0.25); }
+.sb-hook-l { left: 8%; }
+.sb-hook-r { right: 8%; }
+.sb-new { position: absolute; z-index: 4; display: flex; align-items: center; justify-content: center; gap: 0.8cqw; border: max(2px, 0.28cqw) solid #fff; border-radius: 9999px; background: linear-gradient(#3AA7FF, #0A84F5); box-shadow: 0 0.5cqw 1.2cqw rgba(10, 80, 190, 0.35); font-family: var(--font-display); font-weight: 800; font-size: max(15px, 1.45cqw); color: #fff; transition: transform 0.15s, filter 0.15s; }
+.sb-new:hover { transform: translateY(-0.2cqw); filter: brightness(1.06); }
+
+.sb-slot { position: absolute; z-index: 4; display: block; container-type: inline-size; transition: transform 0.18s; }
+a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
+.sb-slot-empty { z-index: 3; }
+.sb-spine { position: absolute; left: 0; top: 1.5%; bottom: 0; width: 9cqw; border-radius: 4cqw 1.5cqw 1.5cqw 4cqw; background: linear-gradient(90deg, #1F67DA, #4E9BFF 45%, #2E7CEF); box-shadow: 0 0.8cqw 1.6cqw rgba(60, 40, 10, 0.3); }
+.sb-cover { position: absolute; left: 5.5cqw; right: 0; top: 0; bottom: 0; overflow: hidden; border-radius: 1.5cqw 3.5cqw 2cqw 1.5cqw; background: #FBF3E2; box-shadow: 0 0.8cqw 1.6cqw rgba(60, 40, 10, 0.3), inset 0 0 0 0.5cqw rgba(255, 255, 255, 0.5); }
+.sb-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.sb-cover-blank { position: absolute; inset: 0; display: grid; place-items: center; background: #EAF6FF; color: #2F86E8; }
+.sb-title { position: absolute; left: 3.5cqw; right: 3.5cqw; bottom: 3.5cqw; display: flex; justify-content: center; padding: 1.8cqw 3cqw; border-radius: 3cqw; background: rgba(255, 251, 242, 0.97); text-align: center; box-shadow: 0 0.4cqw 1cqw rgba(60, 40, 10, 0.2); }
+.sb-title b { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-display); font-weight: 800; font-size: 6.2cqw; line-height: 1.15; color: #6A3A0E; }
+.sb-tag { position: absolute; right: 3cqw; top: 3cqw; padding: 0.6cqw 2.6cqw; border-radius: 9999px; background: rgba(255, 244, 205, 0.95); font-weight: 800; font-size: 4.6cqw; line-height: 1.3; color: #8A5A10; box-shadow: 0 0.4cqw 0.8cqw rgba(60, 40, 10, 0.25); }
+.sb-tag-done { background: rgba(214, 246, 224, 0.96); color: #1E7A44; }
+.sb-empty { position: absolute; inset: 0; display: grid; place-items: center; border: 0.55cqw dashed #D9BA8D; border-radius: 4cqw; background: linear-gradient(#F6E7CB, #F1DDBA); box-shadow: 0 1cqw 1.6cqw rgba(140, 90, 30, 0.22), inset 0 0.5cqw 0 rgba(255, 255, 255, 0.55); }
+.sb-empty-star { width: 30cqw; color: #E5C898; }
+.sb-empty-star path { stroke: #E5C898; }
+.sb-arrow { position: absolute; z-index: 5; display: grid; place-items: center; padding: 0; border: max(2px, 0.2cqw) solid #C58A4C; border-radius: 9999px; background: linear-gradient(#F9DDB0, #EEBC78); box-shadow: 0 0.3cqw 0 #B57A3C; color: #6B3A12; cursor: pointer; transition: transform 0.15s, opacity 0.15s; }
+.sb-arrow:hover:not(:disabled) { transform: scale(1.08); }
+.sb-arrow:disabled { opacity: 0.35; cursor: default; }
+.sb-page { position: absolute; z-index: 5; display: grid; place-items: center; border: max(1px, 0.14cqw) solid #D9B88A; border-radius: 9999px; background: rgba(255, 248, 235, 0.95); font-family: var(--font-display); font-weight: 800; font-size: max(13px, 1.3cqw); color: #6B3A12; }

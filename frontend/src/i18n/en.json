@@ -814,6 +814,7 @@
     "codeChip": "Private code"
   },
   "storybook": {
+    "signTitle": "My storybooks",
     "title": "My storybooks",
     "subtitle": "Turn Free coloring pictures into a flip-page book.",
     "new": "New storybook",
