@@ -704,6 +704,7 @@
     "timeHint": "Finishing early and still looking great earns a bonus."
   },
   "gacha": {
+    "noPulls": "No pulls left — compete in the Arena to earn Gacha Points!",
     "title": "Open picture cards",
     "points": "{{n}} Gacha points",
     "pulls": "{{n}} pulls",
