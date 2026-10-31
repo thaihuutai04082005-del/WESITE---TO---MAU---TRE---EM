@@ -16,12 +16,12 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import PlayCard, { useCardPreview } from '../../components/GachaCardReveal/PlayCard';
 import Icon from '../../components/Icon';
 
-// 7 thẻ úp trên sân khấu (4 hàng trên, 3 hàng dưới) — toạ độ theo ảnh nền 1672×941 (cắt còn 1672×800). Thẻ sáng = còn lượt bóc.
+// 7 thẻ úp trên sân khấu (4 hàng trên, 3 hàng dưới) — toạ độ theo ảnh nền 1672×941 (cắt còn 1672×860). Thẻ sáng = còn lượt bóc.
 const STAGE_W = 1672;
-const STAGE_H = 800;
-const CARD_W = 229;
-const CARD_H = 255;
-const STAGE_CARDS = [[348, 233], [598, 233], [848, 233], [1098, 233], [473, 514], [723, 514], [971, 514]];
+const STAGE_H = 860;
+const CARD_W = 216;
+const CARD_H = 266;
+const STAGE_CARDS = [[367, 232], [610, 232], [852, 232], [1095, 232], [481, 523], [728, 523], [973, 523]];
 const pct = (v, total) => `${(v / total) * 100}%`;
 
 function StageStar({ className }) {
