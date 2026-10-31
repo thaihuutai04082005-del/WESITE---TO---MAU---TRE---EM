@@ -10,8 +10,9 @@ import { ARTWORK_FRAMES } from '../../lib/frames';
 import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
+import useWide from '../../hooks/useWide';
 
-function BrushPreview({ skin }) {
+function BrushPreview({ skin, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
   useEffect(() => {
     const ctx = ref.current.getContext('2d');
@@ -19,14 +20,56 @@ function BrushPreview({ skin }) {
     const pts = Array.from({ length: 40 }, (_, i) => [10 + i * 5.5, 60 + Math.sin(i / 4) * 30]);
     drawStroke(ctx, { tool: 'brush', color: '#FF5F7E', size: 14, points: pts, skin }, 1);
   }, [skin]);
-  return <canvas ref={ref} width={240} height={120} className="h-auto w-full rounded-xl bg-white" />;
+  return <canvas ref={ref} width={240} height={120} className={className} />;
 }
 
-function Preview({ item }) {
-  if (item.type === 'brush_skin') return <BrushPreview skin={item.slug} />;
+function Preview({ item, scene = false }) {
+  if (item.type === 'brush_skin') return <BrushPreview skin={item.slug} className={scene ? 'sh-prev-canvas' : undefined} />;
   if (item.type === 'artwork_frame')
-    return <svg viewBox="0 0 700 700" className="w-full" dangerouslySetInnerHTML={{ __html: `${ARTWORK_FRAMES[item.slug]?.() || ''}<rect x="50" y="50" width="600" height="600" fill="#EAF6FF"/><image href="/avatars/meo.svg" x="150" y="150" width="400" height="400"/>` }} />;
+    return <svg viewBox="0 0 700 700" className={scene ? 'sh-prev-svg' : 'w-full'} dangerouslySetInnerHTML={{ __html: `${ARTWORK_FRAMES[item.slug]?.() || ''}<rect x="50" y="50" width="600" height="600" fill="#EAF6FF"/><image href="/avatars/meo.svg" x="150" y="150" width="400" height="400"/>` }} />;
   return null;
+}
+
+// Cảnh quầy hàng (ảnh nền 1672×863): 2 kệ × 4 ô, bảng chọn loại ở bên trái.
+const W = 1672;
+const H = 863;
+const COLS = [325, 610, 893, 1177];
+const SLOTS = [
+  ...COLS.map((x) => [x, 297, 264, 217]),
+  ...COLS.map((x) => [x, 547, 264, 205]),
+];
+const pc = (v, total) => `${(v / total) * 100}%`;
+const box = ([x, y, w, h]) => ({ left: pc(x, W), top: pc(y, H), width: pc(w, W), height: pc(h, H) });
+
+function SceneCard({ item, ruby, equipped, onBuy, onEquip, t, lang, geo }) {
+  const type = item.type;
+  return (
+    <div className="sh-card" style={box(geo)} data-testid={`shop-item-${item.slug}`}>
+      <div className="sh-ci">
+        <span className="sh-peg" aria-hidden="true" />
+        <div className="sh-body">
+          <div className="sh-prev">
+            <Preview item={item} scene />
+            {item.limited && <span className="sh-limited">{t('shop.limited')}</span>}
+          </div>
+          <div className="sh-name">{item.name[lang]}</div>
+          {item.owned ? (
+            type === 'brush_skin' ? (
+              <button type="button" className={`sh-btn ${equipped ? 'sh-btn-ghost' : 'sh-btn-go'}`} onClick={() => onEquip(item, equipped)}>
+                {equipped ? t('shop.unequip') : t('shop.equip')}
+              </button>
+            ) : (
+              <span className="sh-btn sh-btn-ghost sh-btn-static">{t('shop.owned')}</span>
+            )
+          ) : (
+            <button type="button" className="sh-btn" disabled={ruby < item.price} onClick={() => onBuy(item)} data-testid={`buy-${item.slug}`}>
+              <Icon name="ruby" size={20} /> {item.price}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Shop() {
@@ -38,6 +81,9 @@ export default function Shop() {
   const pushEvents = useUi((s) => s.pushEvents);
   const [shop, setShop] = useState(null);
   const [confirm, setConfirm] = useState(null);
+  const wide = useWide();
+  const [tab, setTab] = useState('brush_skin');
+  const [page, setPage] = useState(0);
   const load = () => api.get('/shop').then(setShop);
   useEffect(() => {
     load();
@@ -58,6 +104,89 @@ export default function Shop() {
   }
 
   if (!shop) return <div className="page text-muted">{t('common.loading')}</div>;
+  const avatarFrames = (
+    <section>
+      <h2 className="mb-1 font-display text-2xl font-bold">{t('shop.avatarFrames')}</h2>
+      <p className="mb-3 text-sm text-muted">{t('shop.avatarFramesHint')}</p>
+      <div className="grid grid-cols-5 gap-2">
+        {shop.items.filter((i) => i.type === 'avatar_frame').map((item) => (
+          <div key={item.slug} className={`card flex flex-col items-center p-2 text-center ${item.owned ? '' : 'opacity-50'}`}>
+            <Avatar avatar={user.avatar} frame={item.slug} size={60} />
+            <div className="text-xs font-bold">{t(`rank.${item.rank}`)}</div>
+            {!item.owned && <Icon name="lock" size={16} />}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+  const confirmModal = (
+    <Modal open={!!confirm} onClose={() => setConfirm(null)}>
+      {confirm && (
+        <div className="space-y-3 text-center">
+          <h2 className="font-display text-2xl font-extrabold">{t('shop.confirmTitle')}</h2>
+          <p>{t('shop.confirmText', { name: confirm.name[i18n.language], price: confirm.price })}</p>
+          <div className="flex gap-2">
+            <button type="button" className="btn-ghost flex-1" onClick={() => setConfirm(null)}>{t('common.cancel')}</button>
+            <button type="button" className="btn-coral flex-1" onClick={() => buy(confirm)} data-testid="confirm-buy">{t('shop.buy')}</button>
+          </div>
+        </div>
+      )}
+    </Modal>
+  );
+  if (wide) {
+    const list = shop.items.filter((i) => i.type === tab);
+    const per = SLOTS.length;
+    const pages = Math.max(1, Math.ceil(list.length / per));
+    const cur = Math.min(page, pages - 1);
+    const shown = list.slice(cur * per, cur * per + per);
+    const tabs = [
+      ['brush_skin', '🖌️', t('shop.brushes')],
+      ['artwork_frame', '🖼️', t('shop.tabFrames')],
+    ];
+    return (
+      <div className="sh-room">
+        <div className="sh-stage" data-testid="shop-stall">
+          <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
+          <span className="sr-only" data-testid="shop-ruby">{shop.ruby} Ruby</span>
+          <p className="sh-sub" style={box([560, 200, 575, 32])}>{t('shop.hint')}</p>
+          <div className="sh-tabs" style={box([35, 247, 226, 232])} role="tablist">
+            {tabs.map(([k, icon, label]) => (
+              <button key={k} type="button" role="tab" aria-selected={tab === k} className={`sh-tab${tab === k ? ' sh-tab-on' : ''}`} onClick={() => { setTab(k); setPage(0); }} data-testid={`shop-tab-${k}`}>
+                <span className="sh-tab-icon" aria-hidden="true">{icon}</span>
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+          {shown.map((item, i) => (
+            <SceneCard
+              key={item.slug}
+              item={item}
+              ruby={shop.ruby}
+              equipped={item.type === 'brush_skin' && user.brushSkin === item.slug}
+              onBuy={setConfirm}
+              onEquip={(it, eq) => updateProfile({ brushSkin: eq ? null : it.slug })}
+              t={t}
+              lang={i18n.language}
+              geo={SLOTS[i]}
+            />
+          ))}
+          {pages > 1 && (
+            <>
+              <button type="button" className="sh-arrow" style={box([760, 784, 56, 56])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="shop-prev">
+                <Icon name="back" size={22} strokeWidth={3.4} />
+              </button>
+              <span className="sh-page" style={box([826, 796, 84, 32])}>{cur + 1}/{pages}</span>
+              <button type="button" className="sh-arrow" style={box([920, 784, 56, 56])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="shop-next">
+                <Icon name="chevronRight" size={22} strokeWidth={3.4} />
+              </button>
+            </>
+          )}
+        </div>
+        <div className="page">{avatarFrames}</div>
+        {confirmModal}
+      </div>
+    );
+  }
   const sections = [
     ['brush_skin', t('shop.brushes')],
     ['artwork_frame', t('shop.frames')],
@@ -101,31 +230,8 @@ export default function Shop() {
           </div>
         </section>
       ))}
-      <section>
-        <h2 className="mb-1 font-display text-2xl font-bold">{t('shop.avatarFrames')}</h2>
-        <p className="mb-3 text-sm text-muted">{t('shop.avatarFramesHint')}</p>
-        <div className="grid grid-cols-5 gap-2">
-          {shop.items.filter((i) => i.type === 'avatar_frame').map((item) => (
-            <div key={item.slug} className={`card flex flex-col items-center p-2 text-center ${item.owned ? '' : 'opacity-50'}`}>
-              <Avatar avatar={user.avatar} frame={item.slug} size={60} />
-              <div className="text-xs font-bold">{t(`rank.${item.rank}`)}</div>
-              {!item.owned && <Icon name="lock" size={16} />}
-            </div>
-          ))}
-        </div>
-      </section>
-      <Modal open={!!confirm} onClose={() => setConfirm(null)}>
-        {confirm && (
-          <div className="space-y-3 text-center">
-            <h2 className="font-display text-2xl font-extrabold">{t('shop.confirmTitle')}</h2>
-            <p>{t('shop.confirmText', { name: confirm.name[i18n.language], price: confirm.price })}</p>
-            <div className="flex gap-2">
-              <button type="button" className="btn-ghost flex-1" onClick={() => setConfirm(null)}>{t('common.cancel')}</button>
-              <button type="button" className="btn-coral flex-1" onClick={() => buy(confirm)} data-testid="confirm-buy">{t('shop.buy')}</button>
-            </div>
-          </div>
-        )}
-      </Modal>
+      {avatarFrames}
+      {confirmModal}
     </div>
   );
 }
