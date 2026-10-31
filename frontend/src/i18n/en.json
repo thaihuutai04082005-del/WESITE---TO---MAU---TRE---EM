@@ -200,6 +200,8 @@
     "edit": "Change signature"
   },
   "collection": {
+    "roomTitle": "My collection",
+    "schedule": "Exhibition schedule",
     "title": "Collection",
     "cards": "Rare cards",
     "artworks": "Finished pictures",
