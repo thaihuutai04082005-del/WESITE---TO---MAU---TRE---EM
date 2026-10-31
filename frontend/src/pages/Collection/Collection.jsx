@@ -342,7 +342,7 @@ function CardInSlot({ card }) {
 }
 
 /** Khung cảnh phòng: nền ảnh, biển treo, nút Quay lại, hai tab, phân trang và 8 khung tranh. */
-function RoomShell({ tab, onTab, slots, pills, loading, emptyText }) {
+function RoomShell({ tab, onTab, slots, pills }) {
   const { t } = useTranslation();
   const [page, setPage] = useState(0);
   const per = ROOM_SLOTS.length;
@@ -379,7 +379,6 @@ function RoomShell({ tab, onTab, slots, pills, loading, emptyText }) {
             </button>
           ) : null;
         })}
-        {!loading && slots.length === 0 && <p className="room-empty" style={box(500, 560, 830, 70)}>{emptyText}</p>}
 
         <div className="room-nav" style={box(330, 574, 1172, 76)}>
           <button type="button" className="room-arrow" disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="room-prev">
@@ -434,7 +433,7 @@ function RoomArtworks({ onTab }) {
   const entry = open && ready ? ex.entries[open.id] : null;
   return (
     <>
-      <RoomShell tab="artworks" onTab={onTab} slots={slots} pills={pills} loading={!ready} emptyText={t('collection.noArtworks')} />
+      <RoomShell tab="artworks" onTab={onTab} slots={slots} pills={pills} />
       <Modal open={rules} onClose={() => setRules(false)} wide>
         <h2 className="mb-3 font-display text-2xl font-extrabold">📜 {t('exhibition.rules.title')}</h2>
         <ExhibitRules />
@@ -500,7 +499,7 @@ function RoomCards({ onTab }) {
       <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>
     </>
   );
-  return <RoomShell tab="cards" onTab={onTab} slots={slots} pills={pills} loading={!col} emptyText={t('gacha.empty')} />;
+  return <RoomShell tab="cards" onTab={onTab} slots={slots} pills={pills} />;
 }
 
 export default function Collection() {
