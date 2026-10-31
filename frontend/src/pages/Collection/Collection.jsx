@@ -289,18 +289,15 @@ function CardsTab() {
 
 /* ===================== Phòng triển lãm hiện đại (màn hình rộng) ===================== */
 
-const ROOM_W = 1828;
-const ROOM_H = 860;
-// Ô xám trong 8 khung treo tường của ảnh phòng (x1, y1, x2, y2 tính theo ảnh 1828×860), xếp theo thứ tự lấp đầy: khung giữa trước.
+const ROOM_W = 1832;
+const ROOM_H = 859;
+// Ô xám trong 5 khung treo tường của ảnh phòng (x1, y1, x2, y2 tính theo ảnh 1832×859), xếp theo thứ tự lấp đầy: khung giữa trước, rồi hai bên, rồi hai khung ngoài.
 const ROOM_SLOTS = [
-  [799, 316, 1051, 530],
-  [530, 262, 646, 398],
-  [1207, 270, 1324, 411],
-  [273, 406, 412, 535],
-  [1470, 225, 1592, 358],
-  [534, 497, 675, 596],
-  [1415, 443, 1523, 578],
-  [298, 229, 373, 315],
+  [798, 279, 1033, 510],
+  [504, 307, 661, 484],
+  [1169, 307, 1326, 484],
+  [247, 326, 380, 480],
+  [1452, 326, 1588, 480],
 ];
 const SLOT_PAD = 10;
 const box = (x, y, w, h) => ({ left: `${(x / ROOM_W) * 100}%`, top: `${(y / ROOM_H) * 100}%`, width: `${(w / ROOM_W) * 100}%`, height: `${(h / ROOM_H) * 100}%` });
@@ -360,14 +357,14 @@ function RoomShell({ tab, onTab, slots, pills, loading, emptyText }) {
   return (
     <div className="room" data-testid="collection-room">
       <div className="room-stage">
-        <span className="room-rope" style={{ left: `${(700 / ROOM_W) * 100}%`, height: `${(100 / ROOM_H) * 100}%` }} />
-        <span className="room-rope" style={{ left: `${(1141 / ROOM_W) * 100}%`, height: `${(100 / ROOM_H) * 100}%` }} />
-        <div className="room-sign" style={box(612, 92, 645, 111)}>
+        <span className="room-rope" style={{ left: `${(689 / ROOM_W) * 100}%`, height: `${(112 / ROOM_H) * 100}%` }} />
+        <span className="room-rope" style={{ left: `${(1141 / ROOM_W) * 100}%`, height: `${(112 / ROOM_H) * 100}%` }} />
+        <div className="room-sign" style={box(627, 101, 579, 103)}>
           <Leaf className="room-leaf room-leaf-l" />
           <h1 className="room-sign-title" data-testid="room-title">{t('collection.roomTitle')}</h1>
           <Leaf className="room-leaf room-leaf-r" />
         </div>
-        <Link to="/" className="room-back" style={box(27, 25, 205, 67)} data-testid="room-back">
+        <Link to="/" className="room-back" style={box(40, 30, 202, 66)} data-testid="room-back">
           <Icon name="back" size={20} strokeWidth={3} /> {t('common.back')}
           <Leaf className="room-leaf room-back-leaf" />
         </Link>
@@ -382,9 +379,9 @@ function RoomShell({ tab, onTab, slots, pills, loading, emptyText }) {
             </button>
           ) : null;
         })}
-        {!loading && slots.length === 0 && <p className="room-empty" style={box(520, 560, 780, 70)}>{emptyText}</p>}
+        {!loading && slots.length === 0 && <p className="room-empty" style={box(500, 560, 830, 70)}>{emptyText}</p>}
 
-        <div className="room-nav" style={box(300, 618, 1210, 74)}>
+        <div className="room-nav" style={box(330, 574, 1172, 76)}>
           <button type="button" className="room-arrow" disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="room-prev">
             <Icon name="back" size={22} strokeWidth={3.4} />
           </button>
@@ -401,7 +398,7 @@ function RoomShell({ tab, onTab, slots, pills, loading, emptyText }) {
           {pages > 1 && <span className="room-page" data-testid="room-page">{cur + 1}/{pages}</span>}
         </div>
 
-        <div className="room-pills" style={box(1230, 92, 470, 100)}>{pills}</div>
+        <div className="room-pills" style={box(1236, 84, 440, 100)}>{pills}</div>
       </div>
     </div>
   );
