@@ -728,6 +728,7 @@
     "previewNote": "Previewing all cards."
   },
   "shop": {
+    "tabFrames": "Picture frames",
     "title": "Shop",
     "hint": "Spend Ruby from missions on brush skins and frames.",
     "brushes": "Brush skins",

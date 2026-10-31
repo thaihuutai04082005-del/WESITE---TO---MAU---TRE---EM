@@ -728,6 +728,7 @@
     "previewNote": "Đang xem trước toàn bộ thẻ."
   },
   "shop": {
+    "tabFrames": "Khung tranh",
     "title": "Shop",
     "hint": "Dùng Ruby từ nhiệm vụ để mua skin cọ vẽ và khung tranh.",
     "brushes": "Skin cọ vẽ",
