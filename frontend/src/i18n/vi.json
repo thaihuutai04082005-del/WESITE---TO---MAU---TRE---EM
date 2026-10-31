@@ -704,6 +704,7 @@
     "timeHint": "Xong sớm mà vẫn đẹp được cộng thêm."
   },
   "gacha": {
+    "noPulls": "Chưa đủ lượt bóc — thi Đấu trường để nhận Điểm Gacha nhé!",
     "title": "Bóc thẻ tranh",
     "points": "{{n}} Điểm Gacha",
     "pulls": "{{n}} lượt bóc",
