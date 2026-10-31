@@ -86,7 +86,6 @@ export default function Gacha() {
   const shown = (deck?.cards || []).filter((c) => (filter === 'all' || c.rarity === filter) && (theme === 'all' || c.theme.slug === theme));
 
   const ready = info ? Math.min(info.pullsAvailable, STAGE_CARDS.length) : 0;
-  const goDeck = () => document.getElementById('gacha-deck')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
     <div>
@@ -132,7 +131,6 @@ export default function Gacha() {
                 ✨ {t('gacha.pullN', { n: Math.min(10, info.pullsAvailable) })}
               </button>
             )}
-            <button type="button" className="gs-pill gs-pill-btn" onClick={goDeck}>📚 {t('gacha.deck')}</button>
           </div>
         )}
       </div>
