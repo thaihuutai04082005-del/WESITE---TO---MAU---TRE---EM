@@ -1289,8 +1289,9 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sh-page { position: absolute; z-index: 5; display: grid; place-items: center; border: max(1px, 0.14cqw) solid #D9B88A; border-radius: 9999px; background: rgba(255, 248, 235, 0.95); font-family: var(--font-display); font-weight: 800; font-size: max(13px, 1.3cqw); color: #6B3A12; }
 
 /* ===== Tô cùng nhau: nền đồng cỏ + tựa là bảng gỗ sáng treo dây ===== */
-.tg-meadow { min-height: calc(100vh - 73px); background: #C8E9B9 url(/together/meadow.webp) center bottom / cover no-repeat; background-attachment: fixed; }
-.tg-head { display: flex; justify-content: center; padding-top: 40px; }
+.tg-meadow { min-height: calc(100vh - 73px); background: #C8E9B9 url(/together/meadow.webp) center bottom / cover no-repeat; background-attachment: fixed; display: flex; align-items: center; justify-content: center; }
+.tg-meadow > .page { width: 100%; padding-top: 0; padding-bottom: 0; }
+.tg-head { display: flex; justify-content: center; padding-top: 52px; }
 .tg-sign { position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; min-width: min(100%, 560px); padding: 14px 64px 16px; border: 3px solid #E8A53D; border-radius: 30px / 26px; background:
   radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 55%),
   linear-gradient(#FFE08A, #FDD07A 60%, #F9C26A);
