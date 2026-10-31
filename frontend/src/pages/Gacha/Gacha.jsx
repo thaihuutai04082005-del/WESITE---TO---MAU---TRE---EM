@@ -7,7 +7,8 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import { usePicture } from '../../hooks/usePicture';
-import GachaCardReveal, { RarityBadge, RARITY_COLOR } from '../../components/GachaCardReveal/GachaCardReveal';
+import { RarityBadge, RARITY_COLOR } from '../../components/GachaCardReveal/GachaCardReveal';
+import Confetti from '../../components/Confetti';
 import PictureView from '../../components/PictureView/PictureView';
 import ModePicker from '../../components/ModePicker';
 import Modal from '../../components/Modal/Modal';
@@ -51,7 +52,8 @@ export default function Gacha() {
   const [info, setInfo] = useState(null);
   const [deck, setDeck] = useState(null);
   const [theme, setTheme] = useState('all');
-  const [results, setResults] = useState([]);
+  const [flips, setFlips] = useState({}); // slot → kết quả bóc, lật ngay trên sân khấu
+  const [flipped, setFlipped] = useState(false);
   const [filter, setFilter] = useState('all');
   const [openCard, setOpenCard] = useState(null);
   const [colorPic, setColorPic] = useState(null);
@@ -67,11 +69,18 @@ export default function Gacha() {
     if (info && deck) window.dispatchEvent(new Event('btm:page-ready'));
   }, [info, deck]);
 
-  async function pull(count) {
+  // count = 1: lật đúng thẻ vừa bấm (slot); nhiều thẻ: lật từ thẻ đầu. Thẻ rung rồi lật lên ngay trên sân khấu.
+  async function pull(count, slot = 0) {
     setBusy(true);
     try {
       const r = await api.post('/gacha/pull', { count });
-      setResults(r.results);
+      const m = {};
+      r.results.forEach((res, k) => {
+        m[count === 1 ? slot : k] = res;
+      });
+      setFlips(m);
+      setFlipped(false);
+      setTimeout(() => setFlipped(true), 700);
       setInfo((x) => ({ ...x, gachaPoints: r.gachaPoints, pullsAvailable: r.pullsAvailable }));
       refresh().catch(() => {});
     } catch (e) {
@@ -81,11 +90,19 @@ export default function Gacha() {
     }
   }
 
+  function doneFlip() {
+    setFlips({});
+    setFlipped(false);
+    load();
+  }
+
   // Bộ thẻ: toàn bộ thẻ trong game, lọc theo hạng và chủ đề.
   const themes = deck ? [...new Map(deck.cards.map((c) => [c.theme.slug, c.theme])).values()] : [];
   const shown = (deck?.cards || []).filter((c) => (filter === 'all' || c.rarity === filter) && (theme === 'all' || c.theme.slug === theme));
 
   const ready = info ? Math.min(info.pullsAvailable, STAGE_CARDS.length) : 0;
+  const locked = Object.keys(flips).length > 0;
+  const best = Object.values(flips).some((x) => x.rarity === 'S') ? 90 : Object.values(flips).some((x) => x.rarity === 'A') ? 40 : 0;
 
   return (
     <div>
@@ -102,21 +119,42 @@ export default function Gacha() {
         </div>
         <div className="gs-cards">
           {STAGE_CARDS.map(([x, y], i) => {
-            const on = i < ready;
+            const res = flips[i];
+            const on = !res && !locked && i < ready;
+            const rc = res ? RARITY_COLOR[res.rarity] : null;
             return (
               <button
                 key={i}
                 type="button"
-                className={`gs-card${on ? ' gs-card-on' : ' gs-card-off'}`}
+                className={`gs-card${on ? ' gs-card-on' : ''}${!res && !on ? ' gs-card-off' : ''}${res && flipped ? ' gs-flipped' : ''}${res && !flipped ? ' gs-shake' : ''}`}
                 style={{ '--x': pct(x, STAGE_W), '--y': pct(y, STAGE_H), '--w': pct(CARD_W, STAGE_W), '--h': pct(CARD_H, STAGE_H) }}
-                disabled={busy}
-                onClick={() => (on ? pull(1) : toast(t('gacha.noPulls'), 'info'))}
-                aria-label={on ? t('gacha.pull1') : t('gacha.noPulls')}
-                title={on ? t('gacha.pull1') : t('gacha.noPulls')}
+                disabled={busy || !!res || locked}
+                onClick={() => (on ? pull(1, i) : toast(t('gacha.noPulls'), 'info'))}
+                aria-label={res ? res.picture.name[i18n.language] : on ? t('gacha.pull1') : t('gacha.noPulls')}
+                title={res ? res.picture.name[i18n.language] : on ? t('gacha.pull1') : t('gacha.noPulls')}
                 data-testid={i === 0 ? 'gacha-pull' : `gacha-slot-${i}`}
               >
-                <span className="gs-card-in">
-                  <span className="gs-q">?</span>
+                <span className="gs-flip">
+                  <span className="gs-face gs-face-f">
+                    <span className="gs-card-in">
+                      <span className="gs-q">?</span>
+                    </span>
+                  </span>
+                  <span
+                    className={`gs-face gs-face-b${res ? ` rarity-glow-${res.rarity}` : ''}`}
+                    style={res ? { '--rc': res.rarity === 'S' ? 'linear-gradient(135deg,#FF5F7E,#FFB84D 50%,#FF5F7E)' : rc } : undefined}
+                  >
+                    {res && (
+                      <span className="gs-bk-in">
+                        <span className="gs-bk-top">
+                          <span className="gs-badge" style={res.rarity === 'S' ? undefined : { background: rc }} data-s={res.rarity === 'S' ? '1' : undefined}>{res.rarity}</span>
+                          <span className="gs-bk-rar">{t(`gacha.rarity.${res.rarity}`)}</span>
+                        </span>
+                        <span className="gs-bk-pic"><PictureView picture={res.picture} /></span>
+                        <span className="gs-bk-name">{res.picture.name[i18n.language]}</span>
+                      </span>
+                    )}
+                  </span>
                 </span>
               </button>
             );
@@ -126,9 +164,14 @@ export default function Gacha() {
           <div className="gs-pills">
             <span className="gs-pill">💎 {t('gacha.points', { n: info.gachaPoints })}</span>
             <span className="gs-pill">🎁 {t('gacha.pulls', { n: info.pullsAvailable })}</span>
-            {info.pullsAvailable > 1 && (
-              <button type="button" className="gs-pill gs-pill-btn" disabled={busy} onClick={() => pull(Math.min(10, info.pullsAvailable))} data-testid="gacha-pull-n">
-                ✨ {t('gacha.pullN', { n: Math.min(10, info.pullsAvailable) })}
+            {!locked && info.pullsAvailable > 1 && (
+              <button type="button" className="gs-pill gs-pill-btn" disabled={busy} onClick={() => pull(Math.min(STAGE_CARDS.length, info.pullsAvailable))} data-testid="gacha-pull-n">
+                ✨ {t('gacha.pullN', { n: Math.min(STAGE_CARDS.length, info.pullsAvailable) })}
+              </button>
+            )}
+            {locked && flipped && (
+              <button type="button" className="gs-pill gs-pill-btn gs-pill-go" onClick={doneFlip} data-testid="gacha-continue">
+                🎉 {t('common.next')}
               </button>
             )}
           </div>
@@ -182,20 +225,7 @@ export default function Gacha() {
         </div>
       </section>
 
-      <Modal open={results.length > 0} onClose={() => { setResults([]); load(); }} dismissable={false}>
-        {results[0] && (
-          <GachaCardReveal
-            key={results[0].cardId}
-            result={results[0]}
-            onDone={() => {
-              const rest = results.slice(1);
-              setResults(rest);
-              if (!rest.length) load();
-            }}
-          />
-        )}
-        {results.length > 1 && <p className="mt-2 text-center text-sm text-muted">{t('gacha.remaining', { n: results.length - 1 })}</p>}
-      </Modal>
+      {locked && flipped && best > 0 && <Confetti count={best} />}
 
       {openCard && !colorPic && (
         <CardModal card={openCard} lang={i18n.language} onClose={() => setOpenCard(null)} onColor={(p) => setColorPic(p)} />
