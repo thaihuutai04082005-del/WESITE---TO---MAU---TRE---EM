@@ -12,19 +12,20 @@ import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
 
-function BrushPreview({ skin, className = 'h-auto w-full rounded-xl bg-white' }) {
+function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
   useEffect(() => {
     const ctx = ref.current.getContext('2d');
-    ctx.clearRect(0, 0, 240, 120);
+    const k = scene ? 4 : 1; // bản quầy hàng vẽ ở độ phân giải gấp 4 cho nét
+    ctx.clearRect(0, 0, 240 * k, 120 * k);
     const pts = Array.from({ length: 40 }, (_, i) => [10 + i * 5.5, 60 + Math.sin(i / 4) * 30]);
-    drawStroke(ctx, { tool: 'brush', color: '#FF5F7E', size: 14, points: pts, skin }, 1);
-  }, [skin]);
-  return <canvas ref={ref} width={240} height={120} className={className} />;
+    drawStroke(ctx, { tool: 'brush', color: '#FF5F7E', size: 14, points: pts, skin }, k);
+  }, [skin, scene]);
+  return <canvas ref={ref} width={scene ? 960 : 240} height={scene ? 480 : 120} className={className} />;
 }
 
 function Preview({ item, scene = false }) {
-  if (item.type === 'brush_skin') return <BrushPreview skin={item.slug} className={scene ? 'sh-prev-canvas' : undefined} />;
+  if (item.type === 'brush_skin') return <BrushPreview skin={item.slug} scene={scene} className={scene ? 'sh-prev-canvas' : undefined} />;
   if (item.type === 'artwork_frame')
     return <svg viewBox="0 0 700 700" className={scene ? 'sh-prev-svg' : 'w-full'} dangerouslySetInnerHTML={{ __html: `${ARTWORK_FRAMES[item.slug]?.() || ''}<rect x="50" y="50" width="600" height="600" fill="#EAF6FF"/><image href="/avatars/meo.svg" x="150" y="150" width="400" height="400"/>` }} />;
   return null;
@@ -182,7 +183,6 @@ export default function Shop() {
             </>
           )}
         </div>
-        <div className="page">{avatarFrames}</div>
         {confirmModal}
       </div>
     );
