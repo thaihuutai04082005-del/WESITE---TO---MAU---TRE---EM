@@ -1390,6 +1390,85 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'ngoi-nha-cua-be-3-5',
+  age: '3-5',
+  name: { vi: 'Ngôi Nhà Của Bé', en: "My Little Home" },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'ngoi-nha-nho',
+      name: { vi: 'Ngôi nhà nhỏ', en: 'Little House' },
+      pictures: [
+        { slug: 'ngoi-nha-nho', name: { vi: 'Ngôi nhà nhỏ', en: 'Little House' }, file: 'ngoi-nha-nho--ngoi-nha-nho' },
+      ],
+    },
+    {
+      slug: 'chiec-giuong',
+      name: { vi: 'Chiếc giường', en: 'Bed' },
+      pictures: [
+        { slug: 'chiec-giuong', name: { vi: 'Chiếc giường', en: 'Bed' }, file: 'chiec-giuong--chiec-giuong' },
+      ],
+    },
+    {
+      slug: 'ghe-sofa',
+      name: { vi: 'Ghế sofa', en: 'Sofa' },
+      pictures: [
+        { slug: 'ghe-sofa', name: { vi: 'Ghế sofa', en: 'Sofa' }, file: 'ghe-sofa--ghe-sofa' },
+      ],
+    },
+    {
+      slug: 'tu-quan-ao',
+      name: { vi: 'Tủ quần áo', en: 'Wardrobe' },
+      pictures: [
+        { slug: 'tu-quan-ao', name: { vi: 'Tủ quần áo', en: 'Wardrobe' }, file: 'tu-quan-ao--tu-quan-ao' },
+      ],
+    },
+    {
+      slug: 'den-ban',
+      name: { vi: 'Đèn bàn', en: 'Desk Lamp' },
+      pictures: [
+        { slug: 'den-ban', name: { vi: 'Đèn bàn', en: 'Desk Lamp' }, file: 'den-ban--den-ban' },
+      ],
+    },
+    {
+      slug: 'quat-may',
+      name: { vi: 'Quạt máy', en: 'Fan' },
+      pictures: [
+        { slug: 'quat-may', name: { vi: 'Quạt máy', en: 'Fan' }, file: 'quat-may--quat-may' },
+      ],
+    },
+    {
+      slug: 'tivi',
+      name: { vi: 'Tivi', en: 'TV' },
+      pictures: [
+        { slug: 'tivi', name: { vi: 'Tivi', en: 'TV' }, file: 'tivi--tivi' },
+      ],
+    },
+    {
+      slug: 'tu-lanh',
+      name: { vi: 'Tủ lạnh', en: 'Fridge' },
+      pictures: [
+        { slug: 'tu-lanh', name: { vi: 'Tủ lạnh', en: 'Fridge' }, file: 'tu-lanh--tu-lanh' },
+      ],
+    },
+    {
+      slug: 'may-giat',
+      name: { vi: 'Máy giặt', en: 'Washing Machine' },
+      pictures: [
+        { slug: 'may-giat', name: { vi: 'Máy giặt', en: 'Washing Machine' }, file: 'may-giat--may-giat' },
+      ],
+    },
+    {
+      slug: 'ban-an',
+      name: { vi: 'Bàn ăn', en: 'Dining Table' },
+      pictures: [
+        { slug: 'ban-an', name: { vi: 'Bàn ăn', en: 'Dining Table' }, file: 'ban-an--ban-an' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',

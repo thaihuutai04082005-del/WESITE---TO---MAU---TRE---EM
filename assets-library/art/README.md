@@ -228,3 +228,6 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Bè Gỗ Rùa Biển Thần Kì (Hải Trình Kỳ Diệu) | – | `src/be-go--rua-bien.png` | ghi trong file |
 | Thuyền Kayak Cá Heo (Hải Trình Kỳ Diệu) | – | `src/thuyen-kayak--ca-heo.png` | ghi trong file |
 | Nhà Mái Vòm Bóng Bay (Thành Phố Nhà Biết Bay) | – | `src/nha-mai-vom--bong-bay.png` | ghi trong file |
+| Ngôi nhà nhỏ (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/ngoi-nha-nho--ngoi-nha-nho.png` | 18 |
+| Chiếc giường (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/chiec-giuong--chiec-giuong.png` | 21 |
+| Ghế sofa, Tủ quần áo, Đèn bàn, Quạt máy, Tivi, Tủ lạnh, Máy giặt, Bàn ăn (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/<đối-tượng>--<đối-tượng>.png` | 17–35 |
