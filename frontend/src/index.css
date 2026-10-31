@@ -1259,7 +1259,6 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 
 /* ===== Shop: quầy hàng có mái hiên, 2 kệ × 4 ô (màn hình rộng) ===== */
 .sh-room { background: #EED2AE; }
-.sh-room .page { padding-top: 28px; padding-bottom: 40px; }
 .sh-stage { position: relative; width: 100%; aspect-ratio: 1672 / 863; overflow: hidden; container-type: inline-size; background: url(/shop/stall.webp) center / 100% 100% no-repeat; }
 .sh-sub { position: absolute; z-index: 3; margin: 0; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: max(12px, 1.02cqw); white-space: nowrap; color: #7A4A1C; }
 .sh-tabs { position: absolute; z-index: 4; display: flex; flex-direction: column; gap: 0.5cqw; padding: 0.9cqw; border: max(2px, 0.22cqw) solid #A9672A; border-radius: 2cqw; background: linear-gradient(#D48A3C, #B8742F); box-shadow: inset 0 0.25cqw 0 rgba(255, 220, 160, 0.6), 0 0.5cqw 1cqw rgba(90, 50, 10, 0.3); }
@@ -1273,9 +1272,9 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sh-body { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 4.5cqw 5cqw 5cqw; }
 .sh-peg { position: absolute; left: 50%; top: -11cqw; width: 4.8cqw; height: 12cqw; margin-left: -2.4cqw; border-radius: 2.4cqw; background: linear-gradient(90deg, #C98A25, #F6CB62 45%, #C98A25); box-shadow: 0 0.6cqw 1cqw rgba(90, 50, 10, 0.35); }
 .sh-peg::before { content: ''; position: absolute; left: 50%; top: 1.2cqw; width: 2cqw; height: 2cqw; margin-left: -1cqw; border-radius: 9999px; background: #8A5A12; opacity: 0.55; }
-.sh-prev { position: relative; flex: 1 1 0; min-height: 0; display: grid; place-items: center; }
-.sh-prev-canvas { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-.sh-prev-svg { height: 100%; width: auto; max-width: 100%; }
+.sh-prev { position: relative; flex: 1 1 0; min-height: 0; display: grid; place-items: stretch; padding: 1cqw 0 0; }
+.sh-prev-canvas { width: 100%; height: 100%; object-fit: contain; }
+.sh-prev-svg { width: 100%; height: 100%; }
 .sh-limited { position: absolute; right: 0; top: 0; padding: 0.4cqw 2.4cqw; border-radius: 9999px; background: #FF8A65; font-weight: 800; font-size: 5.6cqw; line-height: 1.3; color: #fff; }
 .sh-name { margin: 2cqw 0 2.6cqw; text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 7.4cqw; line-height: 1.15; color: #17285B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sh-btn { display: flex; align-items: center; justify-content: center; gap: 2.2cqw; width: 100%; height: 17cqw; border: 0; border-radius: 4.6cqw; background: linear-gradient(#FF8458, #F5683C); box-shadow: inset 0 0.5cqw 0 rgba(255, 255, 255, 0.35); cursor: pointer; font-family: var(--font-display); font-weight: 800; font-size: 8.4cqw; line-height: 1; color: #fff; transition: filter 0.15s, transform 0.15s; }
