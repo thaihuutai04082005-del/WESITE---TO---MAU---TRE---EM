@@ -1155,10 +1155,10 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .room-pill-btn:hover { transform: translateY(-0.15cqw); background: #fff; }
 
 /* ===== Bóc thẻ: sân khấu xanh, biển treo, 7 thẻ úp dấu "?" ===== */
-.gs-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 14px 12px 22px; background: linear-gradient(#B9A6F0, #8F78DE 80%, #F2B88E 80%); container-type: inline-size; }
+.gs-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 14px 12px 22px; background: linear-gradient(#CDBFF6, #A892E8 80%, #F4C3A0 80%); container-type: inline-size; }
 .gs-back { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 20px 0 14px; border: 2px solid #C58A4C; border-radius: 9999px; background: linear-gradient(#FCE2B8, #EDB878); box-shadow: 0 4px 10px rgba(110, 60, 15, 0.28); font-family: var(--font-display); font-weight: 800; font-size: 18px; color: #6B3A12; transition: transform 0.15s; }
 .gs-back:hover { transform: translateX(-2px); }
-.gs-rope { display: none; position: absolute; z-index: 2; top: 0; width: 0.5cqw; border-radius: 0.3cqw; background: repeating-linear-gradient(115deg, #8C6AE0 0 0.25cqw, #5B3FB8 0.25cqw 0.5cqw); box-shadow: 0 0 0 1px rgba(60, 30, 130, 0.35); }
+.gs-rope { display: none; position: absolute; z-index: 2; top: 0; width: 0.5cqw; border-radius: 0.3cqw; background: repeating-linear-gradient(115deg, #A58AE8 0 0.25cqw, #7A5CD0 0.25cqw 0.5cqw); box-shadow: 0 0 0 1px rgba(60, 30, 130, 0.35); }
 .gs-sign { position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 2cqw; padding: 10px 22px 12px; border: 3px solid #E6C88C; border-radius: 22px; background: linear-gradient(#FFEFCB, #FAD79A); box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.7), 0 8px 16px rgba(60, 40, 100, 0.3); }
 .gs-title { margin: 0; white-space: nowrap; font-family: var(--font-display); font-weight: 800; line-height: 1.1; font-size: max(24px, 7cqw); color: #6A3912; }
 .gs-star { flex: none; width: max(30px, 6cqw); height: auto; filter: drop-shadow(0 2px 0 rgba(150, 100, 0, 0.3)); }
@@ -1172,8 +1172,8 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .gs-flipped .gs-flip { transform: rotateY(180deg); }
 .gs-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .gs-face-b { transform: rotateY(180deg); border-radius: 11cqw; }
-.gs-face-f::before, .gs-face-b::before { content: ''; position: absolute; inset: 0; border: 2.8cqw solid #5A3FC2; border-radius: 11cqw; background: linear-gradient(#D3C7FC, #9C86EE); box-shadow: inset 0 1.2cqw 0 rgba(255, 255, 255, 0.7), inset 0 -1.5cqw 0 rgba(90, 60, 190, 0.3), 0 3cqw 4cqw rgba(60, 30, 130, 0.35); }
-.gs-face-b::before { border-color: #5A3FC2; background: var(--rc, #C9BBFA); }
+.gs-face-f::before, .gs-face-b::before { content: ''; position: absolute; inset: 0; border: 2.8cqw solid #7C62D8; border-radius: 11cqw; background: linear-gradient(#E4DCFE, #B8A6F4); box-shadow: inset 0 1.2cqw 0 rgba(255, 255, 255, 0.7), inset 0 -1.5cqw 0 rgba(90, 60, 190, 0.3), 0 3cqw 4cqw rgba(60, 30, 130, 0.35); }
+.gs-face-b::before { border-color: #7C62D8; background: var(--rc, #C9BBFA); }
 .gs-card-in { position: absolute; inset: 6.5cqw; display: grid; place-items: center; border-radius: 7cqw; background:
   radial-gradient(circle at 8% 7%, #B2A4F2 0 4.2%, transparent 4.8%), radial-gradient(circle at 13% 5%, #B2A4F2 0 2.6%, transparent 3.1%), radial-gradient(circle at 5% 12%, #B2A4F2 0 2.6%, transparent 3.1%),
   radial-gradient(circle at 92% 7%, #B2A4F2 0 4.2%, transparent 4.8%), radial-gradient(circle at 87% 5%, #B2A4F2 0 2.6%, transparent 3.1%), radial-gradient(circle at 95% 12%, #B2A4F2 0 2.6%, transparent 3.1%),
