@@ -1469,6 +1469,87 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'cong-chua-phep-thuat-9',
+  age: '9+',
+  name: { vi: 'Công Chúa Phép Thuật', en: 'Magic Princesses' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'cong-chua-nhat-quang',
+      name: { vi: 'Công Chúa Nhật Quang', en: 'Sunlight Princess' },
+      pictures: [
+        { slug: 'cong-chua-nhat-quang', name: { vi: 'Công Chúa Nhật Quang', en: 'Sunlight Princess' }, file: 'cong-chua-nhat-quang--cong-chua-nhat-quang' },
+      ],
+    },
+    {
+      slug: 'cong-chua-hoa-diem',
+      name: { vi: 'Công Chúa Hỏa Diễm', en: 'Flame Princess' },
+      pictures: [
+        { slug: 'cong-chua-hoa-diem', name: { vi: 'Công Chúa Hỏa Diễm', en: 'Flame Princess' }, file: 'cong-chua-hoa-diem--cong-chua-hoa-diem' },
+      ],
+    },
+    {
+      slug: 'cong-chua-nguyet-anh',
+      name: { vi: 'Công Chúa Nguyệt Ảnh', en: 'Moon Shadow Princess' },
+      pictures: [
+        { slug: 'cong-chua-nguyet-anh', name: { vi: 'Công Chúa Nguyệt Ảnh', en: 'Moon Shadow Princess' }, file: 'cong-chua-nguyet-anh--cong-chua-nguyet-anh' },
+      ],
+    },
+    {
+      slug: 'cong-chua-bang-tuyet',
+      name: { vi: 'Công Chúa Băng Tuyết', en: 'Snow Princess' },
+      pictures: [
+        { slug: 'cong-chua-bang-tuyet', name: { vi: 'Công Chúa Băng Tuyết', en: 'Snow Princess' }, file: 'cong-chua-bang-tuyet--cong-chua-bang-tuyet' },
+      ],
+    },
+  ],
+});
+
+ART_THEMES.push({
+  slug: 'kiem-khach-huyen-thoai-9',
+  age: '9+',
+  name: { vi: 'Kiếm Khách Huyền Thoại', en: 'Legendary Swordsmen' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'hoa-phong-kiem',
+      name: { vi: 'Hỏa Phong Kiếm', en: 'Fire Wind Sword' },
+      pictures: [
+        { slug: 'hoa-phong-kiem', name: { vi: 'Hỏa Phong Kiếm', en: 'Fire Wind Sword' }, file: 'hoa-phong-kiem--hoa-phong-kiem' },
+      ],
+    },
+    {
+      slug: 'loi-tram-kiem',
+      name: { vi: 'Lôi Trảm Kiếm', en: 'Thunder Slash Sword' },
+      pictures: [
+        { slug: 'loi-tram-kiem', name: { vi: 'Lôi Trảm Kiếm', en: 'Thunder Slash Sword' }, file: 'loi-tram-kiem--loi-tram-kiem' },
+      ],
+    },
+    {
+      slug: 'anh-vu-kiem',
+      name: { vi: 'Ảnh Vũ Kiếm', en: 'Shadow Dance Sword' },
+      pictures: [
+        { slug: 'anh-vu-kiem', name: { vi: 'Ảnh Vũ Kiếm', en: 'Shadow Dance Sword' }, file: 'anh-vu-kiem--anh-vu-kiem' },
+      ],
+    },
+    {
+      slug: 'sa-ung-kiem',
+      name: { vi: 'Sa Ưng Kiếm', en: 'Desert Eagle Sword' },
+      pictures: [
+        { slug: 'sa-ung-kiem', name: { vi: 'Sa Ưng Kiếm', en: 'Desert Eagle Sword' }, file: 'sa-ung-kiem--sa-ung-kiem' },
+      ],
+    },
+    {
+      slug: 'hai-nha-kiem',
+      name: { vi: 'Hải Nha Kiếm', en: 'Sea Fang Sword' },
+      pictures: [
+        { slug: 'hai-nha-kiem', name: { vi: 'Hải Nha Kiếm', en: 'Sea Fang Sword' }, file: 'hai-nha-kiem--hai-nha-kiem' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',
