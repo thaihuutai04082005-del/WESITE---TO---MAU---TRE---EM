@@ -52,21 +52,22 @@ export default function Together() {
   };
 
   return (
+    <div className="tg-meadow">
     <div className="page space-y-5">
-      {/* Đầu trang */}
-      <section className="flex items-center gap-3 sm:gap-5">
-        <div className="h-20 w-20 shrink-0 sm:h-24 sm:w-24">
-          <PaletteBadge />
-        </div>
-        <h1 className="min-w-0 flex-1 font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-5xl">{t('together.title')}</h1>
-        <div className="hidden h-32 w-48 shrink-0 sm:block">
-          <TogetherArt />
+      {/* Đầu trang: bảng gỗ treo dây */}
+      <section className="tg-head">
+        <div className="tg-sign">
+          <span className="tg-rope tg-rope-l" aria-hidden="true"><i /></span>
+          <span className="tg-rope tg-rope-r" aria-hidden="true"><i /></span>
+          <span className="tg-sign-badge" aria-hidden="true"><PaletteBadge /></span>
+          <h1 className="tg-sign-title" data-testid="together-title">{t('together.title')}</h1>
+          <span className="tg-sign-art" aria-hidden="true"><TogetherArt /></span>
         </div>
       </section>
 
       {/* 2 thẻ cùng một khung: đầu thẻ (biểu tượng + tên + nhãn) → hàng thao tác cao bằng nhau */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="flex flex-col gap-4 rounded-[28px] bg-gradient-to-br from-[#E6F3FF] to-[#F4FAFF] p-5 shadow-soft">
+        <section className="flex flex-col gap-4 tg-card bg-gradient-to-br from-[#E6F3FF] to-[#F4FAFF] p-5">
           <div className="flex flex-wrap items-center gap-3">
             <IconBubble name="plus" bg="#2B9BF4" />
             <h2 className="flex-1 whitespace-nowrap font-display text-xl font-extrabold sm:text-2xl">{t('together.create')}</h2>
@@ -81,7 +82,7 @@ export default function Together() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-4 rounded-[28px] bg-gradient-to-br from-[#F1EEFF] to-[#F9F8FF] p-5 shadow-soft">
+        <section className="flex flex-col gap-4 tg-card bg-gradient-to-br from-[#F1EEFF] to-[#F9F8FF] p-5">
           <div className="flex flex-wrap items-center gap-3">
             <IconBubble name="door" bg="#8B7CF6" />
             <h2 className="flex-1 whitespace-nowrap font-display text-xl font-extrabold sm:text-2xl">{t('together.join')}</h2>
@@ -97,12 +98,13 @@ export default function Together() {
       </div>
 
       {/* Lời nhắc an toàn */}
-      <p className="flex items-center gap-3 rounded-[24px] bg-[#EEF6FD] px-4 py-3 text-sm font-semibold text-[#3D5A73]">
+      <p className="tg-card tg-card-slim flex items-center gap-3 bg-[#EEF6FD] px-5 py-3 text-sm font-semibold text-[#3D5A73]">
         <Icon name="shield" size={28} className="shrink-0 text-[#4F7FD9]" />
         <span className="flex-1">{t('together.safety')}</span>
         <span className="text-xl" aria-hidden="true">⭐</span>
       </p>
       {picking && <PicturePicker onPick={create} onClose={() => setPicking(false)} />}
+    </div>
     </div>
   );
 }
