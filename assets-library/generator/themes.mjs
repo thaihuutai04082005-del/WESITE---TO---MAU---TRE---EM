@@ -1390,6 +1390,29 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'ngoi-nha-cua-be-3-5',
+  age: '3-5',
+  name: { vi: 'Ngôi Nhà Của Bé', en: "My Little Home" },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'ngoi-nha-nho',
+      name: { vi: 'Ngôi nhà nhỏ', en: 'Little House' },
+      pictures: [
+        { slug: 'ngoi-nha-nho', name: { vi: 'Ngôi nhà nhỏ', en: 'Little House' }, file: 'ngoi-nha-nho--ngoi-nha-nho' },
+      ],
+    },
+    {
+      slug: 'chiec-giuong',
+      name: { vi: 'Chiếc giường', en: 'Bed' },
+      pictures: [
+        { slug: 'chiec-giuong', name: { vi: 'Chiếc giường', en: 'Bed' }, file: 'chiec-giuong--chiec-giuong' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',
