@@ -204,6 +204,13 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   const pull = await api('POST', '/gacha/pull', { count: 2 }, a.token);
   assert.equal(pull.body.results.length, 2);
   assert.equal(pull.body.gachaPoints, 30, 'dư 30 điểm giữ lại');
+  // Lật đúng thẻ đã chọn trên sân khấu (không ngẫu nhiên); thẻ không có trong game thì từ chối.
+  const deck0 = await api('GET', '/gacha/catalog', null, a.token);
+  getDb().prepare('UPDATE users SET gacha_points = 130 WHERE id = ?').run(a.id);
+  const fixed = await api('POST', '/gacha/pull', { pictureIds: [deck0.body.cards[1].pictureId] }, a.token);
+  assert.equal(fixed.body.results[0].picture.id, deck0.body.cards[1].pictureId);
+  assert.equal((await api('POST', '/gacha/pull', { pictureIds: [999999] }, a.token)).body.error.code, 'invalid_card');
+  getDb().prepare('UPDATE users SET gacha_points = 30 WHERE id = ?').run(a.id);
   assert.equal((await api('POST', '/shop/khung-hoa/buy', null, a.token)).body.ruby, 30);
 
   // Màu họa tiết & bìa truyện: bán trong Shop, bìa chưa mua thì không gắn được vào truyện.
