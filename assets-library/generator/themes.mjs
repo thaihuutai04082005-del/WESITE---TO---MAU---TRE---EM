@@ -1585,6 +1585,20 @@ ART_THEMES.push({
         { slug: 'tien-ca-bang-nhi', name: { vi: 'Tiên Cá Băng Nhi', en: 'Ice Mermaid' }, file: 'tien-ca-bang-nhi--tien-ca-bang-nhi' },
       ],
     },
+    {
+      slug: 'tien-ca-hong',
+      name: { vi: 'Tiên Cá Hồng', en: 'Pink Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-hong', name: { vi: 'Tiên Cá Hồng', en: 'Pink Mermaid' }, file: 'tien-ca-hong--tien-ca-hong' },
+      ],
+    },
+    {
+      slug: 'tien-ca-am-cao',
+      name: { vi: 'Tiên Cá Âm Cao', en: 'High Note Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-am-cao', name: { vi: 'Tiên Cá Âm Cao', en: 'High Note Mermaid' }, file: 'tien-ca-am-cao--tien-ca-am-cao' },
+      ],
+    },
   ],
 });
 
