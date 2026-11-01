@@ -1260,26 +1260,14 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 /* ===== Shop: quầy hàng có mái hiên, 2 kệ × 4 ô (màn hình rộng) ===== */
 .sh-room { background: #FBEFE1; min-height: calc(100vh - 73px); }
 .sh-stage { position: relative; width: 100%; aspect-ratio: 1821 / 864; overflow: hidden; container-type: inline-size; background: #8FD3FF url(/shop/shop-bg.webp) center / 100% 100% no-repeat; }
-.sh-wood { position: absolute; z-index: 1; display: block; }
-.sh-post { z-index: 2; border-radius: 1.2cqw; background: linear-gradient(90deg, #E9A94F, #F7C877 50%, #DE9A40); box-shadow: inset 0 0 0 max(2px, 0.18cqw) #C98028, 0 0.4cqw 0.9cqw rgba(120, 60, 10, 0.25); }
-.sh-rail { z-index: 3; border-radius: 1cqw; background: linear-gradient(#F9D18A, #EDB05A 60%, #D99637); box-shadow: inset 0 0 0 max(2px, 0.16cqw) #C98028, 0 0.5cqw 0.8cqw rgba(120, 60, 10, 0.3); }
-.sh-wall { background: linear-gradient(#FFF7EF, #FDEBDD); }
-.sh-wall2 { background: linear-gradient(#F6CB8C, #EFB86B); box-shadow: inset 0 0.8cqw 1.2cqw rgba(160, 90, 20, 0.25); }
-.sh-awning { position: absolute; z-index: 6; left: 9.33%; top: 0; width: 81.27%; height: 21%; filter: drop-shadow(0 0.5cqw 0.6cqw rgba(120, 30, 40, 0.3)); }
-.sh-lamp-wrap { position: absolute; z-index: 5; }
-.sh-lamp { width: 100%; height: 100%; overflow: visible; }
-.sh-sign { position: absolute; z-index: 8; display: flex; align-items: center; justify-content: center; gap: 1.2cqw; border: max(3px, 0.3cqw) solid #E2434E; border-radius: 9999px; background: #FFF9F7; box-shadow: inset 0 0 0 max(3px, 0.3cqw) #FFE0DE, 0 0.6cqw 1.2cqw rgba(120, 30, 40, 0.28); }
-.sh-sign b { font-family: var(--font-display); font-weight: 900; font-size: 5.6cqw; line-height: 1; color: #9C1F32; }
+.sh-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.sh-sign { position: absolute; z-index: 8; display: flex; align-items: center; justify-content: center; gap: 1.3cqw; }
+.sh-sign b { font-family: var(--font-display); font-weight: 900; font-size: 5.8cqw; line-height: 1; color: #A1202F; text-shadow: 0 0.25cqw 0 #FFD3D6; }
 .sh-sign-star { width: 3.6cqw; flex: none; }
 .sh-bag { width: 4.3cqw; flex: none; }
-.sh-clip { position: absolute; top: -2.4cqw; width: 2.6cqw; height: 3.4cqw; border: max(2px, 0.2cqw) solid #B7303B; border-radius: 0.8cqw; background: #E2434E; }
-.sh-clip-l { left: 17%; }
-.sh-clip-r { right: 17%; }
 .sh-sub { position: absolute; z-index: 4; margin: 0; display: flex; align-items: center; justify-content: center; gap: 1.6cqw; text-align: center; font-weight: 800; font-size: max(13px, 1.38cqw); white-space: nowrap; color: #A3202F; }
 .sh-dash { display: inline-block; width: 2.4cqw; height: 1.7cqw; border-top: max(2px, 0.2cqw) solid #E2434E; border-bottom: max(2px, 0.2cqw) solid #E2434E; transform: skewX(-20deg); opacity: 0.85; }
 .sh-dash-r { transform: skewX(20deg); }
-.sh-deco { position: absolute; z-index: 2; pointer-events: none; filter: drop-shadow(0 0.4cqw 0.5cqw rgba(60, 40, 10, 0.25)); }
-.sh-deco > svg { width: 100%; height: 100%; }
 .sh-tabs { position: absolute; z-index: 4; display: flex; flex-direction: column; gap: 1cqw; padding: 1.3cqw; border: max(3px, 0.3cqw) solid #FFFFFF; border-radius: 2.6cqw; background: linear-gradient(#F77E8A, #E8525F); box-shadow: 0 0.6cqw 1.2cqw rgba(150, 30, 45, 0.35), inset 0 0 0 max(2px, 0.2cqw) #F2A0A8; }
 .sh-tab { flex: 1; display: flex; align-items: center; gap: 0.8cqw; padding: 0 1cqw; border: 0; border-radius: 2cqw; background: #FFF7F5; box-shadow: inset 0 -0.3cqw 0 #F0D2D2; cursor: pointer; font-family: var(--font-display); font-weight: 900; font-size: max(12px, 1.38cqw); white-space: nowrap; color: #3A1F26; text-align: left; }
 .sh-tab:hover { filter: brightness(1.03); }

@@ -11,7 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
-import { Awning, Lamp, Star, Bag, RubyGem, BrushCup, Palette, SHOP_W, SHOP_H } from '../../components/ShopScene';
+import { ShopArt, Bag, SignStar, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScene';
 
 function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
@@ -151,30 +151,13 @@ export default function Shop() {
           <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
           <span className="sr-only" data-testid="shop-ruby">{shop.ruby} Ruby</span>
 
-          {/* Khung quầy gỗ: hai cột, xà trên, hai kệ */}
-          <span className="sh-wood sh-wall" style={box([372, 296, 1188, 504])} />
-          <span className="sh-wood sh-wall2" style={box([372, 546, 1188, 254])} />
-          <span className="sh-wood sh-post" style={box([318, 150, 58, 690])} />
-          <span className="sh-wood sh-post" style={box([1556, 150, 58, 690])} />
-          <span className="sh-wood sh-rail" style={box([336, 270, 1260, 34])} />
-          <span className="sh-wood sh-rail" style={box([304, 532, 1308, 40])} />
-          <span className="sh-wood sh-rail" style={box([292, 796, 1330, 42])} />
-          <Awning />
-          <div className="sh-lamp-wrap" style={box([428, 150, 130, 110])}><Lamp /></div>
-          <div className="sh-lamp-wrap" style={box([1356, 150, 130, 110])}><Lamp /></div>
-
-          <div className="sh-sign" style={box([690, 56, 524, 124])}>
-            <span className="sh-clip sh-clip-l" /><span className="sh-clip sh-clip-r" />
-            <Star className="sh-sign-star" /> <Bag /> <b>{t('shop.title')}</b> <Star className="sh-sign-star" />
+          <ShopArt />
+          <div className="sh-sign" style={box([712, 54, 456, 130])}>
+            <SignStar /> <Bag /> <b>{t('shop.title')}</b> <SignStar />
           </div>
           <p className="sh-sub" style={box([600, 206, 720, 46])}>
             <span className="sh-dash sh-dash-l" aria-hidden="true" />{t('shop.hint')}<span className="sh-dash sh-dash-r" aria-hidden="true" />
           </p>
-
-          <div className="sh-deco" style={box([84, 168, 72, 72])}><Star /></div>
-          <div className="sh-deco" style={box([1668, 258, 72, 72])}><Star /></div>
-          <div className="sh-deco" style={box([116, 584, 168, 250])}><BrushCup /></div>
-          <div className="sh-deco" style={box([1566, 650, 228, 196])}><Palette /></div>
 
           <div className="sh-tabs" style={box([26, 272, 296, 262])} role="tablist">
             {tabs.map(([k, icon, label]) => (
