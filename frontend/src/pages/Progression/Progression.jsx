@@ -34,18 +34,6 @@ function TargetBadge() {
   );
 }
 
-/** Núi có lá cờ trên đỉnh cho ô Cấp độ. */
-function MountainFlag() {
-  return (
-    <svg viewBox="0 0 64 56" className="h-full w-full" aria-hidden="true">
-      <path d="M2 52 L24 14 L36 34 L44 22 L62 52 Z" fill="#3DBE62" stroke="#1B2A38" strokeWidth="2.2" strokeLinejoin="round" />
-      <path d="M24 14 L18 25 L24 22 L29 26 Z" fill="#FFFFFF" />
-      <path d="M24 14 V3" stroke="#1B2A38" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="M24 3 L36 6.5 L24 10 Z" fill="#FF9F43" stroke="#1B2A38" strokeWidth="1.8" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /** Tấm bảng kẹp giấy có dấu tích trong nhãn "Nhiệm vụ Cấp N". */
 function ClipboardBadge() {
   return (
@@ -86,7 +74,7 @@ export default function Progression() {
 
         <div className="mp-stats">
           <div className="mp-stat">
-            <span className="mp-stat-ic"><MountainFlag /></span>
+            <span className="mp-stat-ic mp-stat-ic-lv"><Icon name="mountain" size={34} strokeWidth={2.4} /></span>
             <div>
               <div className="mp-stat-l">{t('missions.cards.level')}</div>
               <div className="mp-stat-v">{p.level}/{p.maxLevel}</div>

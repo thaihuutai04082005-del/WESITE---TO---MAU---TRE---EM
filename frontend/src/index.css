@@ -1560,3 +1560,4 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .mp-mark { width: 48px; height: 48px; }
   .mp-row { padding: 10px 14px; gap: 10px; }
 }
+.mp-stat-ic-lv { border-radius: 16px; background: #E4F6E8; color: #2FA65A; }
