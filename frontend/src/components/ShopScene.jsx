@@ -146,8 +146,8 @@ function Sign() {
 function LeftPanel() {
   return (
     <g filter="url(#shf-soft)">
-      <rect x="26" y="340" width="296" height="300" rx="48" fill="url(#shg-panel)" stroke="#FFFFFF" strokeWidth="6" />
-      <rect x="38" y="352" width="272" height="276" rx="38" fill="none" stroke="#FFC2C8" strokeWidth="3" />
+      <rect x="8" y="340" width="262" height="300" rx="46" fill="url(#shg-panel)" stroke="#FFFFFF" strokeWidth="6" />
+      <rect x="20" y="352" width="238" height="276" rx="36" fill="none" stroke="#FFC2C8" strokeWidth="3" />
     </g>
   );
 }
@@ -205,6 +205,7 @@ export function ShopArt() {
   return (
     <svg viewBox={`0 0 ${SHOP_W} ${SHOP_H}`} className="sh-art" aria-hidden="true" preserveAspectRatio="none">
       <Defs />
+      <g transform="translate(-48 0)">
       {/* tường quầy */}
       <rect x="372" y="300" width="1188" height="660" fill="url(#shg-wall)" />
       <rect x="372" y="656" width="1188" height="304" fill="url(#shg-wood)" />
@@ -220,6 +221,7 @@ export function ShopArt() {
       <Corbel side="r" />
       <Awning />
       <Sign />
+      </g>
       <LeftPanel />
       <BrushCup />
       <Palette />

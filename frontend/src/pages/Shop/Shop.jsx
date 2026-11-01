@@ -35,7 +35,7 @@ function Preview({ item, scene = false }) {
 // Cảnh quầy hàng (khung 1821×864, nền trời là ảnh): 2 kệ × 4 ô, bảng chọn loại ở bên trái.
 const W = SHOP_W;
 const H = SHOP_H;
-const COLS = [368, 670, 972, 1274];
+const COLS = [320, 622, 924, 1226]; // đã dịch trái 48 theo quầy
 const SLOTS = [
   ...COLS.map((x) => [x, 360, 284, 262]),
   ...COLS.map((x) => [x, 700, 284, 250]),
@@ -147,17 +147,20 @@ export default function Shop() {
     ];
     return (
       <div className="sh-room">
+        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-1" draggable={false} />
+        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-2" draggable={false} />
+        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-3" draggable={false} />
         <div className="sh-stage" data-testid="shop-stall">
           <div className="sh-inner">
           <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
           <span className="sr-only" data-testid="shop-ruby">{shop.ruby} Ruby</span>
 
           <ShopArt />
-          <div className="sh-sign" style={box([738, 104, 456, 112])}>
+          <div className="sh-sign" style={box([690, 104, 456, 112])}>
             <Bag /> <b>{t('shop.title')}</b>
           </div>
 
-          <div className="sh-tabs" style={box([26, 340, 296, 300])} role="tablist">
+          <div className="sh-tabs" style={box([8, 340, 262, 300])} role="tablist">
             {tabs.map(([k, icon, label]) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} className={`sh-tab${tab === k ? ' sh-tab-on' : ''}`} onClick={() => { setTab(k); setPage(0); }} data-testid={`shop-tab-${k}`}>
                 <span className="sh-tab-icon" aria-hidden="true">{icon}</span>
@@ -180,11 +183,11 @@ export default function Shop() {
           ))}
           {pages > 1 && (
             <>
-              <button type="button" className="sh-arrow" style={box([770, 986, 48, 44])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="shop-prev">
+              <button type="button" className="sh-arrow" style={box([722, 986, 48, 44])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="shop-prev">
                 <Icon name="back" size={22} strokeWidth={3.4} />
               </button>
-              <span className="sh-page" style={box([826, 991, 84, 34])}>{cur + 1}/{pages}</span>
-              <button type="button" className="sh-arrow" style={box([906, 986, 48, 44])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="shop-next">
+              <span className="sh-page" style={box([778, 991, 84, 34])}>{cur + 1}/{pages}</span>
+              <button type="button" className="sh-arrow" style={box([858, 986, 48, 44])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="shop-next">
                 <Icon name="chevronRight" size={22} strokeWidth={3.4} />
               </button>
             </>
