@@ -1361,7 +1361,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .wr-top { padding-top: 22px; }
 
 /* ===== Lịch sử tô ===== */
-.hs-stage { position: relative; min-height: calc(100vh - 73px); overflow: hidden; background: #D9ECFB url(/history/bg.webp) center bottom / cover no-repeat; background-attachment: fixed; }
+.hs-stage { position: relative; min-height: calc(100vh - 73px); overflow: hidden; background: #D9ECFB url(/history/bg.webp) center bottom / cover no-repeat; }
 .hs-page { position: relative; z-index: 1; max-width: 1200px; padding-top: 16px; }
 .hs-head { display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; }
 .hs-title { display: flex; align-items: center; gap: 12px; margin: 0; font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(30px, 4vw, 46px); color: #1E3A5C; }
@@ -1394,7 +1394,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 @media (max-width: 639px) { .hs-title { font-size: 24px; gap: 8px; } .hs-title svg { width: 30px; height: 30px; } .hs-deco { width: 62%; } }
 
 /* ===== Bạn bè ===== */
-.fr-stage { position: relative; min-height: calc(100vh - 73px); overflow: hidden; background: #CFE8FB url(/friends/bg.webp) center bottom / cover no-repeat; background-attachment: fixed; }
+.fr-stage { position: relative; min-height: calc(100vh - 73px); overflow: hidden; background: #CFE8FB url(/friends/bg.webp) center bottom / cover no-repeat; }
 .fr-page { position: relative; z-index: 1; max-width: 1200px; padding-top: 22px; padding-bottom: 40px; }
 .fr-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; }
 .fr-titlebox { display: flex; align-items: center; gap: 18px; }
