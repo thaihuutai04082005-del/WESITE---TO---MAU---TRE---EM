@@ -1,5 +1,5 @@
 // Bảng màu (Mục 4.1): preset mở rộng, chọn màu tuỳ ý, màu vừa dùng, màu yêu thích.
-// Chế độ Tô theo mẫu: hiện thêm dãy màu đánh số của tranh.
+// Chế độ Tô theo mẫu: chỉ hiện đúng các màu (đánh số) mà tranh đó dùng — không có bảng màu đầy đủ.
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Icon from '../Icon';
@@ -72,18 +72,22 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
     persist(favKey, next);
   };
 
+  // Tô theo mẫu: chỉ các màu có trong tranh, theo số.
+  if (numbered) {
+    return (
+      <div data-testid="color-palette">
+        <div className="mb-1 text-sm font-bold text-muted">{t('coloring.numberedColors')}</div>
+        <div className="flex flex-wrap gap-2">
+          {numbered.map((p) => (
+            <Swatch key={p.number} color={p.color} number={p.number} active={activeNumber === p.number && color === p.color} onClick={() => { onChange(p.color); onNumber?.(p.number); }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-3" data-testid="color-palette">
-      {numbered && (
-        <div>
-          <div className="mb-1 text-sm font-bold text-muted">{t('coloring.numberedColors')}</div>
-          <div className="flex flex-wrap gap-2">
-            {numbered.map((p) => (
-              <Swatch key={p.number} color={p.color} number={p.number} active={activeNumber === p.number && color === p.color} onClick={() => { onChange(p.color); onNumber?.(p.number); }} />
-            ))}
-          </div>
-        </div>
-      )}
       <div className="flex items-center gap-2">
         <label className="relative flex h-11 cursor-pointer items-center gap-2 rounded-full border-2 border-line pl-1 pr-3 font-bold" title={t('coloring.customColor')}>
           <span className="h-9 w-9 rounded-full border border-line" style={{ background: color }} />
