@@ -174,9 +174,8 @@ export default function History() {
                     <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}
                   </span>
                 </div>
-                <div className="hs-name">{a.name[i18n.language]}</div>
-                <div className="hs-meta">
-                  <span className="hs-meta-text"><Icon name="palette" size={18} className="text-[#F29A2E]" /> {t(`history.mode.${a.mode}`)} · {formatDate(a.updatedAt, i18n.language)}</span>
+                <div className="hs-foot">
+                  <div className="hs-name">{a.name[i18n.language]}</div>
                   <span className="hs-more" aria-hidden="true">•••</span>
                 </div>
               </button>
