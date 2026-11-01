@@ -1,5 +1,5 @@
 // Khu vực tô màu dùng chung cho: tô cá nhân, Đấu trường, tô cùng nhau.
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Canvas from './Canvas/Canvas';
 import ToolBar, { SIZES, STICKER_SCALES } from './ToolBar/ToolBar';
@@ -8,6 +8,7 @@ import PictureView from './PictureView/PictureView';
 import Modal from './Modal/Modal';
 import SignaturePanel from './SignaturePanel';
 import { ensureSignatureFont, placeDefault } from '../lib/signature';
+import { isRegionDone } from '../lib/picture';
 
 export default function ColoringWorkspace({
   picture,
@@ -40,6 +41,8 @@ export default function ColoringWorkspace({
   const [confirmClear, setConfirmClear] = useState(false);
   const [showRef, setShowRef] = useState(false);
   const template = mode === 'template';
+  // Chế độ Theo mẫu: số màu đánh trên tranh mẫu; vùng bé tô đúng màu rồi thì số mờ đi.
+  const doneIds = useMemo(() => (template ? new Set((picture?.regions || []).filter((r) => isRegionDone(r, editor.data.fills)).map((r) => r.id)) : null), [template, picture, editor.data.fills]);
 
   // Mọi thao tác của bé đi qua đây: áp vào trạng thái + báo ra ngoài (tính lượt / đồng bộ / chống gian lận).
   const act = (action) => {
@@ -81,7 +84,7 @@ export default function ColoringWorkspace({
             stickerScale={STICKER_SCALES[stickerSizeIdx]}
             brushSkin={brushSkin}
             stickerType={stickerType}
-            showNumbers={template}
+            showNumbers={false}
             highlightNumber={template ? number : null}
             readOnly={readOnly}
             remoteCursors={remoteCursors}
@@ -94,7 +97,7 @@ export default function ColoringWorkspace({
           />
           {template && (
             <button type="button" onClick={() => setShowRef(true)} className="absolute right-2 top-2 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-pop lg:hidden" aria-label={t('coloring.reference')}>
-              <PictureView picture={picture} />
+              <PictureView picture={picture} numbers doneIds={doneIds} />
             </button>
           )}
         </div>
@@ -105,7 +108,9 @@ export default function ColoringWorkspace({
         {template && (
           <div className="card hidden p-3 lg:block">
             <div className="mb-2 font-bold">{t('coloring.reference')}</div>
-            <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} />
+            <button type="button" onClick={() => setShowRef(true)} className="block w-full cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
+              <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+            </button>
           </div>
         )}
         <div className="card p-3">
@@ -152,7 +157,7 @@ export default function ColoringWorkspace({
         </div>
       </Modal>
       <Modal open={showRef} onClose={() => setShowRef(false)}>
-        <PictureView picture={picture} className="rounded-2xl" />
+        <PictureView picture={picture} className="rounded-2xl" numbers doneIds={doneIds} />
       </Modal>
     </div>
   );

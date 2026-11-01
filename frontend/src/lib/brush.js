@@ -31,6 +31,13 @@ function rand(seed) {
 
 // ---------------- Họa tiết ----------------
 
+// Số ngẫu nhiên cố định theo từng điểm của nét (không phụ thuộc độ dài nét) → hạt không "chạy" khi bé còn đang quẹt.
+function pointRand(x, y, i) {
+  let h = (Math.round(x * 10) * 73856093) ^ (Math.round(y * 10) * 19349663) ^ (i * 83492791);
+  h = Math.abs(h) % 2147483646;
+  return rand(h + 1);
+}
+
 export const PATTERNS = [
   { id: 'rainbow', color: '#FFB454' },
   { id: 'dots', color: '#7FC8FF' },
@@ -144,28 +151,6 @@ function patternFor(ctx, id, s) {
   return ctx.createPattern(tile, 'repeat');
 }
 
-/** Vector pháp tuyến đơn vị tại mỗi điểm (để dời các sợi lông cọ ra hai bên nét). */
-function normals(pts) {
-  return pts.map((p, i) => {
-    const a = pts[Math.max(0, i - 2)];
-    const b = pts[Math.min(pts.length - 1, i + 2)];
-    const dx = b[0] - a[0];
-    const dy = b[1] - a[1];
-    const l = Math.hypot(dx, dy) || 1;
-    return [-dy / l, dx / l];
-  });
-}
-
-function sparkle(ctx, x, y, r) {
-  ctx.beginPath();
-  ctx.moveTo(x, y - r);
-  ctx.quadraticCurveTo(x, y, x + r, y);
-  ctx.quadraticCurveTo(x, y, x, y + r);
-  ctx.quadraticCurveTo(x, y, x - r, y);
-  ctx.quadraticCurveTo(x, y, x, y - r);
-  ctx.fill();
-}
-
 function lighten(hex, amt) {
   const [r, g, b] = hexToRgb(hex);
   const m = (v) => Math.round(v + (255 - v) * amt);
@@ -176,54 +161,39 @@ function lighten(hex, amt) {
 function paintBody(ctx, stroke, s, pts, width) {
   const color = stroke.color;
   const size = stroke.size;
-  const r = rand(pts.length * 7 + Math.round(pts[0][0] * 10) + Math.round(pts[0][1]));
   switch (stroke.kind) {
     case 'brush': {
-      // Cọ: nét mềm, nhiều sợi lông mảnh dọc theo nét.
+      // Cọ: nét bệt, đầy màu, mép hơi mềm (không có vân).
       ctx.strokeStyle = color;
-      ctx.globalAlpha = 0.9;
-      ctx.lineWidth = width * 0.94;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = width * 0.22;
+      ctx.lineWidth = width * 0.96;
       path(ctx, pts, s);
       ctx.stroke();
-      ctx.globalAlpha = 1;
-      const nm = normals(pts);
-      for (let k = -3; k <= 3; k++) {
-        const off = (k / 3) * size * 0.42;
-        const line = pts.map(([x, y], i) => [x + nm[i][0] * off, y + nm[i][1] * off]);
-        ctx.strokeStyle = k % 2 ? lighten(color, 0.28) : color;
-        ctx.globalAlpha = 0.5;
-        ctx.lineWidth = Math.max(1, width * 0.1);
-        path(ctx, line, s);
-        ctx.stroke();
-      }
       break;
     }
     case 'glitter': {
-      // Sáp hạt: nét đặc + hạt kim tuyến li ti rải trên nét.
+      // Sáp hạt: nét đặc + hạt li ti rải trên nét (hạt cố định theo từng điểm, không nhấp nháy).
       ctx.strokeStyle = color;
       ctx.lineWidth = width;
       path(ctx, pts, s);
       ctx.stroke();
-      const grain = ['#FFFFFF', lighten(color, 0.55), '#FFF3B0', lighten(color, 0.25)];
+      const grain = ['#FFFFFF', lighten(color, 0.55), lighten(color, 0.3)];
       let acc = 0;
       const gap = Math.max(1.2, size * 0.12);
       for (let i = 0; i < pts.length; i++) {
         if (i > 0) acc += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
         if (i > 0 && acc < gap) continue;
         acc = 0;
-        for (let g = 0; g < 4; g++) {
-          const ang = r() * Math.PI * 2;
-          const rad = Math.sqrt(r()) * (size / 2);
-          ctx.fillStyle = grain[Math.floor(r() * grain.length)];
-          ctx.globalAlpha = 0.65 + r() * 0.35;
-          const x = (pts[i][0] + Math.cos(ang) * rad) * s;
-          const y = (pts[i][1] + Math.sin(ang) * rad) * s;
-          if (r() < 0.16) sparkle(ctx, x, y, (1.1 + r() * 1.6) * s);
-          else {
-            ctx.beginPath();
-            ctx.arc(x, y, (0.5 + r() * 0.8) * s, 0, Math.PI * 2);
-            ctx.fill();
-          }
+        const g = pointRand(pts[i][0], pts[i][1], i);
+        for (let k = 0; k < 4; k++) {
+          const ang = g() * Math.PI * 2;
+          const rad = Math.sqrt(g()) * (size / 2);
+          ctx.fillStyle = grain[Math.floor(g() * grain.length)];
+          ctx.globalAlpha = 0.7 + g() * 0.3;
+          ctx.beginPath();
+          ctx.arc((pts[i][0] + Math.cos(ang) * rad) * s, (pts[i][1] + Math.sin(ang) * rad) * s, (0.35 + g() * 0.55) * s, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
       break;
@@ -245,11 +215,12 @@ function paintBody(ctx, stroke, s, pts, width) {
       if (stroke.kind === 'crayon') {
         ctx.fillStyle = 'rgba(255,255,255,0.22)';
         for (let i = 0; i < pts.length; i += 2) {
-          if (r() < 0.55) continue;
-          const ang = r() * Math.PI * 2;
-          const rad = Math.sqrt(r()) * (size / 2);
+          const g = pointRand(pts[i][0], pts[i][1], i);
+          if (g() < 0.55) continue;
+          const ang = g() * Math.PI * 2;
+          const rad = Math.sqrt(g()) * (size / 2);
           ctx.beginPath();
-          ctx.arc((pts[i][0] + Math.cos(ang) * rad) * s, (pts[i][1] + Math.sin(ang) * rad) * s, (0.3 + r() * 0.5) * s, 0, Math.PI * 2);
+          ctx.arc((pts[i][0] + Math.cos(ang) * rad) * s, (pts[i][1] + Math.sin(ang) * rad) * s, (0.3 + g() * 0.5) * s, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -257,15 +228,60 @@ function paintBody(ctx, stroke, s, pts, width) {
   }
 }
 
-/** `region`: Path2D của vùng khóa (toạ độ tranh) — nét chỉ hiện trong vùng này. */
+let tmpCanvas = null;
+function tmpFor(w, h) {
+  tmpCanvas ||= document.createElement('canvas');
+  if (tmpCanvas.width !== w || tmpCanvas.height !== h) {
+    tmpCanvas.width = w;
+    tmpCanvas.height = h;
+  }
+  return tmpCanvas;
+}
+
+/**
+ * `region`: { path, above } của vùng khóa (toạ độ tranh) — nét chỉ hiện trong vùng này và không đè lên các vùng nằm trên nó.
+ * Vùng có vùng khác đè lên thì nét được vẽ ra lớp tạm, trừ các vùng đó đi rồi mới ghép vào.
+ */
 export function drawStroke(ctx, stroke, s, region = null) {
   const pts = stroke.points;
   if (!pts?.length) return;
+  if (!region?.above?.length) return drawStrokeRaw(ctx, stroke, s, region?.path || null);
+  const W = ctx.canvas.width;
+  const H = ctx.canvas.height;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [x, y] of pts) {
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x);
+    y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+  }
+  const pad = (stroke.size + 6) * s;
+  const bx = Math.max(0, Math.floor(x0 * s - pad));
+  const by = Math.max(0, Math.floor(y0 * s - pad));
+  const bw = Math.min(W, Math.ceil(x1 * s + pad)) - bx;
+  const bh = Math.min(H, Math.ceil(y1 * s + pad)) - by;
+  if (bw <= 0 || bh <= 0) return;
+  const eraser = stroke.tool === 'eraser';
+  const tc = tmpFor(W, H);
+  const t = tc.getContext('2d');
+  t.clearRect(bx, by, bw, bh);
+  drawStrokeRaw(t, eraser ? { tool: 'brush', color: '#000000', size: stroke.size, points: pts } : stroke, s, region.path);
+  t.save();
+  t.setTransform(s, 0, 0, s, 0, 0);
+  t.globalCompositeOperation = 'destination-out';
+  for (const p of region.above) t.fill(p);
+  t.restore();
+  ctx.save();
+  if (eraser) ctx.globalCompositeOperation = 'destination-out';
+  ctx.drawImage(tc, bx, by, bw, bh, bx, by, bw, bh);
+  ctx.restore();
+}
+
+function drawStrokeRaw(ctx, stroke, s, regionPath = null) {
+  const pts = stroke.points;
   const width = stroke.size * s;
   ctx.save();
-  if (region) {
+  if (regionPath) {
     ctx.setTransform(s, 0, 0, s, 0, 0);
-    ctx.clip(region);
+    ctx.clip(regionPath);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
   ctx.lineCap = 'round';
