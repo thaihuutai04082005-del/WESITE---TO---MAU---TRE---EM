@@ -63,7 +63,7 @@ export default function StorybookView() {
         <Icon name="back" size={20} strokeWidth={3} /> {t('storybook.title')}
       </Link>
       <FlipbookViewer title={book.title} author={user.nickname} pages={book.pages} coverStyle={book.coverStyle} />
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="sbv-actions">
         {!book.completed && (
           <button type="button" className="btn-coral" onClick={complete} disabled={book.pages.length < 2} data-testid="storybook-complete">
             <Icon name="check" /> {t('storybook.complete')}
@@ -82,9 +82,9 @@ export default function StorybookView() {
           <Icon name="trash" />
         </button>
       </div>
-      {book.pages.length < 2 && !book.completed && <p className="text-center text-sm text-muted">{t('storybook.needTwo')}</p>}
+      {book.pages.length < 2 && !book.completed && <p className="sbv-note">{t('storybook.needTwo')}</p>}
       {book.shareToken && (
-        <p className="break-all text-center text-sm text-muted">
+        <p className="sbv-note max-w-full truncate">
           {t('storybook.shareLink')}: {`${window.location.origin}/shared/${book.shareToken}`}
         </p>
       )}
