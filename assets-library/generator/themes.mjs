@@ -1602,6 +1602,50 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'hiep-si-the-bai-9',
+  age: '9+',
+  name: { vi: 'Hiệp Sĩ Thẻ Bài', en: 'Card Knights' },
+  animation: 'bounce',
+  objects: [
+    {
+      slug: 'hiep-si-xung-mach',
+      name: { vi: 'Hiệp Sĩ Xung Mạch', en: 'Pulse Knight' },
+      pictures: [
+        { slug: 'hiep-si-xung-mach', name: { vi: 'Hiệp Sĩ Xung Mạch', en: 'Pulse Knight' }, file: 'hiep-si-xung-mach--hiep-si-xung-mach' },
+      ],
+    },
+    {
+      slug: 'hiep-si-toc-anh',
+      name: { vi: 'Hiệp Sĩ Tốc Ảnh', en: 'Shadow Speed Knight' },
+      pictures: [
+        { slug: 'hiep-si-toc-anh', name: { vi: 'Hiệp Sĩ Tốc Ảnh', en: 'Shadow Speed Knight' }, file: 'hiep-si-toc-anh--hiep-si-toc-anh' },
+      ],
+    },
+    {
+      slug: 'hiep-si-quang-thuan',
+      name: { vi: 'Hiệp Sĩ Quang Thuẫn', en: 'Light Shield Knight' },
+      pictures: [
+        { slug: 'hiep-si-quang-thuan', name: { vi: 'Hiệp Sĩ Quang Thuẫn', en: 'Light Shield Knight' }, file: 'hiep-si-quang-thuan--hiep-si-quang-thuan' },
+      ],
+    },
+    {
+      slug: 'hiep-si-khong-duc',
+      name: { vi: 'Hiệp Sĩ Không Dực', en: 'Sky Wing Knight' },
+      pictures: [
+        { slug: 'hiep-si-khong-duc', name: { vi: 'Hiệp Sĩ Không Dực', en: 'Sky Wing Knight' }, file: 'hiep-si-khong-duc--hiep-si-khong-duc' },
+      ],
+    },
+    {
+      slug: 'hiep-si-tu-cuc',
+      name: { vi: 'Hiệp Sĩ Từ Cực', en: 'Magnet Knight' },
+      pictures: [
+        { slug: 'hiep-si-tu-cuc', name: { vi: 'Hiệp Sĩ Từ Cực', en: 'Magnet Knight' }, file: 'hiep-si-tu-cuc--hiep-si-tu-cuc' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',
