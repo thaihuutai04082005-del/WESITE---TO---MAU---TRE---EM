@@ -750,6 +750,9 @@
   },
   "friends": {
     "title": "Bạn bè",
+    "subtitle": "Kết nối với bạn bè, cùng tô màu và chia sẻ bộ sưu tập nhé!",
+    "newFriend": "Kết bạn mới",
+    "codePlaceholder": "Nhập mã kết bạn...",
     "myCode": "Mã kết bạn của bé",
     "codeHint": "Chỉ gửi mã này cho người bé quen biết.",
     "addByCode": "Nhập mã của bạn",

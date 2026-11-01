@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon';
 import { CardTile } from '../Gacha/Gacha';
 import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
+import { FriendCardsArt, TradeCardsArt } from '../../components/FriendsArt';
 
 function TradeModal({ friend, onClose, onDone, usedToday, limit }) {
   const { t, i18n } = useTranslation();
@@ -128,33 +129,51 @@ export default function Friends() {
   const isIncoming = (x) => x.to.id === myId;
 
   return (
-    <div className="page space-y-6">
-      <h1 className="page-title">{t('friends.title')}</h1>
-
-      <div className="card grid gap-4 p-5 md:grid-cols-2">
-        <div>
-          <div className="label">{t('friends.myCode')}</div>
-          <div className="flex items-center gap-2">
-            <span className="rounded-2xl bg-primary-light px-4 py-2 font-mono text-3xl font-extrabold tracking-widest text-primary-dark" data-testid="my-friend-code">{me.myCode}</span>
-            <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => navigator.clipboard?.writeText(me.myCode).then(() => toast(t('common.copied'), 'success'))} aria-label={t('common.copy')}>
-              <Icon name="copy" />
-            </button>
+    <div className="fr-stage">
+    <div className="page fr-page space-y-6">
+      <header className="fr-head">
+        <div className="fr-titlebox">
+          <Icon name="users" size={62} strokeWidth={2.4} className="fr-title-ico" />
+          <span className="fr-divider" aria-hidden="true" />
+          <div>
+            <h1 className="fr-title">{t('friends.title')}</h1>
+            <p className="fr-sub">{t('friends.subtitle')}</p>
           </div>
-          <p className="mt-2 text-sm text-muted">{t('friends.codeHint')}</p>
         </div>
-        <form onSubmit={addFriend}>
-          <label className="label" htmlFor="fcode">{t('friends.addByCode')}</label>
-          <div className="flex gap-2">
-            <input id="fcode" className="input font-mono uppercase" value={code} onChange={(e) => setCode(e.target.value)} maxLength={12} required data-testid="friend-code-input" />
-            <button type="submit" className="btn-primary" data-testid="friend-add">{t('friends.add')}</button>
+        <img src="/friends/deco.webp" alt="" className="fr-deco" draggable={false} />
+      </header>
+
+      <section className="fr-card fr-card-first">
+        <div className="fr-tab fr-tab-blue"><Icon name="user" size={26} /> {t('friends.newFriend')}</div>
+        <div className="fr-add">
+          <div>
+            <div className="fr-label">{t('friends.myCode')}</div>
+            <div className="flex items-center gap-3">
+              <span className="fr-code" data-testid="my-friend-code">{me.myCode}</span>
+              <button type="button" className="fr-copy" onClick={() => navigator.clipboard?.writeText(me.myCode).then(() => toast(t('common.copied'), 'success'))} aria-label={t('common.copy')}>
+                <Icon name="copy" size={24} />
+              </button>
+            </div>
+            <p className="fr-hint">{t('friends.codeHint')}</p>
           </div>
-        </form>
-      </div>
+          <span className="fr-vsep" aria-hidden="true" />
+          <form onSubmit={addFriend}>
+            <label className="fr-label" htmlFor="fcode">{t('friends.addByCode')}</label>
+            <div className="flex flex-wrap gap-3">
+              <div className="fr-input-wrap">
+                <Icon name="users" size={26} className="fr-input-ico" />
+                <input id="fcode" className="fr-input" value={code} onChange={(e) => setCode(e.target.value)} maxLength={12} required placeholder={t('friends.codePlaceholder')} data-testid="friend-code-input" />
+              </div>
+              <button type="submit" className="fr-add-btn" data-testid="friend-add"><Icon name="user" size={26} /> {t('friends.add')}</button>
+            </div>
+          </form>
+        </div>
+      </section>
 
       {data.incoming.length > 0 && (
-        <section>
-          <h2 className="mb-2 font-display text-2xl font-bold">{t('friends.incoming')}</h2>
-          <div className="space-y-2">
+        <section className="fr-card">
+          <div className="fr-tab fr-tab-green"><Icon name="bell" size={26} /> {t('friends.incoming')}</div>
+          <div className="space-y-2 pt-2">
             {data.incoming.map((f) => (
               <div key={f.friendshipId} className="card flex items-center gap-3 p-3">
                 <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} size={48} />
@@ -171,12 +190,14 @@ export default function Friends() {
         </section>
       )}
 
-      <section>
-        <h2 className="mb-2 font-display text-2xl font-bold">{t('friends.list')} ({data.friends.length})</h2>
-        {data.friends.length === 0 && <div className="card p-6 text-center text-muted">{t('friends.empty')}</div>}
-        <div className="grid gap-2 sm:grid-cols-2">
+      <section className="fr-card">
+        <div className="fr-tab fr-tab-yellow"><Icon name="users" size={26} /> {t('friends.list')} ({data.friends.length})</div>
+        {data.friends.length === 0 && (
+          <div className="fr-empty"><FriendCardsArt /><p>{t('friends.empty')}</p></div>
+        )}
+        <div className="grid gap-3 pt-2 sm:grid-cols-2">
           {data.friends.map((f) => (
-            <div key={f.friendshipId} className="card flex items-center gap-3 p-3">
+            <div key={f.friendshipId} className="fr-friend">
               <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} size={52} />
               <div className="min-w-0 flex-1">
                 <div className="truncate font-bold">{f.user.nickname}</div>
@@ -196,10 +217,10 @@ export default function Friends() {
         {data.outgoing.length > 0 && <p className="mt-2 text-sm text-muted">{t('friends.outgoing', { n: data.outgoing.length })}</p>}
       </section>
 
-      <section>
-        <h2 className="mb-2 font-display text-2xl font-bold">{t('trade.title')}</h2>
-        {trades && <p className="mb-2 text-sm text-muted">{t('trade.limit', { used: trades.usedToday, limit: trades.dailyLimit })}</p>}
-        {pending.length === 0 && <div className="card p-4 text-center text-muted">{t('trade.nonePending')}</div>}
+      <section className="fr-card">
+        <div className="fr-tab fr-tab-purple"><Icon name="gift" size={26} /> {t('trade.title')}</div>
+        {trades && <p className="fr-limit">{t('trade.limit', { used: trades.usedToday, limit: trades.dailyLimit })}</p>}
+        {pending.length === 0 && <div className="fr-empty"><TradeCardsArt /><p>{t('trade.nonePending')}</p></div>}
         <div className="space-y-2">
           {pending.map((x) => {
             const incoming = isIncoming(x);
@@ -272,6 +293,7 @@ export default function Friends() {
           </div>
         )}
       </Modal>
+    </div>
     </div>
   );
 }

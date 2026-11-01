@@ -750,6 +750,9 @@
   },
   "friends": {
     "title": "Friends",
+    "subtitle": "Connect with friends, color together and share your collection!",
+    "newFriend": "Add a friend",
+    "codePlaceholder": "Enter friend code...",
     "myCode": "Your friend code",
     "codeHint": "Only share this code with people you know.",
     "addByCode": "Enter a friend's code",
