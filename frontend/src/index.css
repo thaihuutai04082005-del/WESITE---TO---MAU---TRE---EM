@@ -1196,10 +1196,8 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .gs-pill-btn:disabled { opacity: 0.6; cursor: default; }
 
 @media (min-width: 900px) {
-  .gs-root { position: relative; overflow: hidden; height: calc(100vh - 73px); background: #5B93DE; }
-  .gs-root::before { content: ''; position: absolute; inset: -30px; background: url(/gacha/stage.webp) center / cover no-repeat; filter: blur(18px); }
-  .gs-stage { z-index: 1; }
-  .gs-stage { width: min(100%, calc((100vh - 73px) * 1672 / 860)); margin: 0 auto; display: block; aspect-ratio: 1672 / 860; padding: 0; overflow: hidden; background: url(/gacha/stage.webp) top center / 100% auto no-repeat; }
+  .gs-root { overflow: hidden; height: min(calc(100vh - 73px), calc(100vw * 860 / 1672)); background: url(/gacha/stage.webp) center top / 100% 100% no-repeat; }
+  .gs-stage { width: min(100%, calc((100vh - 73px) * 1672 / 860)); margin: 0 auto; display: block; aspect-ratio: 1672 / 860; padding: 0; overflow: hidden; background: none; }
   .gs-back { position: absolute; left: 1.8%; top: 2.3%; width: 12.7%; height: 8.7%; min-height: 0; padding: 0; justify-content: center; border-width: max(2px, 0.18cqw); font-size: max(14px, 1.65cqw); gap: 0.5cqw; }
   .gs-rope { display: block; height: 8.2%; }
   .gs-rope-l { left: 34.8%; margin-left: -0.25cqw; }
