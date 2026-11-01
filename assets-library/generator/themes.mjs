@@ -1504,6 +1504,13 @@ ART_THEMES.push({
         { slug: 'cong-chua-bang-tuyet', name: { vi: 'Công Chúa Băng Tuyết', en: 'Snow Princess' }, file: 'cong-chua-bang-tuyet--cong-chua-bang-tuyet' },
       ],
     },
+    {
+      slug: 'cong-chua-hoa-linh',
+      name: { vi: 'Công Chúa Hoa Linh', en: 'Flower Spirit Princess' },
+      pictures: [
+        { slug: 'cong-chua-hoa-linh', name: { vi: 'Công Chúa Hoa Linh', en: 'Flower Spirit Princess' }, file: 'cong-chua-hoa-linh--cong-chua-hoa-linh' },
+      ],
+    },
   ],
 });
 
