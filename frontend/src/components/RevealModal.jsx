@@ -8,7 +8,7 @@ import Canvas from './Canvas/Canvas';
 import Icon from './Icon';
 import { downloadDataUrl, printDataUrl, renderArtwork, safeFileName } from '../lib/exportImage';
 import { flyToCollection } from '../lib/flyToCollection';
-import { transitionBus } from '../lib/transitionBus';
+import { armScreenEnter } from '../lib/transitionBus';
 import { warmTheme } from '../lib/prefetch';
 import { api } from '../services/api';
 import { useUi } from '../store/ui';
@@ -60,7 +60,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
       await flight;
       await Promise.race([warm, new Promise((r) => setTimeout(r, 900))]);
       // Trang chủ đề hiện lên bằng hiệu ứng đơn giản (không lớp phủ, không cúp) — Layout bật khi đổi trang.
-      transitionBus.screenEnter = true;
+      armScreenEnter();
       navigate(to);
     }
   };
