@@ -264,7 +264,7 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   assert.equal(t3.status, 201);
 });
 
-test('Flipbook: chỉ nhận tranh Sáng tạo đã xong, xuất PDF, chia sẻ', async () => {
+test('Flipbook: nhận mọi tranh đã hoàn thành của bé (tô mẫu, sáng tạo), xuất PDF, chia sẻ', async () => {
   const { token } = await register('bena06');
   getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) SELECT id, 'year', ?, ? FROM users WHERE username = 'bena06'").run(new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   const ids = [];
@@ -275,7 +275,11 @@ test('Flipbook: chỉ nhận tranh Sáng tạo đã xong, xuất PDF, chia sẻ'
   }
   const tpl = await api('POST', '/artworks', { pictureId: 3, mode: 'template' }, token);
   const bad = await api('POST', '/storybooks', { title: 'Truyện', pages: [{ artworkId: tpl.body.artwork.id }] }, token);
-  assert.equal(bad.body.error.code, 'invalid_page_artwork');
+  assert.equal(bad.body.error.code, 'invalid_page_artwork', 'tranh chưa hoàn thành thì không đóng được');
+  // Tranh tô mẫu đã hoàn thành cũng đóng được.
+  await api('PUT', `/artworks/${tpl.body.artwork.id}`, { data: { fills: { 'nen-troi': '#FFC94D' } }, thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', completed: true }, token);
+  const withTpl = await api('POST', '/storybooks', { title: 'Truyện mẫu', pages: [{ artworkId: tpl.body.artwork.id }] }, token);
+  assert.equal(withTpl.status, 201);
   const book = await api('POST', '/storybooks', { title: 'Mèo Ú đi chơi', pages: ids.map((artworkId, i) => ({ artworkId, caption: `Trang ${i + 1}` })) }, token);
   assert.equal(book.body.storybook.pages.length, 2);
   const done = await api('POST', `/storybooks/${book.body.storybook.id}/complete`, null, token);
