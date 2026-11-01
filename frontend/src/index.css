@@ -1429,3 +1429,25 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .fr-art { width: 150px; height: auto; }
 .fr-limit { margin: 0 0 4px; color: #2B5E9A; font-weight: 600; }
 .fr-friend { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 22px; background: #fff; box-shadow: 0 4px 10px rgba(60, 110, 160, 0.12), inset 0 0 0 2px #EEF4FA; }
+
+/* ===== Bộ công cụ tô tay ===== */
+.tb-key { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; color: #fff; box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45), inset 0 -4px 0 rgba(0, 0, 0, 0.18), 0 4px 8px rgba(40, 70, 120, 0.25); transition: transform 0.12s, filter 0.12s; }
+.tb-key:hover:not(:disabled) { transform: translateY(-2px); }
+.tb-key:disabled { opacity: 0.4; }
+.tb-key-blue { background: linear-gradient(#52B6FF, #2284EE); }
+.tb-key-orange { background: linear-gradient(#FFA24D, #F2701B); }
+.tb-key-gray { background: linear-gradient(#9AA7B8, #6F7E92); }
+.tb-key-on { outline: 4px solid #FFD54F; outline-offset: 1px; }
+.tb-board { display: flex; align-items: stretch; gap: 10px; padding: 10px; border-radius: 22px; background: #1D2733; }
+.tb-sizes { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 6px; padding: 4px; }
+.tb-sizes-row { flex-direction: row; justify-content: flex-start; align-self: flex-start; border-radius: 16px; background: #1D2733; padding: 6px 10px; gap: 10px; }
+.tb-dotbtn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; transition: transform 0.12s; }
+.tb-dotbtn-on { box-shadow: 0 0 0 3px #2AA3FF; background: rgba(255, 255, 255, 0.12); }
+.tb-dot { display: block; border-radius: 999px; background: #fff; }
+.tb-round { display: flex; flex: 1; flex-wrap: wrap; align-content: center; justify-content: center; gap: 10px; padding: 8px; border-radius: 16px; background: linear-gradient(#EEF2F7, #D9E0E9); }
+.tb-bubble { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 999px; background: radial-gradient(circle at 35% 28%, #7AD3F5, #2AA4DA 70%); box-shadow: inset 0 0 0 3px #1B8CC6, 0 4px 8px rgba(30, 80, 130, 0.3); transition: transform 0.12s; }
+.tb-bubble:hover { transform: scale(1.06); }
+.tb-bubble-on { box-shadow: inset 0 0 0 3px #1B8CC6, 0 0 0 5px #fff, 0 0 0 8px #FFB300, 0 6px 12px rgba(30, 80, 130, 0.35); transform: scale(1.08); }
+.tb-ico { width: 40px; height: 40px; }
+.tb-chip { width: 48px; height: 48px; padding: 4px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 2px #E3EAF3; }
+.tb-chip-on { box-shadow: inset 0 0 0 3px #2AA3FF, 0 0 0 2px #fff; }

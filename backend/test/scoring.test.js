@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  scoreEntry, scoreRoom, spillRatio, coverageScore, harmonyScore, diversityScore, sanitizeArtworkData, regionAt,
+  scoreEntry, scoreRoom, coverageScore, harmonyScore, diversityScore, sanitizeArtworkData, regionAt,
 } from '../src/services/scoringEngine.js';
 
 // Tranh giả lập: nền 100×100, một hình vuông 40×40 ở giữa (vẽ sau → nằm trên).
@@ -19,26 +19,29 @@ test('regionAt chọn vùng trên cùng', () => {
   assert.equal(regionAt(manifest.regions, 150, 150), -1);
 });
 
-test('Bucket fill không bao giờ bị tính lem — kể cả tô kín vùng nền', () => {
-  const data = { fills: { nen: '#00FF00', hop: '#FF0000' }, strokes: [] };
-  assert.equal(spillRatio(manifest, data.strokes), 0);
-  assert.equal(scoreEntry(manifest, data).scores.accuracy, 1);
+test('Không còn tiêu chí lem: tô tay khóa vùng, bảng điểm chỉ có 5 tiêu chí và tổng trọng số = 1', async () => {
+  const { RUBRIC } = await import('../src/config/constants.js');
+  assert.deepEqual(Object.keys(RUBRIC).sort(), ['coverage', 'creativity', 'diversity', 'harmony', 'time']);
+  assert.ok(Math.abs(Object.values(RUBRIC).reduce((a, b) => a + b, 0) - 1) < 1e-9);
+  const r = scoreEntry(manifest, { fills: { nen: '#00FF00', hop: '#FF0000' }, strokes: [] });
+  assert.equal(r.scores.accuracy, undefined);
 });
 
-test('Nét Brush gọn trong vùng không lem; tràn ra ngoài thì lem', () => {
-  const inside = [{ tool: 'brush', color: '#000000', size: 4, points: [[40, 50], [60, 50]] }];
-  assert.equal(spillRatio(manifest, inside), 0);
-  const outside = [{ tool: 'brush', color: '#000000', size: 4, points: [[50, 50], [95, 50]] }];
-  const lem = spillRatio(manifest, outside);
-  assert.ok(lem > 0.4 && lem < 0.7, `lem=${lem}`);
-});
-
-test('Nét lem đã bị Tẩy xoá thì không tính', () => {
-  const strokes = [
-    { tool: 'brush', color: '#000000', size: 4, points: [[50, 50], [95, 50]] },
-    { tool: 'eraser', size: 20, points: [[72, 50], [98, 50]] },
-  ];
-  assert.ok(spillRatio(manifest, strokes) < 0.05);
+test('sanitizeArtworkData giữ kiểu nét, họa tiết và vùng khóa hợp lệ; bỏ vùng lạ', () => {
+  const clean = sanitizeArtworkData(manifest, {
+    strokes: [
+      { tool: 'brush', kind: 'pattern', pattern: 'hearts', region: 'hop', color: '#FF8FB3', size: 10, points: [[40, 50], [60, 50]] },
+      { tool: 'brush', kind: 'glitter', region: 'khong-co', color: '#FFD700', size: 10, points: [[40, 50]] },
+      { tool: 'brush', kind: 'laghe', pattern: 'x', color: '#000000', size: 10, points: [[1, 1]] },
+    ],
+  }).strokes;
+  assert.equal(clean[0].kind, 'pattern');
+  assert.equal(clean[0].pattern, 'hearts');
+  assert.equal(clean[0].region, 'hop');
+  assert.equal(clean[1].kind, 'glitter');
+  assert.equal(clean[1].region, undefined);
+  assert.equal(clean[2].kind, undefined);
+  assert.equal(clean[2].pattern, undefined);
 });
 
 test('Độ phủ theo diện tích', () => {

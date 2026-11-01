@@ -248,7 +248,7 @@
     "reported": "Cảm ơn bé! Gấu sẽ xem lại bức tranh này.",
     "rules": {
       "title": "Nội quy",
-      "intro": "Gấu Bông nhắc nhỏ: tranh đi triển lãm cần đủ 8 điều này nha!",
+      "intro": "Gấu Bông nhắc nhỏ: tranh đi triển lãm cần đủ 7 điều này nha!",
       "when": "Gửi tranh vào thứ 7 và chủ nhật — tranh được trưng cả tuần sau.",
       "r1": {
         "title": "Có chữ ký của bé",
@@ -400,12 +400,15 @@
     "clearConfirm": "Xoá hết"
   },
   "tools": {
-    "fill": "Đổ màu",
-    "brush": "Cọ vẽ",
+    "crayon": "Bút sáp",
+    "brush": "Cọ",
+    "glitter": "Sáp hạt lấp lánh",
+    "pattern": "Bút họa tiết",
+    "pickPattern": "Chọn họa tiết rồi tô vào vùng",
+    "stickerSize": "Cỡ sticker",
     "eraser": "Tẩy",
     "sticker": "Sticker",
     "pan": "Di chuyển",
-    "glitter": "Lấp lánh",
     "undo": "Hoàn tác",
     "redo": "Làm lại",
     "zoomIn": "Phóng to",
@@ -693,8 +696,6 @@
   "rubric": {
     "coverage": "Độ phủ màu",
     "coverageHint": "Tô đầy đủ, không bỏ trống mảng lớn.",
-    "accuracy": "Độ gọn nét",
-    "accuracyHint": "Nét cọ không lem ra ngoài vùng.",
     "harmony": "Phối màu hài hoà",
     "harmonyHint": "Các màu hợp nhau và có điểm nhấn.",
     "creativity": "Sáng tạo & khác biệt",
@@ -986,9 +987,9 @@
         "Bấm \"Tìm trận\" để ghép với các bạn cùng trình độ, hoặc \"Tạo phòng\" rồi gửi mã cho bạn bè.",
         "Khi trận bắt đầu, cả phòng cùng tô một bức tranh ở chế độ Sáng tạo trước khi hết giờ.",
         "Tô xong thì bấm \"Nộp bài\" và chờ các bạn khác.",
-        "Xem điểm theo 6 tiêu chí. Bạn đứng Top 3 được cộng Điểm Rank và Điểm Gacha."
+        "Xem điểm theo 5 tiêu chí. Bạn đứng Top 3 được cộng Điểm Rank và Điểm Gacha."
       ],
-      "tip": "Tô gọn trong nét, phối màu hài hoà và thật khác biệt để được điểm cao!"
+      "tip": "Tô kín vùng, phối màu hài hoà và thật khác biệt để được điểm cao!"
     },
     "together": {
       "intro": "2–4 bạn cùng tô chung một bức tranh và thấy màu của nhau ngay lập tức.",

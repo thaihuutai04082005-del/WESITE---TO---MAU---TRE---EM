@@ -18,7 +18,7 @@ function opToAction(op, data) {
     case 'glitter':
       return { type: 'fill', regionId: op.regionId, color: data.fills[op.regionId] || null, glitter: op.on };
     case 'stroke':
-      return { type: 'stroke', stroke: op.stroke };
+      return { type: 'stroke', stroke: op.stroke, ...(op.fill ? { fill: op.fill } : {}) };
     case 'sticker':
       return { type: 'sticker-add', sticker: op.sticker };
     case 'sticker-update':
@@ -102,7 +102,7 @@ export default function TogetherRoom() {
       if (a.type === 'fill') {
         socket.emit('collab:op', { type: 'fill', regionId: a.regionId, color: a.color });
         if (a.glitter) socket.emit('collab:op', { type: 'glitter', regionId: a.regionId, on: true });
-      } else if (a.type === 'stroke') socket.emit('collab:op', { type: 'stroke', stroke: a.stroke });
+      } else if (a.type === 'stroke') socket.emit('collab:op', { type: 'stroke', stroke: a.stroke, ...(a.fill ? { fill: a.fill } : {}) });
       else if (a.type === 'sticker-add') socket.emit('collab:op', { type: 'sticker', sticker: a.sticker });
       else if (a.type === 'sticker-update') socket.emit('collab:op', { type: 'sticker-update', index: a.index, sticker: a.sticker });
       else if (a.type === 'sticker-remove') socket.emit('collab:op', { type: 'sticker-remove', index: a.index });

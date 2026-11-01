@@ -1,9 +1,24 @@
-// Thanh công cụ (Mục 4.2–4.5): đổ màu, cọ vẽ, tẩy, sticker, chữ ký, lấp lánh, di chuyển, độ dày nét, undo/redo, zoom, xoá hết.
+// Bộ công cụ tô tay (Mục 4.2–4.5): 5 kiểu tô (bút sáp, cọ, sáp hạt, họa tiết, sticker) + 5 cỡ nét, tẩy, hoàn tác/làm lại,
+// di chuyển, chữ ký, phóng to/thu nhỏ, xoá hết. Không còn xô đổ màu: bé quẹt tô trong vùng, nét bị khóa trong vùng chạm đầu tiên.
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Icon from '../Icon';
 import { STICKERS } from '../../lib/stickers';
+import { PATTERNS, patternSwatchUrl } from '../../lib/brush';
+import { BrushIcon, CrayonIcon, GlitterIcon, PatternIcon, StickerIcon } from './ToolIcons';
 
-function ToolBtn({ icon, label, active, onClick, disabled, testId }) {
+export const SIZES = [34, 24, 16, 10, 6]; // 5 cỡ nét, từ to đến nhỏ (đơn vị tranh)
+export const STICKER_SCALES = [1.4, 1, 0.65];
+
+const ROUND = [
+  ['crayon', CrayonIcon],
+  ['brush', BrushIcon],
+  ['glitter', GlitterIcon],
+  ['pattern', PatternIcon],
+  ['sticker', StickerIcon],
+];
+
+function KeyBtn({ icon, label, onClick, active, disabled, tone = 'blue', testId }) {
   return (
     <button
       type="button"
@@ -13,63 +28,99 @@ function ToolBtn({ icon, label, active, onClick, disabled, testId }) {
       aria-label={label}
       aria-pressed={active}
       data-testid={testId}
-      className={`flex min-h-12 min-w-12 flex-col items-center justify-center gap-0.5 rounded-2xl px-2 text-xs font-bold transition disabled:opacity-40 ${active ? 'bg-primary text-white shadow-soft' : 'bg-primary-light text-primary-dark hover:bg-primary/20'}`}
+      className={`tb-key tb-key-${tone} ${active ? 'tb-key-on' : ''}`}
     >
-      <Icon name={icon} size={22} />
-      <span className="hidden leading-none sm:block">{label}</span>
+      <Icon name={icon} size={24} />
     </button>
   );
 }
 
 export default function ToolBar({
-  tool, setTool, size, setSize, glitter, setGlitter, stickerType, setStickerType,
-  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowGlitter = true, allowSignature = false,
+  tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, stickerType, setStickerType, stickerSizeIdx, setStickerSizeIdx,
+  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowSignature = false,
 }) {
   const { t } = useTranslation();
+  const swatches = useMemo(() => Object.fromEntries(PATTERNS.map((p) => [p.id, patternSwatchUrl(p.id, 56)])), []);
+  const painting = ['crayon', 'brush', 'glitter', 'pattern', 'eraser'].includes(tool);
   return (
     <div className="space-y-3" data-testid="toolbar">
-      <div className="flex flex-wrap gap-2">
-        <ToolBtn icon="bucket" label={t('tools.fill')} active={tool === 'fill'} onClick={() => setTool('fill')} testId="tool-fill" />
-        <ToolBtn icon="brush" label={t('tools.brush')} active={tool === 'brush'} onClick={() => setTool('brush')} testId="tool-brush" />
-        <ToolBtn icon="eraser" label={t('tools.eraser')} active={tool === 'eraser'} onClick={() => setTool('eraser')} testId="tool-eraser" />
-        {allowStickers && <ToolBtn icon="sticker" label={t('tools.sticker')} active={tool === 'sticker'} onClick={() => setTool('sticker')} testId="tool-sticker" />}
-        {allowSignature && <ToolBtn icon="signature" label={t('tools.signature')} active={tool === 'signature'} onClick={() => setTool('signature')} testId="tool-signature" />}
-        <ToolBtn icon="hand" label={t('tools.pan')} active={tool === 'pan'} onClick={() => setTool('pan')} testId="tool-pan" />
-        {allowGlitter && <ToolBtn icon="sparkle" label={t('tools.glitter')} active={glitter} onClick={() => setGlitter(!glitter)} testId="tool-glitter" />}
+      <div className="flex items-center gap-2">
+        <KeyBtn icon="eraser" label={t('tools.eraser')} active={tool === 'eraser'} onClick={() => setTool('eraser')} testId="tool-eraser" />
+        <KeyBtn icon="undo" label={t('tools.undo')} onClick={onUndo} disabled={!canUndo} tone="orange" testId="tool-undo" />
+        <KeyBtn icon="redo" label={t('tools.redo')} onClick={onRedo} disabled={!canRedo} tone="orange" testId="tool-redo" />
+        <span className="flex-1" />
+        {onClear && <KeyBtn icon="trash" label={t('tools.clear')} onClick={onClear} tone="gray" testId="tool-clear" />}
       </div>
-      <div className="flex flex-wrap gap-2">
-        <ToolBtn icon="undo" label={t('tools.undo')} onClick={onUndo} disabled={!canUndo} testId="tool-undo" />
-        <ToolBtn icon="redo" label={t('tools.redo')} onClick={onRedo} disabled={!canRedo} testId="tool-redo" />
-        <ToolBtn icon="zoomIn" label={t('tools.zoomIn')} onClick={onZoomIn} />
-        <ToolBtn icon="zoomOut" label={t('tools.zoomOut')} onClick={onZoomOut} />
-        <ToolBtn icon="expand" label={t('tools.zoomReset')} onClick={onZoomReset} />
-        {onClear && <ToolBtn icon="trash" label={t('tools.clear')} onClick={onClear} testId="tool-clear" />}
+
+      <div className="tb-board">
+        <div className="tb-sizes" role="radiogroup" aria-label={t('tools.size')}>
+          {SIZES.map((sz, i) => (
+            <button key={sz} type="button" role="radio" aria-checked={sizeIdx === i} aria-label={`${t('tools.size')} ${i + 1}`} onClick={() => setSizeIdx(i)} className={`tb-dotbtn ${sizeIdx === i ? 'tb-dotbtn-on' : ''} ${painting ? '' : 'opacity-60'}`} data-testid={`size-${i}`}>
+              <span className="tb-dot" style={{ width: 10 + (SIZES.length - 1 - i) * 4.5, height: 10 + (SIZES.length - 1 - i) * 4.5 }} />
+            </button>
+          ))}
+        </div>
+        <div className="tb-round">
+          {ROUND.filter(([id]) => allowStickers || id !== 'sticker').map(([id, Ico]) => (
+            <button key={id} type="button" onClick={() => setTool(id)} title={t(`tools.${id}`)} aria-label={t(`tools.${id}`)} aria-pressed={tool === id} data-testid={`tool-${id}`} className={`tb-bubble ${tool === id ? 'tb-bubble-on' : ''}`}>
+              <Ico />
+            </button>
+          ))}
+        </div>
       </div>
-      {(tool === 'brush' || tool === 'eraser') && (
-        <label className="flex items-center gap-3 font-bold">
-          <span className="whitespace-nowrap text-sm">{t('tools.size')}</span>
-          <input type="range" min="2" max="60" value={size} onChange={(e) => setSize(Number(e.target.value))} className="h-11 w-full accent-primary" aria-label={t('tools.size')} />
-          <span className="inline-block shrink-0 rounded-full bg-ink" style={{ width: Math.max(4, size / 1.5), height: Math.max(4, size / 1.5) }} />
-        </label>
-      )}
-      {tool === 'sticker' && (
+
+      {tool === 'pattern' && (
         <div>
-          <div className="mb-1 text-sm font-bold text-muted">{t('tools.pickSticker')}</div>
+          <div className="mb-1 text-sm font-bold text-muted">{t('tools.pickPattern')}</div>
           <div className="flex flex-wrap gap-2">
-            {STICKERS.map((s) => (
-              <button
-                key={s.type}
-                type="button"
-                onClick={() => setStickerType(s.type)}
-                className={`h-12 w-12 rounded-2xl border-2 p-1 ${stickerType === s.type ? 'border-primary bg-primary-light' : 'border-line bg-white'}`}
-                aria-label={s.type}
-              >
-                <svg viewBox="0 0 100 100" dangerouslySetInnerHTML={{ __html: s.svg }} />
+            {PATTERNS.map((p) => (
+              <button key={p.id} type="button" onClick={() => setPattern(p.id)} aria-label={p.id} aria-pressed={pattern === p.id} className={`tb-chip ${pattern === p.id ? 'tb-chip-on' : ''}`} data-testid={`pattern-${p.id}`}>
+                <img src={swatches[p.id]} alt="" className="h-full w-full rounded-lg" draggable={false} />
               </button>
             ))}
           </div>
         </div>
       )}
+      {tool === 'sticker' && (
+        <div className="space-y-2">
+          <div>
+            <div className="mb-1 text-sm font-bold text-muted">{t('tools.pickSticker')}</div>
+            <div className="flex flex-wrap gap-2">
+              {STICKERS.map((s) => (
+                <button key={s.type} type="button" onClick={() => setStickerType(s.type)} aria-label={s.type} aria-pressed={stickerType === s.type} className={`tb-chip ${stickerType === s.type ? 'tb-chip-on' : ''}`} data-testid={`sticker-${s.type}`}>
+                  <svg viewBox="0 0 100 100" className="h-full w-full" dangerouslySetInnerHTML={{ __html: s.svg }} />
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="mb-1 text-sm font-bold text-muted">{t('tools.stickerSize')}</div>
+            <div className="tb-sizes tb-sizes-row">
+              {STICKER_SCALES.map((sc, i) => (
+                <button key={sc} type="button" onClick={() => setStickerSizeIdx(i)} aria-label={`${t('tools.stickerSize')} ${i + 1}`} aria-pressed={stickerSizeIdx === i} className={`tb-dotbtn ${stickerSizeIdx === i ? 'tb-dotbtn-on' : ''}`}>
+                  <svg viewBox="0 0 100 100" style={{ width: 18 + sc * 14, height: 18 + sc * 14 }} dangerouslySetInnerHTML={{ __html: STICKERS.find((x) => x.type === stickerType)?.svg || '' }} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        <SmallBtn icon="hand" label={t('tools.pan')} active={tool === 'pan'} onClick={() => setTool('pan')} testId="tool-pan" />
+        {allowSignature && <SmallBtn icon="signature" label={t('tools.signature')} active={tool === 'signature'} onClick={() => setTool('signature')} testId="tool-signature" />}
+        <SmallBtn icon="zoomIn" label={t('tools.zoomIn')} onClick={onZoomIn} />
+        <SmallBtn icon="zoomOut" label={t('tools.zoomOut')} onClick={onZoomOut} />
+        <SmallBtn icon="expand" label={t('tools.zoomReset')} onClick={onZoomReset} />
+      </div>
     </div>
+  );
+}
+
+function SmallBtn({ icon, label, active, onClick, testId }) {
+  return (
+    <button type="button" onClick={onClick} title={label} aria-label={label} aria-pressed={active} data-testid={testId} className={`flex min-h-11 min-w-11 items-center justify-center rounded-2xl px-2 transition ${active ? 'bg-primary text-white shadow-soft' : 'bg-primary-light text-primary-dark hover:bg-primary/20'}`}>
+      <Icon name={icon} size={22} />
+    </button>
   );
 }

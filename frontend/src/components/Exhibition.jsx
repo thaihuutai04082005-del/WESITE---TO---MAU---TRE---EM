@@ -57,12 +57,12 @@ export function FramedArtwork({ entry, picture, onClick, size = 360 }) {
   );
 }
 
+// Điều 5 (tô gọn, không lem) đã bỏ vì tô tay có khóa vùng — giữ nguyên mã điều 6–8 để không lệch dữ liệu cũ.
 const RULES = [
   ['✍️', 1],
   ['✅', 2],
   ['🃏', 3],
   ['🔁', 4],
-  ['🎨', 5],
   ['😊', 6],
   ['🔤', 7],
   ['🖍️', 8],
@@ -75,12 +75,12 @@ export function ExhibitRules({ highlight = [] }) {
     <div className="space-y-3" data-testid="exhibit-rules">
       <p className="rounded-2xl bg-primary-light p-3 font-bold text-primary-dark">🐻 {t('exhibition.rules.intro')}</p>
       <ol className="space-y-2">
-        {RULES.map(([icon, n]) => (
+        {RULES.map(([icon, n], i) => (
           <li key={n} className={`flex gap-3 rounded-2xl border-2 p-2.5 ${highlight.includes(n) ? 'border-coral bg-coral/10' : 'border-line'}`}>
             <span className="text-2xl leading-none">{icon}</span>
             <span>
               <b>
-                {n}. {t(`exhibition.rules.r${n}.title`)}
+                {i + 1}. {t(`exhibition.rules.r${n}.title`)}
               </b>{' '}
               <span className="text-muted">{t(`exhibition.rules.r${n}.text`)}</span>
             </span>

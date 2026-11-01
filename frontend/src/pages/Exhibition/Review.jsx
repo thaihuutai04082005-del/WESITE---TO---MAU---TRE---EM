@@ -10,7 +10,7 @@ import { errorText } from '../../lib/format';
 import { ArtworkImage } from '../../components/Exhibition';
 import Icon from '../../components/Icon';
 
-const RULES = [5, 6, 7, 8];
+const RULES = [6, 7, 8]; // điều 5 (lem) đã bỏ
 
 export default function Review() {
   const { t, i18n } = useTranslation();

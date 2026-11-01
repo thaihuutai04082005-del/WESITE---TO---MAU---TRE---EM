@@ -17,7 +17,14 @@ function stateOf(room) {
   const data = { fills: {}, strokes: [], stickers: [], glitter: [] };
   for (const op of room.ops) {
     if (op.type === 'fill') data.fills[op.regionId] = op.color;
-    else if (op.type === 'stroke') data.strokes.push(op.stroke);
+    else if (op.type === 'stroke') {
+      data.strokes.push(op.stroke);
+      // Nét tô tay có thể kèm "vùng vừa đủ độ phủ" (ghi màu vùng) hoặc "gỡ màu vùng" khi tẩy bớt.
+      if (op.fill) {
+        if (op.fill.color) data.fills[op.fill.regionId] = op.fill.color;
+        else delete data.fills[op.fill.regionId];
+      }
+    }
     else if (op.type === 'sticker') data.stickers.push(op.sticker);
     else if (op.type === 'sticker-update') {
       if (data.stickers[op.index]) data.stickers[op.index] = op.sticker;
@@ -126,6 +133,10 @@ export function registerCollab(io, socket) {
       const s = sanitizeArtworkData(room.manifest, { strokes: [op.stroke] }).strokes[0];
       if (!s?.points.length) return;
       clean.stroke = s;
+      const f = op.fill;
+      if (f && ids.some((r) => r.id === f.regionId) && (f.color === null || /^#[0-9a-fA-F]{6}$/.test(f.color || ''))) {
+        clean.fill = { regionId: f.regionId, color: f.color ? f.color.toUpperCase() : null };
+      }
     } else if (op.type === 'sticker') {
       const s = sanitizeArtworkData(room.manifest, { stickers: [op.sticker] }).stickers[0];
       if (!s) return;

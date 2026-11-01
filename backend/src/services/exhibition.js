@@ -9,7 +9,7 @@
 import { getDb, parseJson, tx } from '../config/db.js';
 import { EXHIBITION } from '../config/constants.js';
 import * as Picture from '../models/picture.js';
-import { coverageScore, spillRatio } from './scoringEngine.js';
+import { coverageScore } from './scoringEngine.js';
 import { activeSubscription } from './quota.js';
 import { notify } from './notifications.js';
 import { VN_OFFSET_MS } from '../utils/time.js';
@@ -95,7 +95,7 @@ function startedAt(artwork) {
 }
 
 /**
- * Kiểm tra nội quy phần máy tự làm (điều 1, 2, 3, 4, 5, 8).
+ * Kiểm tra nội quy phần máy tự làm (điều 1, 2, 3, 4, 8). Điều 5 (lem) đã bỏ vì tô tay có khóa vùng.
  * @returns {{ board: string|null, failures: number[] }}
  */
 export function checkArtwork(artwork) {
@@ -109,7 +109,6 @@ export function checkArtwork(artwork) {
   if (artwork.status !== 'completed' || coverage < EXHIBITION.minCoverage) failures.push(2);
   if (!board) failures.push(3);
   if (activeEntryFor(artwork.id)) failures.push(4);
-  if (spillRatio(manifest, data.strokes || []) > EXHIBITION.maxSpill) failures.push(5);
   const filled = Object.keys(data.fills || {}).length;
   const elapsed = Date.parse(artwork.completed_at || artwork.updated_at) - startedAt(artwork);
   if (elapsed < Math.max(EXHIBITION.minMs, filled * EXHIBITION.msPerRegion)) failures.push(8);
@@ -122,7 +121,8 @@ const usedInRound = (userId, key) =>
 
 /** Tự duyệt: tranh gần như không có nét cọ tự do, hoặc bé "ngoan" (3 tranh liên tiếp được duyệt, chưa vi phạm điều 6–7). */
 function autoApprove(userId, data) {
-  const brush = (data.strokes || []).filter((s) => s.tool === 'brush');
+  // Nét tô tay đã khóa vùng (có `region`) không thể vẽ hình tự do nên không tính vào "nét cọ tự do".
+  const brush = (data.strokes || []).filter((s) => s.tool === 'brush' && !s.region);
   const points = brush.reduce((n, s) => n + (s.points?.length || 0), 0);
   if (brush.length <= EXHIBITION.autoBrushStrokes && points <= EXHIBITION.autoBrushPoints) return true;
   const db = getDb();

@@ -49,7 +49,7 @@
 2. ✅ **Tô gần xong hết tranh** (ít nhất 8/10 phần).
 3. 🃏 **Đúng loại tranh**: tranh thẻ hiếm S, A, B hoặc tranh Sáng tạo.
 4. 🔁 **Mỗi tranh chỉ đi triển lãm 1 lần.**
-5. 🎨 **Tô gọn gàng**, không lem quá nhiều ra ngoài nét.
+5. ~~🎨 Tô gọn gàng, không lem~~ — **đã bỏ** (tô tay khóa vùng nên không thể lem).
 6. 😊 **Tranh vui vẻ, thân thiện**: không hình bậy, đáng sợ hay đánh nhau.
 7. 🔤 **Không viết chữ xấu**, không ghi số điện thoại hay địa chỉ nhà.
 8. 🖍️ **Tô bằng cả tấm lòng**, không tô vội cho xong.
@@ -62,7 +62,7 @@ Hiển thị: nút "📜 Nội quy" ở sảnh hội trường + trong bảng x�
 
 - Giờ: theo giờ Việt Nam (GMT+7) của máy chủ. **Đóng cổng gửi tranh lúc CN 20:00** (cùng lúc khóa cảm xúc); admin duyệt tới 23:59; tranh chưa duyệt kịp tự chuyển sang vòng sau, giữ lượt.
 - Điều 2 (tô xong): ≥ 80% số vùng đã tô.
-- Điều 5 (lem): loại nếu > 40% số nét cọ lem ra ngoài vùng (Xô màu không bao giờ tính lem; có dung sai mép nét như máy chấm Đấu trường).
+- Điều 5 (lem): **đã bỏ** — nét tô tay bị khóa trong vùng nên không còn lem.
 - Điều 8 (tô vội): loại nếu thời gian tô < 20 giây hoặc < 0,7 giây mỗi vùng đã tô (dùng lại luật chống gian lận có sẵn).
 - Điều 1–5, 8: máy tự kiểm. Điều 6–7: admin xem.
 - Tự duyệt: tranh không/ít nét cọ tự do, hoặc tác giả đã có 3 tranh liên tiếp được duyệt và chưa từng vi phạm điều 6–7. Còn lại vào hàng chờ; trang duyệt dạng lưới có nút "Duyệt tất cả"; loại tranh phải chọn số điều vi phạm.

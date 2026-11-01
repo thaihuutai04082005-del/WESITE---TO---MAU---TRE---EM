@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Canvas from './Canvas/Canvas';
-import ToolBar from './ToolBar/ToolBar';
+import ToolBar, { SIZES, STICKER_SCALES } from './ToolBar/ToolBar';
 import ColorPalette from './ColorPalette/ColorPalette';
 import PictureView from './PictureView/PictureView';
 import Modal from './Modal/Modal';
@@ -30,12 +30,13 @@ export default function ColoringWorkspace({
 }) {
   const { t, i18n } = useTranslation();
   const canvasRef = useRef(null);
-  const [tool, setTool] = useState('fill');
-  const [color, setColor] = useState(picture?.palette?.[0]?.color || '#FF5F7E');
-  const [size, setSize] = useState(12);
-  const [glitter, setGlitter] = useState(false);
+  const [tool, setTool] = useState('crayon');
+  const [color, setColor] = useState(() => picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.color || '#FF5F7E'); // màu đầu tiên không phải màu trắng
+  const [sizeIdx, setSizeIdx] = useState(2);
+  const [pattern, setPattern] = useState('rainbow');
   const [stickerType, setStickerType] = useState('star');
-  const [number, setNumber] = useState(mode === 'template' ? picture?.palette?.[0]?.number ?? null : null);
+  const [stickerSizeIdx, setStickerSizeIdx] = useState(1);
+  const [number, setNumber] = useState(mode === 'template' ? picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.number ?? picture?.palette?.[0]?.number ?? null : null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [showRef, setShowRef] = useState(false);
   const template = mode === 'template';
@@ -59,7 +60,8 @@ export default function ColoringWorkspace({
 
   const pickColor = (c) => {
     setColor(c);
-    if (tool !== 'brush' && tool !== 'fill') setTool('fill');
+    // Chọn màu thì quay về bút sáp (trừ khi đang dùng cọ / sáp hạt — hai kiểu này cũng dùng màu đã chọn).
+    if (!['crayon', 'brush', 'glitter'].includes(tool)) setTool('crayon');
     if (template) setNumber(picture.palette.find((p) => p.color.toUpperCase() === c.toUpperCase())?.number ?? null);
   };
 
@@ -74,7 +76,9 @@ export default function ColoringWorkspace({
             data={editor.data}
             tool={tool}
             color={color}
-            size={size}
+            size={SIZES[sizeIdx]}
+            pattern={pattern}
+            stickerScale={STICKER_SCALES[stickerSizeIdx]}
             brushSkin={brushSkin}
             stickerType={stickerType}
             showNumbers={template}
@@ -82,8 +86,7 @@ export default function ColoringWorkspace({
             readOnly={readOnly}
             remoteCursors={remoteCursors}
             onCursor={onCursor}
-            onFill={(regionId) => act({ type: 'fill', regionId, color, glitter })}
-            onStroke={(stroke) => act({ type: 'stroke', stroke })}
+            onStroke={(stroke, fill) => act({ type: 'stroke', stroke, ...(fill ? { fill } : {}) })}
             onStickerAdd={(sticker) => act({ type: 'sticker-add', sticker })}
             onStickerChange={(index, sticker) => act({ type: 'sticker-update', index, sticker })}
             onStickerRemove={(index) => act({ type: 'sticker-remove', index })}
@@ -110,12 +113,14 @@ export default function ColoringWorkspace({
             tool={tool}
             setTool={chooseTool}
             allowSignature={signatureOn}
-            size={size}
-            setSize={setSize}
-            glitter={glitter}
-            setGlitter={setGlitter}
+            sizeIdx={sizeIdx}
+            setSizeIdx={setSizeIdx}
+            pattern={pattern}
+            setPattern={setPattern}
             stickerType={stickerType}
             setStickerType={setStickerType}
+            stickerSizeIdx={stickerSizeIdx}
+            setStickerSizeIdx={setStickerSizeIdx}
             canUndo={editor.canUndo}
             canRedo={editor.canRedo}
             onUndo={() => (onUndo ? onUndo() : editor.undo())}

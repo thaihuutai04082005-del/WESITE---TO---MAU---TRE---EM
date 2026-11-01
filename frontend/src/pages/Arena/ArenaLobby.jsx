@@ -15,7 +15,6 @@ import { BearCloudArt, CrownCloudArt } from '../../components/Illustrations';
 // Mỗi tiêu chí chấm điểm một biểu tượng + màu riêng.
 const RUBRIC_ICON = {
   coverage: ['palette', '#2B9BF4', '#EAF6FF'],
-  accuracy: ['star', '#E6A817', '#FFF6D8'],
   harmony: ['sun', '#F59E0B', '#FFF1DC'],
   creativity: ['heart', '#FF5F7E', '#FFE9EE'],
   diversity: ['sparkle', '#7D5FFF', '#F0EBFF'],

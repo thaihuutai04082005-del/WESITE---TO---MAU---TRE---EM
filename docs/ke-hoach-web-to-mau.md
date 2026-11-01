@@ -80,7 +80,7 @@ Mọi tranh trong hệ thống — dù ở chế độ nào — đều được 
 - Vẫn dùng chung cấu trúc vùng như mục 3.1 (kể cả vùng nền), nhưng **không gán màu bắt buộc cho vùng nào** — bé thích tô vùng nào màu gì cũng được, kể cả vùng nền, không có tranh mẫu đi kèm.
 - Đây là chế độ **duy nhất được tính điểm** trong Đấu trường sáng tạo hàng tuần và dùng để đóng thành cuốn truyện tranh Flipbook.
 
-### 3.4. Định nghĩa "tô lem" (áp dụng cho rubric chấm điểm ở Mục 9.2)
+### 3.4. Định nghĩa "tô lem" (**đã thay thế**: bộ công cụ tô tay mới khóa nét trong vùng nên không còn tiêu chí lem — xem `docs/quyet-dinh-trien-khai.md`)
 
 - **Bucket fill** (đổ màu trọn 1 vùng theo path có sẵn) **không bao giờ được tính là lem**, vì bản chất là tô trọn vẹn theo đường viền đã định sẵn của vùng đó — kể cả khi bé tô kín toàn bộ vùng nền.
 - **"Lem" chỉ áp dụng cho nét vẽ bằng Brush tự do** (xem Mục 4.2): là phần trăm nét Brush nằm tràn ra ngoài phạm vi vùng liên quan một cách không đều, vượt quá một ngưỡng cho phép, trông cẩu thả/dơ. Brush vẽ thêm chi tiết gọn gàng trong hoặc sát vùng liên quan (ví dụ vẽ vân lông mèo) không bị tính là lem.
