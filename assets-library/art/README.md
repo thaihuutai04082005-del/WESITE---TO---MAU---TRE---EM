@@ -237,5 +237,7 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Tiên Cá Châu Anh, Tiên Cá Băng Nhi (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối nét hở) | – | `src/tien-ca-bang-nhi--tien-ca-bang-nhi.png` | 209 |
 | Tiên Cá Hồng (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu) | – | `src/tien-ca-hong--tien-ca-hong.png` | 157 |
 | Tiên Cá Âm Cao (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu) | – | `src/tien-ca-am-cao--tien-ca-am-cao.png` | 170 |
+| Hiệp Sĩ Xung Mạch (Hiệp Sĩ Thẻ Bài 9+, mới; màu theo ảnh mẫu) | – | `src/hiep-si-xung-mach--hiep-si-xung-mach.png` | 200 |
+| Hiệp Sĩ Tốc Ảnh (Hiệp Sĩ Thẻ Bài 9+, mới; màu theo ảnh mẫu) | – | `src/hiep-si-toc-anh--hiep-si-toc-anh.png` | 199 |
 
 **Gộp màu giống nhau khi dựng thư viện:** `build.mjs` (`snapSimilarColors`, ngưỡng `SNAP_DELTA_E = 6`) gộp các màu chênh nhau mắt thường không thấy được trong cùng một tranh về một mã (ưu tiên mã dùng nhiều vùng nhất), nên các vùng cùng màu dùng chung một số ở chế độ Tô theo mẫu. File `art/*.json` giữ nguyên màu gốc; chỉ `catalog.json` (bảng màu + màu vùng) thay đổi.
