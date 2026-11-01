@@ -1121,7 +1121,7 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 
 /* ===== Bộ sưu tập: phòng triển lãm hiện đại (màn hình rộng) ===== */
 .room { background: #E9CBA2; }
-.room-stage { position: relative; width: 100%; aspect-ratio: 1832 / 859; overflow: hidden; container-type: inline-size; background: url(/collection/room.webp) center / 100% 100% no-repeat; }
+.room-stage { position: relative; width: 100%; aspect-ratio: 1832 / 859; overflow: hidden; container-type: inline-size; background: url(/collection/room-bare.webp) center / 100% 100% no-repeat; }
 .room-rope { position: absolute; z-index: 2; top: 0; width: 6px; margin-left: -3px; border-radius: 3px; background: repeating-linear-gradient(115deg, #D9A66A 0 3px, #9A6330 3px 6px); box-shadow: 0 0 0 1px rgba(110, 60, 15, 0.45); }
 .room-sign { position: absolute; z-index: 3; display: flex; align-items: center; justify-content: center; border: max(2px, 0.2cqw) solid #C58A4C; border-radius: 1.3cqw; background: linear-gradient(#FCE2B8, #F2C68C 60%, #EDB878); box-shadow: inset 0 0.15cqw 0 rgba(255, 255, 255, 0.6), 0 0.5cqw 1cqw rgba(110, 60, 15, 0.28); }
 .room-sign-title { margin: 0; white-space: nowrap; font-family: var(--font-display); font-weight: 800; line-height: 1; font-size: max(17px, 2.6cqw); color: #5E3510; }
@@ -1133,9 +1133,9 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 
 .room-slot { position: absolute; z-index: 4; display: block; padding: 0; border: 0; background: none; cursor: pointer; transition: transform 0.18s, filter 0.18s; }
 .room-slot:hover { transform: scale(1.035); filter: drop-shadow(0 0.6cqw 0.9cqw rgba(90, 50, 10, 0.4)); z-index: 5; }
-.room-slot-in { position: absolute; inset: 0; overflow: hidden; border-radius: 0.2cqw; background: #fff; box-shadow: inset 0 0 0 max(1px, 0.08cqw) rgba(120, 80, 30, 0.3); }
+.room-slot-in { position: absolute; inset: 7.1429%; overflow: hidden; background: #D4C9C4; }
 .room-slot-in > :first-child { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.room-slot-blank { width: 100%; height: 100%; background: #EAF6FF; }
+.room-slot-blank { display: block; width: 100%; height: 100%; background: #D4C9C4; }
 .room-slot-badge { position: absolute; right: -0.8cqw; top: -0.8cqw; display: grid; place-items: center; width: max(22px, 2.4cqw); height: max(22px, 2.4cqw); border: max(1px, 0.12cqw) solid #E0C9A6; border-radius: 9999px; background: #fff; box-shadow: 0 0.2cqw 0.5cqw rgba(60, 30, 5, 0.3); font-family: var(--font-display); font-weight: 800; font-size: max(12px, 1.3cqw); line-height: 1; color: #6B3A12; }
 .room-slot-count { position: absolute; right: 0.3cqw; bottom: 0.3cqw; padding: 0 0.6cqw; border-radius: 9999px; background: #1B2A38; font-weight: 800; font-size: max(11px, 1.1cqw); color: #fff; }
 
@@ -1445,10 +1445,10 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .tb-dotbtn-on { box-shadow: 0 0 0 3px #2AA3FF; background: rgba(255, 255, 255, 0.12); }
 .tb-dot { display: block; border-radius: 999px; background: #fff; }
 .tb-round { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 6px; padding: 8px; border-radius: 16px; background: linear-gradient(#EEF2F7, #D9E0E9); }
-.tb-bubble { display: grid; place-items: center; flex: 1 1 0; max-width: var(--bb, 60px); aspect-ratio: 1; border-radius: 999px; background: radial-gradient(circle at 35% 28%, #7AD3F5, #2AA4DA 70%); box-shadow: inset 0 0 0 3px #1B8CC6, 0 4px 8px rgba(30, 80, 130, 0.3); transition: transform 0.12s; }
+.tb-bubble { display: grid; place-items: center; flex: 1 1 0; max-width: var(--bb, 60px); aspect-ratio: 1; padding: 0; border-radius: 999px; background: none; transition: transform 0.12s, filter 0.12s; }
 .tb-bubble:hover { transform: scale(1.06); }
-.tb-bubble-on { box-shadow: inset 0 0 0 3px #1B8CC6, 0 0 0 5px #fff, 0 0 0 8px #FFB300, 0 6px 12px rgba(30, 80, 130, 0.35); transform: scale(1.08); }
-.tb-ico { width: 72%; height: 72%; }
+.tb-bubble-on { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #FFB300, 0 6px 12px rgba(30, 80, 130, 0.35); transform: scale(1.06); }
+.tb-ico { width: 100%; height: 100%; object-fit: contain; border-radius: 999px; }
 .tb-chip { width: 48px; height: 48px; padding: 4px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 2px #E3EAF3; }
 .tb-chip-on { box-shadow: inset 0 0 0 3px #2AA3FF, 0 0 0 2px #fff; }
 
@@ -1499,3 +1499,10 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw-header > div > .min-w-0 h1 { white-space: normal; font-size: 22px; }
   .cw-header > div > .w-32 { width: 100%; }
 }
+
+/* Khung Artwork phủ lên ô tranh (tranh treo tường / lưới Bộ sưu tập). */
+.frame-overlay { position: absolute; inset: 0; display: block; pointer-events: none; }
+.framed-in { position: absolute; inset: 7.1429%; display: block; overflow: hidden; background: #fff; }
+.framed-in > img { width: 100%; height: 100%; object-fit: cover; }
+.room-slot-empty { cursor: default; pointer-events: none; }
+.room-slot-empty:hover { transform: none; filter: none; }

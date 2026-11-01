@@ -14,6 +14,7 @@ import { ScheduleBanner } from '../Exhibition/Hall';
 import { CertificateButton, ShareDialog } from '../../components/Share';
 import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon';
+import { artworkFrameSvg } from '../../lib/frames';
 
 const RULES_OK_KEY = 'btm.exhibitRulesOk';
 const readRulesOk = () => {
@@ -23,6 +24,24 @@ const readRulesOk = () => {
     return false;
   }
 };
+
+const DEFAULT_FRAME = 'khung-go';
+/** Khung Artwork (SVG 700×700, cửa sổ tranh 600×600 ở giữa) phủ lên một ô vuông. */
+function FrameOverlay({ slug, className = '' }) {
+  const svg = artworkFrameSvg(slug || DEFAULT_FRAME);
+  if (!svg) return null;
+  return <span className={`frame-overlay ${className}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: svg.replace('width="700" height="700"', 'width="100%" height="100%"') }} />;
+}
+
+/** Tranh đã hoàn thành kèm khung đang chọn (mặc định: khung gỗ). `inset` = lề cửa sổ tranh trong khung (50/700). */
+function FramedPicture({ src, frame, className = '' }) {
+  return (
+    <div className={`framed relative aspect-square w-full ${className}`}>
+      <span className="framed-in">{src ? <img src={src} alt="" draggable={false} /> : <span className="room-slot-blank" />}</span>
+      <FrameOverlay slug={frame} />
+    </div>
+  );
+}
 
 /** Tranh này thuộc loại được đi triển lãm không (điều 3): thẻ hiếm S/A/B hoặc tranh Sáng tạo. */
 const exhibitType = (a) => a.mode === 'free' && (!a.isCard || ['S', 'A', 'B'].includes(a.rarity));
@@ -236,7 +255,7 @@ function ArtworksTab() {
           const entry = ex.entries[a.id];
           return (
             <div key={a.id} className="card flex flex-col gap-2 p-2.5" data-testid={`art-${a.id}`}>
-              {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-2xl border border-line" /> : <div className="aspect-square rounded-2xl bg-primary-light" />}
+              <FramedPicture src={a.thumbnail} frame={a.frame} />
               <div className="truncate text-sm font-bold">{a.name[i18n.language]}</div>
               <ArtworkControls a={a} entry={entry} s={s} full={full} onSubmit={setSubmitFor} onWithdraw={withdraw} onShare={setShareFor} />
             </div>
@@ -370,13 +389,26 @@ function RoomShell({ tab, onTab, slots, pills }) {
 
         {ROOM_SLOTS.map(([x1, y1, x2, y2], i) => {
           const it = shown[i];
-          const geo = box(x1 - SLOT_PAD, y1 - SLOT_PAD, x2 - x1 + 2 * SLOT_PAD, y2 - y1 + 2 * SLOT_PAD);
+          // Cửa sổ tranh = ô vuông lớn nhất nằm trong ô xám, khung (700/600 cửa sổ) vẽ quanh nó. Ô trống vẫn treo khung gỗ rỗng.
+          const side = Math.min(x2 - x1, y2 - y1);
+          const cx = (x1 + x2) / 2;
+          const cy = (y1 + y2) / 2;
+          const full = (side * 700) / 600;
+          const geo = box(cx - full / 2, cy - full / 2, full, full);
+          const body = (
+            <>
+              <span className="room-slot-in">{it ? it.content : <span className="room-slot-blank" />}</span>
+              <FrameOverlay slug={it?.frame} />
+              {it?.badge && <span className="room-slot-badge" aria-hidden="true">{it.badge}</span>}
+            </>
+          );
           return it ? (
             <button key={it.key} type="button" className="room-slot" style={geo} onClick={it.onClick} aria-label={it.label} title={it.label} data-testid={it.testId}>
-              <span className="room-slot-in">{it.content}</span>
-              {it.badge && <span className="room-slot-badge" aria-hidden="true">{it.badge}</span>}
+              {body}
             </button>
-          ) : null;
+          ) : (
+            <div key={`empty-${i}`} className="room-slot room-slot-empty" style={geo} aria-hidden="true">{body}</div>
+          );
         })}
 
         <div className="room-nav" style={box(330, 574, 1172, 76)}>
@@ -419,6 +451,7 @@ function RoomArtworks({ onTab }) {
     testId: `art-${a.id}`,
     onClick: () => setOpen(a),
     badge: ready ? entryEmoji(ex.entries[a.id], s) : null,
+    frame: a.frame, // tranh treo tường dùng đúng khung bé đã chọn (mặc định: khung gỗ)
     content: a.thumbnail ? <img src={a.thumbnail} alt="" draggable={false} /> : <span className="room-slot-blank" />,
   }));
   const pills = ready && (
@@ -447,7 +480,7 @@ function RoomArtworks({ onTab }) {
       {open && ready && (
         <Modal open onClose={() => setOpen(null)}>
           <div className="flex flex-col gap-3" data-testid="room-art-dialog">
-            {open.thumbnail ? <img src={open.thumbnail} alt="" className="aspect-square w-full rounded-2xl border border-line" /> : <div className="aspect-square rounded-2xl bg-primary-light" />}
+            <FramedPicture src={open.thumbnail} frame={open.frame} />
             <div className="font-display text-xl font-extrabold">{open.name[i18n.language]}</div>
             <ArtworkControls
               a={open}

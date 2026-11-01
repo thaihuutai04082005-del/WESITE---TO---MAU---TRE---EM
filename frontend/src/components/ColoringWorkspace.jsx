@@ -34,7 +34,7 @@ export default function ColoringWorkspace({
   const canvasRef = useRef(null);
   const [tool, setTool] = useState('crayon');
   const [color, setColor] = useState(() => picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.color || '#FF5F7E'); // màu đầu tiên không phải màu trắng
-  const [sizeIdx, setSizeIdx] = useState(2);
+  const [sizeIdx, setSizeIdx] = useState(0); // mặc định cỡ nét lớn nhất
   const [pattern, setPattern] = useState('rainbow');
   const [stickerType, setStickerType] = useState('star');
   const [number, setNumber] = useState(mode === 'template' ? picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.number ?? picture?.palette?.[0]?.number ?? null : null);
