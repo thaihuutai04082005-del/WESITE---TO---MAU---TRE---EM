@@ -1173,7 +1173,8 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .gs-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .gs-face-b { transform: rotateY(180deg); border-radius: 11cqw; }
 .gs-face-f::before, .gs-face-b::before { content: ''; position: absolute; inset: 0; border: 3cqw solid #1E6FD8; border-radius: 12cqw; background: linear-gradient(#A5DAFF, #4FA8F4); box-shadow: inset 0 1.2cqw 0 rgba(255, 255, 255, 0.65), inset 0 -1.5cqw 0 rgba(20, 90, 190, 0.35), 0 3cqw 4cqw rgba(20, 50, 120, 0.35); }
-.gs-face-b::before { border-color: #1E6FD8; background: var(--rc, #C9BBFA); }
+.gs-face-b::before { border-color: #D9C9A8; background: #FFFDF8; }
+.gs-letter { font-family: var(--font-display); font-weight: 900; font-size: 15cqw; line-height: 1; color: #4A3A22; }
 .gs-card-in { position: absolute; inset: 6.5cqw; display: grid; place-items: center; border-radius: 7cqw; background:
   radial-gradient(circle at 8% 7%, #8CCBF8 0 4.2%, transparent 4.8%), radial-gradient(circle at 13% 5%, #8CCBF8 0 2.6%, transparent 3.1%), radial-gradient(circle at 5% 12%, #8CCBF8 0 2.6%, transparent 3.1%),
   radial-gradient(circle at 92% 7%, #8CCBF8 0 4.2%, transparent 4.8%), radial-gradient(circle at 87% 5%, #8CCBF8 0 2.6%, transparent 3.1%), radial-gradient(circle at 95% 12%, #8CCBF8 0 2.6%, transparent 3.1%),

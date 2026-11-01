@@ -7,7 +7,7 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import { usePicture } from '../../hooks/usePicture';
-import { RarityBadge, RARITY_COLOR } from '../../components/GachaCardReveal/GachaCardReveal';
+import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
 import Confetti from '../../components/Confetti';
 import PictureView from '../../components/PictureView/PictureView';
 import Icon from '../../components/Icon';
@@ -111,7 +111,6 @@ export default function Gacha() {
           {STAGE_CARDS.map(([x, y], i) => {
             const res = flips[i];
             const on = !res && !locked && i < ready;
-            const rc = res ? RARITY_COLOR[res.rarity] : null;
             return (
               <button
                 key={i}
@@ -131,14 +130,12 @@ export default function Gacha() {
                     </span>
                   </span>
                   <span
-                    className={`gs-face gs-face-b${res ? ` rarity-glow-${res.rarity}` : ''}`}
-                    style={res ? { '--rc': res.rarity === 'S' ? 'linear-gradient(135deg,#FF5F7E,#FFB84D 50%,#FF5F7E)' : rc } : undefined}
+                    className="gs-face gs-face-b"
                   >
                     {res && (
                       <span className="gs-bk-in">
                         <span className="gs-bk-top">
-                          <span className="gs-badge" style={res.rarity === 'S' ? undefined : { background: rc }} data-s={res.rarity === 'S' ? '1' : undefined}>{res.rarity}</span>
-                          <span className="gs-bk-rar">{t(`gacha.rarity.${res.rarity}`)}</span>
+                          <span className="gs-letter">{res.rarity}</span>
                         </span>
                         <span className="gs-bk-pic"><PictureView picture={res.picture} /></span>
                         <span className="gs-bk-name">{res.picture.name[i18n.language]}</span>
@@ -152,8 +149,8 @@ export default function Gacha() {
         </div>
         {info && (
           <div className="gs-pills">
-            <span className="gs-pill">💎 {t('gacha.points', { n: info.gachaPoints })}</span>
-            <span className="gs-pill">🎁 {t('gacha.pulls', { n: info.pullsAvailable })}</span>
+            <span className="gs-pill"><Icon name="gift" size={18} strokeWidth={2.6} className="text-[#7D5FFF]" /> {t('gacha.points', { n: info.gachaPoints })}</span>
+            <span className="gs-pill"><Icon name="hand" size={18} strokeWidth={2.6} className="text-[#F07B2E]" /> {t('gacha.pulls', { n: info.pullsAvailable })}</span>
             {!locked && info.pullsAvailable > 1 && (
               <button type="button" className="gs-pill gs-pill-btn" disabled={busy} onClick={() => pull(Math.min(STAGE_CARDS.length, info.pullsAvailable))} data-testid="gacha-pull-n">
                 ✨ {t('gacha.pullN', { n: Math.min(STAGE_CARDS.length, info.pullsAvailable) })}
