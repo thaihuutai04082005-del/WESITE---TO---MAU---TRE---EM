@@ -127,7 +127,23 @@ export default function ColoringScreen() {
 
   async function complete() {
     if (starting.current) await starting.current;
-    if (!started.current) return openUpgrade(true);
+    if (!started.current) {
+      // Chưa tính lượt (chưa có thao tác nào được ghi nhận): không phải hết lượt → chỉ nhắc bé tô trước,
+      // hoặc tính lượt ngay nếu đã có nét/màu. Chỉ khi server báo hết lượt mới mời nâng cấp.
+      const d = dataRef.current;
+      if (!Object.keys(d.fills).length && !d.strokes.length && !d.stickers.length) return toast(t('coloring.paintFirst'), 'error');
+      try {
+        const r = await api.post(`/artworks/${id}/start`);
+        started.current = true;
+        setPlan(r.plan);
+      } catch (e) {
+        if (e.code === 'quota_exceeded') {
+          if (e.data?.plan) setPlan(e.data.plan);
+          return openUpgrade(true);
+        }
+        return toast(errorText(t, e), 'error');
+      }
+    }
     try {
       const thumbnail = await renderThumbnail(picture, dataRef.current);
       const r = await save({ thumbnail, completed: true });
