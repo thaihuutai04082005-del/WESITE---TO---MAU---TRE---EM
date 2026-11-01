@@ -1567,3 +1567,4 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .mp-cloud-3 { left: 4%; top: 62%; width: 6%; transform: scaleX(-1); }
 .mp-cloud-4 { right: 4%; top: 68%; width: 7%; }
 @media (max-width: 720px) { .mp-cloud { display: none; } }
+.hs-stage.mp-stage { background: linear-gradient(#CBE6FB, #DDEFFC 55%, #EAF5FD); }

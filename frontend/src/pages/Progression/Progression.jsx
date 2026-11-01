@@ -61,7 +61,7 @@ export default function Progression() {
   const done = p.missions.filter((m) => m.completed).length;
 
   return (
-    <div className="hs-stage">
+    <div className="hs-stage mp-stage">
       <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-1" draggable={false} />
       <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-2" draggable={false} />
       <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-3" draggable={false} />
