@@ -138,36 +138,50 @@ export default function History() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
+  const filterIcon = { all: 'collection', in_progress: 'hourglass', completed: 'check' };
   return (
-    <div className="page">
-      <h1 className="page-title">{t('history.title')}</h1>
-      <p className="mb-4 text-muted">{t('history.retention')}</p>
-      <div className="mb-4 flex gap-2">
-        {FILTERS.map((f) => (
-          <button key={f} type="button" onClick={() => setFilter(f)} className={`btn min-h-11 px-4 text-base ${filter === f ? 'bg-primary text-white' : 'bg-primary-light text-primary-dark'}`}>
-            {t(`history.filter.${f}`)}
-          </button>
-        ))}
-      </div>
-      {items && items.length === 0 && (
-        <div className="card p-8 text-center">
-          <p className="mb-3 text-lg text-muted">{t('history.empty')}</p>
-          <Link to="/color" className="btn-primary">{t('nav.color')}</Link>
-        </div>
-      )}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {(items || []).map((a) => (
-          <button key={a.id} type="button" onClick={() => setOpen(a.id)} className="card p-2 text-left transition hover:-translate-y-1" data-testid={`history-item-${a.id}`}>
-            <div className="relative">
-              {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-2xl border border-line" /> : <div className="flex aspect-square items-center justify-center rounded-2xl bg-primary-light text-muted">{t('history.noPreview')}</div>}
-              <span className={`absolute left-2 top-2 rounded-full px-2 py-0.5 text-xs font-extrabold text-white ${a.status === 'completed' ? 'bg-mint' : 'bg-sun text-ink'}`}>{t(`history.status.${a.status}`)}</span>
+    <div className="hs-stage">
+      <div className="page hs-page">
+        <header className="hs-head">
+          <div>
+            <h1 className="hs-title">
+              <Icon name="history" size={48} strokeWidth={2.6} /> {t('history.title')}
+            </h1>
+            <p className="hs-sub">{t('history.retention')}</p>
+          </div>
+          <img src="/history/deco.webp" alt="" className="hs-deco" draggable={false} />
+        </header>
+        <section className="hs-panel">
+          <div className="hs-filters">
+            {FILTERS.map((f) => (
+              <button key={f} type="button" onClick={() => setFilter(f)} className={`hs-filter ${filter === f ? 'hs-filter-on' : ''}`}>
+                <Icon name={filterIcon[f]} size={24} /> {t(`history.filter.${f}`)}
+              </button>
+            ))}
+          </div>
+          {items && items.length === 0 && (
+            <div className="hs-empty">
+              <p className="mb-3 text-lg text-muted">{t('history.empty')}</p>
+              <Link to="/color" className="btn-primary">{t('nav.color')}</Link>
             </div>
-            <div className="mt-1 truncate font-bold">{a.name[i18n.language]}</div>
-            <div className="text-xs text-muted">
-              {t(`history.mode.${a.mode}`)} · {formatDate(a.updatedAt, i18n.language)}
-            </div>
-          </button>
-        ))}
+          )}
+          <div className="hs-grid">
+            {(items || []).map((a) => (
+              <button key={a.id} type="button" onClick={() => setOpen(a.id)} className="hs-card" data-testid={`history-item-${a.id}`}>
+                <div className="hs-thumb">
+                  {a.thumbnail ? <img src={a.thumbnail} alt="" /> : <div className="hs-nothumb">{t('history.noPreview')}</div>}
+                  <span className={`hs-badge ${a.status === 'completed' ? 'hs-badge-done' : ''}`}>
+                    <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}
+                  </span>
+                </div>
+                <div className="hs-foot">
+                  <div className="hs-name">{a.name[i18n.language]}</div>
+                  <span className="hs-more" aria-hidden="true">•••</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
       </div>
       {open && <Detail id={open} onClose={() => setOpen(null)} onDeleted={() => { setOpen(null); load(); }} />}
     </div>
