@@ -36,7 +36,7 @@ function KeyBtn({ icon, label, onClick, active, disabled, tone = 'blue', testId 
 }
 
 export default function ToolBar({
-  tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, stickerType, setStickerType,
+  tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, ownedPatterns = [], stickerType, setStickerType,
   canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowSignature = false, colorPanel = null,
 }) {
   const { t } = useTranslation();
@@ -83,7 +83,7 @@ export default function ToolBar({
         <div>
           <div className="mb-1 text-sm font-bold text-muted">{t('tools.pickPattern')}</div>
           <div className="flex flex-wrap gap-2">
-            {PATTERNS.map((p) => (
+            {PATTERNS.filter((p) => !p.shop || ownedPatterns.includes(p.id)).map((p) => (
               <button key={p.id} type="button" onClick={() => setPattern(p.id)} aria-label={p.id} aria-pressed={pattern === p.id} className={`tb-chip ${pattern === p.id ? 'tb-chip-on' : ''}`} data-testid={`pattern-${p.id}`}>
                 <img src={swatches[p.id]} alt="" className="h-full w-full rounded-lg" draggable={false} />
               </button>

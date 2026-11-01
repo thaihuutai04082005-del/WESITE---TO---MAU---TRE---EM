@@ -62,6 +62,9 @@
         "text": "Invite friends to color one picture in real time."
       },
       "storybook": {
+    "coverPick": "Cover",
+    "coverDefault": "Default cover",
+    "buyCovers": "Get more covers in the Shop",
         "title": "Make a storybook",
         "text": "Turn pictures into a flip-page book and download a PDF."
       },
@@ -733,7 +736,8 @@
     "tabFrames": "Picture frames",
     "title": "Shop",
     "hint": "Spend Ruby from missions on brush skins and frames.",
-    "brushes": "Brush skins",
+    "patterns": "Pattern colors",
+    "covers": "Storybook covers",
     "frames": "Artwork frames",
     "avatarFrames": "Avatar frames",
     "avatarFramesHint": "Not for sale — unlocked by ranking up in the Arena.",

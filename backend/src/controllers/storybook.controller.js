@@ -24,6 +24,7 @@ function view(b, withPages = true) {
     id: b.id,
     title: b.title,
     completed: !!b.completed,
+    coverStyle: b.cover_style || null,
     shareToken: b.share_token,
     createdAt: b.created_at,
     updatedAt: b.updated_at,
@@ -33,6 +34,15 @@ function view(b, withPages = true) {
       .get(b.id)?.thumbnail || null,
     ...(withPages ? { pages: pagesOf(b.id) } : {}),
   };
+}
+
+/** Bìa chỉ nhận khi bé đã mua (hoặc để trống = bìa mặc định). */
+function validateCover(userId, v) {
+  if (v === null || v === '' || v === undefined) return null;
+  const it = getDb().prepare("SELECT id, price FROM items WHERE slug = ? AND type = 'storybook_cover'").get(String(v));
+  if (!it) throw badRequest('invalid_cover');
+  if (it.price !== 0 && !getDb().prepare('SELECT 1 FROM user_items WHERE user_id = ? AND item_id = ?').get(userId, it.id)) throw badRequest('cover_not_owned');
+  return String(v);
 }
 
 function own(req) {
@@ -65,8 +75,9 @@ export function list(req, res) {
 export function create(req, res) {
   const title = str(req.body?.title, { min: 1, max: 80, name: 'title' });
   const pages = validatePages(req.user.id, req.body?.pages || []);
+  const cover = validateCover(req.user.id, req.body?.coverStyle);
   const id = tx(() => {
-    const r = getDb().prepare('INSERT INTO storybooks (user_id, title) VALUES (?, ?)').run(req.user.id, title);
+    const r = getDb().prepare('INSERT INTO storybooks (user_id, title, cover_style) VALUES (?, ?, ?)').run(req.user.id, title, cover);
     writePages(Number(r.lastInsertRowid), pages);
     return Number(r.lastInsertRowid);
   });
@@ -81,8 +92,9 @@ export function update(req, res) {
   const b = own(req);
   const title = req.body?.title !== undefined ? str(req.body.title, { min: 1, max: 80, name: 'title' }) : b.title;
   const pages = req.body?.pages !== undefined ? validatePages(req.user.id, req.body.pages) : null;
+  const cover = req.body?.coverStyle !== undefined ? validateCover(req.user.id, req.body.coverStyle) : b.cover_style;
   tx(() => {
-    getDb().prepare('UPDATE storybooks SET title = ?, updated_at = ? WHERE id = ?').run(title, new Date().toISOString(), b.id);
+    getDb().prepare('UPDATE storybooks SET title = ?, cover_style = ?, updated_at = ? WHERE id = ?').run(title, cover, new Date().toISOString(), b.id);
     if (pages) writePages(b.id, pages);
   });
   res.json({ storybook: view(own(req)) });
@@ -118,6 +130,7 @@ async function sendPdf(res, b) {
   const buf = await storybookPdf({
     title: b.title,
     author: author?.nickname || '',
+    coverStyle: b.cover_style || null,
     pages: pagesOf(b.id).map((p) => ({ image: p.image, caption: p.caption })),
   });
   const safe = b.title.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/[^a-zA-Z0-9]+/g, '-').slice(0, 40) || 'truyen';

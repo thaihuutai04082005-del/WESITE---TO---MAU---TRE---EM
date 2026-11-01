@@ -11,6 +11,15 @@ function dataUrlToBuffer(url) {
   return m ? Buffer.from(m[2], 'base64') : null;
 }
 
+// Bìa truyện bán trong shop: nền + viền (khớp frontend/src/lib/storyCovers.js).
+const COVERS = {
+  'bia-xanh-troi': { bg: '#BDE6FF', line: '#2B9BF4' },
+  'bia-hong-phan': { bg: '#FFD6E4', line: '#F2679A' },
+  'bia-xanh-la': { bg: '#CDEFC0', line: '#4CAF50' },
+  'bia-vang-nang': { bg: '#FFF0A6', line: '#F2B01E' },
+  'bia-tim-oai-huong': { bg: '#E3D6FF', line: '#8A63E8' },
+};
+
 /**
  * @param {{ title: string, author: string, pages: { image: string|null, caption: string }[] }} book
  * @returns {Promise<Buffer>}
@@ -28,8 +37,9 @@ export function storybookPdf(book) {
     const H = doc.page.height;
 
     // Bìa
-    doc.rect(0, 0, W, H).fill('#EAF6FF');
-    doc.roundedRect(40, 40, W - 80, H - 80, 24).lineWidth(4).stroke('#2B9BF4');
+    const cv = COVERS[book.coverStyle] || { bg: '#EAF6FF', line: '#2B9BF4' };
+    doc.rect(0, 0, W, H).fill(cv.bg);
+    doc.roundedRect(40, 40, W - 80, H - 80, 24).lineWidth(4).stroke(cv.line);
     doc.fillColor('#1B2A38').font('title').fontSize(44).text(book.title, 60, H / 2 - 70, { width: W - 120, align: 'center' });
     doc.font('body').fontSize(20).fillColor('#5E7A8C').text(book.author, 60, H / 2 + 10, { width: W - 120, align: 'center' });
 

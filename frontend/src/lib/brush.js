@@ -45,6 +45,13 @@ export const PATTERNS = [
   { id: 'hearts', color: '#FF8FB3' },
   { id: 'flowers', color: '#7ED87E' },
   { id: 'bee', color: '#FFD54F' },
+  // Họa tiết bán trong shop (mua rồi mới hiện ở bút họa tiết).
+  { id: 'caro', shop: true },
+  { id: 'song-bien', shop: true },
+  { id: 'keo-ngot', shop: true },
+  { id: 'la-xanh', shop: true },
+  { id: 'bong-bong', shop: true },
+  { id: 'zigzag', shop: true },
 ];
 
 const TILE = 28; // đơn vị tranh
@@ -114,6 +121,77 @@ function drawTile(id, g, n) {
       g.beginPath();
       g.arc(x, y, 2.6, 0, Math.PI * 2);
       g.fill();
+    }
+  } else if (id === 'caro') {
+    g.fillStyle = '#FFFFFF';
+    g.fillRect(0, 0, TILE, TILE);
+    g.fillStyle = '#FF7A7A';
+    g.fillRect(0, 0, TILE / 2, TILE / 2);
+    g.fillRect(TILE / 2, TILE / 2, TILE / 2, TILE / 2);
+  } else if (id === 'song-bien') {
+    g.fillStyle = '#7CCBFF';
+    g.fillRect(0, 0, TILE, TILE);
+    g.strokeStyle = '#FFFFFF';
+    g.lineWidth = 2.4;
+    g.lineCap = 'round';
+    for (const y of [7, 21]) {
+      g.beginPath();
+      g.moveTo(0, y);
+      g.bezierCurveTo(7, y - 7, 7, y - 7, 14, y);
+      g.bezierCurveTo(21, y + 7, 21, y + 7, 28, y);
+      g.stroke();
+    }
+  } else if (id === 'keo-ngot') {
+    g.fillStyle = '#FFFFFF';
+    g.fillRect(0, 0, TILE, TILE);
+    g.rotate(Math.PI / 4);
+    g.fillStyle = '#FF6FA5';
+    for (let i = -6; i < 10; i += 2) g.fillRect(-TILE, i * 5, TILE * 3, 5);
+  } else if (id === 'la-xanh') {
+    g.fillStyle = '#E4F7D2';
+    g.fillRect(0, 0, TILE, TILE);
+    for (const [x, y, a, c] of [[8, 8, -0.6, '#4CAF50'], [21, 21, 0.6, '#2E9B5F']]) {
+      g.save();
+      g.translate(x, y);
+      g.rotate(a);
+      g.fillStyle = c;
+      g.beginPath();
+      g.ellipse(0, 0, 4.2, 8, 0, 0, Math.PI * 2);
+      g.fill();
+      g.strokeStyle = '#E4F7D2';
+      g.lineWidth = 1;
+      g.beginPath();
+      g.moveTo(0, -6);
+      g.lineTo(0, 6);
+      g.stroke();
+      g.restore();
+    }
+  } else if (id === 'bong-bong') {
+    g.fillStyle = '#D9F0FF';
+    g.fillRect(0, 0, TILE, TILE);
+    for (const [x, y, r] of [[8, 9, 5.5], [21, 6, 3], [19, 21, 6], [5, 24, 2.8]]) {
+      g.fillStyle = 'rgba(255,255,255,0.75)';
+      g.strokeStyle = '#6FB8F0';
+      g.lineWidth = 1.4;
+      g.beginPath();
+      g.arc(x, y, r, 0, Math.PI * 2);
+      g.fill();
+      g.stroke();
+      g.fillStyle = '#FFFFFF';
+      g.beginPath();
+      g.arc(x - r * 0.35, y - r * 0.35, r * 0.25, 0, Math.PI * 2);
+      g.fill();
+    }
+  } else if (id === 'zigzag') {
+    g.fillStyle = '#FFF3C4';
+    g.fillRect(0, 0, TILE, TILE);
+    g.lineWidth = 3;
+    g.lineJoin = 'round';
+    for (const [y, c] of [[7, '#FF8A3D'], [21, '#9B6BFF']]) {
+      g.strokeStyle = c;
+      g.beginPath();
+      for (let x = 0; x <= TILE; x += 7) g.lineTo(x, y + (Math.round(x / 7) % 2 ? 4 : -4));
+      g.stroke();
     }
   } else {
     // bee: sọc vàng – nâu

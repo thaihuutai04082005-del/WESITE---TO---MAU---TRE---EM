@@ -1,4 +1,4 @@
-// Shop (Mục 8.4): skin cọ vẽ & Khung Artwork mua bằng Ruby. Khung Avatar chỉ mở khoá qua Rank.
+// Shop (Mục 8.4): màu họa tiết, khung tranh & bìa truyện mua bằng Ruby. Khung Avatar chỉ mở khoá qua Rank.
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -6,6 +6,7 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import { drawStroke } from '../../lib/brush';
+import { STORY_COVERS } from '../../lib/storyCovers';
 import { ARTWORK_FRAMES } from '../../lib/frames';
 import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
@@ -16,20 +17,36 @@ import { ShopArt, Bag, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScen
 // Khung gỗ là khung mặc định miễn phí: không bày bán trong Shop.
 const DEFAULT_FRAME = 'khung-go';
 
-function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
+function PatternPreview({ slug, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
   useEffect(() => {
     const ctx = ref.current.getContext('2d');
     const k = scene ? 4 : 1; // bản quầy hàng vẽ ở độ phân giải gấp 4 cho nét
     ctx.clearRect(0, 0, 240 * k, 120 * k);
-    const pts = Array.from({ length: 40 }, (_, i) => [10 + i * 5.5, 60 + Math.sin(i / 4) * 30]);
-    drawStroke(ctx, { tool: 'brush', color: '#FF5F7E', size: 14, points: pts, skin }, k);
-  }, [skin, scene]);
+    const pts = Array.from({ length: 40 }, (_, i) => [14 + i * 5.2, 60 + Math.sin(i / 4) * 26]);
+    drawStroke(ctx, { kind: 'pattern', pattern: slug, color: '#FF5F7E', size: 44, points: pts }, k);
+  }, [slug, scene]);
   return <canvas ref={ref} width={scene ? 960 : 240} height={scene ? 480 : 120} className={className} />;
 }
 
+function CoverMock({ slug, className }) {
+  const c = STORY_COVERS[slug] || { solid: '#BDE6FF', line: '#2B9BF4' };
+  // Cuốn truyện trơn: bìa màu, gáy, mép giấy trắng; không chữ.
+  return (
+    <svg viewBox="0 0 200 160" className={className}>
+      <ellipse cx="100" cy="148" rx="62" ry="7" fill="#000" opacity=".12" />
+      <rect x="48" y="14" width="104" height="128" rx="9" fill="#FFFFFF" stroke={c.line} strokeWidth="4" />
+      <path d="M142 24h4a6 6 0 016 6v104a6 6 0 01-6 6h-98" fill="none" stroke="#D9DEE3" strokeWidth="3" strokeLinecap="round" />
+      <rect x="40" y="8" width="104" height="128" rx="9" fill={c.solid} stroke={c.line} strokeWidth="5" />
+      <rect x="40" y="8" width="16" height="128" rx="8" fill={c.line} />
+      <rect x="48" y="8" width="8" height="128" fill={c.line} />
+    </svg>
+  );
+}
+
 function Preview({ item, scene = false }) {
-  if (item.type === 'brush_skin') return <BrushPreview skin={item.slug} scene={scene} className={scene ? 'sh-prev-canvas' : undefined} />;
+  if (item.type === 'pattern') return <PatternPreview slug={item.slug} scene={scene} className={scene ? 'sh-prev-canvas' : undefined} />;
+  if (item.type === 'storybook_cover') return <CoverMock slug={item.slug} className={scene ? 'sh-prev-svg' : 'w-full'} />;
   if (item.type === 'artwork_frame')
     return <svg viewBox="0 0 700 700" className={scene ? 'sh-prev-svg' : 'w-full'} dangerouslySetInnerHTML={{ __html: `${ARTWORK_FRAMES[item.slug]?.() || ''}<rect x="50" y="50" width="600" height="600" fill="#EAF6FF"/><image href="/avatars/meo.svg" x="150" y="150" width="400" height="400"/>` }} />;
   return null;
@@ -46,8 +63,7 @@ const SLOTS = [
 const pc = (v, total) => `${(v / total) * 100}%`;
 const box = ([x, y, w, h]) => ({ left: pc(x, W), top: pc(y, H), width: pc(w, W), height: pc(h, H) });
 
-function SceneCard({ item, ruby, equipped, onBuy, onEquip, t, lang, geo }) {
-  const type = item.type;
+function SceneCard({ item, ruby, onBuy, t, lang, geo }) {
   return (
     <div className="sh-card" style={box(geo)} data-testid={`shop-item-${item.slug}`}>
       <div className="sh-ci">
@@ -59,13 +75,7 @@ function SceneCard({ item, ruby, equipped, onBuy, onEquip, t, lang, geo }) {
           </div>
           <div className="sh-name">{item.name[lang]}</div>
           {item.owned ? (
-            type === 'brush_skin' ? (
-              <button type="button" className={`sh-btn ${equipped ? 'sh-btn-ghost' : 'sh-btn-go'}`} onClick={() => onEquip(item, equipped)}>
-                {equipped ? t('shop.unequip') : t('shop.equip')}
-              </button>
-            ) : (
               <span className="sh-btn sh-btn-ghost sh-btn-static">{t('shop.owned')}</span>
-            )
           ) : (
             <button type="button" className="sh-btn" disabled={ruby < item.price} onClick={() => onBuy(item)} data-testid={`buy-${item.slug}`}>
               <RubyGem size={20} /> {item.price}
@@ -81,13 +91,12 @@ export default function Shop() {
   const { t, i18n } = useTranslation();
   const user = useAuth((s) => s.user);
   const refresh = useAuth((s) => s.refresh);
-  const updateProfile = useAuth((s) => s.updateProfile);
   const toast = useUi((s) => s.toast);
   const pushEvents = useUi((s) => s.pushEvents);
   const [shop, setShop] = useState(null);
   const [confirm, setConfirm] = useState(null);
   const wide = useWide();
-  const [tab, setTab] = useState('brush_skin');
+  const [tab, setTab] = useState('pattern');
   const [page, setPage] = useState(0);
   const load = () => api.get('/shop').then(setShop);
   useEffect(() => {
@@ -145,14 +154,14 @@ export default function Shop() {
     const cur = Math.min(page, pages - 1);
     const shown = list.slice(cur * per, cur * per + per);
     const tabs = [
-      ['brush_skin', '🖌️', t('shop.brushes')],
+      ['pattern', <img key="p" src="/tools/pattern.webp" alt="" className="sh-tab-img" draggable={false} />, t('shop.patterns')],
       ['artwork_frame', '🖼️', t('shop.tabFrames')],
+      ['storybook_cover', '📖', t('shop.covers')],
     ];
     return (
       <div className="sh-room">
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-1" draggable={false} />
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-2" draggable={false} />
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-3" draggable={false} />
+
+
         <div className="sh-stage" data-testid="shop-stall">
           <div className="sh-inner">
           <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
@@ -176,9 +185,7 @@ export default function Shop() {
               key={item.slug}
               item={item}
               ruby={shop.ruby}
-              equipped={item.type === 'brush_skin' && user.brushSkin === item.slug}
               onBuy={setConfirm}
-              onEquip={(it, eq) => updateProfile({ brushSkin: eq ? null : it.slug })}
               t={t}
               lang={i18n.language}
               geo={SLOTS[i]}
@@ -202,8 +209,9 @@ export default function Shop() {
     );
   }
   const sections = [
-    ['brush_skin', t('shop.brushes')],
+    ['pattern', t('shop.patterns')],
     ['artwork_frame', t('shop.frames')],
+    ['storybook_cover', t('shop.covers')],
   ];
   return (
     <div className="page space-y-8">
@@ -217,7 +225,6 @@ export default function Shop() {
           <h2 className="mb-3 font-display text-2xl font-bold">{title}</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {shop.items.filter((i) => i.type === type && i.slug !== DEFAULT_FRAME).map((item) => {
-              const equipped = type === 'brush_skin' && user.brushSkin === item.slug;
               return (
                 <div key={item.slug} className="card flex flex-col gap-2 p-3">
                   <div className="relative">
@@ -226,13 +233,7 @@ export default function Shop() {
                   </div>
                   <div className="font-bold leading-tight">{item.name[i18n.language]}</div>
                   {item.owned ? (
-                    type === 'brush_skin' ? (
-                      <button type="button" className={equipped ? 'btn-ghost' : 'btn-primary'} onClick={() => updateProfile({ brushSkin: equipped ? null : item.slug })}>
-                        {equipped ? t('shop.unequip') : t('shop.equip')}
-                      </button>
-                    ) : (
-                      <span className="btn-ghost pointer-events-none">{t('shop.owned')}</span>
-                    )
+                    <span className="btn-ghost pointer-events-none">{t('shop.owned')}</span>
                   ) : (
                     <button type="button" className="btn-coral" disabled={shop.ruby < item.price} onClick={() => setConfirm(item)} data-testid={`buy-${item.slug}`}>
                       <Icon name="ruby" size={18} /> {item.price}
