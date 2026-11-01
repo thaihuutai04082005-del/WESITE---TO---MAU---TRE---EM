@@ -1558,6 +1558,36 @@ ART_THEMES.push({
   ],
 });
 
+ART_THEMES.push({
+  slug: 'tien-ca-phep-thuat-9',
+  age: '9+',
+  name: { vi: 'Tiên Cá Phép Thuật', en: 'Magic Mermaids' },
+  animation: 'float',
+  objects: [
+    {
+      slug: 'tien-ca-hai-lam',
+      name: { vi: 'Tiên Cá Hải Lam', en: 'Sea Blue Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-hai-lam', name: { vi: 'Tiên Cá Hải Lam', en: 'Sea Blue Mermaid' }, file: 'tien-ca-hai-lam--tien-ca-hai-lam' },
+      ],
+    },
+    {
+      slug: 'tien-ca-chau-anh',
+      name: { vi: 'Tiên Cá Châu Anh', en: 'Pearl Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-chau-anh', name: { vi: 'Tiên Cá Châu Anh', en: 'Pearl Mermaid' }, file: 'tien-ca-chau-anh--tien-ca-chau-anh' },
+      ],
+    },
+    {
+      slug: 'tien-ca-bang-nhi',
+      name: { vi: 'Tiên Cá Băng Nhi', en: 'Ice Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-bang-nhi', name: { vi: 'Tiên Cá Băng Nhi', en: 'Ice Mermaid' }, file: 'tien-ca-bang-nhi--tien-ca-bang-nhi' },
+      ],
+    },
+  ],
+});
+
 // Chủ đề tranh vẽ tay thuộc nhóm 6–8 tuổi: `after` = đứng ngay sau chủ đề có slug đó (cùng hàng trên trang chọn chủ đề).
 ART_THEMES.push({
   slug: 'cong-chua-ngan-hoa',
