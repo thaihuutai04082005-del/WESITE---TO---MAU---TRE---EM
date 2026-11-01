@@ -235,14 +235,12 @@ export default function ColoringScreen() {
         artworkId={Number(id)}
         onClose={() => {
           setReveal(false);
-          pushEvents(pendingEvents);
+          // Thông báo nhiệm vụ/thành tích hiện sau khi tranh bay xong vào Bộ sưu tập (khỏi che hiệu ứng).
+          const ev = pendingEvents;
+          setTimeout(() => pushEvents(ev), 1000);
           setPendingEvents([]);
         }}
-        extra={
-          <Link to="/color" className="btn-ghost">
-            <Icon name="palette" /> {t('reveal.another')}
-          </Link>
-        }
+        anotherTo={picture.theme?.slug ? `/color/${picture.theme.slug}` : '/color'}
       />
     </div>
   );
