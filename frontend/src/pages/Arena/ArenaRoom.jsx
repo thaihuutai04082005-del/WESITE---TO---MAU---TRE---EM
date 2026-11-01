@@ -14,6 +14,7 @@ import Leaderboard from '../../components/Leaderboard/Leaderboard';
 import Avatar from '../../components/Avatar/Avatar';
 import Confetti from '../../components/Confetti';
 import Icon from '../../components/Icon';
+import WaitingScene, { PaletteBrush } from '../../components/WaitingScene';
 
 const SNAPSHOT_MS = 8000;
 
@@ -137,42 +138,70 @@ export default function ArenaRoom() {
   if (room.status === 'waiting') {
     const isHost = room.hostId === user.id;
     return (
-      <div className="page space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="page-title">{room.type === 'private' ? t('arena.privateRoom') : t('arena.waitingRoom')}</h1>
-          <button type="button" className="btn-ghost" onClick={leave}>{t('arena.leave')}</button>
-        </div>
-        {room.type === 'private' && (
-          <div className="card flex flex-wrap items-center gap-3 p-4">
-            <span className="font-bold">{t('arena.shareCode')}</span>
-            <span className="rounded-2xl bg-primary-light px-4 py-2 font-mono text-3xl font-extrabold tracking-widest text-primary-dark" data-testid="arena-room-code">{room.code}</span>
-            <span className="text-sm text-muted">{t('arena.friendsOnly')}</span>
+      <div className="wr-stage">
+        <div className="page wr-page">
+          <div className="wr-top">
+            <div className="wr-banner">
+              <PaletteBrush />
+              <h1 className="wr-title">{room.type === 'private' ? t('arena.privateRoom') : t('arena.waitingRoom')}</h1>
+            </div>
+            <button type="button" className="wr-leave" onClick={leave}>
+              <Icon name="logout" size={22} /> {t('arena.leave')}
+            </button>
           </div>
-        )}
-        <div className="card p-4">
-          <div className="mb-3 flex items-center justify-between font-bold">
-            <span>{t('arena.players', { n: room.players.length, max: room.maxPlayers })}</span>
-            {room.type === 'random' && room.lobbyDeadline && (
-              <span>
-                {t('arena.startsIn')} <CountdownTimer endsAt={room.lobbyDeadline} offset={offset.current} warnAt={0} />
-              </span>
-            )}
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {Array.from({ length: room.maxPlayers }, (_, i) => room.players[i]).map((p, i) => (
-              <div key={p?.id ?? `empty-${i}`} className={`flex flex-col items-center gap-1 rounded-2xl p-3 ${p ? 'bg-primary-light' : 'border-2 border-dashed border-line'}`}>
-                {p ? <Avatar avatar={p.avatar} frame={p.avatarFrame} size={56} /> : <div className="h-14 w-14 rounded-full bg-white" />}
-                <span className="truncate text-sm font-bold">{p ? p.nickname : '…'}</span>
+          <section className="wr-card">
+            <WaitingScene />
+            <div className="wr-stats">
+              <div className="wr-pill">
+                <Icon name="users" size={24} className="text-[#F5963A]" />
+                <span>{t('arena.players', { n: room.players.length, max: room.maxPlayers })}</span>
               </div>
-            ))}
-          </div>
-          {room.type === 'random' && room.players.length < room.minPlayers && <p className="mt-3 text-sm text-muted">{t('arena.needMore', { n: room.minPlayers })}</p>}
+              {room.type === 'random' && room.lobbyDeadline && (
+                <div className="wr-pill">
+                  <Icon name="clock" size={24} className="text-[#F5963A]" />
+                  <span>{t('arena.startsIn')}</span>
+                  <CountdownTimer endsAt={room.lobbyDeadline} offset={offset.current} warnAt={0} className="wr-count" />
+                </div>
+              )}
+            </div>
+            {room.type === 'private' && (
+              <div className="wr-code">
+                <span className="font-bold">{t('arena.shareCode')}</span>
+                <span className="wr-code-val" data-testid="arena-room-code">{room.code}</span>
+                <span className="text-sm text-muted">{t('arena.friendsOnly')}</span>
+              </div>
+            )}
+            <div className="wr-grid">
+              {Array.from({ length: room.maxPlayers }, (_, i) => room.players[i]).map((p, i) => (
+                <div key={p?.id ?? `empty-${i}`} className={`wr-slot ${p ? 'wr-slot-on' : ''}`}>
+                  {p ? (
+                    <>
+                      {p.id === room.hostId && <svg viewBox="0 0 40 34" className="wr-crown" aria-hidden="true"><path d="M5 28 2 10l10 8 8-14 8 14 10-8-3 18z" fill="#FFD23F" stroke="#E8A317" strokeWidth="3" strokeLinejoin="round" /><circle cx="20" cy="22" r="2.6" fill="#FF6B6B" /></svg>}
+                      <Avatar avatar={p.avatar} frame={p.avatarFrame} size={58} />
+                      <span className="wr-name">{p.nickname}</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg viewBox="0 0 48 48" className="wr-ghost" aria-hidden="true">
+                        <circle cx="24" cy="16" r="9" fill="none" stroke="#F5A860" strokeWidth="3" />
+                        <path d="M7 42c1-10 8-15 17-15s16 5 17 15z" fill="none" stroke="#F5A860" strokeWidth="3" strokeLinejoin="round" />
+                      </svg>
+                      <span className="wr-dots">…</span>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+            {room.type === 'random' && room.players.length < room.minPlayers && (
+              <p className="wr-note"><span className="wr-info" aria-hidden="true">i</span> {t('arena.needMore', { n: room.minPlayers })}</p>
+            )}
+            {isHost && room.type === 'private' && (
+              <button type="button" className="btn-coral w-full" disabled={room.players.length < room.minPlayers} onClick={() => emitAck(socket, 'arena:start').then((r) => r?.error && toast(t(`errors.${r.error}`), 'error'))} data-testid="arena-start">
+                <Icon name="play" /> {t('arena.startNow')}
+              </button>
+            )}
+          </section>
         </div>
-        {isHost && room.type === 'private' && (
-          <button type="button" className="btn-coral w-full" disabled={room.players.length < room.minPlayers} onClick={() => emitAck(socket, 'arena:start').then((r) => r?.error && toast(t(`errors.${r.error}`), 'error'))} data-testid="arena-start">
-            <Icon name="play" /> {t('arena.startNow')}
-          </button>
-        )}
       </div>
     );
   }
