@@ -11,17 +11,9 @@ export const RANK_STYLE = {
   master: { fill: '#FF7AA2', ring: '#D6336C', bg: '#FFE6EE', text: '#B0245A' },
 };
 
-export function RankMedal({ rank = 'bronze', size = 28 }) {
-  const s = RANK_STYLE[rank] || RANK_STYLE.bronze;
-  return (
-    <svg viewBox="0 0 40 40" width={size} height={size} aria-hidden="true">
-      <path d="M12 2 L18 16 L13 18 L7 4 Z" fill="#FF5F7E" stroke="#1B2A38" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M28 2 L22 16 L27 18 L33 4 Z" fill="#4FA3E0" stroke="#1B2A38" strokeWidth="1.6" strokeLinejoin="round" />
-      <circle cx="20" cy="25" r="12" fill={s.fill} stroke={s.ring} strokeWidth="3" />
-      <circle cx="20" cy="25" r="12" fill="none" stroke="#1B2A38" strokeWidth="1.2" opacity="0.5" />
-      <polygon points="20,18 22,23 27.5,23.3 23.2,26.6 24.7,32 20,29 15.3,32 16.8,26.6 12.5,23.3 18,23" fill="#FFFFFF" opacity="0.9" />
-    </svg>
-  );
+/** Huy hiệu hạng: khiên + vương miện + nhánh nguyệt quế, đổi theo bậc (ảnh /public/ranks). */
+export function RankMedal({ rank = 'bronze', size = 28, className = '' }) {
+  return <img src={`/ranks/${RANK_STYLE[rank] ? rank : 'bronze'}.webp`} alt="" width={size} height={size} className={`object-contain ${className}`} draggable={false} />;
 }
 
 /** Dạng gọn cho thanh điều hướng: huy chương + bậc + điểm. */

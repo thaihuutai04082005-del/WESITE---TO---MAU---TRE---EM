@@ -691,7 +691,12 @@
     "friendsOnlyChip": "Chỉ bạn bè",
     "minutes": "{{n}} phút",
     "upTo": "Tối đa {{n}} bạn",
-    "currentRank": "Hạng hiện tại"
+    "currentRank": "Hạng hiện tại",
+    "rankInfoTitle": "Các bậc Rank",
+    "rankInfoHint": "Thắng Top 3 ở Đấu trường để tích Điểm Rank. Điểm Rank không bao giờ bị trừ.",
+    "youAreHere": "Bé ở đây",
+    "yourPoints": "Bé đang có {{n}} điểm",
+    "toNext": "còn {{n}} điểm để lên {{rank}}"
   },
   "rubric": {
     "coverage": "Độ phủ màu",
