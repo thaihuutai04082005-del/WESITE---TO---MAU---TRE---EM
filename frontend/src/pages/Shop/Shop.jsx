@@ -31,15 +31,15 @@ function PatternPreview({ slug, scene = false, className = 'h-auto w-full rounde
 
 function CoverMock({ slug, className }) {
   const c = STORY_COVERS[slug] || { solid: '#BDE6FF', line: '#2B9BF4' };
-  // Cuốn truyện mở ra: hai trang trắng trơn, bìa màu viền quanh, không chữ.
+  // Cuốn truyện trơn: bìa màu, gáy, mép giấy trắng; không chữ.
   return (
-    <svg viewBox="0 0 200 150" className={className}>
-      <ellipse cx="100" cy="140" rx="80" ry="7" fill="#000" opacity=".12" />
-      <path d="M8 36q46-14 92 6 46-20 92-6v96q-46-14-92 6-46-20-92-6z" fill={c.line} />
-      <path d="M16 30q42-12 84 6v86q-42-16-84-4z" fill="#FFFFFF" stroke={c.line} strokeWidth="3" strokeLinejoin="round" />
-      <path d="M184 30q-42-12-84 6v86q42-16 84-4z" fill="#FFFFFF" stroke={c.line} strokeWidth="3" strokeLinejoin="round" />
-      <path d="M100 36v86" stroke="#D9DEE3" strokeWidth="3" strokeLinecap="round" />
-      <path d="M24 46q36-8 70 6M24 62q36-8 70 6M176 46q-36-8-70 6M176 62q-36-8-70 6" fill="none" stroke="#E6EAEE" strokeWidth="3" strokeLinecap="round" />
+    <svg viewBox="0 0 200 160" className={className}>
+      <ellipse cx="100" cy="148" rx="62" ry="7" fill="#000" opacity=".12" />
+      <rect x="48" y="14" width="104" height="128" rx="9" fill="#FFFFFF" stroke={c.line} strokeWidth="4" />
+      <path d="M142 24h4a6 6 0 016 6v104a6 6 0 01-6 6h-98" fill="none" stroke="#D9DEE3" strokeWidth="3" strokeLinecap="round" />
+      <rect x="40" y="8" width="104" height="128" rx="9" fill={c.solid} stroke={c.line} strokeWidth="5" />
+      <rect x="40" y="8" width="16" height="128" rx="8" fill={c.line} />
+      <rect x="48" y="8" width="8" height="128" fill={c.line} />
     </svg>
   );
 }
