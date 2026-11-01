@@ -14,7 +14,7 @@ export const PRESETS = [
   '#FFFFFF', '#E3E8ED', '#BFC8D0', '#8FA8BF', '#5E7A8C', '#1B2A38',
 ];
 
-const RECENT_MAX = 10;
+const RECENT_MAX = 11; // 10 màu vừa dùng hiển thị + màu đang chọn (không hiện trong hàng)
 const FAV_MAX = 16;
 
 function load(key) {
