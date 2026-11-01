@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
+import { Awning, Lamp, Star, Bag, RubyGem, BrushCup, Palette, SHOP_W, SHOP_H } from '../../components/ShopScene';
 
 function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
@@ -31,13 +32,13 @@ function Preview({ item, scene = false }) {
   return null;
 }
 
-// Cảnh quầy hàng (ảnh nền 1672×863): 2 kệ × 4 ô, bảng chọn loại ở bên trái.
-const W = 1672;
-const H = 863;
-const COLS = [325, 610, 893, 1177];
+// Cảnh quầy hàng (khung 1821×864, nền trời là ảnh): 2 kệ × 4 ô, bảng chọn loại ở bên trái.
+const W = SHOP_W;
+const H = SHOP_H;
+const COLS = [368, 670, 972, 1274];
 const SLOTS = [
-  ...COLS.map((x) => [x, 297, 264, 217]),
-  ...COLS.map((x) => [x, 547, 264, 205]),
+  ...COLS.map((x) => [x, 318, 284, 206]),
+  ...COLS.map((x) => [x, 588, 284, 202]),
 ];
 const pc = (v, total) => `${(v / total) * 100}%`;
 const box = ([x, y, w, h]) => ({ left: pc(x, W), top: pc(y, H), width: pc(w, W), height: pc(h, H) });
@@ -64,7 +65,7 @@ function SceneCard({ item, ruby, equipped, onBuy, onEquip, t, lang, geo }) {
             )
           ) : (
             <button type="button" className="sh-btn" disabled={ruby < item.price} onClick={() => onBuy(item)} data-testid={`buy-${item.slug}`}>
-              <Icon name="ruby" size={20} /> {item.price}
+              <RubyGem size={20} /> {item.price}
             </button>
           )}
         </div>
@@ -149,8 +150,33 @@ export default function Shop() {
         <div className="sh-stage" data-testid="shop-stall">
           <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
           <span className="sr-only" data-testid="shop-ruby">{shop.ruby} Ruby</span>
-          <p className="sh-sub" style={box([560, 200, 575, 32])}>{t('shop.hint')}</p>
-          <div className="sh-tabs" style={box([35, 247, 226, 232])} role="tablist">
+
+          {/* Khung quầy gỗ: hai cột, xà trên, hai kệ */}
+          <span className="sh-wood sh-wall" style={box([372, 296, 1188, 504])} />
+          <span className="sh-wood sh-wall2" style={box([372, 546, 1188, 254])} />
+          <span className="sh-wood sh-post" style={box([318, 150, 58, 690])} />
+          <span className="sh-wood sh-post" style={box([1556, 150, 58, 690])} />
+          <span className="sh-wood sh-rail" style={box([336, 270, 1260, 34])} />
+          <span className="sh-wood sh-rail" style={box([304, 532, 1308, 40])} />
+          <span className="sh-wood sh-rail" style={box([292, 796, 1330, 42])} />
+          <Awning />
+          <div className="sh-lamp-wrap" style={box([428, 150, 130, 110])}><Lamp /></div>
+          <div className="sh-lamp-wrap" style={box([1356, 150, 130, 110])}><Lamp /></div>
+
+          <div className="sh-sign" style={box([690, 56, 524, 124])}>
+            <span className="sh-clip sh-clip-l" /><span className="sh-clip sh-clip-r" />
+            <Star className="sh-sign-star" /> <Bag /> <b>{t('shop.title')}</b> <Star className="sh-sign-star" />
+          </div>
+          <p className="sh-sub" style={box([600, 206, 720, 46])}>
+            <span className="sh-dash sh-dash-l" aria-hidden="true" />{t('shop.hint')}<span className="sh-dash sh-dash-r" aria-hidden="true" />
+          </p>
+
+          <div className="sh-deco" style={box([84, 168, 72, 72])}><Star /></div>
+          <div className="sh-deco" style={box([1668, 258, 72, 72])}><Star /></div>
+          <div className="sh-deco" style={box([116, 584, 168, 250])}><BrushCup /></div>
+          <div className="sh-deco" style={box([1566, 650, 228, 196])}><Palette /></div>
+
+          <div className="sh-tabs" style={box([26, 272, 296, 262])} role="tablist">
             {tabs.map(([k, icon, label]) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} className={`sh-tab${tab === k ? ' sh-tab-on' : ''}`} onClick={() => { setTab(k); setPage(0); }} data-testid={`shop-tab-${k}`}>
                 <span className="sh-tab-icon" aria-hidden="true">{icon}</span>
@@ -173,11 +199,11 @@ export default function Shop() {
           ))}
           {pages > 1 && (
             <>
-              <button type="button" className="sh-arrow" style={box([760, 784, 56, 56])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="shop-prev">
+              <button type="button" className="sh-arrow" style={box([770, 806, 48, 48])} disabled={cur === 0} onClick={() => setPage(cur - 1)} aria-label={t('common.back')} data-testid="shop-prev">
                 <Icon name="back" size={22} strokeWidth={3.4} />
               </button>
-              <span className="sh-page" style={box([826, 796, 84, 32])}>{cur + 1}/{pages}</span>
-              <button type="button" className="sh-arrow" style={box([920, 784, 56, 56])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="shop-next">
+              <span className="sh-page" style={box([826, 812, 84, 34])}>{cur + 1}/{pages}</span>
+              <button type="button" className="sh-arrow" style={box([906, 806, 48, 48])} disabled={cur >= pages - 1} onClick={() => setPage(cur + 1)} aria-label={t('common.next')} data-testid="shop-next">
                 <Icon name="chevronRight" size={22} strokeWidth={3.4} />
               </button>
             </>
