@@ -1578,6 +1578,13 @@ ART_THEMES.push({
         { slug: 'tien-ca-chau-anh', name: { vi: 'Tiên Cá Châu Anh', en: 'Pearl Mermaid' }, file: 'tien-ca-chau-anh--tien-ca-chau-anh' },
       ],
     },
+    {
+      slug: 'tien-ca-bang-nhi',
+      name: { vi: 'Tiên Cá Băng Nhi', en: 'Ice Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-bang-nhi', name: { vi: 'Tiên Cá Băng Nhi', en: 'Ice Mermaid' }, file: 'tien-ca-bang-nhi--tien-ca-bang-nhi' },
+      ],
+    },
   ],
 });
 

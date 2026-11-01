@@ -234,3 +234,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Tiên Cá Hải Lam (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu) | – | `src/tien-ca-hai-lam--tien-ca-hai-lam.png` | 158 |
 | Tiên Cá Châu Anh (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối 11 đoạn nét hở) | – | `src/tien-ca-chau-anh--tien-ca-chau-anh.png` | 168 |
 | Tiên Cá Châu Anh (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối 11 đoạn nét hở) | – | `src/tien-ca-chau-anh--tien-ca-chau-anh.png` | 168 |
+| Tiên Cá Châu Anh, Tiên Cá Băng Nhi (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối nét hở) | – | `src/tien-ca-bang-nhi--tien-ca-bang-nhi.png` | 209 |
