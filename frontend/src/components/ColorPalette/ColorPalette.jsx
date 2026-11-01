@@ -58,11 +58,11 @@ function Swatch({ color, active, onClick, label, number, glitter = false }) {
       onClick={onClick}
       aria-label={label || color}
       title={label || color}
-      className={`cw-sw relative flex shrink-0 items-center justify-center rounded-full border-2 transition ${active ? 'scale-110 border-ink ring-4 ring-primary/40' : 'border-white shadow-[0_0_0_1px_#C9DDF0]'}`}
+      className={`cw-sw relative flex shrink-0 items-center justify-center rounded-full transition ${active ? 'scale-110 ring-[3px] ring-ink ring-offset-2 ring-offset-white' : 'ring-1 ring-black/15'}`}
       style={glitter ? { backgroundColor: color, ...GRAINS } : { background: color }}
     >
       {number != null && (
-        <span className="text-base font-extrabold leading-none" style={{ color: ink, textShadow: ink === '#FFFFFF' ? '0 1px 2px rgba(0,0,0,.45)' : '0 1px 0 rgba(255,255,255,.5)' }}>
+        <span className="text-base font-extrabold leading-none" style={{ color: ink }}>
           {number}
         </span>
       )}
@@ -113,7 +113,7 @@ export default function ColorPalette({ glitter = false, color, onChange, userKey
     <div className="cw-palette space-y-3" data-testid="color-palette">
       <div className="flex items-center gap-2">
         <label className="relative flex h-12 cursor-pointer items-center gap-2 rounded-full border-2 border-line bg-white px-2 pr-3 font-bold" title={t('coloring.customColor')}>
-          <span className="h-8 w-8 shrink-0 rounded-full border-2 border-white shadow-[0_0_0_1px_#C9DDF0]" style={glitter ? { backgroundColor: color, ...GRAINS } : { background: color }} />
+          <span className="h-8 w-8 shrink-0 rounded-full ring-1 ring-black/15" style={glitter ? { backgroundColor: color, ...GRAINS } : { background: color }} />
           <Icon name="palette" size={20} />
           <input type="color" value={color} onChange={(e) => onChange(e.target.value.toUpperCase())} className="absolute inset-0 cursor-pointer opacity-0" aria-label={t('coloring.customColor')} />
         </label>
