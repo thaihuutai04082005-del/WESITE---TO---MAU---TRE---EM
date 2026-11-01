@@ -68,11 +68,25 @@ export default function ColoringWorkspace({
     if (template) setNumber(picture.palette.find((p) => p.color.toUpperCase() === c.toUpperCase())?.number ?? null);
   };
 
+  // Bố cục: máy tính (≥ lg) chia 3 cột vừa khít màn hình, không cuộn trang — trái: thông tin + tranh mẫu + nút Lưu/Hoàn thành;
+  // giữa: khung tô (vuông, lớn nhất có thể); phải: bộ công cụ + bảng của công cụ đang chọn. Điện thoại / máy tính bảng: xếp dọc.
   return (
-    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
-      <div className="min-w-0">
-        {header}
-        <div className="relative mx-auto max-w-[min(100%,calc(100vh-180px))]">
+    <div className={`cw ${template ? 'cw-template' : 'cw-free'}`}>
+      <div className="cw-left">
+        <div className="cw-header">{header}</div>
+        {template && (
+          <div className="cw-ref card hidden p-3 lg:block">
+            <div className="mb-2 font-bold">{t('coloring.reference')}</div>
+            <button type="button" onClick={() => setShowRef(true)} className="block w-full cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
+              <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+            </button>
+          </div>
+        )}
+        {actions && <div className="cw-actions">{actions}</div>}
+      </div>
+
+      <div className="cw-stage">
+        <div className="cw-square relative">
           <Canvas
             ref={canvasRef}
             picture={picture}
@@ -101,18 +115,9 @@ export default function ColoringWorkspace({
             </button>
           )}
         </div>
-        {actions && <div className="mt-3 flex flex-wrap justify-center gap-2">{actions}</div>}
       </div>
 
-      <aside className="space-y-4">
-        {template && (
-          <div className="card hidden p-3 lg:block">
-            <div className="mb-2 font-bold">{t('coloring.reference')}</div>
-            <button type="button" onClick={() => setShowRef(true)} className="block w-full cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
-              <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
-            </button>
-          </div>
-        )}
+      <aside className="cw-tools">
         <div className="card p-3">
           <ToolBar
             tool={tool}

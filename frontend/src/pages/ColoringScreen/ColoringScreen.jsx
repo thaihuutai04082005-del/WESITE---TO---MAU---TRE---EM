@@ -173,7 +173,7 @@ export default function ColoringScreen() {
   const mode = artwork.mode === 'template' ? 'template' : 'free';
 
   return (
-    <div className="page pb-8">
+    <div className="cw-page">
       <ColoringWorkspace
         picture={picture}
         editor={editor}

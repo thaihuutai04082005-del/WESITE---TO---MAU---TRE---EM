@@ -218,7 +218,7 @@ export default function ArenaRoom() {
   if (playing) {
     const doneCount = room.players.filter((p) => p.submitted).length;
     return (
-      <div className="page pb-8">
+      <div className="cw-page">
         <ColoringWorkspace
           picture={picture}
           editor={editor}

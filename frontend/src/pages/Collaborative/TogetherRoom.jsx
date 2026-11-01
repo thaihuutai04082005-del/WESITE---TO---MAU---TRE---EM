@@ -131,7 +131,7 @@ export default function TogetherRoom() {
   const remoteCursors = Object.values(cursors).map((c) => ({ ...c, name: room.players.find((p) => p.id === c.userId)?.nickname || '' }));
 
   return (
-    <div className="page pb-8">
+    <div className="cw-page">
       <ColoringWorkspace
         picture={picture}
         editor={editor}
