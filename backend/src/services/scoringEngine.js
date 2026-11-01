@@ -208,7 +208,7 @@ export function timeScore({ coverage, elapsedMs, durationMs }) {
 }
 
 const STROKE_KINDS = ['crayon', 'brush', 'glitter', 'pattern'];
-const PATTERN_IDS = ['rainbow', 'dots', 'stars', 'hearts', 'flowers', 'bee'];
+const PATTERN_IDS = ['rainbow', 'dots', 'stars', 'hearts', 'flowers', 'bee', 'caro', 'song-bien', 'keo-ngot', 'la-xanh', 'bong-bong', 'zigzag'];
 
 /** Làm sạch dữ liệu tranh gửi lên: chỉ giữ vùng có thật và mã màu hợp lệ. */
 export function sanitizeArtworkData(manifest, data) {

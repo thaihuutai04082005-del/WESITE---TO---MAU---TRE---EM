@@ -1,4 +1,4 @@
-// Mục 8.4: Shop — mua skin cọ vẽ & Khung Artwork bằng Ruby. Khung Avatar không bán (mở theo Rank).
+// Mục 8.4: Shop — mua màu họa tiết, bìa truyện & Khung Artwork bằng Ruby. Khung Avatar không bán (mở theo Rank).
 import { getDb, tx } from '../config/db.js';
 import * as User from '../models/user.js';
 import * as progression from '../services/progression.js';
@@ -8,7 +8,7 @@ export function list(req, res) {
   const items = getDb()
     .prepare(
       `SELECT i.*, EXISTS (SELECT 1 FROM user_items ui WHERE ui.item_id = i.id AND ui.user_id = ?) AS owned
-       FROM items i ORDER BY i.type, i.sort`,
+       FROM items i WHERE i.type != 'brush_skin' ORDER BY i.type, i.sort`,
     )
     .all(req.user.id)
     .map((i) => ({

@@ -206,6 +206,17 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   assert.equal(pull.body.gachaPoints, 30, 'dư 30 điểm giữ lại');
   assert.equal((await api('POST', '/shop/khung-hoa/buy', null, a.token)).body.ruby, 30);
 
+  // Màu họa tiết & bìa truyện: bán trong Shop, bìa chưa mua thì không gắn được vào truyện.
+  const shop1 = await api('GET', '/shop', null, a.token);
+  assert.ok(shop1.body.items.some((i) => i.type === 'pattern' && i.slug === 'caro' && !i.owned));
+  assert.ok(!shop1.body.items.some((i) => i.type === 'brush_skin'), 'skin cọ không còn bán');
+  assert.equal((await api('POST', '/storybooks', { title: 'T', pages: [], coverStyle: 'bia-hong-phan' }, a.token)).body.error.code, 'cover_not_owned');
+  assert.equal((await api('POST', '/shop/caro/buy', null, a.token)).body.error.code, 'not_enough_ruby');
+  assert.equal((await api('POST', '/shop/bia-hong-phan/buy', null, a.token)).body.ruby, 0);
+  const sbOk = await api('POST', '/storybooks', { title: 'T', pages: [], coverStyle: 'bia-hong-phan' }, a.token);
+  assert.equal(sbOk.body.storybook.coverStyle, 'bia-hong-phan');
+  getDb().prepare('UPDATE users SET ruby = 30 WHERE id = ?').run(a.id);
+
   // Kết bạn
   const me = await api('GET', '/social/friends', null, b.token);
   const add = await api('POST', '/social/friends', { code: me.body.myCode }, a.token);

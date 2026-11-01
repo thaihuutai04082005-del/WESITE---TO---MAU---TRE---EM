@@ -6,6 +6,7 @@ import { api } from '../../services/api';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import Icon from '../../components/Icon';
+import { coverOf } from '../../lib/storyCovers';
 
 export default function StorybookEditor() {
   const { id } = useParams();
@@ -15,12 +16,16 @@ export default function StorybookEditor() {
   const [title, setTitle] = useState('');
   const [pages, setPages] = useState([]);
   const [available, setAvailable] = useState([]);
+  const [coverStyle, setCoverStyle] = useState(null);
+  const [covers, setCovers] = useState([]); // bìa đã mua trong Shop
 
   useEffect(() => {
     api.get('/artworks?status=completed&mode=free').then((r) => setAvailable(r.artworks));
+    api.get('/shop').then((r) => setCovers(r.items.filter((i) => i.type === 'storybook_cover' && i.owned))).catch(() => {});
     if (id)
       api.get(`/storybooks/${id}`).then((r) => {
         setTitle(r.storybook.title);
+        setCoverStyle(r.storybook.coverStyle);
         setPages(r.storybook.pages.map((p) => ({ artworkId: p.artworkId, caption: p.caption, image: p.image })));
       });
   }, [id]);
@@ -37,7 +42,7 @@ export default function StorybookEditor() {
 
   async function save() {
     try {
-      const body = { title, pages: pages.map(({ artworkId, caption }) => ({ artworkId, caption })) };
+      const body = { title, coverStyle, pages: pages.map(({ artworkId, caption }) => ({ artworkId, caption })) };
       const r = id ? await api.put(`/storybooks/${id}`, body) : await api.post('/storybooks', body);
       toast(t('storybook.saved'), 'success');
       navigate(`/storybooks/${r.storybook.id}`);
@@ -56,6 +61,20 @@ export default function StorybookEditor() {
         <label className="label" htmlFor="sb-title">{t('storybook.bookTitle')}</label>
         <input id="sb-title" className="input" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={80} placeholder={t('storybook.titlePlaceholder')} data-testid="storybook-title" />
       </div>
+
+      <section>
+        <div className="label">{t('storybook.coverPick')}</div>
+        <div className="flex flex-wrap items-center gap-3">
+          {[{ slug: null, name: { vi: t('storybook.coverDefault'), en: t('storybook.coverDefault') } }, ...covers].map((c) => {
+            const cv = coverOf(c.slug);
+            return (
+              <button key={c.slug || 'default'} type="button" onClick={() => setCoverStyle(c.slug)} aria-pressed={coverStyle === c.slug} title={c.name[i18n.language]} data-testid={`cover-${c.slug || 'default'}`}
+                className={`h-20 w-16 rounded-xl border-4 ${coverStyle === c.slug ? 'ring-4 ring-primary/40' : ''}`} style={{ background: cv.bg, borderColor: cv.line }} />
+            );
+          })}
+          {covers.length === 0 && <Link to="/shop" className="text-sm font-bold text-primary">{t('storybook.buyCovers')}</Link>}
+        </div>
+      </section>
 
       <section>
         <h2 className="mb-2 font-display text-2xl font-bold">{t('storybook.pagesTitle', { n: pages.length })}</h2>

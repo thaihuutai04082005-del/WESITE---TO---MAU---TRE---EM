@@ -2,9 +2,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Icon from '../Icon';
+import { coverOf } from '../../lib/storyCovers';
 
-export default function FlipbookViewer({ title, author, pages = [] }) {
+export default function FlipbookViewer({ title, author, pages = [], coverStyle = null }) {
   const { t } = useTranslation();
+  const cv = coverOf(coverStyle);
   const sheets = [{ cover: true }, ...pages];
   const [index, setIndex] = useState(0);
   const next = useCallback(() => setIndex((i) => Math.min(sheets.length - 1, i + 1)), [sheets.length]);
@@ -26,11 +28,11 @@ export default function FlipbookViewer({ title, author, pages = [] }) {
           <div
             key={i}
             className={`flip-page card absolute inset-0 flex flex-col overflow-hidden p-4 ${i < index ? 'turned' : ''}`}
-            style={{ zIndex: sheets.length - i, background: p.cover ? 'linear-gradient(160deg,#EAF6FF,#BDE6FF)' : '#FFFFFF' }}
+            style={{ zIndex: sheets.length - i, background: p.cover ? cv.bg : '#FFFFFF' }}
           >
             {p.cover ? (
-              <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl border-4 border-primary p-6 text-center">
-                <Icon name="book" size={56} className="text-primary" />
+              <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl border-4 p-6 text-center" style={{ borderColor: cv.line }}>
+                <span style={{ color: cv.line }}><Icon name="book" size={56} /></span>
                 <h2 className="font-display text-3xl font-extrabold leading-tight md:text-4xl">{title}</h2>
                 {author && <div className="text-lg text-muted">{t('storybook.by', { name: author })}</div>}
               </div>

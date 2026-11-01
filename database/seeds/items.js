@@ -1,11 +1,17 @@
-// Vật phẩm: skin cọ vẽ (50–100 Ruby), Khung Artwork thường (100–200) và đặc biệt/limited (300–500),
+// Vật phẩm: màu họa tiết (40–90 Ruby), bìa truyện (30 Ruby), Khung Artwork thường (100–200) và đặc biệt/limited (300–500),
 // Khung gỗ mộc là khung mặc định miễn phí (price 0 = ai cũng có, không bán). Khung Avatar theo Rank (không bán — mở khoá khi thăng hạng).
 export const ITEMS = [
-  { type: 'brush_skin', slug: 'but-sap', name_vi: 'Bút sáp', name_en: 'Crayon', price: 50 },
-  { type: 'brush_skin', slug: 'but-cham-bi', name_vi: 'Bút chấm bi', name_en: 'Polka dots', price: 60 },
-  { type: 'brush_skin', slug: 'but-neon', name_vi: 'Bút neon phát sáng', name_en: 'Neon glow', price: 70 },
-  { type: 'brush_skin', slug: 'but-long-vu', name_vi: 'Bút lông vũ mềm', name_en: 'Soft feather', price: 80 },
-  { type: 'brush_skin', slug: 'but-cau-vong', name_vi: 'Bút cầu vồng', name_en: 'Rainbow', price: 100 },
+  { type: 'pattern', slug: 'caro', name_vi: 'Họa tiết caro', name_en: 'Checkered', price: 40, sort: 1 },
+  { type: 'pattern', slug: 'song-bien', name_vi: 'Họa tiết sóng biển', name_en: 'Ocean waves', price: 50, sort: 2 },
+  { type: 'pattern', slug: 'keo-ngot', name_vi: 'Họa tiết kẹo ngọt', name_en: 'Candy stripes', price: 60, sort: 3 },
+  { type: 'pattern', slug: 'la-xanh', name_vi: 'Họa tiết lá xanh', name_en: 'Green leaves', price: 70, sort: 4 },
+  { type: 'pattern', slug: 'bong-bong', name_vi: 'Họa tiết bong bóng', name_en: 'Bubbles', price: 80, sort: 5 },
+  { type: 'pattern', slug: 'zigzag', name_vi: 'Họa tiết zigzag', name_en: 'Zigzag', price: 90, sort: 6 },
+  { type: 'storybook_cover', slug: 'bia-xanh-troi', name_vi: 'Bìa xanh da trời', name_en: 'Sky blue cover', price: 30, sort: 1 },
+  { type: 'storybook_cover', slug: 'bia-hong-phan', name_vi: 'Bìa hồng phấn', name_en: 'Pink cover', price: 30, sort: 2 },
+  { type: 'storybook_cover', slug: 'bia-xanh-la', name_vi: 'Bìa xanh lá', name_en: 'Green cover', price: 30, sort: 3 },
+  { type: 'storybook_cover', slug: 'bia-vang-nang', name_vi: 'Bìa vàng nắng', name_en: 'Sunny yellow cover', price: 30, sort: 4 },
+  { type: 'storybook_cover', slug: 'bia-tim-oai-huong', name_vi: 'Bìa tím oải hương', name_en: 'Lavender cover', price: 30, sort: 5 },
 
   { type: 'artwork_frame', slug: 'khung-go', name_vi: 'Khung gỗ mộc', name_en: 'Wooden frame', price: 0 },
   { type: 'artwork_frame', slug: 'khung-hoa', name_vi: 'Khung hoa xinh', name_en: 'Flower frame', price: 120 },

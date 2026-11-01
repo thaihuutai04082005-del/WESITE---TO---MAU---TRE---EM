@@ -1,6 +1,7 @@
 // Khu vực tô màu dùng chung cho: tô cá nhân, Đấu trường, tô cùng nhau.
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { api } from '../services/api';
 import Canvas from './Canvas/Canvas';
 import ToolBar, { SIZES, STICKER_SCALES } from './ToolBar/ToolBar';
 import ColorPalette from './ColorPalette/ColorPalette';
@@ -36,6 +37,10 @@ export default function ColoringWorkspace({
   const [color, setColor] = useState(() => picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.color || '#FF5F7E'); // màu đầu tiên không phải màu trắng
   const [sizeIdx, setSizeIdx] = useState(0); // mặc định cỡ nét lớn nhất
   const [pattern, setPattern] = useState('rainbow');
+  const [ownedPatterns, setOwnedPatterns] = useState([]); // họa tiết đã mua trong Shop
+  useEffect(() => {
+    api.get('/shop').then((r) => setOwnedPatterns(r.items.filter((i) => i.type === 'pattern' && i.owned).map((i) => i.slug))).catch(() => {});
+  }, []);
   const [stickerType, setStickerType] = useState('star');
   const [number, setNumber] = useState(mode === 'template' ? picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.number ?? picture?.palette?.[0]?.number ?? null : null);
   const [confirmClear, setConfirmClear] = useState(false);
@@ -128,6 +133,7 @@ export default function ColoringWorkspace({
             setSizeIdx={setSizeIdx}
             pattern={pattern}
             setPattern={setPattern}
+            ownedPatterns={ownedPatterns}
             stickerType={stickerType}
             setStickerType={setStickerType}
             canUndo={editor.canUndo}

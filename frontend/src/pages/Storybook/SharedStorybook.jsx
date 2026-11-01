@@ -17,7 +17,7 @@ export default function SharedStorybook() {
   if (!book) return <div className="page text-muted">{t('common.loading')}</div>;
   return (
     <div className="page space-y-4">
-      <FlipbookViewer title={book.title} author={book.author} pages={book.pages} />
+      <FlipbookViewer title={book.title} author={book.author} pages={book.pages} coverStyle={book.coverStyle} />
       <div className="text-center">
         <a href={`/api/storybooks/shared/${token}/pdf`} className="btn-primary">PDF</a>
       </div>

@@ -62,7 +62,7 @@ export default function StorybookView() {
       <Link to="/storybooks" className="inline-flex items-center gap-1 font-bold text-primary">
         <Icon name="back" size={20} /> {t('storybook.title')}
       </Link>
-      <FlipbookViewer title={book.title} author={user.nickname} pages={book.pages} />
+      <FlipbookViewer title={book.title} author={user.nickname} pages={book.pages} coverStyle={book.coverStyle} />
       <div className="flex flex-wrap justify-center gap-2">
         {!book.completed && (
           <button type="button" className="btn-coral" onClick={complete} disabled={book.pages.length < 2} data-testid="storybook-complete">
