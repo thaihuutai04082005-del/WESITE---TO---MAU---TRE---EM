@@ -104,6 +104,7 @@ export default function Layout() {
                   title={t(`nav.${n.key}`)}
                   className={({ isActive }) => (n.key === 'collection' ? `nav-pill${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
                   data-testid={`nav-${n.key}`}
+                  data-fly-target={n.key}
                 >
                   {n.key === 'collection' ? (
                     <img src="/mascots/suutap.webp" alt="" className="h-8 w-auto shrink-0" draggable="false" />
@@ -157,7 +158,7 @@ export default function Layout() {
       {user && (
         <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
           {navOf(MOBILE_MAIN).map((n) => (
-            <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
+            <NavLink key={n.to} to={n.to} end={n.end} data-fly-target={n.key} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
               <Icon name={n.icon} />
               {t(`nav.${n.key}`)}
             </NavLink>
