@@ -1517,3 +1517,46 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .framed-in > img { width: 100%; height: 100%; object-fit: cover; }
 .room-slot-empty { cursor: default; pointer-events: none; }
 .room-slot-empty:hover { transform: none; filter: none; }
+
+/* ---------- Nhiệm vụ ---------- */
+.mp-page { max-width: 1000px; padding-top: 14px; padding-bottom: 40px; position: relative; z-index: 1; }
+.mp-head { display: flex; align-items: center; gap: 16px; }
+.mp-badge { width: 92px; height: 92px; flex: none; }
+.mp-title { font-family: var(--font-display, inherit); font-weight: 800; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.1; color: #12356B; }
+.mp-sub { display: inline-block; margin-top: 6px; padding: 6px 18px; border-radius: 9999px; background: rgba(255,255,255,0.85); color: #3C5A78; font-weight: 600; box-shadow: 0 2px 6px rgba(70,120,170,0.15); }
+.mp-art { width: 190px; height: 130px; margin-left: auto; flex: none; }
+.mp-stats { display: flex; justify-content: center; gap: 24px; margin: 14px 0 20px; flex-wrap: wrap; }
+.mp-stat { display: flex; align-items: center; gap: 16px; min-width: 250px; padding: 14px 28px; border: 2.5px solid #C9E1F5; border-radius: 26px; background: rgba(255,255,255,0.92); box-shadow: 0 4px 10px rgba(70,120,170,0.18); }
+.mp-stat-ic { width: 60px; height: 60px; display: grid; place-items: center; flex: none; }
+.mp-stat-l { font-weight: 700; color: #3C5A78; }
+.mp-stat-v { font-family: var(--font-display, inherit); font-weight: 800; font-size: 36px; line-height: 1.05; color: #12356B; }
+.mp-panel { position: relative; padding: 70px 20px 18px; border: 3px solid #fff; border-radius: 40px; background: linear-gradient(#F4FAFF, #EAF4FF); box-shadow: 0 6px 18px rgba(70,120,170,0.22); }
+.mp-tab { position: absolute; left: 16px; top: -14px; display: flex; align-items: center; gap: 12px; padding: 8px 26px 8px 62px; border-radius: 9999px; background: linear-gradient(#3FA2F7, #1F7FE0); color: #fff; box-shadow: 0 3px 0 #1565B8; }
+.mp-tab h2 { font-family: var(--font-display, inherit); font-weight: 800; font-size: 28px; }
+.mp-tab-ic { position: absolute; left: 8px; top: -8px; width: 52px; height: 62px; }
+.mp-count { position: absolute; right: 22px; top: 18px; padding: 4px 26px; border-radius: 9999px; background: #CFE6FA; color: #1F6FBF; font-family: var(--font-display, inherit); font-weight: 800; font-size: 28px; }
+.mp-list { display: flex; flex-direction: column; gap: 12px; }
+.mp-row { display: flex; align-items: center; gap: 16px; padding: 14px 24px 14px 26px; border: 2px solid #D5E6F6; border-radius: 26px; background: rgba(255,255,255,0.9); }
+.mp-row-done { border-color: #BDE9C6; background: #E7F8EA; }
+.mp-mark { width: 66px; height: 66px; flex: none; display: grid; place-items: center; border-radius: 9999px; background: #CFE6FA; border: 3px solid #A9D1F5; }
+.mp-mark-done { background: #2FA65A; border-color: #2FA65A; color: #fff; }
+.mp-ring { width: 26px; height: 26px; border-radius: 9999px; background: #2B9BF4; box-shadow: 0 0 0 6px #fff; }
+.mp-name { font-family: var(--font-display, inherit); font-weight: 800; font-size: 24px; line-height: 1.2; color: #12263F; }
+.mp-reward { display: flex; align-items: center; gap: 6px; margin: 2px 0 6px; font-weight: 800; color: #1F7FE0; }
+.mp-row-done .mp-reward { color: #2FA65A; }
+.mp-prog { min-width: 70px; text-align: right; font-family: var(--font-display, inherit); font-weight: 800; font-size: 30px; color: #2B9BF4; }
+.mp-prog-done { color: #2FA65A; }
+.mp-maxed { padding: 20px; text-align: center; font-weight: 800; }
+.mp-hint { display: flex; align-items: center; justify-content: center; gap: 8px; width: fit-content; margin: 16px auto 0; padding: 8px 24px; border-radius: 9999px; background: rgba(255,255,255,0.9); color: #12356B; font-weight: 600; box-shadow: 0 2px 6px rgba(70,120,170,0.15); }
+@media (max-width: 720px) {
+  .mp-badge { width: 60px; height: 60px; }
+  .mp-art { display: none; }
+  .mp-stat { min-width: 0; flex: 1 1 140px; padding: 10px 14px; }
+  .mp-stat-v { font-size: 28px; }
+  .mp-tab h2 { font-size: 20px; }
+  .mp-count { font-size: 20px; padding: 2px 16px; }
+  .mp-name { font-size: 18px; }
+  .mp-prog { font-size: 22px; min-width: 50px; }
+  .mp-mark { width: 48px; height: 48px; }
+  .mp-row { padding: 10px 14px; gap: 10px; }
+}
