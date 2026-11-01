@@ -257,15 +257,60 @@ function paintBody(ctx, stroke, s, pts, width) {
   }
 }
 
-/** `region`: Path2D của vùng khóa (toạ độ tranh) — nét chỉ hiện trong vùng này. */
+let tmpCanvas = null;
+function tmpFor(w, h) {
+  tmpCanvas ||= document.createElement('canvas');
+  if (tmpCanvas.width !== w || tmpCanvas.height !== h) {
+    tmpCanvas.width = w;
+    tmpCanvas.height = h;
+  }
+  return tmpCanvas;
+}
+
+/**
+ * `region`: { path, above } của vùng khóa (toạ độ tranh) — nét chỉ hiện trong vùng này và không đè lên các vùng nằm trên nó.
+ * Vùng có vùng khác đè lên thì nét được vẽ ra lớp tạm, trừ các vùng đó đi rồi mới ghép vào.
+ */
 export function drawStroke(ctx, stroke, s, region = null) {
   const pts = stroke.points;
   if (!pts?.length) return;
+  if (!region?.above?.length) return drawStrokeRaw(ctx, stroke, s, region?.path || null);
+  const W = ctx.canvas.width;
+  const H = ctx.canvas.height;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [x, y] of pts) {
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x);
+    y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+  }
+  const pad = (stroke.size + 6) * s;
+  const bx = Math.max(0, Math.floor(x0 * s - pad));
+  const by = Math.max(0, Math.floor(y0 * s - pad));
+  const bw = Math.min(W, Math.ceil(x1 * s + pad)) - bx;
+  const bh = Math.min(H, Math.ceil(y1 * s + pad)) - by;
+  if (bw <= 0 || bh <= 0) return;
+  const eraser = stroke.tool === 'eraser';
+  const tc = tmpFor(W, H);
+  const t = tc.getContext('2d');
+  t.clearRect(bx, by, bw, bh);
+  drawStrokeRaw(t, eraser ? { tool: 'brush', color: '#000000', size: stroke.size, points: pts } : stroke, s, region.path);
+  t.save();
+  t.setTransform(s, 0, 0, s, 0, 0);
+  t.globalCompositeOperation = 'destination-out';
+  for (const p of region.above) t.fill(p);
+  t.restore();
+  ctx.save();
+  if (eraser) ctx.globalCompositeOperation = 'destination-out';
+  ctx.drawImage(tc, bx, by, bw, bh, bx, by, bw, bh);
+  ctx.restore();
+}
+
+function drawStrokeRaw(ctx, stroke, s, regionPath = null) {
+  const pts = stroke.points;
   const width = stroke.size * s;
   ctx.save();
-  if (region) {
+  if (regionPath) {
     ctx.setTransform(s, 0, 0, s, 0, 0);
-    ctx.clip(region);
+    ctx.clip(regionPath);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
   ctx.lineCap = 'round';

@@ -166,17 +166,17 @@ const Canvas = forwardRef(function Canvas(
   /** Sau mỗi nét: vùng phủ ≥ 80% thì ghi màu vùng (để tiến độ, điểm số, gợi ý số chạy được); tẩy bớt thì gỡ. */
   function fillAfter(st) {
     const rid = st.region;
-    const path = paths.get(rid);
-    if (!path) return null;
+    const region = paths.get(rid);
+    if (!region) return null;
     const mine = data.strokes.filter((x) => x.region === rid);
     const hadPaint = mine.some((x) => x.tool !== 'eraser');
     if (st.tool === 'eraser') {
       if (!data.fills[rid]) return null;
       if (!hadPaint) return { regionId: rid, color: null }; // tranh cũ tô bằng xô: tẩy là gỡ màu vùng
-      return regionCoverage(path, [...mine, st]) < FILL_THRESHOLD ? { regionId: rid, color: null } : null;
+      return regionCoverage(region, [...mine, st]) < FILL_THRESHOLD ? { regionId: rid, color: null } : null;
     }
     const all = [...mine, st];
-    if (regionCoverage(path, all) < FILL_THRESHOLD) return null;
+    if (regionCoverage(region, all) < FILL_THRESHOLD) return null;
     const c = dominantColor(all);
     return c && data.fills[rid] !== c ? { regionId: rid, color: c } : null;
   }

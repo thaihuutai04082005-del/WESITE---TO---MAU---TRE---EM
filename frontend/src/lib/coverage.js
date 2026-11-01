@@ -10,19 +10,21 @@ let c2 = null;
 const ctx1 = () => (c1 ||= Object.assign(document.createElement('canvas'), { width: N, height: N }).getContext('2d', { willReadFrequently: true }));
 const ctx2 = () => (c2 ||= Object.assign(document.createElement('canvas'), { width: N, height: N }).getContext('2d', { willReadFrequently: true }));
 
-export function regionCoverage(path, strokes) {
+export function regionCoverage(region, strokes) {
   const s = N / 600;
   const area = ctx2();
   area.clearRect(0, 0, N, N);
   area.save();
   area.setTransform(s, 0, 0, s, 0, 0);
   area.fillStyle = '#000';
-  area.fill(path);
+  area.fill(region.path);
+  area.globalCompositeOperation = 'destination-out';
+  for (const p of region.above) area.fill(p);
   area.restore();
   const a = area.getImageData(0, 0, N, N).data;
   const paint = ctx1();
   paint.clearRect(0, 0, N, N);
-  for (const st of strokes) drawStroke(paint, st, s, path);
+  for (const st of strokes) drawStroke(paint, st, s, region);
   const p = paint.getImageData(0, 0, N, N).data;
   let total = 0;
   let covered = 0;
