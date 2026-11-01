@@ -37,7 +37,7 @@ function KeyBtn({ icon, label, onClick, active, disabled, tone = 'blue', testId 
 
 export default function ToolBar({
   tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, stickerType, setStickerType, stickerSizeIdx, setStickerSizeIdx,
-  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowSignature = false,
+  canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowSignature = false, colorPanel = null,
 }) {
   const { t } = useTranslation();
   const swatches = useMemo(() => Object.fromEntries(PATTERNS.map((p) => [p.id, patternSwatchUrl(p.id, 56)])), []);
@@ -69,6 +69,16 @@ export default function ToolBar({
         </div>
       </div>
 
+      <div className="flex flex-wrap gap-2">
+        <SmallBtn icon="hand" label={t('tools.pan')} active={tool === 'pan'} onClick={() => setTool('pan')} testId="tool-pan" />
+        {allowSignature && <SmallBtn icon="signature" label={t('tools.signature')} active={tool === 'signature'} onClick={() => setTool('signature')} testId="tool-signature" />}
+        <SmallBtn icon="zoomIn" label={t('tools.zoomIn')} onClick={onZoomIn} />
+        <SmallBtn icon="zoomOut" label={t('tools.zoomOut')} onClick={onZoomOut} />
+        <SmallBtn icon="expand" label={t('tools.zoomReset')} onClick={onZoomReset} />
+      </div>
+
+      {/* Bảng riêng của công cụ đang chọn: bút sáp / cọ / sáp hạt → hộp màu; họa tiết → họa tiết; sticker → sticker + cỡ. */}
+      {['crayon', 'brush', 'glitter'].includes(tool) && colorPanel}
       {tool === 'pattern' && (
         <div>
           <div className="mb-1 text-sm font-bold text-muted">{t('tools.pickPattern')}</div>
@@ -106,13 +116,6 @@ export default function ToolBar({
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2">
-        <SmallBtn icon="hand" label={t('tools.pan')} active={tool === 'pan'} onClick={() => setTool('pan')} testId="tool-pan" />
-        {allowSignature && <SmallBtn icon="signature" label={t('tools.signature')} active={tool === 'signature'} onClick={() => setTool('signature')} testId="tool-signature" />}
-        <SmallBtn icon="zoomIn" label={t('tools.zoomIn')} onClick={onZoomIn} />
-        <SmallBtn icon="zoomOut" label={t('tools.zoomOut')} onClick={onZoomOut} />
-        <SmallBtn icon="expand" label={t('tools.zoomReset')} onClick={onZoomReset} />
-      </div>
     </div>
   );
 }

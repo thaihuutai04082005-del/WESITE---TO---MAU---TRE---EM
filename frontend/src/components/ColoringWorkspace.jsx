@@ -134,15 +134,17 @@ export default function ColoringWorkspace({
             onZoomOut={() => canvasRef.current?.zoomOut()}
             onZoomReset={() => canvasRef.current?.resetZoom()}
             onClear={allowClear ? () => setConfirmClear(true) : null}
+            colorPanel={
+              <div className="border-t-2 border-line pt-3">
+                <ColorPalette color={color} onChange={pickColor} userKey={userKey} numbered={template ? picture.palette : null} activeNumber={number} onNumber={setNumber} />
+              </div>
+            }
           />
           {signatureOn && tool === 'signature' && (
             <div className="mt-3 border-t-2 border-line pt-3">
               <SignaturePanel signature={editor.data.signature} hasDefault={!!signature} inks={signatureInks} onChange={(sig) => act({ type: 'signature-set', signature: sig })} />
             </div>
           )}
-        </div>
-        <div className="card p-3">
-          <ColorPalette color={color} onChange={pickColor} userKey={userKey} numbered={template ? picture.palette : null} activeNumber={number} onNumber={setNumber} />
         </div>
       </aside>
 
