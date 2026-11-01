@@ -2,7 +2,7 @@
 // khung quầy gỗ, mái hiên sọc đỏ có viền lượn, bảng hiệu, đèn có chùm sáng, bảng loại bên trái, ly cọ, bảng pha màu, ngôi sao.
 // Chữ, thẻ vật phẩm và nút nằm ở lớp HTML phía trên (xem Shop.jsx).
 export const SHOP_W = 1821;
-export const SHOP_H = 864;
+export const SHOP_H = 1040;
 
 const WOOD_OUT = '#C27A24';
 const RED = '#E2434E';
@@ -19,6 +19,7 @@ function Defs() {
       <linearGradient id="shg-roof-w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FFFFFF" /><stop offset="1" stopColor="#FCE9EA" /></linearGradient>
       <linearGradient id="shg-val-r" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#E9505B" /><stop offset="1" stopColor="#D23845" /></linearGradient>
       <linearGradient id="shg-val-w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FFF8F8" /><stop offset="1" stopColor="#F6DDDF" /></linearGradient>
+      <linearGradient id="shg-plank" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FCD07E" /><stop offset=".5" stopColor="#F7BC5C" /><stop offset="1" stopColor="#EDA645" /></linearGradient>
       <linearGradient id="shg-panel" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FF8F9A" /><stop offset="1" stopColor="#E8505E" /></linearGradient>
       <linearGradient id="shg-star" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FFEE7A" /><stop offset="1" stopColor="#FFC01F" /></linearGradient>
       <linearGradient id="shg-lamp" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#FF6A74" /><stop offset="1" stopColor="#D8394A" /></linearGradient>
@@ -48,8 +49,8 @@ function StarShape({ cx, cy, r, rot = 0 }) {
 function Post({ x }) {
   return (
     <g>
-      <rect x={x} y="150" width="58" height="690" rx="14" fill="url(#shg-post)" stroke={WOOD_OUT} strokeWidth="4" />
-      <rect x={x + 10} y="170" width="8" height="650" rx="4" fill="#FFF1CC" opacity=".55" />
+      <rect x={x} y="150" width="58" height="850" rx="14" fill="url(#shg-post)" stroke={WOOD_OUT} strokeWidth="4" />
+      <rect x={x + 10} y="170" width="8" height="810" rx="4" fill="#FFF1CC" opacity=".55" />
     </g>
   );
 }
@@ -78,7 +79,7 @@ function Rail({ x, y, w, h }) {
 function Lamp({ cx }) {
   return (
     <g>
-      <polygon points={`${cx - 46},250 ${cx + 46},250 ${cx + 150},400 ${cx - 150},400`} fill="url(#shg-beam)" />
+      <polygon points={`${cx - 46},250 ${cx + 46},250 ${cx + 150},420 ${cx - 150},420`} fill="url(#shg-beam)" />
       <rect x={cx - 7} y="150" width="14" height="30" rx="4" fill="#C93846" />
       <path d={`M${cx - 62} 232 Q${cx - 60} 180 ${cx} 176 Q${cx + 60} 180 ${cx + 62} 232 Z`} fill="url(#shg-lamp)" stroke={RED_DK} strokeWidth="4" strokeLinejoin="round" />
       <path d={`M${cx - 44} 214 Q${cx - 40} 192 ${cx - 14} 186`} fill="none" stroke="#FFD0D3" strokeWidth="6" strokeLinecap="round" opacity=".9" />
@@ -125,15 +126,18 @@ function Awning() {
 function Sign() {
   return (
     <g>
-      {[802, 1128].map((x) => (
-        <g key={x} filter="url(#shf-small)">
-          <rect x={x} y="16" width="46" height="62" rx="12" fill="#E2434E" stroke={RED_DK} strokeWidth="4" />
-          <rect x={x + 8} y="22" width="10" height="38" rx="5" fill="#FF9AA2" opacity=".8" />
+      {/* hai sợi dây treo lên mái */}
+      {[806, 1126].map((x) => (
+        <g key={x}>
+          <rect x={x} y="86" width="8" height="40" rx="4" fill="#8C5A24" stroke="#6B4118" strokeWidth="2" />
+          <circle cx={x + 4} cy="128" r="9" fill="#F4B63A" stroke="#B7791F" strokeWidth="3" />
         </g>
       ))}
       <g filter="url(#shf-soft)">
-        <rect x="738" y="54" width="456" height="130" rx="65" fill="#FFFFFF" stroke={RED} strokeWidth="9" />
-        <rect x="752" y="68" width="428" height="102" rx="51" fill="none" stroke="#FFD5D8" strokeWidth="4" />
+        <rect x="738" y="104" width="456" height="112" rx="30" fill="url(#shg-plank)" stroke="#C27A24" strokeWidth="7" />
+        <rect x="748" y="114" width="436" height="92" rx="22" fill="none" stroke="#FFE4A8" strokeWidth="3" opacity=".7" />
+        <path d="M760 142H1172M752 176H1180" stroke="#E9A94F" strokeWidth="2" opacity=".35" />
+        <path d="M790 118c60 4 120 -2 200 2" stroke="#FFF2CC" strokeWidth="4" strokeLinecap="round" opacity=".7" />
       </g>
     </g>
   );
@@ -142,15 +146,15 @@ function Sign() {
 function LeftPanel() {
   return (
     <g filter="url(#shf-soft)">
-      <rect x="26" y="272" width="296" height="262" rx="48" fill="url(#shg-panel)" stroke="#FFFFFF" strokeWidth="6" />
-      <rect x="38" y="284" width="272" height="238" rx="38" fill="none" stroke="#FFC2C8" strokeWidth="3" />
+      <rect x="26" y="340" width="296" height="300" rx="48" fill="url(#shg-panel)" stroke="#FFFFFF" strokeWidth="6" />
+      <rect x="38" y="352" width="272" height="276" rx="38" fill="none" stroke="#FFC2C8" strokeWidth="3" />
     </g>
   );
 }
 
 function BrushCup() {
   return (
-    <g transform="translate(118 584)" filter="url(#shf-small)">
+    <g transform="translate(118 758)" filter="url(#shf-small)">
       {/* cọ */}
       <g transform="rotate(-16 40 70)"><rect x="30" y="30" width="20" height="92" rx="9" fill="#E2434E" /><rect x="28" y="10" width="24" height="26" rx="6" fill="#D5DCE5" stroke="#A9B4C2" strokeWidth="2" /><path d="M28 10 Q40 -26 52 10 Z" fill="#E8505C" /></g>
       <g><rect x="78" y="20" width="22" height="100" rx="9" fill="#D9323F" /><rect x="76" y="2" width="26" height="26" rx="6" fill="#D5DCE5" stroke="#A9B4C2" strokeWidth="2" /><path d="M76 2 Q89 -40 102 2 Z" fill="#FFC21A" stroke="#F0960A" strokeWidth="2" /></g>
@@ -167,14 +171,16 @@ function BrushCup() {
 
 function Palette() {
   return (
-    <g transform="translate(1566 650)" filter="url(#shf-small)">
-      <path d="M112 8C50 8 6 52 10 108c4 52 50 80 92 76 22-2 24-18 44-22 26-4 62 2 76-32C236 66 182 8 112 8z" fill="url(#shg-pal)" stroke="#D9B07A" strokeWidth="6" strokeLinejoin="round" />
-      <ellipse cx="82" cy="134" rx="15" ry="13" fill="#FFF6E6" stroke="#D9B07A" strokeWidth="4" />
-      <ellipse cx="158" cy="44" rx="28" ry="16" transform="rotate(-18 158 44)" fill="#E2434E" /><ellipse cx="150" cy="40" rx="10" ry="5" transform="rotate(-18 150 40)" fill="#FF9AA2" />
-      <ellipse cx="62" cy="76" rx="22" ry="15" transform="rotate(30 62 76)" fill="#FFC21A" /><ellipse cx="55" cy="71" rx="8" ry="5" transform="rotate(30 55 71)" fill="#FFF08A" />
-      <ellipse cx="108" cy="58" rx="17" ry="11" fill="#FFB3C1" />
-      <ellipse cx="170" cy="116" rx="24" ry="15" transform="rotate(-20 170 116)" fill="#3DA9FC" /><ellipse cx="163" cy="111" rx="8" ry="5" transform="rotate(-20 163 111)" fill="#9BD8FF" />
-      <path d="M44 28q-8 8 0 16" fill="none" stroke="#E0A06A" strokeWidth="5" strokeLinecap="round" opacity=".7" />
+    <g transform="translate(1566 800)" filter="url(#shf-small)">
+      <path d="M118 10C54 10 8 54 12 112c4 54 52 84 98 80 24-2 28-20 50-24 28-4 66 4 80-34C254 70 192 10 118 10z" fill="#FFF8EC" stroke="#F28A1B" strokeWidth="16" strokeLinejoin="round" />
+      <path d="M118 22C62 22 22 62 26 112c4 44 44 70 84 66 20-2 26-18 52-22 24-3 58 2 70-26" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" opacity=".7" />
+      <ellipse cx="74" cy="150" rx="19" ry="16" fill="#FFB347" stroke="#F28A1B" strokeWidth="10" />
+      <circle cx="62" cy="72" r="19" fill="#FFB938" />
+      <circle cx="116" cy="52" r="19" fill="#3E9BF5" />
+      <circle cx="170" cy="78" r="19" fill="#8B5CF6" />
+      <circle cx="52" cy="118" r="19" fill="#FF5C7A" />
+      <circle cx="84" cy="102" r="19" fill="#3FD17A" />
+      <path d="M58 64q4-6 10-6M110 44q4-4 9-4M164 70q4-5 9-4" fill="none" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" opacity=".7" />
     </g>
   );
 }
@@ -185,23 +191,23 @@ export function ShopArt() {
     <svg viewBox={`0 0 ${SHOP_W} ${SHOP_H}`} className="sh-art" aria-hidden="true" preserveAspectRatio="none">
       <Defs />
       {/* tường quầy */}
-      <rect x="372" y="300" width="1188" height="500" fill="url(#shg-wall)" />
-      <rect x="372" y="546" width="1188" height="254" fill="url(#shg-wood)" />
-      {[600, 660, 720, 780].map((y) => <path key={y} d={`M372 ${y}H1560`} stroke="#E4A55A" strokeWidth="2" opacity=".35" />)}
+      <rect x="372" y="300" width="1188" height="660" fill="url(#shg-wall)" />
+      <rect x="372" y="656" width="1188" height="304" fill="url(#shg-wood)" />
+      {[716, 776, 836, 896].map((y) => <path key={y} d={`M372 ${y}H1560`} stroke="#E4A55A" strokeWidth="2" opacity=".35" />)}
       <Lamp cx={506} />
       <Lamp cx={1426} />
       <Post x={318} />
       <Post x={1556} />
-      <Rail x={336} y={270} w={1260} h={36} />
-      <Rail x={304} y={532} w={1308} h={42} />
-      <Rail x={290} y={796} w={1336} h={44} />
+      <Rail x={336} y={296} w={1260} h={36} />
+      <Rail x={304} y={634} w={1308} h={42} />
+      <Rail x={290} y={958} w={1336} h={44} />
       <Corbel side="l" />
       <Corbel side="r" />
       <Awning />
       <Sign />
       <LeftPanel />
-      <StarShape cx={120} cy={206} r={42} rot={-10} />
-      <StarShape cx={1706} cy={294} r={42} rot={12} />
+      <StarShape cx={120} cy={250} r={42} rot={-10} />
+      <StarShape cx={1706} cy={360} r={42} rot={12} />
       <BrushCup />
       <Palette />
     </svg>
@@ -222,7 +228,7 @@ export function Bag() {
 export function SignStar() {
   return (
     <svg viewBox="0 0 80 80" className="sh-sign-star" aria-hidden="true">
-      <polygon points={Array.from({ length: 10 }, (_, i) => { const r = i % 2 ? 17 : 36; const a = ((-90 + i * 36) * Math.PI) / 180; return `${(40 + r * Math.cos(a)).toFixed(1)},${(42 + r * Math.sin(a)).toFixed(1)}`; }).join(' ')} fill="url(#shg-star)" stroke="#F0960A" strokeWidth="4" strokeLinejoin="round" />
+      <polygon points={Array.from({ length: 10 }, (_, i) => { const r = i % 2 ? 17 : 36; const a = ((-90 + i * 36) * Math.PI) / 180; return `${(40 + r * Math.cos(a)).toFixed(1)},${(42 + r * Math.sin(a)).toFixed(1)}`; }).join(' ')} fill="#FFD84A" stroke="#F0A818" strokeWidth="5" strokeLinejoin="round" />
     </svg>
   );
 }

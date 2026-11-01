@@ -1258,16 +1258,14 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sb-page { position: absolute; z-index: 5; display: grid; place-items: center; border: max(1px, 0.14cqw) solid #D9B88A; border-radius: 9999px; background: rgba(255, 248, 235, 0.95); font-family: var(--font-display); font-weight: 800; font-size: max(13px, 1.3cqw); color: #6B3A12; }
 
 /* ===== Shop: quầy hàng có mái hiên, 2 kệ × 4 ô (màn hình rộng) ===== */
-.sh-room { background: #FBEFE1; min-height: calc(100vh - 73px); }
-.sh-stage { position: relative; width: 100%; aspect-ratio: 1821 / 864; overflow: hidden; container-type: inline-size; background: #8FD3FF url(/shop/shop-bg.webp) center / 100% 100% no-repeat; }
+.sh-room { height: calc(100dvh - 73px); overflow: hidden; display: flex; align-items: flex-end; justify-content: center; background: #5BC6FF url(/shop/shop-bg.webp) center bottom / cover no-repeat; }
+.sh-stage { position: relative; flex: none; width: min(100%, calc((100dvh - 73px) * 1821 / 1040)); aspect-ratio: 1821 / 1040; overflow: hidden; }
+.sh-inner { position: absolute; inset: 0; container-type: inline-size; }
 .sh-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
 .sh-sign { position: absolute; z-index: 8; display: flex; align-items: center; justify-content: center; gap: 1.3cqw; }
-.sh-sign b { font-family: var(--font-display); font-weight: 900; font-size: 5.8cqw; line-height: 1; color: #A1202F; text-shadow: 0 0.25cqw 0 #FFD3D6; }
+.sh-sign b { font-family: var(--font-display); font-weight: 900; font-size: 5.6cqw; line-height: 1; color: #7A4313; text-shadow: 0 0.2cqw 0 #FFE2A0; }
 .sh-sign-star { width: 3.6cqw; flex: none; }
 .sh-bag { width: 4.3cqw; flex: none; }
-.sh-sub { position: absolute; z-index: 4; margin: 0; display: flex; align-items: center; justify-content: center; gap: 1.6cqw; text-align: center; font-weight: 800; font-size: max(13px, 1.38cqw); white-space: nowrap; color: #A3202F; }
-.sh-dash { display: inline-block; width: 2.4cqw; height: 1.7cqw; border-top: max(2px, 0.2cqw) solid #E2434E; border-bottom: max(2px, 0.2cqw) solid #E2434E; transform: skewX(-20deg); opacity: 0.85; }
-.sh-dash-r { transform: skewX(20deg); }
 .sh-tabs { position: absolute; z-index: 4; display: flex; flex-direction: column; gap: 1cqw; padding: 1.3cqw; border: max(3px, 0.3cqw) solid #FFFFFF; border-radius: 2.6cqw; background: linear-gradient(#F77E8A, #E8525F); box-shadow: 0 0.6cqw 1.2cqw rgba(150, 30, 45, 0.35), inset 0 0 0 max(2px, 0.2cqw) #F2A0A8; }
 .sh-tab { flex: 1; display: flex; align-items: center; gap: 0.8cqw; padding: 0 1cqw; border: 0; border-radius: 2cqw; background: #FFF7F5; box-shadow: inset 0 -0.3cqw 0 #F0D2D2; cursor: pointer; font-family: var(--font-display); font-weight: 900; font-size: max(12px, 1.38cqw); white-space: nowrap; color: #3A1F26; text-align: left; }
 .sh-tab:hover { filter: brightness(1.03); }
