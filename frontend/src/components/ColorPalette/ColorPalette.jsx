@@ -39,7 +39,7 @@ function Swatch({ color, active, onClick, label, number }) {
       onClick={onClick}
       aria-label={label || color}
       title={label || color}
-      className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 transition ${active ? 'scale-110 border-ink ring-4 ring-primary/40' : 'border-white shadow-[0_0_0_1px_#D6EAF8]'}`}
+      className={`cw-sw relative flex shrink-0 items-center justify-center rounded-full border-2 transition ${active ? 'scale-110 border-ink ring-4 ring-primary/40' : 'border-white shadow-[0_0_0_1px_#D6EAF8]'}`}
       style={{ background: color }}
     >
       {number != null && (
@@ -87,7 +87,7 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
   }
 
   return (
-    <div className="space-y-3" data-testid="color-palette">
+    <div className="cw-palette space-y-3" data-testid="color-palette">
       <div className="flex items-center gap-2">
         <label className="relative flex h-11 cursor-pointer items-center gap-2 rounded-full border-2 border-line pl-1 pr-3 font-bold" title={t('coloring.customColor')}>
           <span className="h-9 w-9 rounded-full border border-line" style={{ background: color }} />
@@ -106,13 +106,13 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
       )}
       {recent.length > 1 && (
         <div>
-          <div className="mb-1 text-sm font-bold text-muted">{t('coloring.recent')}</div>
+          <div className="cw-label mb-1 text-sm font-bold text-muted">{t('coloring.recent')}</div>
           <div className="flex flex-wrap gap-2">{recent.map((c) => <Swatch key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}</div>
         </div>
       )}
       <div>
-        <div className="mb-1 text-sm font-bold text-muted">{t('coloring.presets')}</div>
-        <div className="grid grid-cols-6 gap-2 sm:grid-cols-7 lg:grid-cols-6">
+        <div className="cw-label mb-1 text-sm font-bold text-muted">{t('coloring.presets')}</div>
+        <div className="cw-presets grid grid-cols-6 gap-2 sm:grid-cols-7 lg:grid-cols-6">
           {PRESETS.map((c) => <Swatch key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}
         </div>
       </div>
