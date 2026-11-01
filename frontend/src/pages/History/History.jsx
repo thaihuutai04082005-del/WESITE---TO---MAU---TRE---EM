@@ -10,7 +10,6 @@ import Modal from '../../components/Modal/Modal';
 import Canvas from '../../components/Canvas/Canvas';
 import FrameSelector from '../../components/FrameSelector/FrameSelector';
 import Icon from '../../components/Icon';
-import { HistoryEasel, Bush } from '../../components/HistoryScene';
 
 const FILTERS = ['all', 'in_progress', 'completed'];
 
@@ -150,7 +149,7 @@ export default function History() {
             </h1>
             <p className="hs-sub">{t('history.retention')}</p>
           </div>
-          <HistoryEasel />
+          <img src="/history/deco.webp" alt="" className="hs-deco" draggable={false} />
         </header>
         <section className="hs-panel">
           <div className="hs-filters">
@@ -185,8 +184,6 @@ export default function History() {
           </div>
         </section>
       </div>
-      <Bush />
-      <Bush flip />
       {open && <Detail id={open} onClose={() => setOpen(null)} onDeleted={() => { setOpen(null); load(); }} />}
     </div>
   );
