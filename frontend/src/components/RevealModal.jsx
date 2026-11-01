@@ -7,12 +7,16 @@ import Confetti from './Confetti';
 import Canvas from './Canvas/Canvas';
 import Icon from './Icon';
 import { downloadDataUrl, printDataUrl, renderArtwork, safeFileName } from '../lib/exportImage';
+import { artworkFrameSvg } from '../lib/frames';
 import { flyToCollection } from '../lib/flyToCollection';
 import { warmTheme } from '../lib/prefetch';
 import { api } from '../services/api';
 import { useUi } from '../store/ui';
 
 /** `anotherTo`: trang mở ra khi bé bấm "Tô tranh khác" (VD màn chọn tranh của chủ đề hiện tại). */
+/** Khung Artwork mặc định (miễn phí) cho tranh vừa hoàn thành. */
+const DEFAULT_FRAME = 'khung-go';
+
 export default function RevealModal({ open, picture, data, artworkId, onClose, anotherTo = '/color' }) {
   const { t, i18n } = useTranslation();
   const pushEvents = useUi((s) => s.pushEvents);
@@ -25,7 +29,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
   const exportAs = async (kind) => {
     setBusy(true);
     try {
-      const url = await renderArtwork(picture, data, { size: 1200 });
+      const url = await renderArtwork(picture, data, { size: 1200, frame: DEFAULT_FRAME });
       if (kind === 'download') downloadDataUrl(url, `${safeFileName(name)}.png`);
       else printDataUrl(url, name);
       if (artworkId) {
@@ -46,7 +50,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     const warm = slug ? warmTheme(slug) : Promise.resolve();
     let src = null;
     try {
-      src = await renderArtwork(picture, data, { size: 480 });
+      src = await renderArtwork(picture, data, { size: 480, frame: DEFAULT_FRAME });
     } catch {
       /* không có ảnh bay thì thôi, vẫn đóng bình thường */
     }
@@ -68,8 +72,12 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
       <div className="text-center" data-testid="reveal-modal">
         <h2 className="font-display text-3xl font-extrabold">{t('reveal.title')}</h2>
         <p className="mb-3 text-muted">{t('reveal.subtitle')}</p>
-        <div ref={artRef} className="mx-auto max-w-md">
-          <Canvas picture={picture} data={data} readOnly reveal />
+        {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); khung khác chọn lại trong Lịch sử / Bộ sưu tập. */}
+        <div ref={artRef} className="relative mx-auto aspect-square max-w-md" data-testid="reveal-frame">
+          <div className="absolute" style={{ inset: `${(50 / 700) * 100}%` }}>
+            <Canvas picture={picture} data={data} readOnly reveal className="!rounded-none !border-0" />
+          </div>
+          <div className="pointer-events-none absolute inset-0" dangerouslySetInnerHTML={{ __html: (artworkFrameSvg(DEFAULT_FRAME) || '').replace('width="700" height="700"', 'width="100%" height="100%"') }} />
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <button type="button" className="btn-primary" onClick={() => exportAs('download')} disabled={busy} data-testid="reveal-download">

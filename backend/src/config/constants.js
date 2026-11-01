@@ -7,6 +7,9 @@ export const PLANS = {
 };
 
 /** 6 bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ). */
+/** Khung Artwork mặc định (miễn phí, ai cũng có): tranh hoàn thành tự dùng khung này nếu bé chưa chọn khung khác. */
+export const DEFAULT_ARTWORK_FRAME = 'khung-go';
+
 export const RANK_TIERS = [
   { key: 'bronze', min: 0, ruby: 0, color: '#B08D57', frame: 'avatar-dong' },
   { key: 'silver', min: 50, ruby: 50, color: '#C0C0C0', frame: 'avatar-bac' },
