@@ -167,7 +167,7 @@ function useArtworksData() {
   const [items, setItems] = useState(null);
   const [ex, setEx] = useState(null);
   const load = () => {
-    api.get('/artworks?status=completed').then((r) => setItems(r.artworks));
+    api.get('/artworks?status=completed&eligibility=1').then((r) => setItems(r.artworks));
     api.get('/exhibition/mine').then(setEx);
   };
   useEffect(load, []);

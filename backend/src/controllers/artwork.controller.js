@@ -24,10 +24,11 @@ function own(req) {
 const hasContent = (d) => Object.keys(d.fills).length > 0 || d.strokes.length > 0 || d.stickers.length > 0;
 
 export function list(req, res) {
-  const { status, mode } = req.query;
+  const { status, mode, eligibility } = req.query;
   const artworks = Artwork.listByUser(req.user.id, { status: status || undefined, mode: mode || undefined });
   // Tranh hoàn thành đã đủ điều kiện gửi triển lãm (máy tự kiểm các điều 1, 2, 3, 4, 8) → bé thấy chú thích "Đủ điều kiện triển lãm".
-  for (const a of artworks) {
+  // Chỉ tính khi có ?eligibility=1 (trang Bộ sưu tập) vì phải đọc dữ liệu từng tranh.
+  for (const a of eligibility ? artworks : []) {
     a.exhibitEligible = false;
     if (a.status !== 'completed' || a.mode !== 'free') continue;
     try {
