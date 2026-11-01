@@ -39,7 +39,18 @@ function inkOn(hex) {
   return lum > 0.62 ? '#1B2A38' : '#FFFFFF';
 }
 
-function Swatch({ color, active, onClick, label, number }) {
+// Hạt li ti phủ lên ô màu khi đang dùng sáp hạt (giống nét sáp hạt sẽ tô ra).
+const GRAINS = {
+  backgroundImage: [
+    'radial-gradient(circle, rgba(255,255,255,.95) 0 1.1px, transparent 1.6px)',
+    'radial-gradient(circle, rgba(255,255,255,.8) 0 0.9px, transparent 1.4px)',
+    'radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.5px)',
+  ].join(','),
+  backgroundSize: '9px 9px, 7px 7px, 11px 11px',
+  backgroundPosition: '1px 2px, 4px 5px, 6px 1px',
+};
+
+function Swatch({ color, active, onClick, label, number, glitter = false }) {
   const ink = number != null ? inkOn(color) : null;
   return (
     <button
@@ -48,7 +59,7 @@ function Swatch({ color, active, onClick, label, number }) {
       aria-label={label || color}
       title={label || color}
       className={`cw-sw relative flex shrink-0 items-center justify-center rounded-full border-2 transition ${active ? 'scale-110 border-ink ring-4 ring-primary/40' : 'border-white shadow-[0_0_0_1px_#C9DDF0]'}`}
-      style={{ background: color }}
+      style={glitter ? { backgroundColor: color, ...GRAINS } : { background: color }}
     >
       {number != null && (
         <span className="text-base font-extrabold leading-none" style={{ color: ink, textShadow: ink === '#FFFFFF' ? '0 1px 2px rgba(0,0,0,.45)' : '0 1px 0 rgba(255,255,255,.5)' }}>
@@ -59,7 +70,7 @@ function Swatch({ color, active, onClick, label, number }) {
   );
 }
 
-export default function ColorPalette({ color, onChange, userKey = 'guest', numbered = null, activeNumber = null, onNumber }) {
+export default function ColorPalette({ glitter = false, color, onChange, userKey = 'guest', numbered = null, activeNumber = null, onNumber }) {
   const { t } = useTranslation();
   const recentKey = `btm.recent.${userKey}`;
   const favKey = `btm.fav.${userKey}`;
@@ -91,7 +102,7 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
         <div className="mb-1 text-sm font-bold text-muted">{t('coloring.numberedColors')}</div>
         <div className="cw-grid cw-grid-num">
           {numbered.map((p) => (
-            <Swatch key={p.number} color={p.color} number={p.number} active={activeNumber === p.number && color === p.color} onClick={() => { onChange(p.color); onNumber?.(p.number); }} />
+            <Swatch glitter={glitter} key={p.number} color={p.color} number={p.number} active={activeNumber === p.number && color === p.color} onClick={() => { onChange(p.color); onNumber?.(p.number); }} />
           ))}
         </div>
       </div>
@@ -102,7 +113,7 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
     <div className="cw-palette space-y-3" data-testid="color-palette">
       <div className="flex items-center gap-2">
         <label className="relative flex h-12 cursor-pointer items-center gap-2 rounded-full border-2 border-line bg-white px-2 pr-3 font-bold" title={t('coloring.customColor')}>
-          <span className="h-8 w-8 shrink-0 rounded-full border-2 border-white shadow-[0_0_0_1px_#C9DDF0]" style={{ background: color }} />
+          <span className="h-8 w-8 shrink-0 rounded-full border-2 border-white shadow-[0_0_0_1px_#C9DDF0]" style={glitter ? { backgroundColor: color, ...GRAINS } : { background: color }} />
           <Icon name="palette" size={20} />
           <input type="color" value={color} onChange={(e) => onChange(e.target.value.toUpperCase())} className="absolute inset-0 cursor-pointer opacity-0" aria-label={t('coloring.customColor')} />
         </label>
@@ -113,19 +124,19 @@ export default function ColorPalette({ color, onChange, userKey = 'guest', numbe
       {favs.length > 0 && (
         <div>
           <div className="mb-1 text-sm font-bold text-muted">{t('coloring.favorites')}</div>
-          <div className="cw-grid">{favs.map((c) => <Swatch key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}</div>
+          <div className="cw-grid">{favs.map((c) => <Swatch glitter={glitter} key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}</div>
         </div>
       )}
       {recentOthers.length > 0 && (
         <div>
           <div className="cw-label mb-1 text-sm font-bold text-muted">{t('coloring.recent')}</div>
-          <div className="cw-grid">{recentOthers.map((c) => <Swatch key={c} color={c} onClick={() => onChange(c)} />)}</div>
+          <div className="cw-grid">{recentOthers.map((c) => <Swatch glitter={glitter} key={c} color={c} onClick={() => onChange(c)} />)}</div>
         </div>
       )}
       <div>
         <div className="cw-label mb-1 text-sm font-bold text-muted">{t('coloring.presets')}</div>
         <div className="cw-grid">
-          {PRESETS.map((c) => <Swatch key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}
+          {PRESETS.map((c) => <Swatch glitter={glitter} key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}
         </div>
       </div>
     </div>

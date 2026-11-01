@@ -8,7 +8,7 @@ import { PATTERNS, patternSwatchUrl } from '../../lib/brush';
 import { BrushIcon, CrayonIcon, GlitterIcon, PatternIcon, StickerIcon } from './ToolIcons';
 
 export const SIZES = [34, 24, 16, 10, 6]; // 5 cỡ nét, từ to đến nhỏ (đơn vị tranh)
-export const STICKER_SCALES = [1.4, 1, 0.65];
+export const STICKER_SCALES = [1.7, 1.35, 1, 0.72, 0.5]; // sticker dùng chung 5 cỡ nét: to → nhỏ
 
 const ROUND = [
   ['crayon', CrayonIcon],
@@ -36,12 +36,12 @@ function KeyBtn({ icon, label, onClick, active, disabled, tone = 'blue', testId 
 }
 
 export default function ToolBar({
-  tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, stickerType, setStickerType, stickerSizeIdx, setStickerSizeIdx,
+  tool, setTool, sizeIdx, setSizeIdx, pattern, setPattern, stickerType, setStickerType,
   canUndo, canRedo, onUndo, onRedo, onZoomIn, onZoomOut, onZoomReset, onClear, allowStickers = true, allowSignature = false, colorPanel = null,
 }) {
   const { t } = useTranslation();
   const swatches = useMemo(() => Object.fromEntries(PATTERNS.map((p) => [p.id, patternSwatchUrl(p.id, 56)])), []);
-  const painting = ['crayon', 'brush', 'glitter', 'pattern', 'eraser'].includes(tool);
+  const painting = ['crayon', 'brush', 'glitter', 'pattern', 'eraser', 'sticker'].includes(tool);
   return (
     <div className="space-y-3" data-testid="toolbar">
       <div className="flex items-center gap-2">
@@ -99,16 +99,6 @@ export default function ToolBar({
               {STICKERS.map((s) => (
                 <button key={s.type} type="button" onClick={() => setStickerType(s.type)} aria-label={s.type} aria-pressed={stickerType === s.type} className={`tb-chip ${stickerType === s.type ? 'tb-chip-on' : ''}`} data-testid={`sticker-${s.type}`}>
                   <svg viewBox="0 0 100 100" className="h-full w-full" dangerouslySetInnerHTML={{ __html: s.svg }} />
-                </button>
-              ))}
-            </div>
-          </div>
-          <div>
-            <div className="mb-1 text-sm font-bold text-muted">{t('tools.stickerSize')}</div>
-            <div className="tb-sizes tb-sizes-row">
-              {STICKER_SCALES.map((sc, i) => (
-                <button key={sc} type="button" onClick={() => setStickerSizeIdx(i)} aria-label={`${t('tools.stickerSize')} ${i + 1}`} aria-pressed={stickerSizeIdx === i} className={`tb-dotbtn ${stickerSizeIdx === i ? 'tb-dotbtn-on' : ''}`}>
-                  <svg viewBox="0 0 100 100" style={{ width: 18 + sc * 14, height: 18 + sc * 14 }} dangerouslySetInnerHTML={{ __html: STICKERS.find((x) => x.type === stickerType)?.svg || '' }} />
                 </button>
               ))}
             </div>
