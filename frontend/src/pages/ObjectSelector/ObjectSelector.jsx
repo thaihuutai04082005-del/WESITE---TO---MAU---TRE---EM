@@ -12,6 +12,10 @@ export default function ObjectSelector() {
   const { t, i18n } = useTranslation();
   const [data, setData] = useState(null);
   const [picked, setPicked] = useState(null);
+  // Báo trang đã sẵn sàng để hiệu ứng chuyển màn hình (nếu đang chạy) biết lúc mờ đi.
+  useEffect(() => {
+    if (data) window.dispatchEvent(new Event('btm:page-ready'));
+  }, [data]);
   useEffect(() => {
     api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
