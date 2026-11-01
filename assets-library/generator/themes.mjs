@@ -1571,6 +1571,13 @@ ART_THEMES.push({
         { slug: 'tien-ca-hai-lam', name: { vi: 'Tiên Cá Hải Lam', en: 'Sea Blue Mermaid' }, file: 'tien-ca-hai-lam--tien-ca-hai-lam' },
       ],
     },
+    {
+      slug: 'tien-ca-chau-anh',
+      name: { vi: 'Tiên Cá Châu Anh', en: 'Pearl Mermaid' },
+      pictures: [
+        { slug: 'tien-ca-chau-anh', name: { vi: 'Tiên Cá Châu Anh', en: 'Pearl Mermaid' }, file: 'tien-ca-chau-anh--tien-ca-chau-anh' },
+      ],
+    },
   ],
 });
 
