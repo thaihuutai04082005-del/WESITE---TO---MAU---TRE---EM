@@ -1622,6 +1622,27 @@ ART_THEMES.push({
         { slug: 'hiep-si-toc-anh', name: { vi: 'Hiệp Sĩ Tốc Ảnh', en: 'Shadow Speed Knight' }, file: 'hiep-si-toc-anh--hiep-si-toc-anh' },
       ],
     },
+    {
+      slug: 'hiep-si-quang-thuan',
+      name: { vi: 'Hiệp Sĩ Quang Thuẫn', en: 'Light Shield Knight' },
+      pictures: [
+        { slug: 'hiep-si-quang-thuan', name: { vi: 'Hiệp Sĩ Quang Thuẫn', en: 'Light Shield Knight' }, file: 'hiep-si-quang-thuan--hiep-si-quang-thuan' },
+      ],
+    },
+    {
+      slug: 'hiep-si-khong-duc',
+      name: { vi: 'Hiệp Sĩ Không Dực', en: 'Sky Wing Knight' },
+      pictures: [
+        { slug: 'hiep-si-khong-duc', name: { vi: 'Hiệp Sĩ Không Dực', en: 'Sky Wing Knight' }, file: 'hiep-si-khong-duc--hiep-si-khong-duc' },
+      ],
+    },
+    {
+      slug: 'hiep-si-tu-cuc',
+      name: { vi: 'Hiệp Sĩ Từ Cực', en: 'Magnet Knight' },
+      pictures: [
+        { slug: 'hiep-si-tu-cuc', name: { vi: 'Hiệp Sĩ Từ Cực', en: 'Magnet Knight' }, file: 'hiep-si-tu-cuc--hiep-si-tu-cuc' },
+      ],
+    },
   ],
 });
 
