@@ -65,6 +65,23 @@ export function linesOnlySvgString(pictureSvg) {
   return new XMLSerializer().serializeToString(svg);
 }
 
+const referenceHtmlCache = new Map();
+
+/**
+ * SVG tranh mẫu (tô đúng màu gợi ý) dạng chuỗi HTML, có nhớ đệm theo tranh. Dựng chuỗi này là việc nặng
+ * (phân tích + dựng lại cả SVG kèm lớp nét ảnh nhúng) nên làm sẵn được ở nơi rảnh rỗi trước khi mở màn danh sách tranh.
+ */
+export function referenceSvgHtml(picture) {
+  if (!picture?.svg) return '';
+  let h = referenceHtmlCache.get(picture.slug);
+  if (!h) {
+    h = coloredSvgString(picture.svg, { fills: referenceFills(picture), glitter: [], stickers: [] });
+    if (referenceHtmlCache.size >= 60) referenceHtmlCache.delete(referenceHtmlCache.keys().next().value);
+    referenceHtmlCache.set(picture.slug, h);
+  }
+  return h;
+}
+
 /** Tô bằng màu gợi ý (tranh mẫu / ảnh minh hoạ ở các tầng chọn tranh). */
 export function referenceFills(picture) {
   return Object.fromEntries((picture.regions || []).map((r) => [r.id, r.color]));

@@ -1,13 +1,18 @@
 // Ảnh minh hoạ thật của tranh (SVG + màu) — dùng ở các tầng chọn tranh, lịch sử, thẻ.
 import { memo, useMemo } from 'react';
-import { coloredSvgString, referenceFills } from '../../lib/picture';
+import { coloredSvgString, referenceSvgHtml } from '../../lib/picture';
+import { thumbOf } from '../../lib/prefetch';
 
-function PictureView({ picture, data = null, reveal = false, className = '', title, numbers = false, doneIds = null }) {
+/** `thumb`: ở danh sách tranh, nếu đã có ảnh nhỏ làm sẵn thì dùng ảnh đó (nhẹ) thay vì dựng cả SVG. */
+function PictureView({ picture, data = null, reveal = false, className = '', title, numbers = false, doneIds = null, thumb = false }) {
+  const thumbUrl = thumb && !data && !numbers && !reveal ? thumbOf(picture?.slug) : null;
   const html = useMemo(() => {
-    if (!picture?.svg) return '';
-    return coloredSvgString(picture.svg, data || { fills: referenceFills(picture), glitter: [], stickers: [] }, { withStickers: !!data?.stickers?.length });
-  }, [picture, data]);
+    if (!picture?.svg || thumbUrl) return '';
+    if (!data) return referenceSvgHtml(picture); // tranh mẫu: có nhớ đệm, dùng lại khi đã làm sẵn
+    return coloredSvgString(picture.svg, data, { withStickers: !!data?.stickers?.length });
+  }, [picture, data, thumbUrl]);
   const labels = useMemo(() => (numbers && picture?.regions ? picture.regions.filter((r) => r.area > 60 && r.number != null) : []), [numbers, picture]);
+  if (thumbUrl) return <img src={thumbUrl} alt={title || ''} className={`aspect-square w-full object-cover ${className}`} draggable={false} />;
   const view = (
     <div
       className={`picture-svg no-pointer aspect-square overflow-hidden ${reveal ? 'reveal' : ''} ${className}`}

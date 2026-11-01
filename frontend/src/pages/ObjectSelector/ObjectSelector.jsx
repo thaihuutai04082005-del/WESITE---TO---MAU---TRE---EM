@@ -5,14 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WOOD_GRID, useFitRows } from '../../components/Wood/Wood';
 import ModePicker from '../../components/ModePicker';
+import { takePrefetchedTheme } from '../../lib/prefetch';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(() => takePrefetchedTheme(theme)); // có sẵn nếu vừa được làm sẵn lúc chạy hiệu ứng
   const [picked, setPicked] = useState(null);
   useEffect(() => {
+    if (data?.theme?.slug === theme) return;
     api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
   const lang = i18n.language;
