@@ -9,7 +9,8 @@ import { useUi } from '../../store/ui';
 import { formatDateTime } from '../../lib/format';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
-import { RANK_STYLE } from '../../components/RankBadge';
+import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
+import Modal from '../../components/Modal/Modal';
 import { BearCloudArt, CrownCloudArt } from '../../components/Illustrations';
 
 // Mỗi tiêu chí chấm điểm một biểu tượng + màu riêng.
@@ -47,24 +48,61 @@ function ClipboardBadge() {
   );
 }
 
-/** Khiên hạng có vương miện, đổi màu theo bậc, hai nhánh nguyệt quế hai bên. */
-function RankShield({ rank = 'bronze' }) {
-  const st = RANK_STYLE[rank] || RANK_STYLE.bronze;
+/** Cửa sổ "i": tất cả bậc Rank + ống điểm cho bé biết cần bao nhiêu điểm để lên bậc. */
+function RankInfo({ onClose }) {
+  const { t } = useTranslation();
+  const [p, setP] = useState(null);
+  useEffect(() => {
+    api.get('/progression').then(setP).catch(() => {});
+  }, []);
+  const tiers = p?.tiers || [];
+  const n = tiers.length || 6;
+  const pts = p?.rank.points ?? 0;
+  const idx = Math.max(0, tiers.findIndex((x) => x.key === p?.rank.key));
+  const next = tiers[idx + 1];
+  const frac = next ? Math.min(1, (pts - tiers[idx].min) / (next.min - tiers[idx].min)) : 0;
+  const fill = ((idx + 0.5 + frac) / n) * 100; // ống điểm chạy từ giữa bậc này tới giữa bậc kế
   return (
-    <svg viewBox="0 0 120 110" className="ar-shield" aria-hidden="true">
-      <g fill="#F7B733" stroke="#E08E0B" strokeWidth="1.5">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <g key={i}>
-            <ellipse cx={14 + i * 3} cy={80 - i * 12} rx="5" ry="9" transform={`rotate(${-35 + i * 10} ${14 + i * 3} ${80 - i * 12})`} />
-            <ellipse cx={106 - i * 3} cy={80 - i * 12} rx="5" ry="9" transform={`rotate(${35 - i * 10} ${106 - i * 3} ${80 - i * 12})`} />
-          </g>
-        ))}
-      </g>
-      <path d="M60 22 L98 34 V62 Q98 88 60 104 Q22 88 22 62 V34 Z" fill="#B8651B" stroke="#8A4A12" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M60 28 L92 38 V62 Q92 83 60 97 Q28 83 28 62 V38 Z" fill={st.fill} stroke={st.ring} strokeWidth="3" strokeLinejoin="round" />
-      <polygon points="60,44 65,57 79,58 68,67 72,80 60,72 48,80 52,67 41,58 55,57" fill="#FFFFFF" stroke={st.ring} strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M44 20 L50 8 L56 16 L60 5 L64 16 L70 8 L76 20 Z" fill="#FFD54F" stroke="#E08E0B" strokeWidth="2" strokeLinejoin="round" />
-    </svg>
+    <Modal open onClose={onClose} wide>
+      <div className="space-y-4" data-testid="rank-info">
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h2 className="font-display text-2xl font-extrabold">{t('arena.rankInfoTitle')}</h2>
+            <p className="text-sm text-muted">{t('arena.rankInfoHint')}</p>
+          </div>
+          <button type="button" className="btn-ghost min-h-11 px-3" onClick={onClose} aria-label={t('common.close')}>
+            <Icon name="close" />
+          </button>
+        </div>
+        {p && (
+          <>
+            <div className="grid grid-cols-3 gap-x-2 gap-y-4 sm:grid-cols-6">
+              {tiers.map((tier, i) => (
+                <div key={tier.key} className={`flex flex-col items-center text-center ${i === idx ? '' : 'opacity-80'}`}>
+                  <RankMedal rank={tier.key} size={88} />
+                  <div className="mt-1 text-xs font-extrabold leading-tight" style={{ color: RANK_STYLE[tier.key]?.text }}>{t(`rank.${tier.key}`)}</div>
+                  <div className="text-xs font-bold text-muted">{tier.min}+ {t('rank.pts')}</div>
+                  {i === idx && <span className="mt-1 rounded-full bg-[#FF9A2E] px-2 text-[11px] font-extrabold text-white">{t('arena.youAreHere')}</span>}
+                </div>
+              ))}
+            </div>
+            <div className="hidden sm:block">
+              <div className="ar-tube"><span className="ar-tube-fill" style={{ width: `${fill}%` }} /></div>
+              <div className="mt-1 grid grid-cols-6 text-center text-xs font-bold text-muted">
+                {tiers.map((tier) => <span key={tier.key}>{tier.min}</span>)}
+              </div>
+            </div>
+            <div className="sm:hidden">
+              <div className="ar-tube"><span className="ar-tube-fill" style={{ width: `${Math.min(100, (pts / (tiers[n - 1]?.min || 1)) * 100)}%` }} /></div>
+            </div>
+            <p className="text-center font-bold text-[#7A4A1A]">
+              <Icon name="star" size={18} className="mr-1 inline text-[#F5A623]" />
+              {t('arena.yourPoints', { n: pts })}{next ? ` · ${t('arena.toNext', { n: next.min - pts, rank: t(`rank.${next.key}`) })}` : ''}
+            </p>
+          </>
+        )}
+      </div>
+    </Modal>
   );
 }
 
@@ -77,6 +115,7 @@ export default function ArenaLobby() {
   const [info, setInfo] = useState(null);
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
+  const [rankOpen, setRankOpen] = useState(false);
 
   useEffect(() => {
     api.get('/arena').then(setInfo).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
@@ -117,7 +156,8 @@ export default function ArenaLobby() {
         <span className="ar-sep" aria-hidden="true" />
         <div className="ar-rank" data-testid="arena-me">
           <span className="ar-rank-tag">{t('arena.currentRank')}</span>
-          <RankShield rank={user?.rank} />
+          <button type="button" className="ar-info" onClick={() => setRankOpen(true)} aria-label={t('arena.rankInfoTitle')} data-testid="rank-info-btn">i</button>
+          <RankMedal rank={user?.rank} size={84} className="ar-shield" />
           <div className="ar-rank-info">
             <div className="ar-rank-name">{t(`rank.${user?.rank || 'bronze'}`)}</div>
             <div className="ar-rank-pts">
@@ -255,6 +295,7 @@ export default function ArenaLobby() {
         </section>
       </div>
     </div>
+    {rankOpen && <RankInfo onClose={() => setRankOpen(false)} />}
     </div>
   );
 }

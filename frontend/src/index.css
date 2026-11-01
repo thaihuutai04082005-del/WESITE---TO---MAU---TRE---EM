@@ -1341,7 +1341,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 @media (min-width: 900px) { .ar-sep { display: block; } }
 .ar-rank { position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 26px 10px 14px; border: 3px solid #FFC25C; border-radius: 22px; background: linear-gradient(#FFFDF8, #FFF1DA); box-shadow: 0 6px 12px rgba(200, 110, 30, 0.18), inset 0 2px 0 #fff; }
 .ar-rank-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 3px 16px; border-radius: 999px; background: linear-gradient(#FFB454, #FF9A2E); color: #fff; font-size: 13px; font-weight: 800; white-space: nowrap; box-shadow: 0 3px 6px rgba(190, 100, 10, 0.3); }
-.ar-shield { width: 78px; height: 72px; flex: none; filter: drop-shadow(0 4px 4px rgba(120, 60, 0, 0.25)); }
+.ar-shield { flex: none; filter: drop-shadow(0 4px 4px rgba(120, 60, 0, 0.25)); }
 .ar-rank-name { font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(18px, 2.2vw, 24px); color: #3A2A1C; line-height: 1.15; }
 .ar-rank-pts { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 3px 14px 3px 8px; border-radius: 999px; background: #FFF4D6; border: 2px solid #FFE08A; font-weight: 800; color: #5A3E1B; }
 
@@ -1571,3 +1571,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .mp-cloud-4 { right: 4%; top: 68%; width: 7%; }
 @media (max-width: 720px) { .mp-cloud { display: none; } }
 .hs-stage.mp-stage { background: linear-gradient(#CBE6FB, #DDEFFC 55%, #EAF5FD); }
+.ar-info { position: absolute; top: 8px; right: 10px; width: 24px; height: 24px; border-radius: 9999px; border: 2px solid #E0A24A; background: #FFF4D6; color: #A8661A; font-family: Georgia, serif; font-style: italic; font-weight: 900; font-size: 15px; line-height: 1; display: grid; place-items: center; cursor: pointer; }
+.ar-info:hover { background: #FFE9B0; }
+.ar-tube { height: 22px; border-radius: 9999px; border: 3px solid #E7C98F; background: #FFF6E2; box-shadow: inset 0 2px 4px rgba(150, 100, 30, 0.2); overflow: hidden; }
+.ar-tube-fill { display: block; height: 100%; border-radius: 9999px; background: linear-gradient(90deg, #FFD54F, #FF9F43); box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45); transition: width 0.4s; }

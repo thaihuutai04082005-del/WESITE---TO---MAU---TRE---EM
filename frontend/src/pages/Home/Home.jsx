@@ -187,7 +187,7 @@ function Dashboard() {
             </div>
             <div className="flex items-center gap-4" data-testid="home-rank">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl" style={{ background: RANK_STYLE[rank.key].bg }}>
-                <RankMedal rank={rank.key} size={40} />
+                <RankMedal rank={rank.key} size={48} />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="mb-1.5 flex items-baseline justify-between gap-2">

@@ -694,7 +694,12 @@
     "friendsOnlyChip": "Friends only",
     "minutes": "{{n}} min",
     "upTo": "Up to {{n}} kids",
-    "currentRank": "Current rank"
+    "currentRank": "Current rank",
+    "rankInfoTitle": "Rank levels",
+    "rankInfoHint": "Finish in the Top 3 in the Arena to earn Rank Points. Rank Points never go down.",
+    "youAreHere": "You are here",
+    "yourPoints": "You have {{n}} points",
+    "toNext": "{{n}} more to reach {{rank}}"
   },
   "rubric": {
     "coverage": "Coverage",
