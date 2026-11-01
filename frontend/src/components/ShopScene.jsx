@@ -180,7 +180,6 @@ function BrushCup() {
       <path d="M14 128 A78 13 0 0 0 170 128" fill="none" stroke="#FFFFFF" strokeWidth="4" opacity=".9" />
       <path d="M21 172 H163 L158 208 H26 Z" fill="#EE4C5A" />
       <path d="M21 172 H163" stroke="#FF98A0" strokeWidth="4" opacity=".8" />
-      <polygon points="92,175 99,190 116,192 104,203 107,219 92,211 77,219 80,203 68,192 85,190" fill="#FFFFFF" />
       <path d="M40 146V232" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" opacity=".55" />
     </g>
   );
@@ -195,13 +194,19 @@ function Palette() {
       {/* lỗ ngón tay */}
       <ellipse cx="84" cy="158" rx="22" ry="18" fill="#FFB347" stroke="#F58B1E" strokeWidth="9" />
       <ellipse cx="78" cy="153" rx="8" ry="5" fill="#FFD08A" />
-      {/* chấm màu */}
-      {[[70, 76, '#FFB938', '#FFD98A'], [132, 52, '#3E9BF5', '#8AC7FF'], [196, 82, '#8B5CF6', '#BFA3FF'], [58, 122, '#FF5C7A', '#FF9DB0'], [112, 100, '#3FD17A', '#8FEDB5'], [186, 140, '#FFD23F', '#FFEA8A']].map(([cx, cy, c, hi]) => (
-        <g key={cx + '-' + cy}>
-          <circle cx={cx} cy={cy} r="22" fill={c} />
-          <ellipse cx={cx - 7} cy={cy - 8} rx="8" ry="5" transform={`rotate(-30 ${cx - 7} ${cy - 8})`} fill={hi} />
-        </g>
-      ))}
+      {/* chấm màu: 6 màu cầu vồng xếp đều theo một cung */}
+      <circle cx="55" cy="103" r="17" fill="#FF4D5E" />
+      <ellipse cx="50" cy="97" rx="6" ry="4" transform="rotate(-30 50 97)" fill="#FF9AA5" />
+      <circle cx="81" cy="72" r="17" fill="#FF9A2E" />
+      <ellipse cx="76" cy="66" rx="6" ry="4" transform="rotate(-30 76 66)" fill="#FFC98A" />
+      <circle cx="124" cy="54" r="17" fill="#FFD23F" />
+      <ellipse cx="119" cy="48" rx="6" ry="4" transform="rotate(-30 119 48)" fill="#FFEE9A" />
+      <circle cx="173" cy="55" r="17" fill="#3FD17A" />
+      <ellipse cx="168" cy="49" rx="6" ry="4" transform="rotate(-30 168 49)" fill="#9CF0BE" />
+      <circle cx="216" cy="73" r="17" fill="#3E9BF5" />
+      <ellipse cx="211" cy="67" rx="6" ry="4" transform="rotate(-30 211 67)" fill="#9CCBFF" />
+      <circle cx="242" cy="104" r="17" fill="#8B5CF6" />
+      <ellipse cx="237" cy="98" rx="6" ry="4" transform="rotate(-30 237 98)" fill="#C6AEFF" />
     </g>
   );
 }
@@ -227,8 +232,6 @@ export function ShopArt() {
       <Awning />
       <Sign />
       <LeftPanel />
-      <StarShape cx={120} cy={250} r={42} rot={-10} />
-      <StarShape cx={1706} cy={360} r={42} rot={12} />
       <BrushCup />
       <Palette />
     </svg>
