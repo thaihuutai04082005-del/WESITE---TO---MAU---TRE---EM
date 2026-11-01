@@ -147,7 +147,6 @@ export default function History() {
             <h1 className="hs-title">
               <Icon name="history" size={48} strokeWidth={2.6} /> {t('history.title')}
             </h1>
-            <p className="hs-sub">{t('history.retention')}</p>
           </div>
           <img src="/history/deco.webp" alt="" className="hs-deco" draggable={false} />
         </header>
