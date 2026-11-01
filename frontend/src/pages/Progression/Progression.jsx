@@ -1,14 +1,12 @@
-// Nhiệm vụ & Thành tích (Mục 8): Cấp độ + nhiệm vụ của cấp, Hạng Đấu trường với 6 bậc (tới Bậc Thầy Hội Họa).
-import { Fragment, useEffect, useState } from 'react';
+// Nhiệm vụ (Mục 8): Cấp độ + Ruby + nhiệm vụ của cấp. Hạng đấu ở Đấu trường, Điểm Gacha ở Bóc thẻ.
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
-import { useAuth } from '../../store/auth';
-import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
-import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
+import { RubyGem } from '../../components/ShopScene';
 import { MissionArt } from '../../components/Illustrations';
 
-function Bar({ value, max, color, height = 8 }) {
+function Bar({ value, max, color, height = 12 }) {
   const pct = Math.max(0, Math.min(100, (value / (max || 1)) * 100));
   return (
     <div className="w-full overflow-hidden rounded-full bg-[#E4EEF8]" style={{ height }}>
@@ -36,16 +34,21 @@ function TargetBadge() {
   );
 }
 
-const STATS = [
-  ['mountain', '#2FA65A', '#E4F6E8'],
-  ['medal', '#F07B2E', '#FFE7D3'],
-  ['gift', '#7D5FFF', '#F0EBFF'],
-  ['ruby', '#2B9BF4', '#EAF6FF'],
-];
+/** Tấm bảng kẹp giấy có dấu tích trong nhãn "Nhiệm vụ Cấp N". */
+function ClipboardBadge() {
+  return (
+    <svg viewBox="0 0 48 56" className="h-full w-full" aria-hidden="true">
+      <rect x="5" y="8" width="38" height="44" rx="6" fill="#FFB35C" stroke="#1B2A38" strokeWidth="2.4" />
+      <rect x="10" y="14" width="28" height="34" rx="3" fill="#FFFFFF" />
+      <rect x="16" y="3" width="16" height="9" rx="3" fill="#6FA8FF" stroke="#1B2A38" strokeWidth="2.2" />
+      <path d="M14 22l3 3 5-6M14 33l3 3 5-6M14 44l3 3 5-6" fill="none" stroke="#2FA65A" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M26 22h8M26 33h8M26 44h8" stroke="#B9C7D6" strokeWidth="2.4" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 export default function Progression() {
   const { t, i18n } = useTranslation();
-  const user = useAuth((s) => s.user);
   const [p, setP] = useState(null);
   useEffect(() => {
     api.get('/progression').then(setP).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
@@ -56,110 +59,66 @@ export default function Progression() {
   }, [p]);
   if (!p) return <div className="page text-muted">{t('common.loading')}</div>;
   const done = p.missions.filter((m) => m.completed).length;
-  const rankIdx = p.tiers.findIndex((x) => x.key === p.rank.key);
-  const values = [`${p.level}/${p.maxLevel}`, t(`rank.${p.rank.key}`), p.gachaPoints, p.ruby];
-  const labels = [t('missions.cards.level'), t('missions.cards.rank'), t('missions.cards.gacha'), 'Ruby'];
 
   return (
-    <div className="page space-y-5">
-      {/* Đầu trang */}
-      <section className="flex items-center gap-3 sm:gap-5">
-        <div className="h-16 w-16 shrink-0 sm:h-20 sm:w-20">
-          <TargetBadge />
-        </div>
-        <div className="min-w-0 flex-1">
-          <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-4xl">{t('missions.title')}</h1>
-          <p className="text-muted">{t('missions.subtitle')}</p>
-        </div>
-        <div className="hidden h-28 w-40 shrink-0 md:block">
-          <MissionArt />
-        </div>
-      </section>
+    <div className="hs-stage">
+      <div className="page mp-page">
+        <header className="mp-head">
+          <div className="mp-badge"><TargetBadge /></div>
+          <div className="min-w-0">
+            <h1 className="mp-title">{t('missions.title')}</h1>
+            <p className="mp-sub">{t('missions.subtitle')}</p>
+          </div>
+          <div className="mp-art"><MissionArt /></div>
+        </header>
 
-      {/* 4 chỉ số */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {STATS.map(([icon, color, bg], i) => (
-          <div key={icon} className="flex items-center gap-3 rounded-[22px] border border-white bg-white/90 p-3.5 shadow-soft">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl" style={{ background: bg, color }}>
-              {icon === 'medal' ? <RankMedal rank={p.rank.key} size={34} /> : <Icon name={icon} size={26} strokeWidth={2.4} />}
-            </span>
-            <div className="min-w-0">
-              <div className="text-xs font-bold text-muted">{labels[i]}</div>
-              <div className={`font-display font-extrabold leading-tight ${icon === 'medal' ? 'text-lg' : 'truncate text-2xl'}`}>{values[i]}</div>
+        <div className="mp-stats">
+          <div className="mp-stat">
+            <span className="mp-stat-ic mp-stat-ic-lv"><Icon name="mountain" size={34} strokeWidth={2.4} /></span>
+            <div>
+              <div className="mp-stat-l">{t('missions.cards.level')}</div>
+              <div className="mp-stat-v">{p.level}/{p.maxLevel}</div>
             </div>
           </div>
-        ))}
+          <div className="mp-stat">
+            <span className="mp-stat-ic"><RubyGem size={56} /></span>
+            <div>
+              <div className="mp-stat-l">Ruby</div>
+              <div className="mp-stat-v" data-testid="mission-ruby">{p.ruby}</div>
+            </div>
+          </div>
+        </div>
+
+        <section className="mp-panel">
+          <div className="mp-tab">
+            <span className="mp-tab-ic"><ClipboardBadge /></span>
+            <h2>{t('missions.levelMissions', { level: p.level })}</h2>
+          </div>
+          <span className="mp-count">{done}/{p.missions.length}</span>
+          {p.maxed ? (
+            <div className="mp-maxed">{t('missions.maxed')}</div>
+          ) : (
+            <ul className="mp-list" data-testid="mission-list">
+              {p.missions.map((m) => (
+                <li key={m.id} className={`mp-row ${m.completed ? 'mp-row-done' : ''}`}>
+                  <span className={`mp-mark ${m.completed ? 'mp-mark-done' : ''}`}>
+                    {m.completed ? <Icon name="check" size={34} strokeWidth={3.4} /> : <span className="mp-ring" />}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="mp-name">{m.titles?.[i18n.language] || m.title}</div>
+                    <div className="mp-reward"><RubyGem size={20} /> +{m.ruby} Ruby</div>
+                    <Bar value={m.progress} max={m.target} color={m.completed ? '#2FBF55' : '#2B9BF4'} />
+                  </div>
+                  <div className={`mp-prog ${m.completed ? 'mp-prog-done' : ''}`}>{m.progress}/{m.target}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mp-hint">
+            <Icon name="bulb" size={22} className="text-[#E6A817]" /> {t('missions.hint')}
+          </p>
+        </section>
       </div>
-
-      {/* Nhiệm vụ của cấp */}
-      <section className="space-y-2.5">
-        <div className="flex items-end justify-between">
-          <h2 className="font-display text-xl font-extrabold">{t('missions.levelMissions', { level: p.level })}</h2>
-          <span className="font-bold text-muted">
-            {done}/{p.missions.length}
-          </span>
-        </div>
-        {p.maxed ? (
-          <div className="rounded-[22px] bg-white p-5 text-center font-bold shadow-soft">{t('missions.maxed')}</div>
-        ) : (
-          <ul className="space-y-2.5" data-testid="mission-list">
-            {p.missions.map((m) => (
-              <li key={m.id} className={`flex items-center gap-3 rounded-[22px] border p-3.5 shadow-soft ${m.completed ? 'border-[#BFEBCB] bg-[#EAF9EF]' : 'border-white bg-white'}`}>
-                <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${m.completed ? 'bg-[#2FA65A] text-white' : 'bg-primary-light text-primary-dark'}`}>
-                  <Icon name={m.completed ? 'check' : 'target'} size={24} strokeWidth={2.6} />
-                </span>
-                <div className="min-w-0 flex-1 space-y-1">
-                  <div className="font-bold">{m.titles?.[i18n.language] || m.title}</div>
-                  <div className="flex items-center gap-1 text-xs font-bold text-[#2FA65A]">
-                    <Icon name="ruby" size={13} className="text-[#2B9BF4]" /> +{m.ruby} Ruby
-                  </div>
-                  <Bar value={m.progress} max={m.target} color={m.completed ? '#2FA65A' : '#2B9BF4'} />
-                </div>
-                <div className={`w-10 text-right font-display font-extrabold ${m.completed ? 'text-[#2FA65A]' : 'text-muted'}`}>
-                  {m.progress}/{m.target}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="flex items-center gap-1.5 text-sm text-muted">
-          <Icon name="bulb" size={16} className="text-[#E6A817]" /> {t('missions.hint')}
-        </p>
-      </section>
-
-      {/* Hạng Đấu trường */}
-      <section className="space-y-4 rounded-[28px] bg-gradient-to-br from-[#EAF4FF] to-[#F6FAFF] p-5 shadow-soft">
-        <div className="flex items-center gap-4">
-          <Avatar avatar={user.avatar} frame={user.avatarFrame} size={72} />
-          <div className="min-w-0 flex-1 space-y-2">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 className="font-display text-xl font-extrabold">{t('missions.rankTitle')}</h2>
-              <span className="font-bold text-muted">{p.rank.next ? `${p.rank.points}/${p.rank.next.min}` : p.rank.points}</span>
-            </div>
-            <p className="text-sm text-muted">{t('missions.rankHint')}</p>
-            <Bar value={p.rank.points - p.rank.currentMin} max={p.rank.next ? p.rank.next.min - p.rank.currentMin : 1} color="linear-gradient(90deg,#FFD54F,#FF9F43)" height={10} />
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-y-3 rounded-[22px] bg-white/85 px-3 py-3 sm:flex sm:items-start sm:justify-between sm:gap-1" data-testid="rank-ladder">
-          {p.tiers.map((tier, i) => {
-            const reached = p.rank.points >= tier.min;
-            const current = i === rankIdx;
-            return (
-              <Fragment key={tier.key}>
-                {i > 0 && <span className={`mt-7 hidden h-0.5 min-w-3 flex-1 rounded sm:block ${reached ? 'bg-[#FFC94D]' : 'bg-line'}`} />}
-                <div className={`mx-auto flex w-20 shrink-0 flex-col items-center text-center ${reached ? '' : 'opacity-45'}`}>
-                  <Avatar avatar={user.avatar} frame={tier.frame} size={52} />
-                  <div className="mt-1 text-xs font-extrabold leading-tight" style={{ color: RANK_STYLE[tier.key]?.text }}>
-                    {t(`rank.${tier.key}`)}
-                  </div>
-                  <div className="text-[11px] text-muted">{tier.min}+</div>
-                  {current && <span className="mt-1 h-1 w-8 rounded-full bg-[#2B9BF4]" />}
-                </div>
-              </Fragment>
-            );
-          })}
-        </div>
-      </section>
     </div>
   );
 }

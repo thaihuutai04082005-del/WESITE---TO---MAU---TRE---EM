@@ -610,8 +610,8 @@
     "later": "Later"
   },
   "missions": {
-    "title": "Missions & achievements",
-    "subtitle": "Complete missions to earn Ruby and unlock special achievements!",
+    "title": "Missions",
+    "subtitle": "Complete missions to earn Ruby!",
     "cards": {
       "level": "Level",
       "rank": "Arena rank",
