@@ -8,6 +8,7 @@ import Canvas from './Canvas/Canvas';
 import Icon from './Icon';
 import { downloadDataUrl, printDataUrl, renderArtwork, safeFileName } from '../lib/exportImage';
 import { flyToCollection } from '../lib/flyToCollection';
+import { transitionBus } from '../lib/transitionBus';
 import { api } from '../services/api';
 import { useUi } from '../store/ui';
 
@@ -53,10 +54,9 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     onClose?.(to ? 'another' : 'close');
     if (to) {
       await flight;
-      // Hiệu ứng chuyển màn hình (bản không cúp của Đấu trường); nếu không chạy được (giảm chuyển động…) thì đổi trang luôn.
-      const detail = { dest: to, handled: false };
-      window.dispatchEvent(new CustomEvent('btm:screen-transition', { detail }));
-      if (!detail.handled) navigate(to);
+      // Trang chủ đề hiện lên bằng hiệu ứng đơn giản (không lớp phủ, không cúp) — Layout bật khi đổi trang.
+      transitionBus.screenEnter = true;
+      navigate(to);
     }
   };
 

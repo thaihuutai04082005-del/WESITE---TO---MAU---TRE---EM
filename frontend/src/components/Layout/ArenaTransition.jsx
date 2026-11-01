@@ -8,8 +8,6 @@
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Đấu trường NGAY DƯỚI lớp phủ để trang tự tải dữ liệu.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
-//  5. Biến thể `screen` (không có cúp): phát khi trang khác gửi sự kiện `btm:screen-transition` {dest} (VD "Tô tranh khác" sau khi tranh bay vào
-//     Bộ sưu tập) — cùng nền cam mở ra từ giữa + vòng + đường cong + ngôi sao, rút ngắn thời gian, KHÔNG có cúp/cọ/giọt sơn/tiếng ting.
 // Hình minh hoạ nằm trong /public/arena/: cup-brushes.webp (cúp + hai cây cọ), burst.webp (vạch sáng trên đỉnh cúp), drop-*.webp (giọt sơn),
 // star-*.webp (ngôi sao), wave-*.webp (đường cong ở góc). Đổi hình: thay file cùng tên (WebP/PNG nền trong suốt, cùng tỷ lệ) — vị trí/kích thước
 // tương ứng nằm ở các hằng số CLUSTER, DROPS, BURST, STARS, WAVES bên dưới (toạ độ pixel trong ảnh gốc 1672×941).
@@ -23,10 +21,6 @@ const NAVIGATE_MS = 1500;   // chuyển sang trang Đấu trường (đang nằm
 const MIN_MS = 2050;        // thời gian tối thiểu trước khi lớp phủ được phép mờ đi
 const MAX_WAIT_MS = 6000;   // trần chờ trang đích tải xong
 const FADE_MS = 380;        // lớp phủ mờ dần
-// Biến thể không cúp (chuyển màn hình thường): ngắn hơn vì không phải đợi cúp bật lên.
-const SCREEN_NAVIGATE_MS = 850;
-const SCREEN_MIN_MS = 1250;
-const SCREEN_MAX_WAIT_MS = 3500;  // trần chờ trang đích (bản không cúp)
 const ENTER_MS = 900;       // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
 
 const isArena = (p) => p === '/arena' || p.startsWith('/arena/');
@@ -68,7 +62,7 @@ const WAVES = [
   { cls: 'at-wave-bl', src: '/arena/wave-bl.webp', w: 414, delay: 400 },
 ];
 
-function Overlay({ lite, leaving, cup = true }) {
+function Overlay({ lite, leaving }) {
   const far = STARS.filter((x) => !x.near);
   const near = STARS.filter((x) => x.near);
   const stars = lite ? far.slice(0, 3) : far;
@@ -94,7 +88,6 @@ function Overlay({ lite, leaving, cup = true }) {
           style={{ left: pct(s.cx, ART_W), top: pct(s.cy, ART_H), '--sw': `${((s.w / ART_W) * 100 * 1.08).toFixed(2)}vw`, '--d': `${s.d}ms`, '--tw': `${(i % 4) * 300}ms` }}
         />
       ))}
-      {cup && (
       <div className="at-stage">
         <div className="at-cluster">
           <span className="at-glow" />
@@ -122,7 +115,6 @@ function Overlay({ lite, leaving, cup = true }) {
           <span className="at-shadow" />
         </div>
       </div>
-      )}
     </div>
   );
 }
@@ -131,7 +123,6 @@ export default function ArenaTransition() {
   const navigate = useNavigate();
   const loc = useLocation();
   const [phase, setPhase] = useState(null); // null | 'run' | 'leave'
-  const [withCup, setWithCup] = useState(true);
   const busy = useRef(false);
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
@@ -152,64 +143,6 @@ export default function ArenaTransition() {
     [],
   );
 
-  // Chạy hiệu ứng rồi chuyển tới `dest` (dưới lớp phủ). `cup`: true = bản Đấu trường (có cúp); false = chỉ hiệu ứng chuyển màn hình.
-  const start = useRef(null);
-  start.current = (dest, { cup, card = null }) => {
-    busy.current = true;
-    transitionBus.skipRainbow = true;
-    const st = state.current;
-    st.navigated = false;
-    st.ready = false;
-    st.minDone = false;
-    st.finished = false;
-    setWithCup(cup);
-    const navigateMs = cup ? NAVIGATE_MS : SCREEN_NAVIGATE_MS;
-    const minMs = cup ? MIN_MS : SCREEN_MIN_MS;
-
-    // Thẻ được bấm thu nhẹ xuống 96% rồi trở về.
-    card?.animate?.([{ transform: 'scale(1)' }, { transform: 'scale(0.96)', offset: 0.4 }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
-
-    setPhase('run');
-    if (cup) playTing();
-
-    const finish = () => {
-      if (st.finished) return;
-      st.finished = true;
-      setPhase('leave');
-      document.documentElement.setAttribute('data-arena-enter', '');
-      later(() => document.documentElement.removeAttribute('data-arena-enter'), ENTER_MS);
-      later(() => {
-        setPhase(null);
-        busy.current = false;
-        transitionBus.skipRainbow = false;
-      }, FADE_MS);
-    };
-    const tryFinish = () => {
-      if (st.navigated && st.minDone && st.ready) finish();
-    };
-    const onReady = () => {
-      if (!st.navigated) return;           // tín hiệu của trang khác, không phải trang đích
-      st.ready = true;
-      tryFinish();
-    };
-    window.addEventListener('btm:page-ready', onReady);
-    later(() => window.removeEventListener('btm:page-ready', onReady), MAX_WAIT_MS + 1000);
-
-    later(() => {
-      st.navigated = true;
-      navigate(dest);
-    }, navigateMs);
-    later(() => {
-      st.minDone = true;
-      tryFinish();
-    }, minMs);
-    later(() => {
-      st.ready = true;                      // trần chờ: không để lớp phủ kẹt mãi
-      st.minDone = true;
-      if (st.navigated) finish();
-    }, cup ? MAX_WAIT_MS : SCREEN_MAX_WAIT_MS);
-  };
-
   // Bấm vào liên kết dẫn tới Đấu trường.
   useEffect(() => {
     const onClick = (e) => {
@@ -220,23 +153,62 @@ export default function ArenaTransition() {
       if (url.origin !== window.location.origin || !isArena(url.pathname)) return;
       if (isArena(window.location.pathname) || busy.current || reduceMotion()) return;
       e.preventDefault();
-      start.current(url.pathname + url.search + url.hash, { cup: true, card: a.parentElement || a });
+      busy.current = true;
+      transitionBus.skipRainbow = true;
+      const dest = url.pathname + url.search + url.hash;
+      const st = state.current;
+      st.navigated = false;
+      st.ready = false;
+      st.minDone = false;
+      st.finished = false;
+
+      // Thẻ được bấm thu nhẹ xuống 96% rồi trở về.
+      const card = a.parentElement || a;
+      card.animate?.([{ transform: 'scale(1)' }, { transform: 'scale(0.96)', offset: 0.4 }, { transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
+
+      setPhase('run');
+      playTing();
+
+      const finish = () => {
+        if (st.finished) return;
+        st.finished = true;
+        setPhase('leave');
+        document.documentElement.setAttribute('data-arena-enter', '');
+        later(() => document.documentElement.removeAttribute('data-arena-enter'), ENTER_MS);
+        later(() => {
+          setPhase(null);
+          busy.current = false;
+          transitionBus.skipRainbow = false;
+        }, FADE_MS);
+      };
+      const tryFinish = () => {
+        if (st.navigated && st.minDone && st.ready) finish();
+      };
+      const onReady = () => {
+        if (!st.navigated) return;           // tín hiệu của trang khác, không phải trang Đấu trường
+        st.ready = true;
+        tryFinish();
+      };
+      window.addEventListener('btm:page-ready', onReady);
+      later(() => window.removeEventListener('btm:page-ready', onReady), MAX_WAIT_MS + 1000);
+
+      later(() => {
+        st.navigated = true;
+        navigate(dest);
+      }, NAVIGATE_MS);
+      later(() => {
+        st.minDone = true;
+        tryFinish();
+      }, MIN_MS);
+      later(() => {
+        st.ready = true;                      // trần chờ: không để lớp phủ kẹt mãi
+        st.minDone = true;
+        if (st.navigated) finish();
+      }, MAX_WAIT_MS);
     };
     document.addEventListener('click', onClick, true);
     return () => document.removeEventListener('click', onClick, true);
-  }, []);
-
-  // Trang khác xin hiệu ứng chuyển màn hình (không cúp): detail.handled = true nếu hiệu ứng nhận chạy.
-  useEffect(() => {
-    const onScreen = (e) => {
-      const d = e.detail;
-      if (!d?.dest || busy.current || reduceMotion()) return;
-      d.handled = true;
-      start.current(d.dest, { cup: false });
-    };
-    window.addEventListener('btm:screen-transition', onScreen);
-    return () => window.removeEventListener('btm:screen-transition', onScreen);
-  }, []);
+  }, [navigate]);
 
   // Khoá cuộn trang trong lúc chuyển cảnh (không làm xuất hiện thanh cuộn).
   useEffect(() => {
@@ -261,5 +233,5 @@ export default function ArenaTransition() {
   }, [phase]);
 
   if (!phase) return null;
-  return <Overlay lite={lite} leaving={phase === 'leave'} cup={withCup} />;
+  return <Overlay lite={lite} leaving={phase === 'leave'} />;
 }

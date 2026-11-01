@@ -1,5 +1,5 @@
 // Khung trang: thanh điều hướng (desktop) + thanh dưới (mobile), chuyển ngôn ngữ, thông báo, popup phần thưởng.
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
@@ -15,6 +15,7 @@ import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
 import SoundToggle from './SoundToggle';
 import { initMusic } from '../../lib/sound';
+import { transitionBus } from '../../lib/transitionBus';
 import RainbowTransition from './RainbowTransition';
 import ArenaTransition from './ArenaTransition';
 import GachaTransition from './GachaTransition';
@@ -57,6 +58,15 @@ export default function Layout() {
   const navigate = useNavigate();
 
   useEffect(() => setMenu(false), [loc.pathname]);
+  // Trang mới hiện lên bằng hiệu ứng đơn giản (mờ → rõ, nhích lên nhẹ) khi nơi gọi đã đặt cờ trước lúc đổi trang.
+  useLayoutEffect(() => {
+    if (!transitionBus.screenEnter) return undefined;
+    transitionBus.screenEnter = false;
+    const html = document.documentElement;
+    html.setAttribute('data-screen-enter', '');
+    const id = setTimeout(() => html.removeAttribute('data-screen-enter'), 700);
+    return () => clearTimeout(id);
+  }, [loc.pathname]);
 
   // Nhạc nền: bắt đầu khi bé chạm vào trang lần đầu.
   useEffect(() => initMusic(), []);
