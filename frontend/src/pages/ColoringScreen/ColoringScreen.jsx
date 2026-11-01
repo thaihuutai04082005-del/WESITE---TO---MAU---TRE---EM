@@ -167,7 +167,7 @@ export default function ColoringScreen() {
 
   if (!picture) return <div className="page text-center text-muted">{t('common.loading')}</div>;
 
-  const progress = progressOf(picture, editor.data.fills);
+  const progress = progressOf(picture, editor.data.fills, { skipWhite: artwork.mode === 'template' });
   // Tranh đã gửi triển lãm: chỉ xem, không sửa được (chữ ký và nội dung bị khoá).
   const locked = !!artwork.exhibited;
   const mode = artwork.mode === 'template' ? 'template' : 'free';

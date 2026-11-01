@@ -87,13 +87,18 @@ export function referenceFills(picture) {
   return Object.fromEntries((picture.regions || []).map((r) => [r.id, r.color]));
 }
 
-/** Vùng chưa tô / tô khác màu gợi ý (dùng cho gợi ý số ở chế độ Theo mẫu). */
+/** Vùng màu trắng của tranh mẫu (không đánh số, mặc định trắng). */
+export const isWhiteRegion = (region) => region.number == null;
+
+/** Vùng chưa tô / tô khác màu gợi ý (dùng cho gợi ý số ở chế độ Theo mẫu). Vùng trắng luôn coi là xong. */
 export function isRegionDone(region, fills) {
+  if (isWhiteRegion(region)) return true;
   return (fills[region.id] || '').toUpperCase() === region.color.toUpperCase();
 }
 
-export function progressOf(picture, fills) {
-  const regions = picture.regions || [];
+/** `skipWhite` (Tô theo mẫu): vùng trắng không tính vào tiến độ vì mặc định đã trắng. */
+export function progressOf(picture, fills, { skipWhite = false } = {}) {
+  const regions = (picture.regions || []).filter((r) => !(skipWhite && isWhiteRegion(r)));
   const total = regions.reduce((s, r) => s + Math.max(r.area, 1), 0);
   const done = regions.reduce((s, r) => s + (fills[r.id] ? Math.max(r.area, 1) : 0), 0);
   return total ? done / total : 0;
