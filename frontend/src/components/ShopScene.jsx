@@ -186,27 +186,24 @@ function BrushCup() {
 }
 
 function Palette() {
+  // Bảng pha màu phẳng, đơn giản: thân kem viền cam, lỗ ngón tay khoét rỗng, 5 chấm màu.
   return (
-    <g transform="translate(1528 790)" filter="url(#shf-small)">
-      {/* thân bảng: viền cam dày, nền kem */}
-      <path d="M130 8C60 8 8 56 12 120c4 60 58 92 108 86 26-3 30-24 56-28 30-4 70 6 84-34C276 76 204 8 130 8z" fill="#FFF8EC" stroke="#F58B1E" strokeWidth="14" strokeLinejoin="round" />
-      <path d="M130 24C70 24 26 66 30 118c3 46 46 74 90 68" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" opacity=".85" />
-      {/* lỗ ngón tay */}
-      <ellipse cx="84" cy="158" rx="22" ry="18" fill="#FFB347" stroke="#F58B1E" strokeWidth="9" />
-      <ellipse cx="78" cy="153" rx="8" ry="5" fill="#FFD08A" />
-      {/* chấm màu: 6 màu cầu vồng xếp đều theo một cung */}
-      <circle cx="55" cy="103" r="17" fill="#FF4D5E" />
-      <ellipse cx="50" cy="97" rx="6" ry="4" transform="rotate(-30 50 97)" fill="#FF9AA5" />
-      <circle cx="81" cy="72" r="17" fill="#FF9A2E" />
-      <ellipse cx="76" cy="66" rx="6" ry="4" transform="rotate(-30 76 66)" fill="#FFC98A" />
-      <circle cx="124" cy="54" r="17" fill="#FFD23F" />
-      <ellipse cx="119" cy="48" rx="6" ry="4" transform="rotate(-30 119 48)" fill="#FFEE9A" />
-      <circle cx="173" cy="55" r="17" fill="#3FD17A" />
-      <ellipse cx="168" cy="49" rx="6" ry="4" transform="rotate(-30 168 49)" fill="#9CF0BE" />
-      <circle cx="216" cy="73" r="17" fill="#3E9BF5" />
-      <ellipse cx="211" cy="67" rx="6" ry="4" transform="rotate(-30 211 67)" fill="#9CCBFF" />
-      <circle cx="242" cy="104" r="17" fill="#8B5CF6" />
-      <ellipse cx="237" cy="98" rx="6" ry="4" transform="rotate(-30 237 98)" fill="#C6AEFF" />
+    <g transform="translate(1510 802)">
+      <defs>
+        <mask id="shm-pal" maskUnits="userSpaceOnUse" x="-20" y="-20" width="340" height="260">
+          <rect x="-20" y="-20" width="340" height="260" fill="#fff" />
+          <ellipse cx="190" cy="164" rx="22" ry="17" transform="rotate(-12 190 164)" fill="#000" />
+        </mask>
+      </defs>
+      <g mask="url(#shm-pal)">
+        <path d="M122 10C56 12 10 58 14 118c4 54 50 88 106 82 34-4 50-24 82-22 32 2 64-2 76-40C290 82 220 6 122 10z" fill="#FFF8EC" stroke="#F58B1E" strokeWidth="11" strokeLinejoin="round" />
+      </g>
+      <ellipse cx="190" cy="164" rx="22" ry="17" transform="rotate(-12 190 164)" fill="none" stroke="#F58B1E" strokeWidth="9" />
+      <circle cx="104" cy="62" r="19" fill="#FFB938" />
+      <circle cx="152" cy="50" r="19" fill="#3E9BF5" />
+      <circle cx="198" cy="84" r="19" fill="#8B5CF6" />
+      <circle cx="68" cy="112" r="19" fill="#3FD17A" />
+      <circle cx="68" cy="152" r="19" fill="#FF5C7A" />
     </g>
   );
 }
