@@ -69,7 +69,7 @@ export default function FlipbookViewer({ title, author, pages = [], coverStyle =
                   <span className="sbv-cloud sbv-cloud-l" />
                   <span className="sbv-cloud sbv-cloud-r" />
                   <BookIcon />
-                  <h2 className="sbv-title">{title}</h2>
+                  <h2 className="sbv-title" style={[...title].length <= 28 ? { fontSize: `min(8cqw, ${(86 / Math.max(6, [...title].length * 0.58)).toFixed(2)}cqw)` } : { fontSize: '5.4cqw', whiteSpace: 'normal' }}>{title}</h2>
                   {author && <div className="sbv-author">{t('storybook.by', { name: author })}</div>}
                 </div>
               ) : (
