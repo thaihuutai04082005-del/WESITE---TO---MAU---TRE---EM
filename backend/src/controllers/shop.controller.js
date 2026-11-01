@@ -19,7 +19,7 @@ export function list(req, res) {
       price: i.price,
       limited: !!i.limited,
       rank: i.rank,
-      owned: !!i.owned,
+      owned: !!i.owned || i.price === 0, // price 0 = miễn phí / mặc định (VD khung gỗ)
     }));
   const u = User.findById(req.user.id);
   res.json({ items, ruby: u.ruby, equipped: { brushSkin: u.brush_skin, avatarFrame: u.avatar_frame } });
@@ -29,6 +29,7 @@ export function buy(req, res) {
   const item = getDb().prepare('SELECT * FROM items WHERE slug = ?').get(req.params.slug);
   if (!item) throw notFound('item_not_found');
   if (item.price == null) throw badRequest('item_not_for_sale');
+  if (item.price === 0) throw conflict('item_already_owned'); // vật phẩm miễn phí: ai cũng có sẵn
   tx((db) => {
     if (db.prepare('SELECT 1 FROM user_items WHERE user_id = ? AND item_id = ?').get(req.user.id, item.id)) throw conflict('item_already_owned');
     const r = db.prepare('UPDATE users SET ruby = ruby - ? WHERE id = ? AND ruby >= ?').run(item.price, req.user.id, item.price);

@@ -10,6 +10,7 @@ import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
 import { canUsePicture } from './picture.controller.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
+import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 
 const THUMB_RE = /^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/;
 const MAX_THUMB = 900 * 1024;
@@ -101,12 +102,14 @@ export function download(req, res) {
 export function setFrame(req, res) {
   const a = own(req);
   const frame = req.body?.frame ?? null;
-  if (frame !== null) {
+  // Khung mặc định (miễn phí) ai cũng dùng được; khung khác phải sở hữu.
+  if (frame !== null && frame !== DEFAULT_ARTWORK_FRAME) {
     const owned = getDb()
       .prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = ? AND i.type = 'artwork_frame'")
       .get(req.user.id, frame);
     if (!owned) throw forbidden('item_not_owned');
   }
-  getDb().prepare('UPDATE artworks SET artwork_frame = ? WHERE id = ?').run(frame, a.id);
+  // null = bé chủ động bỏ khung → lưu '' (để phân biệt với "chưa chọn" = dùng khung mặc định).
+  getDb().prepare('UPDATE artworks SET artwork_frame = ? WHERE id = ?').run(frame ?? '', a.id);
   res.json({ ok: true, frame });
 }

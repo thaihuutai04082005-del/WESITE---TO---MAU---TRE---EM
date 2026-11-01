@@ -23,11 +23,11 @@ const alongBorder = (step = 100) => {
   return pts;
 };
 
+import { KHUNG_GO_DATA_URI } from './frameImages';
+
 export const ARTWORK_FRAMES = {
-  'khung-go': () =>
-    border('#B5651D') +
-    Array.from({ length: 12 }, (_, i) => `<path d="M${10 + i * 58} 12 q20 14 40 0" fill="none" stroke="#8B4A12" stroke-width="3"/>`).join('') +
-    Array.from({ length: 12 }, (_, i) => `<path d="M${10 + i * 58} 688 q20 -14 40 0" fill="none" stroke="#8B4A12" stroke-width="3"/>`).join(''),
+  // Khung gỗ mặc định: ảnh khung gỗ + viền kem do chủ web cung cấp (cửa sổ tranh 600×600 ở giữa, giống các khung khác).
+  'khung-go': () => `<image href="${KHUNG_GO_DATA_URI}" x="0" y="0" width="700" height="700"/>`,
   'khung-hoa': () =>
     border('#FFD1E1') +
     alongBorder(100)

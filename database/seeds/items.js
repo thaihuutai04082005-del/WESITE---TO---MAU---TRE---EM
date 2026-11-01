@@ -1,5 +1,5 @@
 // Vật phẩm: skin cọ vẽ (50–100 Ruby), Khung Artwork thường (100–200) và đặc biệt/limited (300–500),
-// Khung Avatar theo Rank (không bán — mở khoá khi thăng hạng).
+// Khung gỗ mộc là khung mặc định miễn phí (price 0 = ai cũng có, không bán). Khung Avatar theo Rank (không bán — mở khoá khi thăng hạng).
 export const ITEMS = [
   { type: 'brush_skin', slug: 'but-sap', name_vi: 'Bút sáp', name_en: 'Crayon', price: 50 },
   { type: 'brush_skin', slug: 'but-cham-bi', name_vi: 'Bút chấm bi', name_en: 'Polka dots', price: 60 },
@@ -7,7 +7,7 @@ export const ITEMS = [
   { type: 'brush_skin', slug: 'but-long-vu', name_vi: 'Bút lông vũ mềm', name_en: 'Soft feather', price: 80 },
   { type: 'brush_skin', slug: 'but-cau-vong', name_vi: 'Bút cầu vồng', name_en: 'Rainbow', price: 100 },
 
-  { type: 'artwork_frame', slug: 'khung-go', name_vi: 'Khung gỗ mộc', name_en: 'Wooden frame', price: 100 },
+  { type: 'artwork_frame', slug: 'khung-go', name_vi: 'Khung gỗ mộc', name_en: 'Wooden frame', price: 0 },
   { type: 'artwork_frame', slug: 'khung-hoa', name_vi: 'Khung hoa xinh', name_en: 'Flower frame', price: 120 },
   { type: 'artwork_frame', slug: 'khung-may', name_vi: 'Khung mây trời', name_en: 'Cloud frame', price: 150 },
   { type: 'artwork_frame', slug: 'khung-sao', name_vi: 'Khung ngôi sao', name_en: 'Star frame', price: 180 },

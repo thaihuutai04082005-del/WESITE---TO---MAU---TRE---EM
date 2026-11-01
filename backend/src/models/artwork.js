@@ -1,3 +1,4 @@
+import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 import { getDb, parseJson } from '../config/db.js';
 
 export const findById = (id) => getDb().prepare('SELECT * FROM artworks WHERE id = ?').get(id);
@@ -33,7 +34,8 @@ export function toSummary(a) {
     mode: a.mode,
     status: a.status,
     thumbnail: a.thumbnail,
-    frame: a.artwork_frame,
+    // Chưa chọn khung (null) → tranh hoàn thành dùng khung gỗ mặc định; '' = bé chủ động bỏ khung.
+    frame: a.artwork_frame === '' ? null : a.artwork_frame || (a.status === 'completed' ? DEFAULT_ARTWORK_FRAME : null),
     name: { vi: a.name_vi, en: a.name_en },
     isCard: !!a.is_card,
     rarity: a.rarity,

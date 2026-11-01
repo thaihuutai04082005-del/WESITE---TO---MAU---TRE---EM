@@ -133,6 +133,14 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   }, token);
   assert.equal(save.status, 200, JSON.stringify(save.body));
   assert.ok(save.body.events.some((e) => e.type === 'mission_complete'), 'hoàn thành nhiệm vụ "Tô xong 1 tranh"');
+  // Tranh hoàn thành tự dùng khung gỗ mặc định (miễn phí); chọn khung khác phải sở hữu; bỏ khung = null.
+  const aid = a1.body.artwork.id;
+  assert.equal(save.body.artwork.frame, 'khung-go');
+  assert.equal((await api('PUT', `/artworks/${aid}/frame`, { frame: 'khung-sao' }, token)).status, 403);
+  assert.equal((await api('PUT', `/artworks/${aid}/frame`, { frame: null }, token)).status, 200);
+  assert.equal((await api('GET', `/artworks/${aid}`, null, token)).body.artwork.frame, null);
+  assert.equal((await api('PUT', `/artworks/${aid}/frame`, { frame: 'khung-go' }, token)).status, 200);
+  assert.equal((await api('GET', `/artworks/${aid}`, null, token)).body.artwork.frame, 'khung-go');
 
   // Tranh thứ 2 trong ngày → hết lượt (402).
   const a2 = await api('POST', '/artworks', { pictureId: hero.body.pictures[1].id, mode: 'template' }, token);
@@ -184,7 +192,11 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   const a = await register('bena04');
   const b = await register('bena05');
   // Không đủ Ruby / Điểm Gacha.
-  assert.equal((await api('POST', '/shop/khung-go/buy', null, a.token)).body.error.code, 'not_enough_ruby');
+  assert.equal((await api('POST', '/shop/khung-hoa/buy', null, a.token)).body.error.code, 'not_enough_ruby');
+  // Khung gỗ là khung mặc định miễn phí: ai cũng có sẵn, không mua được.
+  const shop0 = await api('GET', '/shop', null, a.token);
+  assert.equal(shop0.body.items.find((i) => i.slug === 'khung-go').owned, true);
+  assert.equal((await api('POST', '/shop/khung-go/buy', null, a.token)).body.error.code, 'item_already_owned');
   assert.equal((await api('POST', '/gacha/pull', { count: 1 }, a.token)).body.error.code, 'not_enough_gacha_points');
   assert.equal((await api('POST', '/shop/avatar-vang/buy', null, a.token)).body.error.code, 'item_not_for_sale');
 
@@ -192,7 +204,7 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   const pull = await api('POST', '/gacha/pull', { count: 2 }, a.token);
   assert.equal(pull.body.results.length, 2);
   assert.equal(pull.body.gachaPoints, 30, 'dư 30 điểm giữ lại');
-  assert.equal((await api('POST', '/shop/khung-go/buy', null, a.token)).body.ruby, 50);
+  assert.equal((await api('POST', '/shop/khung-hoa/buy', null, a.token)).body.ruby, 30);
 
   // Kết bạn
   const me = await api('GET', '/social/friends', null, b.token);
