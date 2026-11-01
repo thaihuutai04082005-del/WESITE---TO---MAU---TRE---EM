@@ -11,7 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
-import { ShopArt, Bag, SignStar, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScene';
+import { ShopArt, Bag, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScene';
 
 function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
@@ -154,7 +154,7 @@ export default function Shop() {
 
           <ShopArt />
           <div className="sh-sign" style={box([738, 104, 456, 112])}>
-            <SignStar /> <Bag /> <b>{t('shop.title')}</b> <SignStar />
+            <Bag /> <b>{t('shop.title')}</b>
           </div>
 
           <div className="sh-tabs" style={box([26, 340, 296, 300])} role="tablist">

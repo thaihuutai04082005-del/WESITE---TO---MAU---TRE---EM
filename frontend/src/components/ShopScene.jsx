@@ -152,35 +152,54 @@ function LeftPanel() {
   );
 }
 
+function Brush({ x, y, rot, handle, handleDk, tip, tipDk }) {
+  // Cọ thẳng đứng dài 150: lông cọ trên đầu, đai kim loại, cán sơn màu.
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+      <path d="M-12 -44 C-12 -78 -4 -100 0 -112 C4 -100 12 -78 12 -44 Z" fill={tip} stroke={tipDk} strokeWidth="3" strokeLinejoin="round" />
+      <path d="M-4 -52 C-5 -72 -2 -90 0 -100" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" opacity=".55" />
+      <rect x="-14" y="-46" width="28" height="26" rx="5" fill="#E7ECF2" stroke="#A9B4C2" strokeWidth="3" />
+      <path d="M-14 -38H14M-14 -29H14" stroke="#C5CEDA" strokeWidth="2" />
+      <path d="M-11 -20 H11 L9 100 H-9 Z" fill={handle} stroke={handleDk} strokeWidth="3" strokeLinejoin="round" />
+      <path d="M-5 -14 L-4 92" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" opacity=".4" />
+    </g>
+  );
+}
+
 function BrushCup() {
   return (
-    <g transform="translate(118 758)" filter="url(#shf-small)">
-      {/* cọ */}
-      <g transform="rotate(-16 40 70)"><rect x="30" y="30" width="20" height="92" rx="9" fill="#E2434E" /><rect x="28" y="10" width="24" height="26" rx="6" fill="#D5DCE5" stroke="#A9B4C2" strokeWidth="2" /><path d="M28 10 Q40 -26 52 10 Z" fill="#E8505C" /></g>
-      <g><rect x="78" y="20" width="22" height="100" rx="9" fill="#D9323F" /><rect x="76" y="2" width="26" height="26" rx="6" fill="#D5DCE5" stroke="#A9B4C2" strokeWidth="2" /><path d="M76 2 Q89 -40 102 2 Z" fill="#FFC21A" stroke="#F0960A" strokeWidth="2" /></g>
-      <g transform="rotate(18 134 70)"><rect x="124" y="30" width="20" height="92" rx="9" fill="#3DA9FC" /><rect x="122" y="10" width="24" height="26" rx="6" fill="#D5DCE5" stroke="#A9B4C2" strokeWidth="2" /><path d="M122 10 Q134 -26 146 10 Z" fill="#2B86E8" /></g>
+    <g transform="translate(118 742)" filter="url(#shf-small)">
+      <Brush x={44} y={92} rot={-20} handle="#F0525E" handleDk="#C73541" tip="#F0525E" tipDk="#C73541" />
+      <Brush x={140} y={92} rot={20} handle="#3DA9FC" handleDk="#2276C9" tip="#3DA9FC" tipDk="#2276C9" />
+      <Brush x={92} y={82} rot={0} handle="#FF5A66" handleDk="#C73541" tip="#FFC21A" tipDk="#E09A00" />
       {/* ly */}
-      <path d="M18 112 H162 L148 224 Q146 244 126 244 H54 Q34 244 32 224 Z" fill="url(#shg-cup)" stroke="#D9D2DD" strokeWidth="4" strokeLinejoin="round" />
-      <ellipse cx="90" cy="112" rx="72" ry="13" fill="#EFEAF2" stroke="#D9D2DD" strokeWidth="4" />
-      <path d="M26 156 H154 L150 192 H30 Z" fill="#E94F5C" />
-      <path d="M26 156 H154" stroke="#FF9AA2" strokeWidth="4" opacity=".8" />
-      <polygon points="90,160 98,176 116,178 103,190 107,207 90,198 73,207 77,190 64,178 82,176" fill="#FFFFFF" />
+      <path d="M14 128 H170 L156 232 Q154 252 134 252 H50 Q30 252 28 232 Z" fill="url(#shg-cup)" stroke="#D5CEDB" strokeWidth="4" strokeLinejoin="round" />
+      <ellipse cx="92" cy="128" rx="78" ry="13" fill="#F4F1F7" stroke="#D5CEDB" strokeWidth="4" />
+      <ellipse cx="92" cy="130" rx="68" ry="8" fill="#DCD5E2" opacity=".55" />
+      <path d="M21 168 H163 L158 206 H26 Z" fill="#EE4C5A" />
+      <path d="M21 168 H163" stroke="#FF98A0" strokeWidth="4" opacity=".8" />
+      <polygon points="92,171 99,186 116,188 104,199 107,215 92,207 77,215 80,199 68,188 85,186" fill="#FFFFFF" />
+      <path d="M40 140V232" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" opacity=".55" />
     </g>
   );
 }
 
 function Palette() {
   return (
-    <g transform="translate(1566 800)" filter="url(#shf-small)">
-      <path d="M118 10C54 10 8 54 12 112c4 54 52 84 98 80 24-2 28-20 50-24 28-4 66 4 80-34C254 70 192 10 118 10z" fill="#FFF8EC" stroke="#F28A1B" strokeWidth="16" strokeLinejoin="round" />
-      <path d="M118 22C62 22 22 62 26 112c4 44 44 70 84 66 20-2 26-18 52-22 24-3 58 2 70-26" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" opacity=".7" />
-      <ellipse cx="74" cy="150" rx="19" ry="16" fill="#FFB347" stroke="#F28A1B" strokeWidth="10" />
-      <circle cx="62" cy="72" r="19" fill="#FFB938" />
-      <circle cx="116" cy="52" r="19" fill="#3E9BF5" />
-      <circle cx="170" cy="78" r="19" fill="#8B5CF6" />
-      <circle cx="52" cy="118" r="19" fill="#FF5C7A" />
-      <circle cx="84" cy="102" r="19" fill="#3FD17A" />
-      <path d="M58 64q4-6 10-6M110 44q4-4 9-4M164 70q4-5 9-4" fill="none" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" opacity=".7" />
+    <g transform="translate(1528 790)" filter="url(#shf-small)">
+      {/* thân bảng: viền cam dày, nền kem */}
+      <path d="M130 8C60 8 8 56 12 120c4 60 58 92 108 86 26-3 30-24 56-28 30-4 70 6 84-34C276 76 204 8 130 8z" fill="#FFF8EC" stroke="#F58B1E" strokeWidth="14" strokeLinejoin="round" />
+      <path d="M130 24C70 24 26 66 30 118c3 46 46 74 90 68" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" opacity=".85" />
+      {/* lỗ ngón tay */}
+      <ellipse cx="84" cy="158" rx="22" ry="18" fill="#FFB347" stroke="#F58B1E" strokeWidth="9" />
+      <ellipse cx="78" cy="153" rx="8" ry="5" fill="#FFD08A" />
+      {/* chấm màu */}
+      {[[70, 76, '#FFB938', '#FFD98A'], [132, 52, '#3E9BF5', '#8AC7FF'], [196, 82, '#8B5CF6', '#BFA3FF'], [58, 122, '#FF5C7A', '#FF9DB0'], [112, 100, '#3FD17A', '#8FEDB5'], [186, 140, '#FFD23F', '#FFEA8A']].map(([cx, cy, c, hi]) => (
+        <g key={cx + '-' + cy}>
+          <circle cx={cx} cy={cy} r="22" fill={c} />
+          <ellipse cx={cx - 7} cy={cy - 8} rx="8" ry="5" transform={`rotate(-30 ${cx - 7} ${cy - 8})`} fill={hi} />
+        </g>
+      ))}
     </g>
   );
 }
@@ -221,14 +240,6 @@ export function Bag() {
       <path d="M12 22h40l-3 34H15z" fill="#FFD9DC" stroke="#E2434E" strokeWidth="5" strokeLinejoin="round" />
       <path d="M22 26v-6a10 10 0 0120 0v6" fill="none" stroke="#E2434E" strokeWidth="5" strokeLinecap="round" />
       <path d="M17 30l1 20" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" opacity=".8" />
-    </svg>
-  );
-}
-
-export function SignStar() {
-  return (
-    <svg viewBox="0 0 80 80" className="sh-sign-star" aria-hidden="true">
-      <polygon points={Array.from({ length: 10 }, (_, i) => { const r = i % 2 ? 17 : 36; const a = ((-90 + i * 36) * Math.PI) / 180; return `${(40 + r * Math.cos(a)).toFixed(1)},${(42 + r * Math.sin(a)).toFixed(1)}`; }).join(' ')} fill="#FFD84A" stroke="#F0A818" strokeWidth="5" strokeLinejoin="round" />
     </svg>
   );
 }
