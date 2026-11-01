@@ -31,12 +31,15 @@ function PatternPreview({ slug, scene = false, className = 'h-auto w-full rounde
 
 function CoverMock({ slug, className }) {
   const c = STORY_COVERS[slug] || { solid: '#BDE6FF', line: '#2B9BF4' };
+  // Cuốn truyện trơn: bìa màu, gáy, mép giấy trắng; không chữ.
   return (
-    <svg viewBox="0 0 200 140" className={className}>
-      <rect x="62" y="6" width="76" height="128" rx="8" fill={c.solid} stroke={c.line} strokeWidth="5" />
-      <rect x="70" y="14" width="60" height="112" rx="5" fill="none" stroke={c.line} strokeWidth="2.5" opacity=".7" />
-      <rect x="78" y="46" width="44" height="7" rx="3.5" fill={c.line} opacity=".85" />
-      <rect x="86" y="60" width="28" height="5" rx="2.5" fill={c.line} opacity=".55" />
+    <svg viewBox="0 0 200 160" className={className}>
+      <ellipse cx="100" cy="148" rx="62" ry="7" fill="#000" opacity=".12" />
+      <rect x="48" y="14" width="104" height="128" rx="9" fill="#FFFFFF" stroke={c.line} strokeWidth="4" />
+      <path d="M142 24h4a6 6 0 016 6v104a6 6 0 01-6 6h-98" fill="none" stroke="#D9DEE3" strokeWidth="3" strokeLinecap="round" />
+      <rect x="40" y="8" width="104" height="128" rx="9" fill={c.solid} stroke={c.line} strokeWidth="5" />
+      <rect x="40" y="8" width="16" height="128" rx="8" fill={c.line} />
+      <rect x="48" y="8" width="8" height="128" fill={c.line} />
     </svg>
   );
 }
@@ -157,9 +160,8 @@ export default function Shop() {
     ];
     return (
       <div className="sh-room">
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-1" draggable={false} />
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-2" draggable={false} />
-        <img src="/shop/cloud.webp" alt="" className="sh-cloud sh-cloud-3" draggable={false} />
+
+
         <div className="sh-stage" data-testid="shop-stall">
           <div className="sh-inner">
           <h1 className="sr-only" data-testid="shop-title">{t('shop.title')}</h1>
