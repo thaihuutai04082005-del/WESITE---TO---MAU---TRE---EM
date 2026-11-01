@@ -1463,7 +1463,11 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .cw-ref { order: 5; }
 .cw-square { width: min(100%, calc(100dvh - 220px)); margin: 0 auto; }
 .cw-sw { width: var(--sw, 44px); height: var(--sw, 44px); }
-.cw-title { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-family: var(--font-display, inherit); font-weight: 900; font-size: 20px; color: #1E3A5C; }
+/* Các ô màu căn đều thành lưới 6 cột (chừa lề để vòng sáng của ô đang chọn không bị cắt). */
+.cw-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); justify-items: center; gap: 8px 4px; padding: 5px 2px; }
+.cw-grid-num { --sw: 44px; }
+.cw-grid-num .cw-sw { width: 100%; max-width: 46px; height: auto; aspect-ratio: 1; }
+.cw-title { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding: 3px 4px; font-family: var(--font-display, inherit); font-weight: 900; font-size: 20px; color: #1E3A5C; }
 .cw-title svg { color: #F2701B; }
 .cw-toolcard, .cw-ref { border-radius: 28px; background: rgba(255, 255, 255, 0.94); border: 0; box-shadow: 0 10px 24px rgba(40, 90, 150, 0.2), inset 0 2px 0 #fff; }
 .cw-stage .cw-square > div:first-child { border-radius: 28px; border: 0; box-shadow: 0 10px 24px rgba(40, 90, 150, 0.2); }
@@ -1485,7 +1489,8 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw-tools > .card::-webkit-scrollbar { display: none; }
   .cw-palette { gap: 0; }
   .cw-palette > * + * { margin-top: 8px; }
-  .cw-presets { gap: 6px; justify-items: center; }
+  .cw-grid { gap: 5px 4px; padding: 3px 2px; }
+  .cw-grid-num .cw-sw { max-width: clamp(34px, 5vh, 46px); }
   @media (max-height: 820px) { .cw-palette .cw-label { display: none; } .cw-title { font-size: 18px; margin-bottom: 6px; } }
   @media (max-height: 720px) { .cw-toolcard > .cw-title { display: none; } }
   /* Cột trái hẹp: tiêu đề xếp dọc cho khỏi bị cắt. */
