@@ -9,8 +9,8 @@ import { useUi } from '../../store/ui';
 import { formatDateTime } from '../../lib/format';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
-import { RankMedal } from '../../components/RankBadge';
-import { BearCloudArt, CrownCloudArt, GrandTrophy } from '../../components/Illustrations';
+import { RANK_STYLE } from '../../components/RankBadge';
+import { BearCloudArt, CrownCloudArt } from '../../components/Illustrations';
 
 // Mỗi tiêu chí chấm điểm một biểu tượng + màu riêng.
 const RUBRIC_ICON = {
@@ -44,6 +44,27 @@ function ClipboardBadge() {
       <rect x="11" y="10" width="18" height="22" rx="3" fill="#FFFFFF" />
       <rect x="15.5" y="7.5" width="9" height="5" rx="1.8" fill="#FFFFFF" stroke="#1E5FD9" strokeWidth="1.4" />
       <path d="M15 17.5 H25 M15 21.5 H25 M15 25.5 H21.5" stroke="#3D8BFD" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** Khiên hạng có vương miện, đổi màu theo bậc, hai nhánh nguyệt quế hai bên. */
+function RankShield({ rank = 'bronze' }) {
+  const st = RANK_STYLE[rank] || RANK_STYLE.bronze;
+  return (
+    <svg viewBox="0 0 120 110" className="ar-shield" aria-hidden="true">
+      <g fill="#F7B733" stroke="#E08E0B" strokeWidth="1.5">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <g key={i}>
+            <ellipse cx={14 + i * 3} cy={80 - i * 12} rx="5" ry="9" transform={`rotate(${-35 + i * 10} ${14 + i * 3} ${80 - i * 12})`} />
+            <ellipse cx={106 - i * 3} cy={80 - i * 12} rx="5" ry="9" transform={`rotate(${35 - i * 10} ${106 - i * 3} ${80 - i * 12})`} />
+          </g>
+        ))}
+      </g>
+      <path d="M60 22 L98 34 V62 Q98 88 60 104 Q22 88 22 62 V34 Z" fill="#B8651B" stroke="#8A4A12" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M60 28 L92 38 V62 Q92 83 60 97 Q28 83 28 62 V38 Z" fill={st.fill} stroke={st.ring} strokeWidth="3" strokeLinejoin="round" />
+      <polygon points="60,44 65,57 79,58 68,67 72,80 60,72 48,80 52,67 41,58 55,57" fill="#FFFFFF" stroke={st.ring} strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M44 20 L50 8 L56 16 L60 5 L64 16 L70 8 L76 20 Z" fill="#FFD54F" stroke="#E08E0B" strokeWidth="2" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -86,26 +107,24 @@ export default function ArenaLobby() {
   const { slot, rules } = info;
 
   return (
+    <div className="ar-stage">
     <div className="page space-y-5">
-      {/* Đầu trang */}
-      <section className="relative flex flex-wrap items-center gap-3 sm:gap-5">
-        <div className="h-24 w-24 shrink-0 sm:h-32 sm:w-32">
-          <GrandTrophy />
+      {/* Đầu trang: dải ruy băng cam có cúp + hai cây cọ chéo nhau, thẻ hạng hiện tại bên phải */}
+      <section className="ar-head">
+        <div className="ar-banner">
+          <img src="/arena/cup-brushes.webp" alt="" className="ar-cup" draggable={false} />
+          <h1 className="ar-title">{t('arena.title')}</h1>
         </div>
-        <div className="min-w-0 flex-1">
-          <h1 className="font-display text-3xl font-extrabold leading-tight text-[#16324F] sm:text-5xl">
-            {t('arena.title')}
-          </h1>
-        </div>
-        <div className="flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-2.5 shadow-soft" data-testid="arena-me">
-          <RankMedal rank={user?.rank} size={30} />
-          <span className="font-bold">
-            {t('home.rank')}: {t(`rank.${user?.rank || 'bronze'}`)}
-          </span>
-          <span className="h-6 w-px bg-line" />
-          <span className="flex items-center gap-1.5 font-bold text-primary-dark">
-            <Icon name="star" size={22} className="text-[#2B9BF4]" /> {user?.rankPoints ?? 0} {t('rank.pts')}
-          </span>
+        <span className="ar-sep" aria-hidden="true" />
+        <div className="ar-rank" data-testid="arena-me">
+          <span className="ar-rank-tag">{t('arena.currentRank')}</span>
+          <RankShield rank={user?.rank} />
+          <div className="ar-rank-info">
+            <div className="ar-rank-name">{t(`rank.${user?.rank || 'bronze'}`)}</div>
+            <div className="ar-rank-pts">
+              <Icon name="star" size={20} className="text-[#F5A623]" /> {user?.rankPoints ?? 0} {t('rank.pts')}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -236,6 +255,7 @@ export default function ArenaLobby() {
           )}
         </section>
       </div>
+    </div>
     </div>
   );
 }

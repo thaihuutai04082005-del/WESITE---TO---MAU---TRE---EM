@@ -687,7 +687,8 @@
     "closedShort": "Closed",
     "friendsOnlyChip": "Friends only",
     "minutes": "{{n}} min",
-    "upTo": "Up to {{n}} kids"
+    "upTo": "Up to {{n}} kids",
+    "currentRank": "Current rank"
   },
   "rubric": {
     "coverage": "Coverage",

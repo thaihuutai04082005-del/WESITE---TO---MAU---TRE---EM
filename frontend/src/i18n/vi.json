@@ -687,7 +687,8 @@
     "closedShort": "Đang đóng",
     "friendsOnlyChip": "Chỉ bạn bè",
     "minutes": "{{n}} phút",
-    "upTo": "Tối đa {{n}} bạn"
+    "upTo": "Tối đa {{n}} bạn",
+    "currentRank": "Hạng hiện tại"
   },
   "rubric": {
     "coverage": "Độ phủ màu",
