@@ -233,3 +233,4 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Ghế sofa, Tủ quần áo, Đèn bàn, Quạt máy, Tivi, Tủ lạnh, Máy giặt, Bàn ăn (Ngôi Nhà Của Bé 3–5, mới; màu theo ảnh mẫu) | – | `src/<đối-tượng>--<đối-tượng>.png` | 17–35 |
 | Tiên Cá Hải Lam (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu) | – | `src/tien-ca-hai-lam--tien-ca-hai-lam.png` | 158 |
 | Tiên Cá Châu Anh (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối 11 đoạn nét hở) | – | `src/tien-ca-chau-anh--tien-ca-chau-anh.png` | 168 |
+| Tiên Cá Châu Anh (Tiên Cá Phép Thuật 9+, mới; màu theo ảnh mẫu, nối 11 đoạn nét hở) | – | `src/tien-ca-chau-anh--tien-ca-chau-anh.png` | 168 |
