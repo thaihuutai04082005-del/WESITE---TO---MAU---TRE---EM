@@ -1,7 +1,7 @@
 // Hiệu ứng chuyển màn hình — chỉ dùng khi vào / ra khu vực Tô màu (/color…, /draw/…).
 //  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét MỘT LƯỢT từ trái sang phải theo đường cong
 //    phủ kín màn hình → đổi trang → gỡ cầu vòng NGAY, không mờ dần, không còn dư âm.
-//  • Ra khỏi Tô màu (về trang chủ…): chỉ cầu vòng, y hệt.
+//  • Ra khỏi Tô màu (về trang chủ…): KHÔNG có hiệu ứng — chỉ giữ chiều đi vào, bỏ chiều quay về.
 //  • Vào Tô cùng nhau / Bóc thẻ / Truyện tranh: chỉ lấp lánh quanh chỗ bấm + tiếng ting (giống lúc vào Tô màu),
 //    rồi chuyển trang ngay — chưa có cầu vòng (hiệu ứng chuyển màn hình riêng sẽ bổ sung sau). Đấu trường: xem ArenaTransition.jsx.
 // Cầu vòng là một lớp nền duy nhất (7 dải đồng tâm) + mặt nạ hình quạt quay quanh tâm, vẽ bằng requestAnimationFrame
@@ -26,6 +26,8 @@ export const isColoringPath = (p) => p === '/color' || p.startsWith('/color/') |
 const SPARKLE_MODES = ['/together', '/storybooks'];   // Đấu trường, Bóc thẻ, Truyện tranh, Tô cùng nhau (trang danh sách) có hiệu ứng riêng: ArenaTransition, GachaTransition, StoryTransition, TogetherTransition
 const modeOf = (p) => SPARKLE_MODES.find((m) => p === m || p.startsWith(`${m}/`)) || null;
 const crosses = (from, to) => isColoringPath(from) !== isColoringPath(to);
+/** Chỉ chiều đi VÀO khu vực Tô màu mới có cầu vòng; chiều quay về đổi trang bình thường. */
+const enters = (from, to) => !isColoringPath(from) && isColoringPath(to);
 const reduceMotion = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const ease = (t) => 0.5 - 0.5 * Math.cos(Math.PI * t);   // easeInOutSine: êm ở đầu và cuối
 
@@ -91,30 +93,26 @@ export default function RainbowTransition() {
         }, reduceMotion() ? 0 : SPARKLE_MS);
         return;
       }
-      if (!crosses(window.location.pathname, url.pathname) || reduceMotion()) return;
+      if (!enters(window.location.pathname, url.pathname) || reduceMotion()) return;
       e.preventDefault();
       busy.current = true;
       pendingTo.current = url.pathname + url.search + url.hash;
       setSize({ w: window.innerWidth, h: window.innerHeight });
-      if (isColoringPath(url.pathname)) {
-        // Vào Tô màu: lấp lánh quanh chỗ bấm (bàn phím không có toạ độ → lấy giữa phần tử) rồi mới hiện cầu vòng.
-        const r = a.getBoundingClientRect();
-        const x = e.clientX || r.left + r.width / 2;
-        const y = e.clientY || r.top + r.height / 2;
-        setSpark((s) => ({ x, y, key: s.key + 1 }));
-        setPhase('sparkle');
-        playTing(); // tiếng ting khớp với lúc lấp lánh
-        later(() => setPhase('in'), SPARKLE_MS);
-      } else {
-        setPhase('in');
-      }
+      // Vào Tô màu: lấp lánh quanh chỗ bấm (bàn phím không có toạ độ → lấy giữa phần tử) rồi mới hiện cầu vòng.
+      const r = a.getBoundingClientRect();
+      const x = e.clientX || r.left + r.width / 2;
+      const y = e.clientY || r.top + r.height / 2;
+      setSpark((sp) => ({ x, y, key: sp.key + 1 }));
+      setPhase('sparkle');
+      playTing(); // tiếng ting khớp với lúc lấp lánh
+      later(() => setPhase('in'), SPARKLE_MS);
     };
     document.addEventListener('click', onClick, true);
     return () => document.removeEventListener('click', onClick, true);
   }, [navigate]);
 
-  // Đổi trang theo cách khác (nút Quay lại của trình duyệt, navigate() trong mã): trang mới đã dựng sẵn,
-  // phủ cầu vòng ngay trước khi vẽ rồi cho chạy ra để hé lộ.
+  // Đổi trang theo cách khác (navigate() trong mã) để VÀO Tô màu: trang mới đã dựng sẵn,
+  // phủ cầu vòng ngay trước khi vẽ rồi cho chạy ra để hé lộ. Quay lại / ra khỏi Tô màu thì không có hiệu ứng.
   useLayoutEffect(() => {
     const from = prevPath.current;
     prevPath.current = loc.pathname;
@@ -122,7 +120,7 @@ export default function RainbowTransition() {
       handled.current = false;
       return;
     }
-    if (from === loc.pathname || !crosses(from, loc.pathname) || reduceMotion() || busy.current || transitionBus.skipRainbow) return;
+    if (from === loc.pathname || !enters(from, loc.pathname) || reduceMotion() || busy.current || transitionBus.skipRainbow) return;
     busy.current = true;
     pendingTo.current = null;
     setSize({ w: window.innerWidth, h: window.innerHeight });

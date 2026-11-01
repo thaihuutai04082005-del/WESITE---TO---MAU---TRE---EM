@@ -15,8 +15,8 @@ import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
 import SoundToggle from './SoundToggle';
 import { initMusic } from '../../lib/sound';
-import { transitionBus } from '../../lib/transitionBus';
-import RainbowTransition, { isColoringPath } from './RainbowTransition';
+import { transitionBus, armScreenEnter } from '../../lib/transitionBus';
+import RainbowTransition from './RainbowTransition';
 import ArenaTransition from './ArenaTransition';
 import GachaTransition from './GachaTransition';
 import StoryTransition from './StoryTransition';
@@ -42,11 +42,9 @@ export const NAV = [
 // Thanh điều hướng chính (đúng thứ tự hiển thị): Bộ sưu tập, Cửa hàng, Bạn bè, Lịch sử. Các mục khác vào từ trang chủ / menu.
 const MAIN_NAV = ['collection', 'shop', 'friends', 'history'];
 
-// Trang đích đã có hiệu ứng chuyển màn hình riêng (xem các file *Transition.jsx).
-const OWN_TRANSITION_DEST = (p) =>
-  p === '/arena' || p.startsWith('/arena/') || p === '/gacha' || p.startsWith('/gacha/') || p === '/storybooks' || p === '/together' || p === '/missions' || p === '/exhibition';
-// Vào / ra khu vực Tô màu có hiệu ứng cầu vồng riêng.
-const hasOwnTransition = (from, to) => OWN_TRANSITION_DEST(to) || isColoringPath(from) !== isColoringPath(to);
+// Chỉ khi bé bấm 4 nút trên thanh menu chính (Bộ sưu tập, Shop, Bạn bè, Lịch sử) — hoặc sau "Tô tranh khác" — trang mới mới hiện lên bằng
+// hiệu ứng mờ dần nhẹ. Các lần đổi trang khác (trang chủ, quay lại, nút trong trang…) đổi như bình thường.
+const SOFT_ENTER_KEYS = new Set(['collection', 'shop', 'friends', 'history']);
 const MOBILE_MAIN = MAIN_NAV;
 const DESKTOP_MAIN = MAIN_NAV;
 const navOf = (keys) => keys.map((k) => NAV.find((n) => n.key === k)).filter(Boolean);
@@ -64,20 +62,17 @@ export default function Layout() {
   const navigate = useNavigate();
 
   useEffect(() => setMenu(false), [loc.pathname]);
-  // Mọi lần đổi trang mà chưa có hiệu ứng riêng đều hiện trang mới bằng animation đơn giản (mờ → rõ, nhích lên nhẹ).
-  // Không chạy khi: hiệu ứng riêng đã lo (Tô màu / Đấu trường / Tô cùng nhau / Bóc thẻ / Truyện tranh / Nhiệm vụ / Triển lãm),
-  // chỉ đổi tham số trên cùng một trang, hoặc lần dựng đầu tiên của ứng dụng. Nơi gọi đặt `transitionBus.screenEnter` để ép chạy.
+  // Hiện trang mới bằng hiệu ứng mờ dần nhẹ (chỉ opacity) khi nơi gọi đã bật `armScreenEnter()` ngay trước lúc đổi trang.
   const prevPath = useRef(loc.pathname);
   useLayoutEffect(() => {
     const from = prevPath.current;
     prevPath.current = loc.pathname;
-    const forced = transitionBus.screenEnter;
-    transitionBus.screenEnter = false;
-    if (from === loc.pathname) return undefined;
-    if (!forced && (hasOwnTransition(from, loc.pathname) || transitionBus.skipRainbow)) return undefined;
+    const armed = Date.now() < transitionBus.screenEnterUntil;
+    transitionBus.screenEnterUntil = 0;
+    if (from === loc.pathname || !armed) return undefined;
     const html = document.documentElement;
     html.setAttribute('data-screen-enter', '');
-    const id = setTimeout(() => html.removeAttribute('data-screen-enter'), 700);
+    const id = setTimeout(() => html.removeAttribute('data-screen-enter'), 450);
     return () => clearTimeout(id);
   }, [loc.pathname]);
 
@@ -128,6 +123,7 @@ export default function Layout() {
                   className={({ isActive }) => (n.key === 'collection' ? `nav-pill${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
                   data-testid={`nav-${n.key}`}
                   data-fly-target={n.key}
+                  onClick={() => SOFT_ENTER_KEYS.has(n.key) && armScreenEnter()}
                 >
                   {n.key === 'collection' ? (
                     <img src="/mascots/suutap.webp" alt="" className="h-8 w-auto shrink-0" draggable="false" />
@@ -181,7 +177,7 @@ export default function Layout() {
       {user && (
         <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
           {navOf(MOBILE_MAIN).map((n) => (
-            <NavLink key={n.to} to={n.to} end={n.end} data-fly-target={n.key} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
+            <NavLink key={n.to} to={n.to} end={n.end} data-fly-target={n.key} onClick={() => SOFT_ENTER_KEYS.has(n.key) && armScreenEnter()} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
               <Icon name={n.icon} />
               {t(`nav.${n.key}`)}
             </NavLink>
