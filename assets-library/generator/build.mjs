@@ -317,6 +317,10 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   // Đánh số theo màu gợi ý (chế độ Tô theo mẫu): cùng màu → cùng số.
   const palette = [];
   for (const r of manifestRegions) {
+    if (isWhiteHex(r.color)) {
+      r.number = null;
+      continue;
+    }
     let p = palette.find((q) => q.color === r.color);
     if (!p) {
       p = { number: palette.length + 1, color: r.color };
@@ -364,6 +368,10 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
 }
 
 
+
+/** Màu trắng (hoặc gần trắng): ở chế độ Tô theo mẫu không đánh số, mặc định để trắng; bé vẫn tô màu khác lên được. */
+const isWhiteHex = (hex) => /^#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i.test(hex) && [1, 3, 5].every((i) => parseInt(hex.slice(i, i + 2), 16) >= 0xf4);
+
 /** Màu → Lab (D65) để đo độ chênh màu mắt thường thấy được. */
 function hexToLab(hex) {
   const lin = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
@@ -401,6 +409,10 @@ function buildArtPicture(theme, obj, variant, file, isCard = true) {
   const manifestRegions = computeManifestRegions(regionsItems.map((it) => ({ ...it, worldPoly: it.poly })));
   const palette = [];
   for (const r of manifestRegions) {
+    if (isWhiteHex(r.color)) {
+      r.number = null;
+      continue;
+    }
     let p = palette.find((q) => q.color === r.color);
     if (!p) {
       p = { number: palette.length + 1, color: r.color };

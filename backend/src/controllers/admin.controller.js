@@ -70,6 +70,11 @@ function validateManifest(m) {
   });
   const palette = [];
   for (const r of regions) {
+    // Màu trắng: không đánh số (mặc định trắng ở chế độ Tô theo mẫu).
+    if ([1, 3, 5].every((i) => parseInt(r.color.slice(i, i + 2), 16) >= 0xf4)) {
+      r.number = null;
+      continue;
+    }
     let p = palette.find((q) => q.color === r.color);
     if (!p) palette.push((p = { number: palette.length + 1, color: r.color }));
     r.number = p.number;

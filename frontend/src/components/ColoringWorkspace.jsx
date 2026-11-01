@@ -37,7 +37,6 @@ export default function ColoringWorkspace({
   const [sizeIdx, setSizeIdx] = useState(2);
   const [pattern, setPattern] = useState('rainbow');
   const [stickerType, setStickerType] = useState('star');
-  const [stickerSizeIdx, setStickerSizeIdx] = useState(1);
   const [number, setNumber] = useState(mode === 'template' ? picture?.palette?.find((p) => !/^#F[CDEF]F[CDEF]F[CDEF]$/i.test(p.color))?.number ?? picture?.palette?.[0]?.number ?? null : null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [showRef, setShowRef] = useState(false);
@@ -96,7 +95,7 @@ export default function ColoringWorkspace({
             color={color}
             size={SIZES[sizeIdx]}
             pattern={pattern}
-            stickerScale={STICKER_SCALES[stickerSizeIdx]}
+            stickerScale={STICKER_SCALES[sizeIdx]}
             brushSkin={brushSkin}
             stickerType={stickerType}
             showNumbers={false}
@@ -131,8 +130,6 @@ export default function ColoringWorkspace({
             setPattern={setPattern}
             stickerType={stickerType}
             setStickerType={setStickerType}
-            stickerSizeIdx={stickerSizeIdx}
-            setStickerSizeIdx={setStickerSizeIdx}
             canUndo={editor.canUndo}
             canRedo={editor.canRedo}
             onUndo={() => (onUndo ? onUndo() : editor.undo())}
@@ -143,7 +140,7 @@ export default function ColoringWorkspace({
             onClear={allowClear ? () => setConfirmClear(true) : null}
             colorPanel={
               <div className="border-t-2 border-line pt-3">
-                <ColorPalette color={color} onChange={pickColor} userKey={userKey} numbered={template ? picture.palette : null} activeNumber={number} onNumber={setNumber} />
+                <ColorPalette glitter={tool === 'glitter'} color={color} onChange={pickColor} userKey={userKey} numbered={template ? picture.palette : null} activeNumber={number} onNumber={setNumber} />
               </div>
             }
           />
