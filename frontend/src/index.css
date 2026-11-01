@@ -1323,12 +1323,6 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .ar-banner::after { right: -22px; clip-path: polygon(0 0, 100% 0, 74% 50%, 100% 100%, 0 100%); }
 .ar-cup { position: absolute; left: clamp(-34px, -2.4vw, -12px); bottom: -10px; width: clamp(112px, 13.5vw, 170px); height: auto; filter: drop-shadow(0 6px 6px rgba(120, 60, 0, 0.3)); user-select: none; pointer-events: none; }
 .ar-title { margin: 0; font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(24px, 3.4vw, 40px); line-height: 1.1; color: #FFFFFF; text-shadow: 0 2px 0 #C9650A, 0 3px 6px rgba(150, 70, 0, 0.35); white-space: nowrap; }
-.ar-star { position: absolute; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(190, 110, 0, 0.35)); }
-.ar-star-1 { width: 40px; left: clamp(-58px, -4vw, -30px); top: 6px; transform: rotate(-12deg); }
-.ar-star-2 { width: 22px; left: clamp(76px, 9.5vw, 118px); top: -22px; }
-.ar-star-3 { width: 18px; left: clamp(-30px, -2vw, -12px); top: -14px; transform: rotate(14deg); }
-.ar-star-4 { width: 24px; right: 16px; top: -14px; transform: rotate(10deg); }
-.ar-star-5 { width: 16px; right: -34px; bottom: 6px; }
 .ar-sep { display: none; width: 2px; align-self: stretch; margin: 6px 0; background: linear-gradient(transparent, rgba(220, 140, 60, 0.45), transparent); }
 @media (min-width: 900px) { .ar-sep { display: block; } }
 .ar-rank { position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 26px 10px 14px; border: 3px solid #FFC25C; border-radius: 22px; background: linear-gradient(#FFFDF8, #FFF1DA); box-shadow: 0 6px 12px rgba(200, 110, 30, 0.18), inset 0 2px 0 #fff; }

@@ -48,15 +48,6 @@ function ClipboardBadge() {
   );
 }
 
-/** Ngôi sao vàng bo tròn để trang trí dải tiêu đề. */
-function ArStar({ className }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path d="M12 2.6 14.9 8.6 21.4 9.5 16.7 14.1 17.9 20.6 12 17.5 6.1 20.6 7.3 14.1 2.6 9.5 9.1 8.6Z" fill="#FFD54F" stroke="#F2A100" strokeWidth="1.6" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /** Khiên hạng có vương miện, đổi màu theo bậc, hai nhánh nguyệt quế hai bên. */
 function RankShield({ rank = 'bronze' }) {
   const st = RANK_STYLE[rank] || RANK_STYLE.bronze;
@@ -122,11 +113,6 @@ export default function ArenaLobby() {
       <section className="ar-head">
         <div className="ar-banner">
           <img src="/arena/cup-brushes.webp" alt="" className="ar-cup" draggable={false} />
-          <ArStar className="ar-star ar-star-1" />
-          <ArStar className="ar-star ar-star-2" />
-          <ArStar className="ar-star ar-star-3" />
-          <ArStar className="ar-star ar-star-4" />
-          <ArStar className="ar-star ar-star-5" />
           <h1 className="ar-title">{t('arena.title')}</h1>
         </div>
         <span className="ar-sep" aria-hidden="true" />
