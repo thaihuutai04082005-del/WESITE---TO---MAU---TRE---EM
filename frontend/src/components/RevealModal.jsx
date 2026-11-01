@@ -9,6 +9,7 @@ import Icon from './Icon';
 import { downloadDataUrl, printDataUrl, renderArtwork, safeFileName } from '../lib/exportImage';
 import { flyToCollection } from '../lib/flyToCollection';
 import { transitionBus } from '../lib/transitionBus';
+import { warmTheme } from '../lib/prefetch';
 import { api } from '../services/api';
 import { useUi } from '../store/ui';
 
@@ -41,6 +42,9 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
   const leave = async (to = null) => {
     if (busy) return;
     setBusy(true);
+    // "Tô tranh khác": tải + dựng sẵn màn danh sách tranh trong lúc tranh đang bay (tránh giật khi mở trang).
+    const slug = to?.startsWith('/color/') ? to.split('/')[2] : null;
+    const warm = slug ? warmTheme(slug) : Promise.resolve();
     let src = null;
     try {
       src = await renderArtwork(picture, data, { size: 480 });
@@ -54,6 +58,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     onClose?.(to ? 'another' : 'close');
     if (to) {
       await flight;
+      await Promise.race([warm, new Promise((r) => setTimeout(r, 900))]);
       // Trang chủ đề hiện lên bằng hiệu ứng đơn giản (không lớp phủ, không cúp) — Layout bật khi đổi trang.
       transitionBus.screenEnter = true;
       navigate(to);

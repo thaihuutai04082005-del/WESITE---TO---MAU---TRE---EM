@@ -181,7 +181,7 @@ export function PicFrame({ to, onClick, picture, title, subtitle, testId }) {
   const body = (
     <>
       <div className="wood-paper">
-        {picture ? <PictureView picture={picture} title={title} /> : <div className="aspect-square" />}
+        {picture ? <PictureView picture={picture} title={title} thumb /> : <div className="aspect-square" />}
       </div>
       <div className="wood-label" title={title}>{title}</div>
       <div className="wood-foot">
