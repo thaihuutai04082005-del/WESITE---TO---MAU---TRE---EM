@@ -117,8 +117,8 @@ export default function Gacha() {
                 type="button"
                 className={`gs-card${on ? ' gs-card-on' : ''}${!res && !on ? ' gs-card-off' : ''}${res && flipped ? ' gs-flipped' : ''}${res && !flipped ? ' gs-shake' : ''}`}
                 style={{ '--x': pct(x, STAGE_W), '--y': pct(y, STAGE_H), '--w': pct(CARD_W, STAGE_W), '--h': pct(CARD_H, STAGE_H) }}
-                disabled={busy || !!res || locked}
-                onClick={() => (on ? pull(1, i) : toast(t('gacha.noPulls'), 'info'))}
+                disabled={busy || (locked && !(res && flipped)) || (!res && locked)}
+                onClick={() => (res ? doneFlip() : on ? pull(1, i) : toast(t('gacha.noPulls'), 'info'))}
                 aria-label={res ? res.picture.name[i18n.language] : on ? t('gacha.pull1') : t('gacha.noPulls')}
                 title={res ? res.picture.name[i18n.language] : on ? t('gacha.pull1') : t('gacha.noPulls')}
                 data-testid={i === 0 ? 'gacha-pull' : `gacha-slot-${i}`}
@@ -154,11 +154,6 @@ export default function Gacha() {
             {!locked && info.pullsAvailable > 1 && (
               <button type="button" className="gs-pill gs-pill-btn" disabled={busy} onClick={() => pull(Math.min(STAGE_CARDS.length, info.pullsAvailable))} data-testid="gacha-pull-n">
                 ✨ {t('gacha.pullN', { n: Math.min(STAGE_CARDS.length, info.pullsAvailable) })}
-              </button>
-            )}
-            {locked && flipped && (
-              <button type="button" className="gs-pill gs-pill-btn gs-pill-go" onClick={doneFlip} data-testid="gacha-continue">
-                🎉 {t('common.next')}
               </button>
             )}
           </div>
