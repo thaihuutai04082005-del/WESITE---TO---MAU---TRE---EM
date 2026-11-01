@@ -1,6 +1,6 @@
-// Bảng màu (Mục 4.1): preset mở rộng, chọn màu tuỳ ý, màu vừa dùng, màu yêu thích.
+// Bảng màu (Mục 4.1): preset mở rộng, chọn màu tuỳ ý, màu yêu thích.
 // Chế độ Tô theo mẫu: chỉ hiện đúng các màu (đánh số) mà tranh đó dùng — không có bảng màu đầy đủ.
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Icon from '../Icon';
 
@@ -14,7 +14,6 @@ export const PRESETS = [
   '#FFFFFF', '#E3E8ED', '#BFC8D0', '#8FA8BF', '#5E7A8C', '#1B2A38',
 ];
 
-const RECENT_MAX = 11; // 10 màu vừa dùng hiển thị + màu đang chọn (không hiện trong hàng)
 const FAV_MAX = 16;
 
 function load(key) {
@@ -72,22 +71,10 @@ function Swatch({ color, active, onClick, label, number, glitter = false }) {
 
 export default function ColorPalette({ glitter = false, color, onChange, userKey = 'guest', numbered = null, activeNumber = null, onNumber }) {
   const { t } = useTranslation();
-  const recentKey = `btm.recent.${userKey}`;
   const favKey = `btm.fav.${userKey}`;
-  const [recent, setRecent] = useState(() => load(recentKey));
   const [favs, setFavs] = useState(() => load(favKey));
 
-  useEffect(() => {
-    if (!color) return;
-    setRecent((r) => {
-      const next = [color, ...r.filter((c) => c !== color)].slice(0, RECENT_MAX);
-      persist(recentKey, next);
-      return next;
-    });
-  }, [color, recentKey]);
 
-  // "Vừa dùng" không lặp lại màu đang chọn (màu đó đã hiện ở ô chọn màu phía trên).
-  const recentOthers = recent.filter((c) => c !== color);
   const isFav = favs.includes(color);
   const toggleFav = () => {
     const next = isFav ? favs.filter((c) => c !== color) : [color, ...favs].slice(0, FAV_MAX);
@@ -125,12 +112,6 @@ export default function ColorPalette({ glitter = false, color, onChange, userKey
         <div>
           <div className="mb-1 text-sm font-bold text-muted">{t('coloring.favorites')}</div>
           <div className="cw-grid">{favs.map((c) => <Swatch glitter={glitter} key={c} color={c} active={c === color} onClick={() => onChange(c)} />)}</div>
-        </div>
-      )}
-      {recentOthers.length > 0 && (
-        <div>
-          <div className="cw-label mb-1 text-sm font-bold text-muted">{t('coloring.recent')}</div>
-          <div className="cw-grid">{recentOthers.map((c) => <Swatch glitter={glitter} key={c} color={c} onClick={() => onChange(c)} />)}</div>
         </div>
       )}
       <div>
