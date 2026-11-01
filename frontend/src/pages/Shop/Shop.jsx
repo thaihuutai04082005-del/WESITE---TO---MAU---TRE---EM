@@ -152,7 +152,7 @@ export default function Shop() {
           <span className="sr-only" data-testid="shop-ruby">{shop.ruby} Ruby</span>
 
           <ShopArt />
-          <div className="sh-sign" style={box([712, 54, 456, 130])}>
+          <div className="sh-sign" style={box([738, 54, 456, 130])}>
             <SignStar /> <Bag /> <b>{t('shop.title')}</b> <SignStar />
           </div>
           <p className="sh-sub" style={box([600, 206, 720, 46])}>

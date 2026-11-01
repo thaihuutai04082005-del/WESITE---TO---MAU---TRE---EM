@@ -57,7 +57,7 @@ function Post({ x }) {
 function Corbel({ side }) {
   // Giá đỡ cong dưới mái hiên, nằm cạnh đỉnh cột.
   const left = side === 'l';
-  const x = left ? 296 : 1582;
+  const x = left ? 296 : 1564;
   return (
     <g transform={left ? '' : 'translate(0 0)'}>
       <path d={left ? `M${x + 80} 148 V232 Q${x} 232 ${x} 168 Q${x + 4} 148 ${x + 40} 148 Z` : `M${x - 8} 148 V232 Q${x + 72} 232 ${x + 72} 168 Q${x + 68} 148 ${x + 32} 148 Z`} fill="url(#shg-rail)" stroke={WOOD_OUT} strokeWidth="4" strokeLinejoin="round" />
@@ -92,11 +92,11 @@ function Lamp({ cx }) {
 /** Mái hiên: mặt mái nghiêng (nhạt) + diềm phía trước (đậm) lượn sóng ở mép dưới. */
 function Awning() {
   const n = 14;
-  const L = 172;
-  const R = 1650;
+  const L = 218;
+  const R = 1714;
   const w = (R - L) / n;
-  const topL = 250;
-  const topR = 1572;
+  const topL = 296;
+  const topR = 1636;
   const tw = (topR - topL) / n;
   const roof = [];
   const val = [];
@@ -125,15 +125,15 @@ function Awning() {
 function Sign() {
   return (
     <g>
-      {[776, 1102].map((x) => (
+      {[802, 1128].map((x) => (
         <g key={x} filter="url(#shf-small)">
           <rect x={x} y="16" width="46" height="62" rx="12" fill="#E2434E" stroke={RED_DK} strokeWidth="4" />
           <rect x={x + 8} y="22" width="10" height="38" rx="5" fill="#FF9AA2" opacity=".8" />
         </g>
       ))}
       <g filter="url(#shf-soft)">
-        <rect x="712" y="54" width="456" height="130" rx="65" fill="#FFFFFF" stroke={RED} strokeWidth="9" />
-        <rect x="726" y="68" width="428" height="102" rx="51" fill="none" stroke="#FFD5D8" strokeWidth="4" />
+        <rect x="738" y="54" width="456" height="130" rx="65" fill="#FFFFFF" stroke={RED} strokeWidth="9" />
+        <rect x="752" y="68" width="428" height="102" rx="51" fill="none" stroke="#FFD5D8" strokeWidth="4" />
       </g>
     </g>
   );
@@ -188,8 +188,8 @@ export function ShopArt() {
       <rect x="372" y="300" width="1188" height="500" fill="url(#shg-wall)" />
       <rect x="372" y="546" width="1188" height="254" fill="url(#shg-wood)" />
       {[600, 660, 720, 780].map((y) => <path key={y} d={`M372 ${y}H1560`} stroke="#E4A55A" strokeWidth="2" opacity=".35" />)}
-      <Lamp cx={493} />
-      <Lamp cx={1420} />
+      <Lamp cx={506} />
+      <Lamp cx={1426} />
       <Post x={318} />
       <Post x={1556} />
       <Rail x={336} y={270} w={1260} h={36} />
