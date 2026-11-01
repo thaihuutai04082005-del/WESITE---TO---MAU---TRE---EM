@@ -167,19 +167,21 @@ function Brush({ x, y, rot, handle, handleDk, tip, tipDk }) {
 }
 
 function BrushCup() {
+  // Thứ tự vẽ: lòng ly (phía sau) → cọ → thân ly + vành trước (che phần cán) ⇒ cọ nằm TRONG ly.
   return (
     <g transform="translate(118 742)" filter="url(#shf-small)">
-      <Brush x={44} y={92} rot={-20} handle="#F0525E" handleDk="#C73541" tip="#F0525E" tipDk="#C73541" />
-      <Brush x={140} y={92} rot={20} handle="#3DA9FC" handleDk="#2276C9" tip="#3DA9FC" tipDk="#2276C9" />
-      <Brush x={92} y={82} rot={0} handle="#FF5A66" handleDk="#C73541" tip="#FFC21A" tipDk="#E09A00" />
-      {/* ly */}
-      <path d="M14 128 H170 L156 232 Q154 252 134 252 H50 Q30 252 28 232 Z" fill="url(#shg-cup)" stroke="#D5CEDB" strokeWidth="4" strokeLinejoin="round" />
-      <ellipse cx="92" cy="128" rx="78" ry="13" fill="#F4F1F7" stroke="#D5CEDB" strokeWidth="4" />
-      <ellipse cx="92" cy="130" rx="68" ry="8" fill="#DCD5E2" opacity=".55" />
-      <path d="M21 168 H163 L158 206 H26 Z" fill="#EE4C5A" />
-      <path d="M21 168 H163" stroke="#FF98A0" strokeWidth="4" opacity=".8" />
-      <polygon points="92,171 99,186 116,188 104,199 107,215 92,207 77,215 80,199 68,188 85,186" fill="#FFFFFF" />
-      <path d="M40 140V232" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" opacity=".55" />
+      <ellipse cx="92" cy="128" rx="78" ry="13" fill="#B9B1C4" stroke="#D5CEDB" strokeWidth="4" />
+      <ellipse cx="92" cy="131" rx="70" ry="9" fill="#8F86A0" />
+      <Brush x={50} y={96} rot={-18} handle="#F0525E" handleDk="#C73541" tip="#F0525E" tipDk="#C73541" />
+      <Brush x={134} y={96} rot={18} handle="#3DA9FC" handleDk="#2276C9" tip="#3DA9FC" tipDk="#2276C9" />
+      <Brush x={92} y={88} rot={0} handle="#FF5A66" handleDk="#C73541" tip="#FFC21A" tipDk="#E09A00" />
+      {/* thân ly + vành trước */}
+      <path d="M14 128 A78 13 0 0 0 170 128 L156 232 Q154 252 134 252 H50 Q30 252 28 232 Z" fill="url(#shg-cup)" stroke="#D5CEDB" strokeWidth="4" strokeLinejoin="round" />
+      <path d="M14 128 A78 13 0 0 0 170 128" fill="none" stroke="#FFFFFF" strokeWidth="4" opacity=".9" />
+      <path d="M21 172 H163 L158 208 H26 Z" fill="#EE4C5A" />
+      <path d="M21 172 H163" stroke="#FF98A0" strokeWidth="4" opacity=".8" />
+      <polygon points="92,175 99,190 116,192 104,203 107,219 92,211 77,219 80,203 68,192 85,190" fill="#FFFFFF" />
+      <path d="M40 146V232" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" opacity=".55" />
     </g>
   );
 }
