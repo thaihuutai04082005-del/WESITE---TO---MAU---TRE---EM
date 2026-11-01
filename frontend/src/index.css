@@ -1316,19 +1316,22 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 /* ---- Sảnh Đấu trường sáng tạo: nền đấu trường cam đào + dải đầu trang (tiền tố ar-) ---- */
 .ar-stage { min-height: calc(100vh - 73px); background: #F9D8B0 url(/arena/stadium.webp) center top / cover no-repeat; background-attachment: fixed; }
 .ar-stage > .page { padding-top: 18px; }
-.ar-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; padding: 14px 16px 10px; border-radius: 30px; background: linear-gradient(rgba(255, 244, 226, 0.82), rgba(255, 236, 208, 0.72)); box-shadow: 0 10px 24px rgba(200, 110, 30, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.7); backdrop-filter: blur(2px); }
-.ar-banner { position: relative; display: flex; align-items: center; min-width: min(100%, 470px); padding: 12px 34px 14px clamp(92px, 12vw, 150px); border-radius: 18px; background: linear-gradient(#FFB454, #FF9A2E 55%, #F28A1B); box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.55), inset 0 -4px 0 rgba(190, 100, 10, 0.35), 0 8px 14px rgba(190, 100, 10, 0.3); }
-.ar-banner::before, .ar-banner::after { content: ''; position: absolute; top: 12px; bottom: -10px; width: 30px; background: #E7801A; z-index: -1; }
-.ar-banner::before { left: -16px; clip-path: polygon(100% 0, 100% 100%, 0 100%, 28% 50%, 0 0); }
-.ar-banner::after { right: -16px; clip-path: polygon(0 0, 100% 0, 72% 50%, 100% 100%, 0 100%); }
-.ar-cup { position: absolute; left: clamp(-24px, -2vw, -8px); bottom: -14px; width: clamp(104px, 13vw, 164px); height: auto; filter: drop-shadow(0 6px 6px rgba(120, 60, 0, 0.28)); user-select: none; pointer-events: none; }
-.ar-title { margin: 0; font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(24px, 3.6vw, 42px); line-height: 1.1; color: #FFFFFF; text-shadow: 0 2px 0 #C9650A, 0 3px 6px rgba(150, 70, 0, 0.35); white-space: nowrap; }
-.ar-spark { position: absolute; color: #FFD54F; font-size: 22px; line-height: 1; text-shadow: 0 0 6px rgba(255, 190, 40, 0.8); pointer-events: none; }
-.ar-spark-a { left: clamp(70px, 9vw, 112px); top: -18px; }
-.ar-spark-b { right: 14px; top: -14px; font-size: 16px; }
-.ar-sep { display: none; width: 2px; align-self: stretch; margin: 6px 0; background: linear-gradient(transparent, rgba(220, 140, 60, 0.5), transparent); }
+.ar-head { isolation: isolate; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 34px; padding: 26px 34px 18px; border-radius: 26px; background: linear-gradient(rgba(255, 248, 236, 0.92), rgba(255, 239, 214, 0.86)); box-shadow: 0 8px 20px rgba(200, 110, 30, 0.16), inset 0 2px 0 rgba(255, 255, 255, 0.8); }
+.ar-banner { position: relative; display: flex; align-items: center; justify-content: center; flex: 1 1 430px; max-width: 640px; min-height: 76px; padding: 10px 40px 14px clamp(100px, 13vw, 150px); border-radius: 16px / 22px; background: linear-gradient(#FFC15F, #FF9F32 52%, #F58A1C); box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.6), inset 0 -5px 0 rgba(190, 95, 10, 0.3), 0 8px 14px rgba(190, 100, 10, 0.28); }
+.ar-banner::before, .ar-banner::after { content: ''; position: absolute; top: 14px; bottom: -12px; width: 38px; background: linear-gradient(#F08A1E, #D9700C); z-index: -1; }
+.ar-banner::before { left: -22px; clip-path: polygon(100% 0, 100% 100%, 0 100%, 26% 50%, 0 0); }
+.ar-banner::after { right: -22px; clip-path: polygon(0 0, 100% 0, 74% 50%, 100% 100%, 0 100%); }
+.ar-cup { position: absolute; left: clamp(-34px, -2.4vw, -12px); bottom: -10px; width: clamp(112px, 13.5vw, 170px); height: auto; filter: drop-shadow(0 6px 6px rgba(120, 60, 0, 0.3)); user-select: none; pointer-events: none; }
+.ar-title { margin: 0; font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(24px, 3.4vw, 40px); line-height: 1.1; color: #FFFFFF; text-shadow: 0 2px 0 #C9650A, 0 3px 6px rgba(150, 70, 0, 0.35); white-space: nowrap; }
+.ar-star { position: absolute; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(190, 110, 0, 0.35)); }
+.ar-star-1 { width: 40px; left: clamp(-58px, -4vw, -30px); top: 6px; transform: rotate(-12deg); }
+.ar-star-2 { width: 22px; left: clamp(76px, 9.5vw, 118px); top: -22px; }
+.ar-star-3 { width: 18px; left: clamp(-30px, -2vw, -12px); top: -14px; transform: rotate(14deg); }
+.ar-star-4 { width: 24px; right: 16px; top: -14px; transform: rotate(10deg); }
+.ar-star-5 { width: 16px; right: -34px; bottom: 6px; }
+.ar-sep { display: none; width: 2px; align-self: stretch; margin: 6px 0; background: linear-gradient(transparent, rgba(220, 140, 60, 0.45), transparent); }
 @media (min-width: 900px) { .ar-sep { display: block; } }
-.ar-rank { position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 26px 12px 14px; border: 3px solid #FFC25C; border-radius: 22px; background: linear-gradient(#FFFDF8, #FFF1DA); box-shadow: 0 6px 12px rgba(200, 110, 30, 0.2), inset 0 2px 0 #fff; }
+.ar-rank { position: relative; display: flex; align-items: center; gap: 12px; padding: 20px 26px 10px 14px; border: 3px solid #FFC25C; border-radius: 22px; background: linear-gradient(#FFFDF8, #FFF1DA); box-shadow: 0 6px 12px rgba(200, 110, 30, 0.18), inset 0 2px 0 #fff; }
 .ar-rank-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 3px 16px; border-radius: 999px; background: linear-gradient(#FFB454, #FF9A2E); color: #fff; font-size: 13px; font-weight: 800; white-space: nowrap; box-shadow: 0 3px 6px rgba(190, 100, 10, 0.3); }
 .ar-shield { width: 78px; height: 72px; flex: none; filter: drop-shadow(0 4px 4px rgba(120, 60, 0, 0.25)); }
 .ar-rank-name { font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(18px, 2.2vw, 24px); color: #3A2A1C; line-height: 1.15; }
