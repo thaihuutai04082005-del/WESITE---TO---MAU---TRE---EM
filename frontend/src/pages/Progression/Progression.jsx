@@ -62,6 +62,10 @@ export default function Progression() {
 
   return (
     <div className="hs-stage">
+      <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-1" draggable={false} />
+      <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-2" draggable={false} />
+      <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-3" draggable={false} />
+      <img src="/shop/cloud.webp" alt="" className="mp-cloud mp-cloud-4" draggable={false} />
       <div className="page mp-page">
         <header className="mp-head">
           <div className="mp-badge"><TargetBadge /></div>
