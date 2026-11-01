@@ -1393,6 +1393,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'ngoi-nha-cua-be-3-5',
   age: '3-5',
+  after: 'cac-loai-hoa-3-5',
   name: { vi: 'Ngôi Nhà Của Bé', en: "My Little Home" },
   animation: 'bounce',
   objects: [
