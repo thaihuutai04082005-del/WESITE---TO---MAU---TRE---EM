@@ -378,6 +378,7 @@
     }
   },
   "coloring": {
+    "toolsTitle": "Công cụ tô màu",
     "paintFirst": "Bé hãy tô một chút rồi bấm Hoàn thành nhé!",
     "reference": "Tranh mẫu",
     "numberedColors": "Màu theo số",

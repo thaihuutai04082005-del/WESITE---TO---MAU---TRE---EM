@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Canvas from './Canvas/Canvas';
 import ToolBar, { SIZES, STICKER_SCALES } from './ToolBar/ToolBar';
 import ColorPalette from './ColorPalette/ColorPalette';
+import Icon from './Icon';
 import PictureView from './PictureView/PictureView';
 import Modal from './Modal/Modal';
 import SignaturePanel from './SignaturePanel';
@@ -76,7 +77,7 @@ export default function ColoringWorkspace({
         <div className="cw-header">{header}</div>
         {template && (
           <div className="cw-ref card hidden p-3 lg:block">
-            <div className="mb-2 font-bold">{t('coloring.reference')}</div>
+            <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
             <button type="button" onClick={() => setShowRef(true)} className="block w-full cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
               <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
             </button>
@@ -118,7 +119,8 @@ export default function ColoringWorkspace({
       </div>
 
       <aside className="cw-tools">
-        <div className="card p-3">
+        <div className="card cw-toolcard p-3">
+          <h2 className="cw-title"><Icon name="brush" size={26} strokeWidth={2.4} /> {t('coloring.toolsTitle')}</h2>
           <ToolBar
             tool={tool}
             setTool={chooseTool}
