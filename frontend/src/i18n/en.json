@@ -378,6 +378,7 @@
     }
   },
   "coloring": {
+    "toolsTitle": "Coloring tools",
     "paintFirst": "Color a little first, then tap Done!",
     "reference": "Sample",
     "numberedColors": "Numbered colors",
