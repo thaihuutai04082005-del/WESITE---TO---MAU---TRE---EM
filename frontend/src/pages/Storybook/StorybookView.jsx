@@ -7,7 +7,7 @@ import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import { safeFileName } from '../../lib/exportImage';
-import FlipbookViewer from '../../components/FlipbookViewer/FlipbookViewer';
+import FlipbookViewer, { StoryBackdrop } from '../../components/FlipbookViewer/FlipbookViewer';
 import Icon from '../../components/Icon';
 
 export default function StorybookView() {
@@ -58,9 +58,9 @@ export default function StorybookView() {
   });
 
   return (
-    <div className="page space-y-5">
-      <Link to="/storybooks" className="inline-flex items-center gap-1 font-bold text-primary">
-        <Icon name="back" size={20} /> {t('storybook.title')}
+    <StoryBackdrop>
+      <Link to="/storybooks" className="sbv-back">
+        <Icon name="back" size={20} strokeWidth={3} /> {t('storybook.title')}
       </Link>
       <FlipbookViewer title={book.title} author={user.nickname} pages={book.pages} coverStyle={book.coverStyle} />
       <div className="flex flex-wrap justify-center gap-2">
@@ -88,6 +88,6 @@ export default function StorybookView() {
           {t('storybook.shareLink')}: {`${window.location.origin}/shared/${book.shareToken}`}
         </p>
       )}
-    </div>
+    </StoryBackdrop>
   );
 }

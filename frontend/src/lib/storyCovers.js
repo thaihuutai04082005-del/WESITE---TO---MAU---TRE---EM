@@ -1,5 +1,5 @@
-// Bìa truyện bán trong shop (khớp backend/src/services/pdf.js). Không có bìa = bìa xanh mặc định.
-export const DEFAULT_COVER = { bg: 'linear-gradient(160deg,#EAF6FF,#BDE6FF)', solid: '#BDE6FF', line: '#2B9BF4' };
+// Bìa truyện bán trong shop (khớp backend/src/services/pdf.js). Không có bìa = bìa kem viền cam mặc định.
+export const DEFAULT_COVER = { bg: 'linear-gradient(#FFF6DA, #FFEBB5)', solid: '#FFEBB5', line: '#F5A623' };
 export const STORY_COVERS = {
   'bia-xanh-troi': { solid: '#BDE6FF', line: '#2B9BF4' },
   'bia-hong-phan': { solid: '#FFD6E4', line: '#F2679A' },

@@ -37,7 +37,7 @@ export function storybookPdf(book) {
     const H = doc.page.height;
 
     // Bìa
-    const cv = COVERS[book.coverStyle] || { bg: '#EAF6FF', line: '#2B9BF4' };
+    const cv = COVERS[book.coverStyle] || { bg: '#FFF1CF', line: '#F5A623' };
     doc.rect(0, 0, W, H).fill(cv.bg);
     doc.roundedRect(40, 40, W - 80, H - 80, 24).lineWidth(4).stroke(cv.line);
     doc.fillColor('#1B2A38').font('title').fontSize(44).text(book.title, 60, H / 2 - 70, { width: W - 120, align: 'center' });
