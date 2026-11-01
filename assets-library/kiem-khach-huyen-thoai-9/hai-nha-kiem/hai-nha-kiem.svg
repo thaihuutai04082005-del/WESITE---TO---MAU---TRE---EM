@@ -248,6 +248,7 @@
 <path d="M 599.1 454.0 L 599.1 465.7 L 599.5 465.7 L 599.5 454.0 Z" id="r-wf-83" data-region="wf-83" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 599.1 508.5 L 599.1 539.4 L 599.5 539.4 L 599.5 508.5 Z" id="r-wf-84" data-region="wf-84" class="region" fill="#FFFFFF" stroke="none"/>
 <path d="M 335.2 22.5 L 335.2 23.5 L 337.1 23.5 L 337.1 22.1 L 335.7 22.1 Z" id="r-hsl-top" data-region="hsl-top" class="region" fill="#FFFFFF" stroke="none"/>
+<path d="M 398.1 61.5 L 397.2 61.5 L 396.2 60.6 L 394.4 60.6 L 394.4 62.9 L 393.9 63.4 L 393.9 64.3 L 393.0 66.2 L 393.0 67.6 L 392.0 69.5 L 392.0 71.4 L 393.0 71.4 L 395.8 67.1 L 398.1 62.9 Z" id="r-rsb-1" data-region="rsb-1" class="region" fill="#FFFFFF" stroke="none"/>
 </g>
 <g id="subject" class="subject anim-bounce"></g>
 <g class="scene-front">
