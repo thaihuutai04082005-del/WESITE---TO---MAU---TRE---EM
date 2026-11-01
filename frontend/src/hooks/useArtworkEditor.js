@@ -14,8 +14,17 @@ function applyAction(data, a) {
       if (a.glitter && a.color) glitter = [...glitter, a.regionId];
       return { ...data, fills, glitter };
     }
-    case 'stroke':
-      return { ...data, strokes: [...data.strokes, a.stroke] };
+    case 'stroke': {
+      // Nét tô tay; `fill` (tuỳ chọn) = vùng vừa đủ độ phủ → ghi màu vùng (hoặc gỡ khi tẩy bớt).
+      const next = { ...data, strokes: [...data.strokes, a.stroke] };
+      if (a.fill) {
+        const fills = { ...data.fills };
+        if (a.fill.color) fills[a.fill.regionId] = a.fill.color;
+        else delete fills[a.fill.regionId];
+        next.fills = fills;
+      }
+      return next;
+    }
     case 'sticker-add':
       return { ...data, stickers: [...data.stickers, a.sticker] };
     case 'sticker-update':

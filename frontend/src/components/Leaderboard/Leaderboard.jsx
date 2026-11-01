@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Avatar from '../Avatar/Avatar';
 
 const MEDAL = { 1: '🥇', 2: '🥈', 3: '🥉' };
-const CRITERIA = ['coverage', 'accuracy', 'harmony', 'creativity', 'diversity', 'time'];
+const CRITERIA = ['coverage', 'harmony', 'creativity', 'diversity', 'time'];
 
 export default function Leaderboard({ board = [], meId }) {
   const { t } = useTranslation();

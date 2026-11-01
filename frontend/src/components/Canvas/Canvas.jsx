@@ -1,30 +1,34 @@
-// Khung tô màu: lớp vùng SVG (Bucket fill) + lớp <canvas> Brush tự do + lớp sticker + lớp chữ ký.
+// Khung tô màu: lớp vùng SVG + lớp <canvas> nét tô tay (khóa theo vùng) + lớp nét viền đè lên + lớp sticker + lớp chữ ký.
 // Hỗ trợ zoom (nút, lăn chuột, chụm/mở 2 ngón), kéo di chuyển khi phóng to.
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { applyToSvg, isRegionDone } from '../../lib/picture';
-import { drawStroke, drawStrokes } from '../../lib/brush';
+import { applyToSvg, isRegionDone, linesOnlySvgString } from '../../lib/picture';
+import { drawStroke, drawStrokes, PATTERNS } from '../../lib/brush';
+import { regionPaths, regionAtLocal } from '../../lib/regions';
+import { regionCoverage, dominantColor, FILL_THRESHOLD } from '../../lib/coverage';
 import { stickerSvg } from '../../lib/stickers';
 import { clampPlacement, ensureSignatureFont, hitSignature, signatureMarkup, BOX } from '../../lib/signature';
 
 const RES = 2; // độ phân giải canvas Brush: 2 px / đơn vị tranh
 const MIN_Z = 1;
 const MAX_Z = 6;
+const PAINT_TOOLS = new Set(['crayon', 'brush', 'glitter', 'pattern', 'eraser']);
 
 const Canvas = forwardRef(function Canvas(
   {
     picture,
     data,
-    tool = 'fill',
+    tool = 'crayon',
     color = '#FF5F7E',
     size = 12,
     brushSkin = null,
     stickerType = 'star',
+    stickerScale = 1,
+    pattern = 'rainbow',
     showNumbers = false,
     highlightNumber = null,
     readOnly = false,
     reveal = false,
     remoteCursors = [],
-    onFill,
     onStroke,
     onStickerAdd,
     onStickerChange,
@@ -38,6 +42,9 @@ const Canvas = forwardRef(function Canvas(
   const viewportRef = useRef(null);
   const svgHostRef = useRef(null);
   const canvasRef = useRef(null);
+  const linesHostRef = useRef(null);
+  const snapRef = useRef(null);
+  const paths = useMemo(() => regionPaths(picture?.svg), [picture?.svg]);
   const [view, setView] = useState({ z: 1, x: 0, y: 0 });
   const viewRef = useRef(view);
   viewRef.current = view;
@@ -63,6 +70,7 @@ const Canvas = forwardRef(function Canvas(
   // ----- Lớp SVG: nạp 1 lần mỗi tranh, sau đó chỉ cập nhật thuộc tính fill -----
   useLayoutEffect(() => {
     if (svgHostRef.current) svgHostRef.current.innerHTML = picture?.svg || '';
+    if (linesHostRef.current) linesHostRef.current.innerHTML = picture?.svg ? linesOnlySvgString(picture.svg) : '';
   }, [picture?.svg]);
 
   useLayoutEffect(() => {
@@ -77,12 +85,28 @@ const Canvas = forwardRef(function Canvas(
     }
   }, [data.fills, data.glitter, picture, highlightNumber]);
 
-  // ----- Lớp Brush -----
-  useEffect(() => {
+  // ----- Lớp nét tô tay: vẽ lại các nét đã chốt, giữ bản chụp để vẽ nét đang quẹt đè lên -----
+  const paintCommitted = useCallback(() => {
     const c = canvasRef.current;
     if (!c) return;
-    drawStrokes(c.getContext('2d'), data.strokes, RES);
-  }, [data.strokes]);
+    drawStrokes(c.getContext('2d'), data.strokes, RES, paths);
+    if (!snapRef.current) snapRef.current = document.createElement('canvas');
+    const snap = snapRef.current;
+    snap.width = c.width;
+    snap.height = c.height;
+    snap.getContext('2d').drawImage(c, 0, 0);
+  }, [data.strokes, paths]);
+  useEffect(paintCommitted, [paintCommitted]);
+
+  const paintLive = useCallback(() => {
+    const c = canvasRef.current;
+    const st = liveStroke.current;
+    if (!c || !st) return;
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, c.width, c.height);
+    if (snapRef.current) ctx.drawImage(snapRef.current, 0, 0);
+    drawStroke(ctx, st, RES, paths.get(st.region) || null);
+  }, [paths]);
 
   // ----- Chuyển toạ độ màn hình → toạ độ tranh (600×600) -----
   const toLocal = useCallback((clientX, clientY) => {
@@ -131,20 +155,30 @@ const Canvas = forwardRef(function Canvas(
   }, [zoomAt, readOnly]);
 
   // ----- Xử lý chạm / chuột -----
-  function regionAtPoint(clientX, clientY) {
-    for (const el of document.elementsFromPoint(clientX, clientY)) {
-      const id = el.getAttribute?.('data-region');
-      if (id && svgHostRef.current.contains(el)) return id;
-    }
-    return null;
-  }
-
   function stickerAtPoint(x, y) {
     for (let i = data.stickers.length - 1; i >= 0; i--) {
       const s = data.stickers[i];
       if (Math.hypot(s.x - x, s.y - y) <= 50 * (s.scale || 1)) return i;
     }
     return -1;
+  }
+
+  /** Sau mỗi nét: vùng phủ ≥ 80% thì ghi màu vùng (để tiến độ, điểm số, gợi ý số chạy được); tẩy bớt thì gỡ. */
+  function fillAfter(st) {
+    const rid = st.region;
+    const path = paths.get(rid);
+    if (!path) return null;
+    const mine = data.strokes.filter((x) => x.region === rid);
+    const hadPaint = mine.some((x) => x.tool !== 'eraser');
+    if (st.tool === 'eraser') {
+      if (!data.fills[rid]) return null;
+      if (!hadPaint) return { regionId: rid, color: null }; // tranh cũ tô bằng xô: tẩy là gỡ màu vùng
+      return regionCoverage(path, [...mine, st]) < FILL_THRESHOLD ? { regionId: rid, color: null } : null;
+    }
+    const all = [...mine, st];
+    if (regionCoverage(path, all) < FILL_THRESHOLD) return null;
+    const c = dominantColor(all);
+    return c && data.fills[rid] !== c ? { regionId: rid, color: c } : null;
   }
 
   function onPointerDown(e) {
@@ -154,7 +188,7 @@ const Canvas = forwardRef(function Canvas(
     if (pointers.current.size === 2) {
       // Chụm/mở 2 ngón: huỷ nét đang vẽ, chuyển sang zoom + kéo.
       liveStroke.current = null;
-      drawStrokes(canvasRef.current.getContext('2d'), data.strokes, RES);
+      paintCommitted();
       const [a, b] = [...pointers.current.values()];
       gesture.current = { type: 'pinch', dist: Math.hypot(a.x - b.x, a.y - b.y), mid: [(a.x + b.x) / 2, (a.y + b.y) / 2], view: viewRef.current };
       return;
@@ -162,10 +196,26 @@ const Canvas = forwardRef(function Canvas(
     const [lx, ly] = toLocal(e.clientX, e.clientY);
     if (tool === 'pan' || e.button === 1) {
       gesture.current = { type: 'pan', start: [e.clientX, e.clientY], view: viewRef.current };
-    } else if (tool === 'brush' || tool === 'eraser') {
-      liveStroke.current = { tool: tool === 'eraser' ? 'eraser' : 'brush', color, size, points: [[lx, ly]], ...(tool === 'brush' && brushSkin ? { skin: brushSkin } : {}) };
-      gesture.current = { type: 'stroke' };
-      drawStroke(canvasRef.current.getContext('2d'), liveStroke.current, RES);
+    } else if (PAINT_TOOLS.has(tool)) {
+      // Khóa vùng: nét chỉ ăn màu trong vùng bé chạm xuống đầu tiên (chạm ngoài mọi vùng thì không tô).
+      const region = regionAtLocal(paths, lx, ly);
+      if (!region) {
+        gesture.current = { type: 'none' };
+      } else {
+        const erase = tool === 'eraser';
+        liveStroke.current = {
+          tool: erase ? 'eraser' : 'brush',
+          color: tool === 'pattern' ? PATTERNS.find((x) => x.id === pattern)?.color || color : color,
+          size,
+          region,
+          points: [[lx, ly]],
+          ...(erase ? {} : { kind: tool }),
+          ...(tool === 'pattern' ? { pattern } : {}),
+          ...(tool === 'crayon' && brushSkin ? { skin: brushSkin } : {}),
+        };
+        gesture.current = { type: 'stroke' };
+        paintLive();
+      }
     } else if (tool === 'signature' && data.signature) {
       // Chạm lên chữ ký thì kéo; chạm chỗ khác thì chữ ký nhảy tới đó.
       const sg = data.signature;
@@ -213,13 +263,30 @@ const Canvas = forwardRef(function Canvas(
       const last = pts[pts.length - 1];
       if (Math.hypot(last[0] - lx, last[1] - ly) < 1.2) return;
       pts.push([Math.round(lx * 10) / 10, Math.round(ly * 10) / 10]);
-      const ctx = canvasRef.current.getContext('2d');
-      if (liveStroke.current.tool === 'eraser' || liveStroke.current.skin) {
-        drawStrokes(ctx, data.strokes, RES);
-        drawStroke(ctx, liveStroke.current, RES);
-      } else {
-        drawStroke(ctx, { ...liveStroke.current, points: pts.slice(-3) }, RES);
-      }
+      paintLive();
+    } else if (g.type === 'signature' && data.signature) {
+      setDragSig(clampPlacement({ ...data.signature, x: lx - g.offset[0], y: ly - g.offset[1] }));
+    } else if (g.type === 'sticker') {
+      g.moved = true;
+      setDragSticker({ index: g.index, x: lx - g.offset[0], y: ly - g.offset[1] });
+    }
+  }
+
+  function onPointerUp(e) {
+    const g = gesture.current;
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size > 0) {
+      if (g?.type === 'pinch') gesture.current = null;
+      return;
+    }
+    gesture.current = null;
+    if (!g || readOnly) return;
+    if (g.type === 'stroke' && liveStroke.current) {
+      const pts = liveStroke.current.points;
+      const last = pts[pts.length - 1];
+      if (Math.hypot(last[0] - lx, last[1] - ly) < 1.2) return;
+      pts.push([Math.round(lx * 10) / 10, Math.round(ly * 10) / 10]);
+      paintLive();
     } else if (g.type === 'signature' && data.signature) {
       setDragSig(clampPlacement({ ...data.signature, x: lx - g.offset[0], y: ly - g.offset[1] }));
     } else if (g.type === 'sticker') {
@@ -244,7 +311,7 @@ const Canvas = forwardRef(function Canvas(
     } else if (g.type === 'stroke' && liveStroke.current) {
       const st = liveStroke.current;
       liveStroke.current = null;
-      onStroke?.(st);
+      onStroke?.(st, fillAfter(st));
     } else if (g.type === 'sticker') {
       if (g.moved && dragSticker) {
         const s = data.stickers[g.index];
@@ -256,7 +323,7 @@ const Canvas = forwardRef(function Canvas(
       setDragSig(null);
     } else if (g.type === 'sticker-new') {
       setSelected(data.stickers.length);
-      onStickerAdd?.({ type: stickerType, x: Math.round(g.at[0]), y: Math.round(g.at[1]), scale: 1, rot: 0 });
+      onStickerAdd?.({ type: stickerType, x: Math.round(g.at[0]), y: Math.round(g.at[1]), scale: stickerScale, rot: 0 });
     }
   }
 
@@ -266,7 +333,7 @@ const Canvas = forwardRef(function Canvas(
     liveStroke.current = null;
     setDragSticker(null);
     setDragSig(null);
-    drawStrokes(canvasRef.current.getContext('2d'), data.strokes, RES);
+    paintCommitted();
   }
 
   useEffect(() => {
@@ -291,7 +358,7 @@ const Canvas = forwardRef(function Canvas(
   }, [showNumbers, picture, data.fills]);
 
   const sel = selected != null ? stickers[selected] : null;
-  const cursor = readOnly ? 'default' : tool === 'pan' ? 'grab' : tool === 'fill' ? 'pointer' : tool === 'sticker' ? 'copy' : tool === 'signature' ? 'move' : 'crosshair';
+  const cursor = readOnly ? 'default' : tool === 'pan' ? 'grab' : tool === 'sticker' ? 'copy' : tool === 'signature' ? 'move' : 'crosshair';
 
   return (
     <div
@@ -306,8 +373,9 @@ const Canvas = forwardRef(function Canvas(
       data-testid="coloring-canvas"
     >
       <div className="absolute left-0 top-0 h-full w-full origin-top-left" style={{ transform: `translate(${view.x}px, ${view.y}px) scale(${view.z})` }}>
-        <div ref={svgHostRef} className={`picture-svg absolute inset-0 ${reveal ? 'reveal' : ''} ${tool !== 'fill' || readOnly ? 'no-pointer' : ''}`} />
+        <div ref={svgHostRef} className={`picture-svg no-pointer absolute inset-0 ${reveal ? 'reveal' : ''}`} />
         <canvas ref={canvasRef} width={600 * RES} height={600 * RES} className="pointer-events-none absolute inset-0 h-full w-full" />
+        <div ref={linesHostRef} className="picture-svg lines-only no-pointer absolute inset-0" aria-hidden="true" />
         {showNumbers && (
           <svg viewBox="0 0 600 600" className="pointer-events-none absolute inset-0 h-full w-full">
             {numbers.map((r) => (

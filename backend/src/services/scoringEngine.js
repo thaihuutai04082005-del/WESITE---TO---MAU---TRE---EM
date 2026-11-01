@@ -1,6 +1,6 @@
 // Engine chấm điểm Đấu trường sáng tạo theo rubric (Mục 9.2).
-// Chấm hoàn toàn trên dữ liệu số hoá: danh sách vùng + màu đã tô (Bucket fill) và nét Brush.
-// Bucket fill không bao giờ bị tính là "lem"; chỉ nét Brush tràn ra ngoài vùng mới bị tính (Mục 3.4).
+// Chấm hoàn toàn trên dữ liệu số hoá: danh sách vùng + màu đã tô (vùng phủ ≥ 80% nét tô tay thì được ghi màu).
+// Tô tay có khóa vùng: nét chỉ ăn màu trong vùng bé chạm đầu tiên nên không còn tiêu chí "lem".
 import { RUBRIC } from '../config/constants.js';
 
 // ---------------- Màu sắc ----------------
@@ -111,42 +111,6 @@ export function coverageScore(manifest, fills) {
   return total ? filled / total : 0;
 }
 
-/**
- * Tỉ lệ "lem": phần nét Brush nằm ngoài vùng bắt đầu nét (có dung sai = nửa độ dày nét + 3px).
- * Nét bị Tẩy xoá đi thì không tính.
- */
-export function spillRatio(manifest, strokes = []) {
-  const regions = manifest.regions;
-  const erasers = strokes.filter((s) => s.tool === 'eraser').map((s) => ({ pts: resample(s.points, 6), r: (s.size || 10) / 2 }));
-  const erased = (x, y) => erasers.some((e) => e.pts.some(([ex, ey]) => Math.hypot(ex - x, ey - y) <= e.r));
-  let total = 0;
-  let spill = 0;
-  for (const s of strokes) {
-    if (s.tool === 'eraser' || !s.points?.length) continue;
-    const pts = resample(s.points);
-    const start = regionAt(regions, pts[0][0], pts[0][1]);
-    const tol = (s.size || 8) / 2 + 3;
-    for (const [x, y] of pts) {
-      if (erased(x, y)) continue;
-      total++;
-      if (start < 0) continue;
-      const k = regionAt(regions, x, y);
-      if (k === start) continue;
-      if (distToEdge(x, y, regions[start].poly) <= tol) continue;
-      spill++;
-    }
-  }
-  return total ? spill / total : 0;
-}
-
-export function accuracyScore(manifest, strokes) {
-  const lem = spillRatio(manifest, strokes);
-  // ≤10% lem: tối đa; ≥60%: 0; ở giữa giảm tuyến tính.
-  if (lem <= 0.1) return 1;
-  if (lem >= 0.6) return 0;
-  return 1 - (lem - 0.1) / 0.5;
-}
-
 /** Màu đã dùng kèm trọng số diện tích. */
 export function weightedColors(manifest, fills) {
   const map = new Map();
@@ -238,17 +202,20 @@ export function creativityScore(manifest, fills, otherFillsList) {
   return (sum / wsum) * Math.min(1, coverage / 0.6);
 }
 
-export function timeScore({ coverage, accuracy, elapsedMs, durationMs }) {
-  if (coverage < 0.8 || accuracy < 0.5 || !durationMs) return 0;
+export function timeScore({ coverage, elapsedMs, durationMs }) {
+  if (coverage < 0.8 || !durationMs) return 0;
   return Math.max(0, Math.min(1, 1 - elapsedMs / durationMs));
 }
+
+const STROKE_KINDS = ['crayon', 'brush', 'glitter', 'pattern'];
+const PATTERN_IDS = ['rainbow', 'dots', 'stars', 'hearts', 'flowers', 'bee'];
 
 /** Làm sạch dữ liệu tranh gửi lên: chỉ giữ vùng có thật và mã màu hợp lệ. */
 export function sanitizeArtworkData(manifest, data) {
   const ids = new Set(manifest.regions.map((r) => r.id));
   const fills = {};
   for (const [k, v] of Object.entries(data?.fills || {})) if (ids.has(k) && hexToRgb(v)) fills[k] = String(v).toUpperCase();
-  const strokes = (Array.isArray(data?.strokes) ? data.strokes : []).slice(0, 2000).map((s) => ({
+  const strokes = (Array.isArray(data?.strokes) ? data.strokes : []).slice(0, 6000).map((s) => ({
     tool: s.tool === 'eraser' ? 'eraser' : 'brush',
     color: hexToRgb(s.color) ? s.color : '#000000',
     size: Math.max(1, Math.min(80, Number(s.size) || 8)),
@@ -257,6 +224,9 @@ export function sanitizeArtworkData(manifest, data) {
       .filter((p) => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))
       .map(([x, y]) => [Math.round(x * 10) / 10, Math.round(y * 10) / 10]),
     ...(s.skin ? { skin: String(s.skin).slice(0, 40) } : {}),
+    ...(STROKE_KINDS.includes(s.kind) ? { kind: s.kind } : {}),
+    ...(s.kind === 'pattern' && PATTERN_IDS.includes(s.pattern) ? { pattern: s.pattern } : {}),
+    ...(typeof s.region === 'string' && ids.has(s.region) ? { region: s.region } : {}),
   }));
   const stickers = (Array.isArray(data?.stickers) ? data.stickers : []).slice(0, 100).map((s) => ({
     type: String(s.type || '').slice(0, 40),
@@ -274,14 +244,12 @@ export function scoreEntry(manifest, data, { others = [], elapsedMs = 0, duratio
   const fills = data.fills || {};
   const strokes = data.strokes || [];
   const coverage = coverageScore(manifest, fills);
-  const accuracy = accuracyScore(manifest, strokes);
   const scores = {
     coverage,
-    accuracy,
     harmony: harmonyScore(manifest, fills),
     creativity: creativityScore(manifest, fills, others),
     diversity: diversityScore(fills, strokes),
-    time: timeScore({ coverage, accuracy, elapsedMs, durationMs }),
+    time: timeScore({ coverage, elapsedMs, durationMs }),
   };
   let total = 0;
   for (const [k, w] of Object.entries(RUBRIC)) total += w * scores[k];

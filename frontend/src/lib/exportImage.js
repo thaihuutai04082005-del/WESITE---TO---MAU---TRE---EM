@@ -1,5 +1,6 @@
-// Xuất tranh thành PNG (Mục 4.4): lớp vùng SVG + lớp Brush + sticker + chữ ký + Khung Artwork (tuỳ chọn). In trực tiếp.
-import { coloredSvgString } from './picture';
+// Xuất tranh thành PNG (Mục 4.4): lớp vùng SVG + lớp nét tô tay + nét viền đè lên + sticker + chữ ký + Khung Artwork (tuỳ chọn). In trực tiếp.
+import { coloredSvgString, linesOnlySvgString } from './picture';
+import { regionPaths } from './regions';
 import { drawStrokes } from './brush';
 import { stickersMarkup } from './stickers';
 import { artworkFrameSvg } from './frames';
@@ -38,8 +39,10 @@ export async function renderArtwork(picture, data, { size = 1200, frame = null, 
     const layer = document.createElement('canvas');
     layer.width = size;
     layer.height = size;
-    drawStrokes(layer.getContext('2d'), data.strokes, size / 600);
+    drawStrokes(layer.getContext('2d'), data.strokes, size / 600, regionPaths(picture.svg));
     ctx.drawImage(layer, off, off);
+    // Nét viền vẽ lại đè lên nét tô tay (nét tô luôn nằm dưới nét viền).
+    ctx.drawImage(await loadSvg(linesOnlySvgString(picture.svg)), off, off, size, size);
   }
   if (data?.stickers?.length) {
     const st = await loadSvg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">${stickersMarkup(data.stickers)}</svg>`);

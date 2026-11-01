@@ -363,10 +363,40 @@ function buildPicture(theme, obj, variant, isCard, bgIndex = 0) {
   };
 }
 
+
+/** Màu → Lab (D65) để đo độ chênh màu mắt thường thấy được. */
+function hexToLab(hex) {
+  const lin = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+  const r = lin(parseInt(hex.slice(1, 3), 16)), g = lin(parseInt(hex.slice(3, 5), 16)), b = lin(parseInt(hex.slice(5, 7), 16));
+  const f = (t) => (t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116);
+  const x = f((0.4124 * r + 0.3576 * g + 0.1805 * b) / 0.95047), y = f(0.2126 * r + 0.7152 * g + 0.0722 * b), z = f((0.0193 * r + 0.1192 * g + 0.9505 * b) / 1.08883);
+  return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
+}
+
+/**
+ * Tranh vẽ tay lấy màu từng vùng từ ảnh mẫu nên có nhiều mã chỉ lệch nhau vài đơn vị (mắt không phân biệt được).
+ * Gộp các màu chênh < SNAP_DELTA_E về một mã (ưu tiên mã được dùng nhiều vùng nhất) → cùng màu thì cùng một số.
+ */
+const SNAP_DELTA_E = 6;
+function snapSimilarColors(regions) {
+  const count = new Map();
+  for (const r of regions) count.set(r.color.toUpperCase(), (count.get(r.color.toUpperCase()) || 0) + 1);
+  const ordered = [...count.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([c]) => c);
+  const reps = [];
+  const to = new Map();
+  for (const c of ordered) {
+    const lab = hexToLab(c);
+    const rep = reps.find((q) => Math.hypot(lab[0] - q.lab[0], lab[1] - q.lab[1], lab[2] - q.lab[2]) < SNAP_DELTA_E);
+    if (rep) to.set(c, rep.color);
+    else { reps.push({ color: c, lab }); to.set(c, c); }
+  }
+  return regions.map((r) => ({ ...r, color: to.get(r.color.toUpperCase()) }));
+}
+
 /** Thẻ vẽ tay: vùng tô + lớp nét lấy từ art/<file>.json (do lineart.py tạo). */
 function buildArtPicture(theme, obj, variant, file, isCard = true) {
   const art = JSON.parse(readFileSync(join(ROOT, 'art', `${file}.json`), 'utf8'));
-  const regionsItems = art.regions.map((r) => ({ ...D(r.id, r.d, r.color), noStroke: true }));
+  const regionsItems = snapSimilarColors(art.regions).map((r) => ({ ...D(r.id, r.d, r.color), noStroke: true }));
   const lines = deco(`<image href="data:image/png;base64,${art.lines}" x="0" y="0" width="600" height="600" pointer-events="none"/>`);
   const manifestRegions = computeManifestRegions(regionsItems.map((it) => ({ ...it, worldPoly: it.poly })));
   const palette = [];

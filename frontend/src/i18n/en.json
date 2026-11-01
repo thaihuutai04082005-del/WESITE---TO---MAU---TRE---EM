@@ -248,7 +248,7 @@
     "reported": "Thank you! Bear will take a look.",
     "rules": {
       "title": "Rules",
-      "intro": "Bear’s little reminder: exhibition pictures need all 8 of these!",
+      "intro": "Bear’s little reminder: exhibition pictures need all 7 of these!",
       "when": "Send pictures on Saturday and Sunday — they are shown all next week.",
       "r1": {
         "title": "Sign your picture",
@@ -400,12 +400,15 @@
     "clearConfirm": "Clear all"
   },
   "tools": {
-    "fill": "Fill",
-    "brush": "Brush",
+    "crayon": "Crayon",
+    "brush": "Paintbrush",
+    "glitter": "Glitter crayon",
+    "pattern": "Pattern pen",
+    "pickPattern": "Pick a pattern, then color a region",
+    "stickerSize": "Sticker size",
     "eraser": "Eraser",
     "sticker": "Sticker",
     "pan": "Move",
-    "glitter": "Glitter",
     "undo": "Undo",
     "redo": "Redo",
     "zoomIn": "Zoom in",
@@ -693,8 +696,6 @@
   "rubric": {
     "coverage": "Coverage",
     "coverageHint": "Fill everything, leave no big blank areas.",
-    "accuracy": "Neatness",
-    "accuracyHint": "Brush strokes stay inside the lines.",
     "harmony": "Color harmony",
     "harmonyHint": "Colors go well together with a clear accent.",
     "creativity": "Creativity",
@@ -986,9 +987,9 @@
         "Tap \"Find a match\" to play kids at your level, or \"Create room\" and send the code to friends.",
         "When the match starts, everyone colors the same picture in Free mode before time runs out.",
         "Tap \"Submit\" when you're done and wait for the others.",
-        "See your scores in 6 categories. The top 3 earn Rank points and Gacha points."
+        "See your scores in 5 categories. The top 3 earn Rank points and Gacha points."
       ],
-      "tip": "Stay inside the lines, choose harmonious colors and be unique to score high!"
+      "tip": "Color every region fully, choose harmonious colors and be unique to score high!"
     },
     "together": {
       "intro": "2–4 kids color one picture together and see each other's colors instantly.",

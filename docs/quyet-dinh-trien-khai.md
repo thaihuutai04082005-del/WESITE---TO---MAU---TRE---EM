@@ -46,7 +46,7 @@ Chấm hoàn toàn trên dữ liệu số: danh sách vùng + màu, cộng với
 | Tiêu chí | Trọng số | Cách tính |
 |---|---|---|
 | Độ phủ màu | 20% | Diện tích **hiển thị** của các vùng đã tô chia cho tổng diện tích |
-| Độ chính xác đường nét | 15% | Chỉ xét nét Brush. **Lem** = phần nét nằm ngoài vùng bắt đầu nét, có dung sai = nửa độ dày nét + 3px. Lem ≤10% đạt điểm tối đa, ≥60% được 0 điểm, ở giữa giảm tuyến tính. Nét đã bị tẩy thì không tính. **Bucket fill không bao giờ bị tính lem.** |
+| ~~Độ chính xác đường nét~~ | ~~15%~~ | **Đã bỏ** (bộ công cụ tô tay mới): bé tô bằng cách quẹt, nét bị **khóa trong vùng** chạm đầu tiên nên không thể lem sang vùng khác. 15% trọng số được chia lại cho 5 tiêu chí còn lại theo tỉ lệ (Độ phủ 24%, Phối màu 24%, Sáng tạo 28%, Đa dạng 12%, Thời gian 12%). |
 | Phối màu hài hoà | 20% | Xét tối đa 6 màu chiếm diện tích lớn nhất, chấm từng cặp theo khoảng cách sắc độ (hue): tương đồng ≤30°, bộ ba 100–140°, bổ túc >140° được điểm cao; vùng "chỏi" 60–100° bị trừ. Màu trung tính hợp với mọi màu. Chiếm 80% điểm tiêu chí. 20% còn lại là **điểm nhấn**: có một màu phụ (2–30% diện tích) tương phản với màu chủ đạo. |
 | Sáng tạo & khác biệt | 25% | Với mỗi vùng bé đã tô, đo khoảng cách màu của bé tới **màu trung bình các bạn khác** dùng cho cùng vùng đó, lấy trung bình theo diện tích, rồi nhân với hệ số độ phủ. Phòng chỉ có 1 bé thì so với bảng màu gợi ý. |
 | Đa dạng sắc độ | 10% | Số nhóm màu khác nhau (12 dải sắc × 3 mức sáng, màu trung tính tách riêng). Dùng 6 nhóm trở lên là đạt tối đa. |
@@ -90,3 +90,10 @@ Chấm hoàn toàn trên dữ liệu số: danh sách vùng + màu, cộng với
 - **Flipbook:** chỉ nhận tranh **Sáng tạo** đã hoàn thành. Cần ít nhất 2 trang mới đánh dấu "hoàn thành" được. PDF tạo ở server (pdfkit + font Nunito/Baloo 2 hỗ trợ tiếng Việt). Link chia sẻ chỉ cho xem, có thể thu hồi.
 - **Tô cùng nhau:** mỗi bé chỉ Undo được thao tác của chính mình. Khi bấm "Lưu tranh chung", tranh được lưu vào Lịch sử của mọi bé đang ở trong phòng.
 - **Thanh toán giả lập:** khi PayPal/MoMo chưa cấu hình và `PAYMENT_MOCK=true` (mặc định ngoài production), giao diện ghi rõ đây là **giao dịch thử nghiệm**. Ở production phải đặt `PAYMENT_MOCK=false`.
+
+## Bộ công cụ tô tay (thay xô đổ màu)
+
+- Bỏ xô đổ màu. Bé tô bằng cách quẹt với 5 kiểu: bút sáp, cọ, sáp hạt lấp lánh, bút họa tiết, sticker; 5 cỡ nét; tẩy; hoàn tác / làm lại.
+- **Khóa vùng:** chỗ chạm xuống đầu tiên quyết định vùng đang tô (chạm đúng nét viền thì lấy vùng gần nhất trong 6 đơn vị tranh; chạm ngoài mọi vùng thì không tô). Nét chỉ ăn màu trong vùng đó; nét viền luôn nằm trên cùng.
+- Vùng phủ **≥ 80% diện tích** thì ghi màu vùng (`fills`) bằng màu chiếm nhiều nhất → tiến độ %, gợi ý số (Theo mẫu), chấm điểm Đấu trường, triển lãm vẫn dùng dữ liệu vùng như cũ. Tẩy bớt xuống dưới 80% thì gỡ màu vùng.
+- Áp dụng cho mọi nơi tô tranh: tô cá nhân (Theo mẫu / Sáng tạo), Đấu trường, Tô cùng nhau.

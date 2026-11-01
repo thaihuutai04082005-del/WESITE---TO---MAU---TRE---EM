@@ -49,6 +49,22 @@ export function coloredSvgString(pictureSvg, data, { withStickers = false } = {}
   return new XMLSerializer().serializeToString(svg);
 }
 
+/**
+ * Chỉ lớp nét viền: các vùng bỏ màu nền (trong suốt), giữ nét viền + hình trang trí.
+ * Vẽ đè lên lớp nét tô tay để nét tô luôn nằm dưới nét viền (không bao giờ đè lên nét đen).
+ */
+export function linesOnlySvgString(pictureSvg) {
+  const doc = new DOMParser().parseFromString(pictureSvg, 'image/svg+xml');
+  const svg = doc.documentElement;
+  svg.querySelectorAll('[data-region]').forEach((el) => {
+    el.setAttribute('fill', 'none');
+    el.removeAttribute('id');
+  });
+  svg.setAttribute('width', '600');
+  svg.setAttribute('height', '600');
+  return new XMLSerializer().serializeToString(svg);
+}
+
 /** Tô bằng màu gợi ý (tranh mẫu / ảnh minh hoạ ở các tầng chọn tranh). */
 export function referenceFills(picture) {
   return Object.fromEntries((picture.regions || []).map((r) => [r.id, r.color]));

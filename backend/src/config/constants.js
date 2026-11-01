@@ -44,13 +44,14 @@ export const DRAFT_RETENTION_DAYS = 30;
 export const DRAFT_WARNING_DAYS = 25;
 
 /** Trọng số rubric chấm điểm (tổng = 100%). */
+// Tô tay có khóa vùng (nét không thể lem sang vùng khác) nên không còn tiêu chí "độ gọn nét";
+// trọng số cũ của 5 tiêu chí còn lại được chia lại theo tỉ lệ để tổng vẫn là 1.
 export const RUBRIC = {
-  coverage: 0.2,
-  accuracy: 0.15,
-  harmony: 0.2,
-  creativity: 0.25,
-  diversity: 0.1,
-  time: 0.1,
+  coverage: 0.24,
+  harmony: 0.24,
+  creativity: 0.28,
+  diversity: 0.12,
+  time: 0.12,
 };
 
 export const AVATARS = ['meo', 'cho', 'tho', 'voi', 'gau', 'hoa', 'tao', 'dau-tay', 'o-to', 'may-bay', 'nam', 'cau-vong'];
@@ -66,10 +67,9 @@ export const EXHIBITION = {
   reactions: ['heart', 'cheer', 'clap', 'love', 'star'], // ❤️ 🎉 👏 😍 🌟 — mỗi cái 1 điểm
   perRound: { free: 1, month: 3, year: 5 },
   minCoverage: 0.8, // điều 2: tô ≥ 80% diện tích
-  maxSpill: 0.4, // điều 5: loại nếu > 40% nét cọ lem ra ngoài
   minMs: 20000, // điều 8: tô dưới 20 giây…
   msPerRegion: 700, // …hoặc dưới 0,7 giây mỗi vùng đã tô
-  autoBrushStrokes: 3, // ≤ 3 nét cọ tự do (≤ 200 điểm) → tự duyệt
+  autoBrushStrokes: 3, // ≤ 3 nét cọ tự do không khóa vùng (≤ 200 điểm) → tự duyệt; nét tô tay đã khóa vùng không tính
   autoBrushPoints: 200,
   trustedStreak: 3, // 3 tranh liên tiếp được duyệt, chưa vi phạm điều 6–7 → tự duyệt
   hideAfterReports: 3,
