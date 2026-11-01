@@ -1,4 +1,4 @@
-// Mục 10.2: đóng các tranh Sáng tạo đã hoàn thành thành cuốn truyện Flipbook; xem lật trang, tải PDF, chia sẻ.
+// Mục 10.2: đóng các tranh đã hoàn thành trong bộ sưu tập (tô mẫu, sáng tạo, thẻ hiếm) thành cuốn truyện Flipbook; xem lật trang, tải PDF, chia sẻ.
 import { getDb, tx } from '../config/db.js';
 import * as User from '../models/user.js';
 import * as progression from '../services/progression.js';
@@ -51,11 +51,11 @@ function own(req) {
   return b;
 }
 
-/** Chỉ nhận tranh Sáng tạo (mode free) đã hoàn thành của chính bé. */
+/** Nhận mọi tranh đã hoàn thành (nằm trong bộ sưu tập) của chính bé: tô mẫu, sáng tạo, thẻ hiếm. */
 function validatePages(userId, pages) {
   if (!Array.isArray(pages) || pages.length > MAX_PAGES) throw badRequest('invalid_pages');
   return pages.map((p) => {
-    const a = getDb().prepare("SELECT id FROM artworks WHERE id = ? AND user_id = ? AND mode = 'free' AND status = 'completed'").get(Number(p.artworkId), userId);
+    const a = getDb().prepare("SELECT id FROM artworks WHERE id = ? AND user_id = ? AND status = 'completed'").get(Number(p.artworkId), userId);
     if (!a) throw badRequest('invalid_page_artwork');
     return { artworkId: a.id, caption: typeof p.caption === 'string' ? p.caption.slice(0, 200) : '' };
   });

@@ -1,4 +1,4 @@
-// Trình tạo cuốn truyện: chọn tranh Sáng tạo đã hoàn thành, sắp thứ tự trang, thêm lời thoại/chú thích.
+// Trình tạo cuốn truyện: chọn tranh đã hoàn thành trong bộ sưu tập, sắp thứ tự trang, thêm lời thoại/chú thích.
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ export default function StorybookEditor() {
   const [covers, setCovers] = useState([]); // bìa đã mua trong Shop
 
   useEffect(() => {
-    api.get('/artworks?status=completed&mode=free').then((r) => setAvailable(r.artworks));
+    api.get('/artworks?status=completed').then((r) => setAvailable(r.artworks));
     api.get('/shop').then((r) => setCovers(r.items.filter((i) => i.type === 'storybook_cover' && i.owned))).catch(() => {});
     if (id)
       api.get(`/storybooks/${id}`).then((r) => {
