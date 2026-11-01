@@ -233,11 +233,11 @@ export default function ColoringScreen() {
         picture={picture}
         data={editor.data}
         artworkId={Number(id)}
-        onClose={() => {
+        onClose={(kind) => {
           setReveal(false);
-          // Thông báo nhiệm vụ/thành tích hiện sau khi tranh bay xong vào Bộ sưu tập (khỏi che hiệu ứng).
+          // Thông báo nhiệm vụ/thành tích hiện sau khi tranh bay xong (và sau hiệu ứng chuyển màn hình nếu bé bấm "Tô tranh khác").
           const ev = pendingEvents;
-          setTimeout(() => pushEvents(ev), 1000);
+          setTimeout(() => pushEvents(ev), kind === 'another' ? 3600 : 1000);
           setPendingEvents([]);
         }}
         anotherTo={picture.theme?.slug ? `/color/${picture.theme.slug}` : '/color'}

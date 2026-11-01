@@ -50,10 +50,13 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     // Ảnh bay là phần tử gắn ngoài trang nên vẫn bay khi modal đã đóng. "Tô tranh khác" chỉ đổi trang SAU khi tranh bay xong
     // (dựng trang mới trong lúc đang bay làm hiệu ứng bị giật).
     const flight = flyToCollection(artRef.current, src); // đo vị trí tranh trước khi modal đóng
-    onClose?.();
+    onClose?.(to ? 'another' : 'close');
     if (to) {
       await flight;
-      navigate(to);
+      // Hiệu ứng chuyển màn hình (bản không cúp của Đấu trường); nếu không chạy được (giảm chuyển động…) thì đổi trang luôn.
+      const detail = { dest: to, handled: false };
+      window.dispatchEvent(new CustomEvent('btm:screen-transition', { detail }));
+      if (!detail.handled) navigate(to);
     }
   };
 
