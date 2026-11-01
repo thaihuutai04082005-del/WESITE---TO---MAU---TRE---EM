@@ -10,10 +10,6 @@ import { usePicture } from '../../hooks/usePicture';
 import { RarityBadge, RARITY_COLOR } from '../../components/GachaCardReveal/GachaCardReveal';
 import Confetti from '../../components/Confetti';
 import PictureView from '../../components/PictureView/PictureView';
-import ModePicker from '../../components/ModePicker';
-import Modal from '../../components/Modal/Modal';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import PlayCard, { useCardPreview } from '../../components/GachaCardReveal/PlayCard';
 import Icon from '../../components/Icon';
 
 // 7 thẻ úp trên sân khấu (4 hàng trên, 3 hàng dưới) — toạ độ theo ảnh nền 1672×941 (cắt còn 1672×860). Thẻ sáng = còn lượt bóc.
@@ -51,12 +47,8 @@ export default function Gacha() {
   const toast = useUi((s) => s.toast);
   const [info, setInfo] = useState(null);
   const [deck, setDeck] = useState(null);
-  const [theme, setTheme] = useState('all');
   const [flips, setFlips] = useState({}); // slot → kết quả bóc, lật ngay trên sân khấu
   const [flipped, setFlipped] = useState(false);
-  const [filter, setFilter] = useState('all');
-  const [openCard, setOpenCard] = useState(null);
-  const [colorPic, setColorPic] = useState(null);
   const [busy, setBusy] = useState(false);
 
   const load = () => {
@@ -71,9 +63,11 @@ export default function Gacha() {
 
   // count = 1: lật đúng thẻ vừa bấm (slot); nhiều thẻ: lật từ thẻ đầu. Thẻ rung rồi lật lên ngay trên sân khấu.
   async function pull(count, slot = 0) {
+    if (!deck) return;
     setBusy(true);
     try {
-      const r = await api.post('/gacha/pull', { count });
+      const ids = deck.cards.slice(count === 1 ? slot : 0, count === 1 ? slot + 1 : count).map((c) => c.pictureId);
+      const r = await api.post('/gacha/pull', { pictureIds: ids });
       const m = {};
       r.results.forEach((res, k) => {
         m[count === 1 ? slot : k] = res;
@@ -96,16 +90,12 @@ export default function Gacha() {
     load();
   }
 
-  // Bộ thẻ: toàn bộ thẻ trong game, lọc theo hạng và chủ đề.
-  const themes = deck ? [...new Map(deck.cards.map((c) => [c.theme.slug, c.theme])).values()] : [];
-  const shown = (deck?.cards || []).filter((c) => (filter === 'all' || c.rarity === filter) && (theme === 'all' || c.theme.slug === theme));
-
   const ready = info ? Math.min(info.pullsAvailable, STAGE_CARDS.length) : 0;
   const locked = Object.keys(flips).length > 0;
   const best = Object.values(flips).some((x) => x.rarity === 'S') ? 90 : Object.values(flips).some((x) => x.rarity === 'A') ? 40 : 0;
 
   return (
-    <div>
+    <div className="gs-root">
       <div className="gs-stage" data-testid="gacha-stage">
         <Link to="/" className="gs-back" data-testid="gacha-back">
           <Icon name="back" size={20} strokeWidth={3.4} /> {t('common.back')}
@@ -178,85 +168,7 @@ export default function Gacha() {
         )}
       </div>
 
-      <div className="page space-y-6">
-      {info && (
-        <div className="card space-y-2 p-5">
-          <ProgressBar
-            label={t('gacha.points', { n: info.gachaPoints })}
-            sublabel={t('gacha.pulls', { n: info.pullsAvailable })}
-            value={info.gachaPoints % info.cost}
-            max={info.cost}
-            color="#7D5FFF"
-          />
-          <p className="text-sm text-muted">{t('gacha.how', { cost: info.cost })}</p>
-          <div className="flex flex-wrap gap-2">
-            {info.rates.map((r) => (
-              <span key={r.rarity} className="chip" style={{ background: `${RARITY_COLOR[r.rarity]}22`, color: RARITY_COLOR[r.rarity] }}>
-                {r.rarity}: {r.weight}%
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <section id="gacha-deck">
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="font-display text-2xl font-bold">
-            {t('gacha.deck')} {deck && <span className="text-muted">({deck.owned}/{deck.total})</span>}
-          </h2>
-          <div className="flex flex-wrap gap-1">
-            <select value={theme} onChange={(e) => setTheme(e.target.value)} className="min-h-11 rounded-2xl border-2 border-line bg-white px-3 font-bold text-primary-dark" data-testid="deck-theme">
-              <option value="all">{t('gacha.allThemes')}</option>
-              {themes.map((th) => (
-                <option key={th.slug} value={th.slug}>{th.name[i18n.language]}</option>
-              ))}
-            </select>
-            {['all', 'S', 'A', 'B', 'C'].map((f) => (
-              <button key={f} type="button" onClick={() => setFilter(f)} className={`btn min-h-11 px-3 text-base ${filter === f ? 'bg-primary text-white' : 'bg-primary-light text-primary-dark'}`}>
-                {f === 'all' ? t('common.all') : f}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-          {shown.map((c) => (
-            <PlayCard key={c.pictureId} card={c} onClick={() => setOpenCard(c)} />
-          ))}
-        </div>
-      </section>
-
       {locked && flipped && best > 0 && <Confetti count={best} />}
-
-      {openCard && !colorPic && (
-        <CardModal card={openCard} lang={i18n.language} onClose={() => setOpenCard(null)} onColor={(p) => setColorPic(p)} />
-      )}
-      {colorPic && <ModePicker picture={colorPic} onClose={() => { setColorPic(null); setOpenCard(null); }} />}
-      </div>
     </div>
-  );
-}
-
-function CardModal({ card, lang, onClose, onColor }) {
-  const { t } = useTranslation();
-  const owned = card.count > 0;
-  const preview = useCardPreview(card.pictureId);
-  const full = usePicture(owned ? card.pictureId : null);
-  const pic = full || preview;
-  return (
-    <Modal open onClose={onClose}>
-      <div className="flex flex-col items-center gap-3 text-center">
-        <RarityBadge rarity={card.rarity} />
-        <div className={`w-full max-w-xs rounded-2xl p-1 rarity-glow-${card.rarity}`}>{pic && <PictureView picture={pic} reveal className="rounded-xl" />}</div>
-        <h2 className="font-display text-2xl font-extrabold">{card.name[lang]}</h2>
-        <p className="text-muted">{t(`gacha.rarity.${card.rarity}`)}</p>
-        {owned ? (
-          <button type="button" className="btn-primary w-full" disabled={!full} onClick={() => onColor(full)} data-testid="card-color">
-            {t('gacha.colorThis')}
-          </button>
-        ) : (
-          <p className="rounded-2xl bg-primary-light px-4 py-3 font-bold text-primary-dark">{t('gacha.lockedHint')}</p>
-        )}
-      </div>
-    </Modal>
   );
 }

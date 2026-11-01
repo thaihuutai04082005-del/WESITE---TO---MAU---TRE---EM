@@ -21,14 +21,23 @@ export function info(req, res) {
 }
 
 export function pull(req, res) {
-  const count = int(req.body?.count ?? 1, { min: 1, max: 10, name: 'count' });
+  // Sân khấu có 7 thẻ úp, mỗi thẻ là một thẻ cố định: client gửi `pictureIds` để lật đúng thẻ đã chọn (không gửi = ngẫu nhiên).
+  const picked = Array.isArray(req.body?.pictureIds) ? req.body.pictureIds.map(Number) : null;
+  const count = picked ? picked.length : int(req.body?.count ?? 1, { min: 1, max: 10, name: 'count' });
+  if (picked && (count < 1 || count > 10)) throw badRequest('invalid_count');
   const results = tx(() => {
     const u = User.findById(req.user.id);
     if (u.gacha_points < GACHA_COST * count) throw badRequest('not_enough_gacha_points');
     const pool = Picture.cardPool();
     const out = [];
     for (let i = 0; i < count; i++) {
-      const { rarity, pictureId } = pullCard(pool);
+      let rarity;
+      let pictureId;
+      if (picked) {
+        pictureId = picked[i];
+        rarity = ['S', 'A', 'B', 'C'].find((r) => pool[r].includes(pictureId));
+        if (!rarity) throw badRequest('invalid_card');
+      } else ({ rarity, pictureId } = pullCard(pool));
       const cardId = Card.add(u.id, pictureId, 'gacha');
       getDb().prepare('INSERT INTO gacha_pulls (user_id, picture_id, rarity) VALUES (?, ?, ?)').run(u.id, pictureId, rarity);
       const p = Picture.findPicture(pictureId);
