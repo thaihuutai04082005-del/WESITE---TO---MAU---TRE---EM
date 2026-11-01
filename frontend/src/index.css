@@ -1330,3 +1330,32 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .ar-shield { width: 78px; height: 72px; flex: none; filter: drop-shadow(0 4px 4px rgba(120, 60, 0, 0.25)); }
 .ar-rank-name { font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(18px, 2.2vw, 24px); color: #3A2A1C; line-height: 1.15; }
 .ar-rank-pts { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 3px 14px 3px 8px; border-radius: 999px; background: #FFF4D6; border: 2px solid #FFE08A; font-weight: 800; color: #5A3E1B; }
+
+/* ===== Phòng chờ đấu trường ===== */
+.wr-page { max-width: 1100px; }
+.wr-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.wr-banner { position: relative; display: flex; align-items: center; min-height: 62px; padding: 6px 34px 8px clamp(96px, 12vw, 128px); border-radius: 16px / 22px; background: linear-gradient(#FFC15F, #FF9F32 52%, #F58A1C); box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.6), inset 0 -4px 0 rgba(190, 95, 10, 0.3), 0 8px 14px rgba(190, 100, 10, 0.28); }
+.wr-palette { position: absolute; left: -14px; top: 50%; width: clamp(104px, 12vw, 140px); transform: translateY(-50%); filter: drop-shadow(0 4px 4px rgba(120, 60, 0, 0.3)); }
+.wr-title { margin: 0; font-family: var(--font-display, inherit); font-weight: 900; font-size: clamp(24px, 3.2vw, 38px); line-height: 1.1; color: #fff; text-shadow: 0 2px 0 #C9650A, 0 3px 6px rgba(150, 70, 0, 0.35); white-space: nowrap; }
+.wr-leave { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border: 3px solid #F5A860; border-radius: 999px; background: #FFFaf2; color: #E8761A; font-weight: 800; font-size: 18px; box-shadow: 0 4px 8px rgba(200, 110, 30, 0.18); transition: transform 0.15s; }
+.wr-leave:hover { transform: translateY(-2px); }
+.wr-card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 0 clamp(14px, 2.4vw, 30px) 22px; border-radius: 34px; background: linear-gradient(#FFE9CC, #FFF1DC 40%, #FFF4E4); box-shadow: 0 14px 28px rgba(200, 110, 30, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.85); }
+.wr-scene { display: block; width: min(100%, 560px); height: auto; margin: -30px auto -4px; }
+.wr-stats { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 20px; }
+.wr-pill { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; border-radius: 999px; background: rgba(255, 255, 255, 0.78); font-weight: 800; font-size: 18px; color: #3A2A1C; box-shadow: inset 0 2px 0 #fff; }
+.wr-count { padding: 2px 14px; border-radius: 999px; background: linear-gradient(#FFA94D, #FF8A1F); color: #fff !important; font-size: 18px !important; }
+.wr-code { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 16px; border-radius: 20px; background: #fff; }
+.wr-code-val { padding: 4px 16px; border-radius: 16px; background: #FFF0D2; font-family: monospace; font-weight: 800; font-size: 30px; letter-spacing: 0.2em; color: #C9650A; }
+.wr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; border-radius: 26px; background: #FFFBF3; box-shadow: inset 0 2px 8px rgba(200, 130, 50, 0.12); }
+@media (min-width: 640px) { .wr-grid { grid-template-columns: repeat(5, 1fr); } }
+.wr-slot { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 124px; padding: 10px; border: 2px dashed #F5C795; border-radius: 22px; background: #FFF9EE; }
+.wr-slot-on { border: 2px solid #FFD79A; background: linear-gradient(#FFE6BE, #FFDCA6); box-shadow: 0 4px 8px rgba(200, 130, 30, 0.18); }
+.wr-ghost { width: 44px; height: 44px; }
+.wr-dots { font-weight: 900; font-size: 20px; color: #3A2A1C; }
+.wr-name { max-width: 100%; padding: 2px 16px; overflow: hidden; border-radius: 999px; background: #fff; font-weight: 800; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; }
+.wr-crown { position: absolute; top: -14px; left: -8px; width: 38px; height: 32px; transform: rotate(-14deg); filter: drop-shadow(0 2px 2px rgba(150, 90, 0, 0.35)); }
+.wr-note { display: flex; align-items: center; gap: 10px; margin: 0; padding: 10px 18px; border-radius: 999px; background: #FFEBCB; font-weight: 700; color: #3A2A1C; }
+.wr-info { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: #FF9F32; color: #fff; font-weight: 900; font-size: 16px; }
+.wr-stage { min-height: calc(100vh - 73px); background: #fff; }
+.wr-stage > .page { padding-top: 24px; }
+.wr-top { padding-top: 22px; }
