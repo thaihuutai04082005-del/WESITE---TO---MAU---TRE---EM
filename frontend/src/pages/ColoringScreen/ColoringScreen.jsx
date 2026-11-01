@@ -235,9 +235,9 @@ export default function ColoringScreen() {
         artworkId={Number(id)}
         onClose={(kind) => {
           setReveal(false);
-          // Thông báo nhiệm vụ/thành tích hiện sau khi tranh bay xong (và sau hiệu ứng chuyển màn hình nếu bé bấm "Tô tranh khác").
+          // Thông báo nhiệm vụ/thành tích hiện sau khi tranh bay xong (và sau khi trang chủ đề hiện lên nếu bé bấm "Tô tranh khác").
           const ev = pendingEvents;
-          setTimeout(() => pushEvents(ev), kind === 'another' ? 3600 : 1000);
+          setTimeout(() => pushEvents(ev), kind === 'another' ? 1800 : 1000);
           setPendingEvents([]);
         }}
         anotherTo={picture.theme?.slug ? `/color/${picture.theme.slug}` : '/color'}
