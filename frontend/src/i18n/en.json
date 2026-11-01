@@ -62,9 +62,6 @@
         "text": "Invite friends to color one picture in real time."
       },
       "storybook": {
-    "coverPick": "Cover",
-    "coverDefault": "Default cover",
-    "buyCovers": "Get more covers in the Shop",
         "title": "Make a storybook",
         "text": "Turn pictures into a flip-page book and download a PDF."
       },
@@ -226,10 +223,7 @@
     "scheduleBtn": "Exhibition schedule",
     "pictures": "{{count}} pictures",
     "boards": {
-      "S": "Legend room (S)",
-      "A": "Rare room (A)",
-      "B": "Special room (B)",
-      "free": "Creative room"
+      "free": "Exhibition Hall"
     },
     "award": "Most loved picture of the week",
     "awardShort": "Most loved",
@@ -262,8 +256,8 @@
         "text": "At least 8 out of 10 parts, no big white gaps."
       },
       "r3": {
-        "title": "The right kind of picture",
-        "text": "A rare S, A, B card picture or a Free-color picture."
+        "title": "Colored in Free mode",
+        "text": "Rare cards and theme pictures all count, as long as you color them in Free mode."
       },
       "r4": {
         "title": "Each picture exhibits once",
@@ -306,6 +300,7 @@
     },
     "sentApproved": "Sent! Your picture goes up on Monday 🎉",
     "sentPending": "Sent! Bear will check it before it goes up.",
+    "eligible": "Ready for the exhibition",
     "submitTitle": "Send to the exhibition",
     "notYet": "This picture misses rule {{rules}}. Fix it and try again — Bear believes in you!",
     "submitNote": "After sending, the signature and the picture are locked. It is shown from Monday ({{date}}) to Sunday.",
@@ -318,7 +313,7 @@
     "withdrawn": "Picture taken back.",
     "submitOpensShort": "Opens Saturday",
     "full": "Limit reached",
-    "notType": "Only S, A, B card pictures or Free-color pictures can be exhibited.",
+    "notType": "Only pictures colored in Free mode can go to the exhibition.",
     "lockedArtwork": "This picture was sent to the exhibition, so it stays as it is.",
     "review": {
       "title": "Review exhibition pictures",
@@ -740,7 +735,7 @@
   "shop": {
     "tabFrames": "Picture frames",
     "title": "Shop",
-    "hint": "Spend Ruby from missions on brush skins and frames.",
+    "hint": "Spend Ruby from missions on pattern colors, frames and storybook covers.",
     "patterns": "Pattern colors",
     "covers": "Storybook covers",
     "frames": "Artwork frames",
@@ -856,7 +851,10 @@
     "shareLink": "Share link",
     "linkCopied": "Share link created!",
     "by": "By {{name}}",
-    "notFound": "Storybook not found."
+    "notFound": "Storybook not found.",
+    "coverPick": "Cover",
+    "coverDefault": "Default cover",
+    "buyCovers": "Get more covers in the Shop"
   },
   "notifications": {
     "empty": "No notifications yet.",
@@ -871,7 +869,7 @@
     "trade_declined": "{{by}} declined the card trade.",
     "plan_activated": "Your plan is active until {{date}}.",
     "draft_expiring": "Unfinished picture “{{name}}” will be deleted on {{date}} unless you open it.",
-    "exhibit_award": "🏆 Congratulations! “{{name}}” is the Most loved picture in board {{boardName}} this week!",
+    "exhibit_award": "🏆 Congratulations! “{{name}}” is the Most loved picture this week!",
     "exhibit_done": "“{{name}}” finished its exhibition with {{n}} reactions. Well done!",
     "exhibit_reactions": "🎉 {{n}} more friends reacted to “{{name}}”!",
     "exhibit_approved": "“{{name}}” was approved and goes up on Monday!",
@@ -987,12 +985,12 @@
     "color": {
       "intro": "Pick a lovely picture and color it your way.",
       "steps": [
-        "Pick a theme (Animals, Vehicles…), then a subject, then the pose you like.",
-        "Pick a mode: \"Paint by number\" has a sample and numbers for each area; \"Free coloring\" lets you use any colors.",
-        "Pick a color and tap an area to fill it. Use Brush, Stickers or Glitter to add more.",
-        "Tap \"Finish\" to see your picture come to life, then download or print it."
+        "Pick a theme (Animals, Vehicles…), then an animal or object, then a style you like.",
+        "Pick a mode: \"Guided\" shows the picture with number hints for only the colors it uses; \"Free\" lets you color anything any way you like.",
+        "Pick a tool: crayon, brush, glitter, pattern or sticker. Touch a region and color it — strokes stay inside the region, so nothing smears outside.",
+        "Fill the region and it takes the color. Tap \"Done\" to watch your picture come alive, then download or print it."
       ],
-      "tip": "Unfinished pictures are saved automatically in History, so you can continue any time."
+      "tip": "Unfinished pictures are saved in History automatically. Buy new patterns in the Shop for more ways to color!"
     },
     "arena": {
       "intro": "Color against up to 10 kids with fair, automatic scoring.",
@@ -1000,7 +998,7 @@
         "Tap \"Find a match\" to play kids at your level, or \"Create room\" and send the code to friends.",
         "When the match starts, everyone colors the same picture in Free mode before time runs out.",
         "Tap \"Submit\" when you're done and wait for the others.",
-        "See your scores in 5 categories. The top 3 earn Rank points and Gacha points."
+        "See your score on 5 criteria (color coverage, harmony, creativity, variety, time). The Top 3 win Rank Points and Gacha Points."
       ],
       "tip": "Color every region fully, choose harmonious colors and be unique to score high!"
     },
@@ -1019,30 +1017,31 @@
       "steps": [
         "Place in the Arena top 3 to earn Gacha points.",
         "Every 50 Gacha points = 1 card. Leftover points are kept.",
-        "Cards come in S, A, B and C. Each card is a rare picture you unlock to color.",
+        "Cards come in S, A, B and C. A rare card is a one-of-a-kind picture, different from the theme pictures, and you unlock it to color.",
+        "There are 7 face-down cards on the stage. Tap a glowing card to flip it — each card shows its own picture.",
         "Gift or swap cards with friends, up to 3 times a day."
       ],
       "tip": "Opening cards never lowers your rank and never uses real money."
     },
     "storybooks": {
-      "intro": "Turn your Free coloring pictures into your very own storybook.",
+      "intro": "Turn your colored pictures into a book of your own.",
       "steps": [
         "Tap \"New storybook\" and give it a title.",
-        "Pick finished Free coloring pictures as pages.",
+        "Pick finished pictures from your collection (guided, free or rare cards) as the pages.",
         "Arrange the pages and write a line or caption for each one.",
-        "Flip through it, download a PDF or share it with your family."
+        "Choose a cover (more in the Shop), read it page by page, download a PDF or share it with family."
       ],
       "tip": "A storybook needs at least 2 pages to be finished."
     },
     "missions": {
-      "intro": "Complete missions to level up, earn Ruby and see your Arena rank.",
+      "intro": "Do missions to level up and earn Ruby.",
       "steps": [
         "Each level has 3 missions, like finishing a picture, logging in several days or trying a new theme.",
         "You get Ruby right away for each mission you complete.",
         "Finish all 3 to reach the next level with new missions.",
-        "Spend Ruby on brush skins and frames in the Shop."
+        "Spend Ruby on pattern colors, frames and storybook covers in the Shop."
       ],
-      "tip": "Win in the Arena to rank up. Rank points never go down."
+      "tip": "Finish all 3 missions to reach the next level. Rank and Rank Points are in the Arena."
     }
   }
 }

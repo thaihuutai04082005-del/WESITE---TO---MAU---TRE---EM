@@ -223,10 +223,7 @@
     "scheduleBtn": "Lịch triển lãm",
     "pictures": "{{count}} bức tranh",
     "boards": {
-      "S": "Phòng Huyền thoại (S)",
-      "A": "Phòng Quý hiếm (A)",
-      "B": "Phòng Đặc biệt (B)",
-      "free": "Phòng Sáng tạo"
+      "free": "Hội trường triển lãm"
     },
     "award": "Tranh được yêu thích nhất tuần",
     "awardShort": "Yêu thích nhất",
@@ -259,8 +256,8 @@
         "text": "Ít nhất 8 phần trên 10 phần, không để nhiều chỗ trắng."
       },
       "r3": {
-        "title": "Đúng loại tranh",
-        "text": "Tranh thẻ hiếm S, A, B hoặc tranh tô ở chế độ Sáng tạo."
+        "title": "Tô ở chế độ Sáng tạo",
+        "text": "Tranh thẻ hiếm hay tranh chủ đề đều được, miễn là bé tô ở chế độ Sáng tạo."
       },
       "r4": {
         "title": "Mỗi tranh đi triển lãm 1 lần",
@@ -303,6 +300,7 @@
     },
     "sentApproved": "Đã gửi! Tranh sẽ lên hội trường vào thứ 2 🎉",
     "sentPending": "Đã gửi! Gấu sẽ xem tranh trước khi lên hội trường nhé.",
+    "eligible": "Đủ điều kiện triển lãm",
     "submitTitle": "Gửi tranh triển lãm",
     "notYet": "Tranh chưa đạt điều {{rules}} trong nội quy. Bé sửa lại rồi gửi nhé, Gấu tin bé làm được!",
     "submitNote": "Sau khi gửi, chữ ký và bức tranh sẽ được khoá lại. Tranh được trưng từ thứ 2 ({{date}}) đến chủ nhật.",
@@ -315,7 +313,7 @@
     "withdrawn": "Đã rút tranh.",
     "submitOpensShort": "Mở vào thứ 7",
     "full": "Đã đủ lượt",
-    "notType": "Chỉ tranh thẻ S, A, B hoặc tranh Sáng tạo được đi triển lãm.",
+    "notType": "Chỉ tranh tô ở chế độ Sáng tạo mới được đi triển lãm.",
     "lockedArtwork": "Tranh đã gửi triển lãm nên được giữ nguyên, không sửa nữa.",
     "review": {
       "title": "Duyệt tranh triển lãm",
@@ -737,7 +735,7 @@
   "shop": {
     "tabFrames": "Khung tranh",
     "title": "Shop",
-    "hint": "Dùng Ruby từ nhiệm vụ để mua skin cọ vẽ và khung tranh.",
+    "hint": "Dùng Ruby từ nhiệm vụ để mua màu họa tiết, khung tranh và bìa truyện.",
     "patterns": "Màu họa tiết",
     "covers": "Bìa truyện",
     "frames": "Khung Artwork",
@@ -871,7 +869,7 @@
     "trade_declined": "{{by}} đã từ chối giao dịch thẻ.",
     "plan_activated": "Gói dịch vụ đã được kích hoạt, hạn đến {{date}}.",
     "draft_expiring": "Tranh dở “{{name}}” sẽ tự xoá vào {{date}} nếu bé không mở lại.",
-    "exhibit_award": "🏆 Chúc mừng! Tranh “{{name}}” là Tranh được yêu thích nhất bảng {{boardName}} tuần này!",
+    "exhibit_award": "🏆 Chúc mừng! Tranh “{{name}}” là Tranh được yêu thích nhất tuần này!",
     "exhibit_done": "Tranh “{{name}}” đã triển lãm xong với {{n}} cảm xúc. Giỏi quá!",
     "exhibit_reactions": "🎉 Có thêm {{n}} bạn thả cảm xúc cho tranh “{{name}}”!",
     "exhibit_approved": "Tranh “{{name}}” đã được duyệt, sẽ lên hội trường vào thứ 2!",
@@ -988,11 +986,11 @@
       "intro": "Chọn một bức tranh thật đẹp rồi tô theo cách bé thích.",
       "steps": [
         "Chọn chủ đề (Động vật, Xe cộ…), rồi chọn con vật hoặc đồ vật, rồi chọn kiểu dáng bé thích.",
-        "Chọn cách tô: \"Tô theo mẫu\" có tranh mẫu và số gợi ý cho từng vùng; \"Sáng tạo\" thì tô màu gì cũng được.",
-        "Chọn màu rồi chạm vào một vùng để đổ màu. Muốn vẽ thêm thì dùng Cọ vẽ, Sticker hoặc Lấp lánh.",
-        "Bấm \"Hoàn thành\" để xem tranh chuyển động, rồi tải về hoặc in ra."
+        "Chọn cách tô: \"Tô theo mẫu\" có tranh mẫu và số gợi ý chỉ những màu có trong tranh; \"Sáng tạo\" thì tô màu gì cũng được.",
+        "Chọn dụng cụ: bút sáp, cọ, sáp hạt lấp lánh, họa tiết hoặc sticker. Bé chạm vào một vùng rồi tô, nét tô sẽ chỉ nằm trong vùng đó nên không lem ra ngoài.",
+        "Tô đầy vùng thì vùng đó tự lên màu. Bấm \"Hoàn thành\" để xem tranh chuyển động, rồi tải về hoặc in ra."
       ],
-      "tip": "Tranh đang tô dở được tự động lưu trong Lịch sử, bé có thể quay lại tô tiếp bất cứ lúc nào."
+      "tip": "Tranh đang tô dở được tự động lưu trong Lịch sử. Mua thêm họa tiết mới trong Shop để có nhiều kiểu tô hơn nhé!"
     },
     "arena": {
       "intro": "Thi tô tranh cùng tối đa 10 bạn, máy chấm điểm tự động và công bằng.",
@@ -1000,7 +998,7 @@
         "Bấm \"Tìm trận\" để ghép với các bạn cùng trình độ, hoặc \"Tạo phòng\" rồi gửi mã cho bạn bè.",
         "Khi trận bắt đầu, cả phòng cùng tô một bức tranh ở chế độ Sáng tạo trước khi hết giờ.",
         "Tô xong thì bấm \"Nộp bài\" và chờ các bạn khác.",
-        "Xem điểm theo 5 tiêu chí. Bạn đứng Top 3 được cộng Điểm Rank và Điểm Gacha."
+        "Xem điểm theo 5 tiêu chí (độ phủ màu, phối màu, sáng tạo, đa dạng sắc độ, thời gian). Bạn đứng Top 3 được cộng Điểm Rank và Điểm Gacha."
       ],
       "tip": "Tô kín vùng, phối màu hài hoà và thật khác biệt để được điểm cao!"
     },
@@ -1019,30 +1017,31 @@
       "steps": [
         "Lọt Top 3 ở Đấu trường để nhận Điểm Gacha.",
         "Cứ 50 Điểm Gacha được bóc 1 thẻ. Điểm dư được giữ lại cho lần sau.",
-        "Thẻ có 4 cấp S, A, B, C. Mỗi thẻ là một bức tranh hiếm mà bé được mở khoá để tô.",
+        "Thẻ có 4 cấp S, A, B, C. Thẻ hiếm là những bức tranh độc nhất, khác với tranh trong các chủ đề, và bé được mở khoá để tô.",
+        "Trên sân khấu có 7 thẻ úp. Bấm một thẻ sáng để lật, thẻ nào ra đúng bức tranh của thẻ đó.",
         "Có thể tặng hoặc đổi thẻ với bạn bè, tối đa 3 lần mỗi ngày."
       ],
       "tip": "Bóc thẻ không làm tụt hạng và không bao giờ phải dùng tiền thật."
     },
     "storybooks": {
-      "intro": "Gom những bức tranh Sáng tạo thành một cuốn truyện của riêng bé.",
+      "intro": "Gom những bức tranh đã tô thành một cuốn truyện của riêng bé.",
       "steps": [
         "Bấm \"Tạo truyện mới\" và đặt tên cho cuốn truyện.",
-        "Chọn các tranh Sáng tạo đã hoàn thành để làm từng trang.",
+        "Chọn các tranh đã hoàn thành trong bộ sưu tập (tô mẫu, sáng tạo hay thẻ hiếm) để làm từng trang.",
         "Sắp xếp thứ tự trang và viết lời thoại, chú thích cho từng trang.",
-        "Xem truyện lật trang, tải về dạng PDF hoặc chia sẻ cho bố mẹ, ông bà."
+        "Chọn bìa truyện (mua thêm trong Shop), xem truyện lật trang, tải PDF hoặc chia sẻ cho bố mẹ, ông bà."
       ],
       "tip": "Cần ít nhất 2 trang để hoàn thành một cuốn truyện."
     },
     "missions": {
-      "intro": "Làm nhiệm vụ để lên cấp, nhận Ruby và xem Hạng Đấu trường.",
+      "intro": "Làm nhiệm vụ để lên cấp và nhận Ruby.",
       "steps": [
         "Mỗi cấp có 3 nhiệm vụ, ví dụ: tô xong tranh, đăng nhập nhiều ngày, thử chủ đề mới.",
         "Hoàn thành mỗi nhiệm vụ là nhận Ruby ngay.",
         "Xong cả 3 nhiệm vụ thì lên cấp mới, có bộ nhiệm vụ mới.",
-        "Dùng Ruby mua skin cọ vẽ và khung tranh trong Shop."
+        "Dùng Ruby mua màu họa tiết, khung tranh và bìa truyện trong Shop."
       ],
-      "tip": "Thắng Đấu trường để lên Hạng. Điểm Hạng không bao giờ bị trừ."
+      "tip": "Xong cả 3 nhiệm vụ là lên cấp mới. Hạng và Điểm Rank bé xem ở Đấu trường."
     }
   }
 }

@@ -453,6 +453,10 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   const bad = await api('POST', '/exhibition/entries', { artworkId: noSig }, A.token);
   assert.equal(bad.body.error.code, 'exhibit_rules');
   assert.ok(bad.body.error.failures.includes(1));
+  // Chú thích "đủ điều kiện triển lãm": tranh đã ký + tô đủ + chế độ Sáng tạo thì true; thiếu chữ ký thì false.
+  const eligList = (await api("GET", "/artworks?status=completed", null, A.token)).body.artworks;
+  assert.equal(eligList.find((x) => x.id === a1).exhibitEligible, true);
+  assert.equal(eligList.find((x) => x.id === noSig).exhibitEligible, false);
   // Tranh không có nét cọ → tự duyệt; Free chỉ gửi 1 tranh/vòng.
   const e1 = await api('POST', '/exhibition/entries', { artworkId: a1 }, A.token);
   assert.equal(e1.status, 201, JSON.stringify(e1.body));

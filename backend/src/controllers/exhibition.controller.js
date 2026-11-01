@@ -36,8 +36,8 @@ export const showcase = (req, res) => res.json(Ex.showcase(Number(req.params.use
 
 const IMG_RE = /^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/;
 const BOARD_LABEL = {
-  vi: { S: 'Phòng Huyền thoại (S)', A: 'Phòng Quý hiếm (A)', B: 'Phòng Đặc biệt (B)', free: 'Phòng Sáng tạo' },
-  en: { S: 'Legend room (S)', A: 'Rare room (A)', B: 'Special room (B)', free: 'Creative room' },
+  vi: { free: 'Hội trường triển lãm' },
+  en: { free: 'Exhibition Hall' },
 };
 const dm = (key, days, withYear) => {
   const d = new Date(Date.parse(`${key}T00:00:00Z`) + days * 86400000);

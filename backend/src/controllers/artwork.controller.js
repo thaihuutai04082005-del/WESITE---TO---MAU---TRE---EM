@@ -25,7 +25,19 @@ const hasContent = (d) => Object.keys(d.fills).length > 0 || d.strokes.length > 
 
 export function list(req, res) {
   const { status, mode } = req.query;
-  res.json({ artworks: Artwork.listByUser(req.user.id, { status: status || undefined, mode: mode || undefined }) });
+  const artworks = Artwork.listByUser(req.user.id, { status: status || undefined, mode: mode || undefined });
+  // Tranh hoàn thành đã đủ điều kiện gửi triển lãm (máy tự kiểm các điều 1, 2, 3, 4, 8) → bé thấy chú thích "Đủ điều kiện triển lãm".
+  for (const a of artworks) {
+    a.exhibitEligible = false;
+    if (a.status !== 'completed' || a.mode !== 'free') continue;
+    try {
+      const row = Artwork.findById(a.id);
+      a.exhibitEligible = !!row && Exhibition.checkArtwork(row).failures.length === 0;
+    } catch {
+      /* tranh lỗi dữ liệu: coi như chưa đủ điều kiện */
+    }
+  }
+  res.json({ artworks });
 }
 
 export function create(req, res) {

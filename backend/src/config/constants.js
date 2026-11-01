@@ -66,7 +66,7 @@ export const SIGNATURE_INKS = ['#1B2A38', '#FFFFFF', '#C9961A', '#FF5F7E', '#2B7
 
 // Hội trường triển lãm (Đợt 2).
 export const EXHIBITION = {
-  boards: ['S', 'A', 'B', 'free'],
+  boards: ['free'], // một hội trường chung cho mọi tranh Sáng tạo (không còn chia phòng S/A/B)
   reactions: ['heart', 'cheer', 'clap', 'love', 'star'], // ❤️ 🎉 👏 😍 🌟 — mỗi cái 1 điểm
   perRound: { free: 1, month: 3, year: 5 },
   minCoverage: 0.8, // điều 2: tô ≥ 80% diện tích

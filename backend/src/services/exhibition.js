@@ -82,11 +82,9 @@ const ACTIVE = "('pending', 'approved', 'removed')";
 export const activeEntryFor = (artworkId) =>
   getDb().prepare(`SELECT * FROM exhibition_entries WHERE artwork_id = ? AND status IN ${ACTIVE}`).get(artworkId);
 
-/** Bảng xét của tranh: thẻ hiếm S/A/B theo hạng thẻ, còn lại là bảng Sáng tạo. null = không đúng loại (điều 3). */
-function boardOf(artwork, picture) {
-  if (artwork.mode !== 'free') return null;
-  if (picture.is_card) return ['S', 'A', 'B'].includes(picture.rarity) ? picture.rarity : null;
-  return 'free';
+/** Hội trường chỉ có một bảng chung: mọi tranh tô ở chế độ Sáng tạo (kể cả thẻ hiếm, tranh chủ đề) đều được. null = không đúng loại (điều 3). */
+function boardOf(artwork) {
+  return artwork.mode === 'free' ? 'free' : null;
 }
 
 function startedAt(artwork) {
@@ -103,7 +101,7 @@ export function checkArtwork(artwork) {
   const manifest = Picture.manifestOf(picture);
   const data = parseJson(artwork.data, {});
   const failures = [];
-  const board = boardOf(artwork, picture);
+  const board = boardOf(artwork);
   if (!data.signature) failures.push(1);
   const coverage = coverageScore(manifest, data.fills || {});
   if (artwork.status !== 'completed' || coverage < EXHIBITION.minCoverage) failures.push(2);
@@ -225,7 +223,7 @@ export function reactionCounts(entryId) {
 const total = (counts) => Object.values(counts || {}).reduce((a, b) => a + b, 0);
 
 // ---------------- Xét danh hiệu & việc định kỳ ----------------
-const BOARD_NAMES = { S: { vi: 'S', en: 'S' }, A: { vi: 'A', en: 'A' }, B: { vi: 'B', en: 'B' }, free: { vi: 'Sáng tạo', en: 'Creative' } };
+const BOARD_NAMES = { free: { vi: 'Sáng tạo', en: 'Creative' } };
 
 function judge(key) {
   const db = getDb();
