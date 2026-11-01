@@ -10,8 +10,11 @@ function pop(el) {
   el.animate?.([{ transform: 'scale(1)' }, { transform: 'scale(1.28) rotate(-4deg)' }, { transform: 'scale(0.96)' }, { transform: 'scale(1)' }], { duration: 480, easing: 'ease-out' });
 }
 
-/** @param {HTMLElement} fromEl khung tranh đang hiện;  @param {string} src ảnh tranh (data URL) */
-export function flyToCollection(fromEl, src) {
+/**
+ * @param {HTMLElement} fromEl khung tranh đang hiện;  @param {string} src ảnh tranh (data URL)
+ * @returns {Promise<void>} xong khi tranh đã bay tới nơi (để đổi trang SAU hiệu ứng, tránh giật do trang mới đang dựng)
+ */
+export async function flyToCollection(fromEl, src) {
   if (!fromEl || !src) return;
   const from = fromEl.getBoundingClientRect();
   const img = document.createElement('img');
@@ -25,6 +28,7 @@ export function flyToCollection(fromEl, src) {
     height: `${from.height}px`,
     zIndex: 9999,
     pointerEvents: 'none',
+    willChange: 'transform, opacity',
     borderRadius: '20px',
     background: '#fff',
     border: '4px solid #fff',
@@ -32,13 +36,18 @@ export function flyToCollection(fromEl, src) {
     transformOrigin: 'center center',
   });
   document.body.appendChild(img);
+  await img.decode?.().catch(() => {}); // giải mã ảnh trước khi bay → khung hình đầu không khựng
   const target = visibleTarget();
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   if (!target || !img.animate || reduce) {
     const a = img.animate?.([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
-    if (a) a.onfinish = () => img.remove();
-    else img.remove();
-    return;
+    if (!a) return img.remove();
+    return new Promise((done) => {
+      a.onfinish = () => {
+        img.remove();
+        done();
+      };
+    });
   }
   const t = target.getBoundingClientRect();
   const dx = t.left + t.width / 2 - (from.left + from.width / 2);
@@ -46,14 +55,17 @@ export function flyToCollection(fromEl, src) {
   const end = Math.max(0.06, (Math.max(t.height, 36) * 0.9) / from.width);
   const anim = img.animate(
     [
-      { transform: 'translate(0, 0) scale(1) rotate(0deg)', opacity: 1, offset: 0 },
-      { transform: `translate(${dx * 0.35}px, ${dy * 0.35 + 40}px) scale(${Math.max(end, 0.62)}) rotate(-7deg)`, opacity: 1, offset: 0.4 },
-      { transform: `translate(${dx}px, ${dy}px) scale(${end}) rotate(10deg)`, opacity: 0.9, offset: 1 },
+      { transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)', opacity: 1, offset: 0 },
+      { transform: `translate3d(${dx * 0.35}px, ${dy * 0.35 + 40}px, 0) scale(${Math.max(end, 0.62)}) rotate(-7deg)`, opacity: 1, offset: 0.4 },
+      { transform: `translate3d(${dx}px, ${dy}px, 0) scale(${end}) rotate(10deg)`, opacity: 0.9, offset: 1 },
     ],
     { duration: DURATION, easing: 'cubic-bezier(0.55, 0.06, 0.4, 1)', fill: 'forwards' },
   );
-  anim.onfinish = () => {
-    img.remove();
-    pop(target);
-  };
+  return new Promise((done) => {
+    anim.onfinish = () => {
+      img.remove();
+      pop(target);
+      done();
+    };
+  });
 }

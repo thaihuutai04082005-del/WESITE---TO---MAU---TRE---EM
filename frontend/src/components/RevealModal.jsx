@@ -46,10 +46,15 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     } catch {
       /* không có ảnh bay thì thôi, vẫn đóng bình thường */
     }
-    flyToCollection(artRef.current, src);
     setBusy(false);
+    // Ảnh bay là phần tử gắn ngoài trang nên vẫn bay khi modal đã đóng. "Tô tranh khác" chỉ đổi trang SAU khi tranh bay xong
+    // (dựng trang mới trong lúc đang bay làm hiệu ứng bị giật).
+    const flight = flyToCollection(artRef.current, src); // đo vị trí tranh trước khi modal đóng
     onClose?.();
-    if (to) navigate(to);
+    if (to) {
+      await flight;
+      navigate(to);
+    }
   };
 
   return (
