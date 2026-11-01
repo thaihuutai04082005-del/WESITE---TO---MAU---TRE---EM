@@ -1,5 +1,5 @@
 // Khung trang: thanh điều hướng (desktop) + thanh dưới (mobile), chuyển ngôn ngữ, thông báo, popup phần thưởng.
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
@@ -16,7 +16,7 @@ import LanguageSwitch from './LanguageSwitch';
 import SoundToggle from './SoundToggle';
 import { initMusic } from '../../lib/sound';
 import { transitionBus } from '../../lib/transitionBus';
-import RainbowTransition from './RainbowTransition';
+import RainbowTransition, { isColoringPath } from './RainbowTransition';
 import ArenaTransition from './ArenaTransition';
 import GachaTransition from './GachaTransition';
 import StoryTransition from './StoryTransition';
@@ -41,6 +41,12 @@ export const NAV = [
 ];
 // Thanh điều hướng chính (đúng thứ tự hiển thị): Bộ sưu tập, Cửa hàng, Bạn bè, Lịch sử. Các mục khác vào từ trang chủ / menu.
 const MAIN_NAV = ['collection', 'shop', 'friends', 'history'];
+
+// Trang đích đã có hiệu ứng chuyển màn hình riêng (xem các file *Transition.jsx).
+const OWN_TRANSITION_DEST = (p) =>
+  p === '/arena' || p.startsWith('/arena/') || p === '/gacha' || p.startsWith('/gacha/') || p === '/storybooks' || p === '/together' || p === '/missions' || p === '/exhibition';
+// Vào / ra khu vực Tô màu có hiệu ứng cầu vồng riêng.
+const hasOwnTransition = (from, to) => OWN_TRANSITION_DEST(to) || isColoringPath(from) !== isColoringPath(to);
 const MOBILE_MAIN = MAIN_NAV;
 const DESKTOP_MAIN = MAIN_NAV;
 const navOf = (keys) => keys.map((k) => NAV.find((n) => n.key === k)).filter(Boolean);
@@ -58,10 +64,17 @@ export default function Layout() {
   const navigate = useNavigate();
 
   useEffect(() => setMenu(false), [loc.pathname]);
-  // Trang mới hiện lên bằng hiệu ứng đơn giản (mờ → rõ, nhích lên nhẹ) khi nơi gọi đã đặt cờ trước lúc đổi trang.
+  // Mọi lần đổi trang mà chưa có hiệu ứng riêng đều hiện trang mới bằng animation đơn giản (mờ → rõ, nhích lên nhẹ).
+  // Không chạy khi: hiệu ứng riêng đã lo (Tô màu / Đấu trường / Tô cùng nhau / Bóc thẻ / Truyện tranh / Nhiệm vụ / Triển lãm),
+  // chỉ đổi tham số trên cùng một trang, hoặc lần dựng đầu tiên của ứng dụng. Nơi gọi đặt `transitionBus.screenEnter` để ép chạy.
+  const prevPath = useRef(loc.pathname);
   useLayoutEffect(() => {
-    if (!transitionBus.screenEnter) return undefined;
+    const from = prevPath.current;
+    prevPath.current = loc.pathname;
+    const forced = transitionBus.screenEnter;
     transitionBus.screenEnter = false;
+    if (from === loc.pathname) return undefined;
+    if (!forced && (hasOwnTransition(from, loc.pathname) || transitionBus.skipRainbow)) return undefined;
     const html = document.documentElement;
     html.setAttribute('data-screen-enter', '');
     const id = setTimeout(() => html.removeAttribute('data-screen-enter'), 700);
