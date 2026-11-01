@@ -13,6 +13,9 @@ import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
 import { ShopArt, Bag, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScene';
 
+// Khung gỗ là khung mặc định miễn phí: không bày bán trong Shop.
+const DEFAULT_FRAME = 'khung-go';
+
 function BrushPreview({ skin, scene = false, className = 'h-auto w-full rounded-xl bg-white' }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -136,7 +139,7 @@ export default function Shop() {
     </Modal>
   );
   if (wide) {
-    const list = shop.items.filter((i) => i.type === tab);
+    const list = shop.items.filter((i) => i.type === tab && i.slug !== DEFAULT_FRAME);
     const per = SLOTS.length;
     const pages = Math.max(1, Math.ceil(list.length / per));
     const cur = Math.min(page, pages - 1);
@@ -213,7 +216,7 @@ export default function Shop() {
         <section key={type}>
           <h2 className="mb-3 font-display text-2xl font-bold">{title}</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {shop.items.filter((i) => i.type === type).map((item) => {
+            {shop.items.filter((i) => i.type === type && i.slug !== DEFAULT_FRAME).map((item) => {
               const equipped = type === 'brush_skin' && user.brushSkin === item.slug;
               return (
                 <div key={item.slug} className="card flex flex-col gap-2 p-3">
