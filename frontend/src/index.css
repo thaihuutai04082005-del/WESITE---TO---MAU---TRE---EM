@@ -53,6 +53,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
+  overflow-x: clip; /* trang trí tràn mép (vd. hình góc trang chủ) không làm xuất hiện thanh cuộn ngang */
 }
 
 h1,

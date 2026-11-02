@@ -57,7 +57,7 @@ export async function planId(plan) {
   }
   const created = await call('POST', '/v1/billing/plans', {
     product_id: productId,
-    name: plan === 'month' ? 'Bé Tô Màu - Gói Tháng' : 'Bé Tô Màu - Gói Năm',
+    name: plan === 'month' ? 'Bé Tô Màu - VIP Tháng' : 'Bé Tô Màu - VIP Năm',
     billing_cycles: [
       {
         frequency: { interval_unit: plan === 'month' ? 'MONTH' : 'YEAR', interval_count: 1 },
