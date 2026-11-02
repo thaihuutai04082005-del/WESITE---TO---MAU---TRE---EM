@@ -1673,3 +1673,4 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw-free .cw-left { align-self: start; height: auto; }
   .cw-free .cw-actions { margin-top: 6px; }
 }
+.cw-title .cw-ref-tools svg { color: #2F8FEA; }
