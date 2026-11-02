@@ -11,7 +11,8 @@ import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID
 
 // Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần; tab thứ 4 là các tranh thẻ hiếm bé đã bóc được (chờ tô).
 const AGE_GROUPS = ['3-5', '6-8', '9+', 'cards'];
-const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟', cards: '🃏' };
+const CardBackIcon = () => <img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />;
+const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟', cards: <CardBackIcon /> };
 const AGE_KEY = 'colorAge';
 
 function loadAge() {

@@ -1633,3 +1633,8 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .room-slot-dim .frame-overlay { opacity: 0.55; }
 /* 4 tab (3 nhóm tuổi + Tranh thẻ hiếm) vẫn nằm trọn một hàng trên màn hình vừa */
 @media (min-width: 768px) and (max-width: 1240px) { .wood-tab-body { min-width: 0; gap: 8px; padding: 8px 18px 8px 12px; } .wood-tab-icon { font-size: 32px; } .wood-tab-label { font-size: 17px; } }
+
+/* Biểu tượng mặt sau thẻ "?" cho Tranh thẻ hiếm (thay cho emoji 🃏) */
+.card-back-icon { display: inline-block; height: 1.3em; width: auto; margin-right: 0.15em; vertical-align: -0.28em; border-radius: 14%; box-shadow: 0 1px 3px rgba(30, 60, 120, 0.35); }
+.wood-tab-icon .card-back-icon { height: 1.1em; margin: 0; vertical-align: top; }
+.room-tab .card-back-icon { height: 1.55em; vertical-align: -0.4em; }

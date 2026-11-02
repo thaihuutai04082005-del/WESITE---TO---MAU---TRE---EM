@@ -290,7 +290,7 @@ function RoomShell({ tab, onTab, slots, pills }) {
   const cur = Math.min(page, pages - 1);
   const shown = slots.slice(cur * per, cur * per + per);
   const tabs = [
-    ['cards', '🃏', t('collection.cards')],
+    ['cards', <img key="cb" src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />, t('collection.cards')],
     ['artworks', '🖼️', t('collection.artworks')],
   ];
   return (
@@ -432,7 +432,7 @@ export default function Collection() {
       <h1 className="page-title">{t('collection.title')}</h1>
       <div className="flex gap-2 rounded-2xl bg-primary-light p-1">
         {[
-          ['cards', `🃏 ${t('collection.cards')}`],
+          ['cards', <><img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} /> {t('collection.cards')}</>],
           ['artworks', `🖼️ ${t('collection.artworks')}`],
         ].map(([k, label]) => (
           <button key={k} type="button" onClick={() => setParams({ tab: k })} className={`flex-1 rounded-xl px-3 py-2 font-display text-lg font-bold transition ${tab === k ? 'bg-white text-primary-dark shadow-soft' : 'text-primary-dark/70'}`} data-testid={`col-tab-${k}`}>
