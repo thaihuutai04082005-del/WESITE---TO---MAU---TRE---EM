@@ -1646,7 +1646,8 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 
 /* Màn hình rộng: cột trái (tranh mẫu) lấy phần trống hai bên khung tô; tranh mẫu to lên, tiêu đề + nút xếp dọc bên cạnh. */
 @media (min-width: 1024px) {
-  .cw-template { max-width: 2400px; grid-template-columns: minmax(clamp(220px, 19vw, 320px), min(calc(100dvh - 255px), calc(0.44 * (100vw - 60px - clamp(340px, 26vw, 400px))))) minmax(0, 1fr) clamp(340px, 26vw, 400px); }
+  /* Khung tô luôn được đủ cỡ (vuông, cao bằng màn hình) TRƯỚC; cột trái chỉ lấy phần bề ngang còn dư, tối đa vừa tranh mẫu. */
+  .cw-template { max-width: 2400px; grid-template-columns: minmax(clamp(220px, 19vw, 320px), min(calc(100dvh - 255px), calc(100vw - 60px - clamp(340px, 26vw, 400px) - (100dvh - 97px)))) minmax(0, 1fr) clamp(340px, 26vw, 400px); }
   .cw-template .cw-left { container-type: inline-size; }
   .cw-template .cw-left-in { display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 0; }
   /* Cột trái đủ rộng: một cột thẳng hàng — tiêu đề (nằm ngang) · tranh mẫu to chiếm chỗ còn lại · hai nút cạnh nhau. */
