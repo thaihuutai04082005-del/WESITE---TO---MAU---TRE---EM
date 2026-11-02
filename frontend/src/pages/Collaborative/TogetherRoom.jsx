@@ -193,7 +193,7 @@ export default function TogetherRoom() {
         header={
           <div className="mb-3 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="flex-1 font-display text-2xl font-extrabold">{t('together.room')}</h1>
+              <h1 className="flex-1 whitespace-nowrap font-display text-2xl font-extrabold">{t('together.room')}</h1>
               <span className="rounded-2xl bg-primary-light px-3 py-1 font-mono text-2xl font-extrabold tracking-widest text-primary-dark" data-testid="together-room-code">{room.code}</span>
               <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => navigator.clipboard?.writeText(room.code).then(() => toast(t('common.copied'), 'success'))} aria-label={t('common.copy')}>
                 <Icon name="copy" />
