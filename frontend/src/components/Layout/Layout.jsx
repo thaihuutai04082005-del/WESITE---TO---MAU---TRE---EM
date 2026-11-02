@@ -10,6 +10,7 @@ import { formatDateTime } from '../../lib/format';
 import Icon from '../Icon';
 import Toasts from './Toasts';
 import EventPopup from './EventPopup';
+import CollabInvitePopup from './CollabInvitePopup';
 import UpgradeModal from './UpgradeModal';
 import NotificationBell from './NotificationBell';
 import LanguageSwitch from './LanguageSwitch';
@@ -194,6 +195,7 @@ export default function Layout() {
 
       <Toasts />
       <EventPopup />
+      <CollabInvitePopup />
       <UpgradeModal />
     </div>
   );

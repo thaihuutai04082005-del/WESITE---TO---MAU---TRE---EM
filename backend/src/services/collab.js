@@ -6,11 +6,18 @@ import * as User from '../models/user.js';
 import { sanitizeArtworkData } from './scoringEngine.js';
 import * as progression from './progression.js';
 import { canUsePicture } from '../controllers/picture.controller.js';
+import { areFriends } from '../controllers/social.controller.js';
 import { randomCode } from '../utils/ids.js';
 
 const rooms = new Map();
 const userRoom = new Map();
 const MAX_OPS = 5000;
+const EMPTY_ROOM_GRACE_MS = 60000; // phòng vắng người được giữ 60 giây
+// Mời bạn bè vào phòng: mỗi lượt mời cách nhau ≥ 3 giây; bạn bấm "Từ chối + chặn" thì người mời không mời được bạn trong 5 phút.
+const INVITE_GAP_MS = 3000;
+const INVITE_BLOCK_MS = 5 * 60 * 1000;
+const lastInvite = new Map(); // "người mời:người được mời" → thời điểm mời gần nhất
+const inviteBlocks = new Map(); // "người mời:người được mời" → hết chặn lúc
 
 function stateOf(room) {
   // Dựng lại trạng thái tranh từ nhật ký thao tác (phục vụ Undo theo từng bé).
@@ -67,6 +74,7 @@ export function registerCollab(io, socket) {
       p = { profile: socket.data.user, sockets: new Set(), color: CURSOR_COLORS.find((c) => !used.has(c)) || '#7D5FFF' };
       room.players.set(uid, p);
     }
+    clearTimeout(room.expire); // có người vào lại thì huỷ lịch xoá phòng
     p.sockets.add(socket.id);
     userRoom.set(uid, room.code);
     socket.join(channel(room));
@@ -82,7 +90,13 @@ export function registerCollab(io, socket) {
     room.players.delete(uid);
     userRoom.delete(uid);
     if (!room.players.size) {
-      rooms.delete(room.code);
+      // Phòng vắng người: giữ thêm một lúc rồi mới xoá, để bé vừa tạo phòng xong (chuyển trang → rời → vào lại) hoặc mất mạng
+      // thoáng chốc vẫn vào lại được đúng mã phòng, thay vì báo "không tìm thấy phòng".
+      clearTimeout(room.expire);
+      room.expire = setTimeout(() => {
+        if (!room.players.size) rooms.delete(room.code);
+      }, EMPTY_ROOM_GRACE_MS);
+      room.expire.unref?.();
       return;
     }
     if (room.hostId === uid) room.hostId = room.players.keys().next().value;
@@ -185,6 +199,36 @@ export function registerCollab(io, socket) {
       const events = progression.record(memberId, 'collab_join');
       io.to(`user:${memberId}`).emit('collab:saved', { by: socket.data.user, events });
     }
+    reply(cb, { ok: true });
+  });
+
+  // Mời một người bạn (đã kết bạn) vào phòng đang ở. Người được mời nhận popup "Tèo mời bạn vào phòng tô tranh cùng".
+  socket.on('collab:invite', async (p, cb) => {
+    const room = current();
+    const to = Number(p?.toUserId);
+    if (!room) return reply(cb, { error: 'room_not_found' });
+    if (!Number.isInteger(to) || to === uid) return reply(cb, { error: 'invalid_friend' });
+    if (!areFriends(uid, to)) return reply(cb, { error: 'not_friends' });
+    if (room.players.has(to)) return reply(cb, { error: 'already_in_room' });
+    if (room.players.size >= COLLAB_MAX_PLAYERS) return reply(cb, { error: 'room_full' });
+    const key = `${uid}:${to}`;
+    const now = Date.now();
+    if ((inviteBlocks.get(key) || 0) > now) return reply(cb, { error: 'invite_blocked' });
+    if (now - (lastInvite.get(key) || 0) < INVITE_GAP_MS) return reply(cb, { error: 'invite_too_fast' });
+    const online = await io.in(`user:${to}`).fetchSockets();
+    if (!online.length) return reply(cb, { error: 'friend_offline' });
+    lastInvite.set(key, now);
+    io.to(`user:${to}`).emit('collab:invite', { code: room.code, from: socket.data.user, pictureId: room.picture.id, at: now });
+    reply(cb, { ok: true });
+  });
+
+  // Người được mời từ chối; tick "chặn" thì người mời không mời lại được trong 5 phút.
+  socket.on('collab:invite-decline', (p, cb) => {
+    const from = Number(p?.fromUserId);
+    if (!Number.isInteger(from) || !areFriends(uid, from)) return reply(cb, { ok: true });
+    const block = !!p?.block;
+    if (block) inviteBlocks.set(`${from}:${uid}`, Date.now() + INVITE_BLOCK_MS);
+    io.to(`user:${from}`).emit('collab:invite-declined', { by: socket.data.user, blocked: block });
     reply(cb, { ok: true });
   });
 

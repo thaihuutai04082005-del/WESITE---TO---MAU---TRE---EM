@@ -200,6 +200,7 @@
     "edit": "Đổi chữ ký"
   },
   "collection": {
+    "collabBadge": "Tranh tô cùng nhau",
     "roomTitle": "Bộ sưu tập của tôi",
     "schedule": "Lịch triển lãm",
     "title": "Bộ sưu tập",
@@ -809,6 +810,16 @@
     }
   },
   "together": {
+    "inviteTitle": "{{name}} mời bé vào phòng tô tranh cùng",
+    "inviteBlock": "Không nhận lời mời của bạn này trong 5 phút",
+    "inviteDecline": "Từ chối",
+    "inviteAccept": "Chấp nhận",
+    "friendsTitle": "Mời bạn bè",
+    "friendsEmpty": "Bé chưa có bạn bè để mời. Kết bạn ở trang Bạn bè nhé!",
+    "invite": "Mời",
+    "inviteSent": "Đã mời {{name}}!",
+    "inRoom": "Đã vào phòng",
+    "inviteDeclined": "{{name}} chưa thể tô cùng lúc này.",
     "title": "Tô cùng nhau",
     "subtitle": "2–4 bạn cùng tô một bức tranh, thấy màu của nhau ngay lập tức.",
     "create": "Tạo phòng mới",
@@ -895,6 +906,10 @@
     "plan_expiring": "Gói của bé sẽ hết hạn vào {{date}}. Gia hạn để tiếp tục tô thoải mái nhé!"
   },
   "errors": {
+    "invite_blocked": "Bạn ấy đang bận, mời lại sau nhé.",
+    "friend_offline": "Bạn ấy đang không trực tuyến.",
+    "invite_too_fast": "Chờ một chút rồi mời tiếp nhé.",
+    "invalid_friend": "Không mời được bạn này.",
     "network_error": "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại nhé.",
     "server_error": "Có lỗi xảy ra, thử lại sau nhé.",
     "unauthorized": "Bé cần đăng nhập lại.",
@@ -1028,12 +1043,12 @@
       "intro": "2–4 bạn cùng tô chung một bức tranh.",
       "steps": [
         "Bấm \"Tạo phòng mới\" và chọn tranh muốn tô cùng.",
-        "Gửi mã phòng cho bạn bè (phòng tối đa 4 bạn).",
-        "Bạn bè nhập mã ở ô \"Vào phòng\" rồi bấm \"Vào tô\".",
-        "Cùng nhau tô, màu hiện lên ngay cho cả nhóm.",
+        "Mời bạn bè trong danh sách, hoặc gửi mã phòng cho bất kỳ ai.",
+        "Bạn được mời bấm \"Chấp nhận\"; người có mã thì nhập ở ô \"Vào phòng\".",
+        "Cùng nhau tô, màu hiện lên ngay cho cả nhóm (tối đa 4 bạn).",
         "Tô xong bấm \"Lưu tranh chung\", tranh vào Lịch sử của mọi bạn."
       ],
-      "tip": "Chỉ ai có mã phòng mới vào được."
+      "tip": "Nhập đúng mã là vào được, kể cả chưa kết bạn, miễn phòng chưa đầy."
     },
     "gacha": {
       "intro": "Dùng Điểm Gacha để bóc thẻ tranh hiếm và sưu tầm.",

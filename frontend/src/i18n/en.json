@@ -200,6 +200,7 @@
     "edit": "Change signature"
   },
   "collection": {
+    "collabBadge": "Colored together",
     "roomTitle": "My collection",
     "schedule": "Exhibition schedule",
     "title": "Collection",
@@ -809,6 +810,16 @@
     }
   },
   "together": {
+    "inviteTitle": "{{name}} invites you to color together",
+    "inviteBlock": "Don't accept invites from this friend for 5 minutes",
+    "inviteDecline": "Decline",
+    "inviteAccept": "Accept",
+    "friendsTitle": "Invite friends",
+    "friendsEmpty": "No friends to invite yet. Add friends on the Friends page!",
+    "invite": "Invite",
+    "inviteSent": "Invited {{name}}!",
+    "inRoom": "In the room",
+    "inviteDeclined": "{{name}} can't color together right now.",
     "title": "Color together",
     "subtitle": "2–4 kids color one picture and see each other's colors instantly.",
     "create": "New room",
@@ -895,6 +906,10 @@
     "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring!"
   },
   "errors": {
+    "invite_blocked": "Your friend is busy — try again later.",
+    "friend_offline": "Your friend is offline.",
+    "invite_too_fast": "Wait a moment before inviting again.",
+    "invalid_friend": "Can't invite this friend.",
     "network_error": "Can't reach the server. Check your connection and try again.",
     "server_error": "Something went wrong, please try again.",
     "unauthorized": "Please log in again.",
@@ -1028,12 +1043,12 @@
       "intro": "2–4 friends color one picture together.",
       "steps": [
         "Press \"New room\" and pick the picture to color together.",
-        "Send the room code to friends (up to 4 kids in a room).",
-        "Friends type the code in \"Join a room\" and press \"Join\".",
-        "Color together — everyone sees the colors right away.",
+        "Invite friends from the list, or send the room code to anyone.",
+        "Invited friends press \"Accept\"; others type the code in \"Join a room\".",
+        "Color together (up to 4 kids) — everyone sees the colors right away.",
         "Press \"Save picture\" and it goes to everyone's History."
       ],
-      "tip": "Only people with the room code can join."
+      "tip": "The right code gets anyone in, even non-friends, if the room isn't full."
     },
     "gacha": {
       "intro": "Use Gacha points to open rare picture cards and collect them.",

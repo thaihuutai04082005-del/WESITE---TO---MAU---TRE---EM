@@ -172,10 +172,10 @@ export default function History() {
                   <span className={`hs-badge ${a.status === 'completed' ? 'hs-badge-done' : ''}`}>
                     <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}
                   </span>
+                  <span className="hs-more" aria-hidden="true">•••</span>
                 </div>
                 <div className="hs-foot">
                   <div className="hs-name">{a.name[i18n.language]}</div>
-                  <span className="hs-more" aria-hidden="true">•••</span>
                 </div>
               </button>
             ))}

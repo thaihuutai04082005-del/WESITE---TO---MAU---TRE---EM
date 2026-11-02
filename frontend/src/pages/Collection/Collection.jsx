@@ -22,6 +22,27 @@ function FrameOverlay({ slug, className = '' }) {
 }
 
 /** Tranh đã hoàn thành kèm khung đang chọn (mặc định: khung gỗ). `inset` = lề cửa sổ tranh trong khung (50/700). */
+/** Huy hiệu "tô cùng nhau": vòng tròn có 4 bạn nhỏ, gắn ở góc phải trên của tranh do cả phòng cùng tô. */
+function CollabBadge({ className = '' }) {
+  const { t } = useTranslation();
+  const person = (x, y, c) => (
+    <g key={`${x}${y}`} fill={c}>
+      <circle cx={x} cy={y - 4.2} r="3.1" />
+      <path d={`M${x - 5} ${y + 5.6} a5 5 0 0 1 10 0z`} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 40 40" className={className} role="img" aria-label={t('collection.collabBadge')} data-testid="collab-badge">
+      <title>{t('collection.collabBadge')}</title>
+      <circle cx="20" cy="20" r="18.5" fill="#fff" stroke="#2E9BEA" strokeWidth="2.4" />
+      {person(13.5, 14, '#FF8A3D')}
+      {person(26.5, 14, '#2E9BEA')}
+      {person(13.5, 27, '#34B368')}
+      {person(26.5, 27, '#B070E8')}
+    </svg>
+  );
+}
+
 function FramedPicture({ src, frame, dim = false, className = '' }) {
   return (
     <div className={`framed relative aspect-square w-full ${dim ? 'opacity-40' : ''} ${className}`}>
@@ -224,7 +245,10 @@ function ArtworksTab({ cards = false }) {
           const entry = ex.entries[a.id];
           return (
             <div key={a.id} className="card flex flex-col gap-2 p-2.5" data-testid={`art-${a.id}`}>
-              <FramedPicture src={a.thumbnail} frame={a.frame} dim={isHeld(entry, s)} />
+              <div className="relative">
+                <FramedPicture src={a.thumbnail} frame={a.frame} dim={isHeld(entry, s)} />
+                {a.mode === 'collab' && <CollabBadge className="absolute -right-1.5 -top-1.5 h-9 w-9 drop-shadow" />}
+              </div>
               <div className="truncate text-sm font-bold">{a.name[i18n.language]}</div>
               <ArtworkControls a={a} entry={entry} s={s} full={full} onSend={send} onWithdraw={withdraw} onShare={setShareFor} />
             </div>
@@ -290,8 +314,8 @@ function RoomShell({ tab, onTab, slots, pills }) {
   const cur = Math.min(page, pages - 1);
   const shown = slots.slice(cur * per, cur * per + per);
   const tabs = [
-    ['cards', <img key="cb" src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />, t('collection.cards')],
     ['artworks', '🖼️', t('collection.artworks')],
+    ['cards', <img key="cb" src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />, t('collection.cards')],
   ];
   return (
     <div className="room" data-testid="collection-room">
@@ -376,7 +400,7 @@ function RoomArtworks({ onTab, cards = false }) {
       label: a.name[i18n.language],
       testId: `art-${a.id}`,
       onClick: () => setOpen(a),
-      badge: ready ? entryEmoji(e, s) : null,
+      badge: a.mode === 'collab' ? <CollabBadge className="h-full w-full" /> : ready ? entryEmoji(e, s) : null,
       dim: ready && isHeld(e, s),
       frame: a.frame, // tranh treo tường dùng đúng khung bé đã chọn (mặc định: khung gỗ)
       content: a.thumbnail ? <img src={a.thumbnail} alt="" draggable={false} /> : <span className="room-slot-blank" />,
@@ -392,7 +416,10 @@ function RoomArtworks({ onTab, cards = false }) {
       {open && ready && (
         <Modal closeButton={false} open onClose={() => setOpen(null)}>
           <div className="flex flex-col gap-3" data-testid="room-art-dialog">
-            <FramedPicture src={open.thumbnail} frame={open.frame} dim={isHeld(entry, s)} />
+            <div className="relative">
+              <FramedPicture src={open.thumbnail} frame={open.frame} dim={isHeld(entry, s)} />
+              {open.mode === 'collab' && <CollabBadge className="absolute -right-1.5 -top-1.5 h-10 w-10 drop-shadow" />}
+            </div>
             <div className="font-display text-xl font-extrabold">{open.name[i18n.language]}</div>
             <ArtworkControls
               a={open}
@@ -425,17 +452,17 @@ export default function Collection() {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const wide = useWide();
-  const tab = params.get('tab') === 'artworks' ? 'artworks' : 'cards';
+  const tab = params.get('tab') === 'cards' ? 'cards' : 'artworks';
   if (wide) return <RoomArtworks key={tab} cards={tab === 'cards'} onTab={(k) => setParams({ tab: k })} />;
   return (
     <div className="page space-y-5">
       <h1 className="page-title">{t('collection.title')}</h1>
       <div className="flex gap-2 rounded-2xl bg-primary-light p-1">
         {[
-          ['cards', <><img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} /> {t('collection.cards')}</>],
           ['artworks', `🖼️ ${t('collection.artworks')}`],
+          ['cards', <><img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} /> {t('collection.cards')}</>],
         ].map(([k, label]) => (
-          <button key={k} type="button" onClick={() => setParams({ tab: k })} className={`flex-1 rounded-xl px-3 py-2 font-display text-lg font-bold transition ${tab === k ? 'bg-white text-primary-dark shadow-soft' : 'text-primary-dark/70'}`} data-testid={`col-tab-${k}`}>
+          <button key={k} type="button" onClick={() => setParams({ tab: k })} className={`flex-1 whitespace-nowrap rounded-xl px-2 py-2 font-display text-[15px] font-bold transition sm:px-3 sm:text-lg ${tab === k ? 'bg-white text-primary-dark shadow-soft' : 'text-primary-dark/70'}`} data-testid={`col-tab-${k}`}>
             {label}
           </button>
         ))}
