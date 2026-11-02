@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
+import { pageReady } from '../../lib/transitionBus';
 import { usePicture } from '../../hooks/usePicture';
 import ModePicker from '../../components/ModePicker';
 import Icon from '../../components/Icon';
@@ -75,8 +76,11 @@ export default function ThemeSelector() {
   const [themes, setThemes] = useState(null);
   const [age, setAge] = useState(() => (AGE_GROUPS.includes(params.get('age')) ? params.get('age') : loadAge()));
   useEffect(() => {
-    api.get('/themes').then((r) => setThemes(r.themes));
+    api.get('/themes').then((r) => setThemes(r.themes)).catch(() => setThemes([]));
   }, []);
+  useEffect(() => {
+    if (themes) requestAnimationFrame(pageReady); // báo cho hiệu ứng chuyển màn hình: trang đã sẵn sàng
+  }, [themes]);
   const pickAge = (a) => {
     setAge(a);
     try {
