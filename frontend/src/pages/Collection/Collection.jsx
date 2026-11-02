@@ -1,4 +1,4 @@
-// Bộ sưu tập: 2 tab — Thẻ hiếm (thẻ đã bóc) và Tranh đã hoàn thành (gửi triển lãm, xem thành tích).
+// Bộ sưu tập: 2 tab — Tranh thẻ hiếm (thẻ đã bóc) và Tranh theo chủ đề (gửi triển lãm, xem thành tích).
 import { Fragment, useEffect, useState } from 'react';
 import PictureView from '../../components/PictureView/PictureView';
 import { usePicture } from '../../hooks/usePicture';
