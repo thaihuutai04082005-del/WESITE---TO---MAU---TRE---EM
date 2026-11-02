@@ -291,6 +291,29 @@ body_a[under_head] = 0
 low = np.zeros((H, W), bool)
 low[628:, :] = True
 body_a[low & lightish0] = 0
+# Mẩu xám vụn của ảnh gốc ở mép yếm trái (cạnh cẳng tay): bên trong thân → trắng, bên ngoài → trong suốt
+spur = np.zeros((H, W), bool)
+spur[452:486, 158:182] = True
+spur &= lightish0 & ~((B > 170) & (R < 160))
+body_rgb[spur & (inside > 0.5)] = 255
+body_a[spur & (inside <= 0.5)] = 0
+# Chỗ mép yếm trái chạm sườn: ảnh gốc lem xám → tô lại (trên: áo trắng, dưới: quần xanh) và nối nét yếm liền tới sườn
+zone = np.zeros((H, W), bool)
+zone[456:492, 158:184] = True
+brown_line = (R > G + 25) & (lum < 110)
+navy_px = (B > R + 25) & (lum < 110)
+blue_px = (B > 170) & (R < 160) & (lum > 110)
+P0, P1 = (182.0, 457.0), (165.0, 477.0)
+above = ((P1[0] - P0[0]) * (ys_ - P0[1]) - (P1[1] - P0[1]) * (xs_ - P0[0])) > 0
+fixz = zone & (inside > 0.5) & ~brown_line & ~((navy_px | blue_px) & ~above)
+body_rgb[fixz & above] = 255
+below = zone & (inside > 0.5) & ~above
+body_rgb[below] = [53, 160, 231]
+body_a[fixz | below] = 255
+k = raster(line_pts=sides[0][0], width=6.5)[..., None] * zone[..., None]
+body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
+k = raster(line_pts=np.array([P0, P1]), width=5.0)[..., None] * zone[..., None]
+body_rgb = (body_rgb * (1 - k) + np.array([22, 58, 96], np.float32) * k).astype(np.uint8)
 # Bỏ các mẩu vụn rời (nét đầu/vai lẻ loi) khỏi lớp thân
 bl, bn = ndimage.label(body_a > 0)
 if bn > 1:
@@ -331,8 +354,50 @@ for p in ('legL', 'legR'):
     legs[p] = leg
 
 
+SCALE = 2  # xuất gấp đôi để nét viền mịn, sắc trên màn hình độ phân giải cao
+
+
+def smoothstep(e0, e1, x):
+    t = np.clip((x - e0) / (e1 - e0), 0, 1)
+    return t * t * (3 - 2 * t)
+
+
+def crisp(arr):
+    """Làm nét lớp ảnh: phóng 2 lần, làm phẳng mảng màu (hết lấm tấm do nén), nét viền và mép ảnh sắc gọn."""
+    a = arr[..., 3].astype(np.float32) / 255
+    rgb_ = arr[..., :3].astype(np.float32)
+    h, w = a.shape
+    size = (w * SCALE, h * SCALE)
+    # phóng to dạng nhân trước alpha để mép không bị viền tối
+    pa = cv2.resize(a, size, interpolation=cv2.INTER_CUBIC)
+    prgb = cv2.resize(rgb_ * a[..., None], size, interpolation=cv2.INTER_CUBIC)
+    pa = np.clip(pa, 0, 1)
+    up = np.clip(prgb / np.maximum(pa, 1e-3)[..., None], 0, 255)
+    # mảng màu: lọc giữ cạnh để phẳng màu, hết vệt nhoè
+    flat = cv2.bilateralFilter(up.astype(np.uint8), 9, 28, 6).astype(np.float32)
+    flat = cv2.bilateralFilter(flat.astype(np.uint8), 7, 22, 4).astype(np.float32)
+    # nét viền: độ đậm mực theo độ sáng, làm sắc lại bằng smoothstep hẹp
+    lum_ = (up[..., 0] * 0.299 + up[..., 1] * 0.587 + up[..., 2] * 0.114)
+    ink_raw = 1 - smoothstep(50, 92, lum_)  # nét viền ~35–45; bóng nâu của lông ≥ 92 không bị tính là nét
+    ink_raw = cv2.GaussianBlur(ink_raw, (0, 0), 0.9)
+    ink = smoothstep(0.38, 0.62, ink_raw)
+    # màu mực: trung bình màu các điểm rất đậm ở gần (giữ nâu đậm / xanh đậm của từng nét)
+    core = (lum_ < 60).astype(np.float32) * pa
+    num = cv2.GaussianBlur(up * core[..., None], (0, 0), 3)
+    den = cv2.GaussianBlur(core, (0, 0), 3)[..., None]
+    ink_col = np.where(den > 1e-3, num / np.maximum(den, 1e-3), np.array([69, 23, 10], np.float32))
+    out_rgb = flat * (1 - ink[..., None]) + ink_col * ink[..., None]
+    # mép ảnh: sắc lại, giữ khử răng cưa 1 điểm ảnh
+    sharp_a = smoothstep(0.3, 0.7, cv2.GaussianBlur(pa, (0, 0), 0.6))
+    out_a = np.where(pa > 0.98, 1.0, sharp_a)
+    out = np.zeros((h * SCALE, w * SCALE, 4), np.uint8)
+    out[..., :3] = np.clip(out_rgb, 0, 255).astype(np.uint8)
+    out[..., 3] = np.clip(out_a * 255, 0, 255).astype(np.uint8)
+    return out
+
+
 def save(arr, name):
-    a = arr.copy()
+    a = crisp(arr)
     a[a[..., 3] == 0, :3] = 0
     Image.fromarray(a, 'RGBA').save(os.path.join(OUT, name), 'WEBP', lossless=True, quality=100, method=6)
 
@@ -346,6 +411,7 @@ head_layer[head_mud, 3] = 0
 save(head_layer, 'bear-head.webp')
 save(layer(masks['armR']), 'bear-arm-r.webp')
 save(layer(masks['armL']), 'bear-arm-l.webp')
+save(np.array(Image.open(os.path.join(ROOT, 'assets-library/mascot/src/hello-eyes.webp')).convert('RGBA')), 'bear-eyes.webp')
 
 if DEBUG:
     dbg = np.zeros((H, W, 3), np.uint8) + 230

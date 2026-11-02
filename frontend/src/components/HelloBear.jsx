@@ -21,7 +21,7 @@ export default function HelloBear({ className = '' }) {
             <div className="hb-part hb-head">
               <div className="hb-part hb-bob">
                 <Layer src="/mascots/bear-head.webp" />
-                <div className="hb-part hb-blink"><Layer src="/mascots/hello-eyes.webp" /></div>
+                <div className="hb-part hb-blink"><Layer src="/mascots/bear-eyes.webp" /></div>
               </div>
             </div>
             <div className="hb-part hb-arm-r"><Layer src="/mascots/bear-arm-r.webp" /></div>
