@@ -24,7 +24,7 @@ function own(req) {
 const hasContent = (d) => Object.keys(d.fills).length > 0 || d.strokes.length > 0 || d.stickers.length > 0;
 
 export function list(req, res) {
-  const { status, mode, eligibility } = req.query;
+  const { status, mode, eligibility, progress } = req.query;
   const artworks = Artwork.listByUser(req.user.id, { status: status || undefined, mode: mode || undefined });
   // Tranh hoàn thành đã đủ điều kiện gửi triển lãm (máy tự kiểm các điều 1, 2, 3, 4, 8) → bé thấy chú thích "Đủ điều kiện triển lãm".
   // Chỉ tính khi có ?eligibility=1 (trang Bộ sưu tập) vì phải đọc dữ liệu từng tranh.
@@ -36,6 +36,23 @@ export function list(req, res) {
       a.exhibitEligible = !!row && Exhibition.checkArtwork(row).failures.length === 0;
     } catch {
       /* tranh lỗi dữ liệu: coi như chưa đủ điều kiện */
+    }
+  }
+  // Tranh đang dở: % vùng đã tô (?progress=1, trang Lịch sử). 0 = chưa tô gì.
+  if (progress) {
+    for (const a of artworks) {
+      if (a.status !== 'in_progress') continue;
+      a.progress = 0;
+      try {
+        const row = Artwork.findById(a.id);
+        const total = Picture.manifestOf(Picture.findPicture(a.pictureId)).regions.length;
+        const d = Artwork.dataOf(row);
+        const filled = Object.keys(d.fills).length;
+        if (total && filled) a.progress = Math.max(1, Math.min(99, Math.round((filled / total) * 100)));
+        else if (hasContent(d)) a.progress = 1;
+      } catch {
+        /* dữ liệu lỗi: coi như chưa tô */
+      }
     }
   }
   res.json({ artworks });

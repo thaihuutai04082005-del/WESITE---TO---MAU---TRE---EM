@@ -747,3 +747,18 @@ test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog đư
   assert.equal(now[4], 'suon-xam--tu-dang');
   assert.equal(now[8], 'vay-yem--hoa-cuc-trang');
 });
+
+test('Lịch sử: tranh đang dở trả về % đã tô (?progress=1)', async () => {
+  const { token } = await register('lichsu1');
+  const pic = (await api('GET', '/themes/anh-hung-sieu-thu/objects/su-tu/pictures')).body.pictures[0];
+  const a = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
+  const id = a.body.artwork.id;
+  const one = { [pic.regions[0].id]: '#FF5F7E' };
+  const sv = await api('PUT', `/artworks/${id}`, { data: { fills: one, strokes: [], stickers: [] } }, token);
+  assert.equal(sv.status, 200, JSON.stringify(sv.body));
+  const got = (await api('GET', '/artworks?progress=1&status=in_progress', null, token)).body.artworks.find((x) => x.id === id);
+  assert.ok(got.progress >= 1 && got.progress <= 99, `phần trăm đã tô: ${got.progress}`);
+  const empty = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
+  const e = (await api('GET', '/artworks?progress=1', null, token)).body.artworks.find((x) => x.id === empty.body.artwork.id);
+  assert.equal(e.progress, 0);
+});
