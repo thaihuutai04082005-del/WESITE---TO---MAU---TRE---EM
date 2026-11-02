@@ -7,11 +7,11 @@ export default function Avatar({ avatar = 'meo', frame = null, size = 56, vip = 
     <div className={`relative shrink-0 ${className}`} style={{ width: size, height: size }}>
       <img src={`/avatars/${avatar}.svg`} alt="" className="absolute rounded-full border-2 border-white bg-primary-light object-cover" style={{ inset: size * 0.117, width: size * 0.766, height: size * 0.766 }} draggable={false} />
       {vip && (
-        // Vương miện đội trên đầu, nghiêng nhẹ sang phải.
+        // Vương miện đội thẳng trên đầu.
         <svg
           viewBox="0 0 64 50"
           className="pointer-events-none absolute z-10 drop-shadow"
-          style={{ width: size * 0.5, left: '50%', top: -size * 0.27, transform: 'translateX(-38%) rotate(15deg)' }}
+          style={{ width: size * 0.5, left: '50%', top: -size * 0.27, transform: 'translateX(-50%)' }}
           data-testid="vip-crown"
           role="img"
           aria-label="VIP"
