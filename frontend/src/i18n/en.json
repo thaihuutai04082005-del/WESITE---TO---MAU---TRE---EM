@@ -184,6 +184,8 @@
     "save": "Save as my signature",
     "saved": "Signature saved!",
     "unlock": "Unlock this style",
+    "unlockHand": "Unlock hand-signing",
+    "handHint": "Hand-signing is for VIP.",
     "changeNote": "Pictures you already signed keep their old signature. The new one is used next time.",
     "dragHint": "Drag your signature anywhere you like, or tap a corner button below.",
     "size": "Size",
@@ -503,7 +505,7 @@
         },
         {
           "i": "✏️",
-          "t": "5 signature styles + hand-signing"
+          "t": "5 signature styles"
         },
         {
           "i": "🏆",
@@ -564,6 +566,10 @@
           "t": "Every theme unlocked"
         },
         {
+          "i": "🎮",
+          "t": "Arena, Card draw, Color together"
+        },
+        {
           "i": "🏛️",
           "t": "5 pictures per exhibition round"
         },
@@ -578,6 +584,10 @@
         {
           "i": "✨",
           "t": "5 extra WOW signature styles"
+        },
+        {
+          "i": "✏️",
+          "t": "Sign by hand"
         },
         {
           "i": "👑",

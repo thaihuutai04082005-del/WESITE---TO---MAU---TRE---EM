@@ -74,14 +74,15 @@ function cleanContentSafe(v) {
 export function effectiveSignature(user) {
   const stored = parseJson(user?.signature, null);
   if (!stored) return null;
+  if (stored.style === 'hand' && !hasPremium(user.id)) return null; // tự ký bằng tay: chỉ VIP
   if (isPremiumStyle(stored.style) && !hasPremium(user.id)) return { ...stored, style: FALLBACK_STYLE };
   return stored;
 }
 
-/** Lưu chữ ký mặc định mới. Mẫu wow cần gói tháng/năm. */
+/** Lưu chữ ký mặc định mới. Mẫu wow và tự ký bằng tay chỉ dành cho VIP. */
 export function prepareDefault(userId, input) {
   const content = cleanContent(input);
-  if (isPremiumStyle(content.style) && !hasPremium(userId)) throw forbidden('signature_premium_required');
+  if ((isPremiumStyle(content.style) || content.style === 'hand') && !hasPremium(userId)) throw forbidden('signature_premium_required');
   return content;
 }
 

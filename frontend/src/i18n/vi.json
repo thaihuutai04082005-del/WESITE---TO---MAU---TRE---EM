@@ -184,6 +184,8 @@
     "save": "Lưu làm chữ ký của bé",
     "saved": "Đã lưu chữ ký!",
     "unlock": "Mở khoá mẫu này",
+    "unlockHand": "Mở khoá tự ký bằng tay",
+    "handHint": "Tự ký bằng tay dành cho gói VIP.",
     "changeNote": "Tranh đã ký rồi vẫn giữ chữ ký cũ. Chữ ký mới dùng cho những lần ký sau.",
     "dragHint": "Kéo chữ ký tới chỗ bé thích, hoặc bấm nút góc bên dưới.",
     "size": "To/nhỏ",
@@ -503,7 +505,7 @@
         },
         {
           "i": "✏️",
-          "t": "5 mẫu chữ ký + tự ký"
+          "t": "5 mẫu chữ ký"
         },
         {
           "i": "🏆",
@@ -564,6 +566,10 @@
           "t": "Mở toàn bộ chủ đề"
         },
         {
+          "i": "🎮",
+          "t": "Đấu trường, Bốc thẻ, Tô cùng nhau"
+        },
+        {
           "i": "🏛️",
           "t": "5 tranh mỗi vòng triển lãm"
         },
@@ -578,6 +584,10 @@
         {
           "i": "✨",
           "t": "Thêm 5 mẫu chữ ký WOW"
+        },
+        {
+          "i": "✏️",
+          "t": "Tự ký bằng tay"
         },
         {
           "i": "👑",

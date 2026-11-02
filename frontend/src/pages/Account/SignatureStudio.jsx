@@ -128,7 +128,8 @@ export default function SignatureStudio() {
 
   const locked = (s) => state.styles.premium.includes(s) && !state.premium;
   const draft = tab === 'hand' ? (hand.length ? { style: 'hand', hand } : null) : name.trim() ? { style, name: name.trim() } : null;
-  const canSave = !!draft && !(tab === 'styles' && locked(style));
+  const handLocked = !state.premium;
+  const canSave = !!draft && !(tab === 'styles' && locked(style)) && !(tab === 'hand' && handLocked);
 
   async function save() {
     setSaving(true);
@@ -205,14 +206,23 @@ export default function SignatureStudio() {
         </div>
       ) : (
         <div className="card space-y-3 p-5">
-          <p className="text-muted">{t('signature.handIntro')}</p>
-          <HandPad strokes={hand} setStrokes={setHand} />
+          {!handLocked && <p className="text-muted">{t('signature.handIntro')}</p>}
+          {handLocked ? (
+            <p className="rounded-2xl bg-sun/20 p-3 text-sm font-bold" data-testid="sig-hand-locked">
+              {t('signature.handHint')}{' '}
+              <Link to="/plans" className="underline">
+                {t('profile.upgrade')}
+              </Link>
+            </p>
+          ) : (
+            <HandPad strokes={hand} setStrokes={setHand} />
+          )}
         </div>
       )}
 
-      {tab === 'styles' && locked(style) ? (
+      {(tab === 'styles' && locked(style)) || (tab === 'hand' && handLocked) ? (
         <Link to="/plans" className="btn-coral w-full">
-          <Icon name="lock" /> {t('signature.unlock')}
+          <Icon name="lock" /> {t(tab === 'hand' ? 'signature.unlockHand' : 'signature.unlock')}
         </Link>
       ) : (
         <button type="button" className="btn-primary w-full" disabled={!canSave || saving} onClick={save} data-testid="sig-save">

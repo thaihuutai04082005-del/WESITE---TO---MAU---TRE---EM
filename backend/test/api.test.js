@@ -417,16 +417,16 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   assert.equal((await api('PUT', '/users/me/signature', { name: 'đ.ị.t', style: 'classic' }, token)).body.error.code, 'signature_bad_word');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Na 0912345678', style: 'classic' }, token)).body.error.code, 'signature_private_info');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Na', style: 'gold' }, token)).body.error.code, 'signature_premium_required');
-  // Tự ký bằng tay: miễn phí.
+  // Tự ký bằng tay: chỉ VIP.
   const hand = [[[10, 10], [40, 30], [80, 12]], [[90, 40], [140, 20]]];
-  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.signature.style, 'hand');
+  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.error.code, 'signature_premium_required');
 
   const a = await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, token);
   const id = a.body.artwork.id;
   await api('POST', `/artworks/${id}/start`, null, token);
   // Ký lên tranh: vị trí bị kẹp trong tranh, cỡ tối đa 1/4 bề ngang.
   const put = (signature) => api('PUT', `/artworks/${id}`, { data: { fills: {}, strokes: [], stickers: [], signature } }, token);
-  assert.equal((await put({ style: 'hand', hand, x: 9999, y: -50, scale: 3, rot: 90, color: '#ff5f7e' })).status, 200);
+  assert.equal((await put({ style: 'classic', name: 'Nguyễn Bé Na', x: 9999, y: -50, scale: 3, rot: 90, color: '#ff5f7e' })).status, 200);
   let sig = (await api('GET', `/artworks/${id}`, null, token)).body.artwork.data.signature;
   assert.deepEqual([sig.scale, sig.rot, sig.color], [1, 20, '#FF5F7E']);
   assert.ok(sig.x <= 600 - 70 && sig.y >= 25);
@@ -436,6 +436,7 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   // Có gói → dùng mẫu wow → ký lên tranh; hết gói → chữ ký mặc định về mẫu Free, tranh đã ký giữ nguyên.
   const uid = getDb().prepare("SELECT id FROM users WHERE username = 'bena09'").get().id;
   getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(uid, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.signature.style, 'hand', 'VIP được tự ký bằng tay');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Bé Na', style: 'gold' }, token)).body.signature.style, 'gold');
   assert.equal((await put({ style: 'gold', name: 'Bé Na', x: 480, y: 560, scale: 0.8, rot: -5, color: '#1B2A38' })).status, 200);
   getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now() - 500).toISOString(), uid);
