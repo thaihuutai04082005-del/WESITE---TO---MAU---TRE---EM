@@ -1700,3 +1700,9 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sbv-cap-input::placeholder { color: rgba(90, 52, 18, 0.38); }
 .sbv-cap-input:focus { background: rgba(255, 244, 205, 0.6); }
 button.sbv-back { border: 0; cursor: pointer; font: inherit; font-weight: 800; }
+
+/* Nút "Mời" bạn bè trong phòng tô chung: mời xong mờ đi ~3 giây rồi sáng lại */
+.invite-btn { flex: none; min-width: 52px; padding: 5px 14px; border: 0; border-radius: 9999px; background: linear-gradient(#4AA8FA, #2F8FEA); box-shadow: 0 2px 0 #1F6FBE; font-family: var(--font-display); font-weight: 800; font-size: 13px; color: #fff; cursor: pointer; transition: opacity 0.4s, transform 0.15s; }
+.invite-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.invite-btn:disabled { cursor: default; }
+.invite-btn-wait { opacity: 0.35; }

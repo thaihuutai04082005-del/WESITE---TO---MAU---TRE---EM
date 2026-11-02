@@ -809,6 +809,16 @@
     }
   },
   "together": {
+    "inviteTitle": "{{name}} mời bé vào phòng tô tranh cùng",
+    "inviteBlock": "Không nhận lời mời của bạn này trong 5 phút",
+    "inviteDecline": "Từ chối",
+    "inviteAccept": "Chấp nhận",
+    "friendsTitle": "Mời bạn bè",
+    "friendsEmpty": "Bé chưa có bạn bè để mời. Kết bạn ở trang Bạn bè nhé!",
+    "invite": "Mời",
+    "inviteSent": "Đã mời {{name}}!",
+    "inRoom": "Đã vào phòng",
+    "inviteDeclined": "{{name}} chưa thể tô cùng lúc này.",
     "title": "Tô cùng nhau",
     "subtitle": "2–4 bạn cùng tô một bức tranh, thấy màu của nhau ngay lập tức.",
     "create": "Tạo phòng mới",
@@ -895,6 +905,10 @@
     "plan_expiring": "Gói của bé sẽ hết hạn vào {{date}}. Gia hạn để tiếp tục tô thoải mái nhé!"
   },
   "errors": {
+    "invite_blocked": "Bạn ấy đang bận, mời lại sau nhé.",
+    "friend_offline": "Bạn ấy đang không trực tuyến.",
+    "invite_too_fast": "Chờ một chút rồi mời tiếp nhé.",
+    "invalid_friend": "Không mời được bạn này.",
     "network_error": "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại nhé.",
     "server_error": "Có lỗi xảy ra, thử lại sau nhé.",
     "unauthorized": "Bé cần đăng nhập lại.",

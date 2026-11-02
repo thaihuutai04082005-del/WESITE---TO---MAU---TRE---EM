@@ -372,6 +372,30 @@ test('Tô cùng nhau: tạo phòng xong rời rồi vào lại ngay vẫn còn p
   s.close();
 });
 
+test('Tô cùng nhau: mời bạn bè vào phòng (chỉ bạn đã kết bạn), từ chối + chặn 5 phút', async () => {
+  const [a, b, c] = await Promise.all(['moia', 'moib', 'moic'].map((u) => register(u)));
+  const code = (await api('GET', '/social/friends', null, b.token)).body.myCode;
+  await api('POST', '/social/friends', { code }, a.token);
+  const inc = await api('GET', '/social/friends', null, b.token);
+  await api('POST', `/social/friends/${inc.body.incoming[0].friendshipId}/accept`, null, b.token);
+  const [sa, sb, sc] = await Promise.all([a, b, c].map((u) => connect(u.token)));
+  assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).error, 'room_not_found', 'chưa có phòng thì chưa mời được');
+  const room = (await emit(sa, 'collab:create', { pictureId: 1 })).room;
+  assert.equal((await emit(sa, 'collab:invite', { toUserId: c.id })).error, 'not_friends', 'chỉ mời được bạn đã kết bạn');
+  const got = once(sb, 'collab:invite');
+  assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).ok, true);
+  const inv = await got;
+  assert.equal(inv.code, room.code);
+  assert.equal(inv.from.id, a.id);
+  assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).error, 'invite_too_fast', 'mời dồn dập bị chặn');
+  const declined = once(sa, 'collab:invite-declined');
+  await emit(sb, 'collab:invite-decline', { fromUserId: a.id, block: true });
+  assert.equal((await declined).blocked, true);
+  await new Promise((r) => setTimeout(r, 3100));
+  assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).error, 'invite_blocked', 'bị chặn 5 phút');
+  [sa, sb, sc].forEach((s) => s.close());
+});
+
 test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, hết gói vẫn giữ chữ ký cũ', async () => {
   const { token } = await register('bena09');
   const s0 = await api('GET', '/users/me/signature', null, token);

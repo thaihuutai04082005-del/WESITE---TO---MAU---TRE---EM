@@ -809,6 +809,16 @@
     }
   },
   "together": {
+    "inviteTitle": "{{name}} invites you to color together",
+    "inviteBlock": "Don't accept invites from this friend for 5 minutes",
+    "inviteDecline": "Decline",
+    "inviteAccept": "Accept",
+    "friendsTitle": "Invite friends",
+    "friendsEmpty": "No friends to invite yet. Add friends on the Friends page!",
+    "invite": "Invite",
+    "inviteSent": "Invited {{name}}!",
+    "inRoom": "In the room",
+    "inviteDeclined": "{{name}} can't color together right now.",
     "title": "Color together",
     "subtitle": "2–4 kids color one picture and see each other's colors instantly.",
     "create": "New room",
@@ -895,6 +905,10 @@
     "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring!"
   },
   "errors": {
+    "invite_blocked": "Your friend is busy — try again later.",
+    "friend_offline": "Your friend is offline.",
+    "invite_too_fast": "Wait a moment before inviting again.",
+    "invalid_friend": "Can't invite this friend.",
     "network_error": "Can't reach the server. Check your connection and try again.",
     "server_error": "Something went wrong, please try again.",
     "unauthorized": "Please log in again.",

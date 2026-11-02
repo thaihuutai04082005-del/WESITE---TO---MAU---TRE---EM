@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { api } from '../../services/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getSocket, emitAck } from '../../services/socket';
@@ -30,6 +31,49 @@ function opToAction(op, data) {
     default:
       return null;
   }
+}
+
+/** Danh sách bạn bè (đã kết bạn) để mời vào phòng. Mời xong nút mờ đi ~3 giây rồi sáng lại; bạn đã vào phòng thì hiện "Đã vào phòng". */
+function FriendInvite({ socket, room }) {
+  const { t } = useTranslation();
+  const toast = useUi((s) => s.toast);
+  const [friends, setFriends] = useState(null);
+  const [cool, setCool] = useState({}); // id → đang chờ mời lại
+  useEffect(() => {
+    api.get('/social/friends').then((r) => setFriends(r.friends.map((f) => f.user))).catch(() => setFriends([]));
+  }, []);
+  const invite = async (f) => {
+    setCool((c) => ({ ...c, [f.id]: true }));
+    setTimeout(() => setCool((c) => ({ ...c, [f.id]: false })), 3000);
+    const r = await emitAck(socket, 'collab:invite', { toUserId: f.id }).catch(() => ({ error: 'network_error' }));
+    if (r.error) toast(t(`errors.${r.error}`, { defaultValue: t('errors.server_error') }), 'error');
+    else toast(t('together.inviteSent', { name: f.nickname }), 'success');
+  };
+  const inRoom = new Set(room.players.map((p) => p.id));
+  return (
+    <div className="rounded-2xl border-2 border-line bg-white/70 p-2" data-testid="friend-invite">
+      <div className="mb-1 px-1 text-sm font-extrabold text-primary-dark">{t('together.friendsTitle')}</div>
+      {friends && friends.length === 0 && <p className="px-1 py-2 text-xs font-bold text-muted">{t('together.friendsEmpty')}</p>}
+      <ul className="max-h-44 space-y-1.5 overflow-y-auto pr-1 lg:max-h-[30vh]" data-testid="friend-list">
+        {(friends || []).map((f) => {
+          const here = inRoom.has(f.id);
+          return (
+            <li key={f.id} className="flex items-center gap-2 rounded-xl bg-white px-1.5 py-1 shadow-soft">
+              <Avatar avatar={f.avatar} frame={f.avatarFrame} size={34} />
+              <span className="min-w-0 flex-1 truncate text-sm font-bold">{f.nickname}</span>
+              {here ? (
+                <span className="shrink-0 text-xs font-bold text-[#1E7A44]">{t('together.inRoom')}</span>
+              ) : (
+                <button type="button" className={`invite-btn${cool[f.id] ? ' invite-btn-wait' : ''}`} disabled={!!cool[f.id] || room.players.length >= room.maxPlayers} onClick={() => invite(f)} data-testid={`invite-${f.id}`}>
+                  {t('together.invite')}
+                </button>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
 export default function TogetherRoom() {
@@ -74,6 +118,8 @@ export default function TogetherRoom() {
       toast(t('together.saved', { name: e.by.nickname }), 'success');
       pushEvents(e.events);
     };
+    const onDeclined = (e) => toast(t('together.inviteDeclined', { name: e.by.nickname }), 'info');
+    socket.on('collab:invite-declined', onDeclined);
     socket.on('collab:room', onRoom);
     socket.on('collab:op', onOp);
     socket.on('collab:state', onState);
@@ -81,6 +127,7 @@ export default function TogetherRoom() {
     socket.on('collab:saved', onSaved);
     return () => {
       alive = false;
+      socket.off('collab:invite-declined', onDeclined);
       socket.off('collab:room', onRoom);
       socket.off('collab:op', onOp);
       socket.off('collab:state', onState);
@@ -160,6 +207,7 @@ export default function TogetherRoom() {
               ))}
               <span className="text-sm text-muted">{t('together.count', { n: room.players.length, max: room.maxPlayers })}</span>
             </div>
+            <FriendInvite socket={socket} room={room} />
           </div>
         }
         actions={
