@@ -1667,3 +1667,9 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
     .cw-template .cw-actions > * { flex: 1 1 0; }
   }
 }
+
+/* Tô sáng tạo (không có tranh mẫu): bảng bên trái gọn lại theo nội dung, không kéo dài hết chiều cao. */
+@media (min-width: 1024px) {
+  .cw-free .cw-left { align-self: start; height: auto; }
+  .cw-free .cw-actions { margin-top: 6px; }
+}
