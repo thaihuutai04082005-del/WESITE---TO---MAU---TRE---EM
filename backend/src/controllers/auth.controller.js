@@ -26,7 +26,7 @@ export function captcha(_req, res) {
 }
 
 export async function registerStart(req, res) {
-  const { username, password, captchaId, captchaText, contactType, contact } = req.body || {};
+  const { username, password, captchaId, captchaText, contactType, contact, language } = req.body || {};
   if (!verifyCaptcha(captchaId, captchaText)) throw badRequest('captcha_wrong');
   const uname = str(username, { min: 4, max: 20, name: 'username' });
   if (!USERNAME_RE.test(uname)) throw badRequest('invalid_username');
@@ -34,7 +34,7 @@ export async function registerStart(req, res) {
   if (User.findByUsername(uname)) throw conflict('username_taken');
   const target = normalizeContact(contactType, contact);
   const passwordHash = await bcrypt.hash(pw, 10);
-  const otp = await issueOtp({ purpose: 'register', type: contactType, target, payload: { username: uname, passwordHash, contactType } });
+  const otp = await issueOtp({ purpose: 'register', type: contactType, target, payload: { username: uname, passwordHash, contactType, language: language === 'vi' ? 'vi' : 'en' } });
   res.json({ registrationId: otp.otpId, sentTo: User.maskContact(target), ...(otp.devCode ? { devCode: otp.devCode } : {}) });
 }
 
@@ -47,6 +47,7 @@ export function registerVerify(req, res) {
     password_hash: payload.passwordHash,
     guardian_contact: target,
     guardian_type: payload.contactType,
+    language: payload.language === 'vi' ? 'vi' : 'en',
     avatar_frame: 'avatar-dong',
   });
   grantStarterFrame(user.id);
