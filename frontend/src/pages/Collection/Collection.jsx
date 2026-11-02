@@ -1,5 +1,5 @@
 // Bộ sưu tập: 2 tab — Thẻ hiếm (thẻ đã bóc) và Tranh đã hoàn thành (gửi triển lãm, xem thành tích).
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import PictureView from '../../components/PictureView/PictureView';
 import { usePicture } from '../../hooks/usePicture';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
@@ -16,15 +16,6 @@ import Modal from '../../components/Modal/Modal';
 import Icon from '../../components/Icon';
 import { artworkFrameSvg } from '../../lib/frames';
 
-const RULES_OK_KEY = 'btm.exhibitRulesOk';
-const readRulesOk = () => {
-  try {
-    return localStorage.getItem(RULES_OK_KEY) === '1';
-  } catch {
-    return false;
-  }
-};
-
 const DEFAULT_FRAME = 'khung-go';
 /** Khung Artwork (SVG 700×700, cửa sổ tranh 600×600 ở giữa) phủ lên một ô vuông. */
 function FrameOverlay({ slug, className = '' }) {
@@ -34,29 +25,17 @@ function FrameOverlay({ slug, className = '' }) {
 }
 
 /** Tranh đã hoàn thành kèm khung đang chọn (mặc định: khung gỗ). `inset` = lề cửa sổ tranh trong khung (50/700). */
-function FramedPicture({ src, frame, className = '' }) {
+function FramedPicture({ src, frame, dim = false, className = '' }) {
   return (
-    <div className={`framed relative aspect-square w-full ${className}`}>
+    <div className={`framed relative aspect-square w-full ${dim ? 'opacity-40' : ''} ${className}`}>
       <span className="framed-in">{src ? <img src={src} alt="" draggable={false} /> : <span className="room-slot-blank" />}</span>
       <FrameOverlay slug={frame} />
     </div>
   );
 }
 
-/** Tranh này thuộc loại được đi triển lãm không (điều 3): mọi tranh tô ở chế độ Sáng tạo. */
-const exhibitType = (a) => a.mode === 'free';
-
-/** Chú thích cho bé biết tranh đã đủ điều kiện gửi triển lãm (chưa gửi). */
-function EligibleBadge({ a, entry }) {
-  const { t } = useTranslation();
-  const active = entry && ['pending', 'approved', 'removed'].includes(entry.status);
-  if (!a.exhibitEligible || active) return null;
-  return (
-    <span className="inline-block rounded-full bg-mint/25 px-2 py-0.5 text-xs font-extrabold text-[#1E7A44]" data-testid={`eligible-${a.id}`}>
-      ✨ {t('exhibition.eligible')}
-    </span>
-  );
-}
+/** Tranh đang ở triển lãm (chờ duyệt, sắp lên hoặc đang trưng bày): mờ đi trong bộ sưu tập. Hết kỳ thì quay về, mang theo thành tích. */
+const isHeld = (entry, schedule) => !!entry && (entry.status === 'pending' || (entry.status === 'approved' && entry.roundKey >= schedule.current));
 
 function EntryBadge({ entry, schedule }) {
   const { t, i18n } = useTranslation();
@@ -95,71 +74,6 @@ function EntryBadge({ entry, schedule }) {
   );
 }
 
-function SubmitDialog({ artwork, schedule, onClose, onDone }) {
-  const { t, i18n } = useTranslation();
-  const toast = useUi((s) => s.toast);
-  const [agree, setAgree] = useState(readRulesOk());
-  const [failures, setFailures] = useState([]);
-  const [busy, setBusy] = useState(false);
-
-  async function send() {
-    setBusy(true);
-    try {
-      const r = await api.post('/exhibition/entries', { artworkId: artwork.id });
-      try {
-        localStorage.setItem(RULES_OK_KEY, '1');
-      } catch {
-        // bỏ qua
-      }
-      toast(r.entry.status === 'approved' ? t('exhibition.sentApproved') : t('exhibition.sentPending'), 'success');
-      onDone();
-    } catch (e) {
-      if (e.code === 'exhibit_rules') setFailures(e.data?.failures || []);
-      else toast(errorText(t, e), 'error');
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <Modal open onClose={onClose} wide>
-      <div className="space-y-4" data-testid="submit-dialog">
-        <div className="flex items-center gap-3">
-          {artwork.thumbnail && <img src={artwork.thumbnail} alt="" className="h-20 w-20 rounded-2xl border-2 border-line" />}
-          <div>
-            <h2 className="font-display text-2xl font-extrabold">🏛️ {t('exhibition.submitTitle')}</h2>
-            <p className="font-bold">{artwork.name[i18n.language]}</p>
-          </div>
-        </div>
-        {failures.length > 0 ? (
-          <p className="rounded-2xl bg-coral/15 p-3 font-bold" data-testid="submit-failures">
-            🐻 {t('exhibition.notYet', { rules: failures.join(', ') })}
-          </p>
-        ) : (
-          <p className="rounded-2xl bg-primary-light p-3 text-sm font-bold text-primary-dark">
-            {t('exhibition.submitNote', { date: formatVnTime(schedule.nextRoundStart, i18n.language, { time: false }) })}
-          </p>
-        )}
-        <ExhibitRules highlight={failures} />
-        {!readRulesOk() && (
-          <label className="flex items-center gap-2 font-bold">
-            <input type="checkbox" className="h-5 w-5 accent-primary" checked={agree} onChange={(e) => setAgree(e.target.checked)} data-testid="rules-agree" />
-            {t('exhibition.readRules')}
-          </label>
-        )}
-        <div className="flex gap-2">
-          <button type="button" className="btn-ghost flex-1" onClick={onClose}>
-            {t('common.cancel')}
-          </button>
-          <button type="button" className="btn-coral flex-1" disabled={!agree || busy} onClick={send} data-testid="submit-send">
-            🏛️ {t('exhibition.send')}
-          </button>
-        </div>
-      </div>
-    </Modal>
-  );
-}
-
 /** Tải danh sách tranh đã hoàn thành + tình trạng đi triển lãm (dùng chung cho dạng lưới và dạng phòng). */
 function useArtworksData() {
   const { t } = useTranslation();
@@ -171,6 +85,17 @@ function useArtworksData() {
     api.get('/exhibition/mine').then(setEx);
   };
   useEffect(load, []);
+  /** Gửi thẳng tranh qua triển lãm (không hỏi lại); tranh chưa đạt nội quy thì báo điều nào chưa đạt. */
+  async function send(a) {
+    try {
+      const r = await api.post('/exhibition/entries', { artworkId: a.id });
+      toast(r.entry.status === 'approved' ? t('exhibition.sentApproved') : t('exhibition.sentPending'), 'success');
+      load();
+    } catch (e) {
+      if (e.code === 'exhibit_rules') toast(t('exhibition.notYet', { rules: (e.data?.failures || []).join(', ') }), 'error');
+      else toast(errorText(t, e), 'error');
+    }
+  }
   async function withdraw(entry) {
     try {
       await api.del(`/exhibition/entries/${entry.id}`);
@@ -180,37 +105,46 @@ function useArtworksData() {
       toast(errorText(t, e), 'error');
     }
   }
-  return { items, ex, load, withdraw };
+  return { items, ex, load, withdraw, send };
+}
+
+/** Nút xanh "Gửi tranh triển lãm" — chỉ hiện khi tranh đủ điều kiện và chưa gửi. */
+function SendButton({ a, s, full, onSend, className = '', testId }) {
+  const { t } = useTranslation();
+  const blocked = !s.submitOpen || full;
+  return (
+    <button
+      type="button"
+      className={`send-exhibit ${className}`}
+      disabled={blocked}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSend(a);
+      }}
+      title={!s.submitOpen ? t('exhibition.submitOpensShort') : full ? t('errors.exhibit_limit') : ''}
+      data-testid={testId || `submit-${a.id}`}
+    >
+      <Icon name="send" size={16} strokeWidth={2.6} /> {t('exhibition.sendShort')}
+    </button>
+  );
 }
 
 /** Nhãn tình trạng + các nút thao tác của một bức tranh (dùng trong thẻ lưới và hộp chi tiết ở phòng triển lãm). */
-function ArtworkControls({ a, entry, s, full, onSubmit, onWithdraw, onShare }) {
+function ArtworkControls({ a, entry, s, full, onSend, onWithdraw, onShare }) {
   const { t } = useTranslation();
   const active = entry && ['pending', 'approved', 'removed'].includes(entry.status);
   const canWithdraw = entry && ['pending', 'approved'].includes(entry.status) && entry.roundKey === s.nextRound && s.submitOpen;
   return (
     <>
       <EntryBadge entry={entry} schedule={s} />
-      <EligibleBadge a={a} entry={entry} />
       <div className="mt-auto space-y-1.5">
         {canWithdraw ? (
           <button type="button" className="btn-ghost min-h-10 w-full text-sm" onClick={() => onWithdraw(entry)} data-testid={`withdraw-${a.id}`}>
             {t('exhibition.withdraw')}
           </button>
-        ) : active ? null : exhibitType(a) ? (
-          <button
-            type="button"
-            className="btn-coral min-h-10 w-full px-2 text-sm"
-            disabled={!s.submitOpen || full}
-            onClick={() => onSubmit(a)}
-            title={!s.submitOpen ? t('exhibition.submitOpensShort') : full ? t('errors.exhibit_limit') : ''}
-            data-testid={`submit-${a.id}`}
-          >
-            🏛️ {!s.submitOpen ? t('exhibition.submitOpensShort') : full ? t('exhibition.full') : t('exhibition.send')}
-          </button>
-        ) : (
-          <p className="text-center text-xs text-muted">{t('exhibition.notType')}</p>
-        )}
+        ) : !active && a.exhibitEligible ? (
+          <SendButton a={a} s={s} full={full} onSend={onSend} className="w-full" />
+        ) : null}
         {entry?.award && <CertificateButton entry={{ ...entry, artworkId: a.id }} className="btn-primary min-h-10 w-full px-2 text-sm" />}
         <button type="button" className="btn-ghost min-h-10 w-full px-2 text-sm" onClick={() => onShare({ artworkId: a.id, entry: entry?.status === 'approved' ? entry : null })} data-testid={`share-${a.id}`}>
           📤 {t('share.button')}
@@ -220,29 +154,63 @@ function ArtworkControls({ a, entry, s, full, onSubmit, onWithdraw, onShare }) {
   );
 }
 
-function ArtworksDialogs({ ex, load, submitFor, setSubmitFor, shareFor, setShareFor }) {
-  return (
+function ArtworksDialogs({ shareFor, setShareFor }) {
+  return shareFor ? <ShareDialog artworkId={shareFor.artworkId} entry={shareFor.entry} onClose={() => setShareFor(null)} /> : null;
+}
+
+/** Bảng thông tin triển lãm dùng chung cho cả 2 tab (dạng phòng): số tranh đã gửi, vào hội trường, nội quy, lịch. */
+function useExhibitPills(ex, extra) {
+  const { t } = useTranslation();
+  const [rules, setRules] = useState(false);
+  const [sched, setSched] = useState(false);
+  const pills = ex && (
     <>
-      {shareFor && <ShareDialog artworkId={shareFor.artworkId} entry={shareFor.entry} onClose={() => setShareFor(null)} />}
-      {submitFor && (
-        <SubmitDialog
-          artwork={submitFor}
-          schedule={ex.schedule}
-          onClose={() => setSubmitFor(null)}
-          onDone={() => {
-            setSubmitFor(null);
-            load();
-          }}
-        />
-      )}
+      <span className="room-pill" data-testid="exhibit-quota">{t('exhibition.quota', { used: ex.used, limit: ex.limit })}</span>
+      <Link to="/exhibition" className="room-pill room-pill-btn">🏛️ {t('exhibition.visit')}</Link>
+      <button type="button" className="room-pill room-pill-btn" onClick={() => setRules(true)} data-testid="open-rules">📜 {t('exhibition.rules.title')}</button>
+      <button type="button" className="room-pill room-pill-btn" onClick={() => setSched(true)}>🗓️ {t('collection.schedule')}</button>
+      {extra}
     </>
+  );
+  const modals = (
+    <>
+      <Modal open={rules} onClose={() => setRules(false)} wide>
+        <h2 className="mb-3 font-display text-2xl font-extrabold">📜 {t('exhibition.rules.title')}</h2>
+        <ExhibitRules />
+        <button type="button" className="btn-primary mt-4 w-full" onClick={() => setRules(false)}>{t('guide.gotIt')}</button>
+      </Modal>
+      <Modal open={sched} onClose={() => setSched(false)} wide>
+        <h2 className="mb-3 font-display text-2xl font-extrabold">🏛️ {t('exhibition.title')}</h2>
+        {ex && <ScheduleBanner schedule={ex.schedule} />}
+        {ex && ex.limit === 1 && <p className="mt-3 text-sm text-muted">{t('exhibition.premiumMore')}</p>}
+        <button type="button" className="btn-primary mt-4 w-full" onClick={() => setSched(false)}>{t('guide.gotIt')}</button>
+      </Modal>
+    </>
+  );
+  return { pills, modals };
+}
+
+/** Khung thông tin triển lãm ở đầu trang (điện thoại) — hiện ở cả tab Tranh hoàn thành lẫn Thẻ hiếm. */
+function ExhibitHeader({ ex, extra }) {
+  const { t } = useTranslation();
+  return (
+    <div className="card space-y-3 bg-gradient-to-br from-[#FFF3D6] to-white p-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 className="min-w-0 basis-full sm:basis-0 sm:flex-1 font-display text-xl font-bold">🏛️ {t('exhibition.title')}</h2>
+        <span className="chip" data-testid="exhibit-quota">{t('exhibition.quota', { used: ex.used, limit: ex.limit })}</span>
+        <RulesButton className="btn-ghost min-h-10 bg-white text-base" />
+        <Link to="/exhibition" className="btn-ghost min-h-10 bg-white text-base">{t('exhibition.visit')}</Link>
+        {extra}
+      </div>
+      <ScheduleBanner schedule={ex.schedule} />
+      {ex.limit === 1 && <p className="text-sm text-muted">{t('exhibition.premiumMore')}</p>}
+    </div>
   );
 }
 
 function ArtworksTab() {
   const { t, i18n } = useTranslation();
-  const { items, ex, load, withdraw } = useArtworksData();
-  const [submitFor, setSubmitFor] = useState(null);
+  const { items, ex, withdraw, send } = useArtworksData();
   const [shareFor, setShareFor] = useState(null);
 
   if (!items || !ex) return <div className="text-center text-muted">{t('common.loading')}</div>;
@@ -251,31 +219,21 @@ function ArtworksTab() {
 
   return (
     <div className="space-y-4">
-      <div className="card space-y-3 bg-gradient-to-br from-[#FFF3D6] to-white p-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <h2 className="min-w-0 flex-1 font-display text-xl font-bold">🏛️ {t('exhibition.title')}</h2>
-          <span className="chip" data-testid="exhibit-quota">{t('exhibition.quota', { used: ex.used, limit: ex.limit })}</span>
-          <RulesButton className="btn-ghost min-h-10 bg-white text-base" />
-          <Link to="/exhibition" className="btn-ghost min-h-10 bg-white text-base">{t('exhibition.visit')}</Link>
-        </div>
-        <ScheduleBanner schedule={s} />
-        {ex.limit === 1 && <p className="text-sm text-muted">{t('exhibition.premiumMore')}</p>}
-      </div>
-
+      <ExhibitHeader ex={ex} />
       {items.length === 0 && <div className="card p-6 text-center text-muted">{t('collection.noArtworks')}</div>}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {items.map((a) => {
           const entry = ex.entries[a.id];
           return (
             <div key={a.id} className="card flex flex-col gap-2 p-2.5" data-testid={`art-${a.id}`}>
-              <FramedPicture src={a.thumbnail} frame={a.frame} />
+              <FramedPicture src={a.thumbnail} frame={a.frame} dim={isHeld(entry, s)} />
               <div className="truncate text-sm font-bold">{a.name[i18n.language]}</div>
-              <ArtworkControls a={a} entry={entry} s={s} full={full} onSubmit={setSubmitFor} onWithdraw={withdraw} onShare={setShareFor} />
+              <ArtworkControls a={a} entry={entry} s={s} full={full} onSend={send} onWithdraw={withdraw} onShare={setShareFor} />
             </div>
           );
         })}
       </div>
-      <ArtworksDialogs ex={ex} load={load} submitFor={submitFor} setSubmitFor={setSubmitFor} shareFor={shareFor} setShareFor={setShareFor} />
+      <ArtworksDialogs shareFor={shareFor} setShareFor={setShareFor} />
     </div>
   );
 }
@@ -294,21 +252,21 @@ function CardsTab() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [col, setCol] = useState(null);
+  const [ex, setEx] = useState(null);
   useEffect(() => {
     api.get('/gacha/cards').then(setCol);
+    api.get('/exhibition/mine').then(setEx);
   }, []);
   if (!col) return <div className="text-center text-muted">{t('common.loading')}</div>;
   const grouped = groupCards(col);
+  const toGacha = (
+    <Link to="/gacha" className="btn-ghost min-h-10 bg-white text-base">
+      <Icon name="gift" /> {t('collection.toGacha')}
+    </Link>
+  );
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="font-bold text-muted">
-          {col.distinct}/{col.total}
-        </p>
-        <Link to="/gacha" className="btn-ghost min-h-10 text-base">
-          <Icon name="gift" /> {t('collection.toGacha')}
-        </Link>
-      </div>
+      {ex ? <ExhibitHeader ex={ex} extra={toGacha} /> : <div className="flex justify-end">{toGacha}</div>}
       {grouped.length === 0 && <div className="card p-6 text-center text-muted">{t('gacha.empty')}</div>}
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
         {grouped.map((c) => (
@@ -415,10 +373,14 @@ function RoomShell({ tab, onTab, slots, pills }) {
               {it?.badge && <span className="room-slot-badge" aria-hidden="true">{it.badge}</span>}
             </>
           );
+          const sendPos = it?.sendBtn ? { left: `${(cx / ROOM_W) * 100}%`, top: `${((cy + full / 2 - 6) / ROOM_H) * 100}%` } : null;
           return it ? (
-            <button key={it.key} type="button" className="room-slot" style={geo} onClick={it.onClick} aria-label={it.label} title={it.label} data-testid={it.testId}>
-              {body}
-            </button>
+            <Fragment key={it.key}>
+              <button type="button" className={`room-slot${it.dim ? ' room-slot-dim' : ''}`} style={geo} onClick={it.onClick} aria-label={it.label} title={it.label} data-testid={it.testId}>
+                {body}
+              </button>
+              {sendPos && <div className="room-send-wrap" style={sendPos}>{it.sendBtn}</div>}
+            </Fragment>
           ) : (
             <div key={`empty-${i}`} className="room-slot room-slot-empty" style={geo} aria-hidden="true">{body}</div>
           );
@@ -441,7 +403,7 @@ function RoomShell({ tab, onTab, slots, pills }) {
           {pages > 1 && <span className="room-page" data-testid="room-page">{cur + 1}/{pages}</span>}
         </div>
 
-        <div className="room-pills" style={box(1236, 84, 440, 100)}>{pills}</div>
+        <div className="room-pills" style={box(1196, 84, 480, 130)}>{pills}</div>
       </div>
     </div>
   );
@@ -449,60 +411,47 @@ function RoomShell({ tab, onTab, slots, pills }) {
 
 function RoomArtworks({ onTab }) {
   const { t, i18n } = useTranslation();
-  const { items, ex, load, withdraw } = useArtworksData();
+  const { items, ex, withdraw, send } = useArtworksData();
   const [open, setOpen] = useState(null);
-  const [submitFor, setSubmitFor] = useState(null);
   const [shareFor, setShareFor] = useState(null);
-  const [rules, setRules] = useState(false);
-  const [sched, setSched] = useState(false);
   const ready = items && ex;
   const s = ex?.schedule;
   const full = ready && ex.used >= ex.limit;
-  const slots = (items || []).map((a) => ({
-    key: a.id,
-    label: a.name[i18n.language],
-    testId: `art-${a.id}`,
-    onClick: () => setOpen(a),
-    badge: ready ? entryEmoji(ex.entries[a.id], s) || (a.exhibitEligible ? '✨' : null) : null,
-    frame: a.frame, // tranh treo tường dùng đúng khung bé đã chọn (mặc định: khung gỗ)
-    content: a.thumbnail ? <img src={a.thumbnail} alt="" draggable={false} /> : <span className="room-slot-blank" />,
-  }));
-  const pills = ready && (
-    <>
-      <span className="room-pill" data-testid="exhibit-quota">{t('exhibition.quota', { used: ex.used, limit: ex.limit })}</span>
-      <Link to="/exhibition" className="room-pill room-pill-btn">🏛️ {t('exhibition.visit')}</Link>
-      <button type="button" className="room-pill room-pill-btn" onClick={() => setRules(true)} data-testid="open-rules">📜 {t('exhibition.rules.title')}</button>
-      <button type="button" className="room-pill room-pill-btn" onClick={() => setSched(true)}>🗓️ {t('collection.schedule')}</button>
-    </>
-  );
+  const { pills, modals } = useExhibitPills(ex);
+  const slots = (items || []).map((a) => {
+    const e = ready ? ex.entries[a.id] : null;
+    const active = e && ['pending', 'approved', 'removed'].includes(e.status);
+    return {
+      key: a.id,
+      label: a.name[i18n.language],
+      testId: `art-${a.id}`,
+      onClick: () => setOpen(a),
+      badge: ready ? entryEmoji(e, s) : null,
+      dim: ready && isHeld(e, s),
+      frame: a.frame, // tranh treo tường dùng đúng khung bé đã chọn (mặc định: khung gỗ)
+      content: a.thumbnail ? <img src={a.thumbnail} alt="" draggable={false} /> : <span className="room-slot-blank" />,
+      // Đủ điều kiện triển lãm thì nút gửi hiện ngay dưới khung tranh.
+      sendBtn: ready && a.exhibitEligible && !active ? <SendButton a={a} s={s} full={full} onSend={send} className="room-send" /> : null,
+    };
+  });
   const entry = open && ready ? ex.entries[open.id] : null;
   return (
     <>
       <RoomShell tab="artworks" onTab={onTab} slots={slots} pills={pills} />
-      <Modal open={rules} onClose={() => setRules(false)} wide>
-        <h2 className="mb-3 font-display text-2xl font-extrabold">📜 {t('exhibition.rules.title')}</h2>
-        <ExhibitRules />
-        <button type="button" className="btn-primary mt-4 w-full" onClick={() => setRules(false)}>{t('guide.gotIt')}</button>
-      </Modal>
-      <Modal open={sched} onClose={() => setSched(false)} wide>
-        <h2 className="mb-3 font-display text-2xl font-extrabold">🏛️ {t('exhibition.title')}</h2>
-        {ready && <ScheduleBanner schedule={s} />}
-        {ready && ex.limit === 1 && <p className="mt-3 text-sm text-muted">{t('exhibition.premiumMore')}</p>}
-        <button type="button" className="btn-primary mt-4 w-full" onClick={() => setSched(false)}>{t('guide.gotIt')}</button>
-      </Modal>
+      {modals}
       {open && ready && (
         <Modal open onClose={() => setOpen(null)}>
           <div className="flex flex-col gap-3" data-testid="room-art-dialog">
-            <FramedPicture src={open.thumbnail} frame={open.frame} />
+            <FramedPicture src={open.thumbnail} frame={open.frame} dim={isHeld(entry, s)} />
             <div className="font-display text-xl font-extrabold">{open.name[i18n.language]}</div>
             <ArtworkControls
               a={open}
               entry={entry}
               s={s}
               full={full}
-              onSubmit={(a) => {
+              onSend={(a) => {
                 setOpen(null);
-                setSubmitFor(a);
+                send(a);
               }}
               onWithdraw={async (e) => {
                 await withdraw(e);
@@ -517,7 +466,7 @@ function RoomArtworks({ onTab }) {
           </div>
         </Modal>
       )}
-      {ready && <ArtworksDialogs ex={ex} load={load} submitFor={submitFor} setSubmitFor={setSubmitFor} shareFor={shareFor} setShareFor={setShareFor} />}
+      <ArtworksDialogs shareFor={shareFor} setShareFor={setShareFor} />
     </>
   );
 }
@@ -526,8 +475,10 @@ function RoomCards({ onTab }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [col, setCol] = useState(null);
+  const [ex, setEx] = useState(null);
   useEffect(() => {
     api.get('/gacha/cards').then(setCol);
+    api.get('/exhibition/mine').then(setEx);
   }, []);
   const grouped = col ? groupCards(col) : [];
   const slots = grouped.map((c) => ({
@@ -538,13 +489,16 @@ function RoomCards({ onTab }) {
     badge: c.rarity,
     content: <CardInSlot card={c} />,
   }));
-  const pills = col && (
+  const { pills, modals } = useExhibitPills(
+    ex,
+    <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>,
+  );
+  return (
     <>
-      <span className="room-pill">{col.distinct}/{col.total}</span>
-      <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>
+      <RoomShell tab="cards" onTab={onTab} slots={slots} pills={pills || <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>} />
+      {modals}
     </>
   );
-  return <RoomShell tab="cards" onTab={onTab} slots={slots} pills={pills} />;
 }
 
 export default function Collection() {

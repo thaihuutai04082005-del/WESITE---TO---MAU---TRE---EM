@@ -304,6 +304,7 @@
     "submitNote": "Sau khi gửi, chữ ký và bức tranh sẽ được khoá lại. Tranh được trưng từ thứ 2 ({{date}}) đến chủ nhật.",
     "readRules": "Bé đã đọc nội quy",
     "send": "Gửi triển lãm",
+    "sendShort": "Gửi tranh triển lãm",
     "quota": "Đã gửi {{used}}/{{limit}} tranh",
     "visit": "Vào hội trường",
     "premiumMore": "Gói tháng/năm được gửi 3 tranh mỗi vòng.",
