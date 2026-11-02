@@ -8,7 +8,7 @@ import AuthCard from './AuthCard';
 import Icon from '../../components/Icon';
 
 export function Captcha({ value, onChange, onId, refreshKey }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [cap, setCap] = useState(null);
   const load = useCallback(async () => {
     const c = await api.get('/auth/captcha');
@@ -53,7 +53,7 @@ export default function Register() {
     if (form.password !== form.confirm) return setErr(t('auth.passwordMismatch'));
     setBusy(true);
     try {
-      const r = await api.post('/auth/register/start', { ...form, captchaId, captchaText });
+      const r = await api.post('/auth/register/start', { ...form, captchaId, captchaText, language: i18n.language });
       setReg(r);
       setStep('otp');
     } catch (e2) {

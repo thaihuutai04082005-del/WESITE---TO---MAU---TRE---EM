@@ -19,7 +19,7 @@ function uniqueFriendCode() {
 }
 
 export function create(fields) {
-  const f = { friend_code: uniqueFriendCode(), ...fields };
+  const f = { friend_code: uniqueFriendCode(), language: 'en', ...fields }; // mặc định tiếng Anh
   const cols = Object.keys(f);
   const res = getDb()
     .prepare(`INSERT INTO users (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`)

@@ -527,7 +527,6 @@
       "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
       "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào."
     },
-    "usdNote": "hoặc {{price}} qua PayPal",
     "perMonthUsd": "/tháng",
     "perYearUsd": "/năm",
     "qr": {

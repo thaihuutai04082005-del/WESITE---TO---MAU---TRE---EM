@@ -4,9 +4,9 @@ import { initReactI18next } from 'react-i18next';
 import vi from './vi.json';
 import en from './en.json';
 
-let saved = 'vi';
+let saved = 'en'; // mặc định tiếng Anh
 try {
-  saved = localStorage.getItem('btm.lang') || (navigator.language?.startsWith('en') ? 'en' : 'vi');
+  saved = localStorage.getItem('btm.lang') || 'en';
 } catch {
   /* bỏ qua */
 }
@@ -14,7 +14,7 @@ try {
 i18n.use(initReactI18next).init({
   resources: { vi: { translation: vi }, en: { translation: en } },
   lng: saved,
-  fallbackLng: 'vi',
+  fallbackLng: 'en',
   interpolation: { escapeValue: false },
 });
 

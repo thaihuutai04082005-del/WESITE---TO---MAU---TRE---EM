@@ -56,12 +56,12 @@ async function api(method, path, body, token) {
 }
 
 let otpSeq = 0;
-async function register(username, password = 'abc12345', nickname = username) {
+async function register(username, password = 'abc12345', nickname = username, language) {
   const { body: cap } = await api('GET', '/auth/captcha');
   // Dùng SĐT khác nhau để không bị chặn chống spam OTP.
   const phone = `09${String(10000000 + ++otpSeq).padStart(8, '0')}`;
   const start = await api('POST', '/auth/register/start', {
-    username, password, captchaId: cap.captchaId, captchaText: _peekCaptcha(cap.captchaId), contactType: 'phone', contact: phone,
+    username, password, captchaId: cap.captchaId, captchaText: _peekCaptcha(cap.captchaId), contactType: 'phone', contact: phone, ...(language ? { language } : {}),
   });
   assert.equal(start.status, 200, JSON.stringify(start.body));
   const verify = await api('POST', '/auth/register/verify', { registrationId: start.body.registrationId, code: start.body.devCode });
@@ -69,6 +69,7 @@ async function register(username, password = 'abc12345', nickname = username) {
   const login = await api('POST', '/auth/login', { username, password });
   assert.equal(login.status, 200);
   assert.equal(login.body.user.needsNickname, true);
+  assert.equal(login.body.user.language, language || 'en', 'tài khoản mới mặc định tiếng Anh (hoặc đúng ngôn ngữ đang xem khi đăng ký)');
   await api('PUT', '/users/me', { nickname }, login.body.token);
   return { token: login.body.token, id: login.body.user.id, phone };
 }
@@ -780,4 +781,9 @@ test('Truyện tranh: gói thường 1 cuốn tối đa 10 trang, VIP không gi�
   assert.equal((await api('PUT', `/storybooks/${first.body.storybook.id}`, { title: 'Cuốn 1', pages: eleven }, token)).body.error.code, 'storybook_pages_limit');
   getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'year', ?, ?)").run(id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).status, 201);
+});
+
+test('Ngôn ngữ: tài khoản mới mặc định tiếng Anh, đăng ký khi đang xem tiếng Việt thì giữ tiếng Việt', async () => {
+  await register('ngonngu1');
+  await register('ngonngu2', 'abc12345', 'ngonngu2', 'vi');
 });

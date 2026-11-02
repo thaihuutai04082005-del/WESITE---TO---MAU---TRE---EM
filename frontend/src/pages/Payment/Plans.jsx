@@ -197,9 +197,6 @@ export default function Plans() {
                       </button>
                     ))}
                   </div>
-                  {!en && (
-                    <div className="mt-2 text-sm font-bold text-muted">{t('plans.usdNote', { price: `$${plans[period].priceUsd}` })}</div>
-                  )}
                   {period === 'year' && (
                     <div className="mt-1 text-sm font-extrabold text-[#B45F00]">
                       <div>{en ? t('plans.saveUsd', { amount: `$${saveUsd.toFixed(2)}`, pct: savePct }) : t('plans.save')}</div>
