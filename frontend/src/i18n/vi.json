@@ -997,17 +997,17 @@
   "guide": {
     "label": "Hướng dẫn",
     "open": "Hướng dẫn: {{name}}",
-    "tip": "Mẹo nhỏ:",
+    "tip": "Lưu ý:",
     "gotIt": "Đã hiểu",
     "start": "Bắt đầu",
     "color": {
       "intro": "Chọn tranh yêu thích rồi tô màu thật đẹp.",
       "steps": [
         "Chọn nhóm tuổi, chủ đề rồi chọn tranh.",
-        "Chọn cách tô: \"Tô theo mẫu\" (có số gợi ý màu) hoặc \"Sáng tạo\".",
+        "Chọn cách tô: \"Tô theo mẫu\" (có số gợi ý màu) hoặc \"Sáng tạo\" (tô tự do).",
         "Chọn dụng cụ (bút sáp, cọ, sticker…) và màu rồi tô vào tranh.",
         "Tô sai thì dùng Tẩy hoặc Hoàn tác để sửa lại.",
-        "Tô xong bấm \"Hoàn thành\" để chọn khung cho tranh.",
+        "Tô xong bấm \"Hoàn thành\" và chọn khung tranh.",
         "Bấm \"Tải về\" để lưu tranh hoặc \"In tranh\" để in ra giấy."
       ],
       "tip": "Tranh hoàn thành nằm trong Bộ sưu tập, tranh đang dở nằm trong Lịch sử."

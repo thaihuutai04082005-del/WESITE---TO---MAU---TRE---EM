@@ -997,17 +997,17 @@
   "guide": {
     "label": "How it works",
     "open": "How to use: {{name}}",
-    "tip": "Tip:",
+    "tip": "Note:",
     "gotIt": "Got it",
     "start": "Let's go",
     "color": {
       "intro": "Pick a picture you like and color it beautifully.",
       "steps": [
         "Pick an age group, a theme, then a picture.",
-        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\".",
+        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\" (color freely).",
         "Pick a tool (crayon, brush, sticker…) and a color, then color.",
         "Made a mistake? Use Eraser or Undo to fix it.",
-        "When you're done press \"Finish\" to choose a frame.",
+        "When you're done press \"Finish\" and choose a picture frame.",
         "Press \"Download\" to save it or \"Print\" to print it on paper."
       ],
       "tip": "Finished pictures go to your Collection, unfinished ones stay in History."
