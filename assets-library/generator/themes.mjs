@@ -1223,6 +1223,13 @@ ART_THEMES.push({
       ],
     },
     {
+      slug: 'tau-vu-tru',
+      name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' },
+      pictures: [
+        { slug: 'tau-vu-tru', name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' }, file: 'tau-vu-tru--tau-vu-tru' },
+      ],
+    },
+    {
       slug: 'mat-troi',
       name: { vi: 'Mặt trời', en: 'Sun' },
       pictures: [
@@ -1255,13 +1262,6 @@ ART_THEMES.push({
       name: { vi: 'Sao Hỏa', en: 'Mars' },
       pictures: [
         { slug: 'sao-hoa', name: { vi: 'Sao Hỏa', en: 'Mars' }, file: 'sao-hoa--sao-hoa' },
-      ],
-    },
-    {
-      slug: 'tau-vu-tru',
-      name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' },
-      pictures: [
-        { slug: 'tau-vu-tru', name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' }, file: 'tau-vu-tru--tau-vu-tru' },
       ],
     },
   ],
