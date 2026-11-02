@@ -1638,3 +1638,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .card-back-icon { display: inline-block; height: 1.3em; width: auto; margin-right: 0.15em; vertical-align: -0.28em; border-radius: 14%; box-shadow: 0 1px 3px rgba(30, 60, 120, 0.35); }
 .wood-tab-icon .card-back-icon { height: 1.1em; margin: 0; vertical-align: top; }
 .room-tab .card-back-icon { height: 1.55em; vertical-align: -0.4em; }
+
+/* Tranh mẫu nhỏ: nhãn "Phóng to" để bé biết bấm vào xem to */
+.cw-ref-btn { position: relative; }
+.cw-ref-zoom { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: rgba(27, 42, 74, 0.82); font-family: var(--font-display); font-weight: 800; font-size: 14px; color: #fff; pointer-events: none; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
