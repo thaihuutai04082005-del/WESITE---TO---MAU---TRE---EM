@@ -200,7 +200,8 @@ def main():
             x0, y0, x1, y1 = p['rect']
             win = np.zeros(gray.shape, bool)
             win[y0:y1 + 1, x0:x1 + 1] = True
-            mask = cv2.dilate(((white if p.get('all') else thin) & win).astype(np.uint8), np.ones((3, 3), np.uint8))
+            dk = p.get('dil', 3)   # "dil": cỡ nở của mặt nạ (mặc định 3)
+            mask = cv2.dilate(((white if p.get('all') else thin) & win).astype(np.uint8), np.ones((dk, dk), np.uint8))
             if p.get('clip'):  # "clip": [[x, y], ...] — chỉ tô phần nằm trong đa giác này
                 cm = np.zeros(gray.shape, np.uint8)
                 cv2.fillPoly(cm, [np.array(p['clip'], np.int32)], 1)
@@ -208,7 +209,7 @@ def main():
             cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             if not cs:
                 continue
-            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.6, True).reshape(-1, 2)
+            c = cv2.approxPolyDP(max(cs, key=cv2.contourArea), 0.3, True).reshape(-1, 2)
             if len(c) < 3:
                 continue
             d = 'M ' + ' L '.join(f'{px * k:.1f} {py * k:.1f}' for px, py in c) + ' Z'

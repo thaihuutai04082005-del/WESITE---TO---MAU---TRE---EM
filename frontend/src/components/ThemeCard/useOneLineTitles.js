@@ -6,8 +6,8 @@ import { useLayoutEffect } from 'react';
 // Tên dài nhất hiện có ở mỗi tầng (chủ đề, đối tượng, kiểu). Tên trên trang đang xem cũng được đo thêm,
 // nên nếu sau này có tên dài hơn thì vẫn không bị rớt dòng.
 const LONGEST = {
-  vi: ['Xứ Sở Học Cụ', 'Thị Trấn Khủng Long Tài Ba', 'Bánh kem nhiều tầng', 'Chạy Trên Vành Đai Hành Tinh', 'Bông Tuyết Khổng Lồ Nâng Nhà'],
-  en: ['Fruit Sports Festival', 'Stationery Land', 'Fairytale stone bridge', 'Birthday Gift for the King', 'Lullaby for Little Sister'],
+  vi: ['Xứ Sở Học Cụ', 'Xứ Sở Đồ Chơi Thức Giấc', 'Bánh kem nhiều tầng', 'Chạy Trên Vành Đai Hành Tinh', 'Bông Tuyết Khổng Lồ Nâng Nhà'],
+  en: ['Princess of a Thousand Flowers', 'Stationery Land', 'Fairytale stone bridge', 'Birthday Gift for the King', 'Lullaby for Little Sister'],
 };
 
 /**
