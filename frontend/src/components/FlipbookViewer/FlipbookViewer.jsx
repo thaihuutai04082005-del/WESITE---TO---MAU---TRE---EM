@@ -38,22 +38,38 @@ function BookIcon() {
   );
 }
 
-export default function FlipbookViewer({ title, author, pages = [], coverStyle = null }) {
+/**
+ * `editor` (tuỳ chọn) = chế độ soạn ngay trên cuốn truyện: { setTitle, onCover(), onPick(pageIdx), onCaption(pageIdx, text) }.
+ * Có `editor` thì tên truyện / lời thoại là ô nhập, bìa có nút chọn bìa, trang trống có nút chọn tranh từ bộ sưu tập.
+ * `index` + `onIndex` (tuỳ chọn) để cha điều khiển trang đang mở.
+ */
+export default function FlipbookViewer({ title, author, pages = [], coverStyle = null, editor = null, index: indexProp, onIndex }) {
   const { t } = useTranslation();
   const cv = coverOf(coverStyle);
   const sheets = [{ cover: true }, ...pages];
-  const [index, setIndex] = useState(0);
-  const next = useCallback(() => setIndex((i) => Math.min(sheets.length - 1, i + 1)), [sheets.length]);
-  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
+  const [indexState, setIndexState] = useState(0);
+  const controlled = indexProp !== undefined;
+  const index = controlled ? indexProp : indexState;
+  const setIndex = useCallback(
+    (fn) => {
+      const v = typeof fn === 'function' ? fn(controlled ? indexProp : indexState) : fn;
+      if (controlled) onIndex?.(v);
+      else setIndexState(v);
+    },
+    [controlled, indexProp, indexState, onIndex],
+  );
+  const next = useCallback(() => setIndex((i) => Math.min(sheets.length - 1, i + 1)), [sheets.length, setIndex]);
+  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), [setIndex]);
 
   useEffect(() => {
     const onKey = (e) => {
+      if (editor || /^(INPUT|TEXTAREA)$/.test(e.target?.tagName)) return; // đang gõ chữ: phím mũi tên không lật trang
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [next, prev]);
+  }, [next, prev, editor]);
 
   return (
     <div className="sbv-wrap" data-testid="flipbook">
@@ -69,14 +85,49 @@ export default function FlipbookViewer({ title, author, pages = [], coverStyle =
                   <span className="sbv-cloud sbv-cloud-l" />
                   <span className="sbv-cloud sbv-cloud-r" />
                   <BookIcon />
-                  <h2 className="sbv-title" style={[...title].length <= 28 ? { fontSize: `min(8cqw, ${(86 / Math.max(6, [...title].length * 0.58)).toFixed(2)}cqw)` } : { fontSize: '5.4cqw', whiteSpace: 'normal' }}>{title}</h2>
+                  {editor ? (
+                    <input
+                      className="sbv-title sbv-title-input"
+                      value={title}
+                      maxLength={80}
+                      placeholder={t('storybook.titleOnCover')}
+                      onChange={(e) => editor.setTitle(e.target.value)}
+                      style={{ fontSize: `min(8cqw, ${(86 / Math.max(8, [...title].length * 0.62)).toFixed(2)}cqw)` }}
+                      aria-label={t('storybook.bookTitle')}
+                      data-testid="storybook-title"
+                    />
+                  ) : (
+                    <h2 className="sbv-title" style={[...title].length <= 28 ? { fontSize: `min(8cqw, ${(86 / Math.max(6, [...title].length * 0.58)).toFixed(2)}cqw)` } : { fontSize: '5.4cqw', whiteSpace: 'normal' }}>{title}</h2>
+                  )}
                   {author && <div className="sbv-author">{t('storybook.by', { name: author })}</div>}
+                  {editor && (
+                    <button type="button" className="sbv-cover-btn" onClick={editor.onCover} data-testid="pick-cover">
+                      <Icon name="palette" size={18} strokeWidth={2.6} /> {t('storybook.chooseCover')}
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="sbv-page">
-                  <div className="sbv-pic">{p.image ? <img src={p.image} alt="" /> : <div className="sbv-nopic" />}</div>
+                  <div className="sbv-pic">
+                    {p.image ? <img src={p.image} alt="" /> : editor ? null : <div className="sbv-nopic" />}
+                    {editor && !p.image && (
+                      <button type="button" className="sbv-pick" onClick={() => editor.onPick(i - 1)} data-testid={`pick-art-${i - 1}`}>
+                        <Icon name="plus" size={34} strokeWidth={3} />
+                        <span>{t('storybook.pickFromCollection')}</span>
+                      </button>
+                    )}
+                    {editor && p.image && (
+                      <button type="button" className="sbv-change" onClick={() => editor.onPick(i - 1)} data-testid={`change-art-${i - 1}`}>
+                        <Icon name="palette" size={16} strokeWidth={2.6} /> {t('storybook.changePicture')}
+                      </button>
+                    )}
+                  </div>
                   <div className="sbv-cap">
-                    <p>{p.caption}</p>
+                    {editor ? (
+                      <textarea className="sbv-cap-input" value={p.caption} maxLength={200} placeholder={t('storybook.captionHere')} onChange={(e) => editor.onCaption(i - 1, e.target.value)} aria-label={t('storybook.caption')} data-testid={`caption-${i - 1}`} />
+                    ) : (
+                      <p>{p.caption}</p>
+                    )}
                     <span className="sbv-num">{i}</span>
                   </div>
                 </div>

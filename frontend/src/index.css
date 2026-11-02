@@ -1685,3 +1685,17 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 /* Nút ✕ góc phải trên của mọi cửa sổ con (Modal) */
 .modal-x { position: absolute; right: 0; top: 0; display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 2px solid #D9DFF4; border-radius: 9999px; background: #fff; color: #5E7A8C; box-shadow: 0 2px 6px rgba(40, 90, 150, 0.15); cursor: pointer; transition: transform 0.15s, background 0.15s, color 0.15s; }
 .modal-x:hover { transform: scale(1.08); background: #FFECEC; color: #E5484D; border-color: #FFC9C9; }
+
+/* Soạn truyện ngay trên cuốn truyện */
+.sbv-title-input { width: 100%; padding: 2px 6px; border: 0; border-bottom: 3px dashed rgba(217, 146, 26, 0.55); background: transparent; text-align: center; outline: none; }
+.sbv-title-input::placeholder { color: rgba(90, 52, 18, 0.4); }
+.sbv-title-input:focus { border-bottom-color: #F5A623; background: rgba(255, 255, 255, 0.35); border-radius: 10px 10px 0 0; }
+.sbv-cover-btn { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 6px; margin-top: 2%; padding: 6px 14px; border: 2px solid #F5A623; border-radius: 9999px; background: #fff; font-family: var(--font-display, inherit); font-weight: 800; font-size: clamp(13px, calc(var(--bh) * 0.032), 17px); color: #5A3412; box-shadow: 0 3px 0 #E9D6A8; cursor: pointer; transition: transform 0.15s; }
+.sbv-cover-btn:hover { transform: translateY(-2px); }
+.sbv-pic { position: relative; }
+.sbv-pick { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 10px; border: 3px dashed #F2B64B; border-radius: 13px; background: #FFF9E8; font-family: var(--font-display, inherit); font-weight: 800; font-size: clamp(13px, calc(var(--bh) * 0.036), 20px); line-height: 1.2; color: #B8741A; cursor: pointer; transition: background 0.15s; }
+.sbv-pick:hover { background: #FFF1CC; }
+.sbv-change { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 0; border-radius: 9999px; background: rgba(90, 52, 18, 0.82); font-weight: 800; font-size: 13px; color: #fff; cursor: pointer; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
+.sbv-cap-input { width: 100%; height: 100%; padding: 4px 6px; border: 0; border-radius: 12px; background: transparent; resize: none; outline: none; text-align: center; font: inherit; color: inherit; }
+.sbv-cap-input::placeholder { color: rgba(90, 52, 18, 0.38); }
+.sbv-cap-input:focus { background: rgba(255, 244, 205, 0.6); }
