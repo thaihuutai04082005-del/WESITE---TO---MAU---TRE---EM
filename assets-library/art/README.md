@@ -245,5 +245,6 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Hiệp Sĩ Không Dực (Hiệp Sĩ Thẻ Bài 9+, mới; màu theo ảnh mẫu) | – | `src/hiep-si-khong-duc--hiep-si-khong-duc.png` | 196 |
 | Hiệp Sĩ Từ Cực (Hiệp Sĩ Thẻ Bài 9+, mới; màu theo ảnh mẫu) | – | `src/hiep-si-tu-cuc--hiep-si-tu-cuc.png` | 227 |
 | Công Chúa Nguyệt Ảnh (Công Chúa Phép Thuật 9+; thay bằng ảnh nét mới, màu theo ảnh mẫu mới) | – | `src/cong-chua-nguyet-anh--cong-chua-nguyet-anh.png` | 387 |
+| Công Chúa Hỏa Diễm (Công Chúa Phép Thuật 9+; thay bằng ảnh nét mới, màu theo ảnh mẫu) | – | `src/cong-chua-hoa-diem--cong-chua-hoa-diem.png` | 143 |
 
 **Gộp màu giống nhau khi dựng thư viện:** `build.mjs` (`snapSimilarColors`, ngưỡng `SNAP_DELTA_E = 6`) gộp các màu chênh nhau mắt thường không thấy được trong cùng một tranh về một mã (ưu tiên mã dùng nhiều vùng nhất), nên các vùng cùng màu dùng chung một số ở chế độ Tô theo mẫu. File `art/*.json` giữ nguyên màu gốc; chỉ `catalog.json` (bảng màu + màu vùng) thay đổi.
