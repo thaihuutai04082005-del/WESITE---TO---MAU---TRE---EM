@@ -35,7 +35,8 @@ export function parseSlots(spec) {
     });
 }
 
-export function slotStatus(now = new Date(), spec = env.arena.slots) {
+// Đấu trường LUÔN MỞ: không còn đọc khung giờ từ cấu hình (ARENA_SLOTS đã bỏ). Chỉ giữ tham số `spec` cho kiểm thử.
+export function slotStatus(now = new Date(), spec = '') {
   const slots = parseSlots(spec);
   if (!slots.length) return { open: true, slots: [], nextOpen: null };
   const vn = new Date(now.getTime() + VN_OFFSET_MS);

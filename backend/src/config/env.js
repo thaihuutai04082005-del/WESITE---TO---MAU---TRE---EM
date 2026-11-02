@@ -77,7 +77,6 @@ export const env = {
     lobbyWaitSec: num(process.env.ARENA_LOBBY_WAIT_SEC, 60),
     minPlayers: num(process.env.ARENA_MIN_PLAYERS, 2),
     // Khung giờ ghép ngẫu nhiên công khai (giờ Việt Nam), ví dụ "08:00-11:00,14:00-21:00". Trống = luôn mở.
-    slots: process.env.ARENA_SLOTS || '',
   },
   admin: {
     username: process.env.ADMIN_USERNAME || 'admin',

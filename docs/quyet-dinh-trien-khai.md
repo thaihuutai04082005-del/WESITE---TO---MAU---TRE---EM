@@ -32,7 +32,7 @@ Tên bậc theo chủ đề hội họa (mã bậc trong code giữ nguyên đ�
 ## 4. Đấu trường
 - **Thời gian mỗi trận:** 10 phút (`ARENA_DURATION_SEC`), có 3 giây đếm ngược trước khi bắt đầu.
 - **"Hàng tuần"** được hiểu là **Bảng vàng tuần** (theo tuần ISO, giờ VN). Bé thi được nhiều trận trong tuần.
-- **Khung giờ công khai** cho ghép ngẫu nhiên đặt bằng `ARENA_SLOTS` (ví dụ `08:00-11:00,14:00-21:00`). Để trống thì luôn mở.
+- **Đấu trường luôn mở** (không còn khung giờ công khai; biến `ARENA_SLOTS` đã bỏ).
 - **Ghép ngẫu nhiên:** tối đa 10 bé mỗi phòng, ghép theo 3 nhóm trình độ: (Mầm Non Tô Màu, Họa Sĩ Nhí) / (Họa Sĩ Tài Năng) / (Nghệ Sĩ Sáng Tạo, Danh Họa, Bậc Thầy Hội Họa).
   - Phòng đủ 10 bé thì bắt đầu ngay.
   - Nếu chưa đủ, sau `ARENA_LOBBY_WAIT_SEC` giây (mặc định 60) phòng sẽ bắt đầu khi có ít nhất `ARENA_MIN_PLAYERS` bé (mặc định 2). Nếu vẫn chưa đủ thì tiếp tục chờ thêm.

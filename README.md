@@ -102,6 +102,6 @@ Xem đầy đủ trong [`backend/.env.example`](backend/.env.example). Các nhó
 | OTP | `SMTP_*`, `SMS_API_URL`, `SMS_API_KEY`, `SMS_SECRET_KEY`, `SMS_BRANDNAME`, `EXPOSE_DEV_OTP` |
 | Google | `GOOGLE_CLIENT_ID` |
 | Thanh toán | `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `PAYPAL_API_BASE`, `MOMO_PARTNER_CODE`, `MOMO_ACCESS_KEY`, `MOMO_SECRET_KEY`, `MOMO_ENDPOINT`, `PAYMENT_MOCK` |
-| Đấu trường | `ARENA_DURATION_SEC`, `ARENA_LOBBY_WAIT_SEC`, `ARENA_MIN_PLAYERS`, `ARENA_SLOTS` |
+| Đấu trường | `ARENA_DURATION_SEC`, `ARENA_LOBBY_WAIT_SEC`, `ARENA_MIN_PLAYERS` |
 
 > **Lưu ý pháp lý:** Nghị định 13/2023/NĐ-CP có yêu cầu riêng với dữ liệu cá nhân của trẻ em. Nên rà soát với luật sư trước khi vận hành chính thức (xem Mục 11 của kế hoạch).
