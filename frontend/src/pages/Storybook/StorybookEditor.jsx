@@ -106,19 +106,20 @@ export default function StorybookEditor() {
     }
   }
 
-  const back = (e) => {
-    if (!dirty) return;
-    e.preventDefault();
-    setLeaveAsk(true);
+  // Quay lại đúng màn hình trước đó (không đi vòng qua trang danh sách truyện nên không chạy lại hiệu ứng mở truyện).
+  const leave = () => {
+    if (window.history.state?.idx > 0) navigate(-1);
+    else navigate(id ? `/storybooks/${id}` : '/storybooks');
   };
+  const back = () => (dirty ? setLeaveAsk(true) : leave());
 
   if (!loaded) return <div className="page text-muted">{t('common.loading')}</div>;
 
   return (
     <StoryBackdrop>
-      <Link to={id ? `/storybooks/${id}` : '/storybooks'} onClick={back} className="sbv-back" data-testid="editor-back">
-        <Icon name="back" size={20} strokeWidth={3} /> {t('storybook.title')}
-      </Link>
+      <button type="button" onClick={back} className="sbv-back" data-testid="editor-back">
+        <Icon name="back" size={20} strokeWidth={3} /> {t('common.back')}
+      </button>
       <FlipbookViewer
         title={title}
         author={user?.nickname}
@@ -217,7 +218,7 @@ export default function StorybookEditor() {
         <h2 className="font-display text-2xl font-extrabold">{t('storybook.leaveTitle')}</h2>
         <p className="mb-4 text-muted">{t('storybook.leaveText')}</p>
         <div className="flex gap-2">
-          <button type="button" className="btn-ghost flex-1" onClick={() => navigate(id ? `/storybooks/${id}` : '/storybooks')} data-testid="leave-discard">
+          <button type="button" className="btn-ghost flex-1" onClick={leave} data-testid="leave-discard">
             {t('storybook.leaveDiscard')}
           </button>
           <button
