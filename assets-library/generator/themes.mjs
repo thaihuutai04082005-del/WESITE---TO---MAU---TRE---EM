@@ -19,7 +19,7 @@ export const THEMES = [
   { slug: 'khu-rung-cay-than', name: { vi: 'Khu Rừng Cổ Tích', en: 'Fairytale Forest' }, faceStyle: 'face', animation: 'sway' },
   { slug: 'thanh-pho-nha-biet-bay', name: { vi: 'Thành Phố Nhà Biết Bay', en: 'Flying House City' }, faceStyle: 'none', animation: 'float' },
   { slug: 'xu-so-do-choi', name: { vi: 'Xứ Sở Đồ Chơi Thức Giấc', en: 'Midnight Toyland' }, faceStyle: 'face', animation: 'bounce', hidden: true },
-  { slug: 'vuong-quoc-lau-dai', name: { vi: 'Xứ Sở Học Cụ', en: 'Stationery Land' }, faceStyle: 'none', animation: 'wiggle' },
+  { slug: 'vuong-quoc-lau-dai', name: { vi: 'Xứ Sở Học Cụ', en: 'School Supplies Land' }, faceStyle: 'none', animation: 'wiggle' },
   { slug: 'vuong-quoc-thien-the', name: { vi: 'Vương Quốc Thiên Thể', en: 'Sky Kingdom' }, faceStyle: 'face', animation: 'float', plainSky: true, hidden: true },
   // Đợt 3
   { slug: 'xuong-nghe-thuat', name: { vi: 'Xưởng Nghệ Thuật Sắc Màu', en: 'Colorful Art Studio' }, faceStyle: 'face', animation: 'bounce', hidden: true },
@@ -353,7 +353,7 @@ export const CARD_ART = [
   { theme: 'anh-hung-sieu-thu', object: 'heo', objectName: { vi: 'Heo', en: 'Pig' }, rarity: 'A', slug: 'the-a-cao-boi', name: { vi: 'Cao Bồi', en: 'Cowboy' }, file: 'heo--a' },
   { theme: 'anh-hung-sieu-thu', object: 'voi', objectName: { vi: 'Voi', en: 'Elephant' }, rarity: 'S', slug: 'the-s-linh-cuu-hoa', name: { vi: 'Lính Cứu Hỏa', en: 'Firefighter' }, file: 'voi--s' },
   { theme: 'anh-hung-sieu-thu', object: 'capybara', objectName: { vi: 'Capybara', en: 'Capybara' }, rarity: 'S', slug: 'the-s-hai-tac', name: { vi: 'Hải Tặc', en: 'Pirate' }, file: 'capybara--s' },
-  { theme: 'the-thao-trai-cay', object: 'hamster', objectName: { vi: 'Hamster', en: 'Hamster' }, rarity: 'S', slug: 'the-s-tham-an', name: { vi: 'Tham Ăn', en: 'Little Glutton' }, file: 'hamster--s' },
+  { theme: 'the-thao-trai-cay', object: 'hamster', objectName: { vi: 'Hamster', en: 'Hamster' }, rarity: 'S', slug: 'the-s-tham-an', name: { vi: 'Tham Ăn', en: 'Snack Lover' }, file: 'hamster--s' },
 ];
 
 
@@ -530,16 +530,16 @@ export const PICTURE_NAME = {
   'xe-dap--xe-dap': { vi: 'Xe đạp', en: 'Bicycle' },
   'xe-cuu-thuong--xe-cuu-thuong': { vi: 'Xe cứu thương', en: 'Ambulance' },
   'may-keo--may-keo': { vi: 'Máy kéo', en: 'Tractor' },
-  'xe-may--xe-may': { vi: 'Xe máy', en: 'Scooter' },
+  'xe-may--xe-may': { vi: 'Xe máy', en: 'Motorbike' },
   'cap--cap': { vi: 'Cặp', en: 'Backpack' },
   'but-chi--but-chi': { vi: 'Bút chì', en: 'Pencil' },
   'hop-but--hop-but': { vi: 'Hộp bút', en: 'Pencil case' },
   'quyen-sach--quyen-sach': { vi: 'Quyển sách', en: 'Book' },
   'thuoc--thuoc': { vi: 'Thước', en: 'Ruler' },
   'but-mau--but-mau': { vi: 'Bút màu', en: 'Crayons' },
-  'bang--bang': { vi: 'Bảng', en: 'Blackboard' },
+  'bang--bang': { vi: 'Bảng', en: 'Chalkboard' },
   'keo-thu-cong--keo-thu-cong': { vi: 'Kéo thủ công', en: 'Craft scissors' },
-  'compa--compa': { vi: 'Compa', en: 'Compass' },
+  'compa--compa': { vi: 'Compa', en: 'Drawing compass' },
   'keo-dan--keo-dan': { vi: 'Keo dán giấy', en: 'Glue stick' },
   'gau-bong--gau-bong': { vi: 'Gấu Bông', en: 'Teddy Bear' },
   'bup-be--bup-be': { vi: 'Búp Bê', en: 'Doll' },
@@ -799,7 +799,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'xe-co-3-5',
   age: '3-5',
-  name: { vi: 'Phương Tiện Giao Thông', en: 'Transport' },
+  name: { vi: 'Phương Tiện Giao Thông', en: 'Transportation' },
   animation: 'drive',
   objects: [
     {
@@ -867,9 +867,9 @@ ART_THEMES.push({
     },
     {
       slug: 'xe-may',
-      name: { vi: 'Xe máy', en: 'Scooter' },
+      name: { vi: 'Xe máy', en: 'Motorbike' },
       pictures: [
-        { slug: 'xe-may', name: { vi: 'Xe máy', en: 'Scooter' }, file: 'xe-may--xe-may' },
+        { slug: 'xe-may', name: { vi: 'Xe máy', en: 'Motorbike' }, file: 'xe-may--xe-may' },
       ],
     },
   ],
@@ -925,9 +925,9 @@ ART_THEMES.push({
     },
     {
       slug: 'bang',
-      name: { vi: 'Bảng', en: 'Blackboard' },
+      name: { vi: 'Bảng', en: 'Chalkboard' },
       pictures: [
-        { slug: 'bang', name: { vi: 'Bảng', en: 'Blackboard' }, file: 'bang--bang' },
+        { slug: 'bang', name: { vi: 'Bảng', en: 'Chalkboard' }, file: 'bang--bang' },
       ],
     },
     {
@@ -939,9 +939,9 @@ ART_THEMES.push({
     },
     {
       slug: 'compa',
-      name: { vi: 'Compa', en: 'Compass' },
+      name: { vi: 'Compa', en: 'Drawing compass' },
       pictures: [
-        { slug: 'compa', name: { vi: 'Compa', en: 'Compass' }, file: 'compa--compa' },
+        { slug: 'compa', name: { vi: 'Compa', en: 'Drawing compass' }, file: 'compa--compa' },
       ],
     },
     {
@@ -1307,9 +1307,9 @@ ART_THEMES.push({
     },
     {
       slug: 'hoa-su',
-      name: { vi: 'Hoa sứ', en: 'Frangipani' },
+      name: { vi: 'Hoa sứ', en: 'Plumeria' },
       pictures: [
-        { slug: 'hoa-su', name: { vi: 'Hoa sứ', en: 'Frangipani' }, file: 'hoa-su--hoa-su' },
+        { slug: 'hoa-su', name: { vi: 'Hoa sứ', en: 'Plumeria' }, file: 'hoa-su--hoa-su' },
       ],
     },
     {
@@ -1353,7 +1353,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'chien-binh-bien-hinh-9',
   age: '9+',
-  name: { vi: 'Chiến Binh Biến Hình', en: 'Transformer Warriors' },
+  name: { vi: 'Chiến Binh Biến Hình', en: 'Shapeshifter Warriors' },
   animation: 'bounce',
   objects: [
     {
@@ -1438,9 +1438,9 @@ ART_THEMES.push({
     },
     {
       slug: 'quat-may',
-      name: { vi: 'Quạt máy', en: 'Fan' },
+      name: { vi: 'Quạt máy', en: 'Electric fan' },
       pictures: [
-        { slug: 'quat-may', name: { vi: 'Quạt máy', en: 'Fan' }, file: 'quat-may--quat-may' },
+        { slug: 'quat-may', name: { vi: 'Quạt máy', en: 'Electric fan' }, file: 'quat-may--quat-may' },
       ],
     },
     {
@@ -1782,16 +1782,16 @@ ART_THEMES.push({
     },
     {
       slug: 'ca-no',
-      name: { vi: 'Ca Nô Sóng Thần', en: 'Tsunami Speedboat' },
+      name: { vi: 'Ca Nô Sóng Thần', en: 'Wave Rider Speedboat' },
       pictures: [
-        { slug: 'song-than', name: { vi: 'Ca Nô Sóng Thần', en: 'Tsunami Speedboat' }, file: 'ca-no--song-than' },
+        { slug: 'song-than', name: { vi: 'Ca Nô Sóng Thần', en: 'Wave Rider Speedboat' }, file: 'ca-no--song-than' },
       ],
     },
     {
       slug: 'thuyen-hai-than',
-      name: { vi: 'Thuyền Hải Thần Sứa Biển', en: 'Sea Jellyfish Catamaran' },
+      name: { vi: 'Thuyền Hải Thần Sứa Biển', en: 'Jellyfish Catamaran' },
       pictures: [
-        { slug: 'sua-bien', name: { vi: 'Thuyền Hải Thần Sứa Biển', en: 'Sea Jellyfish Catamaran' }, file: 'thuyen-hai-than--sua-bien' },
+        { slug: 'sua-bien', name: { vi: 'Thuyền Hải Thần Sứa Biển', en: 'Jellyfish Catamaran' }, file: 'thuyen-hai-than--sua-bien' },
       ],
     },
     {

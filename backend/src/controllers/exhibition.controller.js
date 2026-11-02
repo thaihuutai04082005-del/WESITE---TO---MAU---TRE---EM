@@ -38,8 +38,9 @@ const BOARD_LABEL = {
   vi: { free: 'Hội trường triển lãm' },
   en: { free: 'Exhibition Hall' },
 };
-const dm = (key, days, withYear) => {
+const dm = (key, days, withYear, lang = 'vi') => {
   const d = new Date(Date.parse(`${key}T00:00:00Z`) + days * 86400000);
+  if (lang === 'en') return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(withYear ? { year: 'numeric' } : {}), timeZone: 'UTC' });
   const s = `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
   return withYear ? `${s}/${d.getUTCFullYear()}` : s;
 };
@@ -50,7 +51,7 @@ export async function certificate(req, res) {
   const image = req.body?.image;
   if (image != null && (!IMG_RE.test(image) || image.length > 3 * 1024 * 1024)) throw badRequest('invalid_input');
   const lang = req.body?.lang === 'en' ? 'en' : 'vi';
-  const week = `${dm(e.roundKey, 0)} – ${dm(e.roundKey, 6, true)}`;
+  const week = `${dm(e.roundKey, 0, false, lang)} – ${dm(e.roundKey, 6, true, lang)}`;
   const text =
     lang === 'en'
       ? {
@@ -59,8 +60,8 @@ export async function certificate(req, res) {
           line1: `for the picture “${e.name.en}”`,
           line2: 'Most loved picture of the week',
           board: BOARD_LABEL.en[e.board],
-          line3: `Week ${week} · ${e.total} reactions from friends`,
-          footer: 'Created by the Exhibition Hall — Bé Tô Màu',
+          line3: `Week of ${week} · ${e.total} reactions from friends`,
+          footer: 'Presented by the Exhibition Hall — Color Buddies',
         }
       : {
           heading: 'GIẤY KHEN',
