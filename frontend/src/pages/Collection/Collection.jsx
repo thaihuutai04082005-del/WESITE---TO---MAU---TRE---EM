@@ -314,8 +314,8 @@ function RoomShell({ tab, onTab, slots, pills }) {
   const cur = Math.min(page, pages - 1);
   const shown = slots.slice(cur * per, cur * per + per);
   const tabs = [
-    ['cards', <img key="cb" src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />, t('collection.cards')],
     ['artworks', '🖼️', t('collection.artworks')],
+    ['cards', <img key="cb" src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} />, t('collection.cards')],
   ];
   return (
     <div className="room" data-testid="collection-room">
@@ -452,15 +452,15 @@ export default function Collection() {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const wide = useWide();
-  const tab = params.get('tab') === 'artworks' ? 'artworks' : 'cards';
+  const tab = params.get('tab') === 'cards' ? 'cards' : 'artworks';
   if (wide) return <RoomArtworks key={tab} cards={tab === 'cards'} onTab={(k) => setParams({ tab: k })} />;
   return (
     <div className="page space-y-5">
       <h1 className="page-title">{t('collection.title')}</h1>
       <div className="flex gap-2 rounded-2xl bg-primary-light p-1">
         {[
-          ['cards', <><img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} /> {t('collection.cards')}</>],
           ['artworks', `🖼️ ${t('collection.artworks')}`],
+          ['cards', <><img src="/icons/card-back.webp" alt="" className="card-back-icon" draggable={false} /> {t('collection.cards')}</>],
         ].map(([k, label]) => (
           <button key={k} type="button" onClick={() => setParams({ tab: k })} className={`flex-1 whitespace-nowrap rounded-xl px-2 py-2 font-display text-[15px] font-bold transition sm:px-3 sm:text-lg ${tab === k ? 'bg-white text-primary-dark shadow-soft' : 'text-primary-dark/70'}`} data-testid={`col-tab-${k}`}>
             {label}
