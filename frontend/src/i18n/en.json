@@ -556,6 +556,7 @@
     "vip": {
       "name": "VIP",
       "limit": "Unlimited coloring",
+      "ribbon": "VIP privileges",
       "tagline": "Everything in Standard, and more",
       "perks": [
         {
@@ -588,9 +589,7 @@
       "chooseMonth": "Choose VIP Monthly",
       "chooseYear": "Choose VIP Yearly"
     },
-    "save": "Save 79,000đ, about 35%",
-    "avg": "Only about {{price}} per month",
-    "sameBenefits": "Same VIP benefits, only the duration differs."
+    "save": "Save 79,000đ, about 35%"
   },
   "payment": {
     "pending": "Confirming payment…",

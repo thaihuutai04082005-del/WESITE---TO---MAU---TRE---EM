@@ -160,7 +160,7 @@ export default function Plans() {
             <div key={c.key} className={`relative flex flex-col rounded-[28px] border-2 p-5 shadow-soft xl:p-6 ${th.card}`} data-testid={`plan-${c.key}`}>
               {c.best && (
                 <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#F59E0B] px-5 py-1.5 font-extrabold text-white shadow-soft">
-                  <span aria-hidden="true">👑</span> {t('plans.vip.tagline')}
+                  <span aria-hidden="true">👑</span> {t('plans.vip.ribbon')}
                 </span>
               )}
               <div className="flex items-start justify-between gap-3">
@@ -199,10 +199,8 @@ export default function Plans() {
                   {period === 'year' && (
                     <div className="mt-1 text-sm font-extrabold text-[#B45F00]">
                       <div>{t('plans.save')}</div>
-                      <div>{t('plans.avg', { price: formatVnd(Math.round(plans.year.priceVnd / 12 / 100) * 100) })}</div>
                     </div>
                   )}
-                  <div className="mt-1 text-sm text-muted">{t('plans.sameBenefits')}</div>
                 </>
               )}
               <span className={`mt-3 inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
