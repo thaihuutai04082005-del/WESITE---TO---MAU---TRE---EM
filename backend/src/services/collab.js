@@ -11,6 +11,7 @@ import { randomCode } from '../utils/ids.js';
 const rooms = new Map();
 const userRoom = new Map();
 const MAX_OPS = 5000;
+const EMPTY_ROOM_GRACE_MS = 60000; // phòng vắng người được giữ 60 giây
 
 function stateOf(room) {
   // Dựng lại trạng thái tranh từ nhật ký thao tác (phục vụ Undo theo từng bé).
@@ -67,6 +68,7 @@ export function registerCollab(io, socket) {
       p = { profile: socket.data.user, sockets: new Set(), color: CURSOR_COLORS.find((c) => !used.has(c)) || '#7D5FFF' };
       room.players.set(uid, p);
     }
+    clearTimeout(room.expire); // có người vào lại thì huỷ lịch xoá phòng
     p.sockets.add(socket.id);
     userRoom.set(uid, room.code);
     socket.join(channel(room));
@@ -82,7 +84,13 @@ export function registerCollab(io, socket) {
     room.players.delete(uid);
     userRoom.delete(uid);
     if (!room.players.size) {
-      rooms.delete(room.code);
+      // Phòng vắng người: giữ thêm một lúc rồi mới xoá, để bé vừa tạo phòng xong (chuyển trang → rời → vào lại) hoặc mất mạng
+      // thoáng chốc vẫn vào lại được đúng mã phòng, thay vì báo "không tìm thấy phòng".
+      clearTimeout(room.expire);
+      room.expire = setTimeout(() => {
+        if (!room.players.size) rooms.delete(room.code);
+      }, EMPTY_ROOM_GRACE_MS);
+      room.expire.unref?.();
       return;
     }
     if (room.hostId === uid) room.hostId = room.players.keys().next().value;

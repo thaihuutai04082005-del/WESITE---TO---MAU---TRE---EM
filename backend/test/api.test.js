@@ -359,6 +359,19 @@ test('Tô cùng nhau: đồng bộ thao tác, tối đa 4 bé, lưu vào lịch 
   socks.forEach((s) => s.close());
 });
 
+test('Tô cùng nhau: tạo phòng xong rời rồi vào lại ngay vẫn còn phòng (không báo "không tìm thấy phòng")', async () => {
+  const { token } = await register('cungleave');
+  const s = await connect(token);
+  const created = await emit(s, 'collab:create', { pictureId: 1 });
+  const code = created.room.code;
+  assert.equal((await emit(s, 'collab:join', { code })).room.code, code);
+  await emit(s, 'collab:leave', {}); // chuyển trang: rời phòng…
+  const again = await emit(s, 'collab:join', { code }); // …rồi vào lại ngay
+  assert.equal(again.room?.code, code);
+  assert.equal(again.error, undefined);
+  s.close();
+});
+
 test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, hết gói vẫn giữ chữ ký cũ', async () => {
   const { token } = await register('bena09');
   const s0 = await api('GET', '/users/me/signature', null, token);
