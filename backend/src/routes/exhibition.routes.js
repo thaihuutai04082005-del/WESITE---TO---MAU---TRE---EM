@@ -7,7 +7,6 @@ r.use(requireAuth);
 r.get('/', c.hall);
 r.get('/wall', c.wall);
 r.get('/mine', c.mine);
-r.get('/rooms/:board', c.room);
 r.post('/entries', requireNickname, c.submit);
 r.delete('/entries/:id', c.withdraw);
 r.put('/entries/:id/reaction', c.react);

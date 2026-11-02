@@ -335,14 +335,6 @@ export function hall(viewerId) {
   return { schedule: s, counts, lastRound: last?.round_key || null, winners: winners.map((r) => toClient(r, viewerId)), pictures: picturesFor(winners) };
 }
 
-export function room(board, viewerId) {
-  if (!EXHIBITION.boards.includes(board)) throw notFound();
-  maintain();
-  const s = schedule();
-  const rows = getDb().prepare(`${ENTRY_SQL} WHERE e.round_key = ? AND e.board = ? AND e.status = 'approved' AND e.hidden = 0 ORDER BY e.id`).all(s.current, board);
-  return { schedule: s, board, entries: rows.map((r) => toClient(r, viewerId)), pictures: picturesFor(rows) };
-}
-
 /**
  * Tường tranh ở sảnh, phân trang theo trang 5 tranh: tranh thắng giải vòng vừa rồi đứng đầu (đã chốt, không thả thêm cảm xúc),
  * rồi tới các tranh đã duyệt của vòng hiện tại (mới nhất trước) để bé thả cảm xúc.

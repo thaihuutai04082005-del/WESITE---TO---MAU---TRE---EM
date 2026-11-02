@@ -21,7 +21,6 @@ export function withdraw(req, res) {
 
 export const hall = (req, res) => res.json(Ex.hall(req.user.id));
 export const wall = (req, res) => res.json(Ex.wall(req.user.id, Number(req.query.offset) || 0, Number(req.query.limit) || 5));
-export const room = (req, res) => res.json(Ex.room(req.params.board, req.user.id));
 
 export function react(req, res) {
   const emoji = req.body?.emoji ?? null;

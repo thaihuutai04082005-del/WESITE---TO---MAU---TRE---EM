@@ -213,7 +213,6 @@
     "subtitle": "Where the best pictures by kids are shown every week.",
     "homeHint": "See friends’ pictures, send hearts and show off yours every week!",
     "submitCta": "Send a picture",
-    "rooms": "Rooms",
     "comingSoon": "Coming soon",
     "reactBtn": "React",
     "nextPictures": "Next 5 pictures",
@@ -289,7 +288,6 @@
     "winnersTitle": "Most loved pictures of the last round",
     "winnersWeek": "Round starting {{date}}",
     "noWinners": "No round has finished yet. Send a picture this week!",
-    "emptyRoom": "No pictures in this room this week. Send yours on Saturday or Sunday!",
     "status": {
       "pending": "Waiting for review",
       "rejected": "Missed rule {{rule}}",
