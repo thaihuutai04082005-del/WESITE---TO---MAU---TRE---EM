@@ -50,7 +50,7 @@ export default function ModeGuide({ card, onClose }) {
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-display text-lg font-extrabold text-white shadow-soft" style={{ background: card.accent }}>
                   {i + 1}
                 </span>
-                <p className="pt-2 text-base leading-snug text-ink">{step}</p>
+                <p className="pt-2 text-base leading-snug text-ink [text-wrap:pretty]">{step}</p>
               </li>
             ))}
         </ol>
@@ -60,7 +60,7 @@ export default function ModeGuide({ card, onClose }) {
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sun text-ink">
             <Icon name="bulb" size={20} strokeWidth={2.4} />
           </span>
-          <p className="text-sm leading-snug text-ink">
+          <p className="text-sm leading-snug text-ink [text-wrap:pretty]">
             <b>{t('guide.tip')}</b> {t(`guide.${card.key}.tip`)}
           </p>
         </div>

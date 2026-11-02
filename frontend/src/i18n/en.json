@@ -1004,7 +1004,7 @@
       "intro": "Pick a picture you like and color it beautifully.",
       "steps": [
         "Pick an age group, a theme, then a picture.",
-        "Pick a mode: \"Paint by number\" (numbers hint the colors) or \"Free coloring\" (any colors you like).",
+        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\" (any colors).",
         "Pick a tool and a color, then color the picture.",
         "When you're done press \"Finish\", choose a frame, then download or print."
       ],
@@ -1013,9 +1013,9 @@
     "arena": {
       "intro": "Compete with friends in a coloring contest — the top 3 win points.",
       "steps": [
-        "Press \"Find a match\" to play with other kids. Or \"Create room\", send the code to friends and press \"Start\".",
-        "When the match starts, the whole room colors the same picture.",
-        "When you're done press \"Submit\".",
+        "Press \"Find a match\" to play with other kids.",
+        "Or press \"Create room\", send the code to friends and press \"Start\".",
+        "The whole room colors one picture — press \"Submit\" when done.",
         "The top 3 earn Rank and Gacha points."
       ],
       "tip": "Fill the whole picture, mix colors nicely and be creative for a high score!"

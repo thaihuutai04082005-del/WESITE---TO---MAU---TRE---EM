@@ -1013,9 +1013,9 @@
     "arena": {
       "intro": "Thi tô tranh cùng các bạn, Top 3 nhận điểm thưởng.",
       "steps": [
-        "Bấm \"Tìm trận\" để thi với các bạn khác. Hoặc \"Tạo phòng\", gửi mã cho bạn bè rồi bấm \"Bắt đầu thi\".",
-        "Khi trận bắt đầu, cả phòng cùng tô một bức tranh.",
-        "Tô xong bấm \"Nộp bài\".",
+        "Bấm \"Tìm trận\" để thi với các bạn khác.",
+        "Hoặc bấm \"Tạo phòng\", gửi mã cho bạn bè rồi bấm \"Bắt đầu thi\".",
+        "Cả phòng cùng tô một bức tranh, tô xong bấm \"Nộp bài\".",
         "Top 3 nhận Điểm Rank và Điểm Gacha."
       ],
       "tip": "Tô kín tranh, phối màu đẹp và thật sáng tạo để được điểm cao!"
