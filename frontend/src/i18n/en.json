@@ -42,32 +42,32 @@
   },
   "landing": {
     "title": "Fun, creative coloring every day!",
-    "subtitle": "Hundreds of cute pictures, a weekly creative arena, rare picture cards to collect and storybooks made by your child.",
+    "subtitle": "Hundreds of adorable pictures, a weekly creative Arena, rare picture cards to collect, and storybooks your child can make.",
     "cta": "Sign up free",
     "features": {
       "creative": {
         "title": "Two coloring modes",
-        "text": "Paint-by-number to learn colors, or Free Coloring to create anything."
+        "text": "Follow a guide to learn colors, or color freely any way you like."
       },
       "arena": {
         "title": "Creative Arena",
-        "text": "Color alongside 10 kids with fair, automatic scoring."
+        "text": "Color alongside up to 10 kids, with fair, automatic scoring."
       },
       "gacha": {
         "title": "Collect rare cards",
-        "text": "Win prizes to open S/A/B/C cards — no real money involved."
+        "text": "Win Arena prizes to open S/A/B/C cards — no purchase needed."
       },
       "together": {
         "title": "Color together",
-        "text": "Invite friends to color one picture in real time."
+        "text": "Invite friends to color one picture together in real time."
       },
       "storybook": {
         "title": "Make a storybook",
-        "text": "Turn pictures into a flip-page book and download a PDF."
+        "text": "Turn your pictures into a flip-page book and download it as a PDF."
       },
       "safe": {
         "title": "Safe for kids",
-        "text": "Parents verify with a one-time code; friends and rooms use private codes only."
+        "text": "Parents verify with a one-time code, and kids connect with friends and join rooms using private codes only."
       }
     }
   },
@@ -88,17 +88,17 @@
     "registerSubtitle": "Create an account — no Gmail needed.",
     "registeredOk": "You're signed up! Please log in.",
     "username": "Username",
-    "usernameHint": "4–20 characters: letters, numbers, _ or dot.",
+    "usernameHint": "4–20 characters: letters (no accents), numbers, underscores or periods.",
     "password": "Password",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "confirmPassword": "Repeat password",
-    "passwordHint": "At least 6 characters with letters and numbers.",
+    "confirmPassword": "Confirm password",
+    "passwordHint": "At least 6 characters, with both letters and numbers.",
     "passwordMismatch": "The passwords don't match.",
     "captcha": "Verification code",
     "captchaRefresh": "New code",
-    "guardian": "Parent contact",
-    "guardianHint": "Only used to recover the password. We'll send a one-time code for a parent to confirm.",
+    "guardian": "Parent or guardian contact",
+    "guardianHint": "Only used to recover your password. We'll send a one-time code for a parent to confirm.",
     "contact": {
       "phone": "Phone number",
       "email": "Email (Gmail)"
@@ -111,19 +111,19 @@
     "forgot": "Forgot password?",
     "noAccount": "No account? Sign up",
     "haveAccount": "Have an account? Log in",
-    "forgotTitle": "Recover password",
+    "forgotTitle": "Recover your password",
     "forgotStep": {
-      "contact": "Enter the parent phone or email used when signing up.",
+      "contact": "Enter the phone number or email a parent used when signing up.",
       "code": "If the details are correct, a code was sent to {{to}}.",
-      "reset": "Pick the account and set a new password."
+      "reset": "Choose the account and set a new password."
     },
     "sendCode": "Send code",
     "pickAccount": "Child account",
     "newPassword": "New password",
     "resetPassword": "Reset password",
     "google": {
-      "or": "Or, for users aged 13 and over",
-      "age": "I confirm I am at least 13 years old to use a Google account.",
+      "or": "Or sign in with Google (ages 13 and up)",
+      "age": "I confirm I'm at least 13 years old to use a Google account.",
       "ageRequired": "Please confirm you are 13 or older first."
     }
   },
@@ -139,7 +139,7 @@
     "saved": "Saved!",
     "username": "Username",
     "friendCode": "Friend code",
-    "gachaPoints": "{{n}} Gacha points",
+    "gachaPoints": "{{n}} Card Points",
     "nickname": "Display name",
     "avatar": "Avatar",
     "avatarFrame": "Avatar frame",
@@ -147,7 +147,7 @@
     "plan": "Plan",
     "until": "until {{date}}",
     "upgrade": "See plans",
-    "toNextRank": "{{n}} points to {{rank}}",
+    "toNextRank": "{{n}} more points to reach {{rank}}",
     "maxRank": "Top rank!"
   },
   "signature": {
@@ -179,13 +179,12 @@
       "artist": "Artist"
     },
     "handIntro": "Use your finger or mouse to sign in the box below.",
-    "handHint": "Sign here ✍️",
-    "clearPad": "Start over",
+    "handHint": "Signing by hand is a VIP perk.",
+    "clearPad": "Clear",
     "save": "Save as my signature",
     "saved": "Signature saved!",
     "unlock": "Unlock this style",
     "unlockHand": "Unlock hand-signing",
-    "handHint": "Hand-signing is for VIP.",
     "changeNote": "Pictures you already signed keep their old signature. The new one is used next time.",
     "dragHint": "Drag your signature anywhere you like, or tap a corner button below.",
     "size": "Size",
@@ -209,20 +208,20 @@
     "cards": "Rare card pictures",
     "artworks": "Themed pictures",
     "noArtworks": "No finished pictures yet. Color a lovely one!",
-    "noCardArtworks": "No finished rare card pictures yet. Open the Rare card pictures tab on the picture page to color one!",
-    "toGacha": "Go to Card packs"
+    "noCardArtworks": "No finished rare card pictures yet. Head to the Rare card pictures tab on the picture page to color one!",
+    "toGacha": "Go to Cards"
   },
   "exhibition": {
     "title": "Exhibition hall",
-    "subtitle": "Where the best pictures by kids are shown every week.",
-    "homeHint": "See friends’ pictures, send hearts and show off yours every week!",
-    "submitCta": "Send a picture",
+    "subtitle": "Where kids' best pictures are shown off each week.",
+    "homeHint": "See your friends' pictures, send hearts, and show off your own every week!",
+    "submitCta": "Submit a picture",
     "comingSoon": "Coming soon",
     "reactBtn": "React",
     "nextPictures": "Next 5 pictures",
     "prevPictures": "Previous 5 pictures",
     "reactSchedule": "Reaction schedule",
-    "gateTime": "Gate times",
+    "gateTime": "Submission times",
     "scheduleBtn": "Exhibition schedule",
     "pictures": "{{count}} pictures",
     "boards": {
@@ -236,125 +235,125 @@
       "heart": "Heart",
       "cheer": "Hooray",
       "clap": "Clap",
-      "love": "So pretty",
+      "love": "Beautiful",
       "star": "Awesome"
     },
-    "ownHint": "This is your picture — friends will cheer for you!",
+    "ownHint": "This is your picture — your friends will send you reactions!",
     "lockedHint": "Reactions are closed for this week.",
     "changeHint": "Tap another to change, tap again to remove.",
     "reactHint": "Pick one reaction to cheer your friend!",
     "report": "Tell Bear",
-    "reportConfirm": "Is this picture not okay? Bear will take a look. Your name stays secret.",
-    "reported": "Thank you! Bear will take a look.",
+    "reportConfirm": "Does this picture seem inappropriate? Bear will take a look. Your name will stay private.",
+    "reported": "Thank you! Bear will take a look at this picture.",
     "rules": {
       "title": "Rules",
-      "intro": "Bear’s little reminder: exhibition pictures need all 7 of these!",
-      "when": "Send pictures on Saturday and Sunday — they are shown all next week.",
+      "intro": "Bear's friendly reminder: exhibition pictures need to follow all 8 of these rules!",
+      "when": "Submit pictures on Saturday and Sunday. They are displayed all the following week.",
       "r1": {
         "title": "Sign your picture",
-        "text": "It is your art — put your signature on it!"
+        "text": "It's your art — put your signature on it!"
       },
       "r2": {
         "title": "Color almost all of it",
-        "text": "At least 8 out of 10 parts, no big white gaps."
+        "text": "Color at least 80% of the picture, with no big white gaps."
       },
       "r3": {
-        "title": "Colored in Free mode",
-        "text": "Rare cards and theme pictures all count, as long as you color them in Free mode."
+        "title": "Color in Free mode",
+        "text": "Rare card pictures and themed pictures both count, as long as you color them in Free mode."
       },
       "r4": {
-        "title": "Each picture exhibits once",
-        "text": "That leaves room for new pictures."
+        "title": "Each picture is shown once",
+        "text": "This makes room for new pictures."
       },
       "r5": {
         "title": "Color neatly",
-        "text": "Keep colors inside the lines, not too much outside."
+        "text": "Stay inside the lines. A little wobble is okay, but not too much."
       },
       "r6": {
-        "title": "Happy and friendly",
-        "text": "No rude, scary or fighting pictures."
+        "title": "Keep it happy and friendly",
+        "text": "No rude, scary, or violent pictures."
       },
       "r7": {
         "title": "No bad words",
-        "text": "No phone numbers or home addresses on the picture."
+        "text": "Never write a phone number or home address on your picture."
       },
       "r8": {
         "title": "Color with your whole heart",
-        "text": "Don’t rush just to finish."
+        "text": "Don't rush just to get it done."
       }
     },
     "thisWeek": "Week {{from}} – {{to}}",
     "reactUntil": "Reactions open until {{date}}",
     "judging": "Choosing winners · new round opens {{date}}",
-    "submitGate": "Picture gate",
+    "submitGate": "Submission window",
     "submitOpenUntil": "Open until {{date}}",
     "submitOpensAt": "Opens {{date}}",
     "winnersTitle": "Most loved pictures of the last round",
     "winnersWeek": "Round starting {{date}}",
-    "noWinners": "No round has finished yet. Send a picture this week!",
+    "noWinners": "No rounds have ended yet. Submit a picture this week!",
     "status": {
       "pending": "Waiting for review",
-      "rejected": "Missed rule {{rule}}",
+      "rejected": "Didn't meet rule {{rule}}",
       "removed": "Removed from the exhibition",
-      "showing": "On show now",
+      "showing": "Now showing",
       "done": "Exhibited",
-      "approved": "On show from {{date}}"
+      "approved": "Showing from {{date}}"
     },
-    "sentApproved": "Sent! Your picture goes up on Monday 🎉",
-    "sentPending": "Sent! Bear will check it before it goes up.",
+    "sentApproved": "Submitted! Your picture goes up in the hall on Monday 🎉",
+    "sentPending": "Submitted! Bear will check it before it goes up in the hall.",
     "eligible": "Ready for the exhibition",
-    "submitTitle": "Send to the exhibition",
-    "notYet": "This picture misses rule {{rules}}. Fix it and try again — Bear believes in you!",
-    "submitNote": "After sending, the signature and the picture are locked. It is shown from Monday ({{date}}) to Sunday.",
+    "submitTitle": "Submit to the exhibition",
+    "notYet": "This picture doesn't meet rule {{rules}} yet. Fix it and try again — Bear believes in you!",
+    "submitNote": "Once you submit, the signature and the picture are locked. It will be shown from Monday ({{date}}) through Sunday.",
     "readRules": "I have read the rules",
-    "send": "Send",
-    "sendShort": "Send to exhibition",
-    "quota": "Sent {{used}}/{{limit}}",
+    "send": "Submit",
+    "sendShort": "Submit to exhibition",
+    "quota": "{{used}}/{{limit}} submitted",
     "visit": "Visit the hall",
-    "premiumMore": "VIP can send 5 pictures per round.",
-    "withdraw": "Take back",
-    "withdrawn": "Picture taken back.",
+    "premiumMore": "VIP members can submit 5 pictures per round.",
+    "withdraw": "Withdraw",
+    "withdrawn": "Picture withdrawn.",
     "submitOpensShort": "Opens Saturday",
     "full": "Limit reached",
-    "notType": "Only pictures colored in Free mode can go to the exhibition.",
-    "lockedArtwork": "This picture was sent to the exhibition, so it stays as it is.",
+    "notType": "Only pictures colored in Free mode can go in the exhibition.",
+    "lockedArtwork": "This picture was submitted to the exhibition, so it can't be edited.",
     "review": {
       "title": "Review exhibition pictures",
       "approveAll": "Approve all ({{n}})",
-      "hint": "Only pictures the system could not approve and pictures reported many times. Approve all, then reject only the ones breaking a rule.",
+      "hint": "Only pictures the system could not approve automatically, plus pictures that were reported many times. Tap \"Approve all,\" then reject only the ones that break a rule.",
       "empty": "Nothing left to review.",
       "reported": "reported {{n}} times",
-      "pickRule": "Reject for rule:",
-      "restore": "Show again",
+      "pickRule": "Reject for breaking rule:",
+      "restore": "Restore",
       "remove": "Remove",
       "approve": "Approve",
       "reject": "Reject"
     }
   },
   "share": {
-    "brand": "Bé Tô Màu",
-    "title": "Show off",
-    "hint": "A picture with a frame, your signature and your achievements — send it to your family!",
+    "brand": "Color Buddies",
+    "title": "Share your art",
+    "hint": "A picture with its frame, your signature, and your achievements — share it with your family!",
     "download": "Download",
     "send": "Share now",
-    "downloaded": "Image downloaded!",
+    "downloaded": "Image saved to your device!",
     "certificate": "Certificate",
-    "button": "Show off"
+    "button": "Share"
   },
   "showcase": {
-    "title": "Trophy cabinet",
-    "of": "{{name}}’s trophy cabinet",
-    "exhibited": "{{n}} exhibited",
+    "title": "Trophy case",
+    "of": "{{name}}'s trophy case",
+    "exhibited": "{{n}} in the exhibition",
     "awards": "{{n}} awards",
     "reactions": "{{n}} reactions",
-    "emptyOwn": "Your cabinet is empty. Send a picture to the exhibition to show achievements here!",
-    "empty": "No exhibited pictures yet."
+    "emptyOwn": "Your trophy case is empty. Submit a picture to the exhibition to show off your achievements here!",
+    "empty": "They haven't shown any pictures in the exhibition yet."
   },
   "select": {
     "boardTitle": "Pick a picture to color",
     "themes": "Pick a theme",
     "ageEmpty": "New pictures coming soon for this age group!",
-    "cardsEmpty": "No cards yet. Play the Creative Arena to earn Gacha points, then open cards! 🎁",
+    "cardsEmpty": "No cards yet. Play in the Creative Arena to earn Card Points, then open some cards! 🎁",
     "themesHint": "What would you like to color today?",
     "pictures": "Choose a picture",
     "objects": "Pick a subject",
@@ -373,17 +372,17 @@
     "pick": "How would you like to color?",
     "template": {
       "title": "Paint by number",
-      "text": "A sample picture and numbers for every area."
+      "text": "A sample picture with number hints for each area."
     },
     "free": {
       "title": "Free coloring",
-      "text": "Pick any colors you like — counts in the Arena."
+      "text": "Use any colors you like — this mode counts toward the Arena."
     }
   },
   "coloring": {
     "toolsTitle": "Coloring tools",
-    "paintFirst": "Color a little first, then tap Done!",
-    "reference": "Sample",
+    "paintFirst": "Color a bit first, then tap Finish!",
+    "reference": "Reference",
     "numberedColors": "Numbered colors",
     "customColor": "Pick any color",
     "favorite": "Save as favorite",
@@ -399,8 +398,8 @@
       "dirty": "Unsaved",
       "error": "Save failed"
     },
-    "clearTitle": "Clear everything?",
-    "clearText": "All colors, strokes and stickers will be removed. You can press Undo to get them back.",
+    "clearTitle": "Clear everything and start over?",
+    "clearText": "All colors, strokes and stickers will be removed. You can tap Undo to get them back.",
     "clearConfirm": "Clear all"
   },
   "tools": {
@@ -424,12 +423,12 @@
   },
   "reveal": {
     "title": "Your picture came to life!",
-    "subtitle": "It has been saved to your History.",
+    "subtitle": "It's been saved to your History.",
     "another": "Color another"
   },
   "history": {
     "title": "Coloring history",
-    "retention": "Finished pictures are kept forever. Unfinished ones are deleted after 30 days without opening (you'll be warned first).",
+    "retention": "Finished pictures are saved forever. Unfinished pictures are deleted if you don't open them for 30 days (we'll warn you first).",
     "filter": {
       "all": "All",
       "in_progress": "In progress",
@@ -440,27 +439,27 @@
       "completed": "Finished"
     },
     "mode": {
-      "template": "By number",
-      "free": "Free",
+      "template": "Paint by number",
+      "free": "Free coloring",
       "arena": "Arena",
-      "collab": "Together"
+      "collab": "Color together"
     },
-    "empty": "No pictures yet.",
+    "empty": "You haven't colored any pictures yet.",
     "noPreview": "Not started",
     "edit": "Edit",
-    "frame": "Artwork frame",
-    "frameHint": "The frame is added around the picture when downloading or printing.",
-    "buyFrames": "Buy more frames in the Shop →",
-    "confirmDelete": "Delete this picture from history?"
+    "frame": "Picture frame",
+    "frameHint": "The frame is added around your picture when you download or print it.",
+    "buyFrames": "Get more frames in the Shop →",
+    "confirmDelete": "Delete this picture from your history?"
   },
   "plans": {
-    "title": "Choose a plan",
-    "subtitle": "Pick the plan that fits your kid!",
+    "title": "Choose your plan",
+    "subtitle": "Pick the plan that's right for your child!",
     "best": "Best value",
     "choose": "Choose",
     "renew": "Renew",
     "current": "Current plan",
-    "included": "Default",
+    "included": "Included",
     "note": "Pay with MoMo or PayPal. Taxes included.",
     "payTitle": "Pay for {{plan}}",
     "chooseMethod": "Choose a payment method",
@@ -470,11 +469,11 @@
       "paypal": "PayPal (USD) · auto-renew",
       "bank": "Bank transfer / QR (VND)"
     },
-    "mockNotice": "The payment gateway is not configured on this server. This is a TEST transaction; no real money is charged.",
+    "mockNotice": "Payments aren't set up on this server yet. This is a TEST transaction — no real money will be charged.",
     "mockConfirm": "Confirm test payment",
     "success": "Upgrade complete! Have fun coloring.",
     "badge": {
-      "free": "Standard · {{n}}/{{limit}} left today",
+      "free": "Standard · {{n}} of {{limit}} pictures left today",
       "month": "VIP · until {{date}}",
       "year": "VIP · until {{date}}"
     },
@@ -485,11 +484,11 @@
       "perks": [
         {
           "i": "🔒",
-          "t": "5 age-based themes"
+          "t": "5 themes for your child's age"
         },
         {
           "i": "🎮",
-          "t": "Arena, Card draw, Color together"
+          "t": "Arena, Cards, Color together"
         },
         {
           "i": "📖",
@@ -509,7 +508,7 @@
         },
         {
           "i": "🏆",
-          "t": "Trophy case, certificates, PNG & print"
+          "t": "Trophy case, certificates, PNG download and printing"
         }
       ]
     },
@@ -524,7 +523,7 @@
       "limit": "Unlimited coloring"
     },
     "providerHint": {
-      "bank": "Scan with your banking or MoMo app. Pay each time; we remind you before it ends.",
+      "bank": "Scan with your banking or MoMo app. You pay each time, and we'll remind you before your plan ends.",
       "paypal": "Renews automatically each period. Cancel anytime."
     },
     "usdNote": "or {{price}} with PayPal",
@@ -532,14 +531,14 @@
     "perYearUsd": "/year",
     "qr": {
       "title": "Scan to pay",
-      "scan": "Open your banking or MoMo app → Scan QR. Amount and message are pre-filled.",
+      "scan": "Open your banking or MoMo app and scan the QR code. The amount and message are filled in for you.",
       "bank": "Bank",
       "account": "Account number",
       "holder": "Account holder",
       "amount": "Amount",
       "content": "Transfer message",
-      "contentHint": "Keep this message exactly so we can match your payment.",
-      "waiting": "Waiting for your transfer… the plan unlocks automatically (usually under a minute).",
+      "contentHint": "Keep this message exactly as is so we can match your payment.",
+      "waiting": "Waiting for your transfer… your plan unlocks automatically as soon as it arrives (usually under a minute).",
       "copied": "Copied!",
       "copy": "Copy"
     },
@@ -547,10 +546,10 @@
     "manage": {
       "title": "Your plan",
       "active": "{{plan}} · active until {{date}}",
-      "autoRenew": "Renews automatically via PayPal every {{period}}. Cancel anytime; you keep access until it ends.",
-      "manual": "Paid once. We will remind you 3 days before it ends.",
+      "autoRenew": "Renews automatically through PayPal every {{period}}. Cancel anytime and keep access until your plan ends.",
+      "manual": "One-time payment. We'll remind you 3 days before it ends.",
       "cancel": "Cancel auto-renew",
-      "cancelConfirm": "Cancel auto-renew? You keep the plan until it ends, then move to Free.",
+      "cancelConfirm": "Cancel auto-renew? You keep your plan until it ends, then switch to the Standard plan.",
       "cancelled": "Auto-renew cancelled.",
       "month": "month",
       "year": "year"
@@ -558,7 +557,7 @@
     "vip": {
       "name": "VIP",
       "limit": "Unlimited coloring",
-      "ribbon": "VIP privileges",
+      "ribbon": "VIP perks",
       "tagline": "Everything in Standard, and more",
       "perks": [
         {
@@ -567,7 +566,7 @@
         },
         {
           "i": "🎮",
-          "t": "Arena, Card draw, Color together"
+          "t": "Arena, Cards, Color together"
         },
         {
           "i": "🏛️",
@@ -583,11 +582,11 @@
         },
         {
           "i": "✨",
-          "t": "5 extra WOW signature styles"
+          "t": "5 extra \"wow\" signature styles"
         },
         {
           "i": "✏️",
-          "t": "Sign by hand"
+          "t": "Hand-drawn signature"
         },
         {
           "i": "👑",
@@ -599,16 +598,16 @@
       "chooseMonth": "Choose VIP Monthly",
       "chooseYear": "Choose VIP Yearly"
     },
-    "save": "Save 79,000đ, about 35%"
+    "save": "Save 79,000 VND (about 35%)"
   },
   "payment": {
     "pending": "Confirming payment…",
     "paid": "Payment successful!",
-    "failed": "Payment was not completed"
+    "failed": "Payment didn't go through"
   },
   "upgrade": {
-    "title": "Out of pictures for now!",
-    "freeUsed": "The Standard plan includes 2 pictures per day. Come back tomorrow, or ask a parent to upgrade to VIP for unlimited coloring.",
+    "title": "You're out of pictures for today!",
+    "freeUsed": "The Standard plan includes 2 pictures a day. Come back tomorrow, or ask a parent to upgrade to VIP for unlimited coloring.",
     "cta": "See plans",
     "later": "Later"
   },
@@ -618,11 +617,11 @@
     "cards": {
       "level": "Level",
       "rank": "Arena rank",
-      "gacha": "Gacha points"
+      "gacha": "Card Points"
     },
     "levelMissions": "Level {{level}} missions",
     "maxed": "You've finished all 20 levels! New missions are coming soon.",
-    "hint": "Each mission gives Ruby right away. Finish all 3 to reach the next level.",
+    "hint": "You earn Ruby for each mission as soon as you finish it. Finish all 3 to reach the next level.",
     "difficulty": {
       "easy": "Easy",
       "medium": "Medium",
@@ -643,32 +642,32 @@
   },
   "popup": {
     "missionDone": "Mission complete!",
-    "levelUp": "Level {{level}}!",
+    "levelUp": "Level up! You are now level {{level}}!",
     "newMissions": "New missions unlocked.",
-    "rankUp": "{{rank}} rank!",
+    "rankUp": "You reached {{rank}} rank!",
     "newFrame": "You got a new avatar frame."
   },
   "arena": {
     "title": "Creative Arena",
-    "subtitle": "Up to {{size}} kids per room color the same picture in Free mode for {{minutes}} minutes.",
-    "random": "Random match",
-    "randomHint": "We match you with kids at a similar level.",
+    "subtitle": "Each room fits up to {{size}} kids who color the same picture in Free mode for {{minutes}} minutes.",
+    "random": "Quick match",
+    "randomHint": "We'll match you with kids at a similar level.",
     "open": "Open now",
     "closed": "Closed · reopens at {{time}}",
     "slots": "Hours: {{slots}}",
     "findMatch": "Find a match",
     "private": "Private room",
-    "privateHint": "Create a room and send the code to friends (friends only).",
+    "privateHint": "Create a room and share the code with your friends (friends only).",
     "createRoom": "Create room",
     "roomCode": "Room code",
-    "join": "Join",
+    "join": "Join room",
     "rubricTitle": "How scoring works",
-    "rewardsHint": "1st +{{a}}, 2nd +{{b}}, 3rd +{{c}} Rank and Gacha points.",
-    "weekly": "Weekly leaders {{week}}",
-    "noLeaders": "Be the first on the board this week!",
+    "rewardsHint": "1st +{{a}}, 2nd +{{b}}, 3rd +{{c}} Rank Points and Card Points.",
+    "weekly": "Week {{week}} leaderboard",
+    "noLeaders": "Be the first on the leaderboard!",
     "myHistory": "Your matches",
-    "noHistory": "No matches yet.",
-    "placeOf": "Place {{place}}/{{n}}",
+    "noHistory": "You haven't played any matches yet.",
+    "placeOf": "#{{place}} of {{n}}",
     "noPlace": "Not ranked",
     "points": "pts",
     "waitingRoom": "Waiting room",
@@ -679,7 +678,7 @@
     "players": "Players: {{n}}/{{max}}",
     "startsIn": "Starts in",
     "needMore": "At least {{n}} players are needed to start.",
-    "startNow": "Start",
+    "startNow": "Start match",
     "getReady": "Get ready…",
     "submittedCount": "{{n}}/{{total}} submitted",
     "submit": "Submit",
@@ -699,34 +698,34 @@
     "upTo": "Up to {{n}} kids",
     "currentRank": "Current rank",
     "rankInfoTitle": "Rank levels",
-    "rankInfoHint": "Finish in the Top 3 in the Arena to earn Rank Points. Rank Points never go down.",
+    "rankInfoHint": "Finish in the top 3 in the Arena to earn Rank Points. Rank Points never go down.",
     "youAreHere": "You are here",
     "yourPoints": "You have {{n}} points",
     "toNext": "{{n}} more to reach {{rank}}"
   },
   "rubric": {
-    "coverage": "Coverage",
-    "coverageHint": "Fill everything, leave no big blank areas.",
+    "coverage": "Color coverage",
+    "coverageHint": "Fill in the whole picture, with no big blank areas.",
     "harmony": "Color harmony",
-    "harmonyHint": "Colors go well together with a clear accent.",
-    "creativity": "Creativity",
-    "creativityHint": "The more unique, the higher the score.",
-    "diversity": "Variety",
-    "diversityHint": "Use many different tones.",
+    "harmonyHint": "Colors that go well together, with a standout accent.",
+    "creativity": "Creativity & originality",
+    "creativityHint": "The more your picture stands out from the others, the higher the score.",
+    "diversity": "Shade variety",
+    "diversityHint": "Use lots of different tones.",
     "time": "Time",
-    "timeHint": "Finishing early and still looking great earns a bonus."
+    "timeHint": "Finishing early while still looking great earns a bonus."
   },
   "gacha": {
-    "noPulls": "No pulls left — compete in the Arena to earn Gacha Points!",
-    "title": "Open picture cards",
-    "points": "{{n}} Gacha points",
-    "pulls": "{{n}} pulls",
-    "how": "Every {{cost}} Gacha points = 1 pull. Earn Gacha points by placing top 3 in the Arena. Pulling never lowers your rank.",
+    "noPulls": "No draws left — play in the Arena to earn Card Points!",
+    "title": "Open Picture Cards",
+    "points": "{{n}} Card Points",
+    "pulls": "{{n}} draws",
+    "how": "Every {{cost}} Card Points = 1 card draw. Earn Card Points by finishing in the Arena's top 3. Drawing cards never lowers your rank.",
     "pull1": "Open 1 card",
     "pullN": "Open {{n}} cards",
-    "remaining": "{{n}} more to go",
+    "remaining": "{{n}} cards left",
     "collection": "Collection",
-    "empty": "No cards yet. Join the Arena to earn Gacha points!",
+    "empty": "No cards yet. Play in the Arena to earn Card Points!",
     "colorThis": "Color this picture",
     "rarity": {
       "S": "Super rare",
@@ -735,24 +734,24 @@
       "C": "Common"
     },
     "deck": "Card deck",
-    "notOwned": "Not yet",
-    "lockedHint": "Pull this card to unlock coloring!",
+    "notOwned": "Not collected",
+    "lockedHint": "Draw this card to unlock it for coloring!",
     "allThemes": "All themes",
     "previewNote": "Previewing all cards."
   },
   "shop": {
     "tabFrames": "Picture frames",
     "title": "Shop",
-    "hint": "Spend Ruby from missions on pattern colors, frames and storybook covers.",
+    "hint": "Spend the Ruby you earn from missions on pattern colors, frames, and storybook covers.",
     "patterns": "Pattern colors",
     "covers": "Storybook covers",
-    "frames": "Artwork frames",
+    "frames": "Picture frames",
     "avatarFrames": "Avatar frames",
     "avatarFramesHint": "Not for sale — unlocked by ranking up in the Arena.",
     "limited": "Limited",
     "owned": "Owned",
-    "equip": "Use",
-    "unequip": "Stop using",
+    "equip": "Equip",
+    "unequip": "Remove",
     "buy": "Buy",
     "bought": "Bought {{name}}!",
     "confirmTitle": "Buy this item?",
@@ -774,49 +773,49 @@
     "accept": "Accept",
     "decline": "Decline",
     "list": "Friends",
-    "empty": "No friends yet. Swap friend codes with your friends!",
-    "outgoing": "Waiting for {{n}} to accept.",
+    "empty": "No friends yet. Trade friend codes with people you know!",
+    "outgoing": "{{n}} pending request(s)",
     "requestSent": "Request sent!",
     "nowFriends": "You're friends now!"
   },
   "trade": {
     "title": "Gift & swap cards",
     "with": "Gift/swap with {{name}}",
-    "limit": "Used {{used}}/{{limit}} today.",
+    "limit": "{{used}} of {{limit}} trades used today.",
     "kind": {
       "gift": "Gift",
       "exchange": "Swap"
     },
     "pickMine": "Pick your card",
     "pickTheirs": "Pick {{name}}'s card",
-    "noCards": "You have no cards to give yet.",
-    "friendNoCards": "Your friend has no cards yet.",
+    "noCards": "You don't have any cards to give yet.",
+    "friendNoCards": "Your friend doesn't have any cards yet.",
     "confirmGift": "Give “{{card}}” to {{name}}?",
     "confirmExchange": "Swap “{{mine}}” for {{name}}'s “{{theirs}}”?",
-    "twoWay": "Your friend must also agree for it to go through.",
+    "twoWay": "Your friend has to accept too, or the trade won't go through.",
     "send": "Send offer",
-    "sent": "Sent! Waiting for your friend.",
+    "sent": "Sent! Waiting for your friend to accept.",
     "nonePending": "No pending offers.",
-    "fromX": "{{name}} sent you",
-    "toX": "You sent {{name}}",
+    "fromX": "From {{name}}",
+    "toX": "To {{name}}",
     "accept": "Accept",
     "decline": "Decline",
-    "done": "Done!",
+    "done": "Trade complete!",
     "history": "Trade history",
-    "confirmAcceptTitle": "Confirm",
+    "confirmAcceptTitle": "Accept this card?",
     "confirmAcceptGift": "{{name}} wants to give you “{{card}}”. Accept?",
     "confirmAcceptExchange": "{{name}} wants to swap “{{theirs}}” for your “{{mine}}”. Accept?",
     "status": {
       "accepted": "Completed",
       "declined": "Declined",
       "cancelled": "Cancelled",
-      "failed": "Invalid",
+      "failed": "Failed",
       "pending": "Pending"
     }
   },
   "together": {
-    "inviteTitle": "{{name}} invites you to color together",
-    "inviteBlock": "Don't accept invites from this friend for 5 minutes",
+    "inviteTitle": "{{name}} invited you to color together",
+    "inviteBlock": "Block invites from this friend for 5 minutes",
     "inviteDecline": "Decline",
     "inviteAccept": "Accept",
     "friendsTitle": "Invite friends",
@@ -824,39 +823,39 @@
     "invite": "Invite",
     "inviteSent": "Invited {{name}}!",
     "inRoom": "In the room",
-    "inviteDeclined": "{{name}} can't color together right now.",
+    "inviteDeclined": "{{name}} can't color right now.",
     "title": "Color together",
-    "subtitle": "2–4 kids color one picture and see each other's colors instantly.",
-    "create": "New room",
-    "createHint": "Pick a picture, then send the room code to friends.",
+    "subtitle": "2–4 kids color one picture and see each other's colors in real time.",
+    "create": "Create a room",
+    "createHint": "Pick a picture, then send the room code to your friends.",
     "pickPicture": "Pick a picture",
     "join": "Join a room",
     "joinHint": "Enter the room code a friend sent you.",
     "joinBtn": "Join",
-    "safety": "Shared rooms can only be joined with a private code — there is no public room list.",
-    "room": "Shared room",
+    "safety": "Shared rooms can only be joined with a private code — there's no public room list.",
+    "room": "Coloring room",
     "count": "{{n}}/{{max}} kids",
-    "save": "Save picture",
+    "save": "Save group picture",
     "saved": "{{name}} saved the picture to everyone's History!",
     "sizeChip": "2–4 kids",
     "codeChip": "Private code"
   },
   "storybook": {
     "titleOnCover": "Type the story title…",
-    "chooseCover": "Pick cover",
-    "pickFromCollection": "Pick a picture from collection",
+    "chooseCover": "Choose a cover",
+    "pickFromCollection": "Pick a picture from your collection",
     "changePicture": "Change picture",
     "captionHere": "Write something here…",
     "addPage": "Add new page",
     "removePage": "Delete this page",
-    "saveBook": "Save story",
+    "saveBook": "Save book",
     "pickFirst": "Pick a picture for this page first",
     "needTitle": "Give your story a title on the cover!",
     "needPicture": "Page {{n}} has no picture yet — pick one!",
-    "needPage": "Add at least one picture page!",
+    "needPage": "Add at least one page with a picture!",
     "maxPages": "A story can have at most {{n}} pages.",
-    "leaveTitle": "Story not saved",
-    "leaveText": "If you leave now, what you just wrote will be lost. Save it?",
+    "leaveTitle": "Unsaved storybook",
+    "leaveText": "If you leave now, your changes will be lost. Do you want to save them?",
     "leaveDiscard": "Leave without saving",
     "signTitle": "My storybooks",
     "title": "My storybooks",
@@ -868,11 +867,11 @@
     "done": "Finished",
     "draft": "Draft",
     "bookTitle": "Title",
-    "titlePlaceholder": "e.g. The Adventures of Chubby Cat",
+    "titlePlaceholder": "e.g. Whiskers' Big Adventure",
     "pagesTitle": "Pages ({{n}})",
     "addHint": "Pick pictures below to add pages.",
     "caption": "Caption",
-    "captionPlaceholder": "Write a line or caption for this page…",
+    "captionPlaceholder": "Write a caption or some dialogue for this page…",
     "moveUp": "Move up",
     "moveDown": "Move down",
     "pick": "Pictures in your collection",
@@ -880,13 +879,13 @@
     "noArtworks": "No finished pictures yet.",
     "saved": "Storybook saved!",
     "complete": "Finish storybook",
-    "needTwo": "At least 2 pages are needed to finish.",
+    "needTwo": "You need at least 2 pages to finish your storybook.",
     "share": "Share",
     "shareLink": "Share link",
     "linkCopied": "Share link created!",
     "by": "By {{name}}",
     "notFound": "Storybook not found.",
-    "coverPick": "Cover",
+    "coverPick": "Choose a cover",
     "coverDefault": "Default cover",
     "buyCovers": "Get more covers in the Shop"
   },
@@ -895,202 +894,202 @@
     "generic": "You have a new notification.",
     "mission_complete": "Mission “{{title}}” complete · +{{ruby}} Ruby",
     "level_up": "You reached level {{level}}!",
-    "rank_up": "You ranked up! New avatar frame and {{ruby}} Ruby.",
+    "rank_up": "You ranked up! You got a new avatar frame and {{ruby}} Ruby.",
     "friend_request": "{{from}} wants to be your friend.",
     "friend_accepted": "{{by}} accepted your friend request.",
     "trade_offer": "{{from}} sent you a card offer.",
     "trade_accepted": "{{by}} accepted the card trade.",
     "trade_declined": "{{by}} declined the card trade.",
     "plan_activated": "Your plan is active until {{date}}.",
-    "draft_expiring": "Unfinished picture “{{name}}” will be deleted on {{date}} unless you open it.",
-    "exhibit_award": "🏆 Congratulations! “{{name}}” is the Most loved picture this week!",
-    "exhibit_done": "“{{name}}” finished its exhibition with {{n}} reactions. Well done!",
+    "draft_expiring": "Your unfinished picture “{{name}}” will be deleted on {{date}} unless you open it again.",
+    "exhibit_award": "🏆 Congratulations! “{{name}}” is this week's Most Loved Picture!",
+    "exhibit_done": "“{{name}}” has finished its exhibition with {{n}} reactions. Great job!",
     "exhibit_reactions": "🎉 {{n}} more friends reacted to “{{name}}”!",
-    "exhibit_approved": "“{{name}}” was approved and goes up on Monday!",
-    "exhibit_rejected": "“{{name}}” missed rule {{rule}} of the exhibition rules. Try another picture!",
-    "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring!"
+    "exhibit_approved": "“{{name}}” was approved and will be on display Monday!",
+    "exhibit_rejected": "“{{name}}” didn't meet rule {{rule}} of the exhibition rules. Try submitting another picture!",
+    "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring without limits!"
   },
   "errors": {
-    "invite_blocked": "Your friend is busy — try again later.",
+    "invite_blocked": "Your friend is busy right now. Try again in a bit.",
     "friend_offline": "Your friend is offline.",
     "invite_too_fast": "Wait a moment before inviting again.",
     "invalid_friend": "Can't invite this friend.",
     "network_error": "Can't reach the server. Check your connection and try again.",
-    "server_error": "Something went wrong, please try again.",
+    "server_error": "Something went wrong. Please try again later.",
     "unauthorized": "Please log in again.",
-    "token_invalid": "Your session expired.",
-    "forbidden": "You can't do that.",
+    "token_invalid": "Your session has expired. Please log in again.",
+    "forbidden": "You don't have permission to do that.",
     "not_found": "Not found.",
-    "too_many_requests": "Too fast! Wait a moment.",
-    "invalid_input": "Some details aren't valid.",
-    "invalid_credentials": "Wrong username or password.",
-    "captcha_wrong": "Wrong verification code, try a new one.",
-    "invalid_username": "Usernames use letters, numbers, _ or dot (4–20 characters).",
+    "too_many_requests": "Slow down a little — try again in a moment.",
+    "invalid_input": "Some of the details aren't valid.",
+    "invalid_credentials": "Incorrect username or password.",
+    "captcha_wrong": "That verification code isn't right. Try a new one.",
+    "invalid_username": "Usernames can use letters (no accents), numbers, underscores and periods, 4–20 characters.",
     "username_taken": "That username is taken.",
-    "weak_password": "Passwords need letters and numbers.",
-    "invalid_email": "That email isn't valid.",
+    "weak_password": "Passwords need both letters and numbers.",
+    "invalid_email": "That email address isn't valid.",
     "invalid_phone": "That phone number isn't valid (10 digits starting with 0).",
-    "invalid_contact_type": "Choose phone or email.",
-    "otp_invalid": "Invalid code.",
-    "otp_expired": "The code expired, request a new one.",
-    "otp_wrong": "Wrong code.",
-    "otp_too_many_attempts": "Too many wrong tries, request a new code.",
-    "otp_too_frequent": "A code was just sent, wait a minute.",
-    "reset_token_invalid": "The recovery session expired.",
-    "google_not_configured": "Google sign-in isn't enabled.",
-    "google_token_invalid": "Google sign-in failed.",
-    "google_token_expired": "Google sign-in expired, try again.",
+    "invalid_contact_type": "Please choose phone or email.",
+    "otp_invalid": "That code isn't valid.",
+    "otp_expired": "That code has expired. Please request a new one.",
+    "otp_wrong": "That code isn't right.",
+    "otp_too_many_attempts": "Too many incorrect tries. Please request a new code.",
+    "otp_too_frequent": "A code was just sent. Please wait a minute.",
+    "reset_token_invalid": "The recovery session has expired.",
+    "google_not_configured": "Google sign-in isn't available right now.",
+    "google_token_invalid": "Google sign-in didn't work.",
+    "google_token_expired": "Google sign-in timed out. Please try again.",
     "age_confirmation_required": "Please confirm you are 13 or older.",
-    "nickname_required": "Please set a display name first.",
+    "nickname_required": "Please choose a display name first.",
     "nickname_private_info": "Display names can't contain phone numbers or emails.",
-    "invalid_avatar": "Invalid avatar.",
-    "invalid_language": "Invalid language.",
-    "quota_exceeded": "You're out of pictures for now.",
+    "invalid_avatar": "That avatar isn't valid.",
+    "invalid_language": "That language isn't supported.",
+    "quota_exceeded": "You've used all your pictures for today.",
     "artwork_not_found": "Picture not found.",
     "picture_not_found": "Picture not found.",
-    "card_not_owned": "You don't have this card.",
+    "card_not_owned": "You don't own this card yet.",
     "invalid_mode": "Invalid coloring mode.",
     "invalid_thumbnail": "Invalid preview image.",
     "invalid_plan": "Invalid plan.",
     "invalid_provider": "Invalid payment method.",
-    "payment_unavailable": "Payments are under maintenance, please try again later.",
-    "payment_failed": "Payment was not completed.",
+    "payment_unavailable": "Payments are down for maintenance. Please ask a parent to try again later.",
+    "payment_failed": "Payment didn't go through.",
     "payment_not_found": "Payment not found.",
-    "mock_disabled": "Test payments are disabled.",
-    "not_enough_ruby": "Not enough Ruby. Do more missions!",
-    "not_enough_gacha_points": "Not enough Gacha points.",
+    "mock_disabled": "Test payments are turned off.",
+    "not_enough_ruby": "Not enough Ruby yet. Complete more missions!",
+    "not_enough_gacha_points": "Not enough Card Points.",
     "item_not_for_sale": "This item isn't for sale.",
-    "item_already_owned": "You already own this.",
+    "item_already_owned": "You already own this item.",
     "item_not_found": "Item not found.",
     "item_not_owned": "You don't own this item.",
-    "friend_code_not_found": "No one has that friend code.",
+    "friend_code_not_found": "We couldn't find that friend code.",
     "cannot_friend_self": "That's your own code!",
     "already_friends": "You're already friends.",
-    "request_already_sent": "Request already sent — wait for them to accept.",
+    "request_already_sent": "You already sent a request. Wait for them to accept.",
     "not_friends": "Only friends can do this.",
-    "storybook_limit": "The Standard plan has 1 storybook. Upgrade to VIP for more.",
-    "storybook_pages_limit": "The Standard plan allows 10 pages per story. Upgrade to VIP for more.",
-    "trade_daily_limit": "You've used all gifts/swaps for today. VIP gets 5 a day.",
-    "card_in_trade": "This card is in another offer.",
+    "storybook_limit": "The Standard plan includes 1 storybook. Upgrade to VIP to make more.",
+    "storybook_pages_limit": "The Standard plan allows up to 10 pages per storybook. Upgrade to VIP to add more.",
+    "trade_daily_limit": "You've used all your gifts and swaps for today. VIP members get 5 a day.",
+    "card_in_trade": "This card is already part of another offer.",
     "trade_invalid": "This offer is no longer valid.",
     "trade_not_found": "Offer not found.",
     "storybook_not_found": "Storybook not found.",
-    "storybook_too_short": "At least 2 pages are needed.",
-    "invalid_pages": "Invalid pages.",
-    "invalid_card": "This card is not in the game.",
-    "invalid_count": "Invalid number of pulls.",
+    "storybook_too_short": "A storybook needs at least 2 pages.",
+    "invalid_pages": "Invalid page list.",
+    "invalid_card": "That card doesn't exist.",
+    "invalid_count": "Invalid number of draws.",
     "invalid_cover": "Invalid storybook cover.",
-    "cover_not_owned": "You have not bought this cover in the Shop.",
+    "cover_not_owned": "You haven't bought this cover in the Shop yet.",
     "invalid_page_artwork": "Only your finished pictures can be used.",
-    "arena_closed": "The Arena is closed now, come back during open hours.",
+    "arena_closed": "The Arena is closed right now. Come back during open hours.",
     "already_in_room": "You're already in another room.",
     "room_not_found": "Room not found.",
-    "room_started": "This match already started.",
+    "room_started": "This match has already started.",
     "room_full": "The room is full.",
-    "not_host": "Only the host can start.",
+    "not_host": "Only the host can start the match.",
     "not_enough_players": "Not enough players yet.",
-    "not_playing": "The match isn't running.",
-    "already_submitted": "Already submitted.",
+    "not_playing": "The match hasn't started yet, or it's already over.",
+    "already_submitted": "You've already submitted.",
     "time_up": "Time's up.",
     "empty": "The picture is still empty — color some more!",
     "payload_too_large": "That's too much data.",
     "admin_only": "Admins only.",
-    "signature_name_length": "The name on a signature must be 1–20 characters.",
+    "signature_name_length": "A signature name must be 1–20 characters.",
     "signature_private_info": "Signatures can't contain phone numbers, emails or links.",
-    "signature_bad_word": "That name has a word that isn’t nice — please pick another!",
-    "signature_premium_required": "This style is for VIP.",
+    "signature_bad_word": "That name has a word that isn't nice. Please pick another!",
+    "signature_premium_required": "This style is for VIP members.",
     "signature_style_invalid": "Invalid signature style.",
     "signature_hand_invalid": "That hand signature didn't work — please sign again.",
     "signature_invalid": "Invalid signature.",
     "signature_not_default": "You can only sign with your own signature.",
-    "exhibit_closed": "The picture gate is open only on Saturday and Sunday (until 20:00).",
-    "exhibit_rules": "This picture does not meet the exhibition rules yet.",
-    "exhibit_limit": "You already sent the maximum for this round.",
-    "exhibit_cannot_withdraw": "The picture is already on show and can’t be taken back.",
-    "artwork_exhibited": "This picture was sent to the exhibition, so it can’t be edited or deleted.",
+    "exhibit_closed": "Submissions are open only on Saturday and Sunday (until 8:00 PM).",
+    "exhibit_rules": "This picture doesn't meet the exhibition rules yet.",
+    "exhibit_limit": "You've already submitted the maximum number of pictures this round.",
+    "exhibit_cannot_withdraw": "This picture is already on display, so it can't be withdrawn.",
+    "artwork_exhibited": "This picture was submitted to the exhibition, so it can't be edited or deleted.",
     "exhibit_locked": "Reactions are closed for this week.",
     "exhibit_own": "This is your own picture.",
-    "exhibit_unverified": "This account needs parent verification.",
-    "entry_not_found": "This picture is not in the hall.",
-    "no_award": "Only award-winning pictures have a certificate.",
-    "already_subscribed": "You already have an auto-renewing PayPal plan. Cancel it before choosing another plan.",
-    "no_recurring": "No auto-renewing plan."
+    "exhibit_unverified": "This account needs to be verified by a parent.",
+    "entry_not_found": "This picture isn't in the hall.",
+    "no_award": "Only award-winning pictures get a certificate.",
+    "already_subscribed": "You already have an auto-renewing PayPal plan. Cancel auto-renew before choosing another plan.",
+    "no_recurring": "No auto-renewing plan found."
   },
   "guide": {
     "label": "How it works",
-    "open": "How to use: {{name}}",
+    "open": "Guide: {{name}}",
     "tip": "Note:",
     "gotIt": "Got it",
     "start": "Let's go",
     "color": {
-      "intro": "Pick a picture you like and color it beautifully.",
+      "intro": "Pick a picture you love and color it beautifully.",
       "steps": [
         "Pick an age group, a theme, then a picture.",
-        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\" (color freely).",
-        "Pick a tool (crayon, brush, sticker…) and a color, then color.",
-        "Made a mistake? Use Eraser or Undo to fix it.",
-        "When you're done press \"Finish\" and choose a picture frame.",
-        "Press \"Download\" to save it or \"Print\" to print it on paper."
+        "Choose \"Paint by number\" (with color hints) or \"Free coloring\".",
+        "Pick a tool (crayon, brush, sticker…) and a color, then start coloring.",
+        "Made a mistake? Use Eraser or Undo.",
+        "When you're done, tap \"Finish\" and choose a frame.",
+        "Tap \"Download\" to save it or \"Print\" to print it."
       ],
-      "tip": "Finished pictures go to your Collection, unfinished ones stay in History."
+      "tip": "Finished pictures go to your Collection. Unfinished ones are in History."
     },
     "arena": {
-      "intro": "Compete with friends — scoring is automatic and fair.",
+      "intro": "Compete with other kids — scoring is automatic and fair.",
       "steps": [
-        "Press \"Find a match\" to play with other kids.",
-        "Or press \"Create room\", send the code to friends and press \"Start\".",
-        "The whole room colors one picture — press \"Submit\" when done.",
-        "The system scores automatically, fairly for every kid.",
-        "1st place gets +10 points, 2nd gets +8, 3rd gets +6.",
-        "Rewards are Rank points (to move up) and Gacha points (to open cards)."
+        "Tap \"Find a match\" to play with other kids.",
+        "Or tap \"Create room\", send the code to friends, then tap \"Start match\".",
+        "Everyone colors the same picture. Tap \"Submit\" when done.",
+        "Scores are calculated automatically, so it's fair for everyone.",
+        "1st place earns +10 points, 2nd +8, and 3rd +6.",
+        "Prizes are Rank Points (to move up) and Card Points (to open cards)."
       ],
-      "tip": "Fill the whole picture, mix colors nicely and be creative for a high score!"
+      "tip": "Fill the whole picture, mix colors well, and get creative for a high score!"
     },
     "together": {
       "intro": "2–4 friends color one picture together.",
       "steps": [
-        "Press \"New room\" and pick the picture to color together.",
-        "Invite friends from the list, or send the room code to anyone.",
-        "Invited friends press \"Accept\"; others type the code in \"Join a room\".",
-        "Color together (up to 4 kids) — everyone sees the colors right away.",
-        "Press \"Save picture\": it goes to everyone's Collection (with a 4-kids badge) and History."
+        "Tap \"Create a room\" and pick a picture to color together.",
+        "Invite friends from your list, or share the room code with anyone.",
+        "Invited friends tap \"Accept\". Others enter the code under \"Join a room\".",
+        "Color together (up to 4 kids) and see everyone's colors instantly.",
+        "Tap \"Save group picture\" and it goes to everyone's Collection and History."
       ],
       "tip": "The right code gets anyone in, even non-friends, if the room isn't full."
     },
     "gacha": {
-      "intro": "Use Gacha points to open rare picture cards and collect them.",
+      "intro": "Use Card Points to open rare picture cards and collect them.",
       "steps": [
-        "Finish in the top 3 of the Arena to earn Gacha points.",
-        "Every 50 Gacha points let you open 1 card.",
+        "Finish in the Arena's top 3 to earn Card Points.",
+        "Every 50 Card Points gets you 1 card.",
         "Tap a glowing card on the stage to flip it, or tap \"Open N cards\".",
-        "Cards have 4 tiers: S (super rare), A (rare), B (uncommon), C (common).",
-        "Cards you open appear in the Rare card pictures tab on the picture page.",
-        "Tap a card to color it — the finished picture goes to your Collection."
+        "There are 4 tiers: S (super rare), A (rare), B (uncommon), C (common).",
+        "Cards you open appear under Rare card pictures on the picture page.",
+        "Tap a card to color it. The finished picture goes to your Collection."
       ],
       "tip": "You can gift or swap cards with friends on the Friends page."
     },
     "storybooks": {
-      "intro": "Turn the pictures you've colored into a storybook of your own.",
+      "intro": "Turn your colored pictures into a storybook of your own.",
       "steps": [
-        "Press \"New storybook\" and the book opens.",
-        "Type the title on the cover, press \"Pick cover\" to change it.",
-        "Turn to an inside page, press \"Pick a picture from collection\".",
-        "Write under the picture. To add a page press \"Add new page\".",
-        "Press \"Save story\" to keep it.",
-        "Then you can flip through it, download the PDF or share it."
+        "Tap \"New storybook\" to open a new book.",
+        "Type the title on the cover. Tap \"Choose a cover\" to change it.",
+        "Turn to an inside page and tap \"Pick a picture from your collection\".",
+        "Write under the picture. To add a page, tap \"Add new page\".",
+        "Tap \"Save book\" to keep it.",
+        "Then flip through it, download a PDF, or share it with family."
       ],
-      "tip": "A story needs at least 2 pages before you can press \"Finish storybook\"."
+      "tip": "A storybook needs at least 2 pages before you can tap \"Finish storybook\"."
     },
     "missions": {
       "intro": "Complete missions to level up and earn Ruby.",
       "steps": [
-        "Each level has 3 missions — finish one and get Ruby right away.",
-        "Missions include coloring, logging in, making friends, the Arena…",
-        "The higher the level, the harder the missions and the more Ruby.",
-        "Finish all 3 missions to level up (there are 20 levels in all).",
-        "Spend Ruby in the Shop on pattern colors, frames and storybook covers."
+        "Each level has 3 missions. Finish one and get Ruby right away.",
+        "Missions include coloring, logging in, making friends, playing in the Arena, and more.",
+        "The higher the level, the harder the missions and the more Ruby you earn.",
+        "Finish all 3 missions to level up (there are 20 levels).",
+        "Spend Ruby in the Shop on pattern colors, frames, and storybook covers."
       ],
-      "tip": "Avatar frames aren't sold — you unlock them by moving up a rank in the Arena."
+      "tip": "Avatar frames aren't for sale. You unlock them by ranking up in the Arena."
     }
   }
 }

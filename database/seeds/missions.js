@@ -1,8 +1,8 @@
 // 20 cấp khởi điểm × 3 nhiệm vụ. Cấp 1–5 dễ (10 Ruby), 6–15 trung bình (20 Ruby), 16–20 khó (30 Ruby).
 const T = {
   complete_any: [(n) => `Tô xong ${n} tranh`, (n) => `Finish ${n} picture${n > 1 ? 's' : ''}`],
-  complete_free: [(n) => `Tô xong ${n} tranh Sáng tạo`, (n) => `Finish ${n} Free Coloring picture${n > 1 ? 's' : ''}`],
-  complete_template: [(n) => `Tô xong ${n} tranh Theo mẫu`, (n) => `Finish ${n} Paint-by-Number picture${n > 1 ? 's' : ''}`],
+  complete_free: [(n) => `Tô xong ${n} tranh Sáng tạo`, (n) => `Finish ${n} Free coloring picture${n > 1 ? 's' : ''}`],
+  complete_template: [(n) => `Tô xong ${n} tranh Theo mẫu`, (n) => `Finish ${n} Paint by number picture${n > 1 ? 's' : ''}`],
   login_streak: [(n) => `Đăng nhập ${n} ngày liên tiếp`, (n) => `Log in ${n} days in a row`],
   new_theme: [() => 'Thử tô 1 chủ đề mới', () => 'Try a new theme'],
   download: [(n) => `Tải về hoặc in ${n} tranh`, (n) => `Download or print ${n} picture${n > 1 ? 's' : ''}`],
@@ -12,7 +12,7 @@ const T = {
   arena_join: [(n) => `Tham gia Đấu trường sáng tạo ${n} lần`, (n) => `Join the Creative Arena ${n} time${n > 1 ? 's' : ''}`],
   collab_join: [(n) => `Tô cùng bạn bè ${n} lần`, (n) => `Color together with friends ${n} time${n > 1 ? 's' : ''}`],
   shop_buy: [(n) => `Mua ${n} món trong Shop`, (n) => `Buy ${n} item${n > 1 ? 's' : ''} in the Shop`],
-  flipbook_complete: [(n) => `Hoàn thành ${n} cuốn Flipbook`, (n) => `Finish ${n} Flipbook${n > 1 ? 's' : ''}`],
+  flipbook_complete: [(n) => `Hoàn thành ${n} cuốn Flipbook`, (n) => `Finish ${n} storybook${n > 1 ? 's' : ''}`],
   rank_at_least: [(n, p) => `Đạt Rank ${{ silver: 'Bạc', gold: 'Vàng' }[p]} trở lên`, (n, p) => `Reach ${p[0].toUpperCase() + p.slice(1)} rank or higher`],
 };
 

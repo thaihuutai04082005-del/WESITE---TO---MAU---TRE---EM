@@ -7,7 +7,7 @@ import { useLayoutEffect } from 'react';
 // nên nếu sau này có tên dài hơn thì vẫn không bị rớt dòng.
 const LONGEST = {
   vi: ['Xứ Sở Học Cụ', 'Xứ Sở Đồ Chơi Thức Giấc', 'Bánh kem nhiều tầng', 'Chạy Trên Vành Đai Hành Tinh', 'Bông Tuyết Khổng Lồ Nâng Nhà'],
-  en: ['Princess of a Thousand Flowers', 'Stationery Land', 'Fairytale stone bridge', 'Birthday Gift for the King', 'Lullaby for Little Sister'],
+  en: ['Princess of a Thousand Flowers', 'School Supplies Land', 'Fairytale stone bridge', 'Birthday Gift for the King', 'Lullaby for Little Sister'],
 };
 
 /**
