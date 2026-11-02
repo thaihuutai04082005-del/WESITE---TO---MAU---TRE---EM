@@ -1,6 +1,6 @@
 // Màn hình tô màu cá nhân (Theo mẫu / Sáng tạo): tự lưu, tính lượt ở thao tác đầu tiên, hoàn thành → Tranh sống.
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useAuth } from '../../store/auth';
@@ -155,6 +155,12 @@ export default function ColoringScreen() {
     }
   }
 
+  // Quay lại đúng màn hình trước đó (chọn tranh, bộ sưu tập…); mở thẳng trang này không có trang trước thì về màn chọn tranh.
+  function goBack() {
+    if (window.history.state?.idx > 0) navigate(-1);
+    else navigate('/color');
+  }
+
   async function saveAndExit() {
     if (starting.current) await starting.current;
     try {
@@ -196,9 +202,9 @@ export default function ColoringScreen() {
         }}
         header={
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <Link to="/history" className="btn-ghost min-h-11 px-3" aria-label={t('common.back')}>
+            <button type="button" className="btn-ghost min-h-11 px-3" aria-label={t('common.back')} onClick={goBack} data-testid="draw-back">
               <Icon name="back" />
-            </Link>
+            </button>
             <div className="min-w-0 flex-1">
               <h1 className="truncate font-display text-2xl font-extrabold">{picture.name[i18n.language]}</h1>
               <div className="flex items-center gap-2 text-sm font-bold text-muted">
