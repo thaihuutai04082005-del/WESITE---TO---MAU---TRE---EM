@@ -12,6 +12,14 @@ import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
 import HelloBear from '../../components/HelloBear';
 import { ColorArt, TrophyArt, TogetherArt, GachaArt, BookArt, MissionArt, SunCloud } from '../../components/Illustrations';
 
+// 5 tranh ở trang giới thiệu, theo thứ tự ô: chó (ô lớn), Chiến Binh Siêu Tốc, Tiên Cá Hải Lam, Xe Đua Phản Lực, búp bê.
+// Ảnh bìa của mỗi chủ đề chính là tranh đầu tiên của chủ đề đó.
+const LANDING_SLUGS = ['dong-vat-3-4', 'chien-binh-bien-hinh-9', 'tien-ca-phep-thuat-9', 'doi-xe-vu-tru', 'do-choi-3-5'];
+const landingThemes = (themes) => {
+  const picked = LANDING_SLUGS.map((slug) => themes.find((th) => th.slug === slug)).filter(Boolean);
+  return picked.length === LANDING_SLUGS.length ? picked : themes.slice(0, 5);
+};
+
 function Landing() {
   const { t } = useTranslation();
   const [themes, setThemes] = useState([]);
@@ -36,7 +44,7 @@ function Landing() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
-          {themes.slice(0, 5).map((th, i) => (
+          {landingThemes(themes).map((th, i) => (
             <div key={th.slug} className={`card overflow-hidden p-1 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>
               <PictureView picture={th.cover} reveal className="rounded-2xl" />
             </div>
