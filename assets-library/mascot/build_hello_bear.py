@@ -252,6 +252,10 @@ def left_of(p, q):
 HEM_L = ((163, 478), (190, 452))
 HEM_R = ((420, 478), (410, 452))
 sleeve = side_zone & inner & (ys_ < 488) & (((xs_ < 184) & ~left_of(*HEM_L)) | ((xs_ > 414) & left_of(*HEM_R)))
+# chỉ tô trắng chỗ vốn không phải quần xanh / nét viền xanh của yếm (giữ nguyên mép yếm cạnh cúc áo)
+orig_blue = (B > 170) & (R < 160) & (A > 200)
+navy_line = dark & (B > R + 2)
+sleeve &= ~ndimage.binary_dilation(orig_blue | navy_line, iterations=1)
 need |= sleeve
 
 # Tô bù chỉ bằng màu của chính thân (áo/quần/khăn) — vùng ngoài thân, nét viền và dải cần tô coi như chưa biết
@@ -275,7 +279,7 @@ body_a = np.where(side_zone & (inside > 0) & need, cov, body_a).astype(np.uint8)
 
 # Nét viền mới dọc hai sườn
 OUTLINE = np.array([69, 23, 10], np.float32)
-for c in [c for c, _ in sides] + [np.array(HEM_L, float), np.array(HEM_R, float)]:
+for c in [c for c, _ in sides]:
     k = raster(line_pts=c, width=6.5)[..., None]
     body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
     body_a = np.maximum(body_a, (k[..., 0] * 255).astype(np.uint8))
@@ -287,6 +291,47 @@ body_a[under_head] = 0
 low = np.zeros((H, W), bool)
 low[628:, :] = True
 body_a[low & lightish0] = 0
+# Mẩu xám vụn của ảnh gốc ở mép yếm trái (cạnh cẳng tay): bên trong thân → trắng, bên ngoài → trong suốt
+spur = np.zeros((H, W), bool)
+spur[452:486, 158:182] = True
+spur &= lightish0 & ~((B > 170) & (R < 160))
+body_rgb[spur & (inside > 0.5)] = 255
+body_a[spur & (inside <= 0.5)] = 0
+# Chỗ mép yếm trái chạm sườn: ảnh gốc lem xám → tô lại (trên: áo trắng, dưới: quần xanh) và nối nét yếm liền tới sườn
+zone = np.zeros((H, W), bool)
+zone[456:492, 158:184] = True
+brown_line = (R > G + 25) & (lum < 110)
+navy_px = (B > R + 25) & (lum < 110)
+blue_px = (B > 170) & (R < 160) & (lum > 110)
+P0, P1 = (182.0, 457.0), (165.0, 477.0)
+above = ((P1[0] - P0[0]) * (ys_ - P0[1]) - (P1[1] - P0[1]) * (xs_ - P0[0])) > 0
+fixz = zone & (inside > 0.5) & ~brown_line & ~((navy_px | blue_px) & ~above)
+body_rgb[fixz & above] = 255
+below = zone & (inside > 0.5) & ~above
+body_rgb[below] = [53, 160, 231]
+body_a[fixz | below] = 255
+k = raster(line_pts=sides[0][0], width=6.5)[..., None] * zone[..., None]
+body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
+k = raster(line_pts=np.array([P0, P1]), width=5.0)[..., None] * zone[..., None]
+body_rgb = (body_rgb * (1 - k) + np.array([22, 58, 96], np.float32) * k).astype(np.uint8)
+# Tay áo hai bên vẽ lại hẳn bằng hình học: vùng giữa mép yếm và đường sườn tô trắng phẳng, rồi kẻ lại
+# nét mép yếm (xanh đậm) và nét sườn (nâu) cho sắc gọn — hết răng cưa, hết vệt lem quanh nách.
+NAVY = np.array([22, 58, 96], np.float32)
+BIB_R = [(391, 384), (395, 400), (398, 416), (401, 432), (404, 448), (408, 462), (414, 472), (420, 478)]
+BIB_L = [(198, 386), (194, 400), (190, 416), (187, 432), (185, 448), (182, 457), (165, 477)]
+for bib, (c, _), end_y in ((BIB_R, sides[1], 478), (BIB_L, sides[0], 477)):
+    upper = c[c[:, 1] <= end_y + 0.5]
+    poly = np.vstack([np.array(bib, float), upper[::-1]])
+    cov = raster(poly_pts=poly)
+    m = cov > 0
+    body_rgb[m] = (body_rgb[m] * (1 - cov[m][:, None]) + 255 * cov[m][:, None]).astype(np.uint8)
+    body_a[m] = np.maximum(body_a[m], (cov[m] * 255).astype(np.uint8))
+for c, _ in sides:
+    k = raster(line_pts=c, width=6.5)[..., None]
+    body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
+for bib in (BIB_R, BIB_L):
+    k = raster(line_pts=spline(bib), width=5.0)[..., None]
+    body_rgb = (body_rgb * (1 - k) + NAVY * k).astype(np.uint8)
 # Bỏ các mẩu vụn rời (nét đầu/vai lẻ loi) khỏi lớp thân
 bl, bn = ndimage.label(body_a > 0)
 if bn > 1:
@@ -327,8 +372,67 @@ for p in ('legL', 'legR'):
     legs[p] = leg
 
 
+SCALE = 2  # xuất gấp đôi để nét viền mịn, sắc trên màn hình độ phân giải cao
+
+
+def smoothstep(e0, e1, x):
+    t = np.clip((x - e0) / (e1 - e0), 0, 1)
+    return t * t * (3 - 2 * t)
+
+
+def crisp(arr):
+    """Làm nét lớp ảnh: phóng 2 lần, làm phẳng mảng màu (hết lấm tấm do nén), nét viền và mép ảnh sắc gọn."""
+    a = arr[..., 3].astype(np.float32) / 255
+    rgb_ = arr[..., :3].astype(np.float32)
+    h, w = a.shape
+    size = (w * SCALE, h * SCALE)
+    # phóng to dạng nhân trước alpha để mép không bị viền tối
+    pa = cv2.resize(a, size, interpolation=cv2.INTER_CUBIC)
+    prgb = cv2.resize(rgb_ * a[..., None], size, interpolation=cv2.INTER_CUBIC)
+    pa = np.clip(pa, 0, 1)
+    up = np.clip(prgb / np.maximum(pa, 1e-3)[..., None], 0, 255)
+    # mảng màu: lọc giữ cạnh để phẳng màu, hết vệt nhoè
+    flat = cv2.bilateralFilter(up.astype(np.uint8), 9, 28, 6).astype(np.float32)
+    flat = cv2.bilateralFilter(flat.astype(np.uint8), 7, 22, 4).astype(np.float32)
+    # nét viền: độ đậm mực theo độ sáng, làm sắc lại bằng smoothstep hẹp
+    lum_ = (up[..., 0] * 0.299 + up[..., 1] * 0.587 + up[..., 2] * 0.114)
+    ink_raw = 1 - smoothstep(50, 92, lum_)  # nét viền ~35–45; bóng nâu của lông ≥ 92 không bị tính là nét
+    ink_raw = cv2.GaussianBlur(ink_raw, (0, 0), 0.9)
+    ink = smoothstep(0.38, 0.62, ink_raw)
+    # màu mực: trung bình màu các điểm rất đậm ở gần (giữ nâu đậm / xanh đậm của từng nét)
+    core = (lum_ < 60).astype(np.float32) * pa
+    num = cv2.GaussianBlur(up * core[..., None], (0, 0), 3)
+    den = cv2.GaussianBlur(core, (0, 0), 3)[..., None]
+    ink_col = np.where(den > 1e-3, num / np.maximum(den, 1e-3), np.array([69, 23, 10], np.float32))
+    out_rgb = flat * (1 - ink[..., None]) + ink_col * ink[..., None]
+    # mép ảnh: sắc lại, giữ khử răng cưa 1 điểm ảnh
+    sharp_a = smoothstep(0.3, 0.7, cv2.GaussianBlur(pa, (0, 0), 0.6))
+    out_a = np.where(pa > 0.98, 1.0, sharp_a)
+    out = np.zeros((h * SCALE, w * SCALE, 4), np.uint8)
+    out[..., :3] = np.clip(out_rgb, 0, 255).astype(np.uint8)
+    out[..., 3] = np.clip(out_a * 255, 0, 255).astype(np.uint8)
+    return out
+
+
+def reoutline(arr, width=3.6):
+    """Làm lại mép ngoài của bộ phận: hình bóng được làm trơn (hết răng cưa ở chỗ cắt), viền ngoài kẻ lại bằng nét nâu đậm
+    đều nét — chỗ cắt sát yếm/áo không còn vụn xanh, vụn trắng."""
+    a = arr[..., 3] > 127
+    big = cv2.resize(a.astype(np.uint8) * 255, (W * SS, H * SS), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255
+    big = cv2.GaussianBlur(big, (0, 0), 1.6 * SS) > 0.5
+    dist = ndimage.distance_transform_edt(big)
+    ring = big & (dist <= width * SS)
+    cov = cv2.resize(big.astype(np.float32), (W, H), interpolation=cv2.INTER_AREA)
+    ring_c = cv2.resize(ring.astype(np.float32), (W, H), interpolation=cv2.INTER_AREA)
+    out = arr.copy()
+    k = np.clip(ring_c / np.maximum(cov, 1e-3), 0, 1)[..., None]
+    out[..., :3] = (arr[..., :3] * (1 - k) + np.array([69, 23, 10], np.float32) * k).astype(np.uint8)
+    out[..., 3] = (cov * 255).astype(np.uint8)
+    return out
+
+
 def save(arr, name):
-    a = arr.copy()
+    a = crisp(arr)
     a[a[..., 3] == 0, :3] = 0
     Image.fromarray(a, 'RGBA').save(os.path.join(OUT, name), 'WEBP', lossless=True, quality=100, method=6)
 
@@ -340,8 +444,12 @@ head_layer = layer(masks['head'])
 head_mud = box & (lum > 110) & ~((R > 140) & (G > 70) & (G < 150) & (B < 100))
 head_layer[head_mud, 3] = 0
 save(head_layer, 'bear-head.webp')
-save(layer(masks['armR']), 'bear-arm-r.webp')
-save(layer(masks['armL']), 'bear-arm-l.webp')
+arm_r = layer(masks['armR'])
+navy_bits = (B > R + 15) & (lum < 150) & (xs_ < 445)
+arm_r[navy_bits, 3] = 0
+save(reoutline(arm_r), 'bear-arm-r.webp')
+save(reoutline(layer(masks['armL'])), 'bear-arm-l.webp')
+save(np.array(Image.open(os.path.join(ROOT, 'assets-library/mascot/src/hello-eyes.webp')).convert('RGBA')), 'bear-eyes.webp')
 
 if DEBUG:
     dbg = np.zeros((H, W, 3), np.uint8) + 230
