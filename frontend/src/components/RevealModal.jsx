@@ -1,16 +1,18 @@
 // Tranh sống (Animated Reveal): khi hoàn thành, chủ thể chuyển động nhẹ + pháo giấy.
-import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Modal from './Modal/Modal';
 import Confetti from './Confetti';
 import Canvas from './Canvas/Canvas';
 import Icon from './Icon';
+import FrameSelector from './FrameSelector/FrameSelector';
 import { downloadDataUrl, printDataUrl, renderArtwork, safeFileName } from '../lib/exportImage';
 import { artworkFrameSvg } from '../lib/frames';
 import { flyToCollection } from '../lib/flyToCollection';
 import { warmTheme } from '../lib/prefetch';
 import { api } from '../services/api';
+import { errorText } from '../lib/format';
 import { useUi } from '../store/ui';
 
 /** `anotherTo`: trang mở ra khi bé bấm "Tô tranh khác" (VD màn chọn tranh của chủ đề hiện tại). */
@@ -22,14 +24,33 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
   const pushEvents = useUi((s) => s.pushEvents);
   const navigate = useNavigate();
   const artRef = useRef(null);
+  const toast = useUi((s) => s.toast);
   const [busy, setBusy] = useState(false);
+  const [frames, setFrames] = useState([]);
+  const [frame, setFrame] = useState(DEFAULT_FRAME); // null = bé chọn "Không khung"
+  // Bé chọn khung ngay khi vừa hoàn thành (khung đã mua + khung gỗ miễn phí); khung được lưu vào tranh.
+  useEffect(() => {
+    if (!open) return;
+    setFrame(DEFAULT_FRAME);
+    api.get('/shop').then((r) => setFrames(r.items.filter((i) => i.type === 'artwork_frame'))).catch(() => {});
+  }, [open]);
   if (!open) return null;
   const name = picture.name?.[i18n.language] || '';
+
+  const pickFrame = async (f) => {
+    setFrame(f);
+    if (!artworkId) return;
+    try {
+      await api.put(`/artworks/${artworkId}/frame`, { frame: f });
+    } catch (e) {
+      toast(errorText(t, e), 'error');
+    }
+  };
 
   const exportAs = async (kind) => {
     setBusy(true);
     try {
-      const url = await renderArtwork(picture, data, { size: 1200, frame: DEFAULT_FRAME });
+      const url = await renderArtwork(picture, data, { size: 1200, frame });
       if (kind === 'download') downloadDataUrl(url, `${safeFileName(name)}.png`);
       else printDataUrl(url, name);
       if (artworkId) {
@@ -50,7 +71,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     const warm = slug ? warmTheme(slug) : Promise.resolve();
     let src = null;
     try {
-      src = await renderArtwork(picture, data, { size: 480, frame: DEFAULT_FRAME });
+      src = await renderArtwork(picture, data, { size: 480, frame });
     } catch {
       /* không có ảnh bay thì thôi, vẫn đóng bình thường */
     }
@@ -72,12 +93,23 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
       <div className="text-center" data-testid="reveal-modal">
         <h2 className="font-display text-3xl font-extrabold">{t('reveal.title')}</h2>
         <p className="mb-3 text-muted">{t('reveal.subtitle')}</p>
-        {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); khung khác chọn lại trong Lịch sử / Bộ sưu tập. */}
+        {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); bé chọn khung khác ngay bên dưới (khung mua ở Shop). */}
         <div ref={artRef} className="relative mx-auto aspect-square max-w-md" data-testid="reveal-frame">
-          <div className="absolute" style={{ inset: `${(50 / 700) * 100}%` }}>
+          <div className="absolute" style={{ inset: frame ? `${(50 / 700) * 100}%` : 0 }}>
             <Canvas picture={picture} data={data} readOnly reveal className="!rounded-none !border-0" />
           </div>
-          <div className="pointer-events-none absolute inset-0" dangerouslySetInnerHTML={{ __html: (artworkFrameSvg(DEFAULT_FRAME) || '').replace('width="700" height="700"', 'width="100%" height="100%"') }} />
+          {frame && <div className="pointer-events-none absolute inset-0" dangerouslySetInnerHTML={{ __html: (artworkFrameSvg(frame) || '').replace('width="700" height="700"', 'width="100%" height="100%"') }} />}
+        </div>
+        <div className="mx-auto mt-3 max-w-xl text-left" data-testid="reveal-frames">
+          <div className="label text-center">{t('history.frame')}</div>
+          <div className="overflow-x-auto pb-2 [&>div]:flex-nowrap [&>div]:justify-start">
+            <FrameSelector type="artwork" items={frames} value={frame} onChange={pickFrame} />
+          </div>
+          {frames.length > 0 && frames.filter((f) => f.owned).length <= 1 && (
+            <Link to="/shop" className="inline-block text-sm font-bold text-primary">
+              {t('history.buyFrames')}
+            </Link>
+          )}
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <button type="button" className="btn-primary" onClick={() => exportAs('download')} disabled={busy} data-testid="reveal-download">
