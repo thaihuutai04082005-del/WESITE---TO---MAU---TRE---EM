@@ -12,6 +12,71 @@ import SignaturePanel from './SignaturePanel';
 import { ensureSignatureFont, placeDefault } from '../lib/signature';
 import { isRegionDone } from '../lib/picture';
 
+/** Tranh mẫu (màn rộng): nút phóng to / thu nhỏ ở hàng tiêu đề, phóng ngay trên tranh; phóng rồi thì giữ chuột (bàn tay) kéo qua lại để xem. */
+function ReferencePane({ picture, doneIds }) {
+  const { t, i18n } = useTranslation();
+  const [zoom, setZoom] = useState(1);
+  const view = useRef(null);
+  const drag = useRef(null);
+  const [grabbing, setGrabbing] = useState(false);
+  const set = (z) => {
+    const el = view.current;
+    const next = Math.min(4, Math.max(1, Math.round(z * 4) / 4));
+    if (el && next !== zoom) {
+      // giữ nguyên điểm đang nhìn ở giữa khung khi phóng / thu
+      const cx = (el.scrollLeft + el.clientWidth / 2) / el.scrollWidth;
+      const cy = (el.scrollTop + el.clientHeight / 2) / el.scrollHeight;
+      setZoom(next);
+      requestAnimationFrame(() => {
+        el.scrollLeft = cx * el.scrollWidth - el.clientWidth / 2;
+        el.scrollTop = cy * el.scrollHeight - el.clientHeight / 2;
+      });
+    } else setZoom(next);
+  };
+  const onDown = (e) => {
+    if (zoom <= 1) return;
+    drag.current = { x: e.clientX, y: e.clientY, sl: view.current.scrollLeft, st: view.current.scrollTop };
+    setGrabbing(true);
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const onMove = (e) => {
+    const d = drag.current;
+    if (!d) return;
+    view.current.scrollLeft = d.sl - (e.clientX - d.x);
+    view.current.scrollTop = d.st - (e.clientY - d.y);
+  };
+  const end = () => {
+    drag.current = null;
+    setGrabbing(false);
+  };
+  return (
+    <>
+      <div className="cw-title mb-2 justify-between">
+        <span className="flex items-center gap-2.5"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</span>
+        <span className="cw-ref-tools">
+          <button type="button" onClick={() => set(zoom - 0.5)} disabled={zoom <= 1} aria-label={t('coloring.zoomOut')} title={t('coloring.zoomOut')} data-testid="ref-zoom-out"><Icon name="zoomOut" size={20} strokeWidth={2.6} /></button>
+          <button type="button" onClick={() => set(zoom + 0.5)} disabled={zoom >= 4} aria-label={t('coloring.zoomIn')} title={t('coloring.zoomIn')} data-testid="ref-zoom-in"><Icon name="zoomIn" size={20} strokeWidth={2.6} /></button>
+        </span>
+      </div>
+      <div className="cw-ref-box">
+        <div
+          ref={view}
+          className={`cw-ref-view${zoom > 1 ? (grabbing ? ' cw-ref-grabbing' : ' cw-ref-grab') : ''}`}
+          onPointerDown={onDown}
+          onPointerMove={onMove}
+          onPointerUp={end}
+          onPointerCancel={end}
+          data-testid="reference-picture"
+        >
+          <div style={{ width: `${zoom * 100}%`, aspectRatio: '1' }}>
+            <PictureView picture={picture} className="h-full w-full rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 /** Tranh mẫu phóng to: ô vuông lớn nhất vừa màn hình, bấm +/− hoặc cuộn chuột để phóng, kéo để xem chỗ nhỏ (đọc số màu cho rõ). */
 function ReferenceViewer({ picture, doneIds, onClose }) {
   const { t, i18n } = useTranslation();
@@ -136,13 +201,7 @@ export default function ColoringWorkspace({
           <div className="cw-header">{header}</div>
           {template && (
             <div className="cw-ref card hidden p-3 lg:block">
-              <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
-              <div className="cw-ref-box">
-                <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
-                  <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
-                  <span className="cw-ref-zoom"><Icon name="zoomIn" size={18} strokeWidth={2.8} /> {t('coloring.refZoom')}</span>
-                </button>
-              </div>
+              <ReferencePane picture={picture} doneIds={doneIds} />
             </div>
           )}
           {actions && <div className="cw-actions">{actions}</div>}

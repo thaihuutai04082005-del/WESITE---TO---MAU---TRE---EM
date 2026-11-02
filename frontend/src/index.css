@@ -1640,9 +1640,15 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .wood-tab-icon .card-back-icon { height: 1.1em; margin: 0; vertical-align: top; }
 .room-tab .card-back-icon { height: 1.55em; vertical-align: -0.4em; }
 
-/* Tranh mẫu nhỏ: nhãn "Phóng to" để bé biết bấm vào xem to */
-.cw-ref-btn { position: relative; }
-.cw-ref-zoom { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: rgba(27, 42, 74, 0.82); font-family: var(--font-display); font-weight: 800; font-size: 14px; color: #fff; pointer-events: none; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
+/* Tranh mẫu: nút phóng to / thu nhỏ ở hàng tiêu đề; phóng ngay trên tranh, giữ chuột (bàn tay) kéo qua lại */
+.cw-ref-tools { display: inline-flex; gap: 6px; }
+.cw-ref-tools button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 2px solid #D9DFF4; border-radius: 9999px; background: #fff; color: #2F8FEA; cursor: pointer; transition: transform 0.15s, background 0.15s; }
+.cw-ref-tools button:hover:not(:disabled) { transform: translateY(-1px); background: #EAF4FF; }
+.cw-ref-tools button:disabled { opacity: 0.35; cursor: default; }
+.cw-ref-view { width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); overflow: auto; scrollbar-width: none; border-radius: 16px; touch-action: none; user-select: none; }
+.cw-ref-view::-webkit-scrollbar { display: none; }
+.cw-ref-grab { cursor: grab; }
+.cw-ref-grabbing { cursor: grabbing; }
 
 /* Màn hình rộng: cột trái (tranh mẫu) lấy phần trống hai bên khung tô; tranh mẫu to lên, tiêu đề + nút xếp dọc bên cạnh. */
 @media (min-width: 1024px) {
