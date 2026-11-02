@@ -151,6 +151,8 @@ def main():
             sid = spot_lab[int(y), int(x)]
             if sid == 0:
                 continue
+            if (spot_lab == sid).sum() > 20000:
+                continue   # ô thông ra cả bức tranh (sát mép, không có khung chắn) — không phải ô nhỏ cần tô riêng
             mask = cv2.dilate((spot_lab == sid).astype(np.uint8), np.ones((3, 3), np.uint8))
             cs, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             # ô rất nhỏ/dài chéo: giữ nhiều điểm để đa giác bám đúng ô (epsilon lớn biến ô thành tam giác méo)
