@@ -526,7 +526,6 @@
       "bank": "Scan with your banking or MoMo app. You pay each time, and we'll remind you before your plan ends.",
       "paypal": "Renews automatically each period. Cancel anytime."
     },
-    "usdNote": "or {{price}} with PayPal",
     "perMonthUsd": "/month",
     "perYearUsd": "/year",
     "qr": {
