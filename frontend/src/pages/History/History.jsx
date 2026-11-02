@@ -71,7 +71,7 @@ function Detail({ id, onClose, onDeleted }) {
   };
 
   return (
-    <Modal open onClose={onClose} wide>
+    <Modal closeButton={false} open onClose={onClose} wide>
       <div className="mb-3 flex items-start justify-between gap-2">
         <div>
           <h2 className="font-display text-2xl font-extrabold">{name}</h2>

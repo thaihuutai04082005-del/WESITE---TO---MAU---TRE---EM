@@ -63,7 +63,7 @@ function RankInfo({ onClose }) {
   const frac = next ? Math.min(1, (pts - tiers[idx].min) / (next.min - tiers[idx].min)) : 0;
   const fill = ((idx + 0.5 + frac) / n) * 100; // ống điểm chạy từ giữa bậc này tới giữa bậc kế
   return (
-    <Modal open onClose={onClose} wide>
+    <Modal closeButton={false} open onClose={onClose} wide>
       <div className="space-y-4" data-testid="rank-info">
         <div className="flex items-start justify-between gap-2">
           <div>
