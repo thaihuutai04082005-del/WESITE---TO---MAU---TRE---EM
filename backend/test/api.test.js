@@ -122,7 +122,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   const a1 = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
   assert.equal(a1.body.plan.used, 0);
   const s1 = await api('POST', `/artworks/${a1.body.artwork.id}/start`, null, token);
-  assert.equal(s1.body.plan.remaining, 0);
+  assert.equal(s1.body.plan.remaining, 1, 'gói thường: 2 tranh mỗi ngày');
   // Gọi lại start cho cùng tranh không tính thêm.
   assert.equal((await api('POST', `/artworks/${a1.body.artwork.id}/start`, null, token)).status, 200);
 
@@ -142,11 +142,13 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal((await api('PUT', `/artworks/${aid}/frame`, { frame: 'khung-go' }, token)).status, 200);
   assert.equal((await api('GET', `/artworks/${aid}`, null, token)).body.artwork.frame, 'khung-go');
 
-  // Tranh thứ 2 trong ngày → hết lượt (402).
+  // Tranh thứ 2 trong ngày vẫn được; tranh thứ 3 → hết lượt (402).
   const a2 = await api('POST', '/artworks', { pictureId: hero.body.pictures[1].id, mode: 'template' }, token);
-  const s2 = await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token);
-  assert.equal(s2.status, 402);
-  assert.equal(s2.body.error.code, 'quota_exceeded');
+  assert.equal((await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token)).status, 200);
+  const a3 = await api('POST', '/artworks', { pictureId: hero.body.pictures[2].id, mode: 'template' }, token);
+  const s3 = await api('POST', `/artworks/${a3.body.artwork.id}/start`, null, token);
+  assert.equal(s3.status, 402);
+  assert.equal(s3.body.error.code, 'quota_exceeded');
 
   // Thanh toán gói Tháng (chế độ giả lập vì chưa cấu hình cổng).
   const pay = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, token);
@@ -154,9 +156,10 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(pay.body.amount, 49000);
   const done = await api('POST', `/payments/${pay.body.paymentId}/mock-complete`, null, token);
   assert.equal(done.body.plan.plan, 'month');
-  assert.equal((await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token)).status, 200);
+  assert.equal((await api('POST', `/artworks/${a3.body.artwork.id}/start`, null, token)).status, 200);
   const sub = await api('GET', '/subscription', null, token);
-  assert.equal(sub.body.plan.limit, 100);
+  assert.equal(sub.body.plan.limit, null, 'VIP tô không giới hạn');
+  assert.equal(sub.body.plan.vip, true);
 
   const hist = await api('GET', '/artworks?status=completed', null, token);
   assert.equal(hist.body.artworks.length, 1);
@@ -252,16 +255,20 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   assert.equal(acc.body.trade.status, 'accepted');
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, b.token)).status, 200);
 
-  // Giới hạn 3 lượt/ngày
+  // Gói thường: 1 lượt/ngày → lượt thứ 2 bị chặn; VIP: 5 lượt/ngày
   const other = cards.body.cards[1].id;
+  const blocked = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
+  assert.equal(blocked.body.error.code, 'trade_daily_limit');
+  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(a.id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   for (let i = 0; i < 2; i++) {
     const t = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
     assert.equal(t.status, 201);
     await api('POST', `/social/trades/${t.body.trade.id}/decline`, null, b.token);
   }
-  // 1 accepted + 2 declined (declined không tính) → vẫn tạo được
+  // 1 accepted + 2 declined (declined không tính) → VIP vẫn tạo được
   const t3 = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
   assert.equal(t3.status, 201);
+  assert.equal((await api('GET', '/social/trades', null, a.token)).body.dailyLimit, 5);
 });
 
 test('Flipbook: nhận mọi tranh đã hoàn thành của bé (tô mẫu, sáng tạo), xuất PDF, chia sẻ', async () => {
@@ -480,9 +487,9 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   at(vn('2026-10-03T10:00:00Z'));
   const st = await api('GET', '/exhibition/mine', null, A.token);
   assert.deepEqual([st.body.schedule.submitOpen, st.body.schedule.nextRound, st.body.limit], [true, '2026-10-05', 1]);
-  // Gói Tháng gửi 3 tranh/vòng, Gói Năm 5 tranh/vòng.
+  // VIP (Tháng hoặc Năm) gửi 5 tranh/vòng.
   const uidB = db.prepare('SELECT id FROM users WHERE username = ?').get('trienlam2').id;
-  for (const [plan, n] of [['month', 3], ['year', 5]]) {
+  for (const [plan, n] of [['month', 5], ['year', 5]]) {
     db.prepare('INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, ?, ?, ?)').run(uidB, plan, '2026-01-01T00:00:00Z', '2027-01-01T00:00:00Z');
     assert.equal((await api('GET', '/exhibition/mine', null, B.token)).body.limit, n);
     db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(uidB);
@@ -761,4 +768,15 @@ test('Lịch sử: tranh đang dở trả về % đã tô (?progress=1)', async 
   const empty = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
   const e = (await api('GET', '/artworks?progress=1', null, token)).body.artworks.find((x) => x.id === empty.body.artwork.id);
   assert.equal(e.progress, 0);
+});
+
+test('Truyện tranh: gói thường 1 cuốn tối đa 10 trang, VIP không giới hạn', async () => {
+  const { token, id } = await register('truyen01');
+  const first = await api('POST', '/storybooks', { title: 'Cuốn 1', pages: [] }, token);
+  assert.equal(first.status, 201);
+  assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).body.error.code, 'storybook_limit');
+  const eleven = Array.from({ length: 11 }, (_, i) => ({ artworkId: i + 1 }));
+  assert.equal((await api('PUT', `/storybooks/${first.body.storybook.id}`, { title: 'Cuốn 1', pages: eleven }, token)).body.error.code, 'storybook_pages_limit');
+  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'year', ?, ?)").run(id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).status, 201);
 });

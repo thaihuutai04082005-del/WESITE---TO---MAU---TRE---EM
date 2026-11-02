@@ -46,7 +46,7 @@ export default function Profile() {
   return (
     <div className="page space-y-5">
       <div className="card flex flex-col items-center gap-4 p-6 sm:flex-row">
-        <Avatar avatar={user.avatar} frame={user.avatarFrame} size={120} />
+        <Avatar avatar={user.avatar} frame={user.avatarFrame} vip={user.vip} size={120} />
         <div className="flex-1 text-center sm:text-left">
           <h1 className="page-title">{user.nickname}</h1>
           <div className="mt-1 flex flex-wrap justify-center gap-2 sm:justify-start">

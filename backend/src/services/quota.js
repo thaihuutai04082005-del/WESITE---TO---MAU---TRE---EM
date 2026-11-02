@@ -17,6 +17,8 @@ export function activeSubscription(userId, at = new Date()) {
 const usedSince = (userId, fromIso) =>
   getDb().prepare('SELECT COUNT(*) AS c FROM usage_log WHERE user_id = ? AND used_at >= ?').get(userId, fromIso).c;
 
+export const isVip = (userId) => !!activeSubscription(userId);
+
 export function planStatus(userId, at = new Date()) {
   const sub = activeSubscription(userId, at);
   if (!sub) {
@@ -24,6 +26,7 @@ export function planStatus(userId, at = new Date()) {
     const used = usedSince(userId, from);
     return {
       plan: 'free',
+      vip: false,
       limit: PLANS.free.limit.count,
       used,
       remaining: Math.max(0, PLANS.free.limit.count - used),
@@ -31,10 +34,8 @@ export function planStatus(userId, at = new Date()) {
       endsAt: null,
     };
   }
-  if (sub.plan === 'year') return { plan: 'year', limit: null, used: usedSince(userId, sub.starts_at), remaining: null, resetsAt: null, endsAt: sub.ends_at };
-  const used = usedSince(userId, sub.starts_at);
-  const limit = PLANS.month.limit.count;
-  return { plan: 'month', limit, used, remaining: Math.max(0, limit - used), resetsAt: sub.ends_at, endsAt: sub.ends_at };
+  // VIP (Tháng hoặc Năm): tô không giới hạn.
+  return { plan: sub.plan, vip: true, limit: null, used: usedSince(userId, sub.starts_at), remaining: null, resetsAt: null, endsAt: sub.ends_at };
 }
 
 /** Các chế độ tính lượt: tô cá nhân (Theo mẫu, Sáng tạo). Đấu trường & tô cùng nhau không tính. */

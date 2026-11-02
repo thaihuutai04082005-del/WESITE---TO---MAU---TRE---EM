@@ -59,7 +59,7 @@ function FriendInvite({ socket, room }) {
           const here = inRoom.has(f.id);
           return (
             <li key={f.id} className="flex items-center gap-2 rounded-xl bg-white px-1.5 py-1 shadow-soft">
-              <Avatar avatar={f.avatar} frame={f.avatarFrame} size={34} />
+              <Avatar avatar={f.avatar} frame={f.avatarFrame} vip={f.vip} size={34} />
               <span className="min-w-0 flex-1 truncate text-sm font-bold">{f.nickname}</span>
               {here ? (
                 <span className="shrink-0 text-xs font-bold text-[#1E7A44]">{t('together.inRoom')}</span>
@@ -202,7 +202,7 @@ export default function TogetherRoom() {
             <div className="flex flex-wrap gap-2">
               {room.players.map((p) => (
                 <span key={p.id} className="flex items-center gap-1 rounded-full py-1 pl-1 pr-3 text-sm font-bold" style={{ background: `${p.color}22`, color: p.color }}>
-                  <Avatar avatar={p.avatar} frame={p.avatarFrame} size={32} /> {p.nickname}
+                  <Avatar avatar={p.avatar} frame={p.avatarFrame} vip={p.vip} size={32} /> {p.nickname}
                 </span>
               ))}
               <span className="text-sm text-muted">{t('together.count', { n: room.players.length, max: room.maxPlayers })}</span>

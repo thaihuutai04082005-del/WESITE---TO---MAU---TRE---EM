@@ -176,7 +176,7 @@ export default function Friends() {
           <div className="space-y-2 pt-2">
             {data.incoming.map((f) => (
               <div key={f.friendshipId} className="card flex items-center gap-3 p-3">
-                <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} size={48} />
+                <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} vip={f.user.vip} size={48} />
                 <div className="flex-1 font-bold">{f.user.nickname}</div>
                 <button type="button" className="btn-primary min-h-11 px-4 text-base" onClick={run(() => api.post(`/social/friends/${f.friendshipId}/accept`), t('friends.nowFriends'))} data-testid="friend-accept">
                   {t('friends.accept')}
@@ -198,7 +198,7 @@ export default function Friends() {
         <div className="grid gap-3 pt-2 sm:grid-cols-2">
           {data.friends.map((f) => (
             <div key={f.friendshipId} className="fr-friend">
-              <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} size={52} />
+              <Avatar avatar={f.user.avatar} frame={f.user.avatarFrame} vip={f.user.vip} size={52} />
               <div className="min-w-0 flex-1">
                 <div className="truncate font-bold">{f.user.nickname}</div>
                 <div className="text-xs text-muted">

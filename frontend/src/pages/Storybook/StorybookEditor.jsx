@@ -12,7 +12,7 @@ import Modal from '../../components/Modal/Modal';
 import FlipbookViewer, { StoryBackdrop } from '../../components/FlipbookViewer/FlipbookViewer';
 import { coverOf } from '../../lib/storyCovers';
 
-const MAX_PAGES = 40;
+const MAX_PAGES = { free: 10, vip: 200 }; // khớp STORYBOOK_LIMITS ở backend
 const blank = () => ({ artworkId: null, caption: '', image: null });
 
 export default function StorybookEditor() {
@@ -20,6 +20,8 @@ export default function StorybookEditor() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const user = useAuth((s) => s.user);
+  const vip = useAuth((s) => !!s.plan?.vip);
+  const maxPages = vip ? MAX_PAGES.vip : MAX_PAGES.free;
   const toast = useUi((s) => s.toast);
   const [title, setTitle] = useState('');
   const [pages, setPages] = useState([blank()]);
@@ -66,7 +68,7 @@ export default function StorybookEditor() {
   const addPage = () => {
     const empty = pages.findIndex((p) => !p.artworkId && !p.caption.trim());
     if (empty >= 0) return setIndex(empty + 1);
-    if (pages.length >= MAX_PAGES) return toast(t('storybook.maxPages', { n: MAX_PAGES }), 'error');
+    if (pages.length >= maxPages) return toast(vip ? t('storybook.maxPages', { n: maxPages }) : t('errors.storybook_pages_limit'), 'error');
     const at = index === 0 ? pages.length : index; // chèn ngay sau trang đang xem; đang ở bìa thì thêm vào cuối truyện
     setPages((ps) => [...ps.slice(0, at), blank(), ...ps.slice(at)]);
     setIndex(at + 1);

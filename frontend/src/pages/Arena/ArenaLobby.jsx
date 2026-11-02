@@ -257,7 +257,7 @@ export default function ArenaLobby() {
               {info.leaderboard.map((r) => (
                 <li key={r.user.id} className="flex items-center gap-3 rounded-2xl bg-white/80 px-3 py-2">
                   <span className="w-6 text-center font-display text-xl font-extrabold text-[#5B4FD6]">{r.place}</span>
-                  <Avatar avatar={r.user.avatar} frame={r.user.avatarFrame} size={40} />
+                  <Avatar avatar={r.user.avatar} frame={r.user.avatarFrame} vip={r.user.vip} size={40} />
                   <span className="flex-1 truncate font-bold">{r.user.nickname}</span>
                   <span className="chip">
                     {r.points} {t('arena.points')}

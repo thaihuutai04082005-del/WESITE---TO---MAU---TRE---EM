@@ -177,7 +177,7 @@ export default function ArenaRoom() {
                   {p ? (
                     <>
                       {p.id === room.hostId && <svg viewBox="0 0 40 34" className="wr-crown" aria-hidden="true"><path d="M5 28 2 10l10 8 8-14 8 14 10-8-3 18z" fill="#FFD23F" stroke="#E8A317" strokeWidth="3" strokeLinejoin="round" /><circle cx="20" cy="22" r="2.6" fill="#FF6B6B" /></svg>}
-                      <Avatar avatar={p.avatar} frame={p.avatarFrame} size={58} />
+                      <Avatar avatar={p.avatar} frame={p.avatarFrame} vip={p.vip} size={58} />
                       <span className="wr-name">{p.nickname}</span>
                     </>
                   ) : (

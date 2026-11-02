@@ -2,6 +2,7 @@
 import { getDb, parseJson } from '../config/db.js';
 import { rankOf } from '../config/constants.js';
 import { randomCode } from '../utils/ids.js';
+import { isVip } from '../services/quota.js';
 
 export const findById = (id) => getDb().prepare('SELECT * FROM users WHERE id = ?').get(id);
 export const findByUsername = (u) => getDb().prepare('SELECT * FROM users WHERE username = ?').get(u);
@@ -74,6 +75,7 @@ export function publicProfile(u) {
     avatarFrame: u.avatar_frame,
     rank: rankOf(u.rank_points).key,
     level: u.level,
+    vip: isVip(u.id),
   };
 }
 

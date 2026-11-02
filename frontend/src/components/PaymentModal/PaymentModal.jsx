@@ -128,7 +128,7 @@ export default function PaymentModal({ open, plan, onClose }) {
       {planInfo && step === 'choose' && (
         <p className="mb-4 text-muted">
           {price(provider)}
-          {provider === 'paypal' ? t(plan === 'month' ? 'plans.perMonthUsd' : 'plans.perYearUsd') : ''} · {t(`plans.${plan}.limit`)}
+          {provider === 'paypal' ? t(plan === 'month' ? 'plans.perMonthUsd' : 'plans.perYearUsd') : ''} · {t('plans.vip.limit')}
         </p>
       )}
       {step === 'choose' && (

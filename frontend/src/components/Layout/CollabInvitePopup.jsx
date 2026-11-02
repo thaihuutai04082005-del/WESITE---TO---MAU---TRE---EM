@@ -51,7 +51,7 @@ export default function CollabInvitePopup() {
     <Modal open dismissable={false} closeButton={false}>
       <div className="flex flex-col items-center gap-3 text-center" data-testid="collab-invite">
         <div className="h-28 w-full max-w-[220px]"><TogetherArt /></div>
-        <Avatar avatar={inv.from.avatar} frame={inv.from.avatarFrame} size={64} />
+        <Avatar avatar={inv.from.avatar} frame={inv.from.avatarFrame} vip={inv.from.vip} size={64} />
         <h2 className="font-display text-2xl font-extrabold leading-snug" style={{ textWrap: "balance" }}>{t('together.inviteTitle', { name: inv.from.nickname })}</h2>
         <label className="flex cursor-pointer items-center gap-2 rounded-2xl bg-primary-light px-3 py-2 text-sm font-bold text-primary-dark">
           <input type="checkbox" className="h-5 w-5 accent-primary" checked={block} onChange={(e) => setBlock(e.target.checked)} data-testid="invite-block" />

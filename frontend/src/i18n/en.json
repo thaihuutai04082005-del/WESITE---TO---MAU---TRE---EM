@@ -165,7 +165,7 @@
     "nameHint": "Your real name or a nickname — both are fine. No phone numbers or addresses!",
     "freeStyles": "Signature styles",
     "premiumStyles": "\"Wow\" signature styles",
-    "premiumHint": "These 5 styles unlock with the Monthly or Yearly plan.",
+    "premiumHint": "These 5 styles unlock with the VIP plan.",
     "styles": {
       "classic": "Soft",
       "round": "Round",
@@ -309,7 +309,7 @@
     "sendShort": "Send to exhibition",
     "quota": "Sent {{used}}/{{limit}}",
     "visit": "Visit the hall",
-    "premiumMore": "Monthly/Yearly plans can send 3 pictures per round.",
+    "premiumMore": "VIP can send 5 pictures per round.",
     "withdraw": "Take back",
     "withdrawn": "Picture taken back.",
     "submitOpensShort": "Opens Saturday",
@@ -453,13 +453,13 @@
   },
   "plans": {
     "title": "Choose a plan",
-    "subtitle": "Unlock a creative world of coloring!",
+    "subtitle": "Pick the plan that fits your kid!",
     "best": "Best value",
     "choose": "Choose",
     "renew": "Renew",
     "current": "Current plan",
     "included": "Default",
-    "note": "Pay with MoMo or PayPal. Prices include tax. The Yearly plan costs ~15% less than 12 monthly payments.",
+    "note": "Pay with MoMo or PayPal. Taxes included.",
     "payTitle": "Pay for {{plan}}",
     "chooseMethod": "Choose a payment method",
     "payNow": "Pay",
@@ -472,96 +472,55 @@
     "mockConfirm": "Confirm test payment",
     "success": "Upgrade complete! Have fun coloring.",
     "badge": {
-      "free": "Free · {{n}} left today",
-      "month": "Monthly · {{n}}/{{limit}} left",
-      "year": "Yearly · until {{date}}"
+      "free": "Standard · {{n}}/{{limit}} left today",
+      "month": "VIP · until {{date}}",
+      "year": "VIP · until {{date}}"
     },
     "free": {
-      "name": "Free",
+      "name": "Standard",
       "per": "",
-      "limit": "1 picture per day",
+      "limit": "2 pictures a day",
       "perks": [
         {
           "i": "🔒",
-          "t": "5 free themes for your age",
-          "help": "Your child can color 5 age-appropriate themes for free. Upgrade to unlock every theme."
-        },
-        {
-          "i": "⚙️",
-          "t": "Basic coloring tools"
+          "t": "5 age-based themes"
         },
         {
           "i": "🎮",
-          "t": "Arena, card packs, color together, storybooks"
+          "t": "Arena, Card draw, Color together"
         },
         {
-          "i": "✏️",
-          "t": "5 basic signature styles + sign by hand"
+          "i": "📖",
+          "t": "Storybooks: 1 book, 10 pages"
         },
         {
           "i": "🏛️",
           "t": "1 picture per exhibition round"
         },
         {
-          "i": "🏆",
-          "t": "Trophy cabinet, certificates, show off"
+          "i": "🔁",
+          "t": "Trade or gift 1 card a day"
         },
         {
-          "i": "🖼️",
-          "t": "History, PNG download & printing"
+          "i": "✏️",
+          "t": "5 signature styles + hand-signing"
+        },
+        {
+          "i": "🏆",
+          "t": "Trophy case, certificates, PNG & print"
         }
       ]
     },
     "month": {
-      "name": "Monthly",
+      "name": "VIP Monthly",
       "per": "/month",
-      "limit": "100 pictures per month",
-      "perks": [
-        {
-          "i": "🔓",
-          "t": "All themes unlocked for 1 month",
-          "help": "Every theme is open while the plan is active."
-        },
-        {
-          "i": "✨",
-          "t": "5 extra \"WOW\" signature styles"
-        },
-        {
-          "i": "🏛️",
-          "t": "3 pictures per exhibition round"
-        },
-        {
-          "i": "⭐",
-          "t": "Priority support"
-        }
-      ]
+      "limit": "Unlimited coloring"
     },
     "year": {
-      "name": "Yearly",
+      "name": "VIP Yearly",
       "per": "/year",
-      "limit": "Unlimited pictures",
-      "perks": [
-        {
-          "i": "🔓",
-          "t": "All themes unlocked for 1 year",
-          "help": "Every theme is open while the plan is active."
-        },
-        {
-          "i": "🏛️",
-          "t": "5 pictures per exhibition round"
-        },
-        {
-          "i": "💰",
-          "t": "Save 89,000đ (~15%)"
-        }
-      ]
+      "limit": "Unlimited coloring"
     },
-    "allOf": {
-      "month": "Everything in Free",
-      "year": "Everything in Monthly"
-    },
-    "chooseMonth": "Choose Monthly",
-    "chooseYear": "Choose Yearly",
     "providerHint": {
       "bank": "Scan with your banking or MoMo app. Pay each time; we remind you before it ends.",
       "paypal": "Renews automatically each period. Cancel anytime."
@@ -593,7 +552,43 @@
       "cancelled": "Auto-renew cancelled.",
       "month": "month",
       "year": "year"
-    }
+    },
+    "vip": {
+      "name": "VIP",
+      "limit": "Unlimited coloring",
+      "tagline": "Everything in Standard, and more",
+      "perks": [
+        {
+          "i": "🔓",
+          "t": "Every theme unlocked"
+        },
+        {
+          "i": "🏛️",
+          "t": "5 pictures per exhibition round"
+        },
+        {
+          "i": "🔁",
+          "t": "Trade or gift 5 cards a day"
+        },
+        {
+          "i": "📖",
+          "t": "Unlimited storybooks"
+        },
+        {
+          "i": "✨",
+          "t": "5 extra WOW signature styles"
+        },
+        {
+          "i": "👑",
+          "t": "VIP badge next to your avatar"
+        }
+      ],
+      "month": "Monthly",
+      "year": "Yearly",
+      "chooseMonth": "Choose VIP Monthly",
+      "chooseYear": "Choose VIP Yearly"
+    },
+    "save": "Save 89,000đ (~15%)"
   },
   "payment": {
     "pending": "Confirming payment…",
@@ -602,8 +597,7 @@
   },
   "upgrade": {
     "title": "Out of pictures for now!",
-    "freeUsed": "The Free plan includes 1 picture per day. Come back tomorrow, or ask a parent to upgrade.",
-    "monthUsed": "You've used all 100 pictures this month. Upgrade to Yearly for unlimited coloring.",
+    "freeUsed": "The Standard plan includes 2 pictures per day. Come back tomorrow, or ask a parent to upgrade to VIP for unlimited coloring.",
     "cta": "See plans",
     "later": "Later"
   },
@@ -963,7 +957,9 @@
     "already_friends": "You're already friends.",
     "request_already_sent": "Request already sent — wait for them to accept.",
     "not_friends": "Only friends can do this.",
-    "trade_daily_limit": "You've used all 3 gifts/swaps today.",
+    "storybook_limit": "The Standard plan has 1 storybook. Upgrade to VIP for more.",
+    "storybook_pages_limit": "The Standard plan allows 10 pages per story. Upgrade to VIP for more.",
+    "trade_daily_limit": "You've used all gifts/swaps for today. VIP gets 5 a day.",
     "card_in_trade": "This card is in another offer.",
     "trade_invalid": "This offer is no longer valid.",
     "trade_not_found": "Offer not found.",
@@ -991,7 +987,7 @@
     "signature_name_length": "The name on a signature must be 1–20 characters.",
     "signature_private_info": "Signatures can't contain phone numbers, emails or links.",
     "signature_bad_word": "That name has a word that isn’t nice — please pick another!",
-    "signature_premium_required": "This style needs the Monthly or Yearly plan.",
+    "signature_premium_required": "This style is for VIP.",
     "signature_style_invalid": "Invalid signature style.",
     "signature_hand_invalid": "That hand signature didn't work — please sign again.",
     "signature_invalid": "Invalid signature.",

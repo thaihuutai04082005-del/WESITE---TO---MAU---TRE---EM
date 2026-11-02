@@ -165,7 +165,7 @@
     "nameHint": "Tên thật hay biệt danh đều được. Không ghi số điện thoại hay địa chỉ nhé!",
     "freeStyles": "Mẫu chữ ký",
     "premiumStyles": "Mẫu chữ ký \"wow\"",
-    "premiumHint": "5 mẫu này mở khoá khi có Gói tháng hoặc Gói năm.",
+    "premiumHint": "5 mẫu này mở khoá khi bé có gói VIP.",
     "styles": {
       "classic": "Nét mềm",
       "round": "Chữ tròn",
@@ -309,7 +309,7 @@
     "sendShort": "Gửi tranh triển lãm",
     "quota": "Đã gửi {{used}}/{{limit}} tranh",
     "visit": "Vào hội trường",
-    "premiumMore": "Gói tháng/năm được gửi 3 tranh mỗi vòng.",
+    "premiumMore": "Gói VIP được gửi 5 tranh mỗi vòng.",
     "withdraw": "Rút tranh",
     "withdrawn": "Đã rút tranh.",
     "submitOpensShort": "Mở vào thứ 7",
@@ -453,13 +453,13 @@
   },
   "plans": {
     "title": "Chọn gói cho bé",
-    "subtitle": "Mở khóa thế giới tô màu đầy sáng tạo!",
+    "subtitle": "Chọn gói phù hợp cho bé!",
     "best": "Tiết kiệm nhất",
     "choose": "Chọn gói này",
     "renew": "Gia hạn",
     "current": "Gói hiện tại",
     "included": "Mặc định",
-    "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế. Gói Năm rẻ hơn ~15% so với 12 tháng lẻ.",
+    "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế.",
     "payTitle": "Thanh toán {{plan}}",
     "chooseMethod": "Chọn hình thức thanh toán",
     "payNow": "Thanh toán",
@@ -472,96 +472,55 @@
     "mockConfirm": "Xác nhận thanh toán thử",
     "success": "Nâng cấp thành công! Chúc bé tô thật vui.",
     "badge": {
-      "free": "Gói Free · còn {{n}} lượt hôm nay",
-      "month": "Gói Tháng · còn {{n}}/{{limit}} lượt",
-      "year": "Gói Năm · đến {{date}}"
+      "free": "Gói Thường · còn {{n}}/{{limit}} lượt hôm nay",
+      "month": "VIP · đến {{date}}",
+      "year": "VIP · đến {{date}}"
     },
     "free": {
-      "name": "Free",
+      "name": "Gói Thường",
       "per": "",
-      "limit": "1 tranh mỗi ngày",
+      "limit": "2 tranh mỗi ngày",
       "perks": [
         {
           "i": "🔒",
-          "t": "5 chủ đề miễn phí theo độ tuổi",
-          "help": "Bé được tô miễn phí 5 chủ đề phù hợp với độ tuổi. Nâng cấp để mở toàn bộ chủ đề."
-        },
-        {
-          "i": "⚙️",
-          "t": "Các chức năng tô cơ bản"
+          "t": "5 chủ đề theo độ tuổi"
         },
         {
           "i": "🎮",
-          "t": "Đấu trường, Bốc thẻ, Tô cùng nhau, Truyện tranh"
+          "t": "Đấu trường, Bốc thẻ, Tô cùng nhau"
         },
         {
-          "i": "✏️",
-          "t": "5 mẫu chữ ký cơ bản + tự ký"
+          "i": "📖",
+          "t": "Truyện tranh: 1 cuốn, 10 trang"
         },
         {
           "i": "🏛️",
           "t": "1 tranh mỗi vòng triển lãm"
         },
         {
-          "i": "🏆",
-          "t": "Tủ kính thành tích, giấy khen, khoe tranh"
+          "i": "🔁",
+          "t": "Đổi hoặc tặng 1 thẻ mỗi ngày"
         },
         {
-          "i": "🖼️",
-          "t": "Lưu lịch sử, tải PNG & in tranh"
+          "i": "✏️",
+          "t": "5 mẫu chữ ký + tự ký"
+        },
+        {
+          "i": "🏆",
+          "t": "Tủ kính, giấy khen, tải PNG & in tranh"
         }
       ]
     },
     "month": {
-      "name": "Gói Tháng",
+      "name": "VIP Tháng",
       "per": "/tháng",
-      "limit": "100 tranh mỗi tháng",
-      "perks": [
-        {
-          "i": "🔓",
-          "t": "Mở toàn bộ chủ đề trong 1 tháng",
-          "help": "Bé tô được tất cả chủ đề trong suốt thời gian gói còn hiệu lực."
-        },
-        {
-          "i": "✨",
-          "t": "Thêm 5 mẫu chữ ký WOW"
-        },
-        {
-          "i": "🏛️",
-          "t": "3 tranh mỗi vòng triển lãm"
-        },
-        {
-          "i": "⭐",
-          "t": "Hỗ trợ ưu tiên"
-        }
-      ]
+      "limit": "Tô không giới hạn"
     },
     "year": {
-      "name": "Gói Năm",
+      "name": "VIP Năm",
       "per": "/năm",
-      "limit": "Không giới hạn số tranh",
-      "perks": [
-        {
-          "i": "🔓",
-          "t": "Mở toàn bộ chủ đề trong 1 năm",
-          "help": "Bé tô được tất cả chủ đề trong suốt thời gian gói còn hiệu lực."
-        },
-        {
-          "i": "🏛️",
-          "t": "5 tranh mỗi vòng triển lãm"
-        },
-        {
-          "i": "💰",
-          "t": "Tiết kiệm 89.000đ (~15%)"
-        }
-      ]
+      "limit": "Tô không giới hạn"
     },
-    "allOf": {
-      "month": "Mọi quyền lợi của gói Free",
-      "year": "Mọi quyền lợi của gói Tháng"
-    },
-    "chooseMonth": "Chọn gói Tháng",
-    "chooseYear": "Chọn gói Năm",
     "providerHint": {
       "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
       "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào."
@@ -589,11 +548,47 @@
       "autoRenew": "Tự gia hạn qua PayPal mỗi {{period}}. Huỷ bất cứ lúc nào, gói vẫn dùng tới hết hạn.",
       "manual": "Trả từng lần. Web sẽ nhắc trước khi hết hạn 3 ngày.",
       "cancel": "Huỷ tự gia hạn",
-      "cancelConfirm": "Huỷ tự gia hạn? Bé vẫn dùng gói tới hết hạn, sau đó về gói Free.",
+      "cancelConfirm": "Huỷ tự gia hạn? Bé vẫn dùng gói tới hết hạn, sau đó về gói Thường.",
       "cancelled": "Đã huỷ tự gia hạn.",
       "month": "tháng",
       "year": "năm"
-    }
+    },
+    "vip": {
+      "name": "VIP",
+      "limit": "Tô không giới hạn",
+      "tagline": "Mọi thứ của gói Thường, và hơn thế nữa",
+      "perks": [
+        {
+          "i": "🔓",
+          "t": "Mở toàn bộ chủ đề"
+        },
+        {
+          "i": "🏛️",
+          "t": "5 tranh mỗi vòng triển lãm"
+        },
+        {
+          "i": "🔁",
+          "t": "Đổi hoặc tặng 5 thẻ mỗi ngày"
+        },
+        {
+          "i": "📖",
+          "t": "Truyện tranh không giới hạn"
+        },
+        {
+          "i": "✨",
+          "t": "Thêm 5 mẫu chữ ký WOW"
+        },
+        {
+          "i": "👑",
+          "t": "Huy hiệu VIP bên cạnh ảnh đại diện"
+        }
+      ],
+      "month": "Tháng",
+      "year": "Năm",
+      "chooseMonth": "Chọn VIP Tháng",
+      "chooseYear": "Chọn VIP Năm"
+    },
+    "save": "Tiết kiệm 89.000đ (~15%)"
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",
@@ -602,8 +597,7 @@
   },
   "upgrade": {
     "title": "Hết lượt tô rồi!",
-    "freeUsed": "Gói Free được tô 1 tranh mỗi ngày. Bé quay lại vào ngày mai, hoặc nhờ bố mẹ nâng cấp để tô tiếp nhé.",
-    "monthUsed": "Bé đã tô hết 100 tranh của tháng này. Nâng cấp lên Gói Năm để tô không giới hạn.",
+    "freeUsed": "Gói Thường được tô 2 tranh mỗi ngày. Bé quay lại vào ngày mai, hoặc nhờ bố mẹ nâng cấp VIP để tô không giới hạn nhé.",
     "cta": "Xem các gói",
     "later": "Để sau"
   },
@@ -963,7 +957,9 @@
     "already_friends": "Hai bạn đã là bạn bè rồi.",
     "request_already_sent": "Đã gửi lời mời rồi, chờ bạn ấy đồng ý nhé.",
     "not_friends": "Chỉ bạn bè mới làm được việc này.",
-    "trade_daily_limit": "Hôm nay đã hết 3 lượt tặng/đổi thẻ.",
+    "storybook_limit": "Gói Thường chỉ có 1 cuốn truyện. Nâng cấp VIP để làm thêm nhé.",
+    "storybook_pages_limit": "Gói Thường chỉ được 10 trang mỗi truyện. Nâng cấp VIP để thêm trang nhé.",
+    "trade_daily_limit": "Hôm nay đã hết lượt tặng/đổi thẻ. Gói VIP được 5 lượt mỗi ngày.",
     "card_in_trade": "Thẻ này đang trong một giao dịch khác.",
     "trade_invalid": "Giao dịch không còn hợp lệ.",
     "trade_not_found": "Không tìm thấy giao dịch.",
@@ -991,7 +987,7 @@
     "signature_name_length": "Tên trên chữ ký dài từ 1 đến 20 ký tự nhé.",
     "signature_private_info": "Chữ ký không được chứa số điện thoại, email hay đường link.",
     "signature_bad_word": "Chữ ký có từ chưa đẹp, bé đổi tên khác nhé!",
-    "signature_premium_required": "Mẫu này cần Gói tháng hoặc Gói năm.",
+    "signature_premium_required": "Mẫu này dành cho gói VIP.",
     "signature_style_invalid": "Mẫu chữ ký không hợp lệ.",
     "signature_hand_invalid": "Chữ ký tay chưa hợp lệ, bé ký lại nhé.",
     "signature_invalid": "Chữ ký không hợp lệ.",
