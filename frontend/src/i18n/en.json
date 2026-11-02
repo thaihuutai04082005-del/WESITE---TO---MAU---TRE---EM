@@ -1003,63 +1003,64 @@
     "color": {
       "intro": "Pick a lovely picture and color it your way.",
       "steps": [
-        "Pick a theme (Animals, Vehicles…), then an animal or object, then a style you like.",
-        "Pick a mode: \"Guided\" shows the picture with number hints for only the colors it uses; \"Free\" lets you color anything any way you like.",
-        "Pick a tool: crayon, brush, glitter, pattern or sticker. Touch a region and color it — strokes stay inside the region, so nothing smears outside.",
-        "Fill the region and it takes the color. Tap \"Done\" to watch your picture come alive, then download or print it."
+        "Pick an age group (3–5, 6–8, 9+) or the Rare card pictures tab, then pick a theme and a picture.",
+        "Pick a mode: \"Paint by number\" has a sample picture with a number for each color (zoom in on the sample to read the numbers); \"Free coloring\" lets you use any color.",
+        "Pick a tool: crayon, brush, glitter crayon, pattern pen or sticker, plus Eraser, Undo and Redo. Start inside a region and color — strokes stay inside that region, so nothing spills over.",
+        "Cover most of a region and the whole region fills with color.",
+        "Press \"Finish\", choose a frame, then download, print or color another picture. Finished pictures go to your Collection; \"Save & exit\" keeps an unfinished picture in History."
       ],
-      "tip": "Unfinished pictures are saved in History automatically. Buy new patterns in the Shop for more ways to color!"
+      "tip": "The Free plan lets you color 1 picture a day (counted when you start coloring). The Arena and Color Together don't use up your picture."
     },
     "arena": {
-      "intro": "Color against up to 10 kids with fair, automatic scoring.",
+      "intro": "Compete with up to 10 friends — scoring is automatic and fair.",
       "steps": [
-        "Tap \"Find a match\" to play kids at your level, or \"Create room\" and send the code to friends.",
-        "When the match starts, everyone colors the same picture in Free mode before time runs out.",
-        "Tap \"Submit\" when you're done and wait for the others.",
-        "See your score on 5 criteria (color coverage, harmony, creativity, variety, time). The Top 3 win Rank Points and Gacha Points."
+        "Press \"Find a match\" to be matched with kids of a similar level. If the lobby says \"Closed\", wait until it opens again.",
+        "Or press \"Create room\" and send the code to friends: only friends of the room owner can join, and the owner presses \"Start\" once at least 2 kids are in.",
+        "When the match starts, the whole room colors the same picture, chosen by the system, in Free coloring until time is up. Press \"Submit\" when you're done.",
+        "Pictures are scored on 5 things: coverage, color harmony, creativity, variety and time. The top 3 win +10, +8 and +6 Rank and Gacha points."
       ],
-      "tip": "Color every region fully, choose harmonious colors and be unique to score high!"
+      "tip": "Fill every region, mix colors nicely and be original for a high score. Rank points are never taken away."
     },
     "together": {
-      "intro": "2–4 kids color one picture together and see each other's colors instantly.",
+      "intro": "2–4 friends color one picture together and see each other's colors instantly.",
       "steps": [
-        "Tap \"New room\" and pick the picture to color together.",
-        "Send the room code to your friends. Only people with the code can join.",
-        "Color together. Each friend has their own colored pointer on the picture.",
-        "Tap \"Save picture\" to save it to everyone's History."
+        "Press \"New room\", pick a theme, then pick the picture to color together.",
+        "Send the room code to friends; they type it in \"Join a room\" and press \"Join\". There is no public list of rooms, so only people with the code can get in.",
+        "Everyone colors together, and each friend has their own colored cursor on the picture.",
+        "Press \"Save picture\" to save it to everyone's History."
       ],
       "tip": "Undo only removes your own last stroke, never a friend's."
     },
     "gacha": {
       "intro": "Use Gacha points to open rare picture cards and collect them.",
       "steps": [
-        "Place in the Arena top 3 to earn Gacha points.",
-        "Every 50 Gacha points = 1 card. Leftover points are kept.",
-        "Cards come in S, A, B and C. A rare card is a one-of-a-kind picture, different from the theme pictures, and you unlock it to color.",
-        "There are 7 face-down cards on the stage. Tap a glowing card to flip it — each card shows its own picture.",
-        "Gift or swap cards with friends, up to 3 times a day."
+        "Finish in the top 3 of the Arena to earn Gacha points (+10, +8, +6).",
+        "Every 50 Gacha points give 1 pull, and leftover points are kept. Your points and pulls are shown on the page.",
+        "The stage has 7 face-down cards; the number of glowing cards equals your pulls (up to 7). Tap a glowing card to flip it, or tap \"Open N cards\" to flip several at once.",
+        "Cards come in 4 tiers: S, A, B, C. Each card is a one-of-a-kind picture that isn't in any theme.",
+        "Cards you open appear in the Rare card pictures tab on the picture page: tap one to color it, and the finished picture goes to your Collection. To gift or swap cards, go to Friends (up to 3 offers a day)."
       ],
-      "tip": "Opening cards never lowers your rank and never uses real money."
+      "tip": "Opening cards never lowers your rank and never needs real money."
     },
     "storybooks": {
-      "intro": "Turn your colored pictures into a book of your own.",
+      "intro": "Turn the pictures you've colored into a storybook of your own.",
       "steps": [
-        "Tap \"New storybook\" and give it a title.",
-        "Pick finished pictures from your collection (guided, free or rare cards) as the pages.",
-        "Arrange the pages and write a line or caption for each one.",
-        "Choose a cover (more in the Shop), read it page by page, download a PDF or share it with family."
+        "Press \"New storybook\": the book opens, type the title right on the cover and press \"Pick cover\" to change it (more covers in the Shop).",
+        "Turn to an inside page, press \"Pick a picture from collection\" and choose a finished picture. Each picture can be used once in a story.",
+        "Write the words or a caption right under the picture. To keep writing, press \"Add new page\" (up to 40 pages).",
+        "Press \"Save story\". Then you can flip through it, press \"Finish storybook\", download the PDF or share a link with parents and grandparents."
       ],
-      "tip": "A storybook needs at least 2 pages to be finished."
+      "tip": "A story needs at least 2 pages before you can press \"Finish storybook\"."
     },
     "missions": {
-      "intro": "Do missions to level up and earn Ruby.",
+      "intro": "Complete missions to level up and earn Ruby.",
       "steps": [
-        "Each level has 3 missions, like finishing a picture, logging in several days or trying a new theme.",
-        "You get Ruby right away for each mission you complete.",
-        "Finish all 3 to reach the next level with new missions.",
-        "Spend Ruby on pattern colors, frames and storybook covers in the Shop."
+        "There are 20 levels with 3 missions each, for example: finish a picture, log in several days in a row, try a new theme.",
+        "Each finished mission gives Ruby right away: 10 Ruby on levels 1–5, 20 Ruby on levels 6–15, 30 Ruby on levels 16–20.",
+        "Finish all 3 missions to reach the next level with a new set of missions.",
+        "Spend Ruby in the Shop on pattern colors, picture frames and storybook covers."
       ],
-      "tip": "Finish all 3 missions to reach the next level. Rank and Rank Points are in the Arena."
+      "tip": "Avatar frames aren't sold in the Shop: you unlock them by moving up a rank in the Arena."
     }
   }
 }
