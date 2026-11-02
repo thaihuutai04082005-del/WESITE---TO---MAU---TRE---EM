@@ -139,15 +139,15 @@ Mọi tranh trong hệ thống — dù ở chế độ nào — đều được 
 
 ## 6. Gói dịch vụ & Thanh toán
 
-### 6.1. Ba gói dịch vụ
+### 6.1. Hai gói dịch vụ: Thường và VIP
 
 | Gói | Giá | Giới hạn tô |
 |---|---|---|
-| **Free (miễn phí)** | 0đ | Tối đa **1 ảnh/ngày** |
-| **Gói Tháng** | **49.000đ/tháng** | Tối đa **100 ảnh/tháng** (~3 ảnh/ngày) |
-| **Gói Năm** | **499.000đ/năm** | **Không giới hạn** số ảnh |
+| **Thường** | 0đ | **2 ảnh/ngày** |
+| **VIP Tháng** | **19.000đ/tháng** | **Không giới hạn** số ảnh |
+| **VIP Năm** | **149.000đ/năm** | **Không giới hạn** số ảnh |
 
-> Tỉ lệ giá được cân đối để gói Năm có lý do rõ ràng tồn tại: 49.000đ × 12 tháng = 588.000đ, so với 499.000đ chỉ giảm ~15% (đúng chuẩn "tặng gần 2 tháng" phổ biến trong mô hình subscription) — tránh tình trạng gói Tháng quá hào phóng khiến không ai cần lên gói Năm.
+> Quyền lợi VIP giống nhau, chỉ khác thời hạn. VIP Năm tiết kiệm 79.000đ (19.000đ × 12 = 228.000đ), khoảng 35%, trung bình ~12.400đ/tháng.
 
 ### 6.2. Quy tắc tính lượt tô cho gói Free
 - **Chỉ tính là đã dùng 1 lượt trong ngày** khi người dùng **thực sự bắt đầu tô** (có ít nhất 1 hành động đổ màu/vẽ brush đầu tiên). Chỉ mở/xem/chọn tranh mà chưa tô thì **không tính**.

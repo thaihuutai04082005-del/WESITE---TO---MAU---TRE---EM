@@ -153,7 +153,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   // Thanh toán gói Tháng (chế độ giả lập vì chưa cấu hình cổng).
   const pay = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, token);
   assert.equal(pay.body.mock, true);
-  assert.equal(pay.body.amount, 49000);
+  assert.equal(pay.body.amount, 19000);
   const done = await api('POST', `/payments/${pay.body.paymentId}/mock-complete`, null, token);
   assert.equal(done.body.plan.plan, 'month');
   assert.equal((await api('POST', `/artworks/${a3.body.artwork.id}/start`, null, token)).status, 200);
@@ -618,28 +618,28 @@ test('Thanh toán chuyển khoản QR: tạo mã, SePay báo tiền về thì m�
   assert.equal(p.body.bankTransfer.accountNo, '35391537');
   assert.equal(p.body.bankTransfer.bank, 'ACB');
   assert.match(p.body.bankTransfer.content, /^BTM[A-Z2-9]{6}$/);
-  // Mã VietQR chuẩn NAPAS: ACB (970416), số TK, 49.000đ, nội dung = mã BTM…; CRC hợp lệ.
+  // Mã VietQR chuẩn NAPAS: ACB (970416), số TK, 19.000đ, nội dung = mã BTM…; CRC hợp lệ.
   const qr = p.body.bankTransfer.qrData;
   assert.ok(qr.startsWith('000201010212'));
   assert.ok(qr.includes('0006970416010835391537'));
-  assert.ok(qr.includes('540549000') && qr.includes(p.body.bankTransfer.content));
+  assert.ok(qr.includes('540519000') && qr.includes(p.body.bankTransfer.content));
 
   const hook = (body, key) =>
     fetch(`${base}/api/payments/sepay/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(key ? { Authorization: `Apikey ${key}` } : {}) }, body: JSON.stringify(body) });
   env.sepay.apiKey = 'test-sepay-key';
   try {
     const content = `MBVCB.123 ${p.body.bankTransfer.content.toLowerCase()} chuyen tien`;
-    assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 49000, content }, 'sai-khoa')).status, 401);
+    assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 19000, content }, 'sai-khoa')).status, 401);
     // Chuyển thiếu tiền → chưa mở gói.
     await hook({ id: 2, transferType: 'in', transferAmount: 10000, content }, 'test-sepay-key');
     assert.equal((await api('GET', `/payments/${p.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
     // Đủ tiền → mở gói; gửi lại cùng giao dịch không gia hạn thêm.
-    assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key')).status, 200);
+    assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key')).status, 200);
     const st = await api('GET', `/payments/${p.body.paymentId}`, null, u.token);
     assert.equal(st.body.payment.status, 'paid');
     assert.equal(st.body.plan.plan, 'month');
     const ends = st.body.plan.endsAt;
-    await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key');
+    await hook({ id: 3, transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key');
     assert.equal((await api('GET', '/subscription', null, u.token)).body.plan.endsAt, ends);
   } finally {
     env.sepay.apiKey = '';
@@ -679,7 +679,7 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     const p = await api('POST', '/payments', { plan: 'month', provider: 'paypal' }, u.token);
     assert.equal(p.status, 201, JSON.stringify(p.body));
     assert.equal(p.body.payUrl, 'https://paypal.test/approve');
-    assert.equal([p.body.amount, p.body.currency].join(' '), '1.99 USD');
+    assert.equal([p.body.amount, p.body.currency].join(' '), '0.79 USD');
     assert.equal(fake.created.plan_id, 'P-MONTH');
     // Chưa đồng ý → vẫn chờ.
     assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).body.payment.status, 'pending');

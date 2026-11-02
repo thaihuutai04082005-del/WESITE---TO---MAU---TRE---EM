@@ -2,8 +2,8 @@
 
 export const PLANS = {
   free: { key: 'free', priceVnd: 0, limit: { per: 'day', count: 2 } },
-  month: { key: 'month', priceVnd: 49000, priceUsd: 1.99, days: 30, limit: null },
-  year: { key: 'year', priceVnd: 499000, priceUsd: 19.99, days: 365, limit: null },
+  month: { key: 'month', priceVnd: 19000, priceUsd: 0.79, days: 30, limit: null },
+  year: { key: 'year', priceVnd: 149000, priceUsd: 5.99, days: 365, limit: null },
 };
 
 /** 6 bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ). */

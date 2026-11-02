@@ -195,8 +195,14 @@ export default function Plans() {
                   </div>
                   <div className="mt-2 text-sm font-bold text-muted">
                     {t('plans.usdNote', { price: `$${plans[period].priceUsd}` })}
-                    {period === 'year' && <span className="ml-2 text-[#B45F00]">· {t('plans.save')}</span>}
                   </div>
+                  {period === 'year' && (
+                    <div className="mt-1 text-sm font-extrabold text-[#B45F00]">
+                      <div>{t('plans.save')}</div>
+                      <div>{t('plans.avg', { price: formatVnd(Math.round(plans.year.priceVnd / 12 / 100) * 100) })}</div>
+                    </div>
+                  )}
+                  <div className="mt-1 text-sm text-muted">{t('plans.sameBenefits')}</div>
                 </>
               )}
               <span className={`mt-3 inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
