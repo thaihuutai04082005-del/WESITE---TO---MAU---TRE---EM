@@ -11,7 +11,7 @@ export default function Avatar({ avatar = 'meo', frame = null, size = 56, vip = 
         <svg
           viewBox="0 0 64 50"
           className="pointer-events-none absolute z-10 drop-shadow"
-          style={{ width: size * 0.5, left: '50%', top: -size * 0.14, transform: 'translateX(-38%) rotate(15deg)' }}
+          style={{ width: size * 0.5, left: '50%', top: -size * 0.27, transform: 'translateX(-38%) rotate(15deg)' }}
           data-testid="vip-crown"
           role="img"
           aria-label="VIP"
