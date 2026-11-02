@@ -12,6 +12,60 @@ import SignaturePanel from './SignaturePanel';
 import { ensureSignatureFont, placeDefault } from '../lib/signature';
 import { isRegionDone } from '../lib/picture';
 
+/** Tranh mẫu phóng to: ô vuông lớn nhất vừa màn hình, bấm +/− hoặc cuộn chuột để phóng, kéo để xem chỗ nhỏ (đọc số màu cho rõ). */
+function ReferenceViewer({ picture, doneIds, onClose }) {
+  const { t, i18n } = useTranslation();
+  const [zoom, setZoom] = useState(1);
+  const box = useRef(null);
+  const drag = useRef(null);
+  const set = (z) => setZoom(Math.min(4, Math.max(1, Math.round(z * 10) / 10)));
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  const onDown = (e) => {
+    if (zoom <= 1) return;
+    drag.current = { x: e.clientX, y: e.clientY, sl: box.current.scrollLeft, st: box.current.scrollTop };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const onMove = (e) => {
+    const d = drag.current;
+    if (!d) return;
+    box.current.scrollLeft = d.sl - (e.clientX - d.x);
+    box.current.scrollTop = d.st - (e.clientY - d.y);
+  };
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/50 p-3 backdrop-blur-sm" onClick={onClose} data-testid="reference-viewer">
+      <div className="flex max-h-full max-w-full flex-col items-center gap-3 rounded-3xl bg-white p-3 shadow-pop" onClick={(e) => e.stopPropagation()}>
+        <div className="flex w-full flex-wrap items-center justify-between gap-x-2 gap-y-1">
+          <div className="min-w-0 max-w-full truncate font-display text-lg font-extrabold">{picture.name?.[i18n.language]}</div>
+          <div className="flex shrink-0 items-center gap-1.5">
+            <button type="button" className="btn-ghost min-h-10 px-3" onClick={() => set(zoom - 0.5)} disabled={zoom <= 1} aria-label="−" data-testid="ref-zoom-out"><Icon name="zoomOut" size={20} /></button>
+            <span className="w-12 text-center text-sm font-bold">{Math.round(zoom * 100)}%</span>
+            <button type="button" className="btn-ghost min-h-10 px-3" onClick={() => set(zoom + 0.5)} disabled={zoom >= 4} aria-label="+" data-testid="ref-zoom-in"><Icon name="zoomIn" size={20} /></button>
+            <button type="button" className="btn-primary min-h-10 px-4" onClick={onClose} data-testid="ref-close">{t('common.close')}</button>
+          </div>
+        </div>
+        <div
+          ref={box}
+          className={`overflow-auto rounded-2xl border-2 border-line bg-white ${zoom > 1 ? 'cursor-grab touch-none active:cursor-grabbing' : ''}`}
+          style={{ width: 'min(92vw, calc(100vh - 110px))', height: 'min(92vw, calc(100vh - 110px))' }}
+          onPointerDown={onDown}
+          onPointerMove={onMove}
+          onPointerUp={() => (drag.current = null)}
+          onPointerCancel={() => (drag.current = null)}
+          onWheel={(e) => set(zoom + (e.deltaY < 0 ? 0.25 : -0.25))}
+        >
+          <div style={{ width: `${zoom * 100}%`, aspectRatio: '1' }}>
+            <PictureView picture={picture} className="h-full w-full" numbers doneIds={doneIds} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ColoringWorkspace({
   picture,
   editor,
@@ -78,18 +132,21 @@ export default function ColoringWorkspace({
   return (
     <div className={`cw ${template ? 'cw-template' : 'cw-free'}`}>
       <div className="cw-left">
-        <div className="cw-header">{header}</div>
-        {template && (
-          <div className="cw-ref card hidden p-3 lg:block">
-            <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
-            <div className="cw-ref-box">
-              <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
-                <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
-              </button>
+        <div className="cw-left-in">
+          <div className="cw-header">{header}</div>
+          {template && (
+            <div className="cw-ref card hidden p-3 lg:block">
+              <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
+              <div className="cw-ref-box">
+                <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
+                  <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+                  <span className="cw-ref-zoom"><Icon name="zoomIn" size={18} strokeWidth={2.8} /> {t('coloring.refZoom')}</span>
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-        {actions && <div className="cw-actions">{actions}</div>}
+          )}
+          {actions && <div className="cw-actions">{actions}</div>}
+              </div>
       </div>
 
       <div className="cw-stage">
@@ -170,9 +227,7 @@ export default function ColoringWorkspace({
           </button>
         </div>
       </Modal>
-      <Modal open={showRef} onClose={() => setShowRef(false)}>
-        <PictureView picture={picture} className="rounded-2xl" numbers doneIds={doneIds} />
-      </Modal>
+      {showRef && <ReferenceViewer picture={picture} doneIds={doneIds} onClose={() => setShowRef(false)} />}
     </div>
   );
 }

@@ -1470,6 +1470,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .cw-page { margin: 0; width: 100%; padding: 14px 14px 112px; min-height: calc(100dvh - 73px); background: #BFE8FF url(/home-bg.webp) center bottom / cover no-repeat; }
 .cw { display: flex; flex-direction: column; gap: 14px; max-width: 1800px; margin: 0 auto; }
 .cw-left { display: contents; }
+.cw-left-in { display: contents; }
 .cw-header { order: 1; }
 .cw-stage { order: 2; }
 .cw-actions { order: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
@@ -1638,3 +1639,25 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .card-back-icon { display: inline-block; height: 1.3em; width: auto; margin-right: 0.15em; vertical-align: -0.28em; border-radius: 14%; box-shadow: 0 1px 3px rgba(30, 60, 120, 0.35); }
 .wood-tab-icon .card-back-icon { height: 1.1em; margin: 0; vertical-align: top; }
 .room-tab .card-back-icon { height: 1.55em; vertical-align: -0.4em; }
+
+/* Tranh mẫu nhỏ: nhãn "Phóng to" để bé biết bấm vào xem to */
+.cw-ref-btn { position: relative; }
+.cw-ref-zoom { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: rgba(27, 42, 74, 0.82); font-family: var(--font-display); font-weight: 800; font-size: 14px; color: #fff; pointer-events: none; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
+
+/* Màn hình rộng: cột trái (tranh mẫu) lấy phần trống hai bên khung tô; tranh mẫu to lên, tiêu đề + nút xếp dọc bên cạnh. */
+@media (min-width: 1024px) {
+  /* Khung tô luôn được đủ cỡ (vuông, cao bằng màn hình) TRƯỚC; cột trái chỉ lấy phần bề ngang còn dư, tối đa vừa tranh mẫu. */
+  .cw-template { max-width: 2400px; grid-template-columns: minmax(clamp(220px, 19vw, 320px), min(calc(100dvh - 255px), calc(100vw - 60px - clamp(340px, 26vw, 400px) - (100dvh - 97px)))) minmax(0, 1fr) clamp(340px, 26vw, 400px); }
+  .cw-template .cw-left { container-type: inline-size; }
+  .cw-template .cw-left-in { display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 0; }
+  /* Cột trái đủ rộng: một cột thẳng hàng — tiêu đề (nằm ngang) · tranh mẫu to chiếm chỗ còn lại · hai nút cạnh nhau. */
+  @container (min-width: 340px) {
+    .cw-template .cw-header > div { flex-direction: row; align-items: center; flex-wrap: nowrap; gap: 10px; margin-bottom: 0; }
+    .cw-template .cw-header > div > .min-w-0 { width: auto; flex: 1 1 0; }
+    .cw-template .cw-header > div > .min-w-0 h1 { white-space: nowrap; font-size: 20px; }
+    .cw-template .cw-header > div > .w-32 { width: 84px; flex: none; }
+    .cw-template .cw-ref { flex: 1 1 0; }
+    .cw-template .cw-actions { flex-direction: row; margin-top: 0; }
+    .cw-template .cw-actions > * { flex: 1 1 0; }
+  }
+}
