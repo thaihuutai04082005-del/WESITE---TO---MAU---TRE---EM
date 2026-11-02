@@ -132,7 +132,7 @@ export default function History() {
   const [items, setItems] = useState(null);
   const [open, setOpen] = useState(null);
 
-  const load = () => api.get(`/artworks${filter === 'all' ? '' : `?status=${filter}`}`).then((r) => setItems(r.artworks));
+  const load = () => api.get(`/artworks?progress=1${filter === 'all' ? '' : `&status=${filter}`}`).then((r) => setItems(r.artworks));
   useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -170,7 +170,7 @@ export default function History() {
                 <div className="hs-thumb">
                   {a.thumbnail ? <img src={a.thumbnail} alt="" /> : <div className="hs-nothumb">{t('history.noPreview')}</div>}
                   <span className={`hs-badge ${a.status === 'completed' ? 'hs-badge-done' : ''}`}>
-                    <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}
+                    <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}{a.status === 'in_progress' && a.progress > 0 ? ` · ${a.progress}%` : ''}
                   </span>
                   <span className="hs-more" aria-hidden="true">•••</span>
                 </div>
