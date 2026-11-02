@@ -49,6 +49,8 @@ Cần Python 3 với `numpy`, `scipy`, `opencv-python-headless`.
 
 ## Tranh theo độ tuổi (không phải thẻ)
 
+> Tên chủ đề 3–5 tuổi đã đổi (cột "Chủ đề" dưới đây ghi tên cũ): Động Vật → Thế Giới Động Vật, Trái Cây → Vườn Trái Cây, Xe Cộ → Phương Tiện Giao Thông, Đồ Dùng Học Tập → Bé Đến Trường, Đồ Chơi → Thế Giới Đồ Chơi, Đồ Ăn → Món Ngon Của Bé, Khu Vui Chơi → Khu Vui Chơi Của Bé, Du Hành Vũ Trụ → Khám Phá Vũ Trụ, Các Loài Hoa → Vườn Hoa Xinh, Ngôi Nhà Của Bé → Ngôi Nhà Thân Yêu.
+
 Chủ đề cho bé **3–5 tuổi** dùng tranh vẽ tay, khai báo trong `ART_THEMES` (`generator/themes.mjs`):
 chủ đề (`age`: `'3-5'`) → đối tượng → từng tranh (`file` trong thư mục này). Cách tạo file `.json` giống thẻ ở trên.
 Các chủ đề kết hợp sáng tạo do bộ tạo tranh vẽ thuộc nhóm **6–8 tuổi**; nhóm **9 tuổi trở lên** mới có chủ đề Chiến Binh Biến Hình (4 tranh).
