@@ -252,6 +252,10 @@ def left_of(p, q):
 HEM_L = ((163, 478), (190, 452))
 HEM_R = ((420, 478), (410, 452))
 sleeve = side_zone & inner & (ys_ < 488) & (((xs_ < 184) & ~left_of(*HEM_L)) | ((xs_ > 414) & left_of(*HEM_R)))
+# chỉ tô trắng chỗ vốn không phải quần xanh / nét viền xanh của yếm (giữ nguyên mép yếm cạnh cúc áo)
+orig_blue = (B > 170) & (R < 160) & (A > 200)
+navy_line = dark & (B > R + 2)
+sleeve &= ~ndimage.binary_dilation(orig_blue | navy_line, iterations=1)
 need |= sleeve
 
 # Tô bù chỉ bằng màu của chính thân (áo/quần/khăn) — vùng ngoài thân, nét viền và dải cần tô coi như chưa biết
@@ -275,7 +279,7 @@ body_a = np.where(side_zone & (inside > 0) & need, cov, body_a).astype(np.uint8)
 
 # Nét viền mới dọc hai sườn
 OUTLINE = np.array([69, 23, 10], np.float32)
-for c in [c for c, _ in sides] + [np.array(HEM_L, float), np.array(HEM_R, float)]:
+for c in [c for c, _ in sides]:
     k = raster(line_pts=c, width=6.5)[..., None]
     body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
     body_a = np.maximum(body_a, (k[..., 0] * 255).astype(np.uint8))
