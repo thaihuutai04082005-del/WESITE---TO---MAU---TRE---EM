@@ -88,7 +88,7 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
   };
 
   return (
-    <Modal open onClose={() => leave(null)} wide>
+    <Modal closeButton={false} open onClose={() => leave(null)} wide>
       <Confetti count={80} />
       <div className="text-center" data-testid="reveal-modal">
         <h2 className="flex items-center justify-center gap-2 font-display text-3xl font-extrabold text-[#22A55B]" data-testid="reveal-title">

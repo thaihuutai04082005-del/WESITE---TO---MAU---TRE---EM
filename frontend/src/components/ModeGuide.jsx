@@ -10,7 +10,7 @@ export default function ModeGuide({ card, onClose }) {
   const { Art } = card;
   const steps = t(`guide.${card.key}.steps`, { returnObjects: true });
   return (
-    <Modal open onClose={onClose} wide>
+    <Modal closeButton={false} open onClose={onClose} wide>
       <div data-testid={`guide-${card.key}`}>
         {/* Đầu bảng: cùng màu nền với ô chức năng */}
         <div className="relative -mx-5 -mt-5 mb-5 overflow-hidden rounded-t-3xl px-5 pb-5 pt-6 sm:px-6" style={{ background: card.bg }}>

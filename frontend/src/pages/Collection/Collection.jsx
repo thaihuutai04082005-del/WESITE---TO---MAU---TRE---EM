@@ -390,7 +390,7 @@ function RoomArtworks({ onTab, cards = false }) {
       <RoomShell tab={cards ? 'cards' : 'artworks'} onTab={onTab} slots={slots} pills={pills} />
       {modals}
       {open && ready && (
-        <Modal open onClose={() => setOpen(null)}>
+        <Modal closeButton={false} open onClose={() => setOpen(null)}>
           <div className="flex flex-col gap-3" data-testid="room-art-dialog">
             <FramedPicture src={open.thumbnail} frame={open.frame} dim={isHeld(entry, s)} />
             <div className="font-display text-xl font-extrabold">{open.name[i18n.language]}</div>

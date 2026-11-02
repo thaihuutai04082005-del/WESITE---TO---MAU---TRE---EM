@@ -145,7 +145,7 @@ export function EntryModal({ entry, picture, reactionsOpen, onClose, onChange })
   }
 
   return (
-    <Modal open onClose={onClose} wide>
+    <Modal closeButton={false} open onClose={onClose} wide>
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_260px]" data-testid="entry-modal">
         <div className="rounded-2xl p-3" style={{ background: `linear-gradient(145deg, ${b.frame}, ${b.frameLight} 45%, ${b.frame})` }}>
           <div className="rounded-lg bg-white p-2">
