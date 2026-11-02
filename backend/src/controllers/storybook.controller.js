@@ -4,9 +4,11 @@ import * as User from '../models/user.js';
 import * as progression from '../services/progression.js';
 import { storybookPdf } from '../services/pdf.js';
 import { token } from '../utils/ids.js';
-import { badRequest, notFound, str } from '../utils/http.js';
+import { badRequest, forbidden, notFound, str } from '../utils/http.js';
+import { isVip } from '../services/quota.js';
+import { STORYBOOK_LIMITS } from '../config/constants.js';
 
-const MAX_PAGES = 40;
+const limitsOf = (userId) => (isVip(userId) ? STORYBOOK_LIMITS.vip : STORYBOOK_LIMITS.free);
 
 function pagesOf(bookId) {
   return getDb()
@@ -53,7 +55,9 @@ function own(req) {
 
 /** Nhận mọi tranh đã hoàn thành (nằm trong bộ sưu tập) của chính bé: tô mẫu, sáng tạo, thẻ hiếm. */
 function validatePages(userId, pages) {
-  if (!Array.isArray(pages) || pages.length > MAX_PAGES) throw badRequest('invalid_pages');
+  if (!Array.isArray(pages)) throw badRequest('invalid_pages');
+  const max = limitsOf(userId).pages;
+  if (pages.length > max) throw pages.length > STORYBOOK_LIMITS.vip.pages ? badRequest('invalid_pages') : forbidden('storybook_pages_limit');
   return pages.map((p) => {
     const a = getDb().prepare("SELECT id FROM artworks WHERE id = ? AND user_id = ? AND status = 'completed'").get(Number(p.artworkId), userId);
     if (!a) throw badRequest('invalid_page_artwork');
@@ -73,6 +77,8 @@ export function list(req, res) {
 }
 
 export function create(req, res) {
+  const maxBooks = limitsOf(req.user.id).books;
+  if (maxBooks !== null && getDb().prepare('SELECT COUNT(*) AS c FROM storybooks WHERE user_id = ?').get(req.user.id).c >= maxBooks) throw forbidden('storybook_limit');
   const title = str(req.body?.title, { min: 1, max: 80, name: 'title' });
   const pages = validatePages(req.user.id, req.body?.pages || []);
   const cover = validateCover(req.user.id, req.body?.coverStyle);

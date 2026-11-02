@@ -1,4 +1,4 @@
-// Bảng giá 3 gói (Mục 6.1).
+// Bảng giá 2 gói: Thường và VIP (VIP trả theo tháng hoặc năm, cùng quyền lợi).
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,11 +12,9 @@ import { useUi } from '../../store/ui';
 /** Chữ trên nhãn gói (Gói Tháng · còn 97/100 lượt…). */
 function planBadgeText(plan, t, lang) {
   if (!plan) return '';
-  return plan.plan === 'year'
-    ? t('plans.badge.year', { date: formatDate(plan.endsAt, lang) })
-    : plan.plan === 'month'
-      ? t('plans.badge.month', { n: plan.remaining, limit: plan.limit })
-      : t('plans.badge.free', { n: plan.remaining });
+  return plan.plan === 'free'
+    ? t('plans.badge.free', { n: plan.remaining, limit: plan.limit })
+    : t(`plans.badge.${plan.plan}`, { date: formatDate(plan.endsAt, lang) });
 }
 
 /** Nhãn gói dạng viên thuốc viền xanh — dùng chung ở mọi trang. */
@@ -45,16 +43,7 @@ const THEMES = {
     art: '🎨',
     btn: 'border-2 border-[#4CD787] bg-white text-[#178A4A]',
   },
-  month: {
-    card: 'border-[#CFE6FA] bg-gradient-to-b from-[#EAF6FF] to-white',
-    title: 'text-primary-dark',
-    price: 'text-primary-dark',
-    pill: 'bg-[#DCEEFD] text-primary-dark',
-    art: 'calendar',
-    box: 'bg-[#EAF6FF] text-primary-dark',
-    btn: 'bg-primary text-white hover:bg-primary-dark',
-  },
-  year: {
+  vip: {
     card: 'border-[#FFC94D] bg-gradient-to-b from-[#FFF6DD] to-white ring-4 ring-[#FFE7A3]',
     title: 'text-[#7A4A00]',
     price: 'text-[#7A4A00]',
@@ -64,19 +53,6 @@ const THEMES = {
     btn: 'bg-[#F59E0B] text-white hover:brightness-95',
   },
 };
-
-/** Lịch có ngôi sao (emoji 📅 hiện ngày tháng tuỳ máy nên tự vẽ). */
-function CalendarArt() {
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" className="inline-block" aria-hidden="true">
-      <rect x="6" y="12" width="52" height="46" rx="10" fill="#fff" stroke="#2B6CB0" strokeWidth="3.5" />
-      <path d="M6 22a10 10 0 0110-10h32a10 10 0 0110 10v4H6z" fill="#9F8CFF" stroke="#2B6CB0" strokeWidth="3.5" />
-      <rect x="18" y="5" width="7" height="14" rx="3.5" fill="#fff" stroke="#2B6CB0" strokeWidth="3" />
-      <rect x="39" y="5" width="7" height="14" rx="3.5" fill="#fff" stroke="#2B6CB0" strokeWidth="3" />
-      <path d="M32 31l3.6 7.3 8 1.2-5.8 5.6 1.4 8L32 49.3 24.8 53l1.4-8-5.8-5.6 8-1.2z" fill="#FFC94D" stroke="#E5A100" strokeWidth="2" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function Perk({ p }) {
   return (
@@ -120,7 +96,7 @@ function ManagePlan({ plan, billing, onCancelled }) {
   }
   return (
     <div className="mx-auto mb-8 flex max-w-3xl flex-wrap items-center gap-4 rounded-3xl border-2 border-[#CFE6FA] bg-white p-5 shadow-soft" data-testid="manage-plan">
-      <span className="text-4xl" aria-hidden="true">{plan.plan === 'year' ? '👑' : '⭐'}</span>
+      <span className="text-4xl" aria-hidden="true">👑</span>
       <div className="min-w-0 flex-1">
         <div className="font-display text-lg font-extrabold">
           {t('plans.manage.active', { plan: t(`plans.${plan.plan}.name`), date: formatDate(plan.endsAt, i18n.language) })}
@@ -145,6 +121,7 @@ export default function Plans() {
   const current = useAuth((s) => s.plan);
   const setPlan = useAuth((s) => s.setPlan);
   const [buy, setBuy] = useState(null);
+  const [period, setPeriod] = useState('year');
   const [billing, setBilling] = useState(null);
   useEffect(() => {
     if (!user) return;
@@ -155,13 +132,13 @@ export default function Plans() {
   }, [user, current?.plan, current?.endsAt]);
   const plans = meta?.plans;
   if (!plans) return null;
+  const isVip = !!current?.vip;
   const cards = [
     { key: 'free', price: formatVnd(0) },
-    { key: 'month', price: formatVnd(plans.month.priceVnd) },
-    { key: 'year', price: formatVnd(plans.year.priceVnd), best: true },
+    { key: 'vip', price: formatVnd(plans[period].priceVnd), best: true },
   ];
   return (
-    <div className="page" style={{ maxWidth: 1480 }}>
+    <div className="page" style={{ maxWidth: 1100 }}>
       <div className="mb-10 text-center">
         <h1 className="page-title">{t('plans.title')}</h1>
         <p className="mt-1 text-muted">{t('plans.subtitle')}</p>
@@ -176,22 +153,22 @@ export default function Plans() {
           }}
         />
       )}
-      <div className="mx-auto grid max-w-xl gap-6 xl:max-w-none xl:grid-cols-3">
+      <div className="mx-auto grid max-w-xl gap-6 md:max-w-none md:grid-cols-2">
         {cards.map((c) => {
           const th = THEMES[c.key];
           return (
             <div key={c.key} className={`relative flex flex-col rounded-[28px] border-2 p-5 shadow-soft xl:p-6 ${th.card}`} data-testid={`plan-${c.key}`}>
               {c.best && (
                 <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#F59E0B] px-5 py-1.5 font-extrabold text-white shadow-soft">
-                  <span aria-hidden="true">👑</span> {t('plans.best')}
+                  <span aria-hidden="true">👑</span> {t('plans.vip.ribbon')}
                 </span>
               )}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className={`font-display text-2xl font-extrabold ${th.title}`}>{t(`plans.${c.key}.name`)}</h2>
+                  <h2 className={`font-display text-2xl font-extrabold ${th.title}`}>{t(c.key === 'vip' ? 'plans.vip.name' : 'plans.free.name')}</h2>
                   <div className={`mt-1 font-display text-4xl font-extrabold ${th.price}`}>
                     {c.price}
-                    <span className="text-base font-bold text-muted">{t(`plans.${c.key}.per`)}</span>
+                    <span className="text-base font-bold text-muted">{t(c.key === 'vip' ? `plans.${period}.per` : 'plans.free.per')}</span>
                   </div>
                 </div>
                 <div className="relative shrink-0 select-none text-6xl leading-none" aria-hidden="true">
@@ -199,21 +176,38 @@ export default function Plans() {
                   <span className="absolute -bottom-1 -right-2 text-xl">✨</span>
                 </div>
               </div>
-              {c.key !== 'free' && (
-                <div className="mt-1 text-sm font-bold text-muted">
-                  {t('plans.usdNote', { price: `$${plans[c.key].priceUsd}` })}
-                </div>
+              {c.key === 'vip' && (
+                <>
+                  <div className="mt-3 inline-flex rounded-full bg-[#FFEDB8] p-1" role="tablist" data-testid="vip-period">
+                    {['month', 'year'].map((k) => (
+                      <button
+                        key={k}
+                        type="button"
+                        role="tab"
+                        aria-selected={period === k}
+                        onClick={() => setPeriod(k)}
+                        data-testid={`vip-${k}`}
+                        className={`whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold transition ${period === k ? 'bg-white text-[#7A4A00] shadow-soft' : 'text-[#7A4A00]/70'}`}
+                      >
+                        {t(`plans.vip.${k}`)}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-2 text-sm font-bold text-muted">
+                    {t('plans.usdNote', { price: `$${plans[period].priceUsd}` })}
+                  </div>
+                  {period === 'year' && (
+                    <div className="mt-1 text-sm font-extrabold text-[#B45F00]">
+                      <div>{t('plans.save')}</div>
+                    </div>
+                  )}
+                </>
               )}
               <span className={`mt-3 inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-4 py-1.5 font-extrabold ${th.pill}`}>
-                {c.key === 'year' && <span aria-hidden="true">∞</span>}
+                {c.key === 'vip' && <span aria-hidden="true">∞</span>}
                 {t(`plans.${c.key}.limit`)}
               </span>
               <div className="mt-5 flex-1 rounded-3xl bg-white/80 p-3 xl:p-4">
-                {th.box && (
-                  <div className={`mb-4 flex items-center gap-3 rounded-2xl px-4 py-3 font-extrabold ${th.box}`}>
-                    <span className="text-2xl" aria-hidden="true">🎁</span> <span className="[text-wrap:balance]">{t(`plans.allOf.${c.key}`)}</span>
-                  </div>
-                )}
                 <ul className="space-y-3 text-[15px]">
                   {t(`plans.${c.key}.perks`, { returnObjects: true }).map((p) => (
                     <Perk key={p.t} p={p} />
@@ -222,10 +216,10 @@ export default function Plans() {
               </div>
               <div className="mt-5">
                 {c.key === 'free' ? (
-                  <span className={`btn pointer-events-none w-full ${th.btn}`}>{current?.plan === 'free' ? t('plans.current') : t('plans.included')}</span>
+                  <span className={`btn pointer-events-none w-full ${th.btn}`}>{!isVip ? t('plans.current') : t('plans.included')}</span>
                 ) : user ? (
-                  <button type="button" className={`btn w-full shadow-soft ${th.btn}`} onClick={() => setBuy(c.key)} data-testid={`buy-${c.key}`}>
-                    {current?.plan === c.key ? t('plans.renew') : t(c.key === 'month' ? 'plans.chooseMonth' : 'plans.chooseYear')}
+                  <button type="button" className={`btn w-full shadow-soft ${th.btn}`} onClick={() => setBuy(period)} data-testid="buy-vip">
+                    {current?.plan === period ? t('plans.renew') : t(period === 'month' ? 'plans.vip.chooseMonth' : 'plans.vip.chooseYear')}
                   </button>
                 ) : (
                   <Link to="/register" className={`btn w-full shadow-soft ${th.btn}`}>{t('landing.cta')}</Link>

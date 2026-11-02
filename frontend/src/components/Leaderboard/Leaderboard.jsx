@@ -15,7 +15,7 @@ export default function Leaderboard({ board = [], meId }) {
         <li key={e.user?.id ?? i} className={`card overflow-hidden ${e.user?.id === meId ? 'ring-4 ring-primary/40' : ''}`}>
           <button type="button" className="flex w-full items-center gap-3 p-3 text-left" onClick={() => setOpen(open === e.user?.id ? null : e.user?.id)}>
             <span className="w-8 text-center font-display text-2xl font-extrabold">{e.place ? MEDAL[e.place] || e.place : '–'}</span>
-            <Avatar avatar={e.user?.avatar} frame={e.user?.avatarFrame} size={48} />
+            <Avatar avatar={e.user?.avatar} frame={e.user?.avatarFrame} vip={e.user?.vip} size={48} />
             {e.thumbnail && <img src={e.thumbnail} alt="" className="h-12 w-12 rounded-xl border border-line" />}
             <div className="min-w-0 flex-1">
               <div className="truncate font-bold">{e.user?.nickname}</div>

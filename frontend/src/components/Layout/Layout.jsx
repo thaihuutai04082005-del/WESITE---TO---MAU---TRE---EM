@@ -133,7 +133,7 @@ export default function Layout() {
                 </Link>
                 <NotificationBell />
                 <Link to="/profile" className="flex items-center gap-2" data-testid="nav-profile">
-                  <Avatar avatar={user.avatar} frame={user.avatarFrame} size={42} />
+                  <Avatar avatar={user.avatar} frame={user.avatarFrame} vip={user.vip} size={42} />
                 </Link>
                 <button type="button" className="btn-ghost min-h-11 px-2.5 sm:px-3" onClick={() => setMenu(true)} aria-label={t('nav.menu')} data-testid="nav-menu">
                   <Icon name="menu" />

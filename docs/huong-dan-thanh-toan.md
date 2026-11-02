@@ -47,7 +47,7 @@ Nếu phụ huynh chuyển thiếu tiền, gói **không** mở. Cũng nên ki�
    PAYPAL_CLIENT_SECRET=<Secret>
    PAYPAL_API_BASE=https://api-m.paypal.com
    ```
-   Không cần tạo gói trong PayPal: web tự tạo Gói Tháng ($1.99) và Gói Năm ($19.99) ở lần thanh toán đầu tiên.
+   Không cần tạo gói trong PayPal: web tự tạo VIP Tháng ($0.79) và VIP Năm ($5.99) ở lần thanh toán đầu tiên.
 
 Mỗi kỳ PayPal tự trừ tiền và web tự cộng thêm 1 tháng hoặc 1 năm. Phụ huynh bấm **"Huỷ tự gia hạn"** ở trang *Gói* thì vẫn dùng hết kỳ đã trả. Tiền nằm trong ví PayPal; vào PayPal bấm **Rút tiền** để chuyển về ACB.
 

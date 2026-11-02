@@ -1,6 +1,7 @@
 // Mục 10.3: kết bạn chỉ qua mã mời riêng; tặng/đổi thẻ giới hạn 3 lượt/ngày, xác nhận 2 chiều.
 import { getDb, tx } from '../config/db.js';
-import { TRADE_DAILY_LIMIT } from '../config/constants.js';
+import { TRADE_LIMITS } from '../config/constants.js';
+import { isVip } from '../services/quota.js';
 import * as User from '../models/user.js';
 import * as Card from '../models/card.js';
 import * as progression from '../services/progression.js';
@@ -84,6 +85,7 @@ export function friendCards(req, res) {
 
 // ---------------- Trading ----------------
 
+const tradeLimit = (userId) => (isVip(userId) ? TRADE_LIMITS.vip : TRADE_LIMITS.free);
 const tradesToday = (userId) =>
   getDb()
     .prepare("SELECT COUNT(*) AS c FROM trades WHERE from_user = ? AND created_at >= ? AND status IN ('pending', 'accepted')")
@@ -110,7 +112,7 @@ function tradeView(t) {
 
 export function trades(req, res) {
   const rows = getDb().prepare('SELECT * FROM trades WHERE from_user = ? OR to_user = ? ORDER BY id DESC LIMIT 100').all(req.user.id, req.user.id);
-  res.json({ trades: rows.map(tradeView), usedToday: tradesToday(req.user.id), dailyLimit: TRADE_DAILY_LIMIT });
+  res.json({ trades: rows.map(tradeView), usedToday: tradesToday(req.user.id), dailyLimit: tradeLimit(req.user.id) });
 }
 
 const isLocked = (cardId) =>
@@ -121,7 +123,6 @@ export function createTrade(req, res) {
   const { toUserId, offerCardId, requestCardId } = req.body || {};
   const to = Number(toUserId);
   if (!areFriends(req.user.id, to)) throw forbidden('not_friends');
-  if (tradesToday(req.user.id) >= TRADE_DAILY_LIMIT) throw badRequest('trade_daily_limit');
   const offer = Card.findById(Number(offerCardId));
   if (!offer || offer.user_id !== req.user.id) throw badRequest('card_not_owned');
   if (isLocked(offer.id)) throw conflict('card_in_trade');
@@ -131,6 +132,7 @@ export function createTrade(req, res) {
     if (!request || request.user_id !== to) throw badRequest('card_not_owned');
     if (isLocked(request.id)) throw conflict('card_in_trade');
   }
+  if (tradesToday(req.user.id) >= tradeLimit(req.user.id)) throw badRequest('trade_daily_limit');
   const r = getDb().prepare('INSERT INTO trades (from_user, to_user, offer_card_id, request_card_id) VALUES (?, ?, ?, ?)').run(req.user.id, to, offer.id, request?.id ?? null);
   const t = getDb().prepare('SELECT * FROM trades WHERE id = ?').get(Number(r.lastInsertRowid));
   notify(to, 'trade_offer', { tradeId: t.id, from: User.publicProfile(req.user), kind: request ? 'exchange' : 'gift' });

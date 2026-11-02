@@ -4,7 +4,7 @@ import cors from 'cors';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { env, REPO_ROOT } from './config/env.js';
-import { PLANS, RANK_TIERS, GACHA_RATES, GACHA_COST, ARENA_REWARDS, ARENA_ROOM_SIZE, MISSION_RUBY, TRADE_DAILY_LIMIT, RUBRIC, AVATARS, COLLAB_MAX_PLAYERS } from './config/constants.js';
+import { PLANS, RANK_TIERS, GACHA_RATES, GACHA_COST, ARENA_REWARDS, ARENA_ROOM_SIZE, MISSION_RUBY, TRADE_DAILY_LIMIT, TRADE_LIMITS, STORYBOOK_LIMITS, RUBRIC, AVATARS, COLLAB_MAX_PLAYERS } from './config/constants.js';
 import { providerStatus } from './services/payments/index.js';
 import { errorHandler, notFoundHandler } from './middlewares/errors.js';
 import authRoutes from './routes/auth.routes.js';
@@ -43,6 +43,8 @@ export function createApp() {
       arena: { rewards: ARENA_REWARDS, roomSize: ARENA_ROOM_SIZE, rubric: RUBRIC, durationSec: env.arena.durationSec },
       missionRuby: MISSION_RUBY,
       tradeDailyLimit: TRADE_DAILY_LIMIT,
+      tradeLimits: TRADE_LIMITS,
+      storybookLimits: STORYBOOK_LIMITS,
       collabMaxPlayers: COLLAB_MAX_PLAYERS,
       avatars: AVATARS,
       payments: providerStatus(),

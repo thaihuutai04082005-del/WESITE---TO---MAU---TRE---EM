@@ -122,7 +122,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   const a1 = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
   assert.equal(a1.body.plan.used, 0);
   const s1 = await api('POST', `/artworks/${a1.body.artwork.id}/start`, null, token);
-  assert.equal(s1.body.plan.remaining, 0);
+  assert.equal(s1.body.plan.remaining, 1, 'gói thường: 2 tranh mỗi ngày');
   // Gọi lại start cho cùng tranh không tính thêm.
   assert.equal((await api('POST', `/artworks/${a1.body.artwork.id}/start`, null, token)).status, 200);
 
@@ -142,21 +142,24 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal((await api('PUT', `/artworks/${aid}/frame`, { frame: 'khung-go' }, token)).status, 200);
   assert.equal((await api('GET', `/artworks/${aid}`, null, token)).body.artwork.frame, 'khung-go');
 
-  // Tranh thứ 2 trong ngày → hết lượt (402).
+  // Tranh thứ 2 trong ngày vẫn được; tranh thứ 3 → hết lượt (402).
   const a2 = await api('POST', '/artworks', { pictureId: hero.body.pictures[1].id, mode: 'template' }, token);
-  const s2 = await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token);
-  assert.equal(s2.status, 402);
-  assert.equal(s2.body.error.code, 'quota_exceeded');
+  assert.equal((await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token)).status, 200);
+  const a3 = await api('POST', '/artworks', { pictureId: hero.body.pictures[2].id, mode: 'template' }, token);
+  const s3 = await api('POST', `/artworks/${a3.body.artwork.id}/start`, null, token);
+  assert.equal(s3.status, 402);
+  assert.equal(s3.body.error.code, 'quota_exceeded');
 
   // Thanh toán gói Tháng (chế độ giả lập vì chưa cấu hình cổng).
   const pay = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, token);
   assert.equal(pay.body.mock, true);
-  assert.equal(pay.body.amount, 49000);
+  assert.equal(pay.body.amount, 19000);
   const done = await api('POST', `/payments/${pay.body.paymentId}/mock-complete`, null, token);
   assert.equal(done.body.plan.plan, 'month');
-  assert.equal((await api('POST', `/artworks/${a2.body.artwork.id}/start`, null, token)).status, 200);
+  assert.equal((await api('POST', `/artworks/${a3.body.artwork.id}/start`, null, token)).status, 200);
   const sub = await api('GET', '/subscription', null, token);
-  assert.equal(sub.body.plan.limit, 100);
+  assert.equal(sub.body.plan.limit, null, 'VIP tô không giới hạn');
+  assert.equal(sub.body.plan.vip, true);
 
   const hist = await api('GET', '/artworks?status=completed', null, token);
   assert.equal(hist.body.artworks.length, 1);
@@ -252,16 +255,20 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   assert.equal(acc.body.trade.status, 'accepted');
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, b.token)).status, 200);
 
-  // Giới hạn 3 lượt/ngày
+  // Gói thường: 1 lượt/ngày → lượt thứ 2 bị chặn; VIP: 5 lượt/ngày
   const other = cards.body.cards[1].id;
+  const blocked = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
+  assert.equal(blocked.body.error.code, 'trade_daily_limit');
+  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(a.id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   for (let i = 0; i < 2; i++) {
     const t = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
     assert.equal(t.status, 201);
     await api('POST', `/social/trades/${t.body.trade.id}/decline`, null, b.token);
   }
-  // 1 accepted + 2 declined (declined không tính) → vẫn tạo được
+  // 1 accepted + 2 declined (declined không tính) → VIP vẫn tạo được
   const t3 = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
   assert.equal(t3.status, 201);
+  assert.equal((await api('GET', '/social/trades', null, a.token)).body.dailyLimit, 5);
 });
 
 test('Flipbook: nhận mọi tranh đã hoàn thành của bé (tô mẫu, sáng tạo), xuất PDF, chia sẻ', async () => {
@@ -410,16 +417,16 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   assert.equal((await api('PUT', '/users/me/signature', { name: 'đ.ị.t', style: 'classic' }, token)).body.error.code, 'signature_bad_word');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Na 0912345678', style: 'classic' }, token)).body.error.code, 'signature_private_info');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Na', style: 'gold' }, token)).body.error.code, 'signature_premium_required');
-  // Tự ký bằng tay: miễn phí.
+  // Tự ký bằng tay: chỉ VIP.
   const hand = [[[10, 10], [40, 30], [80, 12]], [[90, 40], [140, 20]]];
-  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.signature.style, 'hand');
+  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.error.code, 'signature_premium_required');
 
   const a = await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, token);
   const id = a.body.artwork.id;
   await api('POST', `/artworks/${id}/start`, null, token);
   // Ký lên tranh: vị trí bị kẹp trong tranh, cỡ tối đa 1/4 bề ngang.
   const put = (signature) => api('PUT', `/artworks/${id}`, { data: { fills: {}, strokes: [], stickers: [], signature } }, token);
-  assert.equal((await put({ style: 'hand', hand, x: 9999, y: -50, scale: 3, rot: 90, color: '#ff5f7e' })).status, 200);
+  assert.equal((await put({ style: 'classic', name: 'Nguyễn Bé Na', x: 9999, y: -50, scale: 3, rot: 90, color: '#ff5f7e' })).status, 200);
   let sig = (await api('GET', `/artworks/${id}`, null, token)).body.artwork.data.signature;
   assert.deepEqual([sig.scale, sig.rot, sig.color], [1, 20, '#FF5F7E']);
   assert.ok(sig.x <= 600 - 70 && sig.y >= 25);
@@ -429,6 +436,7 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   // Có gói → dùng mẫu wow → ký lên tranh; hết gói → chữ ký mặc định về mẫu Free, tranh đã ký giữ nguyên.
   const uid = getDb().prepare("SELECT id FROM users WHERE username = 'bena09'").get().id;
   getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(uid, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.signature.style, 'hand', 'VIP được tự ký bằng tay');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Bé Na', style: 'gold' }, token)).body.signature.style, 'gold');
   assert.equal((await put({ style: 'gold', name: 'Bé Na', x: 480, y: 560, scale: 0.8, rot: -5, color: '#1B2A38' })).status, 200);
   getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now() - 500).toISOString(), uid);
@@ -480,9 +488,9 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   at(vn('2026-10-03T10:00:00Z'));
   const st = await api('GET', '/exhibition/mine', null, A.token);
   assert.deepEqual([st.body.schedule.submitOpen, st.body.schedule.nextRound, st.body.limit], [true, '2026-10-05', 1]);
-  // Gói Tháng gửi 3 tranh/vòng, Gói Năm 5 tranh/vòng.
+  // VIP (Tháng hoặc Năm) gửi 5 tranh/vòng.
   const uidB = db.prepare('SELECT id FROM users WHERE username = ?').get('trienlam2').id;
-  for (const [plan, n] of [['month', 3], ['year', 5]]) {
+  for (const [plan, n] of [['month', 5], ['year', 5]]) {
     db.prepare('INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, ?, ?, ?)').run(uidB, plan, '2026-01-01T00:00:00Z', '2027-01-01T00:00:00Z');
     assert.equal((await api('GET', '/exhibition/mine', null, B.token)).body.limit, n);
     db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(uidB);
@@ -611,28 +619,28 @@ test('Thanh toán chuyển khoản QR: tạo mã, SePay báo tiền về thì m�
   assert.equal(p.body.bankTransfer.accountNo, '35391537');
   assert.equal(p.body.bankTransfer.bank, 'ACB');
   assert.match(p.body.bankTransfer.content, /^BTM[A-Z2-9]{6}$/);
-  // Mã VietQR chuẩn NAPAS: ACB (970416), số TK, 49.000đ, nội dung = mã BTM…; CRC hợp lệ.
+  // Mã VietQR chuẩn NAPAS: ACB (970416), số TK, 19.000đ, nội dung = mã BTM…; CRC hợp lệ.
   const qr = p.body.bankTransfer.qrData;
   assert.ok(qr.startsWith('000201010212'));
   assert.ok(qr.includes('0006970416010835391537'));
-  assert.ok(qr.includes('540549000') && qr.includes(p.body.bankTransfer.content));
+  assert.ok(qr.includes('540519000') && qr.includes(p.body.bankTransfer.content));
 
   const hook = (body, key) =>
     fetch(`${base}/api/payments/sepay/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(key ? { Authorization: `Apikey ${key}` } : {}) }, body: JSON.stringify(body) });
   env.sepay.apiKey = 'test-sepay-key';
   try {
     const content = `MBVCB.123 ${p.body.bankTransfer.content.toLowerCase()} chuyen tien`;
-    assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 49000, content }, 'sai-khoa')).status, 401);
+    assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 19000, content }, 'sai-khoa')).status, 401);
     // Chuyển thiếu tiền → chưa mở gói.
     await hook({ id: 2, transferType: 'in', transferAmount: 10000, content }, 'test-sepay-key');
     assert.equal((await api('GET', `/payments/${p.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
     // Đủ tiền → mở gói; gửi lại cùng giao dịch không gia hạn thêm.
-    assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key')).status, 200);
+    assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key')).status, 200);
     const st = await api('GET', `/payments/${p.body.paymentId}`, null, u.token);
     assert.equal(st.body.payment.status, 'paid');
     assert.equal(st.body.plan.plan, 'month');
     const ends = st.body.plan.endsAt;
-    await hook({ id: 3, transferType: 'in', transferAmount: 49000, content }, 'test-sepay-key');
+    await hook({ id: 3, transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key');
     assert.equal((await api('GET', '/subscription', null, u.token)).body.plan.endsAt, ends);
   } finally {
     env.sepay.apiKey = '';
@@ -672,7 +680,7 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     const p = await api('POST', '/payments', { plan: 'month', provider: 'paypal' }, u.token);
     assert.equal(p.status, 201, JSON.stringify(p.body));
     assert.equal(p.body.payUrl, 'https://paypal.test/approve');
-    assert.equal([p.body.amount, p.body.currency].join(' '), '1.99 USD');
+    assert.equal([p.body.amount, p.body.currency].join(' '), '0.79 USD');
     assert.equal(fake.created.plan_id, 'P-MONTH');
     // Chưa đồng ý → vẫn chờ.
     assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).body.payment.status, 'pending');
@@ -761,4 +769,15 @@ test('Lịch sử: tranh đang dở trả về % đã tô (?progress=1)', async 
   const empty = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
   const e = (await api('GET', '/artworks?progress=1', null, token)).body.artworks.find((x) => x.id === empty.body.artwork.id);
   assert.equal(e.progress, 0);
+});
+
+test('Truyện tranh: gói thường 1 cuốn tối đa 10 trang, VIP không giới hạn', async () => {
+  const { token, id } = await register('truyen01');
+  const first = await api('POST', '/storybooks', { title: 'Cuốn 1', pages: [] }, token);
+  assert.equal(first.status, 201);
+  assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).body.error.code, 'storybook_limit');
+  const eleven = Array.from({ length: 11 }, (_, i) => ({ artworkId: i + 1 }));
+  assert.equal((await api('PUT', `/storybooks/${first.body.storybook.id}`, { title: 'Cuốn 1', pages: eleven }, token)).body.error.code, 'storybook_pages_limit');
+  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'year', ?, ?)").run(id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).status, 201);
 });

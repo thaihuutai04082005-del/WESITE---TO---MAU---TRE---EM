@@ -1,9 +1,9 @@
 // Luật chơi & thông số kinh doanh — một nguồn duy nhất, frontend đọc qua GET /api/meta.
 
 export const PLANS = {
-  free: { key: 'free', priceVnd: 0, limit: { per: 'day', count: 1 } },
-  month: { key: 'month', priceVnd: 49000, priceUsd: 1.99, days: 30, limit: { per: 'period', count: 100 } },
-  year: { key: 'year', priceVnd: 499000, priceUsd: 19.99, days: 365, limit: null },
+  free: { key: 'free', priceVnd: 0, limit: { per: 'day', count: 2 } },
+  month: { key: 'month', priceVnd: 19000, priceUsd: 0.79, days: 30, limit: null },
+  year: { key: 'year', priceVnd: 149000, priceUsd: 5.99, days: 365, limit: null },
 };
 
 /** 6 bậc Rank theo Điểm Rank tích luỹ (không bao giờ bị trừ). */
@@ -41,7 +41,10 @@ export const GACHA_RATES = [
 
 export const MISSION_RUBY = { easy: 10, medium: 20, hard: 30 };
 
-export const TRADE_DAILY_LIMIT = 3;
+// Gói thường / VIP (VIP = đang có gói Tháng hoặc Năm; hai kỳ hạn cùng quyền lợi).
+export const TRADE_DAILY_LIMIT = 1; // gói thường; VIP xem TRADE_LIMITS
+export const TRADE_LIMITS = { free: 1, vip: 5 };
+export const STORYBOOK_LIMITS = { free: { books: 1, pages: 10 }, vip: { books: null, pages: 200 } };
 export const COLLAB_MAX_PLAYERS = 4;
 export const DRAFT_RETENTION_DAYS = 30;
 export const DRAFT_WARNING_DAYS = 25;
@@ -68,7 +71,7 @@ export const SIGNATURE_INKS = ['#1B2A38', '#FFFFFF', '#C9961A', '#FF5F7E', '#2B7
 export const EXHIBITION = {
   boards: ['free'], // một hội trường chung cho mọi tranh Sáng tạo (không còn chia phòng S/A/B)
   reactions: ['heart', 'cheer', 'clap', 'love', 'star'], // ❤️ 🎉 👏 😍 🌟 — mỗi cái 1 điểm
-  perRound: { free: 1, month: 3, year: 5 },
+  perRound: { free: 1, month: 5, year: 5 },
   minCoverage: 0.8, // điều 2: tô ≥ 80% diện tích
   minMs: 20000, // điều 8: tô dưới 20 giây…
   msPerRegion: 700, // …hoặc dưới 0,7 giây mỗi vùng đã tô

@@ -1,9 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
+import { useAuth } from '../../store/auth';
+import { useUi } from '../../store/ui';
+
+/** Gói Thường chỉ có 1 cuốn truyện: đã có rồi thì bấm "Làm truyện mới" báo mời nâng cấp VIP thay vì mở trình soạn. */
+function useNewBook(books) {
+  const { t } = useTranslation();
+  const vip = useAuth((s) => !!s.plan?.vip);
+  const toast = useUi((s) => s.toast);
+  const navigate = useNavigate();
+  return (e) => {
+    if (vip || !books || books.length < 1) return;
+    e.preventDefault();
+    toast(t('errors.storybook_limit'), 'info');
+    navigate('/plans');
+  };
+}
 
 // Cảnh giá sách (ảnh nền 1821×774): 1 kệ × 3 ô. Truyện lấp từ ô giữa ra hai bên; ô chưa có truyện để trống.
 const W = 1821;
@@ -50,6 +66,7 @@ function EmptySlot() {
 
 function StorybookRoom({ books }) {
   const { t } = useTranslation();
+  const onNew = useNewBook(books);
   const [page, setPage] = useState(0);
   const items = books || [];
   const per = SLOTS.length;
@@ -66,7 +83,7 @@ function StorybookRoom({ books }) {
           <h1 className="sb-sign-title" data-testid="storybook-title">{t('storybook.signTitle')}</h1>
           <Star className="sb-sign-star sb-sign-star-r" />
         </div>
-        <Link to="/storybooks/new" className="sb-new" style={box([1405, 53, 303, 70])} data-testid="storybook-new">
+        <Link to="/storybooks/new" onClick={onNew} className="sb-new" style={box([1405, 53, 303, 70])} data-testid="storybook-new">
           <Icon name="plus" size={26} strokeWidth={3.6} /> {t('storybook.new')}
         </Link>
 
@@ -97,6 +114,7 @@ export default function StorybookList() {
   const { t } = useTranslation();
   const wide = useWide();
   const [books, setBooks] = useState(null);
+  const onNew = useNewBook(books);
   useEffect(() => {
     api.get('/storybooks').then((r) => setBooks(r.storybooks)).catch(() => window.dispatchEvent(new Event('btm:page-ready')));
   }, []);
@@ -112,7 +130,7 @@ export default function StorybookList() {
           <h1 className="page-title">{t('storybook.title')}</h1>
           <p className="text-muted">{t('storybook.subtitle')}</p>
         </div>
-        <Link to="/storybooks/new" className="btn-primary" data-testid="storybook-new">
+        <Link to="/storybooks/new" onClick={onNew} className="btn-primary" data-testid="storybook-new">
           <Icon name="plus" /> {t('storybook.new')}
         </Link>
       </div>
