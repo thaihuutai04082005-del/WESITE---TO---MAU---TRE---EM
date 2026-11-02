@@ -1649,13 +1649,14 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw-template { grid-template-columns: minmax(clamp(220px, 19vw, 320px), 1fr) minmax(0, calc(100dvh - 73px - 24px)) clamp(340px, 26vw, 400px); }
   .cw-template .cw-left { container-type: inline-size; }
   .cw-template .cw-left-in { display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 0; }
+  /* Cột trái đủ rộng: một cột thẳng hàng — tiêu đề (nằm ngang) · tranh mẫu to chiếm chỗ còn lại · hai nút cạnh nhau. */
   @container (min-width: 460px) {
-    .cw-template .cw-left-in { display: grid; grid-template-columns: minmax(150px, 180px) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 12px; row-gap: 10px; }
-    .cw-template .cw-header { grid-column: 1; grid-row: 1; }
-    .cw-template .cw-ref { grid-column: 2; grid-row: 1 / 4; }
-    .cw-template .cw-actions { grid-column: 1; grid-row: 3; margin-top: 0; }
+    .cw-template .cw-header > div { flex-direction: row; align-items: center; flex-wrap: nowrap; gap: 10px; margin-bottom: 0; }
+    .cw-template .cw-header > div > .min-w-0 { width: auto; flex: 1 1 0; }
+    .cw-template .cw-header > div > .min-w-0 h1 { white-space: nowrap; font-size: 20px; }
+    .cw-template .cw-header > div > .w-32 { width: 112px; flex: none; }
+    .cw-template .cw-ref { flex: 1 1 0; }
+    .cw-template .cw-actions { flex-direction: row; margin-top: 0; }
+    .cw-template .cw-actions > * { flex: 1 1 0; }
   }
-}
-@media (min-width: 1024px) {
-  @container (min-width: 460px) { .cw-template .cw-header > div > .min-w-0 h1 { font-size: 20px; } }
 }
