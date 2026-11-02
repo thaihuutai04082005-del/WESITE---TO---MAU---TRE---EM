@@ -1195,13 +1195,6 @@ ART_THEMES.push({
   animation: 'bounce',
   objects: [
     {
-      slug: 'mat-troi',
-      name: { vi: 'Mặt trời', en: 'Sun' },
-      pictures: [
-        { slug: 'mat-troi', name: { vi: 'Mặt trời', en: 'Sun' }, file: 'mat-troi--mat-troi' },
-      ],
-    },
-    {
       slug: 'ten-lua',
       name: { vi: 'Tên lửa', en: 'Rocket' },
       pictures: [
@@ -1223,6 +1216,13 @@ ART_THEMES.push({
       ],
     },
     {
+      slug: 've-tinh',
+      name: { vi: 'Vệ tinh', en: 'Satellite' },
+      pictures: [
+        { slug: 've-tinh', name: { vi: 'Vệ tinh', en: 'Satellite' }, file: 've-tinh--ve-tinh' },
+      ],
+    },
+    {
       slug: 'tau-vu-tru',
       name: { vi: 'Tàu vũ trụ', en: 'Space Shuttle' },
       pictures: [
@@ -1230,10 +1230,10 @@ ART_THEMES.push({
       ],
     },
     {
-      slug: 've-tinh',
-      name: { vi: 'Vệ tinh', en: 'Satellite' },
+      slug: 'mat-troi',
+      name: { vi: 'Mặt trời', en: 'Sun' },
       pictures: [
-        { slug: 've-tinh', name: { vi: 'Vệ tinh', en: 'Satellite' }, file: 've-tinh--ve-tinh' },
+        { slug: 'mat-troi', name: { vi: 'Mặt trời', en: 'Sun' }, file: 'mat-troi--mat-troi' },
       ],
     },
     {
