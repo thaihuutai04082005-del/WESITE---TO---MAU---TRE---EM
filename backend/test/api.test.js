@@ -382,6 +382,7 @@ test('Tô cùng nhau: mời bạn bè vào phòng (chỉ bạn đã kết bạn)
   assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).error, 'room_not_found', 'chưa có phòng thì chưa mời được');
   const room = (await emit(sa, 'collab:create', { pictureId: 1 })).room;
   assert.equal((await emit(sa, 'collab:invite', { toUserId: c.id })).error, 'not_friends', 'chỉ mời được bạn đã kết bạn');
+  assert.ok((await emit(sc, 'collab:join', { code: room.code })).room, 'chưa kết bạn vẫn vào được bằng mã nếu phòng chưa đầy');
   const got = once(sb, 'collab:invite');
   assert.equal((await emit(sa, 'collab:invite', { toUserId: b.id })).ok, true);
   const inv = await got;

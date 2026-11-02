@@ -1042,12 +1042,12 @@
       "intro": "2–4 bạn cùng tô chung một bức tranh.",
       "steps": [
         "Bấm \"Tạo phòng mới\" và chọn tranh muốn tô cùng.",
-        "Gửi mã phòng cho bạn bè (phòng tối đa 4 bạn).",
-        "Bạn bè nhập mã ở ô \"Vào phòng\" rồi bấm \"Vào tô\".",
-        "Cùng nhau tô, màu hiện lên ngay cho cả nhóm.",
+        "Mời bạn bè trong danh sách, hoặc gửi mã phòng cho bất kỳ ai.",
+        "Bạn được mời bấm \"Chấp nhận\"; người có mã thì nhập ở ô \"Vào phòng\".",
+        "Cùng nhau tô, màu hiện lên ngay cho cả nhóm (tối đa 4 bạn).",
         "Tô xong bấm \"Lưu tranh chung\", tranh vào Lịch sử của mọi bạn."
       ],
-      "tip": "Chỉ ai có mã phòng mới vào được."
+      "tip": "Nhập đúng mã là vào được, kể cả chưa kết bạn, miễn phòng chưa đầy."
     },
     "gacha": {
       "intro": "Dùng Điểm Gacha để bóc thẻ tranh hiếm và sưu tầm.",
