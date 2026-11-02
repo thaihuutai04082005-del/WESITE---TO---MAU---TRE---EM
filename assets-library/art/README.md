@@ -194,15 +194,15 @@ Mèo con, Thỏ con chỉ có ảnh màu: nét được tách từ chính ảnh 
 | Lê Xanh Tập Bắn Cung (Đại Hội Thể Thao Trái Cây) | – | `src/le-the-thao--ban-cung.png` | ghi trong file |
 | Dừa Nâu Tập Quyền Anh (Đại Hội Thể Thao Trái Cây) | – | `src/dua-nau--quyen-anh.png` | ghi trong file |
 | Ngô Tập Võ Karate (Đại Hội Thể Thao Trái Cây) | – | `src/ngo--karate.png` | ghi trong file |
-| Cây Dừa Đảo Ngọc Thiên Đường (Khu Rừng Ánh Sáng) | – | `src/cay-dua--dao-ngoc-thien-duong.png` | ghi trong file |
-| Xương Rồng Ốc Đảo Ánh Sao (Khu Rừng Ánh Sáng) | – | `src/cay-xuong-rong--oc-dao-anh-sao.png` | ghi trong file |
-| Rừng Tre Ngọc Bích (Khu Rừng Ánh Sáng) | – | `src/khom-tre--rung-ngoc-bich.png` | ghi trong file |
-| Cây Thông Ngôi Sao Tuyết (Khu Rừng Ánh Sáng) | – | `src/cay-thong--ngoi-sao-tuyet.png` | ghi trong file |
-| Cây Đa Cổng Trời (Khu Rừng Ánh Sáng) | – | `src/cay-co-thu--cong-troi.png` | ghi trong file |
-| Cây Liễu Rèm Trăng (Khu Rừng Ánh Sáng) | – | `src/cay-lieu--ren-trang.png` | ghi trong file |
-| Cây Anh Đào Mưa Sao Hồng (Khu Rừng Ánh Sáng) | – | `src/cay-anh-dao--mua-sao-hong.png` | ghi trong file |
-| Cây Phong Lá Lửa Thiên Thu (Khu Rừng Ánh Sáng) | – | `src/cay-phong--la-lua-thien-thu.png` | ghi trong file |
-| Cây Bao Báp Giữa Sa Mạc Nắng Vàng (Khu Rừng Ánh Sáng) | – | `src/cay-bao-bap--sa-mac-nang-vang.png` | ghi trong file |
+| Cây Dừa Đảo Ngọc Thiên Đường (Khu Rừng Cổ Tích) | – | `src/cay-dua--dao-ngoc-thien-duong.png` | ghi trong file |
+| Xương Rồng Ốc Đảo Ánh Sao (Khu Rừng Cổ Tích) | – | `src/cay-xuong-rong--oc-dao-anh-sao.png` | ghi trong file |
+| Rừng Tre Ngọc Bích (Khu Rừng Cổ Tích) | – | `src/khom-tre--rung-ngoc-bich.png` | ghi trong file |
+| Cây Thông Ngôi Sao Tuyết (Khu Rừng Cổ Tích) | – | `src/cay-thong--ngoi-sao-tuyet.png` | ghi trong file |
+| Cây Đa Cổng Trời (Khu Rừng Cổ Tích) | – | `src/cay-co-thu--cong-troi.png` | ghi trong file |
+| Cây Liễu Rèm Trăng (Khu Rừng Cổ Tích) | – | `src/cay-lieu--ren-trang.png` | ghi trong file |
+| Cây Anh Đào Mưa Sao Hồng (Khu Rừng Cổ Tích) | – | `src/cay-anh-dao--mua-sao-hong.png` | ghi trong file |
+| Cây Phong Lá Lửa Thiên Thu (Khu Rừng Cổ Tích) | – | `src/cay-phong--la-lua-thien-thu.png` | ghi trong file |
+| Cây Bao Báp Giữa Sa Mạc Nắng Vàng (Khu Rừng Cổ Tích) | – | `src/cay-bao-bap--sa-mac-nang-vang.png` | ghi trong file |
 | Thư Viện Sách Mở Thần Kỳ (Xứ Sở Học Cụ) | – | `src/thu-vien--sach-mo-than-ky.png` | ghi trong file |
 | Cầu Vồng Thước Kẻ Ánh Dương (Xứ Sở Học Cụ) | – | `src/cau-da--cau-vong-thuoc-ke.png` | ghi trong file |
 | Tháp Đồng Hồ Gọt Bút Thời Gian (Xứ Sở Học Cụ) | – | `src/thap-co--dong-ho-got-but.png` | ghi trong file |
