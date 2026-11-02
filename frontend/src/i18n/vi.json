@@ -599,7 +599,9 @@
       "chooseMonth": "Chọn VIP Tháng",
       "chooseYear": "Chọn VIP Năm"
     },
-    "save": "Tiết kiệm 79.000đ, khoảng 35%"
+    "save": "Tiết kiệm 79.000đ, khoảng 35%",
+    "saveUsd": "Tiết kiệm {{amount}} (khoảng {{pct}}%)",
+    "vndNote": "hoặc {{price}} qua MoMo / chuyển khoản"
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",

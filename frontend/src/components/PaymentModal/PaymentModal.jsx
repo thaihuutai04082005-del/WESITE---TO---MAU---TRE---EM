@@ -41,11 +41,11 @@ function CopyRow({ label, value, strong }) {
 }
 
 export default function PaymentModal({ open, plan, onClose }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const meta = useAuth((s) => s.meta);
   const setPlan = useAuth((s) => s.setPlan);
   const toast = useUi((s) => s.toast);
-  const [provider, setProvider] = useState('bank');
+  const [provider, setProvider] = useState(i18n.language === 'en' ? 'paypal' : 'bank'); // bản tiếng Anh mặc định thanh toán bằng USD qua PayPal
   const [step, setStep] = useState('choose');
   const [payment, setPayment] = useState(null);
   const [busy, setBusy] = useState(false);
