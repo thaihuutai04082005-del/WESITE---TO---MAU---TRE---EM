@@ -206,6 +206,7 @@
     "cards": "Tranh thẻ hiếm",
     "artworks": "Tranh theo chủ đề",
     "noArtworks": "Bé chưa có tranh nào tô xong. Tô một bức thật đẹp nhé!",
+    "noCardArtworks": "Bé chưa tô xong tranh thẻ hiếm nào. Vào tab Tranh thẻ hiếm ở trang chọn tranh để tô nhé!",
     "toGacha": "Tới trang Bóc thẻ"
   },
   "exhibition": {
@@ -351,13 +352,15 @@
     "themes": "Chọn chủ đề",
     "themesHint": "Bé thích tô gì hôm nay?",
     "ageEmpty": "Sắp có tranh mới cho nhóm tuổi này!",
+    "cardsEmpty": "Chưa có thẻ nào. Chơi Đấu trường Sáng tạo để nhận điểm Gacha rồi bóc thẻ nhé! 🎁",
     "pictures": "Chọn tranh",
     "objects": "Chọn đối tượng",
     "variants": "Chọn tư thế",
     "age": {
       "3-5": "Từ 3 – 5 tuổi",
       "6-8": "Từ 6 – 8 tuổi",
-      "9+": "Từ 9 tuổi trở lên"
+      "9+": "Từ 9 tuổi trở lên",
+      "cards": "Tranh thẻ hiếm"
     },
     "pictureCount": "{{n}} tranh",
     "objectCount": "{{n}} đối tượng",

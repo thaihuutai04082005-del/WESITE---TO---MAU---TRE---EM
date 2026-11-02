@@ -1,14 +1,11 @@
-// Bộ sưu tập: 2 tab — Tranh thẻ hiếm (thẻ đã bóc) và Tranh theo chủ đề (gửi triển lãm, xem thành tích).
+// Bộ sưu tập: 2 tab — Tranh thẻ hiếm và Tranh theo chủ đề: đều là tranh bé ĐÃ TÔ XONG (gửi triển lãm, xem thành tích). Thẻ chưa tô nằm ở tab Tranh thẻ hiếm của trang chọn tranh.
 import { Fragment, useEffect, useState } from 'react';
-import PictureView from '../../components/PictureView/PictureView';
-import { usePicture } from '../../hooks/usePicture';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useUi } from '../../store/ui';
 import { errorText, formatVnTime } from '../../lib/format';
 import { REACTIONS } from '../../lib/exhibition';
-import { CardTile } from '../Gacha/Gacha';
 import { ExhibitRules, RulesButton } from '../../components/Exhibition';
 import { ScheduleBanner } from '../Exhibition/Hall';
 import { CertificateButton, ShareDialog } from '../../components/Share';
@@ -208,9 +205,10 @@ function ExhibitHeader({ ex, extra }) {
   );
 }
 
-function ArtworksTab() {
+function ArtworksTab({ cards = false }) {
   const { t, i18n } = useTranslation();
-  const { items, ex, withdraw, send } = useArtworksData();
+  const { items: all, ex, withdraw, send } = useArtworksData();
+  const items = all && all.filter((a) => a.isCard === cards);
   const [shareFor, setShareFor] = useState(null);
 
   if (!items || !ex) return <div className="text-center text-muted">{t('common.loading')}</div>;
@@ -220,7 +218,7 @@ function ArtworksTab() {
   return (
     <div className="space-y-4">
       <ExhibitHeader ex={ex} />
-      {items.length === 0 && <div className="card p-6 text-center text-muted">{t('collection.noArtworks')}</div>}
+      {items.length === 0 && <div className="card p-6 text-center text-muted">{t(cards ? 'collection.noCardArtworks' : 'collection.noArtworks')}</div>}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {items.map((a) => {
           const entry = ex.entries[a.id];
@@ -234,45 +232,6 @@ function ArtworksTab() {
         })}
       </div>
       <ArtworksDialogs shareFor={shareFor} setShareFor={setShareFor} />
-    </div>
-  );
-}
-
-function groupCards(col) {
-  return Object.values(
-    col.cards.reduce((acc, c) => {
-      acc[c.pictureId] ||= { ...c, count: 0 };
-      acc[c.pictureId].count++;
-      return acc;
-    }, {}),
-  );
-}
-
-function CardsTab() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [col, setCol] = useState(null);
-  const [ex, setEx] = useState(null);
-  useEffect(() => {
-    api.get('/gacha/cards').then(setCol);
-    api.get('/exhibition/mine').then(setEx);
-  }, []);
-  if (!col) return <div className="text-center text-muted">{t('common.loading')}</div>;
-  const grouped = groupCards(col);
-  const toGacha = (
-    <Link to="/gacha" className="btn-ghost min-h-10 bg-white text-base">
-      <Icon name="gift" /> {t('collection.toGacha')}
-    </Link>
-  );
-  return (
-    <div className="space-y-3">
-      {ex ? <ExhibitHeader ex={ex} extra={toGacha} /> : <div className="flex justify-end">{toGacha}</div>}
-      {grouped.length === 0 && <div className="card p-6 text-center text-muted">{t('gacha.empty')}</div>}
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-        {grouped.map((c) => (
-          <CardTile key={c.pictureId} card={c} onClick={() => navigate('/gacha')} />
-        ))}
-      </div>
     </div>
   );
 }
@@ -319,16 +278,6 @@ function entryEmoji(entry, schedule) {
   if (entry.status === 'pending') return '⏳';
   if (entry.roundKey < schedule.current) return '🏅';
   return entry.roundKey === schedule.current ? '🏛️' : '✅';
-}
-
-function CardInSlot({ card }) {
-  const pic = usePicture(card.pictureId);
-  return (
-    <>
-      {pic && <PictureView picture={pic} className="h-full w-full" />}
-      {card.count > 1 && <span className="room-slot-count">×{card.count}</span>}
-    </>
-  );
 }
 
 /** Khung cảnh phòng: nền ảnh, biển treo, nút Quay lại, hai tab, phân trang và 8 khung tranh. */
@@ -409,9 +358,10 @@ function RoomShell({ tab, onTab, slots, pills }) {
   );
 }
 
-function RoomArtworks({ onTab }) {
+function RoomArtworks({ onTab, cards = false }) {
   const { t, i18n } = useTranslation();
-  const { items, ex, withdraw, send } = useArtworksData();
+  const { items: all, ex, withdraw, send } = useArtworksData();
+  const items = all && all.filter((a) => a.isCard === cards);
   const [open, setOpen] = useState(null);
   const [shareFor, setShareFor] = useState(null);
   const ready = items && ex;
@@ -437,7 +387,7 @@ function RoomArtworks({ onTab }) {
   const entry = open && ready ? ex.entries[open.id] : null;
   return (
     <>
-      <RoomShell tab="artworks" onTab={onTab} slots={slots} pills={pills} />
+      <RoomShell tab={cards ? 'cards' : 'artworks'} onTab={onTab} slots={slots} pills={pills} />
       {modals}
       {open && ready && (
         <Modal open onClose={() => setOpen(null)}>
@@ -471,42 +421,12 @@ function RoomArtworks({ onTab }) {
   );
 }
 
-function RoomCards({ onTab }) {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const [col, setCol] = useState(null);
-  const [ex, setEx] = useState(null);
-  useEffect(() => {
-    api.get('/gacha/cards').then(setCol);
-    api.get('/exhibition/mine').then(setEx);
-  }, []);
-  const grouped = col ? groupCards(col) : [];
-  const slots = grouped.map((c) => ({
-    key: c.pictureId,
-    label: c.name[i18n.language],
-    testId: `card-${c.pictureId}`,
-    onClick: () => navigate('/gacha'),
-    badge: c.rarity,
-    content: <CardInSlot card={c} />,
-  }));
-  const { pills, modals } = useExhibitPills(
-    ex,
-    <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>,
-  );
-  return (
-    <>
-      <RoomShell tab="cards" onTab={onTab} slots={slots} pills={pills || <Link to="/gacha" className="room-pill room-pill-btn">🎁 {t('collection.toGacha')}</Link>} />
-      {modals}
-    </>
-  );
-}
-
 export default function Collection() {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const wide = useWide();
   const tab = params.get('tab') === 'artworks' ? 'artworks' : 'cards';
-  if (wide) return tab === 'cards' ? <RoomCards onTab={(k) => setParams({ tab: k })} /> : <RoomArtworks onTab={(k) => setParams({ tab: k })} />;
+  if (wide) return <RoomArtworks key={tab} cards={tab === 'cards'} onTab={(k) => setParams({ tab: k })} />;
   return (
     <div className="page space-y-5">
       <h1 className="page-title">{t('collection.title')}</h1>
@@ -520,7 +440,7 @@ export default function Collection() {
           </button>
         ))}
       </div>
-      {tab === 'cards' ? <CardsTab /> : <ArtworksTab />}
+      <ArtworksTab key={tab} cards={tab === 'cards'} />
     </div>
   );
 }

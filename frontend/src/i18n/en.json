@@ -206,6 +206,7 @@
     "cards": "Rare card pictures",
     "artworks": "Themed pictures",
     "noArtworks": "No finished pictures yet. Color a lovely one!",
+    "noCardArtworks": "No finished rare card pictures yet. Open the Rare card pictures tab on the picture page to color one!",
     "toGacha": "Go to Card packs"
   },
   "exhibition": {
@@ -350,6 +351,7 @@
     "boardTitle": "Pick a picture to color",
     "themes": "Pick a theme",
     "ageEmpty": "New pictures coming soon for this age group!",
+    "cardsEmpty": "No cards yet. Play the Creative Arena to earn Gacha points, then open cards! 🎁",
     "themesHint": "What would you like to color today?",
     "pictures": "Choose a picture",
     "objects": "Pick a subject",
@@ -357,7 +359,8 @@
     "age": {
       "3-5": "Ages 3 – 5",
       "6-8": "Ages 6 – 8",
-      "9+": "Ages 9 and up"
+      "9+": "Ages 9 and up",
+      "cards": "Rare card pictures"
     },
     "pictureCount": "{{n}} pictures",
     "objectCount": "{{n}} subjects",

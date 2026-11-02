@@ -1,12 +1,17 @@
 // Tầng 1: Chủ đề lớn — bảng gỗ có 3 biển nhóm tuổi treo phía trên.
 import { useEffect, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
+import { usePicture } from '../../hooks/usePicture';
+import ModePicker from '../../components/ModePicker';
+import Icon from '../../components/Icon';
+import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
 import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WoodTabs, WOOD_GRID, useFitRows } from '../../components/Wood/Wood';
 
-// Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần.
-const AGE_GROUPS = ['3-5', '6-8', '9+'];
-const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟' };
+// Chủ đề chia theo 3 nhóm tuổi, độ khó tăng dần; tab thứ 4 là các tranh thẻ hiếm bé đã bóc được (chờ tô).
+const AGE_GROUPS = ['3-5', '6-8', '9+', 'cards'];
+const AGE_ICON = { '3-5': '🐣', '6-8': '🚀', '9+': '🌟', cards: '🃏' };
 const AGE_KEY = 'colorAge';
 
 function loadAge() {
@@ -18,10 +23,56 @@ function loadAge() {
   }
 }
 
+/** Thẻ đã bóc: bấm vào để chọn chế độ rồi tô. Tô xong tranh mới vào Bộ sưu tập (tab Tranh thẻ hiếm). */
+function CardFrame({ card, onPick }) {
+  const { i18n } = useTranslation();
+  const pic = usePicture(card.pictureId);
+  const title = card.name[i18n.language];
+  return (
+    <div className="relative">
+      <PicFrame onClick={() => pic && onPick(pic)} picture={pic} title={title} testId={`cardpic-${card.pictureId}`} />
+      <RarityBadge rarity={card.rarity} className="absolute -left-1 -top-1 z-10" />
+    </div>
+  );
+}
+
+function CardsBoard() {
+  const { t } = useTranslation();
+  const [col, setCol] = useState(null);
+  const [picked, setPicked] = useState(null);
+  const gridRef = useRef(null);
+  useFitRows(gridRef, [col]);
+  useEffect(() => {
+    api.get('/gacha/cards').then(setCol).catch(() => setCol({ cards: [] }));
+  }, []);
+  const cards = col ? Object.values(col.cards.reduce((acc, c) => ({ ...acc, [c.pictureId]: acc[c.pictureId] || c }), {})) : [];
+  return (
+    <div>
+      <div className="mb-3 flex justify-end">
+        <Link to="/gacha" className="btn-ghost min-h-10 bg-white text-base" data-testid="cards-to-gacha">
+          <Icon name="gift" /> {t('collection.toGacha')}
+        </Link>
+      </div>
+      {col && !cards.length && (
+        <p className="rounded-2xl bg-white/70 px-4 py-10 text-center font-display text-xl font-extrabold text-[#7A430F]" data-testid="cards-empty">
+          {t('select.cardsEmpty')}
+        </p>
+      )}
+      <div ref={gridRef} className={WOOD_GRID}>
+        {cards.map((c) => (
+          <CardFrame key={c.pictureId} card={c} onPick={setPicked} />
+        ))}
+      </div>
+      {picked && <ModePicker picture={picked} onClose={() => setPicked(null)} />}
+    </div>
+  );
+}
+
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
+  const [params] = useSearchParams();
   const [themes, setThemes] = useState(null);
-  const [age, setAge] = useState(loadAge);
+  const [age, setAge] = useState(() => (AGE_GROUPS.includes(params.get('age')) ? params.get('age') : loadAge()));
   useEffect(() => {
     api.get('/themes').then((r) => setThemes(r.themes));
   }, []);
@@ -46,6 +97,9 @@ export default function ThemeSelector() {
         tabs={AGE_GROUPS.map((a) => ({ key: a, icon: AGE_ICON[a], label: t(`select.age.${a}`) }))}
       />
       <WoodBoard testId={`age-${age}`}>
+        {age === 'cards' ? (
+          <CardsBoard />
+        ) : (
         <div>
           {themes && !list.length && (
             <p className="rounded-2xl bg-white/70 px-4 py-10 text-center font-display text-xl font-extrabold text-[#7A430F]" data-testid={`age-empty-${age}`}>
@@ -65,6 +119,7 @@ export default function ThemeSelector() {
             ))}
           </div>
         </div>
+        )}
       </WoodBoard>
     </WoodScene>
   );

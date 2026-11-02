@@ -1033,7 +1033,7 @@ html[data-arena-enter] main .page > *:nth-child(n+5) { animation-delay: 280ms; }
 .wood-hint { margin-top: 8px; font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.2vw, 22px); color: #17365D; text-shadow: 0 0 6px #fff, 0 0 3px #fff; }
 
 /* Ba biển nhóm tuổi: viên thuốc, có con vật bên trong, gác lên mép bảng */
-.wood-tabs { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; margin: 12px auto -26px; max-width: 1060px; padding: 0 8px; }
+.wood-tabs { position: relative; z-index: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 16px; margin: 12px auto -26px; max-width: 1320px; padding: 0 8px; }
 .wood-tab { position: relative; padding: 0; background: none; border: 0; cursor: pointer; transition: transform 0.15s; }
 .wood-tab:hover { transform: translateY(-2px); }
 .wood-tab-body { display: flex; align-items: center; gap: 12px; min-width: 230px; padding: 10px 28px 10px 16px; border-radius: 9999px; border: 3px solid #D9DFF4; background: rgba(255, 255, 255, 0.88); box-shadow: 0 6px 16px rgba(40, 90, 160, 0.16); }
@@ -1631,3 +1631,5 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .room-send { min-height: 0; gap: 0.45cqw; padding: 0.5cqw 1.3cqw; font-size: max(12px, 1.2cqw); box-shadow: 0 0.25cqw 0 #1F6FBE, 0 0.5cqw 0.9cqw rgba(31, 111, 190, 0.35); }
 .room-slot-dim .room-slot-in { opacity: 0.35; }
 .room-slot-dim .frame-overlay { opacity: 0.55; }
+/* 4 tab (3 nhóm tuổi + Tranh thẻ hiếm) vẫn nằm trọn một hàng trên màn hình vừa */
+@media (min-width: 768px) and (max-width: 1240px) { .wood-tab-body { min-width: 0; gap: 8px; padding: 8px 18px 8px 12px; } .wood-tab-icon { font-size: 32px; } .wood-tab-label { font-size: 17px; } }
