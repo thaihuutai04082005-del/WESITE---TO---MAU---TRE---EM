@@ -83,7 +83,7 @@ Mọi tranh trong hệ thống — dù ở chế độ nào — đều được 
 ### 3.4. Định nghĩa "tô lem" (**đã thay thế**: bộ công cụ tô tay mới khóa nét trong vùng nên không còn tiêu chí lem — xem `docs/quyet-dinh-trien-khai.md`)
 
 - **Bucket fill** (đổ màu trọn 1 vùng theo path có sẵn) **không bao giờ được tính là lem**, vì bản chất là tô trọn vẹn theo đường viền đã định sẵn của vùng đó — kể cả khi bé tô kín toàn bộ vùng nền.
-- **"Lem" chỉ áp dụng cho nét vẽ bằng Brush tự do** (xem Mục 4.2): là phần trăm nét Brush nằm tràn ra ngoài phạm vi vùng liên quan một cách không đều, vượt quá một ngưỡng cho phép, trông cẩu thả/dơ. Brush vẽ thêm chi tiết gọn gàng trong hoặc sát vùng liên quan (ví dụ vẽ vân lông mèo) không bị tính là lem.
+- **[Đã bỏ] Tiêu chí "lem"**: từ khi tô tay có khóa vùng (nét chỉ ăn màu trong vùng bé chạm đầu tiên), không còn tiêu chí lem trong rubric Đấu trường và nội quy triển lãm. Mô tả cũ: **"Lem" chỉ áp dụng cho nét vẽ bằng Brush tự do** (xem Mục 4.2): là phần trăm nét Brush nằm tràn ra ngoài phạm vi vùng liên quan một cách không đều, vượt quá một ngưỡng cho phép, trông cẩu thả/dơ. Brush vẽ thêm chi tiết gọn gàng trong hoặc sát vùng liên quan (ví dụ vẽ vân lông mèo) không bị tính là lem.
 
 ---
 
@@ -261,10 +261,12 @@ Chỉ áp dụng cho **chế độ Sáng tạo** (Mục 3.3) — vì đây là c
 
 | Cấp thẻ | Tỉ lệ | Mô tả |
 |---|---|---|
-| **S** | 5% | Siêu hiếm — tranh đẹp và chi tiết nhất |
+| **S** | 5% | Siêu hiếm — tranh độc nhất, khác hẳn tranh trong các chủ đề |
 | **A** | 12% | Hiếm — tranh đẹp |
 | **B** | 34% | Thường — tranh mức trung bình khá |
-| **C** | 49% | Phổ biến — tranh mở rộng bình thường trong chủ đề |
+| **C** | 49% | Phổ biến — thẻ hiếm ở cấp thấp nhất (vẫn độc nhất, không nằm trong chủ đề) |
+
+> Cập nhật: thẻ hiếm hiểu theo nghĩa **độc nhất, không có trong các chủ đề** (tranh chủ đề là tranh đại trà), không còn là "phức tạp hơn". Trên sân khấu Bóc thẻ có 7 thẻ úp cố định; ô nào lật ra đúng thẻ của ô đó.
 
 ---
 

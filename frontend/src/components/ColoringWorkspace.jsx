@@ -82,9 +82,11 @@ export default function ColoringWorkspace({
         {template && (
           <div className="cw-ref card hidden p-3 lg:block">
             <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
-            <button type="button" onClick={() => setShowRef(true)} className="block w-full cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
-              <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
-            </button>
+            <div className="cw-ref-box">
+              <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
+                <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+              </button>
+            </div>
           </div>
         )}
         {actions && <div className="cw-actions">{actions}</div>}

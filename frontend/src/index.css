@@ -1494,7 +1494,10 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw { --sw: clamp(24px, 3.7vh, 42px); --bb: clamp(40px, 6.2vh, 62px); height: 100%; display: grid; grid-template-columns: clamp(220px, 19vw, 320px) minmax(0, 1fr) clamp(340px, 26vw, 400px); gap: 14px; align-items: stretch; }
   .cw-left { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; overflow: hidden; padding: 16px; border-radius: 28px; background: rgba(255, 255, 255, 0.94); box-shadow: 0 10px 24px rgba(40, 90, 150, 0.2), inset 0 2px 0 #fff; }
   .cw-header { order: 1; }
-  .cw-ref { order: 2; flex: 0 1 auto; min-height: 0; overflow: hidden; padding: 0 !important; box-shadow: none; background: transparent; }
+  .cw-ref { order: 2; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; padding: 0 !important; box-shadow: none; background: transparent; }
+  /* Tranh mẫu luôn hiện trọn vẹn: ô vuông lớn nhất nằm vừa chỗ còn lại của cột trái (không bị cắt). */
+  .cw-ref-box { flex: 1 1 0; min-height: 0; display: flex; align-items: center; justify-content: center; container-type: size; }
+  .cw-ref-btn { display: block; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); }
   .cw-actions { order: 3; margin-top: auto; flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
   .cw-stage { display: grid; place-items: center; min-width: 0; min-height: 0; }
   .cw-square { width: min(100%, calc(100dvh - 73px - 24px)); }

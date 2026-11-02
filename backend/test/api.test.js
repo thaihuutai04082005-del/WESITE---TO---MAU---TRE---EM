@@ -453,6 +453,10 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   const bad = await api('POST', '/exhibition/entries', { artworkId: noSig }, A.token);
   assert.equal(bad.body.error.code, 'exhibit_rules');
   assert.ok(bad.body.error.failures.includes(1));
+  // Chú thích "đủ điều kiện triển lãm": tranh đã ký + tô đủ + chế độ Sáng tạo thì true; thiếu chữ ký thì false.
+  const eligList = (await api("GET", "/artworks?status=completed&eligibility=1", null, A.token)).body.artworks;
+  assert.equal(eligList.find((x) => x.id === a1).exhibitEligible, true);
+  assert.equal(eligList.find((x) => x.id === noSig).exhibitEligible, false);
   // Tranh không có nét cọ → tự duyệt; Free chỉ gửi 1 tranh/vòng.
   const e1 = await api('POST', '/exhibition/entries', { artworkId: a1 }, A.token);
   assert.equal(e1.status, 201, JSON.stringify(e1.body));
@@ -481,9 +485,10 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
 
   // Thứ 2: vòng 2026-10-05 mở. B thả cảm xúc cho A; A không tự thả; không rút được nữa.
   at(vn('2026-10-05T09:00:00Z'));
-  const room = await api('GET', '/exhibition/rooms/free', null, B.token);
+  const room = await api('GET', '/exhibition/wall?offset=0&limit=10', null, B.token);
   const entry = room.body.entries.find((x) => x.id === e1.body.entry.id);
   assert.ok(entry && room.body.pictures[entry.pictureId].svg);
+  assert.equal((await api('GET', '/exhibition/rooms/free', null, B.token)).status, 404, 'không còn route phòng riêng');
   assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'love' }, B.token)).body.counts.love, 1);
   const r2 = await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'star' }, B.token);
   assert.deepEqual([r2.body.counts.love, r2.body.counts.star, r2.body.mine], [0, 1, 'star']);

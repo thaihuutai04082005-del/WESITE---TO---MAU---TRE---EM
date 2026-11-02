@@ -401,6 +401,8 @@ function snapSimilarColors(regions) {
   return regions.map((r) => ({ ...r, color: to.get(r.color.toUpperCase()) }));
 }
 
+const sameName = (obj, variant) => obj.name.vi.trim().toLowerCase() === variant.name.vi.trim().toLowerCase();
+
 /** Thẻ vẽ tay: vùng tô + lớp nét lấy từ art/<file>.json (do lineart.py tạo). */
 function buildArtPicture(theme, obj, variant, file, isCard = true) {
   const art = JSON.parse(readFileSync(join(ROOT, 'art', `${file}.json`), 'utf8'));
@@ -440,7 +442,8 @@ function buildArtPicture(theme, obj, variant, file, isCard = true) {
       theme: theme.slug,
       object: obj.slug,
       variant: variant.slug,
-      name: PICTURE_NAME[slug] || { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` },
+      // Tranh vẽ tay có tên đối tượng trùng tên kiểu dáng (VD "Tiên Cá Hồng" – "Tiên Cá Hồng") thì chỉ lấy tên đối tượng, không lặp lại hai lần.
+      name: PICTURE_NAME[slug] || (sameName(obj, variant) ? obj.name : { vi: `${obj.name.vi} ${lowerVi(variant.name.vi)}`, en: `${obj.name.en} – ${variant.name.en}` }),
       variantName: PICTURE_NAME[slug] || variant.name,
       isCard,
       rarity: variant.rarity || null,

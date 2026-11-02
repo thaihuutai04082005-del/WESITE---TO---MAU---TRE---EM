@@ -22,20 +22,20 @@
 
 | Nội dung | Chốt |
 |---|---|
-| Kiểu hội trường | **Kiểu A — Bảo tàng nhiều phòng**: sảnh chính → Phòng Huyền thoại (S, khung vàng), Quý hiếm (A, khung bạc), Đặc biệt (B, khung gỗ); bấm tranh để phóng to xem chữ ký, tác giả |
+| Kiểu hội trường | **Một hội trường chung** (không còn chia phòng S/A/B): tường tranh ở sảnh, bấm tranh để phóng to xem chữ ký, tác giả |
 | Tương tác | **Chỉ thả cảm xúc tích cực**: ❤️ Tim, 🎉 Hoan hô, 👏 Vỗ tay, 😍 Rất đẹp, 🌟 Tuyệt vời. Không có biểu tượng buồn/giận |
 | Bình luận | **Không có bình luận** — giữ tâm lý tích cực, vui vẻ cho trẻ |
-| Tranh được vào | Chỉ tranh thẻ hiếm **S, A, B** và tranh tô ở chế độ **Sáng tạo**. Tranh "Tô theo mẫu" **không** được vào |
+| Tranh được vào | Mọi tranh tô ở chế độ **Sáng tạo** (kể cả tranh thẻ hiếm và tranh chủ đề). Tranh "Tô theo mẫu" **không** được vào |
 | Lịch vòng triển lãm (cố định 1 tuần, không có tùy chọn) | **Thứ 2 → Chủ nhật**: trưng tranh vòng hiện tại. **Thứ 7 + Chủ nhật**: vẫn trưng, đồng thời mở cổng gửi tranh cho vòng sau. **Chủ nhật 20:00**: chốt vòng. **Thứ 2 00:00**: mở vòng mới. Hội trường không bao giờ trống |
 | Kết thúc vòng | Tranh tự về bộ sưu tập, mang theo **bảng cảm xúc** đã nhận (thành tích triển lãm). Tranh được thả nhiều nhất tuần nhận danh hiệu 🏆 **"Tranh được yêu thích nhất tuần"** (khung/ruy băng đi theo tranh mãi mãi) |
 | Luật thả cảm xúc | Mỗi người thả cho mỗi tranh 1 cảm xúc (đổi được); không tự thả cho tranh mình; chỉ tài khoản đã xác minh mới được thả |
 | Tâm lý tích cực | Tranh nào cũng có sẵn 1 lời khen của linh vật (không hiện "0"); không có bảng "ít tim nhất"; thông báo cảm xúc gom mỗi ngày 1 lần |
 | Liên kết đấu giá | Tranh có thành tích triển lãm là tranh bé có thể đem đi đấu giá (bàn ở Phần 3) |
-| Vinh danh mỗi tuần | **Mỗi bảng 1 tranh**: 🏆 "Tranh được yêu thích nhất bảng S / A / B / Sáng tạo" (4 danh hiệu/tuần). Tính theo **tổng số cảm xúc** — 5 loại tính điểm như nhau (VD 3 ❤️ + 2 👏 = 5 điểm) |
-| Đồng hạng | Nếu bằng số cảm xúc với tranh cao nhất thì **đồng hạng, cùng được trao danh hiệu**. Bảng không có tranh nào được thả cảm xúc thì tuần đó bảng không trao |
+| Vinh danh mỗi tuần | **1 tranh mỗi tuần**: 🏆 "Tranh được yêu thích nhất tuần". Tính theo **tổng số cảm xúc** — 5 loại tính điểm như nhau (VD 3 ❤️ + 2 👏 = 5 điểm) |
+| Đồng hạng | Nếu bằng số cảm xúc với tranh cao nhất thì **đồng hạng, cùng được trao danh hiệu**. Tuần không có tranh nào được thả cảm xúc thì không trao |
 | Khóa khi xét | **Chủ nhật 20:00 (giờ Việt Nam) khóa thả cảm xúc** trên toàn hội trường, không thả/đổi/gỡ được nữa, rồi mới xét danh hiệu — đảm bảo công bằng |
-| Cách gửi | **Bé tự gửi**, từ trang **Bộ sưu tập** (nâng cấp thêm tab chứa toàn bộ tranh đã hoàn thành, gồm tranh thẻ S/A/B và tranh Sáng tạo). Nút "🏛️ Gửi triển lãm" chỉ sáng vào thứ 7 + chủ nhật |
-| Điều kiện gửi | Tranh đã tô xong, **bắt buộc đã ký tên**, thuộc S/A/B hoặc Sáng tạo. Bảng xác nhận báo chữ ký sẽ bị khóa |
+| Cách gửi | **Bé tự gửi**, từ trang **Bộ sưu tập** (nâng cấp thêm tab chứa toàn bộ tranh đã hoàn thành, gồm mọi tranh hoàn thành; tranh đủ điều kiện có chú thích "✨ Đủ điều kiện triển lãm"). Nút "🏛️ Gửi triển lãm" chỉ sáng vào thứ 7 + chủ nhật |
+| Điều kiện gửi | Tranh đã tô xong, **bắt buộc đã ký tên**, tô ở chế độ Sáng tạo. Bảng xác nhận báo chữ ký sẽ bị khóa |
 | Số tranh mỗi vòng | **Free: 1 tranh**, **Gói tháng: 3 tranh** |
 | Rút tranh | Rút được trong thứ 7 + chủ nhật; **từ thứ 2 không rút được** |
 | Số lần triển lãm | Mỗi tranh **chỉ đi triển lãm 1 lần** |
@@ -47,7 +47,7 @@
 
 1. ✍️ **Có chữ ký của bé** trên tranh.
 2. ✅ **Tô gần xong hết tranh** (ít nhất 8/10 phần).
-3. 🃏 **Đúng loại tranh**: tranh thẻ hiếm S, A, B hoặc tranh Sáng tạo.
+3. 🃏 **Tô ở chế độ Sáng tạo**: tranh thẻ hiếm hay tranh chủ đề đều được, miễn tô ở chế độ Sáng tạo.
 4. 🔁 **Mỗi tranh chỉ đi triển lãm 1 lần.**
 5. ~~🎨 Tô gọn gàng, không lem~~ — **đã bỏ** (tô tay khóa vùng nên không thể lem).
 6. 😊 **Tranh vui vẻ, thân thiện**: không hình bậy, đáng sợ hay đánh nhau.
@@ -81,7 +81,7 @@ Quyết định không làm đấu giá. Lý do: bé sẽ không muốn bán tá
 | Tính năng | Nội dung |
 |---|---|
 | 🏅 Tủ kính thành tích | Mục mới trong trang cá nhân: trưng các tranh đã đi triển lãm, kèm bảng cảm xúc và danh hiệu 🏆. Ai xem trang cá nhân của bé cũng thấy |
-| 📜 Giấy khen | Tranh đạt danh hiệu được tạo giấy khen (PDF tải về/in): hình tranh, chữ ký của bé, dòng "Tranh được yêu thích nhất bảng … tuần …". Dùng lại công cụ tạo PDF có sẵn |
+| 📜 Giấy khen | Tranh đạt danh hiệu được tạo giấy khen (PDF tải về/in): hình tranh, chữ ký của bé, dòng "Tranh được yêu thích nhất tuần …". Dùng lại công cụ tạo PDF có sẵn |
 | 📤 Nút "Khoe tranh" | Tạo 1 ảnh đẹp (khung + chữ ký + logo web) để tải về / gửi người thân qua Zalo, Facebook. Có cho mọi tranh đã hoàn thành; tranh có thành tích thì ảnh kèm huy hiệu |
 
 ## Phần 4 — An toàn trẻ em & phụ huynh: KHÔNG CẦN RIÊNG

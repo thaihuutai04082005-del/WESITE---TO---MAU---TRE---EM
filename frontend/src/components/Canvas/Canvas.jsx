@@ -211,7 +211,6 @@ const Canvas = forwardRef(function Canvas(
           points: [[lx, ly]],
           ...(erase ? {} : { kind: tool }),
           ...(tool === 'pattern' ? { pattern } : {}),
-          ...(tool === 'crayon' && brushSkin ? { skin: brushSkin } : {}),
         };
         gesture.current = { type: 'stroke' };
         paintLive();

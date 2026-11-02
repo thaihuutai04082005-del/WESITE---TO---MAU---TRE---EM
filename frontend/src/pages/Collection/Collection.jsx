@@ -43,8 +43,20 @@ function FramedPicture({ src, frame, className = '' }) {
   );
 }
 
-/** Tranh này thuộc loại được đi triển lãm không (điều 3): thẻ hiếm S/A/B hoặc tranh Sáng tạo. */
-const exhibitType = (a) => a.mode === 'free' && (!a.isCard || ['S', 'A', 'B'].includes(a.rarity));
+/** Tranh này thuộc loại được đi triển lãm không (điều 3): mọi tranh tô ở chế độ Sáng tạo. */
+const exhibitType = (a) => a.mode === 'free';
+
+/** Chú thích cho bé biết tranh đã đủ điều kiện gửi triển lãm (chưa gửi). */
+function EligibleBadge({ a, entry }) {
+  const { t } = useTranslation();
+  const active = entry && ['pending', 'approved', 'removed'].includes(entry.status);
+  if (!a.exhibitEligible || active) return null;
+  return (
+    <span className="inline-block rounded-full bg-mint/25 px-2 py-0.5 text-xs font-extrabold text-[#1E7A44]" data-testid={`eligible-${a.id}`}>
+      ✨ {t('exhibition.eligible')}
+    </span>
+  );
+}
 
 function EntryBadge({ entry, schedule }) {
   const { t, i18n } = useTranslation();
@@ -155,7 +167,7 @@ function useArtworksData() {
   const [items, setItems] = useState(null);
   const [ex, setEx] = useState(null);
   const load = () => {
-    api.get('/artworks?status=completed').then((r) => setItems(r.artworks));
+    api.get('/artworks?status=completed&eligibility=1').then((r) => setItems(r.artworks));
     api.get('/exhibition/mine').then(setEx);
   };
   useEffect(load, []);
@@ -179,6 +191,7 @@ function ArtworkControls({ a, entry, s, full, onSubmit, onWithdraw, onShare }) {
   return (
     <>
       <EntryBadge entry={entry} schedule={s} />
+      <EligibleBadge a={a} entry={entry} />
       <div className="mt-auto space-y-1.5">
         {canWithdraw ? (
           <button type="button" className="btn-ghost min-h-10 w-full text-sm" onClick={() => onWithdraw(entry)} data-testid={`withdraw-${a.id}`}>
@@ -450,7 +463,7 @@ function RoomArtworks({ onTab }) {
     label: a.name[i18n.language],
     testId: `art-${a.id}`,
     onClick: () => setOpen(a),
-    badge: ready ? entryEmoji(ex.entries[a.id], s) : null,
+    badge: ready ? entryEmoji(ex.entries[a.id], s) || (a.exhibitEligible ? '✨' : null) : null,
     frame: a.frame, // tranh treo tường dùng đúng khung bé đã chọn (mặc định: khung gỗ)
     content: a.thumbnail ? <img src={a.thumbnail} alt="" draggable={false} /> : <span className="room-slot-blank" />,
   }));
