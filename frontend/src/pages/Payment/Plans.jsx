@@ -115,7 +115,7 @@ function ManagePlan({ plan, billing, onCancelled }) {
 }
 
 export default function Plans() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const meta = useAuth((s) => s.meta);
   const user = useAuth((s) => s.user);
   const current = useAuth((s) => s.plan);
@@ -133,9 +133,13 @@ export default function Plans() {
   const plans = meta?.plans;
   if (!plans) return null;
   const isVip = !!current?.vip;
+  const en = i18n.language === 'en';
+  // Tiết kiệm của gói Năm so với 12 tháng lẻ, tính theo giá USD (bản tiếng Anh hiện giá đô).
+  const saveUsd = plans.month.priceUsd * 12 - plans.year.priceUsd;
+  const savePct = Math.round((saveUsd / (plans.month.priceUsd * 12)) * 100);
   const cards = [
     { key: 'free', price: formatVnd(0) },
-    { key: 'vip', price: formatVnd(plans[period].priceVnd), best: true },
+    { key: 'vip', price: en ? `$${plans[period].priceUsd}` : formatVnd(plans[period].priceVnd), best: true },
   ];
   return (
     <div className="page" style={{ maxWidth: 1100 }}>
@@ -193,12 +197,12 @@ export default function Plans() {
                       </button>
                     ))}
                   </div>
-                  <div className="mt-2 text-sm font-bold text-muted">
-                    {t('plans.usdNote', { price: `$${plans[period].priceUsd}` })}
-                  </div>
+                  {!en && (
+                    <div className="mt-2 text-sm font-bold text-muted">{t('plans.usdNote', { price: `$${plans[period].priceUsd}` })}</div>
+                  )}
                   {period === 'year' && (
                     <div className="mt-1 text-sm font-extrabold text-[#B45F00]">
-                      <div>{t('plans.save')}</div>
+                      <div>{en ? t('plans.saveUsd', { amount: `$${saveUsd.toFixed(2)}`, pct: savePct }) : t('plans.save')}</div>
                     </div>
                   )}
                 </>

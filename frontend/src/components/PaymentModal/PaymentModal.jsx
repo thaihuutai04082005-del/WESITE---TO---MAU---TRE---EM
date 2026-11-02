@@ -41,11 +41,11 @@ function CopyRow({ label, value, strong }) {
 }
 
 export default function PaymentModal({ open, plan, onClose }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const meta = useAuth((s) => s.meta);
   const setPlan = useAuth((s) => s.setPlan);
   const toast = useUi((s) => s.toast);
-  const [provider, setProvider] = useState('bank');
+  const [provider, setProvider] = useState(i18n.language === 'en' ? 'paypal' : 'bank'); // bản tiếng Anh mặc định thanh toán bằng USD qua PayPal
   const [step, setStep] = useState('choose');
   const [payment, setPayment] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -134,7 +134,7 @@ export default function PaymentModal({ open, plan, onClose }) {
       {step === 'choose' && (
         <div className="space-y-3">
           <h3 className="font-display text-lg font-extrabold">{t('plans.chooseMethod')}</h3>
-          {PROVIDERS.map((p) => (
+          {(i18n.language === 'en' ? [...PROVIDERS].reverse() : PROVIDERS).map((p) => ( // tiếng Anh: PayPal (USD) lên đầu
             <label key={p.key} className={`card flex cursor-pointer items-center gap-3 p-4 ${provider === p.key ? 'ring-4 ring-primary/40' : ''}`}>
               <input type="radio" name="provider" checked={provider === p.key} onChange={() => setProvider(p.key)} className="h-5 w-5 accent-primary" />
               <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-display text-sm font-extrabold text-white ${p.cls}`}>{p.badge}</span>

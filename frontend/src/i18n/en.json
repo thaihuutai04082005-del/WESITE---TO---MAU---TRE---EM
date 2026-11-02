@@ -598,7 +598,8 @@
       "chooseMonth": "Choose VIP Monthly",
       "chooseYear": "Choose VIP Yearly"
     },
-    "save": "Save 79,000 VND (about 35%)"
+    "save": "Save 79,000 VND (about 35%)",
+    "saveUsd": "Save {{amount}} (about {{pct}}%)"
   },
   "payment": {
     "pending": "Confirming payment…",
