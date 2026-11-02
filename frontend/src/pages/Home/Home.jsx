@@ -112,9 +112,27 @@ function Dashboard() {
   const plan = useAuth((s) => s.plan);
   const [prog, setProg] = useState(null);
   const [guide, setGuide] = useState(null);
+  // Tải cấp độ & hạng. Lỗi mạng/máy chủ thoáng qua (hay gặp ngay sau khi đăng nhập) thì tự thử lại, không để thanh này biến mất tới khi tải lại trang.
+  const uid = user?.id;
   useEffect(() => {
-    api.get('/progression').then(setProg).catch(() => {});
-  }, []);
+    let alive = true;
+    let timer;
+    const load = (attempt = 0) =>
+      api
+        .get('/progression')
+        .then((r) => alive && setProg(r))
+        .catch(() => {
+          if (alive && attempt < 4) timer = setTimeout(() => load(attempt + 1), 1000 * (attempt + 1));
+        });
+    load();
+    const onVisible = () => document.visibilityState === 'visible' && load();
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [uid]);
   const done = prog ? prog.missions.filter((m) => m.completed).length : 0;
   const rank = prog?.rank;
 
