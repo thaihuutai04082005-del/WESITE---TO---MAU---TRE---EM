@@ -1674,3 +1674,10 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
   .cw-free .cw-actions { margin-top: 6px; }
 }
 .cw-title .cw-ref-tools svg { color: #2F8FEA; }
+
+/* Danh sách khung bên phải màn hoàn thành: thanh cuộn mảnh */
+@media (min-width: 640px) {
+  .reveal-frame-list { scrollbar-width: thin; scrollbar-color: #B9CDEA transparent; }
+}
+.reveal-art { width: min(100%, 28rem); }
+@media (min-width: 640px) { .reveal-art { width: min(100%, calc(88vh - 230px)); margin: 0; justify-self: center; } }

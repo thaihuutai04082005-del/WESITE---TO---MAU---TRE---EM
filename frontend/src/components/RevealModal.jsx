@@ -91,25 +91,33 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     <Modal open onClose={() => leave(null)} wide>
       <Confetti count={80} />
       <div className="text-center" data-testid="reveal-modal">
-        <h2 className="font-display text-3xl font-extrabold">{t('reveal.title')}</h2>
+        <h2 className="flex items-center justify-center gap-2 font-display text-3xl font-extrabold text-[#22A55B]" data-testid="reveal-title">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-[#22A55B] text-white" aria-hidden="true"><Icon name="check" size={22} strokeWidth={3.6} /></span>
+          {t('coloring.complete')}
+        </h2>
         <p className="mb-3 text-muted">{t('reveal.subtitle')}</p>
-        {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); bé chọn khung khác ngay bên dưới (khung mua ở Shop). */}
-        <div ref={artRef} className="relative mx-auto aspect-square max-w-md" data-testid="reveal-frame">
-          <div className="absolute" style={{ inset: frame ? `${(50 / 700) * 100}%` : 0 }}>
-            <Canvas picture={picture} data={data} readOnly reveal className="!rounded-none !border-0" />
+        {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); bé chọn khung khác ở danh sách bên phải (khung mua ở Shop). */}
+        <div className="sm:grid sm:grid-cols-[minmax(0,1fr)_228px] sm:items-stretch sm:gap-4">
+          <div ref={artRef} className="reveal-art relative mx-auto aspect-square" data-testid="reveal-frame">
+            <div className="absolute" style={{ inset: frame ? `${(50 / 700) * 100}%` : 0 }}>
+              <Canvas picture={picture} data={data} readOnly reveal className="!rounded-none !border-0" />
+            </div>
+            {frame && <div className="pointer-events-none absolute inset-0" dangerouslySetInnerHTML={{ __html: (artworkFrameSvg(frame) || '').replace('width="700" height="700"', 'width="100%" height="100%"') }} />}
           </div>
-          {frame && <div className="pointer-events-none absolute inset-0" dangerouslySetInnerHTML={{ __html: (artworkFrameSvg(frame) || '').replace('width="700" height="700"', 'width="100%" height="100%"') }} />}
-        </div>
-        <div className="mx-auto mt-3 max-w-xl text-left" data-testid="reveal-frames">
-          <div className="label text-center">{t('history.frame')}</div>
-          <div className="overflow-x-auto pb-2 [&>div]:flex-nowrap [&>div]:justify-start">
-            <FrameSelector type="artwork" items={frames} value={frame} onChange={pickFrame} />
+          <div className="mt-3 flex min-h-0 flex-col text-left sm:mt-0" data-testid="reveal-frames">
+            <div className="label text-center">{t('history.frame')}</div>
+            {/* Điện thoại: hàng ngang cuộn ngang. Màn rộng: cột dọc bên phải tranh, có thanh cuộn riêng (cửa sổ không cuộn). */}
+            <div className="relative min-h-0 flex-1">
+              <div className="reveal-frame-list overflow-x-auto pb-2 sm:absolute sm:inset-0 sm:overflow-x-hidden sm:overflow-y-auto sm:pb-0 sm:pr-1 [&>div]:flex-nowrap [&>div]:justify-start sm:[&>div]:grid sm:[&>div]:grid-cols-2 sm:[&>div]:justify-items-center sm:[&>div]:gap-2">
+                <FrameSelector type="artwork" items={frames} value={frame} onChange={pickFrame} />
+              </div>
+            </div>
+            {frames.length > 0 && frames.filter((f) => f.owned).length <= 1 && (
+              <Link to="/shop" className="mt-1 inline-block text-sm font-bold text-primary">
+                {t('history.buyFrames')}
+              </Link>
+            )}
           </div>
-          {frames.length > 0 && frames.filter((f) => f.owned).length <= 1 && (
-            <Link to="/shop" className="inline-block text-sm font-bold text-primary">
-              {t('history.buyFrames')}
-            </Link>
-          )}
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <button type="button" className="btn-primary" onClick={() => exportAs('download')} disabled={busy} data-testid="reveal-download">
