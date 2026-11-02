@@ -621,7 +621,7 @@ export const ART_THEMES = [
   {
     slug: 'dong-vat-3-4',
     age: '3-5',
-    name: { vi: 'Động Vật', en: 'Animals' },
+    name: { vi: 'Thế Giới Động Vật', en: 'Animal World' },
     animation: 'bounce',
     objects: [
       {
@@ -716,7 +716,7 @@ export const ART_THEMES = [
 ART_THEMES.push({
   slug: 'trai-cay-3-5',
   age: '3-5',
-  name: { vi: 'Trái Cây', en: 'Fruits' },
+  name: { vi: 'Vườn Trái Cây', en: 'Fruit Garden' },
   animation: 'float',
   objects: [
     {
@@ -795,7 +795,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'xe-co-3-5',
   age: '3-5',
-  name: { vi: 'Xe Cộ', en: 'Vehicles' },
+  name: { vi: 'Phương Tiện Giao Thông', en: 'Transport' },
   animation: 'drive',
   objects: [
     {
@@ -874,7 +874,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'do-dung-hoc-tap-3-5',
   age: '3-5',
-  name: { vi: 'Đồ Dùng Học Tập', en: 'School Supplies' },
+  name: { vi: 'Bé Đến Trường', en: 'Off to School' },
   animation: 'float',
   objects: [
     {
@@ -953,7 +953,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'do-choi-3-5',
   age: '3-5',
-  name: { vi: 'Đồ Chơi', en: 'Toys' },
+  name: { vi: 'Thế Giới Đồ Chơi', en: 'Toy World' },
   animation: 'bounce',
   objects: [
     {
@@ -1032,7 +1032,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'do-an-3-5',
   age: '3-5',
-  name: { vi: 'Đồ Ăn', en: 'Food' },
+  name: { vi: 'Món Ngon Của Bé', en: 'Yummy Treats' },
   animation: 'float',
   objects: [
     {
@@ -1112,7 +1112,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'khu-vui-choi-3-5',
   age: '3-5',
-  name: { vi: 'Khu Vui Chơi', en: 'Playground' },
+  name: { vi: 'Khu Vui Chơi Của Bé', en: 'Fun Playground' },
   animation: 'bounce',
   objects: [
     {
@@ -1191,7 +1191,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'du-hanh-vu-tru-3-5',
   age: '3-5',
-  name: { vi: 'Du Hành Vũ Trụ', en: 'Space Travel' },
+  name: { vi: 'Khám Phá Vũ Trụ', en: 'Space Explorers' },
   animation: 'bounce',
   objects: [
     {
@@ -1270,7 +1270,7 @@ ART_THEMES.push({
 ART_THEMES.push({
   slug: 'cac-loai-hoa-3-5',
   age: '3-5',
-  name: { vi: 'Các Loài Hoa', en: 'Flowers' },
+  name: { vi: 'Vườn Hoa Xinh', en: 'Pretty Flower Garden' },
   animation: 'bounce',
   objects: [
     {
@@ -1394,7 +1394,7 @@ ART_THEMES.push({
   slug: 'ngoi-nha-cua-be-3-5',
   age: '3-5',
   after: 'cac-loai-hoa-3-5',
-  name: { vi: 'Ngôi Nhà Của Bé', en: "My Little Home" },
+  name: { vi: 'Ngôi Nhà Thân Yêu', en: 'Sweet Home' },
   animation: 'bounce',
   objects: [
     {
