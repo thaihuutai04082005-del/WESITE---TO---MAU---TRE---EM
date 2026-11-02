@@ -21,6 +21,11 @@ export default function StorybookView() {
   useEffect(() => {
     api.get(`/storybooks/${id}`).then((r) => setBook(r.storybook));
   }, [id]);
+  // Quay lại đúng màn hình trước đó (không đi vòng qua trang danh sách truyện nên không chạy lại hiệu ứng mở truyện).
+  const goBack = () => {
+    if (window.history.state?.idx > 0) navigate(-1);
+    else navigate('/storybooks');
+  };
   if (!book) return <div className="page text-muted">{t('common.loading')}</div>;
 
   const run = (fn) => async () => {
@@ -59,9 +64,9 @@ export default function StorybookView() {
 
   return (
     <StoryBackdrop>
-      <Link to="/storybooks" className="sbv-back">
-        <Icon name="back" size={20} strokeWidth={3} /> {t('storybook.title')}
-      </Link>
+      <button type="button" onClick={goBack} className="sbv-back" data-testid="view-back">
+        <Icon name="back" size={20} strokeWidth={3} /> {t('common.back')}
+      </button>
       <FlipbookViewer title={book.title} author={user.nickname} pages={book.pages} coverStyle={book.coverStyle} />
       <div className="sbv-actions">
         {!book.completed && (
