@@ -1,126 +1,234 @@
-// Trình tạo cuốn truyện: chọn tranh đã hoàn thành trong bộ sưu tập, sắp thứ tự trang, thêm lời thoại/chú thích.
-import { useEffect, useState } from 'react';
+// Soạn truyện ngay trên cuốn truyện: gõ tên truyện + chọn bìa trực tiếp trên bìa; lật vào trang trong thì chọn tranh từ bộ sưu tập,
+// viết lời thoại ngay dưới tranh, muốn viết tiếp thì thêm trang mới.
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
+import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { errorText } from '../../lib/format';
 import Icon from '../../components/Icon';
+import Modal from '../../components/Modal/Modal';
+import FlipbookViewer, { StoryBackdrop } from '../../components/FlipbookViewer/FlipbookViewer';
 import { coverOf } from '../../lib/storyCovers';
+
+const MAX_PAGES = 40;
+const blank = () => ({ artworkId: null, caption: '', image: null });
 
 export default function StorybookEditor() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const user = useAuth((s) => s.user);
   const toast = useUi((s) => s.toast);
   const [title, setTitle] = useState('');
-  const [pages, setPages] = useState([]);
-  const [available, setAvailable] = useState([]);
+  const [pages, setPages] = useState([blank()]);
   const [coverStyle, setCoverStyle] = useState(null);
+  const [available, setAvailable] = useState([]);
   const [covers, setCovers] = useState([]); // bìa đã mua trong Shop
+  const [index, setIndex] = useState(0); // 0 = bìa
+  const [pickFor, setPickFor] = useState(null); // số trang (từ 0) đang chọn tranh
+  const [coverOpen, setCoverOpen] = useState(false);
+  const [leaveAsk, setLeaveAsk] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loaded, setLoaded] = useState(!id);
+  const [snap, setSnap] = useState(() => JSON.stringify({ title: '', coverStyle: null, pages: [blank()] }));
 
   useEffect(() => {
     api.get('/artworks?status=completed').then((r) => setAvailable(r.artworks));
     api.get('/shop').then((r) => setCovers(r.items.filter((i) => i.type === 'storybook_cover' && i.owned))).catch(() => {});
     if (id)
       api.get(`/storybooks/${id}`).then((r) => {
-        setTitle(r.storybook.title);
-        setCoverStyle(r.storybook.coverStyle);
-        setPages(r.storybook.pages.map((p) => ({ artworkId: p.artworkId, caption: p.caption, image: p.image })));
+        const b = r.storybook;
+        const ps = b.pages.length ? b.pages.map((p) => ({ artworkId: p.artworkId, caption: p.caption, image: p.image })) : [blank()];
+        setTitle(b.title);
+        setCoverStyle(b.coverStyle);
+        setPages(ps);
+        setSnap(JSON.stringify({ title: b.title, coverStyle: b.coverStyle, pages: ps }));
+        setLoaded(true);
       });
   }, [id]);
 
-  const inBook = new Set(pages.map((p) => p.artworkId));
-  const add = (a) => setPages([...pages, { artworkId: a.id, caption: '', image: a.thumbnail }]);
-  const move = (i, d) => {
-    const j = i + d;
-    if (j < 0 || j >= pages.length) return;
-    const next = [...pages];
-    [next[i], next[j]] = [next[j], next[i]];
-    setPages(next);
+  const dirty = useMemo(() => JSON.stringify({ title, coverStyle, pages }) !== snap, [title, coverStyle, pages, snap]);
+  // Báo trình duyệt khi đóng tab lúc chưa lưu.
+  useEffect(() => {
+    if (!dirty) return undefined;
+    const h = (e) => e.preventDefault();
+    window.addEventListener('beforeunload', h);
+    return () => window.removeEventListener('beforeunload', h);
+  }, [dirty]);
+
+  const page = index > 0 ? pages[index - 1] : null;
+  const used = new Set(pages.map((p) => p.artworkId).filter(Boolean));
+  const setPage = (i, patch) => setPages((ps) => ps.map((p, k) => (k === i ? { ...p, ...patch } : p)));
+
+  const addPage = () => {
+    if (pages.length >= MAX_PAGES) return toast(t('storybook.maxPages', { n: MAX_PAGES }), 'error');
+    const at = index; // chèn ngay sau trang đang xem (đang ở bìa thì thành trang đầu)
+    setPages((ps) => [...ps.slice(0, at), blank(), ...ps.slice(at)]);
+    setIndex(at + 1);
+  };
+  const removePage = () => {
+    if (!page) return;
+    setPages((ps) => (ps.length === 1 ? [blank()] : ps.filter((_, k) => k !== index - 1)));
+    setIndex((i) => Math.max(0, pages.length === 1 ? 0 : i - 1));
   };
 
   async function save() {
+    if (!title.trim()) {
+      setIndex(0);
+      return toast(t('storybook.needTitle'), 'error');
+    }
+    const keep = pages.map((p, i) => ({ ...p, n: i + 1 })).filter((p) => p.artworkId || p.caption.trim());
+    const bad = keep.find((p) => !p.artworkId);
+    if (bad) {
+      setIndex(bad.n);
+      return toast(t('storybook.needPicture', { n: bad.n }), 'error');
+    }
+    if (!keep.length) {
+      setIndex(1);
+      return toast(t('storybook.needPage'), 'error');
+    }
+    setSaving(true);
     try {
-      const body = { title, coverStyle, pages: pages.map(({ artworkId, caption }) => ({ artworkId, caption })) };
+      const body = { title: title.trim(), coverStyle, pages: keep.map(({ artworkId, caption }) => ({ artworkId, caption })) };
       const r = id ? await api.put(`/storybooks/${id}`, body) : await api.post('/storybooks', body);
       toast(t('storybook.saved'), 'success');
-      navigate(`/storybooks/${r.storybook.id}`);
+      setSnap(JSON.stringify({ title, coverStyle, pages })); // đã lưu: không còn cảnh báo chưa lưu
+      navigate(`/storybooks/${r.storybook.id}`, { replace: true });
     } catch (e) {
       toast(errorText(t, e), 'error');
+    } finally {
+      setSaving(false);
     }
   }
 
+  const back = (e) => {
+    if (!dirty) return;
+    e.preventDefault();
+    setLeaveAsk(true);
+  };
+
+  if (!loaded) return <div className="page text-muted">{t('common.loading')}</div>;
+
   return (
-    <div className="page space-y-5">
-      <Link to="/storybooks" className="inline-flex items-center gap-1 font-bold text-primary">
-        <Icon name="back" size={20} /> {t('storybook.title')}
+    <StoryBackdrop>
+      <Link to={id ? `/storybooks/${id}` : '/storybooks'} onClick={back} className="sbv-back" data-testid="editor-back">
+        <Icon name="back" size={20} strokeWidth={3} /> {t('storybook.title')}
       </Link>
-      <h1 className="page-title">{id ? t('storybook.edit') : t('storybook.new')}</h1>
-      <div>
-        <label className="label" htmlFor="sb-title">{t('storybook.bookTitle')}</label>
-        <input id="sb-title" className="input" value={title} onChange={(e) => setTitle(e.target.value)} maxLength={80} placeholder={t('storybook.titlePlaceholder')} data-testid="storybook-title" />
+      <FlipbookViewer
+        title={title}
+        author={user?.nickname}
+        pages={pages}
+        coverStyle={coverStyle}
+        index={index}
+        onIndex={setIndex}
+        editor={{
+          setTitle,
+          onCover: () => setCoverOpen(true),
+          onPick: (i) => setPickFor(i),
+          onCaption: (i, v) => setPage(i, { caption: v }),
+        }}
+      />
+      <div className="sbv-actions">
+        <button type="button" className="btn-ghost" onClick={addPage} disabled={!!page && !page.artworkId} title={page && !page.artworkId ? t('storybook.pickFirst') : ''} data-testid="add-page">
+          <Icon name="plus" /> {t('storybook.addPage')}
+        </button>
+        {page && (
+          <button type="button" className="btn-ghost text-danger" onClick={removePage} aria-label={t('storybook.removePage')} title={t('storybook.removePage')} data-testid="remove-page">
+            <Icon name="trash" />
+          </button>
+        )}
+        <button type="button" className="btn-coral" onClick={save} disabled={saving} data-testid="storybook-save">
+          <Icon name="save" /> {t('storybook.saveBook')}
+        </button>
       </div>
 
-      <section>
-        <div className="label">{t('storybook.coverPick')}</div>
-        <div className="flex flex-wrap items-center gap-3">
+      {/* Chọn bìa ngay trên bìa */}
+      <Modal open={coverOpen} onClose={() => setCoverOpen(false)}>
+        <h2 className="mb-3 font-display text-2xl font-extrabold">{t('storybook.coverPick')}</h2>
+        <div className="flex flex-wrap items-center gap-3" data-testid="cover-list">
           {[{ slug: null, name: { vi: t('storybook.coverDefault'), en: t('storybook.coverDefault') } }, ...covers].map((c) => {
             const cv = coverOf(c.slug);
+            const on = coverStyle === c.slug;
             return (
-              <button key={c.slug || 'default'} type="button" onClick={() => setCoverStyle(c.slug)} aria-pressed={coverStyle === c.slug} title={c.name[i18n.language]} data-testid={`cover-${c.slug || 'default'}`}
-                className={`h-20 w-16 rounded-xl border-4 ${coverStyle === c.slug ? 'ring-4 ring-primary/40' : ''}`} style={{ background: cv.bg, borderColor: cv.line }} />
+              <button
+                key={c.slug || 'default'}
+                type="button"
+                onClick={() => {
+                  setCoverStyle(c.slug);
+                  setCoverOpen(false);
+                }}
+                aria-pressed={on}
+                title={c.name[i18n.language]}
+                data-testid={`cover-${c.slug || 'default'}`}
+                className={`relative h-24 w-[76px] rounded-xl border-4 ${on ? 'ring-4 ring-primary/40' : ''}`}
+                style={{ background: cv.bg, borderColor: cv.line }}
+              >
+                {on && <span className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-primary text-white"><Icon name="check" size={14} strokeWidth={3.4} /></span>}
+              </button>
             );
           })}
-          {covers.length === 0 && <Link to="/shop" className="text-sm font-bold text-primary">{t('storybook.buyCovers')}</Link>}
         </div>
-      </section>
+        {covers.length === 0 && (
+          <Link to="/shop" className="mt-3 inline-block text-sm font-bold text-primary">
+            {t('storybook.buyCovers')}
+          </Link>
+        )}
+      </Modal>
 
-      <section>
-        <h2 className="mb-2 font-display text-2xl font-bold">{t('storybook.pagesTitle', { n: pages.length })}</h2>
-        {pages.length === 0 && <p className="text-muted">{t('storybook.addHint')}</p>}
-        <ol className="space-y-3">
-          {pages.map((p, i) => (
-            <li key={p.artworkId} className="card flex flex-col gap-3 p-3 sm:flex-row sm:items-center">
-              <div className="flex items-center gap-3">
-                <span className="w-8 text-center font-display text-2xl font-extrabold text-primary">{i + 1}</span>
-                {p.image ? <img src={p.image} alt="" className="h-24 w-24 rounded-xl border border-line" /> : <div className="h-24 w-24 rounded-xl bg-primary-light" />}
-              </div>
-              <textarea className="input min-h-24 flex-1 py-2" value={p.caption} maxLength={200} placeholder={t('storybook.captionPlaceholder')} onChange={(e) => setPages(pages.map((x, k) => (k === i ? { ...x, caption: e.target.value } : x)))} aria-label={t('storybook.caption')} data-testid={`caption-${i}`} />
-              <div className="flex gap-1 sm:flex-col">
-                <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => move(i, -1)} disabled={i === 0} aria-label={t('storybook.moveUp')}><Icon name="up" /></button>
-                <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => move(i, 1)} disabled={i === pages.length - 1} aria-label={t('storybook.moveDown')}><Icon name="down" /></button>
-                <button type="button" className="btn-ghost min-h-11 px-3 text-danger" onClick={() => setPages(pages.filter((_, k) => k !== i))} aria-label={t('common.delete')}><Icon name="trash" /></button>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section>
-        <h2 className="mb-1 font-display text-2xl font-bold">{t('storybook.pick')}</h2>
-        <p className="mb-2 text-sm text-muted">{t('storybook.pickHint')}</p>
+      {/* Chọn tranh từ bộ sưu tập cho trang đang soạn */}
+      <Modal open={pickFor !== null} onClose={() => setPickFor(null)} wide>
+        <h2 className="font-display text-2xl font-extrabold">{t('storybook.pickFromCollection')}</h2>
+        <p className="mb-3 text-sm text-muted">{t('storybook.pickHint')}</p>
         {available.length === 0 && (
           <div className="card p-4 text-center text-muted">
             {t('storybook.noArtworks')} <Link to="/color" className="font-bold text-primary">{t('nav.color')}</Link>
           </div>
         )}
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-6">
-          {available.map((a) => (
-            <button key={a.id} type="button" disabled={inBook.has(a.id)} onClick={() => add(a)} className="card relative p-1 disabled:opacity-40" data-testid={`sb-add-${a.id}`}>
-              {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-xl" /> : <div className="aspect-square rounded-xl bg-primary-light" />}
-              <div className="truncate text-xs font-bold">{a.name[i18n.language]}</div>
-              {!inBook.has(a.id) && <span className="absolute right-1 top-1 rounded-full bg-primary p-1 text-white"><Icon name="plus" size={16} /></span>}
-            </button>
-          ))}
+        <div className="grid max-h-[60vh] grid-cols-3 gap-3 overflow-y-auto p-1 sm:grid-cols-4" data-testid="pick-list">
+          {available.map((a) => {
+            const taken = used.has(a.id) && pages[pickFor]?.artworkId !== a.id;
+            return (
+              <button
+                key={a.id}
+                type="button"
+                disabled={taken}
+                onClick={() => {
+                  setPage(pickFor, { artworkId: a.id, image: a.thumbnail });
+                  setPickFor(null);
+                }}
+                className={`card relative p-1 disabled:opacity-40 ${pages[pickFor]?.artworkId === a.id ? 'ring-4 ring-primary/50' : ''}`}
+                data-testid={`sb-add-${a.id}`}
+              >
+                {a.thumbnail ? <img src={a.thumbnail} alt="" className="aspect-square w-full rounded-xl" /> : <div className="aspect-square rounded-xl bg-primary-light" />}
+                <div className="truncate text-xs font-bold">{a.name[i18n.language]}</div>
+              </button>
+            );
+          })}
         </div>
-      </section>
+      </Modal>
 
-      <div className="sticky bottom-20 flex justify-end md:bottom-4">
-        <button type="button" className="btn-coral shadow-pop" onClick={save} disabled={!title.trim() || pages.length === 0} data-testid="storybook-save">
-          <Icon name="save" /> {t('common.save')}
-        </button>
-      </div>
-    </div>
+      {/* Rời trang khi chưa lưu */}
+      <Modal open={leaveAsk} onClose={() => setLeaveAsk(false)}>
+        <h2 className="font-display text-2xl font-extrabold">{t('storybook.leaveTitle')}</h2>
+        <p className="mb-4 text-muted">{t('storybook.leaveText')}</p>
+        <div className="flex gap-2">
+          <button type="button" className="btn-ghost flex-1" onClick={() => navigate(id ? `/storybooks/${id}` : '/storybooks')} data-testid="leave-discard">
+            {t('storybook.leaveDiscard')}
+          </button>
+          <button
+            type="button"
+            className="btn-coral flex-1"
+            onClick={() => {
+              setLeaveAsk(false);
+              save();
+            }}
+          >
+            {t('storybook.saveBook')}
+          </button>
+        </div>
+      </Modal>
+    </StoryBackdrop>
   );
 }
