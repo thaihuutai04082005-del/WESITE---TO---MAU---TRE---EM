@@ -1591,9 +1591,9 @@ ART_THEMES.push({
     },
     {
       slug: 'tien-ca-hong',
-      name: { vi: 'Tiên Cá Hồng', en: 'Pink Mermaid' },
+      name: { vi: 'Tiên Cá Hồng San', en: 'Pink Coral Mermaid' },
       pictures: [
-        { slug: 'tien-ca-hong', name: { vi: 'Tiên Cá Hồng', en: 'Pink Mermaid' }, file: 'tien-ca-hong--tien-ca-hong' },
+        { slug: 'tien-ca-hong', name: { vi: 'Tiên Cá Hồng San', en: 'Pink Coral Mermaid' }, file: 'tien-ca-hong--tien-ca-hong' },
       ],
     },
     {
