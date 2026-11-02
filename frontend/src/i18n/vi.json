@@ -1004,48 +1004,58 @@
       "intro": "Chọn tranh yêu thích rồi tô màu thật đẹp.",
       "steps": [
         "Chọn nhóm tuổi, chủ đề rồi chọn tranh.",
-        "Chọn cách tô: \"Tô theo mẫu\" (có số gợi ý màu) hoặc \"Sáng tạo\" (tô màu tuỳ thích).",
-        "Chọn dụng cụ và màu rồi tô vào tranh.",
-        "Tô xong bấm \"Hoàn thành\", chọn khung rồi tải về hoặc in."
+        "Chọn cách tô: \"Tô theo mẫu\" (có số gợi ý màu) hoặc \"Sáng tạo\".",
+        "Chọn dụng cụ (bút sáp, cọ, sticker…) và màu rồi tô vào tranh.",
+        "Tô sai thì dùng Tẩy hoặc Hoàn tác để sửa lại.",
+        "Tô xong bấm \"Hoàn thành\" để chọn khung cho tranh.",
+        "Bấm \"Tải về\" để lưu tranh hoặc \"In tranh\" để in ra giấy."
       ],
-      "tip": "Chưa tô xong thì bấm \"Lưu & thoát\", tranh nằm trong Lịch sử để tô tiếp."
+      "tip": "Tranh hoàn thành nằm trong Bộ sưu tập, tranh đang dở nằm trong Lịch sử."
     },
     "arena": {
-      "intro": "Thi tô tranh cùng các bạn, Top 3 nhận điểm thưởng.",
+      "intro": "Thi tô tranh cùng các bạn, máy chấm điểm tự động và công bằng.",
       "steps": [
         "Bấm \"Tìm trận\" để thi với các bạn khác.",
         "Hoặc bấm \"Tạo phòng\", gửi mã cho bạn bè rồi bấm \"Bắt đầu thi\".",
         "Cả phòng cùng tô một bức tranh, tô xong bấm \"Nộp bài\".",
-        "Top 3 nhận Điểm Rank và Điểm Gacha."
+        "Máy tự động chấm điểm, công bằng cho tất cả các bạn.",
+        "Hạng 1 nhận +10 điểm, hạng 2 nhận +8 điểm, hạng 3 nhận +6 điểm.",
+        "Điểm thưởng gồm Điểm Rank (lên hạng) và Điểm Gacha (bóc thẻ)."
       ],
       "tip": "Tô kín tranh, phối màu đẹp và thật sáng tạo để được điểm cao!"
     },
     "together": {
       "intro": "2–4 bạn cùng tô chung một bức tranh.",
       "steps": [
-        "Bấm \"Tạo phòng mới\" và chọn tranh.",
-        "Gửi mã phòng cho bạn bè. Bạn nhập mã ở ô \"Vào phòng\" để vào tô cùng.",
+        "Bấm \"Tạo phòng mới\" và chọn tranh muốn tô cùng.",
+        "Gửi mã phòng cho bạn bè (phòng tối đa 4 bạn).",
+        "Bạn bè nhập mã ở ô \"Vào phòng\" rồi bấm \"Vào tô\".",
         "Cùng nhau tô, màu hiện lên ngay cho cả nhóm.",
-        "Tô xong bấm \"Lưu tranh chung\"."
+        "Tô xong bấm \"Lưu tranh chung\", tranh vào Lịch sử của mọi bạn."
       ],
       "tip": "Chỉ ai có mã phòng mới vào được."
     },
     "gacha": {
-      "intro": "Dùng Điểm Gacha để bóc thẻ tranh hiếm.",
+      "intro": "Dùng Điểm Gacha để bóc thẻ tranh hiếm và sưu tầm.",
       "steps": [
         "Lọt Top 3 ở Đấu trường để nhận Điểm Gacha.",
-        "Cứ 50 Điểm Gacha được bóc 1 thẻ: bấm một thẻ sáng để lật.",
-        "Thẻ nhận được nằm ở tab Tranh thẻ hiếm trong trang chọn tranh, bấm vào để tô."
+        "Cứ 50 Điểm Gacha bé được bóc 1 thẻ.",
+        "Bấm một thẻ sáng trên sân khấu để lật, hoặc bấm \"Bóc N thẻ\".",
+        "Thẻ có 4 bậc: S (siêu hiếm), A (hiếm), B (thường), C (phổ biến).",
+        "Thẻ nhận được nằm ở tab Tranh thẻ hiếm trong trang chọn tranh.",
+        "Bấm vào thẻ để tô, tô xong tranh nằm trong Bộ sưu tập."
       ],
       "tip": "Bé có thể tặng hoặc đổi thẻ với bạn bè ở trang Bạn bè."
     },
     "storybooks": {
       "intro": "Gom những bức tranh đã tô thành cuốn truyện của riêng bé.",
       "steps": [
-        "Bấm \"Tạo truyện mới\", gõ tên truyện và chọn bìa ngay trên bìa.",
-        "Lật sang trang trong, bấm \"Chọn tranh từ bộ sưu tập\" để thêm tranh.",
-        "Viết lời dưới tranh. Muốn thêm trang thì bấm \"Thêm trang mới\".",
-        "Bấm \"Lưu truyện\", rồi xem, tải PDF hoặc chia sẻ."
+        "Bấm \"Tạo truyện mới\", cuốn truyện sẽ mở ra.",
+        "Gõ tên truyện ngay trên bìa, bấm \"Chọn bìa\" để đổi bìa.",
+        "Lật sang trang trong, bấm \"Chọn tranh từ bộ sưu tập\".",
+        "Viết lời ngay dưới tranh. Muốn thêm trang thì bấm \"Thêm trang mới\".",
+        "Bấm \"Lưu truyện\" để lưu lại.",
+        "Sau đó bé có thể xem lật trang, tải PDF hoặc chia sẻ cho người thân."
       ],
       "tip": "Truyện có từ 2 trang trở lên mới bấm \"Hoàn thành truyện\" được."
     },
@@ -1053,10 +1063,12 @@
       "intro": "Làm nhiệm vụ để lên cấp và nhận Ruby.",
       "steps": [
         "Mỗi cấp có 3 nhiệm vụ, làm xong nhận Ruby ngay.",
-        "Xong cả 3 nhiệm vụ thì lên cấp mới.",
+        "Nhiệm vụ gồm tô tranh, đăng nhập, kết bạn, thi Đấu trường…",
+        "Cấp càng cao, nhiệm vụ càng khó và nhận càng nhiều Ruby.",
+        "Xong cả 3 nhiệm vụ thì lên cấp mới (có tất cả 20 cấp).",
         "Dùng Ruby ở Shop để mua màu họa tiết, khung tranh và bìa truyện."
       ],
-      "tip": "Nhiệm vụ rất đa dạng: tô tranh, đăng nhập, kết bạn, thi Đấu trường…"
+      "tip": "Khung Avatar không bán, bé mở khoá khi thăng hạng ở Đấu trường."
     }
   }
 }

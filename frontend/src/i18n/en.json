@@ -1004,48 +1004,58 @@
       "intro": "Pick a picture you like and color it beautifully.",
       "steps": [
         "Pick an age group, a theme, then a picture.",
-        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\" (any colors).",
-        "Pick a tool and a color, then color the picture.",
-        "When you're done press \"Finish\", choose a frame, then download or print."
+        "Pick \"Paint by number\" (numbered colors) or \"Free coloring\".",
+        "Pick a tool (crayon, brush, sticker…) and a color, then color.",
+        "Made a mistake? Use Eraser or Undo to fix it.",
+        "When you're done press \"Finish\" to choose a frame.",
+        "Press \"Download\" to save it or \"Print\" to print it on paper."
       ],
-      "tip": "Not finished? Press \"Save & exit\" and find it in History to keep coloring."
+      "tip": "Finished pictures go to your Collection, unfinished ones stay in History."
     },
     "arena": {
-      "intro": "Compete with friends in a coloring contest — the top 3 win points.",
+      "intro": "Compete with friends — scoring is automatic and fair.",
       "steps": [
         "Press \"Find a match\" to play with other kids.",
         "Or press \"Create room\", send the code to friends and press \"Start\".",
         "The whole room colors one picture — press \"Submit\" when done.",
-        "The top 3 earn Rank and Gacha points."
+        "The system scores automatically, fairly for every kid.",
+        "1st place gets +10 points, 2nd gets +8, 3rd gets +6.",
+        "Rewards are Rank points (to move up) and Gacha points (to open cards)."
       ],
       "tip": "Fill the whole picture, mix colors nicely and be creative for a high score!"
     },
     "together": {
       "intro": "2–4 friends color one picture together.",
       "steps": [
-        "Press \"New room\" and pick a picture.",
-        "Send the room code to friends. They type it in \"Join a room\" to join in.",
+        "Press \"New room\" and pick the picture to color together.",
+        "Send the room code to friends (up to 4 kids in a room).",
+        "Friends type the code in \"Join a room\" and press \"Join\".",
         "Color together — everyone sees the colors right away.",
-        "When you're done press \"Save picture\"."
+        "Press \"Save picture\" and it goes to everyone's History."
       ],
       "tip": "Only people with the room code can join."
     },
     "gacha": {
-      "intro": "Use Gacha points to open rare picture cards.",
+      "intro": "Use Gacha points to open rare picture cards and collect them.",
       "steps": [
         "Finish in the top 3 of the Arena to earn Gacha points.",
-        "Every 50 Gacha points give 1 card: tap a glowing card to flip it.",
-        "Your cards are in the Rare card pictures tab on the picture page — tap one to color it."
+        "Every 50 Gacha points let you open 1 card.",
+        "Tap a glowing card on the stage to flip it, or tap \"Open N cards\".",
+        "Cards have 4 tiers: S (super rare), A (rare), B (uncommon), C (common).",
+        "Cards you open appear in the Rare card pictures tab on the picture page.",
+        "Tap a card to color it — the finished picture goes to your Collection."
       ],
       "tip": "You can gift or swap cards with friends on the Friends page."
     },
     "storybooks": {
       "intro": "Turn the pictures you've colored into a storybook of your own.",
       "steps": [
-        "Press \"New storybook\", type the title and pick a cover right on the cover.",
-        "Turn to an inside page and press \"Pick a picture from collection\" to add a picture.",
-        "Write the words under the picture. To add a page press \"Add new page\".",
-        "Press \"Save story\", then read it, download the PDF or share it."
+        "Press \"New storybook\" and the book opens.",
+        "Type the title on the cover, press \"Pick cover\" to change it.",
+        "Turn to an inside page, press \"Pick a picture from collection\".",
+        "Write under the picture. To add a page press \"Add new page\".",
+        "Press \"Save story\" to keep it.",
+        "Then you can flip through it, download the PDF or share it."
       ],
       "tip": "A story needs at least 2 pages before you can press \"Finish storybook\"."
     },
@@ -1053,10 +1063,12 @@
       "intro": "Complete missions to level up and earn Ruby.",
       "steps": [
         "Each level has 3 missions — finish one and get Ruby right away.",
-        "Finish all 3 missions to reach the next level.",
-        "Spend Ruby in the Shop on pattern colors, picture frames and storybook covers."
+        "Missions include coloring, logging in, making friends, the Arena…",
+        "The higher the level, the harder the missions and the more Ruby.",
+        "Finish all 3 missions to level up (there are 20 levels in all).",
+        "Spend Ruby in the Shop on pattern colors, frames and storybook covers."
       ],
-      "tip": "Missions are varied: coloring, logging in, making friends, playing the Arena…"
+      "tip": "Avatar frames aren't sold — you unlock them by moving up a rank in the Arena."
     }
   }
 }
