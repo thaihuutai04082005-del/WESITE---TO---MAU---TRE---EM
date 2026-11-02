@@ -314,6 +314,24 @@ k = raster(line_pts=sides[0][0], width=6.5)[..., None] * zone[..., None]
 body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
 k = raster(line_pts=np.array([P0, P1]), width=5.0)[..., None] * zone[..., None]
 body_rgb = (body_rgb * (1 - k) + np.array([22, 58, 96], np.float32) * k).astype(np.uint8)
+# Tay áo hai bên vẽ lại hẳn bằng hình học: vùng giữa mép yếm và đường sườn tô trắng phẳng, rồi kẻ lại
+# nét mép yếm (xanh đậm) và nét sườn (nâu) cho sắc gọn — hết răng cưa, hết vệt lem quanh nách.
+NAVY = np.array([22, 58, 96], np.float32)
+BIB_R = [(391, 384), (395, 400), (398, 416), (401, 432), (404, 448), (408, 462), (414, 472), (420, 478)]
+BIB_L = [(198, 386), (194, 400), (190, 416), (187, 432), (185, 448), (182, 457), (165, 477)]
+for bib, (c, _), end_y in ((BIB_R, sides[1], 478), (BIB_L, sides[0], 477)):
+    upper = c[c[:, 1] <= end_y + 0.5]
+    poly = np.vstack([np.array(bib, float), upper[::-1]])
+    cov = raster(poly_pts=poly)
+    m = cov > 0
+    body_rgb[m] = (body_rgb[m] * (1 - cov[m][:, None]) + 255 * cov[m][:, None]).astype(np.uint8)
+    body_a[m] = np.maximum(body_a[m], (cov[m] * 255).astype(np.uint8))
+for c, _ in sides:
+    k = raster(line_pts=c, width=6.5)[..., None]
+    body_rgb = (body_rgb * (1 - k) + OUTLINE * k).astype(np.uint8)
+for bib in (BIB_R, BIB_L):
+    k = raster(line_pts=spline(bib), width=5.0)[..., None]
+    body_rgb = (body_rgb * (1 - k) + NAVY * k).astype(np.uint8)
 # Bỏ các mẩu vụn rời (nét đầu/vai lẻ loi) khỏi lớp thân
 bl, bn = ndimage.label(body_a > 0)
 if bn > 1:
@@ -396,6 +414,23 @@ def crisp(arr):
     return out
 
 
+def reoutline(arr, width=3.6):
+    """Làm lại mép ngoài của bộ phận: hình bóng được làm trơn (hết răng cưa ở chỗ cắt), viền ngoài kẻ lại bằng nét nâu đậm
+    đều nét — chỗ cắt sát yếm/áo không còn vụn xanh, vụn trắng."""
+    a = arr[..., 3] > 127
+    big = cv2.resize(a.astype(np.uint8) * 255, (W * SS, H * SS), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255
+    big = cv2.GaussianBlur(big, (0, 0), 1.6 * SS) > 0.5
+    dist = ndimage.distance_transform_edt(big)
+    ring = big & (dist <= width * SS)
+    cov = cv2.resize(big.astype(np.float32), (W, H), interpolation=cv2.INTER_AREA)
+    ring_c = cv2.resize(ring.astype(np.float32), (W, H), interpolation=cv2.INTER_AREA)
+    out = arr.copy()
+    k = np.clip(ring_c / np.maximum(cov, 1e-3), 0, 1)[..., None]
+    out[..., :3] = (arr[..., :3] * (1 - k) + np.array([69, 23, 10], np.float32) * k).astype(np.uint8)
+    out[..., 3] = (cov * 255).astype(np.uint8)
+    return out
+
+
 def save(arr, name):
     a = crisp(arr)
     a[a[..., 3] == 0, :3] = 0
@@ -409,8 +444,11 @@ head_layer = layer(masks['head'])
 head_mud = box & (lum > 110) & ~((R > 140) & (G > 70) & (G < 150) & (B < 100))
 head_layer[head_mud, 3] = 0
 save(head_layer, 'bear-head.webp')
-save(layer(masks['armR']), 'bear-arm-r.webp')
-save(layer(masks['armL']), 'bear-arm-l.webp')
+arm_r = layer(masks['armR'])
+navy_bits = (B > R + 15) & (lum < 150) & (xs_ < 445)
+arm_r[navy_bits, 3] = 0
+save(reoutline(arm_r), 'bear-arm-r.webp')
+save(reoutline(layer(masks['armL'])), 'bear-arm-l.webp')
 save(np.array(Image.open(os.path.join(ROOT, 'assets-library/mascot/src/hello-eyes.webp')).convert('RGBA')), 'bear-eyes.webp')
 
 if DEBUG:
