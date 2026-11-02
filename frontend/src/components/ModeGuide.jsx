@@ -14,14 +14,6 @@ export default function ModeGuide({ card, onClose }) {
       <div data-testid={`guide-${card.key}`}>
         {/* Đầu bảng: cùng màu nền với ô chức năng */}
         <div className="relative -mx-5 -mt-5 mb-5 overflow-hidden rounded-t-3xl px-5 pb-5 pt-6 sm:px-6" style={{ background: card.bg }}>
-          <button
-            type="button"
-            onClick={onClose}
-            className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 text-ink shadow-soft transition hover:rotate-90 hover:bg-white"
-            aria-label={t('common.close')}
-          >
-            <Icon name="close" size={20} strokeWidth={2.6} />
-          </button>
           <div className="flex items-center gap-4">
             <div className="min-w-0 flex-1">
               <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 text-xs font-extrabold uppercase tracking-wide" style={{ color: card.accent }}>
