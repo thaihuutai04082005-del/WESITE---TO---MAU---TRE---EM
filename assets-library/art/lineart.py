@@ -47,6 +47,18 @@ def main():
     gray = cv2.cvtColor(cv2.imread(src), cv2.COLOR_BGR2GRAY)
     h, w = gray.shape
     cfg = json.load(open(colors_file)) if colors_file != '-' else {'default': '#FFFFFF', 'seeds': []}
+    # "frame": true — tranh có khung viền đen bao quanh ảnh: xoá đúng nét khung (cả góc bo tròn) nhưng vẫn giữ đường ngăn tại chỗ khung
+    # để các vùng sát mép không thông nhau (khung đã khép kín chúng); phần rìa ngoài khung bị bỏ (nhập vào vùng kề).
+    frame_ink = None
+    outer_white = None
+    if cfg.get('frame'):
+        ink0 = gray < 140
+        wl, wn = ndimage.label(~ink0)
+        edge_labels = np.unique(np.concatenate([wl[0], wl[-1], wl[:, 0], wl[:, -1]]))
+        outer_white = np.isin(wl, edge_labels[edge_labels > 0])
+        dist = ndimage.distance_transform_edt(~outer_white)
+        frame_ink = ink0 & (dist <= float(cfg.get('frame_width', 7.5)))
+        gray[frame_ink] = 255
     # "erase": xoá bớt nét của tranh gốc — {"rect": [x0, y0, x1, y1]} hoặc {"line": [[x, y], ...], "w": độ dày}.
     for e in cfg.get('erase', []):
         if 'rect' in e:
@@ -72,6 +84,8 @@ def main():
     line = gray < 140
     # Bịt các khe hở rất nhỏ giữa các nét để vùng không bị "rò" sang nhau.
     sealed = cv2.dilate(line.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
+    if frame_ink is not None:
+        sealed |= cv2.dilate(frame_ink.astype(np.uint8), np.ones((5, 5), np.uint8)) > 0
     # "seal": ngăn vùng ngầm dọc các đường này mà KHÔNG vẽ nét (khép chỗ hở để tách 2 vùng, giống tranh màu gốc).
     for sl in cfg.get('seal', []):
         sm = np.zeros(gray.shape, np.uint8)
@@ -84,6 +98,9 @@ def main():
     # "keep_small": [[x, y], ...] — giữ lại vùng nhỏ hơn MIN_AREA chứa các điểm này (chi tiết nhỏ cần tô riêng).
     for x, y in cfg.get('keep_small', []):
         keep[labels[int(y), int(x)]] = labels[int(y), int(x)] > 0
+    if outer_white is not None:
+        keep[np.unique(labels[outer_white & ~sealed])] = False   # rìa ngoài khung: không phải vùng tô
+        keep[0] = False
     labels[~keep[labels]] = 0
     # Nới từng vùng ra tới giữa nét đen (mỗi điểm nét nhận vùng gần nhất).
     _, (iy, ix) = ndimage.distance_transform_edt(labels == 0, return_indices=True)
@@ -95,6 +112,8 @@ def main():
     for num, (color, name) in cfg.get('numbers', {}).items():
         seed_of[int(num)] = (color, name)
     for x, y, color, name in cfg.get('seeds', []):
+        if outer_white is not None and outer_white[int(y), int(x)]:
+            continue   # điểm gán màu nằm ở rìa ngoài khung (đã bỏ) → không được tô lên vùng kề
         seed_of.setdefault(int(full[int(y), int(x)]), (color, name))
 
     k = SIZE / w
@@ -123,8 +142,12 @@ def main():
     # "spots": [[x, y, "#màu", "tên"], ...] — ô rất nhỏ (vd. hạt dâu) bị bước bịt khe làm mất:
     # lấy đúng phần trắng chứa điểm đó trên nét gốc, thêm thành vùng tô vẽ đè lên trên.
     if cfg.get('spots'):
-        spot_lab, _ = ndimage.label(~line)
+        # Có "frame": chỗ khung đã xoá vẫn là rào chắn (như khung cũ) để ô nhỏ không nối ra cả bức tranh.
+        barrier = line if frame_ink is None else (line | (cv2.dilate(frame_ink.astype(np.uint8), np.ones((3, 3), np.uint8)) > 0))
+        spot_lab, _ = ndimage.label(~barrier)
         for x, y, color, name in cfg['spots']:
+            if outer_white is not None and outer_white[int(y), int(x)]:
+                continue
             sid = spot_lab[int(y), int(x)]
             if sid == 0:
                 continue
