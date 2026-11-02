@@ -91,7 +91,10 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
     <Modal open onClose={() => leave(null)} wide>
       <Confetti count={80} />
       <div className="text-center" data-testid="reveal-modal">
-        <h2 className="font-display text-3xl font-extrabold">{t('reveal.title')}</h2>
+        <h2 className="flex items-center justify-center gap-2 font-display text-3xl font-extrabold text-[#22A55B]" data-testid="reveal-title">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-[#22A55B] text-white" aria-hidden="true"><Icon name="check" size={22} strokeWidth={3.6} /></span>
+          {t('coloring.complete')}
+        </h2>
         <p className="mb-3 text-muted">{t('reveal.subtitle')}</p>
         {/* Tranh hoàn thành tự có khung gỗ mặc định (miễn phí); bé chọn khung khác ở danh sách bên phải (khung mua ở Shop). */}
         <div className="sm:grid sm:grid-cols-[minmax(0,1fr)_228px] sm:items-stretch sm:gap-4">
