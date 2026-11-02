@@ -44,6 +44,7 @@ export default function Profile() {
   };
 
   return (
+    <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: 'url(/home-bg.webp)' }}>
     <div className="page space-y-5">
       <div className="card flex flex-col items-center gap-4 p-6 sm:flex-row">
         <Avatar avatar={user.avatar} frame={user.avatarFrame} vip={user.vip} size={120} />
@@ -122,6 +123,7 @@ export default function Profile() {
       <button type="button" className="btn-ghost w-full" onClick={() => { logout(); navigate('/'); }} data-testid="logout">
         <Icon name="logout" /> {t('auth.logout')}
       </button>
+    </div>
     </div>
   );
 }
