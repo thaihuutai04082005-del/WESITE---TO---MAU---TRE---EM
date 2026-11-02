@@ -132,19 +132,21 @@ export default function ColoringWorkspace({
   return (
     <div className={`cw ${template ? 'cw-template' : 'cw-free'}`}>
       <div className="cw-left">
-        <div className="cw-header">{header}</div>
-        {template && (
-          <div className="cw-ref card hidden p-3 lg:block">
-            <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
-            <div className="cw-ref-box">
-              <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
-                <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
-                <span className="cw-ref-zoom"><Icon name="zoomIn" size={18} strokeWidth={2.8} /> {t('coloring.refZoom')}</span>
-              </button>
+        <div className="cw-left-in">
+          <div className="cw-header">{header}</div>
+          {template && (
+            <div className="cw-ref card hidden p-3 lg:block">
+              <div className="cw-title mb-2"><Icon name="palette" size={24} strokeWidth={2.4} /> {t('coloring.reference')}</div>
+              <div className="cw-ref-box">
+                <button type="button" onClick={() => setShowRef(true)} className="cw-ref-btn cursor-zoom-in" aria-label={t('coloring.reference')} data-testid="reference-picture">
+                  <PictureView picture={picture} className="rounded-2xl" title={picture.name?.[i18n.language]} numbers doneIds={doneIds} />
+                  <span className="cw-ref-zoom"><Icon name="zoomIn" size={18} strokeWidth={2.8} /> {t('coloring.refZoom')}</span>
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-        {actions && <div className="cw-actions">{actions}</div>}
+          )}
+          {actions && <div className="cw-actions">{actions}</div>}
+              </div>
       </div>
 
       <div className="cw-stage">
