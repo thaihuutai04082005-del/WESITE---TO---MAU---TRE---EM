@@ -62,9 +62,12 @@ export default function StorybookEditor() {
   const used = new Set(pages.map((p) => p.artworkId).filter(Boolean));
   const setPage = (i, patch) => setPages((ps) => ps.map((p, k) => (k === i ? { ...p, ...patch } : p)));
 
+  // Mỗi lần bấm chỉ thêm đúng 1 trang. Đã có sẵn một trang trống (chưa có tranh, chưa có chữ) thì đưa bé tới trang đó, không thêm trang trống thứ hai.
   const addPage = () => {
+    const empty = pages.findIndex((p) => !p.artworkId && !p.caption.trim());
+    if (empty >= 0) return setIndex(empty + 1);
     if (pages.length >= MAX_PAGES) return toast(t('storybook.maxPages', { n: MAX_PAGES }), 'error');
-    const at = index; // chèn ngay sau trang đang xem (đang ở bìa thì thành trang đầu)
+    const at = index === 0 ? pages.length : index; // chèn ngay sau trang đang xem; đang ở bìa thì thêm vào cuối truyện
     setPages((ps) => [...ps.slice(0, at), blank(), ...ps.slice(at)]);
     setIndex(at + 1);
   };
