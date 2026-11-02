@@ -203,8 +203,8 @@
     "roomTitle": "My collection",
     "schedule": "Exhibition schedule",
     "title": "Collection",
-    "cards": "Rare cards",
-    "artworks": "Finished pictures",
+    "cards": "Rare card pictures",
+    "artworks": "Themed pictures",
     "noArtworks": "No finished pictures yet. Color a lovely one!",
     "toGacha": "Go to Card packs"
   },
@@ -304,6 +304,7 @@
     "submitNote": "After sending, the signature and the picture are locked. It is shown from Monday ({{date}}) to Sunday.",
     "readRules": "I have read the rules",
     "send": "Send",
+    "sendShort": "Send to exhibition",
     "quota": "Sent {{used}}/{{limit}}",
     "visit": "Visit the hall",
     "premiumMore": "Monthly/Yearly plans can send 3 pictures per round.",
