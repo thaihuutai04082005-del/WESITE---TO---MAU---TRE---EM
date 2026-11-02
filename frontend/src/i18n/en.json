@@ -599,8 +599,7 @@
       "chooseYear": "Choose VIP Yearly"
     },
     "save": "Save 79,000 VND (about 35%)",
-    "saveUsd": "Save {{amount}} (about {{pct}}%)",
-    "vndNote": "or {{price}} via MoMo or bank transfer (Vietnam)"
+    "saveUsd": "Save {{amount}} (about {{pct}}%)"
   },
   "payment": {
     "pending": "Confirming payment…",
