@@ -1,6 +1,6 @@
 // Hiệu ứng chuyển màn hình — chỉ dùng khi vào / ra khu vực Tô màu (/color…, /draw/…).
 //  • Vào Tô màu: lấp lánh quanh chỗ bấm → MỘT cầu vòng 7 màu vừa khung hình quét MỘT LƯỢT từ trái sang phải theo đường cong
-//    phủ kín màn hình → đổi trang → gỡ cầu vòng NGAY, không mờ dần, không còn dư âm.
+//    phủ kín màn hình → đổi trang → GIỮ kín tới khi trang đích báo sẵn sàng (btm:page-ready) → cầu vòng mờ dần, nội dung bay lên nhẹ.
 //  • Ra khỏi Tô màu (về trang chủ…): KHÔNG có hiệu ứng — chỉ giữ chiều đi vào, bỏ chiều quay về.
 //  • Vào Tô cùng nhau / Bóc thẻ / Truyện tranh: chỉ lấp lánh quanh chỗ bấm + tiếng ting (giống lúc vào Tô màu),
 //    rồi chuyển trang ngay — chưa có cầu vòng (hiệu ứng chuyển màn hình riêng sẽ bổ sung sau). Đấu trường: xem ArenaTransition.jsx.
@@ -16,7 +16,11 @@ const SPARKLE_COLORS = ['#FFD93B', '#FFFFFF', '#FF9ACB', '#7FD4FF', '#B79CFF'];
 const SPARKLES = 18;
 const SPARKLE_MS = 560;     // thời gian lấp lánh trước khi cầu vòng hiện
 const SWEEP_MS = 950;       // một lượt quét (phủ kín, hoặc hé lộ)
-const HOLD_MS = 110;        // giữ kín màn hình một nhịp cho trang mới kịp dựng, rồi gỡ ngay
+const HOLD_MS = 220;        // tối thiểu giữ kín màn hình sau lượt quét cho trang mới kịp dựng
+const MAX_WAIT_MS = 4000;   // trần chờ trang đích tải xong (không bao giờ bị kẹt)
+const SETTLE_MAX_MS = 900;  // chờ tối đa bấy lâu cho trang đích dựng xong sau khi báo sẵn sàng
+const FADE_MS = 380;        // lớp phủ mờ dần để lộ trang mới
+const ENTER_MS = 900;       // thời gian giữ hiệu ứng "nội dung bay lên" của trang đích
 const END_ANGLE = 186;      // quét quá 180° một chút để chắc chắn phủ kín / sạch hẳn
 const CENTER_Y = 1.05;      // tâm vòng cung nằm hơi dưới đáy màn hình
 
@@ -49,7 +53,8 @@ function sweep(ms, set, done) {
 export default function RainbowTransition() {
   const loc = useLocation();
   const navigate = useNavigate();
-  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in'
+  const [phase, setPhase] = useState(null);           // null | 'sparkle' | 'in' (quét) | 'hold' (phủ kín, chờ trang đích) | 'leave' (mờ dần)
+  const startAt = useRef(0);                           // mốc thời gian bắt đầu chờ trang đích (tín hiệu sẵn sàng phải đến sau mốc này)
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [spark, setSpark] = useState({ x: 0, y: 0, key: 0 });
   const overlay = useRef(null);
@@ -63,7 +68,13 @@ export default function RainbowTransition() {
     const id = setTimeout(fn, ms);
     timers.current.push(id);
   };
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(
+    () => () => {
+      timers.current.forEach(clearTimeout);
+      document.documentElement.removeAttribute('data-arena-enter');
+    },
+    [],
+  );
 
   // Bấm vào liên kết vượt ranh giới khu vực Tô màu.
   useEffect(() => {
@@ -123,6 +134,7 @@ export default function RainbowTransition() {
     if (from === loc.pathname || !enters(from, loc.pathname) || reduceMotion() || busy.current || transitionBus.skipRainbow) return;
     busy.current = true;
     pendingTo.current = null;
+    startAt.current = Date.now();
     setSize({ w: window.innerWidth, h: window.innerHeight });
     setPhase('in');
   }, [loc.pathname]);
@@ -165,13 +177,68 @@ export default function RainbowTransition() {
       () => {
         if (pendingTo.current) {
           handled.current = true;
+          startAt.current = Date.now();
           navigate(pendingTo.current);
           pendingTo.current = null;
         }
-        later(() => { setPhase(null); busy.current = false; }, HOLD_MS);
+        setPhase('hold');
       },
     );
   }, [phase, navigate]);
+
+  // Phủ kín: chờ đủ HOLD_MS VÀ trang đích báo sẵn sàng (hoặc hết MAX_WAIT_MS) rồi mới mờ dần — không để lộ trang đang dựng dở.
+  useEffect(() => {
+    if (phase !== 'hold') return undefined;
+    const t0 = startAt.current;
+    let minDone = false;
+    let finished = false;
+    const html = document.documentElement;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setPhase('leave');
+      html.setAttribute('data-arena-enter', '');
+      later(() => html.removeAttribute('data-arena-enter'), ENTER_MS);
+      later(() => {
+        setPhase(null);
+        busy.current = false;
+      }, FADE_MS);
+    };
+    // Trang đích báo xong thì còn chờ trình duyệt dựng/vẽ hết (3 khung hình liên tiếp đều nhanh, tối đa SETTLE_MAX_MS) rồi mới mờ dần,
+    // để lúc mờ dần không bị khựng bởi việc dựng trang còn dở.
+    let settling = false;
+    const settle = () => {
+      if (settling) return;
+      settling = true;
+      const t1 = performance.now();
+      let last = t1;
+      let calm = 0;
+      const step = (now) => {
+        if (finished) return;
+        calm = now - last < 60 ? calm + 1 : 0;
+        last = now;
+        if (calm >= 3 || now - t1 > SETTLE_MAX_MS) finish();
+        else raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    };
+    let raf = 0;
+    const check = () => {
+      if (minDone && transitionBus.readyAt >= t0) settle();
+    };
+    window.addEventListener('btm:page-ready', check);
+    const minId = setTimeout(() => {
+      minDone = true;
+      check();
+    }, HOLD_MS);
+    const maxId = setTimeout(finish, MAX_WAIT_MS);
+    return () => {
+      window.removeEventListener('btm:page-ready', check);
+      clearTimeout(minId);
+      clearTimeout(maxId);
+      cancelAnimationFrame(raf);
+    };
+  }, [phase]);
 
   const sparkles = useMemo(
     () =>
@@ -217,7 +284,7 @@ export default function RainbowTransition() {
           ))}
         </div>
       )}
-      {phase === 'in' && (
+      {(phase === 'in' || phase === 'hold' || phase === 'leave') && (
         <div
           ref={overlay}
           className="fixed inset-0 z-[9999]"
@@ -225,11 +292,13 @@ export default function RainbowTransition() {
           data-testid="rainbow-transition"
           data-phase={phase}
           style={{
-            '--a': '0deg',
+            '--a': phase === 'in' ? '0deg' : `${END_ANGLE}deg`,
+            opacity: phase === 'leave' ? 0 : 1,
+            transition: `opacity ${FADE_MS}ms ease-out`,
             background: `radial-gradient(circle at ${center}, ${stops})`,
             WebkitMaskImage: mask,
             maskImage: mask,
-            willChange: 'mask-image',
+            willChange: 'mask-image, opacity',
           }}
         />
       )}

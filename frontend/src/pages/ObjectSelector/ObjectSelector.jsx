@@ -6,6 +6,7 @@ import { api } from '../../services/api';
 import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WOOD_GRID, useFitRows } from '../../components/Wood/Wood';
 import ModePicker from '../../components/ModePicker';
 import { takePrefetchedTheme } from '../../lib/prefetch';
+import { pageReady } from '../../lib/transitionBus';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
@@ -17,6 +18,9 @@ export default function ObjectSelector() {
     if (data?.theme?.slug === theme) return;
     api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
   }, [theme]);
+  useEffect(() => {
+    if (data) requestAnimationFrame(pageReady);
+  }, [data]);
   const lang = i18n.language;
   const gridRef = useRef(null);
   useFitRows(gridRef, [data]);

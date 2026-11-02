@@ -1,4 +1,5 @@
 // Màn hình tô màu cá nhân (Theo mẫu / Sáng tạo): tự lưu, tính lượt ở thao tác đầu tiên, hoàn thành → Tranh sống.
+import { pageReady } from '../../lib/transitionBus';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -65,6 +66,11 @@ export default function ColoringScreen() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  // Báo cho hiệu ứng chuyển màn hình: tranh đã tải xong, sẵn sàng hiện.
+  useEffect(() => {
+    if (picture) requestAnimationFrame(pageReady);
+  }, [picture]);
 
   const save = useCallback(
     async (extra = {}) => {
