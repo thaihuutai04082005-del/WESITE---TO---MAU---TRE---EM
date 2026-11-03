@@ -126,59 +126,6 @@ let ctx = null;
 let buffer = null;
 let loading = null;
 
-/* Tiếng vỗ tay tổng hợp: nhiều tiếng vỗ lệch nhịp, trải đều hai kênh trong 3 giây. */
-let applauseBuffer = null;
-export function playApplause() {
-  if (!enabled || document.hidden) return;
-  let source;
-  let cancelled = false;
-  const stop = () => {
-    cancelled = true;
-    try { source?.stop(); } catch { /* nguồn đã kết thúc */ }
-    listeners.delete(onSoundChange);
-  };
-  const onSoundChange = () => { if (!enabled) stop(); };
-  try {
-    const c = getContext();
-    if (!c) return;
-    if (!applauseBuffer) {
-      const duration = 3;
-      applauseBuffer = c.createBuffer(2, Math.ceil(c.sampleRate * duration), c.sampleRate);
-      for (let channel = 0; channel < 2; channel++) {
-        const samples = applauseBuffer.getChannelData(channel);
-        for (let clap = 0; clap < 65; clap++) {
-          const time = Math.random() * 2.65;
-          const start = Math.floor(time * c.sampleRate);
-          const length = Math.floor((0.035 + Math.random() * 0.045) * c.sampleRate);
-          const volume = (0.12 + Math.random() * 0.12) * Math.min(1, (3 - time) / 0.7);
-          let previous = 0;
-          for (let i = 0; i < length && start + i < samples.length; i++) {
-            const noise = Math.random() * 2 - 1;
-            const envelope = Math.min(1, i / (c.sampleRate * 0.001)) * Math.exp(-6 * i / length);
-            samples[start + i] += (noise - previous * 0.6) * envelope * volume;
-            previous = noise;
-          }
-        }
-        for (let i = 0; i < samples.length; i++) samples[i] = Math.tanh(samples[i]);
-      }
-    }
-    source = c.createBufferSource();
-    source.buffer = applauseBuffer;
-    source.connect(c.destination);
-    source.onended = () => listeners.delete(onSoundChange);
-    listeners.add(onSoundChange);
-    const start = () => {
-      if (!cancelled && enabled && !document.hidden) source.start();
-      else stop();
-    };
-    if (c.state === 'suspended') c.resume().then(start).catch(stop);
-    else start();
-  } catch {
-    stop(); // âm thanh không được phép phát không ảnh hưởng bảng hoàn thành
-  }
-  return stop;
-}
-
 function getContext() {
   if (ctx) return ctx;
   const AC = window.AudioContext || window.webkitAudioContext;

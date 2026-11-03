@@ -14,7 +14,6 @@ import { warmTheme } from '../lib/prefetch';
 import { api } from '../services/api';
 import { errorText } from '../lib/format';
 import { useUi } from '../store/ui';
-import { playApplause } from '../lib/sound';
 
 /** `anotherTo`: trang mở ra khi bé bấm "Tô tranh khác" (VD màn chọn tranh của chủ đề hiện tại). */
 /** Khung Artwork mặc định (miễn phí) cho tranh vừa hoàn thành. */
@@ -29,9 +28,6 @@ export default function RevealModal({ open, picture, data, artworkId, onClose, a
   const [busy, setBusy] = useState(false);
   const [frames, setFrames] = useState([]);
   const [frame, setFrame] = useState(DEFAULT_FRAME); // null = bé chọn "Không khung"
-  useEffect(() => {
-    if (open) return playApplause();
-  }, [open]);
   // Bé chọn khung ngay khi vừa hoàn thành (khung đã mua + khung gỗ miễn phí); khung được lưu vào tranh.
   useEffect(() => {
     if (!open) return;
