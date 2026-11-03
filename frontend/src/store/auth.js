@@ -4,6 +4,7 @@ import { api, configureApi } from '../services/api';
 import { closeSocket } from '../services/socket';
 import i18n from '../i18n';
 import { useUi } from './ui';
+import { publicPage } from '../../../shared/publicRoutes.mjs';
 
 const TOKEN_KEY = 'btm.token';
 const readToken = () => {
@@ -23,6 +24,8 @@ export const useAuth = create((set, get) => ({
   meta: null,
 
   async boot() {
+    // Public content must not wait for a sleeping or unavailable API.
+    if (!get().token && publicPage(window.location.pathname)) set({ ready: true });
     try {
       const meta = await api.get('/meta');
       set({ meta });

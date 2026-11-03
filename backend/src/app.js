@@ -20,6 +20,7 @@ import socialRoutes from './routes/social.routes.js';
 import storybookRoutes from './routes/storybook.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import exhibitionRoutes from './routes/exhibition.routes.js';
+import { PUBLIC_ROUTES, isAppPath } from '../../shared/publicRoutes.mjs';
 
 export function createApp() {
   const app = express();
@@ -28,9 +29,10 @@ export function createApp() {
   app.use(cors({ origin: env.corsOrigins, credentials: true }));
   app.use(express.json({ limit: '8mb' }));
   app.use(express.urlencoded({ extended: false }));
-  app.use((_req, res, next) => {
+  app.use((req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    if (/^\/(api|admin|socket\.io)(\/|$)/.test(req.path)) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
     next();
   });
 
@@ -73,8 +75,22 @@ export function createApp() {
   // Production: phục vụ luôn bản build của frontend (SPA).
   const dist = join(REPO_ROOT, 'frontend', 'dist');
   if (existsSync(dist)) {
+    app.use((req, res, next) => {
+      if (isAppPath(req.path) || ['/app.html', '/404.html'].includes(req.path)) res.setHeader('X-Robots-Tag', 'noindex, follow');
+      next();
+    });
     app.use(express.static(dist, { index: false, maxAge: '1h' }));
-    app.get(/^\/(?!api|socket\.io|admin).*/, (_req, res) => res.sendFile(join(dist, 'index.html')));
+    app.get(/^\/(?!api|socket\.io|admin).*/, (req, res) => {
+      const path = req.path.replace(/\/+$/, '') || '/';
+      const page = PUBLIC_ROUTES.find((item) => item.path === path);
+      if (page) return res.sendFile(join(dist, page.file));
+      if (isAppPath(path)) {
+        res.setHeader('X-Robots-Tag', 'noindex, follow');
+        return res.sendFile(join(dist, 'app.html'));
+      }
+      res.setHeader('X-Robots-Tag', 'noindex, follow');
+      return res.status(404).sendFile(join(dist, '404.html'));
+    });
   }
 
   app.use(errorHandler);

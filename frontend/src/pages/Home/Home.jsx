@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
 import { api } from '../../services/api';
@@ -10,6 +10,8 @@ import { PlanBadge } from '../Payment/Plans';
 import ModeGuide from '../../components/ModeGuide';
 import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
 import HelloBear from '../../components/HelloBear';
+import { HomeIntro, PublicDetails } from '../../seo/PublicContent';
+import { publicPage } from '../../../../shared/publicRoutes.mjs';
 import { ColorArt, TrophyArt, TogetherArt, GachaArt, BookArt, MissionArt, SunCloud } from '../../components/Illustrations';
 
 // 5 tranh ở trang giới thiệu, theo thứ tự ô: chó (ô lớn), Chiến Binh Siêu Tốc, Tiên Cá Hải Lam, Xe Đua Phản Lực, búp bê.
@@ -22,6 +24,8 @@ const landingThemes = (themes) => {
 
 function Landing() {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const page = publicPage(pathname) || publicPage('/');
   const [themes, setThemes] = useState([]);
   const [loadError, setLoadError] = useState(false);
   const [retry, setRetry] = useState(0);
@@ -36,7 +40,6 @@ function Landing() {
     });
     return () => { active = false; };
   }, [retry]);
-  const features = ['creative', 'arena', 'gacha', 'together', 'storybook', 'safe'];
   return (
     <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
     <div className="page">
@@ -46,35 +49,16 @@ function Landing() {
           <button type="button" className="btn-ghost" onClick={() => setRetry((n) => n + 1)}>{t('common.tryAgain')}</button>
         </div>
       )}
-      <section className="grid items-center gap-6 py-6 md:grid-cols-2 md:py-12">
-        <div>
-          <h1 className="font-display text-4xl font-extrabold leading-tight md:text-6xl">{t('landing.title')}</h1>
-          <p className="mt-3 text-lg text-muted md:text-xl">{t('landing.subtitle')}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/register" className="btn-primary text-xl" data-testid="cta-register">
-              {t('landing.cta')}
-            </Link>
-            <Link to="/login" className="btn-ghost text-xl">
-              {t('auth.login')}
-            </Link>
-          </div>
-        </div>
+      <HomeIntro lang={page.lang} gallery={themes.length > 0 ? (
         <div className="grid grid-cols-3 gap-3">
           {landingThemes(themes).map((th, i) => (
             <div key={th.slug} className={`card overflow-hidden p-1 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>
-              <PictureView picture={th.cover} reveal className="rounded-2xl" />
+              <PictureView picture={th.cover} title={th.name?.[page.lang]} reveal className="rounded-2xl" />
             </div>
           ))}
         </div>
-      </section>
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((f) => (
-          <div key={f} className="card p-5">
-            <h3 className="font-display text-xl font-bold">{t(`landing.features.${f}.title`)}</h3>
-            <p className="text-muted">{t(`landing.features.${f}.text`)}</p>
-          </div>
-        ))}
-      </section>
+      ) : null} />
+      <PublicDetails page={page} />
     </div>
     </div>
   );

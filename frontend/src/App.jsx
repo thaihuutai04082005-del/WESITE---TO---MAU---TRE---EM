@@ -32,6 +32,9 @@ import StorybookList from './pages/Storybook/StorybookList';
 import StorybookEditor from './pages/Storybook/StorybookEditor';
 import StorybookView from './pages/Storybook/StorybookView';
 import SharedStorybook from './pages/Storybook/SharedStorybook';
+import SiteSeo from './components/SiteSeo';
+import PublicInfo from './pages/PublicInfo';
+import { PUBLIC_ROUTES } from '../../shared/publicRoutes.mjs';
 
 function RequireAuth({ children }) {
   const user = useAuth((s) => s.user);
@@ -56,7 +59,12 @@ export default function App() {
   useEffect(() => {
     boot();
   }, [boot]);
+  useEffect(() => {
+    if (ready) document.getElementById('seo-content')?.remove();
+  }, [ready]);
   if (!ready) {
+    // Keep the readable HTML visible while the app initializes (including slow APIs).
+    if (document.getElementById('seo-content')) return null;
     return (
       <div className="flex min-h-screen items-center justify-center">
         <img src="/favicon.svg" alt="" className="h-20 w-20 animate-bounce" />
@@ -66,9 +74,14 @@ export default function App() {
   const auth = (el) => <RequireAuth>{el}</RequireAuth>;
   return (
     <BrowserRouter>
+      <SiteSeo />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="vi" element={<Home />} />
+          {PUBLIC_ROUTES.filter((page) => page.kind !== 'home').map((page) => (
+            <Route key={page.path} path={page.path.slice(1)} element={<PublicInfo />} />
+          ))}
           <Route path="login" element={<GuestOnly><Login /></GuestOnly>} />
           <Route path="register" element={<GuestOnly><Register /></GuestOnly>} />
           <Route path="forgot" element={<GuestOnly><Forgot /></GuestOnly>} />

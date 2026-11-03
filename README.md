@@ -96,6 +96,13 @@ Backend phục vụ luôn bản build frontend (SPA), API `/api`, Socket.io và 
   - Có rate limit, CAPTCHA dạng nét vẽ, OTP chỉ lưu hash.
   - SVG tải lên qua trang quản trị được lọc script.
 
+## SEO và Google
+
+`npm run build` tạo HTML đọc được không cần JavaScript cho trang giới thiệu,
+chủ đề tranh và hướng dẫn bằng tiếng Việt/Anh, cùng sitemap, robots và metadata.
+Xem [hướng dẫn SEO và Google Search Console](docs/seo-google.md) để kiểm tra bản
+triển khai, xác minh website và gửi sitemap. Đặt `VITE_SITE_URL` khi đổi tên miền chính.
+
 ## Biến môi trường
 
 Xem đầy đủ trong [`backend/.env.example`](backend/.env.example). Các nhóm chính:

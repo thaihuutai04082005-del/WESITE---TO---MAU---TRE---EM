@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
 import Icon from '../Icon';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { publicPage, alternatePage } from '../../../../shared/publicRoutes.mjs';
 
 export default function LanguageSwitch() {
   const { i18n, t } = useTranslation();
   const user = useAuth((s) => s.user);
   const updateProfile = useAuth((s) => s.updateProfile);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const next = i18n.language === 'vi' ? 'en' : 'vi';
   const change = () => {
     i18n.changeLanguage(next);
@@ -15,6 +19,8 @@ export default function LanguageSwitch() {
       /* bỏ qua */
     }
     if (user) updateProfile({ language: next }).catch(() => {});
+    const page = publicPage(pathname);
+    if (page) navigate(alternatePage(page, next).path);
   };
   return (
     <button type="button" onClick={change} className="btn-ghost min-h-11 min-w-11 gap-1.5 whitespace-nowrap rounded-full px-2 text-base sm:min-w-[8.5rem] sm:px-5" aria-label={t('nav.language')} data-testid="lang-switch">
