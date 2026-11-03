@@ -9,7 +9,7 @@ Web có 2 cách trả tiền cho Gói Tháng / Gói Năm:
 
 Chưa điền khoá nào thì web chạy chế độ **giả lập** (có nút "Hoàn tất giả lập") để thử.
 
-> ⚠️ **Bắt buộc:** web phải được đưa lên mạng với tên miền **https** (ví dụ `https://betomau.vn`).
+> ⚠️ **Bắt buộc:** web phải được đưa lên mạng với tên miền **https** (ví dụ `https://tinytints.app`).
 > PayPal và SePay cần gọi vào web để báo "đã nhận tiền". Họ không gọi được vào máy tính
 > đang chạy `chay-web.bat` ở nhà.
 
