@@ -5,12 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { errorText } from '../../lib/format';
 import AuthCard from './AuthCard';
+import PhoneInput from '../../components/PhoneInput';
+import { internationalPhone } from '../../../../shared/phone.mjs';
 
 export default function Forgot() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [step, setStep] = useState('contact');
   const [contactType, setType] = useState('phone');
+  const [phoneCountry, setPhoneCountry] = useState('VN');
   const [contact, setContact] = useState('');
   const [start, setStart] = useState(null);
   const [code, setCode] = useState('');
@@ -33,19 +36,23 @@ export default function Forgot() {
     <AuthCard title={t('auth.forgotTitle')} subtitle={t(`auth.forgotStep.${step}`, { to: start?.sentTo })}>
       {step === 'contact' && (
         <form className="space-y-4" onSubmit={run(async () => {
-          const r = await api.post('/auth/forgot/start', { contactType, contact });
+          const r = await api.post('/auth/forgot/start', { contactType, contact: contactType === 'phone' ? internationalPhone(contact, phoneCountry) : contact });
           setStart(r);
           setStep('code');
         })}>
           <div className="flex gap-2">
             {['phone', 'email'].map((k) => (
               <label key={k} className={`btn-ghost flex-1 text-base ${contactType === k ? 'border-primary text-primary' : ''}`}>
-                <input type="radio" className="sr-only" checked={contactType === k} onChange={() => setType(k)} />
+                <input type="radio" className="sr-only" checked={contactType === k} onChange={() => { setType(k); setContact(''); }} />
                 {t(`auth.contact.${k}`)}
               </label>
             ))}
           </div>
-          <input className="input" value={contact} onChange={(e) => setContact(e.target.value)} required aria-label={t(`auth.contact.${contactType}`)} />
+          {contactType === 'phone' ? (
+            <PhoneInput value={contact} onChange={setContact} country={phoneCountry} onCountryChange={setPhoneCountry} />
+          ) : (
+            <input className="input" type="email" autoComplete="email" value={contact} onChange={(e) => setContact(e.target.value)} required aria-label={t('auth.contact.email')} />
+          )}
           {err && <p className="font-bold text-danger">{err}</p>}
           <button className="btn-primary w-full" type="submit">{t('auth.sendCode')}</button>
         </form>

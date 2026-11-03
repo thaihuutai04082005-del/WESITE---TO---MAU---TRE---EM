@@ -126,7 +126,13 @@
       "or": "Or sign in with Google (ages 13 and up)",
       "age": "I confirm that I'm at least 13 years old.",
       "ageRequired": "Please confirm you are 13 or older first."
-    }
+    },
+    "phoneCountry": "Country / calling code",
+    "phoneCountries": {
+      "VN": "Vietnam",
+      "US": "United States"
+    },
+    "phoneHint": "Choose a country or enter a full number with +84 or +1. We’ll switch the country automatically. The +1 code is shared with Canada and other North American regions."
   },
   "welcome": {
     "title": "Welcome!",
@@ -926,7 +932,7 @@
     "username_taken": "That username is taken.",
     "weak_password": "Passwords need both letters and numbers.",
     "invalid_email": "That email address isn't valid.",
-    "invalid_phone": "Enter a Vietnamese phone number with 10 digits, starting with 0.",
+    "invalid_phone": "Enter a valid Vietnamese (+84) or US-format (+1) phone number. For +1, include the 3-digit area code and 7-digit local number.",
     "invalid_contact_type": "Please choose phone or email.",
     "otp_invalid": "That code isn't valid.",
     "otp_expired": "That code has expired. Please request a new one.",

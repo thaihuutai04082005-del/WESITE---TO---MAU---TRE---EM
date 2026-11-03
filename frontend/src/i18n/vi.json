@@ -126,7 +126,13 @@
       "or": "Hoặc dành cho người từ 13 tuổi trở lên",
       "age": "Tôi xác nhận mình đã đủ 13 tuổi để dùng tài khoản Google.",
       "ageRequired": "Hãy xác nhận đủ 13 tuổi trước khi dùng Google."
-    }
+    },
+      "phoneCountry": "Quốc gia / mã gọi",
+      "phoneCountries": {
+        "VN": "Việt Nam",
+        "US": "Mỹ"
+      },
+      "phoneHint": "Chọn quốc gia hoặc nhập số đầy đủ có +84 hay +1 để tự chuyển vùng. Mã +1 cũng dùng cho Canada và một số vùng Bắc Mỹ."
   },
   "welcome": {
     "title": "Chào mừng bé!",
@@ -927,7 +933,7 @@
     "username_taken": "Tên đăng nhập đã có người dùng.",
     "weak_password": "Mật khẩu cần có cả chữ và số.",
     "invalid_email": "Email chưa đúng.",
-    "invalid_phone": "Số điện thoại chưa đúng (10 số, bắt đầu bằng 0).",
+    "invalid_phone": "Nhập số Việt Nam (+84) hoặc số theo định dạng Mỹ (+1) hợp lệ. Với +1, nhập đủ 3 số mã vùng và 7 số điện thoại.",
     "invalid_contact_type": "Hãy chọn SĐT hoặc Email.",
     "otp_invalid": "Mã không hợp lệ.",
     "otp_expired": "Mã đã hết hạn, hãy gửi lại.",

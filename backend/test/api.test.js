@@ -787,3 +787,36 @@ test('Ngôn ngữ: tài khoản mới mặc định tiếng Anh, đăng ký khi 
   await register('ngonngu1');
   await register('ngonngu2', 'abc12345', 'ngonngu2', 'vi');
 });
+
+test('US phone OTP registration and password reset use the same normalized contact', async () => {
+  const { body: cap } = await api('GET', '/auth/captcha');
+  const start = await api('POST', '/auth/register/start', {
+    username: 'usphone01', password: 'abc12345', language: 'en',
+    captchaId: cap.captchaId, captchaText: _peekCaptcha(cap.captchaId),
+    contactType: 'phone', contact: '+1 (202) 555-0123',
+  });
+  assert.equal(start.status, 200, JSON.stringify(start.body));
+  assert.ok(start.body.devCode);
+  const verify = await api('POST', '/auth/register/verify', { registrationId: start.body.registrationId, code: start.body.devCode });
+  assert.equal(verify.status, 201);
+  const user = getDb().prepare('SELECT guardian_contact FROM users WHERE username = ?').get('usphone01');
+  assert.equal(user.guardian_contact, '+12025550123');
+
+  const { body: cap2 } = await api('GET', '/auth/captcha');
+  const throttled = await api('POST', '/auth/register/start', {
+    username: 'usphone02', password: 'abc12345',
+    captchaId: cap2.captchaId, captchaText: _peekCaptcha(cap2.captchaId),
+    contactType: 'phone', contact: '12025550123',
+  });
+  assert.equal(throttled.body.error.code, 'otp_too_frequent', 'Formatting must not bypass OTP throttling');
+
+  const reset = await api('POST', '/auth/forgot/start', { contactType: 'phone', contact: '(202) 555-0123' });
+  assert.equal(reset.status, 200);
+  assert.ok(reset.body.resetId);
+  const accounts = await api('POST', '/auth/forgot/verify', { resetId: reset.body.resetId, code: reset.body.devCode });
+  assert.equal(accounts.status, 200);
+  assert.deepEqual(accounts.body.accounts.map(a => a.username), ['usphone01']);
+  const changed = await api('POST', '/auth/forgot/reset', { resetToken: accounts.body.resetToken, username: 'usphone01', newPassword: 'newpass123' });
+  assert.equal(changed.status, 200);
+  assert.equal((await api('POST', '/auth/login', { username: 'usphone01', password: 'newpass123' })).status, 200);
+});

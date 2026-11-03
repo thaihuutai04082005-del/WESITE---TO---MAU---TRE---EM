@@ -20,7 +20,9 @@ const TEXT = {
 };
 
 export async function sendCode({ type, target, code, purpose }) {
-  const text = TEXT[purpose](code);
+  const text = type === 'phone' && target.startsWith('+1')
+    ? `Your TinyTints ${purpose === 'reset' ? 'password reset' : 'verification'} code is ${code}. It expires in 10 minutes.`
+    : TEXT[purpose](code);
   if (type === 'email' && mailer()) {
     await mailer().sendMail({
       from: env.smtp.from,

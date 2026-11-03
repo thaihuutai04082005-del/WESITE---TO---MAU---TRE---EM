@@ -6,6 +6,8 @@ import { api } from '../../services/api';
 import { errorText } from '../../lib/format';
 import AuthCard from './AuthCard';
 import Icon from '../../components/Icon';
+import PhoneInput from '../../components/PhoneInput';
+import { internationalPhone } from '../../../../shared/phone.mjs';
 
 export function Captcha({ value, onChange, onId, refreshKey }) {
   const { t, i18n } = useTranslation();
@@ -34,10 +36,11 @@ export function Captcha({ value, onChange, onId, refreshKey }) {
 }
 
 export default function Register() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [step, setStep] = useState('form');
   const [form, setForm] = useState({ username: '', password: '', confirm: '', contactType: 'phone', contact: '' });
+  const [phoneCountry, setPhoneCountry] = useState('VN');
   const [captchaText, setCaptchaText] = useState('');
   const [captchaId, setCaptchaId] = useState('');
   const [capKey, setCapKey] = useState(0);
@@ -53,7 +56,7 @@ export default function Register() {
     if (form.password !== form.confirm) return setErr(t('auth.passwordMismatch'));
     setBusy(true);
     try {
-      const r = await api.post('/auth/register/start', { ...form, captchaId, captchaText, language: i18n.language });
+      const r = await api.post('/auth/register/start', { ...form, contact: form.contactType === 'phone' ? internationalPhone(form.contact, phoneCountry) : form.contact, captchaId, captchaText, language: i18n.language });
       setReg(r);
       setStep('otp');
     } catch (e2) {
@@ -131,7 +134,11 @@ export default function Register() {
               </label>
             ))}
           </div>
-          <input className="input" type={form.contactType === 'email' ? 'email' : 'tel'} value={form.contact} onChange={set('contact')} required placeholder={form.contactType === 'email' ? 'phuhuynh@gmail.com' : '0912 345 678'} aria-label={t(`auth.contact.${form.contactType}`)} />
+          {form.contactType === 'phone' ? (
+            <PhoneInput value={form.contact} onChange={(contact) => setForm((prev) => ({ ...prev, contact }))} country={phoneCountry} onCountryChange={setPhoneCountry} />
+          ) : (
+            <input className="input" type="email" value={form.contact} onChange={set('contact')} required placeholder="parent@example.com" autoComplete="email" aria-label={t('auth.contact.email')} />
+          )}
         </fieldset>
         {err && <p className="font-bold text-danger" role="alert">{err}</p>}
         <button type="submit" className="btn-primary w-full" disabled={busy} data-testid="register-submit">
