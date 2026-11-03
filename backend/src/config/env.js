@@ -34,7 +34,7 @@ export const env = {
     secure: bool(process.env.SMTP_SECURE),
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
-    from: process.env.SMTP_FROM || 'Bé Tô Màu <no-reply@betomau.vn>',
+    from: process.env.SMTP_FROM || 'TinyTints <no-reply@example.com>',
   },
   sms: {
     // Nhà cung cấp SMS dạng HTTP (ví dụ eSMS.vn). Để trống = chế độ dev (log ra console).

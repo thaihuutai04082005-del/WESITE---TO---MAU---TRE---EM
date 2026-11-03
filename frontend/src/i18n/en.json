@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Color Buddies"
+    "name": "TinyTints"
   },
   "common": {
     "loading": "Loading…",
@@ -331,7 +331,7 @@
     }
   },
   "share": {
-    "brand": "Color Buddies",
+    "brand": "TinyTints",
     "title": "Share your art",
     "hint": "A picture with its frame, your signature, and your achievements — share it with your family!",
     "download": "Download",

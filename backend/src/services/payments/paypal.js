@@ -51,13 +51,13 @@ export async function planId(plan) {
   const productKey = `paypal:${env.paypal.base}:product`;
   let productId = setting(productKey);
   if (!productId) {
-    const prod = await call('POST', '/v1/catalogs/products', { name: 'Bé Tô Màu', type: 'SERVICE', category: 'SOFTWARE' });
+    const prod = await call('POST', '/v1/catalogs/products', { name: 'TinyTints', type: 'SERVICE', category: 'SOFTWARE' });
     productId = prod.id;
     saveSetting(productKey, productId);
   }
   const created = await call('POST', '/v1/billing/plans', {
     product_id: productId,
-    name: plan === 'month' ? 'Bé Tô Màu - VIP Tháng' : 'Bé Tô Màu - VIP Năm',
+    name: plan === 'month' ? 'TinyTints - VIP Monthly' : 'TinyTints - VIP Yearly',
     billing_cycles: [
       {
         frequency: { interval_unit: plan === 'month' ? 'MONTH' : 'YEAR', interval_count: 1 },
@@ -82,7 +82,7 @@ export async function createSubscription({ paymentId, plan, returnUrl, cancelUrl
       plan_id: await planId(plan),
       custom_id: paymentId,
       application_context: {
-        brand_name: 'Bé Tô Màu',
+        brand_name: 'TinyTints',
         user_action: 'SUBSCRIBE_NOW',
         shipping_preference: 'NO_SHIPPING',
         return_url: returnUrl,

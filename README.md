@@ -1,4 +1,4 @@
-# Bé Tô Màu — Web tô màu cho trẻ em
+# TinyTints — Web tô màu cho trẻ em
 
 Nền tảng tô màu trực tuyến cho trẻ em, kết hợp **sáng tạo, giáo dục và giải trí**:
 - Thư viện tranh 3 tầng, có hình minh hoạ thật ở mọi tầng.
