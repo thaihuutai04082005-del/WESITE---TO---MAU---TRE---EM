@@ -167,7 +167,7 @@
     "premiumStyles": "\"Wow\" signature styles",
     "premiumHint": "These 5 styles unlock with the VIP plan.",
     "styles": {
-      "classic": "Soft",
+      "classic": "Soft strokes",
       "round": "Round",
       "pen": "Pen",
       "neat": "Neat",
@@ -242,7 +242,7 @@
     "lockedHint": "Reactions are closed for this week.",
     "changeHint": "Tap another to change, tap again to remove.",
     "reactHint": "Pick one reaction to cheer your friend!",
-    "report": "Tell Bear",
+    "report": "Report to Bear",
     "reportConfirm": "Does this picture seem inappropriate? Bear will take a look. Your name will stay private.",
     "reported": "Thank you! Bear will take a look at this picture.",
     "rules": {
@@ -382,7 +382,7 @@
   "coloring": {
     "toolsTitle": "Coloring tools",
     "paintFirst": "Color a bit first, then tap Finish!",
-    "reference": "Reference",
+    "reference": "Sample",
     "numberedColors": "Numbered colors",
     "customColor": "Pick any color",
     "favorite": "Save as favorite",
@@ -415,7 +415,7 @@
     "redo": "Redo",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
-    "zoomReset": "Fit",
+    "zoomReset": "Fit to screen",
     "clear": "Clear",
     "size": "Size",
     "pickSticker": "Pick a sticker, then tap the picture",
@@ -605,7 +605,7 @@
     "title": "You're out of pictures for today!",
     "freeUsed": "The Standard plan includes 2 pictures a day. Come back tomorrow, or ask a parent to upgrade to VIP for unlimited coloring.",
     "cta": "See plans",
-    "later": "Later"
+    "later": "Maybe later"
   },
   "missions": {
     "title": "Missions",
@@ -729,7 +729,7 @@
       "B": "Uncommon",
       "C": "Common"
     },
-    "deck": "Card deck",
+    "deck": "Card album",
     "notOwned": "Not collected",
     "lockedHint": "Draw this card to unlock it for coloring!",
     "allThemes": "All themes",
@@ -747,7 +747,7 @@
     "limited": "Limited",
     "owned": "Owned",
     "equip": "Equip",
-    "unequip": "Remove",
+    "unequip": "Unequip",
     "buy": "Buy",
     "bought": "Bought {{name}}!",
     "confirmTitle": "Buy this item?",
