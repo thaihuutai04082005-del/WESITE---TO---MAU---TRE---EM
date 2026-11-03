@@ -24,6 +24,7 @@ export async function request(method, path, body, { raw = false } = {}) {
   try {
     res = await fetch(`${BASE}${path}`, {
       method,
+      cache: 'no-store',
       headers: {
         ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),

@@ -6,6 +6,8 @@ import PictureView from './PictureView/PictureView';
 import { createArtwork } from '../lib/actions';
 import { errorText } from '../lib/format';
 import { useUi } from '../store/ui';
+import { useAuth } from '../store/auth';
+import { assertPictureThemeAllowed } from '../lib/themeAccess';
 
 const WORD_COLORS = ['#2F9BF5', '#FFB01A', '#F0504F', '#33C45A'];
 
@@ -63,6 +65,8 @@ export default function ModePicker({ picture, onClose }) {
   const go = async (mode) => {
     setBusy(true);
     try {
+      const state = useAuth.getState();
+      await assertPictureThemeAllowed(picture, state.plan, state.meta?.plans?.free?.themesPerAge);
       const id = await createArtwork(picture.id, mode);
       navigate(`/draw/${id}`);
     } catch (e) {

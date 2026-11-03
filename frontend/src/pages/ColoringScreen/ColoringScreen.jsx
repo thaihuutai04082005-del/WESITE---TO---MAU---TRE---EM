@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { useAuth } from '../../store/auth';
+import { assertPictureThemeAllowed } from '../../lib/themeAccess';
 import { useUi } from '../../store/ui';
 import { useArtworkEditor } from '../../hooks/useArtworkEditor';
 import { renderThumbnail } from '../../lib/exportImage';
@@ -23,6 +24,7 @@ export default function ColoringScreen() {
   const navigate = useNavigate();
   const user = useAuth((s) => s.user);
   const plan = useAuth((s) => s.plan);
+  const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
   const setPlan = useAuth((s) => s.setPlan);
   const toast = useUi((s) => s.toast);
   const openUpgrade = useUi((s) => s.openUpgrade);
@@ -45,13 +47,15 @@ export default function ColoringScreen() {
     let alive = true;
     api
       .get(`/artworks/${id}`)
-      .then((r) => {
+      .then(async (r) => {
         if (!alive) return;
         if (r.accessError) {
           if (r.accessError === 'theme_vip_required') openUpgrade(true, 'theme');
           else toast(t(`errors.${r.accessError}`), 'error');
           return navigate('/history', { replace: true });
         }
+        await assertPictureThemeAllowed(r.picture, useAuth.getState().plan, useAuth.getState().meta?.plans?.free?.themesPerAge);
+        if (!alive) return;
         setArtwork(r.artwork);
         setPicture(r.picture);
         started.current = r.artwork.counted || !['template', 'free'].includes(r.artwork.mode);
@@ -59,6 +63,11 @@ export default function ColoringScreen() {
         editor.reset(r.artwork.data);
       })
       .catch((e) => {
+        if (!alive) return;
+        if (e.code === 'theme_vip_required') {
+          openUpgrade(true, 'theme');
+          return navigate('/history', { replace: true });
+        }
         toast(errorText(t, e), 'error');
         navigate('/history');
       });
@@ -71,7 +80,7 @@ export default function ColoringScreen() {
   useEffect(() => {
     if (!picture) return;
     let alive = true;
-    api.get(`/pictures/${picture.id}?access=1`).catch((error) => {
+    assertPictureThemeAllowed(picture, plan, freeLimit).then(() => api.get(`/pictures/${picture.id}?access=1`)).catch((error) => {
       if (!alive || !['theme_vip_required', 'card_not_owned'].includes(error.code)) return;
       dirty.current = false;
       if (error.code === 'theme_vip_required') openUpgrade(true, 'theme');
@@ -80,7 +89,7 @@ export default function ColoringScreen() {
     });
     api.get('/users/me/signature').then((state) => alive && setSig(state)).catch(() => {});
     return () => { alive = false; };
-  }, [picture?.id, plan?.plan, plan?.endsAt]);
+  }, [picture?.id, plan?.plan, plan?.endsAt, freeLimit]);
 
   // Báo cho hiệu ứng chuyển màn hình: tranh đã tải xong, sẵn sàng hiện.
   useEffect(() => {

@@ -33,6 +33,10 @@ export function createApp() {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     if (/^\/(api|admin|socket\.io)(\/|$)/.test(req.path)) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    if (/^\/api(?:\/|$)/.test(req.path)) {
+      res.setHeader('Cache-Control', 'private, no-store');
+      res.vary('Authorization');
+    }
     next();
   });
 

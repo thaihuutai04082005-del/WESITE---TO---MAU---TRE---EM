@@ -1251,3 +1251,16 @@ test('Free and expired VIP obey storybook, signature and exhibition benefits whi
   assert.equal((await api('POST',`/shop/${item.slug}/buy`,null,user.token)).status,200,'Ruby shop purchases are a Free benefit too');
   assert.ok((await api('GET','/shop',null,user.token)).body.items.find(i=>i.slug===item.slug).owned);
 });
+
+test('Theme entitlement metadata is never cached and the lightweight access query preserves lock decisions', async () => {
+  const full = await api('GET', '/themes');
+  const light = await api('GET', '/themes?access=1');
+  assert.equal(light.status, 200);
+  assert.deepEqual(light.body.themes.map(t=>[t.id,t.locked]), full.body.themes.map(t=>[t.id,t.locked]));
+  assert.ok(light.body.themes.every(t=>t.cover === null));
+  assert.ok(full.body.themes.some(t=>t.cover));
+  for (const response of [full,light]) {
+    assert.match(response.headers.get('cache-control'), /private, no-store/);
+    assert.match(response.headers.get('vary'), /Authorization/);
+  }
+});

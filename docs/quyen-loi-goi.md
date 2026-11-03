@@ -35,6 +35,19 @@ triển lãm, tặng/đổi và chữ ký về Free. Tranh và truyện được
 Giao diện đồng bộ gói khi quay lại tab, khi tới hạn gói và định kỳ trong lúc dùng.
 Sau thanh toán, trạng thái gói và huy hiệu tài khoản được cập nhật cùng nhau.
 
+Frontend và backend dùng chung cách chọn 5 chủ đề theo nhóm tuổi. Khi API cũ
+chưa trả `locked`, giao diện vẫn tính giới hạn từ gói đang dùng; thiếu thông tin
+không được hiểu là mở tất cả. URL trực tiếp, hộp chọn tranh và màn sửa tranh cũng
+kiểm tra trước khi cho sử dụng. Các phản hồi API không lưu cache để tránh dùng
+lại dữ liệu quyền của tài khoản/gói trước.
+
+Cloudflare Pages chỉ triển khai frontend. Backend Render phải triển khai cùng
+nhánh `main` để áp dụng kiểm tra quyền ở máy chủ; khóa giao diện không thay thế
+việc này. Nếu Render chưa tự triển khai, vào dịch vụ `tinytints-api`, chọn
+**Manual Deploy → Deploy latest commit**. Với API mới, `/api/themes` khi chưa đăng
+nhập có `locked: true` từ chủ đề thứ 6 ở các nhóm có hơn 5 chủ đề;
+`/api/themes?access=1` trả metadata quyền, không kèm SVG bìa.
+
 Kiểm tra:
 
 ```bash

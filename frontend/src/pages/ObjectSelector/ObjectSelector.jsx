@@ -9,12 +9,14 @@ import { takePrefetchedTheme } from '../../lib/prefetch';
 import { pageReady } from '../../lib/transitionBus';
 import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
+import { assertThemeAllowed } from '../../lib/themeAccess';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
+  const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
   const openUpgrade = useUi((s) => s.openUpgrade);
   const [data, setData] = useState(() => takePrefetchedTheme(theme)); // có sẵn nếu vừa được làm sẵn lúc chạy hiệu ứng
   const [picked, setPicked] = useState(null);
@@ -22,13 +24,13 @@ export default function ObjectSelector() {
     let alive = true;
     setData(null);
     setPicked(null);
-    api.get(`/themes/${theme}/pictures`).then((r) => alive && setData(r)).catch((error) => {
+    assertThemeAllowed(theme, plan, freeLimit).then(() => api.get(`/themes/${theme}/pictures`)).then((r) => alive && setData(r)).catch((error) => {
       if (!alive) return;
       if (error.code === 'theme_vip_required') openUpgrade(true, 'theme');
       navigate('/color', { replace: true });
     });
     return () => { alive = false; };
-  }, [theme, plan?.plan, plan?.endsAt]);
+  }, [theme, plan?.plan, plan?.endsAt, freeLimit]);
   useEffect(() => {
     if (data) requestAnimationFrame(pageReady);
   }, [data]);

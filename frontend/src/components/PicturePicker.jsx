@@ -6,11 +6,16 @@ import Modal from './Modal/Modal';
 import ThemeCard from './ThemeCard/ThemeCard';
 import Icon from './Icon';
 import { useUi } from '../store/ui';
+import { useAuth } from '../store/auth';
+import { resolveThemeAccess } from '../../../shared/themeAccess.mjs';
+import { assertThemeAllowed } from '../lib/themeAccess';
 
 export default function PicturePicker({ onPick, onClose }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const openUpgrade = useUi((s) => s.openUpgrade);
+  const plan = useAuth((s) => s.plan);
+  const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
   const [theme, setTheme] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -18,15 +23,15 @@ export default function PicturePicker({ onPick, onClose }) {
     let active = true;
     setItems([]);
     const request = !theme
-      ? api.get('/themes').then((r) => r.themes.map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover, locked: x.locked })))
-      : api.get(`/themes/${theme}/pictures`).then((r) => r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x })));
+      ? api.get('/themes').then((r) => resolveThemeAccess(r.themes, plan, freeLimit).map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover, locked: x.locked })))
+      : assertThemeAllowed(theme, plan, freeLimit).then(() => api.get(`/themes/${theme}/pictures`)).then((r) => r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x })));
     request.then((items) => active && setItems(items)).catch((error) => {
       if (!active) return;
       if (error.code === 'theme_vip_required') { onClose?.(); openUpgrade(true, 'theme'); }
       else setTheme(null);
     });
     return () => { active = false; };
-  }, [theme, lang]);
+  }, [theme, lang, plan?.plan, plan?.endsAt, freeLimit]);
 
   const pick = (it) => {
     if (it.locked) { onClose?.(); openUpgrade(true, 'theme'); return; }

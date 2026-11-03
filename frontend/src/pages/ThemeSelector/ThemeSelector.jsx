@@ -7,6 +7,7 @@ import { pageReady } from '../../lib/transitionBus';
 import { usePicture } from '../../hooks/usePicture';
 import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
+import { resolveThemeAccess } from '../../../../shared/themeAccess.mjs';
 import ModePicker from '../../components/ModePicker';
 import Icon from '../../components/Icon';
 import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
@@ -75,6 +76,7 @@ function CardsBoard() {
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
+  const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
   const openUpgrade = useUi((s) => s.openUpgrade);
   const [params] = useSearchParams();
   const [themes, setThemes] = useState(null);
@@ -95,7 +97,7 @@ export default function ThemeSelector() {
       /* không lưu được thì thôi */
     }
   };
-  const list = (themes || []).filter((th) => (th.age || '6-8') === age);
+  const list = resolveThemeAccess(themes || [], plan, freeLimit).filter((th) => (th.age || '6-8') === age);
   const gridRef = useRef(null);
   useFitRows(gridRef, [themes, age]);
   return (

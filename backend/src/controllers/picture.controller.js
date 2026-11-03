@@ -15,7 +15,7 @@ export async function themes(req, res) {
     locked: !access.vip && !access.allowedIds.has(t.id),
     objectCount: t.object_count,
     pictureCount: t.picture_count,
-    cover: t.cover_id ? Picture.toClient(await Picture.findPicture(t.cover_id)) : null,
+    cover: req.query.access !== '1' && t.cover_id ? Picture.toClient(await Picture.findPicture(t.cover_id)) : null,
   }));
   res.json({ themes: list });
 }

@@ -1312,7 +1312,7 @@ a.sb-slot:hover { transform: translateY(-1.4cqw) rotate(-0.6deg); z-index: 5; }
 .sh-tab:hover { filter: brightness(1.03); }
 .sh-tab-icon { font-size: max(18px, 2cqw); line-height: 1; display: flex; align-items: center; justify-content: center; min-width: 0; }
 .sh-tab-icon svg { width: 100%; height: auto; color: #B35B25; }
-.sh-tab-label { min-width: 0; white-space: normal; overflow-wrap: anywhere; line-height: 1.2; }
+.sh-tab-label { min-width: 0; white-space: nowrap; overflow-wrap: normal; line-height: 1.2; }
 .sh-tab-img { width: max(22px, 2.6cqw); height: max(22px, 2.6cqw); object-fit: contain; }
 .sh-tab-on { background: linear-gradient(#FFE79A, #FFD04F); box-shadow: inset 0 0.3cqw 0 rgba(255, 255, 255, 0.8), 0 0.25cqw 0 #E0A21A; }
 .sh-card { position: absolute; z-index: 4; border: 0.3cqw solid #F9D3D6; border-radius: 1.7cqw; background: #FFFFFF; box-shadow: 0 0.7cqw 1.2cqw rgba(120, 50, 40, 0.22), inset 0 0 0 0.2cqw #FFF1F1; }

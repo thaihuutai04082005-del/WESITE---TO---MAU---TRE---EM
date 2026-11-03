@@ -3,6 +3,7 @@ import { getDb, tx } from '../config/db.js';
 import { PLANS } from '../config/constants.js';
 import { vnDayStart, addDays } from '../utils/time.js';
 import { HttpError, forbidden } from '../utils/http.js';
+import { freeThemeIds } from '../../../shared/themeAccess.mjs';
 
 export async function activeSubscription(userId, at = new Date()) {
   const iso = at.toISOString();
@@ -23,14 +24,7 @@ export const isVip = async (userId) => !!(await activeSubscription(userId));
 export async function themeAccess(userId, at = new Date()) {
   if (userId && await activeSubscription(userId, at)) return { vip: true, allowedIds: null };
   const rows = await getDb().prepare('SELECT id, age_group FROM themes WHERE active = 1 ORDER BY sort, id').all();
-  const counts = new Map();
-  const allowedIds = new Set();
-  for (const row of rows) {
-    const used = counts.get(row.age_group) || 0;
-    if (used < PLANS.free.themesPerAge) allowedIds.add(row.id);
-    counts.set(row.age_group, used + 1);
-  }
-  return { vip: false, allowedIds };
+  return { vip: false, allowedIds: freeThemeIds(rows, PLANS.free.themesPerAge) };
 }
 
 export async function canAccessTheme(userId, themeId) {

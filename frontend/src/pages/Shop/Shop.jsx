@@ -12,6 +12,7 @@ import Modal from '../../components/Modal/Modal';
 import Avatar from '../../components/Avatar/Avatar';
 import Icon from '../../components/Icon';
 import useWide from '../../hooks/useWide';
+import useSingleLineLabels from '../../hooks/useSingleLineLabels';
 import { ShopArt, Bag, RubyGem, SHOP_W, SHOP_H } from '../../components/ShopScene';
 
 // Khung gỗ là khung mặc định miễn phí: không bày bán trong Shop.
@@ -98,6 +99,8 @@ export default function Shop() {
   const wide = useWide();
   const [tab, setTab] = useState('pattern');
   const [page, setPage] = useState(0);
+  const tabsRef = useRef(null);
+  useSingleLineLabels(tabsRef, [wide, !!shop, i18n.language]);
   const load = () => api.get('/shop').then(setShop);
   useEffect(() => {
     load();
@@ -172,11 +175,11 @@ export default function Shop() {
             <Bag /> <b>{t('shop.title')}</b>
           </div>
 
-          <div className="sh-tabs" style={box([8, 340, 262, 300])} role="tablist">
+          <div ref={tabsRef} className="sh-tabs" style={box([8, 340, 302, 300])} role="tablist">
             {tabs.map(([k, icon, label]) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} className={`sh-tab${tab === k ? ' sh-tab-on' : ''}`} onClick={() => { setTab(k); setPage(0); }} data-testid={`shop-tab-${k}`}>
                 <span className="sh-tab-icon" aria-hidden="true">{icon}</span>
-                <span className="sh-tab-label">{label}</span>
+                <span className="sh-tab-label" data-fit-label>{label}</span>
               </button>
             ))}
           </div>
