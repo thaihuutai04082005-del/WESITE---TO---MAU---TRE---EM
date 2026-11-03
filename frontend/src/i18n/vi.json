@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Sắc Màu Của Bé"
+    "name": "Bé Tô Màu"
   },
   "common": {
     "loading": "Đang tải…",
@@ -332,7 +332,7 @@
     }
   },
   "share": {
-    "brand": "Sắc Màu Của Bé",
+    "brand": "Bé Tô Màu",
     "title": "Khoe tranh",
     "hint": "Ảnh có khung, chữ ký và thành tích của bé — gửi ông bà, bố mẹ xem nhé!",
     "download": "Tải ảnh",

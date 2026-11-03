@@ -95,7 +95,7 @@ export default function Layout() {
         <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-2 px-4">
           <Link to="/" className="mr-2 flex shrink-0 items-center gap-2 font-display text-2xl font-extrabold text-primary">
             <img src="/favicon.svg" alt="" className="h-9 w-9" />
-            <span className="hidden whitespace-nowrap sm:inline lg:hidden min-[1100px]:inline">{t('app.name')}</span>
+            <span className="hidden whitespace-nowrap sm:inline">{t('app.name')}</span>
           </Link>
           {user && (
             <nav className="mx-2 hidden min-w-0 flex-1 items-center justify-evenly gap-1 lg:flex">
