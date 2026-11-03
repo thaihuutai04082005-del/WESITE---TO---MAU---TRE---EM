@@ -10,6 +10,9 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { io as ioc } from 'socket.io-client';
 
+const { env: testEnv } = await import('../src/config/env.js');
+// Test runs must never send real SMS or email, even when credentials are present.
+Object.assign(testEnv, { brevo: {}, twilio: {}, smtp: {}, sms: {} });
 const { createApp } = await import('../src/app.js');
 const { seedAll, seedPicturesIfNeeded } = await import('../../database/seeds/seed.js');
 const { initRealtime } = await import('../src/services/realtime.js');

@@ -72,6 +72,8 @@ thật. Cấu hình hiện tại cho phép origin production, không tự cho m�
 
 ## 3. Chức năng nào sẵn sàng?
 
+Để bật gửi OTP thật, xem [cấu hình Brevo và Twilio](bat-otp-that.md).
+
 - Backend khởi động, tự tạo schema và nạp tranh; CAPTCHA không cần khóa dịch vụ.
 - Socket.io chạy trên cùng cổng với HTTP; frontend dùng `VITE_SOCKET_URL` ở trên.
 - OTP qua SMS/email cần tài khoản nhà cung cấp và khóa hợp lệ. Chưa cấu hình thì

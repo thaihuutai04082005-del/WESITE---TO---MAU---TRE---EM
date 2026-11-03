@@ -10,6 +10,10 @@ import { getDb } from '../src/config/db.js';
 import { createApp } from '../src/app.js';
 import { issueOtp } from '../src/services/otp.js';
 
+// Never use externally configured messaging accounts in test runs.
+env.brevo = {};
+env.twilio = {};
+
 const configModule = new URL('../src/config/env.js', import.meta.url).href;
 function productionConfig(overrides = {}) {
   return JSON.parse(execFileSync(process.execPath, ['--input-type=module', '-e', `

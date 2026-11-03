@@ -46,12 +46,13 @@ export async function issueOtp({ purpose, type, target, payload = {} }) {
     new Date(Date.now() + TTL_MS).toISOString(),
   );
   try {
-    const { delivered } = await sendCode({ type, target, code, purpose });
+    const { delivered } = await sendCode({ type, target, code, purpose, language: payload.language });
     if (!delivered && (env.isProd || !env.exposeDevOtp)) throw new HttpError(503, 'otp_delivery_unavailable');
     return { otpId: id, ...(!delivered && !env.isProd && env.exposeDevOtp ? { devCode: code } : {}) };
   } catch (err) {
     // A code that was never sent must not block the next attempt for 45 seconds.
     db.prepare('DELETE FROM otp_codes WHERE id = ?').run(id);
+    console.error('[otp delivery]', { provider: err.provider || type, status: err.providerStatus || (err instanceof HttpError ? 'not_configured' : 'transport_error') });
     if (err instanceof HttpError) throw err;
     throw new HttpError(503, 'otp_delivery_unavailable');
   }

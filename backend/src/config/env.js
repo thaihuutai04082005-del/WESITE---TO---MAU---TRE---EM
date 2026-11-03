@@ -43,6 +43,18 @@ export const env = {
     secretKey: process.env.SMS_SECRET_KEY,
     brandname: process.env.SMS_BRANDNAME,
   },
+  // HTTPS email/SMS providers work on hosts that restrict SMTP ports.
+  brevo: {
+    apiKey: process.env.BREVO_API_KEY || '',
+    senderEmail: process.env.BREVO_SENDER_EMAIL || '',
+    senderName: process.env.BREVO_SENDER_NAME || 'TinyTints',
+  },
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID || '',
+    authToken: process.env.TWILIO_AUTH_TOKEN || '',
+    messagingServiceSid: process.env.TWILIO_MESSAGING_SERVICE_SID || '',
+    from: process.env.TWILIO_PHONE_NUMBER || '',
+  },
   googleClientId: process.env.GOOGLE_CLIENT_ID || '',
   paypal: {
     clientId: process.env.PAYPAL_CLIENT_ID || '',

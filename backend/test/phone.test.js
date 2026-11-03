@@ -2,6 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { compactPhone, detectPhoneCountry, internationalPhone, nationalPhone, normalizePhone } from '../../shared/phone.mjs';
 import { normalizeContact } from '../src/services/otp.js';
+import { env as testEnv } from '../src/config/env.js';
+testEnv.twilio = {};
+testEnv.brevo = {};
 
 test('Vietnam numbers keep the legacy account lookup format', () => {
   for (const value of ['0912 345 678', '+84 912-345-678', '84912345678', '0084 912 345 678']) {
@@ -49,7 +52,7 @@ test('SMS gateway receives a full +1 number and an English verification message'
   globalThis.fetch = async (url, options) => {
     assert.equal(url, 'https://sms.example.test/send');
     requests.push(JSON.parse(options.body));
-    return { ok: true };
+    return Response.json({ CodeResult: '100', SMSID: 'test-esms-id' });
   };
   try {
     assert.deepEqual(await sendCode({ type: 'phone', target: '+12025550123', code: '123456', purpose: 'register' }), { delivered: true });
