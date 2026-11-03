@@ -15,3 +15,15 @@ export async function assertPictureThemeAllowed(picture, plan, limit) {
   if (!picture.theme?.slug) throw new ApiError(502, 'backend_unavailable');
   await assertThemeAllowed(picture.theme.slug, plan, limit);
 }
+
+/** Current APIs enforce access before returning previews; old APIs still need the guard first. */
+export async function loadThemePictures(slug, plan, limit, { prefetched = null, previewApi = false } = {}) {
+  const allowed = assertThemeAllowed(slug, plan, limit);
+  const load = () => prefetched || api.get(`/themes/${slug}/pictures?preview=1`);
+  if (previewApi) {
+    const [, data] = await Promise.all([allowed, load()]);
+    return data;
+  }
+  await allowed;
+  return load();
+}

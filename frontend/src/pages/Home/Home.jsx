@@ -32,7 +32,7 @@ function Landing() {
   useEffect(() => {
     let active = true;
     setLoadError(false);
-    api.get('/themes').then((r) => {
+    api.get('/themes?preview=1').then((r) => {
       if (!Array.isArray(r.themes)) throw new Error('Invalid themes response');
       if (active) setThemes(r.themes);
     }).catch(() => {

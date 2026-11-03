@@ -8,7 +8,7 @@ import Icon from './Icon';
 import { useUi } from '../store/ui';
 import { useAuth } from '../store/auth';
 import { resolveThemeAccess } from '../../../shared/themeAccess.mjs';
-import { assertThemeAllowed } from '../lib/themeAccess';
+import { loadThemePictures } from '../lib/themeAccess';
 
 export default function PicturePicker({ onPick, onClose }) {
   const { t, i18n } = useTranslation();
@@ -16,6 +16,7 @@ export default function PicturePicker({ onPick, onClose }) {
   const openUpgrade = useUi((s) => s.openUpgrade);
   const plan = useAuth((s) => s.plan);
   const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
+  const previewApi = useAuth((s) => s.meta?.picturePreviews === true);
   const [theme, setTheme] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -23,15 +24,16 @@ export default function PicturePicker({ onPick, onClose }) {
     let active = true;
     setItems([]);
     const request = !theme
-      ? api.get('/themes').then((r) => resolveThemeAccess(r.themes, plan, freeLimit).map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover, locked: x.locked })))
-      : assertThemeAllowed(theme, plan, freeLimit).then(() => api.get(`/themes/${theme}/pictures`)).then((r) => r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x })));
+      ? api.get('/themes?preview=1').then((r) => resolveThemeAccess(r.themes, plan, freeLimit).map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover, locked: x.locked })))
+      : loadThemePictures(theme, plan, freeLimit, { previewApi })
+        .then((r) => r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x })));
     request.then((items) => active && setItems(items)).catch((error) => {
       if (!active) return;
       if (error.code === 'theme_vip_required') { onClose?.(); openUpgrade(true, 'theme'); }
       else setTheme(null);
     });
     return () => { active = false; };
-  }, [theme, lang, plan?.plan, plan?.endsAt, freeLimit]);
+  }, [theme, lang, plan?.plan, plan?.endsAt, freeLimit, previewApi]);
 
   const pick = (it) => {
     if (it.locked) { onClose?.(); openUpgrade(true, 'theme'); return; }

@@ -59,7 +59,8 @@ try {
   await writeFile(resolve(dist, '_redirects'), [...legacyUrls, ...animationRedirects, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
   const appHeaders = [...APP_ROUTES, APP_SHELL_PATH].map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, follow`);
   const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
-  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders].join('\n\n') + '\n');
+  const previewHeaders = '/picture-previews/*\n  Cache-Control: public, max-age=31536000, immutable';
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });

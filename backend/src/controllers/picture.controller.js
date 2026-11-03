@@ -1,4 +1,3 @@
-import { asyncMap } from '../utils/asyncArray.js';
 // Mục 2: nội dung 3 tầng — mỗi tầng trả kèm tranh minh hoạ thật (SVG + màu gợi ý) để bé dễ chọn.
 import { getDb } from '../config/db.js';
 import * as Picture from '../models/picture.js';
@@ -7,7 +6,10 @@ import { themeAccess, canAccessTheme, assertThemeAccess } from '../services/quot
 
 export async function themes(req, res) {
   const access = await themeAccess(req.user?.id);
-  const list = await asyncMap(await Picture.listThemes(), async (t) => ({
+  const rows = await Picture.listThemes();
+  const covers = req.query.access === '1' ? new Map() : await Picture.findPictures(rows.map((theme) => theme.cover_id));
+  const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
+  const list = rows.map((t) => ({
     id: t.id,
     slug: t.slug,
     name: { vi: t.name_vi, en: t.name_en },
@@ -15,7 +17,7 @@ export async function themes(req, res) {
     locked: !access.vip && !access.allowedIds.has(t.id),
     objectCount: t.object_count,
     pictureCount: t.picture_count,
-    cover: req.query.access !== '1' && t.cover_id ? Picture.toClient(await Picture.findPicture(t.cover_id)) : null,
+    cover: covers.has(t.cover_id) ? client(covers.get(t.cover_id)) : null,
   }));
   res.json({ themes: list });
 }
@@ -24,12 +26,15 @@ export async function objects(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
-  const list = await asyncMap(await Picture.listObjects(theme.id), async (o) => ({
+  const rows = await Picture.listObjects(theme.id);
+  const covers = await Picture.findPictures(rows.map((object) => object.cover_id));
+  const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
+  const list = rows.map((o) => ({
     id: o.id,
     slug: o.slug,
     name: { vi: o.name_vi, en: o.name_en },
     pictureCount: o.picture_count,
-    cover: o.cover_id ? Picture.toClient(await Picture.findPicture(o.cover_id)) : null,
+    cover: covers.has(o.cover_id) ? client(covers.get(o.cover_id)) : null,
   }));
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, objects: list });
 }
@@ -39,7 +44,10 @@ export async function pictures(req, res) {
   const obj = theme && (await Picture.findObject(theme.id, req.params.object));
   if (!obj) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
-  const list = await asyncMap(await Picture.listPictures(obj.id), async (p) => Picture.toClient(await Picture.findPicture(p.id)));
+  const rows = await Picture.listPictures(obj.id);
+  const pictures = await Picture.findPictures(rows.map((p) => p.id));
+  const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
+  const list = rows.map((p) => client(pictures.get(p.id)));
   res.json({
     theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } },
     object: { slug: obj.slug, name: { vi: obj.name_vi, en: obj.name_en } },
@@ -52,7 +60,10 @@ export async function themePictures(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
-  const list = await asyncMap(await Picture.listThemePictures(theme.id), async (p) => Picture.toClient(await Picture.findPicture(p.id)));
+  const rows = await Picture.listThemePictures(theme.id);
+  const pictures = await Picture.findPictures(rows.map((p) => p.id));
+  const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
+  const list = rows.map((p) => client(pictures.get(p.id)));
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
 }
 

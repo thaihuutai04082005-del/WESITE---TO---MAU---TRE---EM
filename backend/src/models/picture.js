@@ -1,5 +1,6 @@
 // Truy vấn nội dung tranh theo 3 tầng: Chủ đề → Đối tượng → Biến thể.
 import { getDb, parseJson } from '../config/db.js';
+import { picturePreviewPaths } from '../../../shared/picturePreview.mjs';
 
 const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`${base}_vi`]);
 
@@ -61,6 +62,19 @@ export async function findPicture(id) {
     .get(id);
 }
 
+/** One database trip for a whole selection grid, including each picture's theme metadata. */
+export async function findPictures(ids) {
+  const unique = [...new Set(ids.filter((id) => id != null))];
+  if (!unique.length) return new Map();
+  const rows = await getDb().prepare(
+    `SELECT p.*, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
+            t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
+     FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
+     WHERE p.id IN (${unique.map(() => '?').join(',')})`,
+  ).all(...unique);
+  return new Map(rows.map((row) => [row.id, row]));
+}
+
 export const findPictureBySlug = async (slug) => await getDb().prepare('SELECT id FROM pictures WHERE slug = ?').get(slug);
 
 export function manifestOf(picture) {
@@ -69,7 +83,7 @@ export function manifestOf(picture) {
 
 /** Bản gọn gửi cho client: SVG + bảng màu + nhãn số, không kèm đa giác (chỉ server cần). */
 export function toClient(p, withSvg = true) {
-  const m = manifestOf(p);
+  const m = withSvg ? manifestOf(p) : null;
   return {
     id: p.id,
     slug: p.slug,
@@ -88,6 +102,11 @@ export function toClient(p, withSvg = true) {
         }
       : {}),
   };
+}
+
+/** Lists need names and small static images; SVG/regions are fetched only for the editor. */
+export function toPreview(p) {
+  return { ...toClient(p, false), preview: picturePreviewPaths(p, manifestOf(p).regions) };
 }
 
 export async function cardPool() {

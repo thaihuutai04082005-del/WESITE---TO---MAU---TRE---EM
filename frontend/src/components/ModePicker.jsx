@@ -103,7 +103,7 @@ export default function ModePicker({ picture, onClose }) {
             </button>
                       </div>
           <div className="mode-card">
-            <div className="mode-pic"><PictureView picture={picture} data={{ fills: {}, strokes: [], stickers: [], glitter: [] }} /></div>
+            <div className="mode-pic"><PictureView picture={picture} outline /></div>
             <button type="button" disabled={busy} onClick={() => go('free')} className="mode-btn mode-btn-free" title={t('mode.free.text')} data-testid="mode-free">
               <CrayonIcon />
               <span>{t('mode.free.title')}</span>

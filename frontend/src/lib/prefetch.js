@@ -40,7 +40,7 @@ export function takePrefetchedTheme(slug) {
 export async function warmTheme(slug, budgetMs = 1600) {
   const t0 = performance.now();
   try {
-    const data = await api.get(`/themes/${slug}/pictures`);
+    const data = await api.get(`/themes/${slug}/pictures?preview=1`);
     themes.set(slug, data);
     for (const p of data.pictures || []) {
       if (performance.now() - t0 > budgetMs) break;

@@ -1266,6 +1266,54 @@ test('Theme entitlement metadata is never cached and the lightweight access quer
   }
 });
 
+test('Lightweight picture grids preserve order and permissions without downloading editor data', async () => {
+  const full = await api('GET', '/themes');
+  const previews = await api('GET', '/themes?preview=1');
+  assert.equal(previews.status, 200);
+  assert.deepEqual(previews.body.themes.map((t) => [t.id,t.locked,t.pictureCount]), full.body.themes.map((t) => [t.id,t.locked,t.pictureCount]));
+  assert.ok(JSON.stringify(previews.body).length < JSON.stringify(full.body).length / 50);
+  for (const { cover } of previews.body.themes) {
+    if (!cover) continue;
+    assert.equal(cover.svg, undefined);
+    assert.equal(cover.regions, undefined);
+    assert.equal(cover.palette, undefined);
+    assert.match(cover.preview.color, /^\/picture-previews\/.+-[a-f0-9]{16}\.webp$/);
+    assert.match(cover.preview.outline, /-outline\.webp$/);
+  }
+  const theme = previews.body.themes.find((t) => !t.locked);
+  const fullPictures = await api('GET', `/themes/${theme.slug}/pictures`);
+  const lightPictures = await api('GET', `/themes/${theme.slug}/pictures?preview=1`);
+  assert.equal(lightPictures.status, 200);
+  assert.deepEqual(lightPictures.body.pictures.map((p) => [p.id,p.name,p.theme]), fullPictures.body.pictures.map((p) => [p.id,p.name,p.theme]));
+  assert.ok(lightPictures.body.pictures.every((p) => p.preview && !p.svg && !p.regions));
+  assert.ok(JSON.stringify(lightPictures.body).length < JSON.stringify(fullPictures.body).length / 50);
+  for (const response of [previews,lightPictures]) assert.match(response.headers.get('cache-control'), /private, no-store/);
+  const locked = previews.body.themes.find((t) => t.locked);
+  assert.equal((await api('GET', `/themes/${locked.slug}/pictures?preview=1`)).body.error.code, 'theme_vip_required');
+  const vip = await register('previewvip1');
+  await getDb().prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'month',?,?)")
+    .run(vip.id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+  assert.equal((await api('GET', `/themes/${locked.slug}/pictures?preview=1`, null, vip.token)).status,200);
+  await getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now()-1000).toISOString(),vip.id);
+  assert.equal((await api('GET', `/themes/${locked.slug}/pictures?preview=1`, null, vip.token)).body.error.code,'theme_vip_required');
+});
+
+test('Selection grids use a bounded number of database requests regardless of the number of covers', async () => {
+  const db = getDb();
+  const prepare = db.prepare;
+  let queries = 0;
+  db.prepare = function (...args) { queries++; return prepare.apply(this, args); };
+  try {
+    const themes = await api('GET', '/themes?preview=1');
+    assert.equal(themes.status,200);
+    assert.ok(queries <= 3, `Theme grid needed ${queries} queries`);
+    queries = 0;
+    const pictures = await api('GET', `/themes/${themes.body.themes.find((t) => !t.locked).slug}/pictures?preview=1`);
+    assert.equal(pictures.status,200);
+    assert.ok(queries <= 4, `Picture grid needed ${queries} queries`);
+  } finally { db.prepare = prepare; }
+});
+
 test('Email-only signup and recovery reject SMS, require the email OTP and preserve legacy phone logins', async () => {
   const legacy = await register('phonelegacy1');
   const before = (await getDb().prepare('SELECT count(*) AS n FROM otp_codes').get()).n;

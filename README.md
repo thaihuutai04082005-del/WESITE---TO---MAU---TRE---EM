@@ -47,6 +47,13 @@ NODE_ENV=production JWT_SECRET=... PAYMENT_MOCK=false npm start
 
 Backend phục vụ luôn bản build frontend (SPA), API `/api`, Socket.io và trang quản trị `/admin`, tất cả trên một cổng.
 
+`npm run build` và `npm run dev` tự tạo ảnh xem trước WebP từ kho SVG bằng Sharp.
+Ảnh sinh ra trong `frontend/public/picture-previews/` không cần đưa vào Git;
+tên ảnh có mã nội dung để lưu cache mà vẫn cập nhật khi tranh hoặc màu mẫu đổi.
+Danh sách dùng `?preview=1`; dữ liệu SVG đầy đủ vẫn dùng cho màn tô. Sau khi đổi
+kho tranh, build lại frontend và cập nhật backend cùng phiên bản. Có thể kiểm tra
+toàn bộ ảnh sau build bằng `node frontend/scripts/check-picture-previews.mjs`.
+
 ### Các lệnh khác
 
 | Lệnh | Việc làm |

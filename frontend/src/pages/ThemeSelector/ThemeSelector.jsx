@@ -83,7 +83,7 @@ export default function ThemeSelector() {
   const [age, setAge] = useState(() => (AGE_GROUPS.includes(params.get('age')) ? params.get('age') : loadAge()));
   useEffect(() => {
     let alive = true;
-    api.get('/themes').then((r) => alive && setThemes(r.themes)).catch(() => alive && setThemes([]));
+    api.get('/themes?preview=1').then((r) => alive && setThemes(r.themes)).catch(() => alive && setThemes([]));
     return () => { alive = false; };
   }, [plan?.plan, plan?.endsAt]);
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { freeThemeIds, resolveThemeAccess } from '../../shared/themeAccess.mjs';
-import { assertThemeAllowed, assertPictureThemeAllowed } from '../src/lib/themeAccess.js';
+import { assertThemeAllowed, assertPictureThemeAllowed, loadThemePictures } from '../src/lib/themeAccess.js';
 import { configureApi } from '../src/services/api.js';
 
 const themes = ['3-5', '6-8', '9+'].flatMap((age) => Array.from({ length: age === '9+' ? 5 : 10 }, (_, index) => ({
@@ -52,4 +52,31 @@ test('Deep-link and editor guards enforce Free even when an old API reports ever
   await assert.rejects(assertThemeAllowed('missing', free), { code: 'picture_not_found' });
   globalThis.fetch = async () => Response.json({});
   await assert.rejects(assertThemeAllowed('3-5-0', free), { code: 'backend_unavailable' });
+});
+
+test('Preview APIs load access and pictures concurrently, while old APIs check permission first', async () => {
+  for (const previewApi of [true, false]) {
+    const calls = [];
+    let allow;
+    globalThis.fetch = (url) => {
+      calls.push(url);
+      return url.endsWith('/themes?access=1')
+        ? new Promise((resolve) => { allow = () => resolve(Response.json({ themes })); })
+        : Promise.resolve(Response.json({ pictures: [{ id: 1 }] }));
+    };
+    const loading = loadThemePictures('3-5-0', { plan: 'free', vip: false }, 5, { previewApi });
+    assert.equal(calls.length, previewApi ? 2 : 1);
+    allow();
+    assert.deepEqual(await loading, { pictures: [{ id: 1 }] });
+    assert.match(calls[1], /\/themes\/3-5-0\/pictures\?preview=1$/);
+  }
+});
+
+test('A warm preview still needs fresh access and cannot open a locked theme on a legacy API', async () => {
+  const calls = [];
+  globalThis.fetch = async (url) => { calls.push(url); return Response.json({ themes }); };
+  const options = { prefetched: { pictures: [{ id: 1 }] } };
+  await assert.rejects(loadThemePictures('3-5-8', { plan: 'free', vip: false }, 5, options), { code: 'theme_vip_required' });
+  assert.deepEqual(await loadThemePictures('3-5-0', { plan: 'free', vip: false }, 5, options), options.prefetched);
+  assert.ok(calls.every((url) => url.endsWith('/themes?access=1')));
 });

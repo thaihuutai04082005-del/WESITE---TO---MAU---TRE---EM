@@ -4,13 +4,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/build-picture-previews.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/build-picture-previews.mjs",
     "build": "vite build && node scripts/build-seo.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.1",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.1"
   },
