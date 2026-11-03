@@ -15,6 +15,12 @@ export const APP_ROUTES = [
   '/gacha', '/shop', '/friends', '/together', '/together/*', '/storybooks', '/storybooks/*', '/shared/*',
 ];
 
+// Pages redirects .html files to clean URLs, even when used as a 200 rewrite target.
+// An extensionless entry preserves the requested SPA route and query parameters.
+export const APP_SHELL_FILE = '__app-shell';
+export const APP_SHELL_PATH = `/${APP_SHELL_FILE}`;
+export const LEGACY_APP_PATHS = ['/app', '/app.html'];
+
 export function publicPage(pathname) {
   const path = pathname.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
   return PUBLIC_ROUTES.find((page) => page.path === path) || null;

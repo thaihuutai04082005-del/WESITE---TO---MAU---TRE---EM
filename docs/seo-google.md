@@ -34,6 +34,29 @@ Cloudflare Pages cần chạy `npm run build` (hoặc workspace frontend) và xu
 URL không tồn tại trả 404 thay vì bị hiểu nhầm là một bản sao trang chủ.
 Express cũng hỗ trợ cùng các URL khi phục vụ bản build.
 
+Trang HTML nội bộ của ứng dụng là file không có phần mở rộng `__app-shell`.
+Không đổi đích rewrite 200 thành một file `.html`: Cloudflare Pages sẽ tự đổi
+file đó sang clean URL, làm mất đường dẫn `/shop`, `/plans` hoặc kết quả thanh toán.
+`Content-Type: text/html` được đặt cho entry này và các route ứng dụng.
+Các địa chỉ `/app` và `/app.html` từ cấu hình cũ chuyển về trang chủ.
+
+Khi thay đổi `_redirects` hoặc `_headers`, kiểm tra bằng runtime Pages, ngoài
+Vite/Express. Dùng Wrangler đã cài, chạy từ thư mục gốc trong một terminal:
+
+```bash
+wrangler pages dev frontend/dist --ip 127.0.0.1 --port 8788
+```
+
+Sau đó chạy trong terminal khác:
+
+```bash
+node frontend/scripts/check-pages-routing.mjs
+```
+
+Các trang ứng dụng phải trả HTML trực tiếp với HTTP 200, không đổi URL sang
+entry nội bộ; query của kết quả thanh toán phải được giữ. Sáu trang công khai
+vẫn được lập chỉ mục, các route riêng tư vẫn `noindex` và URL không có phải trả 404.
+
 Khi chuyển sang tên miền khác, đặt `VITE_SITE_URL=https://ten-mien-chinh` ở bước
 build. Chỉ dùng một origin HTTPS chính, không thêm đường dẫn hoặc thông tin bí mật.
 Build lại và kiểm tra canonical/hreflang/sitemap đều dùng miền mới. Đổi tên miền

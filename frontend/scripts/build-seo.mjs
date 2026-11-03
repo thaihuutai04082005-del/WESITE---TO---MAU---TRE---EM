@@ -4,7 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
-import { PUBLIC_ROUTES, APP_ROUTES } from '../../shared/publicRoutes.mjs';
+import { PUBLIC_ROUTES, APP_ROUTES, APP_SHELL_FILE, APP_SHELL_PATH, LEGACY_APP_PATHS } from '../../shared/publicRoutes.mjs';
 import { absoluteUrl, escapeHtml, pageMetadata, metadataHtml, siteOrigin } from '../src/seo/site.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -35,7 +35,7 @@ try {
     await writeFile(resolve(dist, page.file), documentFor(pageMetadata(page.path, { origin }), renderPublicPage(page)));
   }
   // Separate non-indexable SPA entry: account/payment URLs must not inherit home metadata.
-  await writeFile(resolve(dist, 'app.html'), documentFor(pageMetadata('/login', { origin })));
+  await writeFile(resolve(dist, APP_SHELL_FILE), documentFor(pageMetadata('/login', { origin })));
   await writeFile(resolve(dist, '404.html'), documentFor(pageMetadata('/not-found', { origin }),
     '<main class="page"><h1 class="page-title">Page not found · Không tìm thấy trang</h1><p class="mt-4"><a href="/">TinyTints home</a> · <a href="/vi">Trang chủ tiếng Việt</a></p></main>'));
 
@@ -48,8 +48,12 @@ try {
   await writeFile(resolve(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\nDisallow: /socket.io/\n\nSitemap: ${absoluteUrl('/sitemap.xml', origin)}\n`);
   // Cloudflare Pages serves the public .html files at clean URLs. Only real app routes are rewritten.
   const cleanAppUrls = APP_ROUTES.filter((path) => !path.includes('*')).map((path) => `${path}/ ${path} 301`);
-  await writeFile(resolve(dist, '_redirects'), [...cleanAppUrls, ...APP_ROUTES.map((path) => `${path} /app.html 200`)].join('\n') + '\n');
-  await writeFile(resolve(dist, '_headers'), [...APP_ROUTES, '/app.html', '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`).join('\n\n') + '\n');
+  const legacyUrls = LEGACY_APP_PATHS.flatMap((path) => [`${path} / 302`, `${path}/ / 302`]);
+  const appUrls = [...APP_ROUTES.filter((path) => !path.includes('*')), ...APP_ROUTES.filter((path) => path.includes('*'))];
+  await writeFile(resolve(dist, '_redirects'), [...legacyUrls, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
+  const appHeaders = [...APP_ROUTES, APP_SHELL_PATH].map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, follow`);
+  const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });

@@ -34,7 +34,12 @@ import StorybookView from './pages/Storybook/StorybookView';
 import SharedStorybook from './pages/Storybook/SharedStorybook';
 import SiteSeo from './components/SiteSeo';
 import PublicInfo from './pages/PublicInfo';
-import { PUBLIC_ROUTES } from '../../shared/publicRoutes.mjs';
+import { PUBLIC_ROUTES, LEGACY_APP_PATHS, APP_SHELL_PATH } from '../../shared/publicRoutes.mjs';
+
+function RecoverAppEntry() {
+  const { search, hash } = useLocation();
+  return <Navigate to={{ pathname: '/', search, hash }} replace />;
+}
 
 function RequireAuth({ children }) {
   const user = useAuth((s) => s.user);
@@ -78,6 +83,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          {[...LEGACY_APP_PATHS, APP_SHELL_PATH].map((path) => <Route key={path} path={path.slice(1)} element={<RecoverAppEntry />} />)}
           <Route path="vi" element={<Home />} />
           {PUBLIC_ROUTES.filter((page) => page.kind !== 'home').map((page) => (
             <Route key={page.path} path={page.path.slice(1)} element={<PublicInfo />} />

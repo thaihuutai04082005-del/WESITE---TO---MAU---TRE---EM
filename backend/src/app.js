@@ -20,7 +20,7 @@ import socialRoutes from './routes/social.routes.js';
 import storybookRoutes from './routes/storybook.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import exhibitionRoutes from './routes/exhibition.routes.js';
-import { PUBLIC_ROUTES, isAppPath } from '../../shared/publicRoutes.mjs';
+import { PUBLIC_ROUTES, isAppPath, APP_SHELL_FILE, APP_SHELL_PATH, LEGACY_APP_PATHS } from '../../shared/publicRoutes.mjs';
 
 export function createApp() {
   const app = express();
@@ -76,7 +76,10 @@ export function createApp() {
   const dist = join(REPO_ROOT, 'frontend', 'dist');
   if (existsSync(dist)) {
     app.use((req, res, next) => {
-      if (isAppPath(req.path) || ['/app.html', '/404.html'].includes(req.path)) res.setHeader('X-Robots-Tag', 'noindex, follow');
+      const path = req.path.replace(/\/+$/, '') || '/';
+      if (isAppPath(path) || [APP_SHELL_PATH, ...LEGACY_APP_PATHS, '/404.html'].includes(path)) res.setHeader('X-Robots-Tag', 'noindex, follow');
+      if (LEGACY_APP_PATHS.includes(path)) return res.redirect(302, `/${req.originalUrl.slice(req.path.length)}`);
+      if (path === APP_SHELL_PATH) res.type('html');
       next();
     });
     app.use(express.static(dist, { index: false, maxAge: '1h' }));
@@ -86,7 +89,7 @@ export function createApp() {
       if (page) return res.sendFile(join(dist, page.file));
       if (isAppPath(path)) {
         res.setHeader('X-Robots-Tag', 'noindex, follow');
-        return res.sendFile(join(dist, 'app.html'));
+        return res.type('html').sendFile(join(dist, APP_SHELL_FILE));
       }
       res.setHeader('X-Robots-Tag', 'noindex, follow');
       return res.status(404).sendFile(join(dist, '404.html'));
