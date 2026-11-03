@@ -270,7 +270,7 @@ export async function runBillingJobs(now = new Date()) {
 }
 
 export async function scheduleBilling(intervalMs = 3600 * 1000) {
-  const run = async () => (await runBillingJobs()).catch((err) => console.error('[billing] lỗi', err));
+  const run = () => runBillingJobs().catch((err) => console.error('[billing] lỗi', err));
   await run();
   return setInterval(run, intervalMs).unref();
 }
