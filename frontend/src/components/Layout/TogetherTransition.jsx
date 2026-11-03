@@ -12,7 +12,7 @@
 //  3. Tới mốc NAVIGATE_MS: chuyển sang trang Tô cùng nhau NGAY DƯỚI lớp phủ để trang tự tải.
 //  4. Lớp phủ chỉ mờ đi khi đã đủ MIN_MS VÀ trang đích báo sẵn sàng (sự kiện `btm:page-ready`) — có trần MAX_WAIT_MS
 //     để không bao giờ bị kẹt. Nội dung trang đích bay lên nhẹ lần lượt (html[data-arena-enter]), rồi lớp phủ được gỡ.
-// Hình minh hoạ nằm trong /public/together/ (tách từ ảnh tham chiếu 1672×941, WebP không nén): bg (nền xanh, đã xoá ba bạn + tờ giấy, vòng tròn sáng dựng lại),
+// Hình minh hoạ nằm trong /public/animations/together/ (tách từ ảnh tham chiếu 1672×941, WebP không nén): bg (nền xanh, đã xoá ba bạn + tờ giấy, vòng tròn sáng dựng lại),
 // shadow (bóng đổ dưới chân, đứng yên), paper (tờ giấy + viền, dựng bằng toán học nên liền nét), band-red / band-yellow / band-blue (ba dải màu phẳng, kéo dài xuống dưới đám mây
 // và dưới chân các bạn nên lúc các bạn xê dịch không hở lỗ trắng), lines (các vạch cầu vồng + hai đám mây, nằm TRÊN dải màu), cat / bear / rabbit (từng bạn kèm bút sáp,
 // viền bút đã vẽ lại mượt, KHÔNG dính nét của bức tranh). Toạ độ (x, y, w, h) nằm ở hằng số SPR (pixel ảnh gốc).
@@ -50,11 +50,11 @@ const SPR = {
 const at = (k) => ({ left: `${((SPR[k].x / FW) * 100).toFixed(3)}%`, top: `${((SPR[k].y / FH) * 100).toFixed(3)}%`, width: `${((SPR[k].w / FW) * 100).toFixed(3)}%` });
 
 function Overlay({ lite, leaving }) {
-  const img = (k, cls) => <img className={cls} src={`/together/${k}.webp`} alt="" draggable="false" style={at(k)} />;
+  const img = (k, cls) => <img className={cls} src={`/animations/together/${k}.webp`} alt="" draggable="false" style={at(k)} />;
   return (
     <div className={`tg-root${lite ? ' tg-lite' : ''}${leaving ? ' tg-leaving' : ''}`} data-testid="together-transition" aria-hidden="true">
       <div className="tg-frame">
-        <img className="tg-bg" src="/together/bg.webp" alt="" draggable="false" />
+        <img className="tg-bg" src="/animations/together/bg.webp" alt="" draggable="false" />
         {img('shadow', 'tg-shadow')}
         <div className="tg-paper">
           {img('paper', 'tg-paper-img')}
@@ -80,7 +80,7 @@ export default function TogetherTransition() {
   const timers = useRef([]);
   const state = useRef({ navigated: false, ready: false, minDone: false, finished: false });
   const lite = useMemo(weakDevice, []);
-  useEffect(() => preloadImages([`/together/bg.webp`, ...Object.keys(SPR).map((k) => `/together/${k}.webp`)]), []);
+  useEffect(() => preloadImages([`/animations/together/bg.webp`, ...Object.keys(SPR).map((k) => `/animations/together/${k}.webp`)]), []);
 
   const later = (fn, ms) => {
     const id = setTimeout(fn, ms);

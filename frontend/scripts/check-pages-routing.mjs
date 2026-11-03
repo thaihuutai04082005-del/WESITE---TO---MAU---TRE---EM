@@ -2,9 +2,29 @@
 // Vite/Express do not implement Pages' clean-URL redirects; test the actual host runtime.
 import assert from 'node:assert/strict';
 import { APP_ROUTES, PUBLIC_ROUTES, APP_SHELL_PATH, LEGACY_APP_PATHS } from '../../shared/publicRoutes.mjs';
+import { staticAssetPaths } from './static-assets.mjs';
 
 const base = process.argv[2] || 'http://127.0.0.1:8788';
 const request = (path) => fetch(new URL(path, base), { redirect: 'manual' });
+const animationAssets = (await staticAssetPaths(new URL('../public/', import.meta.url))).filter((path) => path.startsWith('/animations/together/'));
+assert.ok(animationAssets.length >= 11, 'Test the complete Together animation and background');
+for (const path of animationAssets) {
+  const response = await request(path);
+  assert.equal(response.status, 200, path);
+  assert.match(response.headers.get('content-type') || '', /^image\/webp/, path);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF', path);
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP', path);
+  const oldPath = path.replace('/animations/together/', '/together/');
+  const legacy = await request(`${oldPath}?source=old-animation`);
+  assert.equal(legacy.status, 301, oldPath);
+  const target = new URL(legacy.headers.get('location'), base);
+  assert.equal(target.pathname, path);
+  assert.equal(target.searchParams.get('source'), 'old-animation');
+  const followed = await fetch(new URL(oldPath, base));
+  assert.match(followed.headers.get('content-type'), /^image\/webp/, oldPath);
+  assert.deepEqual(Buffer.from(await followed.arrayBuffer()), bytes);
+}
 for (const pattern of APP_ROUTES) {
   const path = `${pattern.replace('*', 'routing-test')}?paymentId=routing-test&source=check`;
   const response = await request(path);
@@ -46,4 +66,4 @@ const script = home.match(/src="(\/assets\/[^"]+\.js)"/)[1];
 const asset = await request(script);
 assert.equal(asset.status, 200);
 assert.match(asset.headers.get('content-type'), /javascript/);
-console.log(`PASS Pages runtime: ${APP_ROUTES.length} application routes, queries, ${PUBLIC_ROUTES.length} public pages, legacy /app recovery, trailing slashes, JavaScript assets and real 404s`);
+console.log(`PASS Pages runtime: ${APP_ROUTES.length} app routes, ${PUBLIC_ROUTES.length} public pages, ${animationAssets.length} animation images and their legacy redirects, queries, assets and 404s`);

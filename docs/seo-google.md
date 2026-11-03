@@ -57,6 +57,12 @@ Các trang ứng dụng phải trả HTML trực tiếp với HTTP 200, không �
 entry nội bộ; query của kết quả thanh toán phải được giữ. Sáu trang công khai
 vẫn được lập chỉ mục, các route riêng tư vẫn `noindex` và URL không có phải trả 404.
 
+Ảnh animation Tô cùng nhau nằm trong `/animations/together/`, tách khỏi route
+phòng `/together/*`. Build chặn asset tĩnh nằm dưới các wildcard ứng dụng để
+tránh trả nhầm HTML cho ảnh. URL ảnh `/together/*.webp` cũ được chuyển 301 tới
+ảnh mới để các tab đang mở vẫn tải được. Kiểm tra Pages ở trên cũng xác minh
+Content-Type và chữ ký WebP của toàn bộ lớp ảnh, bao gồm URL cũ.
+
 Khi chuyển sang tên miền khác, đặt `VITE_SITE_URL=https://ten-mien-chinh` ở bước
 build. Chỉ dùng một origin HTTPS chính, không thêm đường dẫn hoặc thông tin bí mật.
 Build lại và kiểm tra canonical/hreflang/sitemap đều dùng miền mới. Đổi tên miền

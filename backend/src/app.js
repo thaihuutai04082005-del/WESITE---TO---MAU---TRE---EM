@@ -81,6 +81,10 @@ export function createApp() {
   if (existsSync(dist)) {
     app.use((req, res, next) => {
       const path = req.path.replace(/\/+$/, '') || '/';
+      const legacyImage = path.match(/^\/together\/([a-z-]+\.webp)$/);
+      if (legacyImage && existsSync(join(dist, 'animations', 'together', legacyImage[1]))) {
+        return res.redirect(301, `/animations/together/${legacyImage[1]}${req.originalUrl.slice(req.path.length)}`);
+      }
       if (isAppPath(path) || [APP_SHELL_PATH, ...LEGACY_APP_PATHS, '/404.html'].includes(path)) res.setHeader('X-Robots-Tag', 'noindex, follow');
       if (LEGACY_APP_PATHS.includes(path)) return res.redirect(302, `/${req.originalUrl.slice(req.path.length)}`);
       if (path === APP_SHELL_PATH) res.type('html');

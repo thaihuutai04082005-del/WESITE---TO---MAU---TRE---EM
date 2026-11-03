@@ -3,12 +3,18 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { PUBLIC_ROUTES, APP_ROUTES, APP_SHELL_FILE, APP_SHELL_PATH, LEGACY_APP_PATHS } from '../../shared/publicRoutes.mjs';
 import { SEO_COPY } from '../src/seo/content.js';
+import { staticAssetPaths, assertNoAppAssetCollisions } from './static-assets.mjs';
 
 const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), 'utf8');
 const sitemap = await read('sitemap.xml');
 const robots = await read('robots.txt');
 const headers = await read('_headers');
 const redirects = await read('_redirects');
+const assets = await staticAssetPaths(new URL('../public/', import.meta.url));
+assertNoAppAssetCollisions(assets);
+for (const path of assets.filter((path) => path.startsWith('/animations/together/'))) {
+  assert.ok(redirects.includes(`${path.replace('/animations/together/', '/together/')} ${path} 301`));
+}
 assert.equal((sitemap.match(/<loc>/g) || []).length, PUBLIC_ROUTES.length);
 for (const page of PUBLIC_ROUTES) {
   const html = await read(page.file);

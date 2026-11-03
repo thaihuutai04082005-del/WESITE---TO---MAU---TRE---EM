@@ -6,9 +6,12 @@ import { build, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { PUBLIC_ROUTES, APP_ROUTES, APP_SHELL_FILE, APP_SHELL_PATH, LEGACY_APP_PATHS } from '../../shared/publicRoutes.mjs';
 import { absoluteUrl, escapeHtml, pageMetadata, metadataHtml, siteOrigin } from '../src/seo/site.js';
+import { staticAssetPaths, assertNoAppAssetCollisions } from './static-assets.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, 'dist');
+const assets = await staticAssetPaths(resolve(root, 'public'));
+assertNoAppAssetCollisions(assets);
 const configured = loadEnv('production', root, 'VITE_SITE_URL');
 const origin = siteOrigin(process.env.VITE_SITE_URL || configured.VITE_SITE_URL || undefined);
 const template = (await readFile(resolve(dist, 'index.html'), 'utf8'))
@@ -49,8 +52,11 @@ try {
   // Cloudflare Pages serves the public .html files at clean URLs. Only real app routes are rewritten.
   const cleanAppUrls = APP_ROUTES.filter((path) => !path.includes('*')).map((path) => `${path}/ ${path} 301`);
   const legacyUrls = LEGACY_APP_PATHS.flatMap((path) => [`${path} / 302`, `${path}/ / 302`]);
+  // Old open tabs can still request the original animation URLs.
+  const animationRedirects = assets.filter((path) => path.startsWith('/animations/together/'))
+    .map((path) => `${path.replace('/animations/together/', '/together/')} ${path} 301`);
   const appUrls = [...APP_ROUTES.filter((path) => !path.includes('*')), ...APP_ROUTES.filter((path) => path.includes('*'))];
-  await writeFile(resolve(dist, '_redirects'), [...legacyUrls, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
+  await writeFile(resolve(dist, '_redirects'), [...legacyUrls, ...animationRedirects, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
   const appHeaders = [...APP_ROUTES, APP_SHELL_PATH].map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, follow`);
   const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
   await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders].join('\n\n') + '\n');
