@@ -98,13 +98,13 @@ export default function Layout() {
             <span className="hidden whitespace-nowrap sm:inline">{t('app.name')}</span>
           </Link>
           {user && (
-            <nav className="mx-4 hidden flex-1 items-center justify-evenly gap-1 lg:flex">
+            <nav className="mx-2 hidden min-w-0 flex-1 items-center justify-evenly gap-1 lg:flex">
               {navOf(DESKTOP_MAIN).map((n) => (
                 <NavLink
                   key={n.to}
                   to={n.to}
                   title={t(`nav.${n.key}`)}
-                  className={({ isActive }) => (n.key === 'collection' ? `nav-pill${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-4 font-bold transition ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
+                  className={({ isActive }) => (n.key === 'collection' ? `nav-pill shrink-0${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3 font-bold transition xl:px-4 ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
                   data-testid={`nav-${n.key}`}
                   data-fly-target={n.key}
                 >
@@ -115,7 +115,7 @@ export default function Layout() {
                       <Icon name={n.icon} size={22} strokeWidth={2.4} />
                     </span>
                   )}
-                  <span className="hidden lg:inline">{t(`nav.${n.key}`)}</span>
+                  <span className="hidden xl:inline">{t(`nav.${n.key}`)}</span>
                 </NavLink>
               ))}
             </nav>
