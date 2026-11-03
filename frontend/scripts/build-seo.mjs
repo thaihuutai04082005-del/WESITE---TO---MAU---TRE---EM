@@ -55,7 +55,11 @@ try {
     return `  <url>\n    <loc>${escapeHtml(meta.canonical)}</loc>\n${alternates.map(({ lang, href }) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${escapeHtml(href)}" />`).join('\n')}\n  </url>`;
   });
   await writeFile(resolve(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`);
-  await writeFile(resolve(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\nDisallow: /socket.io/\n\nSitemap: ${absoluteUrl('/sitemap.xml', origin)}\n`);
+  // A plain URL-only sitemap is also available for a fresh Search Console fetch.
+  // Reciprocal language annotations remain in every public page's HTML and sitemap.xml.
+  const pageUrls = PUBLIC_ROUTES.map((page) => `  <url><loc>${escapeHtml(pageMetadata(page.path, { origin }).canonical)}</loc></url>`);
+  await writeFile(resolve(dist, 'sitemap-pages.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pageUrls.join('\n')}\n</urlset>\n`);
+  await writeFile(resolve(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\nDisallow: /socket.io/\n\nSitemap: ${absoluteUrl('/sitemap.xml', origin)}\nSitemap: ${absoluteUrl('/sitemap-pages.xml', origin)}\n`);
   // Cloudflare Pages serves the public .html files at clean URLs. Only real app routes are rewritten.
   const cleanAppUrls = APP_ROUTES.filter((path) => !path.includes('*')).map((path) => `${path}/ ${path} 301`);
   const legacyUrls = LEGACY_APP_PATHS.flatMap((path) => [`${path} / 302`, `${path}/ / 302`]);
@@ -70,7 +74,9 @@ try {
   const previewHeaders = '/picture-previews/*\n  Cache-Control: public, max-age=31536000, immutable';
   const verificationHeaders = googleVerificationFiles.flatMap((path) => [path, path.slice(0, -5)])
     .map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, nofollow`);
-  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, ...verificationHeaders].join('\n\n') + '\n');
+  const sitemapHeaders = ['/sitemap.xml', '/sitemap-pages.xml'].map((path) => `${path}\n  Content-Type: application/xml; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate`);
+  const robotsHeaders = '/robots.txt\n  Content-Type: text/plain; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate';
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, ...verificationHeaders, ...sitemapHeaders, robotsHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });

@@ -7,6 +7,7 @@ import { staticAssetPaths, assertNoAppAssetCollisions } from './static-assets.mj
 
 const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), 'utf8');
 const sitemap = await read('sitemap.xml');
+const pageSitemap = await read('sitemap-pages.xml');
 const robots = await read('robots.txt');
 const headers = await read('_headers');
 const redirects = await read('_redirects');
@@ -16,6 +17,12 @@ for (const path of assets.filter((path) => path.startsWith('/animations/together
   assert.ok(redirects.includes(`${path.replace('/animations/together/', '/together/')} ${path} 301`));
 }
 assert.equal((sitemap.match(/<loc>/g) || []).length, PUBLIC_ROUTES.length);
+assert.equal((pageSitemap.match(/<loc>/g) || []).length, PUBLIC_ROUTES.length);
+assert.match(pageSitemap, /^<\?xml version="1.0" encoding="UTF-8"\?>\n<urlset xmlns="http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9">/);
+assert.ok(!pageSitemap.includes('xhtml:'));
+for (const path of ['/sitemap.xml', '/sitemap-pages.xml']) {
+  assert.ok(headers.includes(`${path}\n  Content-Type: application/xml; charset=utf-8`));
+}
 for (const page of PUBLIC_ROUTES) {
   const html = await read(page.file);
   assert.match(html, new RegExp(`<html lang="${page.lang}">`));
@@ -28,7 +35,9 @@ for (const page of PUBLIC_ROUTES) {
   const canonical = html.match(/rel="canonical" href="([^"]+)"/)[1];
   assert.equal(new URL(canonical).pathname, page.path);
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
+  assert.ok(pageSitemap.includes(`<loc>${canonical}</loc>`));
   assert.ok(robots.includes(`${new URL(canonical).origin}/sitemap.xml`));
+  assert.ok(robots.includes(`${new URL(canonical).origin}/sitemap-pages.xml`));
   const schema = html.match(/<script type="application\/ld\+json" data-seo>([\s\S]*?)<\/script>/)[1];
   assert.equal(JSON.parse(schema)['@graph'].find((item) => item['@type'] === 'WebPage').url, canonical);
   assert.ok(!html.includes('content="noindex'), page.path);
