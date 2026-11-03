@@ -39,13 +39,9 @@ export function setSoundOn(on) {
   notify();
 }
 
-/** Bấm nút loa: đã bật mà nhạc chưa kêu (bị trình duyệt chặn) thì bấm là cho nhạc kêu; đang kêu thì tắt; đang tắt thì bật. */
+/** Nút loa luôn đổi trạng thái bật/tắt, kể cả khi chưa bắt đầu phát. */
 export function toggleSound() {
-  if (enabled && !isMusicPlaying()) {
-    started = true;
-    playMusic();
-    return;
-  }
+  started = true;
   setSoundOn(!enabled);
 }
 
@@ -87,7 +83,7 @@ function playMusic() {
     fadeTo(MUSIC_VOLUME, FADE_MS);
     return;
   }
-  a.volume = 0;
+  a.volume = MUSIC_VOLUME;
   a.play()
     .then(() => fadeTo(MUSIC_VOLUME, FADE_MS))
     .catch(() => {
@@ -100,21 +96,22 @@ function pauseMusic() {
   fadeTo(0, 400, () => music.pause());
 }
 
-/** Gọi một lần khi mở web: thử phát nhạc ngay; nếu trình duyệt chưa cho thì phát ở lần chạm đầu tiên. Tạm dừng khi rời tab. */
+/** Phát sau tương tác đầu tiên, thử lại nếu trình duyệt chặn. Tạm dừng khi rời tab. */
 export function initMusic() {
-  started = true; // thử phát ngay khi mở web
-  playMusic();
   preloadTing();
   const unlock = () => {
+    if (started) return;
     started = true;
     playMusic();
   };
-  window.addEventListener('pointerdown', unlock, { once: true });
-  window.addEventListener('keydown', unlock, { once: true });
+  window.addEventListener('pointerdown', unlock);
+  window.addEventListener('click', unlock);
+  window.addEventListener('keydown', unlock);
   const onVisibility = () => (document.hidden ? music && !music.paused && music.pause() : playMusic());
   document.addEventListener('visibilitychange', onVisibility);
   return () => {
     window.removeEventListener('pointerdown', unlock);
+    window.removeEventListener('click', unlock);
     window.removeEventListener('keydown', unlock);
     document.removeEventListener('visibilitychange', onVisibility);
     clearInterval(fadeTimer);
