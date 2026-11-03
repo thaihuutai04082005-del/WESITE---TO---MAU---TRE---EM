@@ -23,13 +23,29 @@ const landingThemes = (themes) => {
 function Landing() {
   const { t } = useTranslation();
   const [themes, setThemes] = useState([]);
+  const [loadError, setLoadError] = useState(false);
+  const [retry, setRetry] = useState(0);
   useEffect(() => {
-    api.get('/themes').then((r) => setThemes(r.themes)).catch(() => {});
-  }, []);
+    let active = true;
+    setLoadError(false);
+    api.get('/themes').then((r) => {
+      if (!Array.isArray(r.themes)) throw new Error('Invalid themes response');
+      if (active) setThemes(r.themes);
+    }).catch(() => {
+      if (active) setLoadError(true);
+    });
+    return () => { active = false; };
+  }, [retry]);
   const features = ['creative', 'arena', 'gacha', 'together', 'storybook', 'safe'];
   return (
     <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
     <div className="page">
+      {loadError && (
+        <div role="status" className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white/90 p-4 text-ink" data-testid="backend-unavailable">
+          <p>{t('errors.backend_unavailable')}</p>
+          <button type="button" className="btn-ghost" onClick={() => setRetry((n) => n + 1)}>{t('common.tryAgain')}</button>
+        </div>
+      )}
       <section className="grid items-center gap-6 py-6 md:grid-cols-2 md:py-12">
         <div>
           <h1 className="font-display text-4xl font-extrabold leading-tight md:text-6xl">{t('landing.title')}</h1>

@@ -3,6 +3,7 @@
     "name": "Bé Tô Màu"
   },
   "common": {
+    "tryAgain": "Thử lại",
     "loading": "Đang tải…",
     "back": "Quay lại",
     "next": "Tiếp tục",
@@ -907,6 +908,7 @@
     "plan_expiring": "Gói của bé sẽ hết hạn vào {{date}}. Gia hạn để tiếp tục tô thoải mái nhé!"
   },
   "errors": {
+    "backend_unavailable": "Chưa thể kết nối dịch vụ. Bạn vui lòng thử lại sau nhé.",
     "invite_blocked": "Bạn ấy đang bận, mời lại sau nhé.",
     "friend_offline": "Bạn ấy đang không trực tuyến.",
     "invite_too_fast": "Chờ một chút rồi mời tiếp nhé.",

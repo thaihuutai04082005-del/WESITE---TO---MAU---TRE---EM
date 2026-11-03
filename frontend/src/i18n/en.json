@@ -3,6 +3,7 @@
     "name": "TinyTints"
   },
   "common": {
+    "tryAgain": "Try again",
     "loading": "Loading…",
     "back": "Back",
     "next": "Next",
@@ -906,6 +907,7 @@
     "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring without limits!"
   },
   "errors": {
+    "backend_unavailable": "The service is temporarily unavailable. Please try again shortly.",
     "invite_blocked": "Your friend is busy right now. Try again in a bit.",
     "friend_offline": "Your friend is offline.",
     "invite_too_fast": "Wait a moment before inviting again.",
