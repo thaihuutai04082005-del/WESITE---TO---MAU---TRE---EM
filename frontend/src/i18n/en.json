@@ -42,7 +42,7 @@
   },
   "landing": {
     "title": "Fun, creative coloring every day!",
-    "subtitle": "Hundreds of adorable pictures, a weekly creative Arena, rare picture cards to collect, and storybooks your child can make.",
+    "subtitle": "Hundreds of adorable pictures to color, creative competitions, rare cards to collect, and storybooks your child can create.",
     "cta": "Sign up free",
     "features": {
       "creative": {
@@ -55,7 +55,7 @@
       },
       "gacha": {
         "title": "Collect rare cards",
-        "text": "Win Arena prizes to open S/A/B/C cards — no purchase needed."
+        "text": "Earn Card Points in the Arena and collect cards in four rarity tiers: S, A, B, and C. No purchase needed."
       },
       "together": {
         "title": "Color together",
@@ -63,11 +63,11 @@
       },
       "storybook": {
         "title": "Make a storybook",
-        "text": "Turn your pictures into a flip-page book and download it as a PDF."
+        "text": "Turn your pictures into a storybook with pages you can flip through, then download it as a PDF."
       },
       "safe": {
         "title": "Safe for kids",
-        "text": "Parents verify with a one-time code, and kids connect with friends and join rooms using private codes only."
+        "text": "Parents verify accounts with a one-time code. Kids add friends and join rooms using private codes."
       }
     }
   },
@@ -85,10 +85,10 @@
     "logout": "Log out",
     "register": "Sign up",
     "loginSubtitle": "Welcome back!",
-    "registerSubtitle": "Create an account — no Gmail needed.",
+    "registerSubtitle": "Create an account with a username and password.",
     "registeredOk": "You're signed up! Please log in.",
     "username": "Username",
-    "usernameHint": "4–20 characters: letters (no accents), numbers, underscores or periods.",
+    "usernameHint": "4–20 characters: letters A–Z, numbers, underscores, or periods.",
     "password": "Password",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -97,33 +97,33 @@
     "passwordMismatch": "The passwords don't match.",
     "captcha": "Verification code",
     "captchaRefresh": "New code",
-    "guardian": "Parent or guardian contact",
-    "guardianHint": "Only used to recover your password. We'll send a one-time code for a parent to confirm.",
+    "guardian": "Parent or guardian contact information",
+    "guardianHint": "We'll send a one-time code to verify this contact information. It can also be used to reset your password.",
     "contact": {
       "phone": "Phone number",
-      "email": "Email (Gmail)"
+      "email": "Email address"
     },
     "otpTitle": "Enter the code",
     "otpSent": "A 6-digit code was sent to {{to}}.",
     "otpCode": "One-time code",
-    "devOtp": "Test environment (SMS/Email not configured): your code is {{code}}",
+    "devOtp": "For testing only: text messages and email are not set up. Your code is {{code}}.",
     "confirm": "Confirm",
     "forgot": "Forgot password?",
     "noAccount": "No account? Sign up",
     "haveAccount": "Have an account? Log in",
-    "forgotTitle": "Recover your password",
+    "forgotTitle": "Reset your password",
     "forgotStep": {
-      "contact": "Enter the phone number or email a parent used when signing up.",
+      "contact": "Enter the phone number or email address your parent or guardian used to sign up.",
       "code": "If the details are correct, a code was sent to {{to}}.",
       "reset": "Choose the account and set a new password."
     },
     "sendCode": "Send code",
-    "pickAccount": "Child account",
+    "pickAccount": "Child's account",
     "newPassword": "New password",
     "resetPassword": "Reset password",
     "google": {
       "or": "Or sign in with Google (ages 13 and up)",
-      "age": "I confirm I'm at least 13 years old to use a Google account.",
+      "age": "I confirm that I'm at least 13 years old.",
       "ageRequired": "Please confirm you are 13 or older first."
     }
   },
@@ -131,7 +131,7 @@
     "title": "Welcome!",
     "subtitle": "Pick a display name and an avatar.",
     "nickname": "Display name",
-    "nicknameHint": "Don't use your full real name, phone number or address.",
+    "nicknameHint": "Don't use your full name, phone number, or address.",
     "avatar": "Avatar",
     "start": "Start coloring!"
   },
@@ -160,7 +160,7 @@
       "styles": "Pick a style",
       "hand": "Sign by hand"
     },
-    "nameLabel": "Name on the signature",
+    "nameLabel": "Signature name",
     "namePlaceholder": "Type your name",
     "nameHint": "Your real name or a nickname — both are fine. No phone numbers or addresses!",
     "freeStyles": "Signature styles",
@@ -184,8 +184,8 @@
     "save": "Save as my signature",
     "saved": "Signature saved!",
     "unlock": "Unlock this style",
-    "unlockHand": "Unlock hand-signing",
-    "changeNote": "Pictures you already signed keep their old signature. The new one is used next time.",
+    "unlockHand": "Unlock handwritten signatures",
+    "changeNote": "Pictures you've already signed will keep their original signature. Your new signature will appear on pictures you sign from now on.",
     "dragHint": "Drag your signature anywhere you like, or tap a corner button below.",
     "size": "Size",
     "tilt": "Tilt",
@@ -207,13 +207,13 @@
     "title": "Collection",
     "cards": "Rare card pictures",
     "artworks": "Themed pictures",
-    "noArtworks": "No finished pictures yet. Color a lovely one!",
-    "noCardArtworks": "No finished rare card pictures yet. Head to the Rare card pictures tab on the picture page to color one!",
-    "toGacha": "Go to Cards"
+    "noArtworks": "No finished pictures yet. Pick a picture and start coloring!",
+    "noCardArtworks": "No finished card pictures yet. Pick a picture from the \"Rare card pictures\" tab and start coloring!",
+    "toGacha": "Go to Card Packs"
   },
   "exhibition": {
     "title": "Exhibition hall",
-    "subtitle": "Where kids' best pictures are shown off each week.",
+    "subtitle": "Explore kids' artwork in our weekly exhibition.",
     "homeHint": "See your friends' pictures, send hearts, and show off your own every week!",
     "submitCta": "Submit a picture",
     "comingSoon": "Coming soon",
@@ -223,7 +223,7 @@
     "reactSchedule": "Reaction schedule",
     "gateTime": "Submission times",
     "scheduleBtn": "Exhibition schedule",
-    "pictures": "{{count}} pictures",
+    "pictures": "Pictures: {{count}}",
     "boards": {
       "free": "Exhibition Hall"
     },
@@ -240,8 +240,8 @@
     },
     "ownHint": "This is your picture — your friends will send you reactions!",
     "lockedHint": "Reactions are closed for this week.",
-    "changeHint": "Tap another to change, tap again to remove.",
-    "reactHint": "Pick one reaction to cheer your friend!",
+    "changeHint": "Tap a different reaction to change yours, or tap your current reaction to remove it.",
+    "reactHint": "Pick a reaction to cheer on your friend!",
     "report": "Tell Bear",
     "reportConfirm": "Does this picture seem inappropriate? Bear will take a look. Your name will stay private.",
     "reported": "Thank you! Bear will take a look at this picture.",
@@ -258,8 +258,8 @@
         "text": "Color at least 80% of the picture, with no big white gaps."
       },
       "r3": {
-        "title": "Color in Free mode",
-        "text": "Rare card pictures and themed pictures both count, as long as you color them in Free mode."
+        "title": "Use Free coloring mode",
+        "text": "Both rare card pictures and themed pictures are welcome. Just use Free coloring mode."
       },
       "r4": {
         "title": "Each picture is shown once",
@@ -275,14 +275,14 @@
       },
       "r7": {
         "title": "No bad words",
-        "text": "Never write a phone number or home address on your picture."
+        "text": "Keep words kind, and never include a phone number or home address on your picture."
       },
       "r8": {
         "title": "Color with your whole heart",
         "text": "Don't rush just to get it done."
       }
     },
-    "thisWeek": "Week {{from}} – {{to}}",
+    "thisWeek": "{{from}} – {{to}}",
     "reactUntil": "Reactions open until {{date}}",
     "judging": "Choosing winners · new round opens {{date}}",
     "submitGate": "Submission window",
@@ -296,14 +296,14 @@
       "rejected": "Didn't meet rule {{rule}}",
       "removed": "Removed from the exhibition",
       "showing": "Now showing",
-      "done": "Exhibited",
-      "approved": "Showing from {{date}}"
+      "done": "Previously displayed",
+      "approved": "On display starting {{date}}"
     },
     "sentApproved": "Submitted! Your picture goes up in the hall on Monday 🎉",
     "sentPending": "Submitted! Bear will check it before it goes up in the hall.",
     "eligible": "Ready for the exhibition",
     "submitTitle": "Submit to the exhibition",
-    "notYet": "This picture doesn't meet rule {{rules}} yet. Fix it and try again — Bear believes in you!",
+    "notYet": "Check these exhibition rules: {{rules}}. Make a few changes and try again — Bear believes in you!",
     "submitNote": "Once you submit, the signature and the picture are locked. It will be shown from Monday ({{date}}) through Sunday.",
     "readRules": "I have read the rules",
     "send": "Submit",
@@ -315,12 +315,12 @@
     "withdrawn": "Picture withdrawn.",
     "submitOpensShort": "Opens Saturday",
     "full": "Limit reached",
-    "notType": "Only pictures colored in Free mode can go in the exhibition.",
+    "notType": "Only pictures colored in Free coloring mode can be submitted to the exhibition.",
     "lockedArtwork": "This picture was submitted to the exhibition, so it can't be edited.",
     "review": {
       "title": "Review exhibition pictures",
       "approveAll": "Approve all ({{n}})",
-      "hint": "Only pictures the system could not approve automatically, plus pictures that were reported many times. Tap \"Approve all,\" then reject only the ones that break a rule.",
+      "hint": "These pictures need a review because they could not be approved automatically or were reported multiple times. Approve pictures that follow the rules and reject those that do not.",
       "empty": "Nothing left to review.",
       "reported": "reported {{n}} times",
       "pickRule": "Reject for breaking rule:",
@@ -344,8 +344,8 @@
     "title": "Trophy case",
     "of": "{{name}}'s trophy case",
     "exhibited": "{{n}} in the exhibition",
-    "awards": "{{n}} awards",
-    "reactions": "{{n}} reactions",
+    "awards": "Awards: {{n}}",
+    "reactions": "Reactions: {{n}}",
     "emptyOwn": "Your trophy case is empty. Submit a picture to the exhibition to show off your achievements here!",
     "empty": "They haven't shown any pictures in the exhibition yet."
   },
@@ -353,36 +353,36 @@
     "boardTitle": "Pick a picture to color",
     "themes": "Pick a theme",
     "ageEmpty": "New pictures coming soon for this age group!",
-    "cardsEmpty": "No cards yet. Play in the Creative Arena to earn Card Points, then open some cards! 🎁",
+    "cardsEmpty": "No cards yet. Earn Card Points in the Creative Arena, then visit Card Packs to collect some! 🎁",
     "themesHint": "What would you like to color today?",
     "pictures": "Choose a picture",
     "objects": "Pick a subject",
     "variants": "Pick a pose",
     "age": {
-      "3-5": "Ages 3 – 5",
-      "6-8": "Ages 6 – 8",
+      "3-5": "Ages 3–5",
+      "6-8": "Ages 6–8",
       "9+": "Ages 9 and up",
       "cards": "Rare card pictures"
     },
-    "pictureCount": "{{n}} pictures",
-    "objectCount": "{{n}} subjects",
-    "variantCount": "{{n}} poses"
+    "pictureCount": "Pictures: {{n}}",
+    "objectCount": "Subjects: {{n}}",
+    "variantCount": "Poses: {{n}}"
   },
   "mode": {
     "pick": "How would you like to color?",
     "template": {
-      "title": "Paint by number",
-      "text": "A sample picture with number hints for each area."
+      "title": "Color by number",
+      "text": "Match each numbered area to its color, using the sample picture as a guide."
     },
     "free": {
       "title": "Free coloring",
-      "text": "Use any colors you like — this mode counts toward the Arena."
+      "text": "Choose any colors you like and make the picture your own."
     }
   },
   "coloring": {
     "toolsTitle": "Coloring tools",
     "paintFirst": "Color a bit first, then tap Finish!",
-    "reference": "Reference",
+    "reference": "Sample picture",
     "numberedColors": "Numbered colors",
     "customColor": "Pick any color",
     "favorite": "Save as favorite",
@@ -399,7 +399,7 @@
       "error": "Save failed"
     },
     "clearTitle": "Clear everything and start over?",
-    "clearText": "All colors, strokes and stickers will be removed. You can tap Undo to get them back.",
+    "clearText": "All colors, brushstrokes, and stickers will be removed. Tap Undo to bring them back.",
     "clearConfirm": "Clear all"
   },
   "tools": {
@@ -407,7 +407,7 @@
     "brush": "Paintbrush",
     "glitter": "Glitter crayon",
     "pattern": "Pattern pen",
-    "pickPattern": "Pick a pattern, then color a region",
+    "pickPattern": "Pick a pattern, then color an area",
     "eraser": "Eraser",
     "sticker": "Sticker",
     "pan": "Move",
@@ -415,7 +415,7 @@
     "redo": "Redo",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
-    "zoomReset": "Fit",
+    "zoomReset": "Fit to screen",
     "clear": "Clear",
     "size": "Size",
     "pickSticker": "Pick a sticker, then tap the picture",
@@ -439,7 +439,7 @@
       "completed": "Finished"
     },
     "mode": {
-      "template": "Paint by number",
+      "template": "Color by number",
       "free": "Free coloring",
       "arena": "Arena",
       "collab": "Color together"
@@ -488,7 +488,7 @@
         },
         {
           "i": "🎮",
-          "t": "Arena, Cards, Color together"
+          "t": "Arena, Card Packs, and Color together"
         },
         {
           "i": "📖",
@@ -523,20 +523,20 @@
       "limit": "Unlimited coloring"
     },
     "providerHint": {
-      "bank": "Scan with your banking or MoMo app. You pay each time, and we'll remind you before your plan ends.",
-      "paypal": "Renews automatically each period. Cancel anytime."
+      "bank": "Scan the QR code with your Vietnamese banking app or MoMo. This is a one-time payment. We'll remind you before your plan expires.",
+      "paypal": "Renews automatically each month or year, depending on your plan. Cancel anytime."
     },
     "perMonthUsd": "/month",
     "perYearUsd": "/year",
     "qr": {
       "title": "Scan to pay",
-      "scan": "Open your banking or MoMo app and scan the QR code. The amount and message are filled in for you.",
+      "scan": "Open your Vietnamese banking app or MoMo and scan the QR code. The payment amount and transfer note are filled in for you.",
       "bank": "Bank",
       "account": "Account number",
       "holder": "Account holder",
       "amount": "Amount",
-      "content": "Transfer message",
-      "contentHint": "Keep this message exactly as is so we can match your payment.",
+      "content": "Transfer note",
+      "contentHint": "Keep this note exactly as shown so we can match your payment.",
       "waiting": "Waiting for your transfer… your plan unlocks automatically as soon as it arrives (usually under a minute).",
       "copied": "Copied!",
       "copy": "Copy"
@@ -549,7 +549,7 @@
       "manual": "One-time payment. We'll remind you 3 days before it ends.",
       "cancel": "Cancel auto-renew",
       "cancelConfirm": "Cancel auto-renew? You keep your plan until it ends, then switch to the Standard plan.",
-      "cancelled": "Auto-renew cancelled.",
+      "cancelled": "Auto-renewal canceled.",
       "month": "month",
       "year": "year"
     },
@@ -565,7 +565,7 @@
         },
         {
           "i": "🎮",
-          "t": "Arena, Cards, Color together"
+          "t": "Arena, Card Packs, and Color together"
         },
         {
           "i": "🏛️",
@@ -581,7 +581,7 @@
         },
         {
           "i": "✨",
-          "t": "5 \"wow\" signatures + hand-drawn"
+          "t": "5 special signature styles + handwritten signatures"
         },
         {
           "i": "👑",
@@ -624,10 +624,10 @@
       "hard": "Hard"
     },
     "rankTitle": "Arena rank",
-    "rankHint": "Place in the Arena top 3 to earn Rank points. Rank points never go down."
+    "rankHint": "Finish in the top 3 in the Arena to earn Rank Points. Rank Points never go down."
   },
   "rank": {
-    "bronze": "Little Colorer",
+    "bronze": "Budding Artist",
     "silver": "Young Artist",
     "gold": "Talented Artist",
     "platinum": "Creative Artist",
@@ -645,7 +645,7 @@
   },
   "arena": {
     "title": "Creative Arena",
-    "subtitle": "Each room fits up to {{size}} kids who color the same picture in Free mode for {{minutes}} minutes.",
+    "subtitle": "Up to {{size}} kids compete in each room, coloring the same picture in Free coloring mode for {{minutes}} minutes.",
     "random": "Quick match",
     "randomHint": "We'll match you with kids at a similar level.",
     "open": "Open now",
@@ -658,7 +658,7 @@
     "roomCode": "Room code",
     "join": "Join room",
     "rubricTitle": "How scoring works",
-    "rewardsHint": "1st +{{a}}, 2nd +{{b}}, 3rd +{{c}} Rank Points and Card Points.",
+    "rewardsHint": "Earn Rank Points and Card Points: 1st place +{{a}}, 2nd place +{{b}}, 3rd place +{{c}}.",
     "weekly": "Week {{week}} leaderboard",
     "noLeaders": "Be the first on the leaderboard!",
     "myHistory": "Your matches",
@@ -703,23 +703,23 @@
     "coverage": "Color coverage",
     "coverageHint": "Fill in the whole picture, with no big blank areas.",
     "harmony": "Color harmony",
-    "harmonyHint": "Colors that go well together, with a standout accent.",
+    "harmonyHint": "Use colors that look good together, with an accent color that stands out.",
     "creativity": "Creativity & originality",
     "creativityHint": "The more your picture stands out from the others, the higher the score.",
     "diversity": "Shade variety",
     "diversityHint": "Use lots of different tones.",
     "time": "Time",
-    "timeHint": "Finishing early while still looking great earns a bonus."
+    "timeHint": "Finish early and do your best work to earn a bonus."
   },
   "gacha": {
-    "noPulls": "No draws left — play in the Arena to earn Card Points!",
-    "title": "Open Picture Cards",
+    "noPulls": "Not enough Card Points to open a card yet. Earn more in the Arena!",
+    "title": "Card Packs",
     "points": "{{n}} Card Points",
-    "pulls": "{{n}} draws",
-    "how": "Every {{cost}} Card Points = 1 card draw. Earn Card Points by finishing in the Arena's top 3. Drawing cards never lowers your rank.",
+    "pulls": "Cards you can open: {{n}}",
+    "how": "Spend {{cost}} Card Points to get one random card. Earn Card Points by finishing in the top 3 in the Arena. Opening cards doesn't lower your rank.",
     "pull1": "Open 1 card",
     "pullN": "Open {{n}} cards",
-    "remaining": "{{n}} cards left",
+    "remaining": "Cards left: {{n}}",
     "collection": "Collection",
     "empty": "No cards yet. Play in the Arena to earn Card Points!",
     "colorThis": "Color this picture",
@@ -731,15 +731,15 @@
     },
     "deck": "Card deck",
     "notOwned": "Not collected",
-    "lockedHint": "Draw this card to unlock it for coloring!",
+    "lockedHint": "Get this card in Card Packs to unlock it for coloring!",
     "allThemes": "All themes",
     "previewNote": "Previewing all cards."
   },
   "shop": {
     "tabFrames": "Picture frames",
     "title": "Shop",
-    "hint": "Spend the Ruby you earn from missions on pattern colors, frames, and storybook covers.",
-    "patterns": "Pattern colors",
+    "hint": "Spend Ruby from missions on coloring patterns, picture frames, and storybook covers.",
+    "patterns": "Coloring patterns",
     "covers": "Storybook covers",
     "frames": "Picture frames",
     "avatarFrames": "Avatar frames",
@@ -760,7 +760,7 @@
     "title": "Friends",
     "subtitle": "Connect with friends, color together and share your collection!",
     "newFriend": "Add a friend",
-    "codePlaceholder": "Enter friend code...",
+    "codePlaceholder": "Enter a friend's code…",
     "myCode": "Your friend code",
     "codeHint": "Only share this code with people you know.",
     "addByCode": "Enter a friend's code",
@@ -770,24 +770,24 @@
     "decline": "Decline",
     "list": "Friends",
     "empty": "No friends yet. Trade friend codes with people you know!",
-    "outgoing": "{{n}} pending request(s)",
+    "outgoing": "Pending requests: {{n}}",
     "requestSent": "Request sent!",
     "nowFriends": "You're friends now!"
   },
   "trade": {
-    "title": "Gift & swap cards",
-    "with": "Gift/swap with {{name}}",
+    "title": "Give & trade cards",
+    "with": "Give or trade cards with {{name}}",
     "limit": "{{used}} of {{limit}} trades used today.",
     "kind": {
-      "gift": "Gift",
-      "exchange": "Swap"
+      "gift": "Give",
+      "exchange": "Trade"
     },
     "pickMine": "Pick your card",
     "pickTheirs": "Pick {{name}}'s card",
     "noCards": "You don't have any cards to give yet.",
     "friendNoCards": "Your friend doesn't have any cards yet.",
     "confirmGift": "Give “{{card}}” to {{name}}?",
-    "confirmExchange": "Swap “{{mine}}” for {{name}}'s “{{theirs}}”?",
+    "confirmExchange": "Trade your “{{mine}}” for {{name}}'s “{{theirs}}”?",
     "twoWay": "Your friend has to accept too, or the trade won't go through.",
     "send": "Send offer",
     "sent": "Sent! Waiting for your friend to accept.",
@@ -798,13 +798,13 @@
     "decline": "Decline",
     "done": "Trade complete!",
     "history": "Trade history",
-    "confirmAcceptTitle": "Accept this card?",
+    "confirmAcceptTitle": "Accept this offer?",
     "confirmAcceptGift": "{{name}} wants to give you “{{card}}”. Accept?",
-    "confirmAcceptExchange": "{{name}} wants to swap “{{theirs}}” for your “{{mine}}”. Accept?",
+    "confirmAcceptExchange": "{{name}} wants to trade their “{{theirs}}” for your “{{mine}}”. Accept?",
     "status": {
       "accepted": "Completed",
       "declined": "Declined",
-      "cancelled": "Cancelled",
+      "cancelled": "Canceled",
       "failed": "Failed",
       "pending": "Pending"
     }
@@ -842,7 +842,7 @@
     "pickFromCollection": "Pick a picture from your collection",
     "changePicture": "Change picture",
     "captionHere": "Write something here…",
-    "addPage": "Add new page",
+    "addPage": "Add a page",
     "removePage": "Delete this page",
     "saveBook": "Save book",
     "pickFirst": "Pick a picture for this page first",
@@ -855,15 +855,15 @@
     "leaveDiscard": "Leave without saving",
     "signTitle": "My storybooks",
     "title": "My storybooks",
-    "subtitle": "Turn pictures from your collection into a flip-page book.",
+    "subtitle": "Turn pictures from your collection into a storybook you can flip through.",
     "new": "New storybook",
     "edit": "Edit",
     "empty": "No storybooks yet.",
-    "pages": "{{n}} pages",
+    "pages": "Pages: {{n}}",
     "done": "Finished",
     "draft": "Draft",
     "bookTitle": "Title",
-    "titlePlaceholder": "e.g. Whiskers' Big Adventure",
+    "titlePlaceholder": "For example, Whiskers' Big Adventure",
     "pagesTitle": "Pages ({{n}})",
     "addHint": "Pick pictures below to add pages.",
     "caption": "Caption",
@@ -871,7 +871,7 @@
     "moveUp": "Move up",
     "moveDown": "Move down",
     "pick": "Pictures in your collection",
-    "pickHint": "Any finished picture (guided, free or rare card) can go into a storybook.",
+    "pickHint": "Use any of your finished pictures, including color-by-number pictures, free coloring, and rare card pictures.",
     "noArtworks": "No finished pictures yet.",
     "saved": "Storybook saved!",
     "complete": "Finish storybook",
@@ -899,8 +899,8 @@
     "plan_activated": "Your plan is active until {{date}}.",
     "draft_expiring": "Your unfinished picture “{{name}}” will be deleted on {{date}} unless you open it again.",
     "exhibit_award": "🏆 Congratulations! “{{name}}” is this week's Most Loved Picture!",
-    "exhibit_done": "“{{name}}” has finished its exhibition with {{n}} reactions. Great job!",
-    "exhibit_reactions": "🎉 {{n}} more friends reacted to “{{name}}”!",
+    "exhibit_done": "The exhibition has ended for “{{name}}”. Reactions received: {{n}}. Great job!",
+    "exhibit_reactions": "🎉 New reactions to “{{name}}”: {{n}}!",
     "exhibit_approved": "“{{name}}” was approved and will be on display Monday!",
     "exhibit_rejected": "“{{name}}” didn't meet rule {{rule}} of the exhibition rules. Try submitting another picture!",
     "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring without limits!"
@@ -920,11 +920,11 @@
     "invalid_input": "Some of the details aren't valid.",
     "invalid_credentials": "Incorrect username or password.",
     "captcha_wrong": "That verification code isn't right. Try a new one.",
-    "invalid_username": "Usernames can use letters (no accents), numbers, underscores and periods, 4–20 characters.",
+    "invalid_username": "Use 4–20 characters: letters A–Z, numbers, underscores, or periods.",
     "username_taken": "That username is taken.",
     "weak_password": "Passwords need both letters and numbers.",
     "invalid_email": "That email address isn't valid.",
-    "invalid_phone": "That phone number isn't valid (10 digits starting with 0).",
+    "invalid_phone": "Enter a Vietnamese phone number with 10 digits, starting with 0.",
     "invalid_contact_type": "Please choose phone or email.",
     "otp_invalid": "That code isn't valid.",
     "otp_expired": "That code has expired. Please request a new one.",
@@ -937,7 +937,7 @@
     "google_token_expired": "Google sign-in timed out. Please try again.",
     "age_confirmation_required": "Please confirm you are 13 or older.",
     "nickname_required": "Please choose a display name first.",
-    "nickname_private_info": "Display names can't contain phone numbers or emails.",
+    "nickname_private_info": "Display names can't contain phone numbers or email addresses.",
     "invalid_avatar": "That avatar isn't valid.",
     "invalid_language": "That language isn't supported.",
     "quota_exceeded": "You've used all your pictures for today.",
@@ -948,7 +948,7 @@
     "invalid_thumbnail": "Invalid preview image.",
     "invalid_plan": "Invalid plan.",
     "invalid_provider": "Invalid payment method.",
-    "payment_unavailable": "Payments are down for maintenance. Please ask a parent to try again later.",
+    "payment_unavailable": "Payments are unavailable right now. Please ask a parent to try again later.",
     "payment_failed": "Payment didn't go through.",
     "payment_not_found": "Payment not found.",
     "mock_disabled": "Test payments are turned off.",
@@ -991,14 +991,14 @@
     "payload_too_large": "That's too much data.",
     "admin_only": "Admins only.",
     "signature_name_length": "A signature name must be 1–20 characters.",
-    "signature_private_info": "Signatures can't contain phone numbers, emails or links.",
+    "signature_private_info": "Signatures can't contain phone numbers, email addresses, or links.",
     "signature_bad_word": "That name has a word that isn't nice. Please pick another!",
     "signature_premium_required": "This style is for VIP members.",
     "signature_style_invalid": "Invalid signature style.",
-    "signature_hand_invalid": "That hand signature didn't work — please sign again.",
+    "signature_hand_invalid": "We couldn't save your handwritten signature. Please try signing again.",
     "signature_invalid": "Invalid signature.",
     "signature_not_default": "You can only sign with your own signature.",
-    "exhibit_closed": "Submissions are open only on Saturday and Sunday (until 8:00 PM).",
+    "exhibit_closed": "Submissions open on Saturday and close on Sunday at 8:00 PM Vietnam time (UTC+7).",
     "exhibit_rules": "This picture doesn't meet the exhibition rules yet.",
     "exhibit_limit": "You've already submitted the maximum number of pictures this round.",
     "exhibit_cannot_withdraw": "This picture is already on display, so it can't be withdrawn.",
@@ -1018,12 +1018,12 @@
     "gotIt": "Got it",
     "start": "Let's go",
     "color": {
-      "intro": "Pick a picture you love and color it beautifully.",
+      "intro": "Pick a picture you love and make it your own!",
       "steps": [
         "Pick an age group, a theme, then a picture.",
-        "Choose \"Paint by number\" (with color hints) or \"Free coloring\".",
+        "Choose \"Color by number\" for color hints or \"Free coloring\" to use any colors you like.",
         "Pick a tool (crayon, brush, sticker…) and a color, then start coloring.",
-        "Made a mistake? Use Eraser or Undo.",
+        "Made a mistake? Use the eraser or tap \"Undo\".",
         "When you're done, tap \"Finish\" and choose a frame.",
         "Tap \"Download\" to save it or \"Print\" to print it."
       ],
@@ -1037,7 +1037,7 @@
         "Everyone colors the same picture. Tap \"Submit\" when done.",
         "Scores are calculated automatically, so it's fair for everyone.",
         "1st place earns +10 points, 2nd +8, and 3rd +6.",
-        "Prizes are Rank Points (to move up) and Card Points (to open cards)."
+        "Earn Rank Points to move up the ranks and Card Points to get cards in Card Packs."
       ],
       "tip": "Fill the whole picture, mix colors well, and get creative for a high score!"
     },
@@ -1045,21 +1045,21 @@
       "intro": "2–4 friends color one picture together.",
       "steps": [
         "Tap \"Create a room\" and pick a picture to color together.",
-        "Invite friends from your list, or share the room code with anyone.",
+        "Invite friends from your list, or share the room code with people you know.",
         "Invited friends tap \"Accept\". Others enter the code under \"Join a room\".",
         "Color together (up to 4 kids) and see everyone's colors instantly.",
         "Tap \"Save group picture\" and it goes to everyone's Collection and History."
       ],
-      "tip": "The right code gets anyone in, even non-friends, if the room isn't full."
+      "tip": "Anyone with the code can join if there's room, even if they're not on your friends list. Share it only with people you know."
     },
     "gacha": {
-      "intro": "Use Card Points to open rare picture cards and collect them.",
+      "intro": "Spend Card Points to get random picture cards for your collection.",
       "steps": [
         "Finish in the Arena's top 3 to earn Card Points.",
-        "Every 50 Card Points gets you 1 card.",
-        "Tap a glowing card on the stage to flip it, or tap \"Open N cards\".",
+        "Spend 50 Card Points to get one random card.",
+        "Tap a glowing card to flip it, or use the button to open multiple cards.",
         "There are 4 tiers: S (super rare), A (rare), B (uncommon), C (common).",
-        "Cards you open appear under Rare card pictures on the picture page.",
+        "Your cards appear in the \"Rare card pictures\" tab when you choose a picture to color.",
         "Tap a card to color it. The finished picture goes to your Collection."
       ],
       "tip": "You can gift or swap cards with friends on the Friends page."
@@ -1070,7 +1070,7 @@
         "Tap \"New storybook\" to open a new book.",
         "Type the title on the cover. Tap \"Choose a cover\" to change it.",
         "Turn to an inside page and tap \"Pick a picture from your collection\".",
-        "Write under the picture. To add a page, tap \"Add new page\".",
+        "Write below the picture. To add another page, tap \"Add a page\".",
         "Tap \"Save book\" to keep it.",
         "Then flip through it, download a PDF, or share it with family."
       ],
@@ -1083,7 +1083,7 @@
         "Missions include coloring, logging in, making friends, playing in the Arena, and more.",
         "The higher the level, the harder the missions and the more Ruby you earn.",
         "Finish all 3 missions to level up (there are 20 levels).",
-        "Spend Ruby in the Shop on pattern colors, frames, and storybook covers."
+        "Spend Ruby in the Shop on coloring patterns, picture frames, and storybook covers."
       ],
       "tip": "Avatar frames aren't for sale. You unlock them by ranking up in the Arena."
     }
