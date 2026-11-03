@@ -24,7 +24,7 @@ function productionConfig(overrides = {}) {
         '-e',
         `
     const {env} = await import(${JSON.stringify(configModule)});
-    console.log(JSON.stringify({otp:env.exposeDevOtp,mock:env.paymentMock,api:env.apiPublicUrl}));
+    console.log(JSON.stringify({otp:env.exposeDevOtp,mock:env.paymentMock,api:env.apiPublicUrl,phone:env.phoneOtpEnabled}));
   `,
       ],
       {
@@ -33,6 +33,7 @@ function productionConfig(overrides = {}) {
           NODE_ENV: 'production',
           JWT_SECRET: 'test-only-production-config-secret',
           EXPOSE_DEV_OTP: 'true',
+          PHONE_OTP_ENABLED: '',
           PAYMENT_MOCK: 'true',
           API_PUBLIC_URL: '',
           RENDER_EXTERNAL_URL: 'https://generated-api.onrender.com',
@@ -45,8 +46,14 @@ function productionConfig(overrides = {}) {
 }
 
 test('Production refuses simulated OTP/payments and uses the Render-assigned callback URL', () => {
-  assert.deepEqual(productionConfig(), { otp: false, mock: false, api: 'https://generated-api.onrender.com' });
+  assert.deepEqual(productionConfig(), { otp: false, mock: false, api: 'https://generated-api.onrender.com', phone: false });
   assert.equal(productionConfig({ API_PUBLIC_URL: 'https://api.example.com' }).api, 'https://api.example.com');
+});
+
+test('Phone OTP requires an explicit switch; SMS credentials alone cannot enable it', () => {
+  assert.equal(productionConfig({ TWILIO_ACCOUNT_SID: 'test-only-account', TWILIO_AUTH_TOKEN: 'test-only-token' }).phone, false);
+  assert.equal(productionConfig({ PHONE_OTP_ENABLED: 'true' }).phone, true);
+  assert.equal(productionConfig({ PHONE_OTP_ENABLED: 'false' }).phone, false);
 });
 
 test('Missing OTP delivery fails clearly and does not leave an unsent code or a cooldown', async () => {

@@ -4,6 +4,19 @@ CAPTCHA (ảnh 4 ký tự) do backend tự tạo. OTP (6 số) phải được n
 điện thoại/email; việc deploy backend không tự tạo tài khoản hoặc khóa gửi tin.
 Giữ `NODE_ENV=production`, `EXPOSE_DEV_OTP=false`, `PAYMENT_MOCK=false`.
 
+## Hiện tại: xác minh bằng email
+
+`PHONE_OTP_ENABLED` mặc định là `false`: đăng ký và quên mật khẩu chỉ hiện email.
+Backend từ chối khởi tạo OTP qua số điện thoại khi cờ này tắt, kể cả yêu cầu gửi
+trực tiếp từ giao diện cũ. Việc nhập khóa Twilio không tự bật SMS.
+Tài khoản đã đăng ký bằng số điện thoại vẫn đăng nhập bằng tên đăng nhập/mật khẩu;
+khôi phục bằng SMS tạm ngừng. Email khôi phục phải là email đã xác minh của tài
+khoản; không chuyển một tài khoản điện thoại thành tài khoản đã xác minh email.
+
+OTP email vẫn phải được gửi và xác minh bình thường. Không cần thêm cấu hình
+frontend; bản frontend gặp API cũ thiếu cờ `auth.phoneOtpEnabled` cũng mặc định
+ẩn SMS. Hai ô mật khẩu đăng ký và mật khẩu mới khi khôi phục có nút hiện/ẩn riêng.
+
 ## Email: Brevo qua HTTPS
 
 1. Đăng ký tài khoản tại https://www.brevo.com/ và hoàn tất bước xác minh/duyệt
@@ -23,8 +36,8 @@ Giữ `NODE_ENV=production`, `EXPOSE_DEV_OTP=false`, `PAYMENT_MOCK=false`.
    | `BREVO_SENDER_EMAIL` | Địa chỉ gửi đã xác minh/được duyệt trong Brevo |
    | `BREVO_SENDER_NAME` | `TinyTints` |
 
-5. Chọn lưu và triển khai lại dịch vụ. Đợi **Live** rồi vào đăng ký, chọn Email,
-   nhập CAPTCHA mới và thử nhận OTP. Kiểm tra cả Spam và trang transactional logs
+5. Chọn lưu và triển khai lại dịch vụ. Đợi **Live** rồi vào đăng ký, nhập email,
+   CAPTCHA mới và thử nhận OTP. Kiểm tra cả Spam và trang transactional logs
    trong Brevo. Key đúng chưa chứng minh thư đã tới hộp thư: sender phải được
    duyệt, tài khoản còn hạn mức và thư không bị nhà cung cấp/người nhận chặn.
 
@@ -50,7 +63,9 @@ Render Free nên dùng HTTPS; các cổng SMTP thường bị hạn chế trên 
 
    Nếu không dùng Messaging Service, thay dòng cuối bằng `TWILIO_PHONE_NUMBER`
    là số gửi SMS Twilio được cấp, có mã quốc gia. Không dùng số cá nhân tùy ý.
-4. Lưu và chờ redeploy. Thử số nhận do bạn sở hữu, xem **Messaging Logs** để kiểm
+4. Khi đã xác minh khả năng gửi thật và chấp nhận chi phí, đặt
+   `PHONE_OTP_ENABLED=true` trên backend để bật lại lựa chọn số điện thoại.
+   Lưu và chờ redeploy. Thử số nhận do bạn sở hữu, xem **Messaging Logs** để kiểm
    tra trạng thái nhận thực tế. Mã vùng đã hỗ trợ `+84`, `+1`; số Việt Nam cũ
    được đổi sang `+84` khi gửi tới Twilio.
 

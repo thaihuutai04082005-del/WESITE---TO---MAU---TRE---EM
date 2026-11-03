@@ -8,6 +8,8 @@ import AuthCard from './AuthCard';
 import Icon from '../../components/Icon';
 import PhoneInput from '../../components/PhoneInput';
 import { internationalPhone } from '../../../../shared/phone.mjs';
+import { useAuth } from '../../store/auth';
+import PasswordInput from '../../components/PasswordInput';
 
 export function Captcha({ value, onChange, onId, refreshKey }) {
   const { t } = useTranslation();
@@ -53,8 +55,9 @@ export function Captcha({ value, onChange, onId, refreshKey }) {
 export default function Register() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const phoneEnabled = useAuth((state) => state.meta?.auth?.phoneOtpEnabled === true);
   const [step, setStep] = useState('form');
-  const [form, setForm] = useState({ username: '', password: '', confirm: '', contactType: 'phone', contact: '' });
+  const [form, setForm] = useState({ username: '', password: '', confirm: '', contactType: 'email', contact: '' });
   const [phoneCountry, setPhoneCountry] = useState('VN');
   const [captchaText, setCaptchaText] = useState('');
   const [captchaId, setCaptchaId] = useState('');
@@ -64,6 +67,9 @@ export default function Register() {
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  useEffect(() => {
+    if (!phoneEnabled) setForm((current) => current.contactType === 'phone' ? { ...current, contactType: 'email', contact: '' } : current);
+  }, [phoneEnabled]);
 
   async function submit(e) {
     e.preventDefault();
@@ -119,7 +125,7 @@ export default function Register() {
   }
 
   return (
-    <AuthCard title={t('auth.register')} subtitle={t('auth.registerSubtitle')}>
+    <AuthCard title={t('auth.register')} subtitle={t(phoneEnabled ? 'auth.registerSubtitle' : 'auth.registerEmailSubtitle')}>
       <form onSubmit={submit} className="space-y-4">
         <div>
           <label className="label" htmlFor="r-username">{t('auth.username')}</label>
@@ -129,27 +135,27 @@ export default function Register() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="label" htmlFor="r-password">{t('auth.password')}</label>
-            <input id="r-password" type="password" className="input" value={form.password} onChange={set('password')} required minLength={6} autoComplete="new-password" />
+            <PasswordInput id="r-password" label={t('auth.password')} value={form.password} onChange={set('password')} required minLength={6} autoComplete="new-password" />
           </div>
           <div>
             <label className="label" htmlFor="r-confirm">{t('auth.confirmPassword')}</label>
-            <input id="r-confirm" type="password" className="input" value={form.confirm} onChange={set('confirm')} required autoComplete="new-password" />
+            <PasswordInput id="r-confirm" label={t('auth.confirmPassword')} value={form.confirm} onChange={set('confirm')} required autoComplete="new-password" />
           </div>
         </div>
         <p className="-mt-2 text-sm text-muted">{t('auth.passwordHint')}</p>
         <Captcha value={captchaText} onChange={setCaptchaText} onId={setCaptchaId} refreshKey={capKey} />
         <fieldset>
-          <legend className="label">{t('auth.guardian')}</legend>
-          <p className="mb-2 text-sm text-muted">{t('auth.guardianHint')}</p>
-          <div className="mb-2 flex gap-2">
+          <legend className="label">{t(phoneEnabled ? 'auth.guardian' : 'auth.guardianEmail')}</legend>
+          <p className="mb-2 text-sm text-muted">{t(phoneEnabled ? 'auth.guardianHint' : 'auth.emailOtpHint')}</p>
+          {phoneEnabled && <div className="mb-2 flex gap-2">
             {['phone', 'email'].map((k) => (
               <label key={k} className={`btn-ghost flex-1 text-base ${form.contactType === k ? 'border-primary text-primary' : ''}`}>
                 <input type="radio" className="sr-only" checked={form.contactType === k} onChange={() => setForm({ ...form, contactType: k, contact: '' })} />
                 {t(`auth.contact.${k}`)}
               </label>
             ))}
-          </div>
-          {form.contactType === 'phone' ? (
+          </div>}
+          {phoneEnabled && form.contactType === 'phone' ? (
             <PhoneInput value={form.contact} onChange={(contact) => setForm((prev) => ({ ...prev, contact }))} country={phoneCountry} onCountryChange={setPhoneCountry} />
           ) : (
             <input className="input" type="email" value={form.contact} onChange={set('contact')} required placeholder="parent@example.com" autoComplete="email" aria-label={t('auth.contact.email')} />

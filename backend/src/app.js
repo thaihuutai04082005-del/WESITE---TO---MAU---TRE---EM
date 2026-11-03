@@ -55,6 +55,7 @@ export function createApp() {
       avatars: AVATARS,
       payments: providerStatus(),
       googleClientId: env.googleClientId || null,
+      auth: { phoneOtpEnabled: env.phoneOtpEnabled },
     }),
   );
 

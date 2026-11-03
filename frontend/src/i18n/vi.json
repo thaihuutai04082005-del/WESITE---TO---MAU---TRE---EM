@@ -82,6 +82,10 @@
     "bookBubble": "Xin chào!"
   },
   "auth": {
+    "forgotEmailContact": "Nhập email phụ huynh đã được xác minh khi đăng ký.",
+    "emailOtpHint": "Mã OTP sẽ được gửi qua email. Hãy dùng địa chỉ email phụ huynh có thể truy cập; email này cũng dùng để khôi phục mật khẩu.",
+    "guardianEmail": "Email phụ huynh",
+    "registerEmailSubtitle": "Tạo tên đăng nhập, mật khẩu và xác minh email phụ huynh.",
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
     "register": "Đăng ký",
@@ -102,7 +106,7 @@
     "guardianHint": "Chỉ dùng để khôi phục mật khẩu. Hệ thống sẽ gửi mã OTP để phụ huynh xác nhận.",
     "contact": {
       "phone": "Số điện thoại",
-      "email": "Email (Gmail)"
+      "email": "Email"
     },
     "otpTitle": "Nhập mã xác nhận",
     "otpSent": "Mã gồm 6 số đã được gửi tới {{to}}.",
@@ -942,6 +946,7 @@
     "weak_password": "Mật khẩu cần có cả chữ và số.",
     "invalid_email": "Email chưa đúng.",
     "invalid_phone": "Nhập số Việt Nam (+84) hoặc số theo định dạng Mỹ (+1) hợp lệ. Với +1, nhập đủ 3 số mã vùng và 7 số điện thoại.",
+    "phone_otp_unavailable": "OTP qua số điện thoại đang tạm ngừng. Vui lòng dùng email.",
     "invalid_contact_type": "Hãy chọn SĐT hoặc Email.",
     "otp_invalid": "Mã không hợp lệ.",
     "otp_expired": "Mã đã hết hạn, hãy gửi lại.",

@@ -11,7 +11,7 @@ import { touchLogin, grantAvatarFrame } from '../services/progression.js';
 import { planStatus } from '../services/quota.js';
 import { unreadCount } from '../services/notifications.js';
 import { vnDateKey } from '../utils/time.js';
-import { badRequest, conflict, unauthorized, str } from '../utils/http.js';
+import { badRequest, conflict, unauthorized, str, HttpError } from '../utils/http.js';
 
 const USERNAME_RE = /^[a-zA-Z0-9_.]{4,20}$/;
 
@@ -27,6 +27,7 @@ export function captcha(_req, res) {
 
 export async function registerStart(req, res) {
   const { username, password, captchaId, captchaText, contactType, contact, language } = req.body || {};
+  if (contactType === 'phone' && !env.phoneOtpEnabled) throw new HttpError(503, 'phone_otp_unavailable');
   if (!verifyCaptcha(captchaId, captchaText)) throw badRequest('captcha_wrong');
   const uname = str(username, { min: 4, max: 20, name: 'username' });
   if (!USERNAME_RE.test(uname)) throw badRequest('invalid_username');
@@ -108,6 +109,7 @@ export async function google(req, res) {
 
 export async function forgotStart(req, res) {
   const { contactType, contact } = req.body || {};
+  if (contactType === 'phone' && !env.phoneOtpEnabled) throw new HttpError(503, 'phone_otp_unavailable');
   const target = normalizeContact(contactType, contact);
   const accounts = await User.findByGuardian(target);
   // Luôn trả cùng một thông điệp để không lộ việc liên hệ này có tồn tại hay không.

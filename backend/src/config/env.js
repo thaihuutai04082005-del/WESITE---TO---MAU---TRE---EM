@@ -28,6 +28,8 @@ export const env = {
   jwtExpires: process.env.JWT_EXPIRES || '30d',
   // Trả mã OTP trong response khi chưa cấu hình SMTP/SMS (chỉ môi trường dev).
   exposeDevOtp: !isProd && bool(process.env.EXPOSE_DEV_OTP, true),
+  // Temporarily use email verification only. Enable SMS explicitly after configuring delivery.
+  phoneOtpEnabled: bool(process.env.PHONE_OTP_ENABLED, false),
   // Trang Bóc thẻ: lật sẵn (xem trước) toàn bộ thẻ trong lúc đang hoàn thiện bộ thẻ. Đặt GACHA_PREVIEW=false để ẩn thẻ chưa có.
   gachaPreview: bool(process.env.GACHA_PREVIEW, true),
   smtp: {

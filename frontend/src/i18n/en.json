@@ -82,6 +82,10 @@
     "bookBubble": "Hello!"
   },
   "auth": {
+    "forgotEmailContact": "Enter the parent or guardian email address verified when you signed up.",
+    "emailOtpHint": "We will email a one-time code to verify this address. Use an email your parent or guardian can access; it is also used to reset your password.",
+    "guardianEmail": "Parent or guardian email",
+    "registerEmailSubtitle": "Create a username and password, then verify a parent or guardian's email.",
     "login": "Log in",
     "logout": "Log out",
     "register": "Sign up",
@@ -941,6 +945,7 @@
     "weak_password": "Passwords need both letters and numbers.",
     "invalid_email": "That email address isn't valid.",
     "invalid_phone": "Enter a valid Vietnamese (+84) or US-format (+1) phone number. For +1, include the 3-digit area code and 7-digit local number.",
+    "phone_otp_unavailable": "Phone verification is temporarily unavailable. Please use email.",
     "invalid_contact_type": "Please choose phone or email.",
     "otp_invalid": "That code isn't valid.",
     "otp_expired": "That code has expired. Please request a new one.",

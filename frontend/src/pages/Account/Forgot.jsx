@@ -1,5 +1,5 @@
 // Khôi phục mật khẩu (Mục 5.2): mã gửi tới đúng SĐT/Email phụ huynh đã xác minh lúc đăng ký.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -7,12 +7,15 @@ import { errorText } from '../../lib/format';
 import AuthCard from './AuthCard';
 import PhoneInput from '../../components/PhoneInput';
 import { internationalPhone } from '../../../../shared/phone.mjs';
+import { useAuth } from '../../store/auth';
+import PasswordInput from '../../components/PasswordInput';
 
 export default function Forgot() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const phoneEnabled = useAuth((state) => state.meta?.auth?.phoneOtpEnabled === true);
   const [step, setStep] = useState('contact');
-  const [contactType, setType] = useState('phone');
+  const [contactType, setType] = useState('email');
   const [phoneCountry, setPhoneCountry] = useState('VN');
   const [contact, setContact] = useState('');
   const [start, setStart] = useState(null);
@@ -21,6 +24,9 @@ export default function Forgot() {
   const [username, setUsername] = useState('');
   const [pw, setPw] = useState('');
   const [err, setErr] = useState('');
+  useEffect(() => {
+    if (!phoneEnabled && contactType === 'phone') { setType('email'); setContact(''); }
+  }, [phoneEnabled, contactType]);
 
   const run = (fn) => async (e) => {
     e.preventDefault();
@@ -33,22 +39,22 @@ export default function Forgot() {
   };
 
   return (
-    <AuthCard title={t('auth.forgotTitle')} subtitle={t(`auth.forgotStep.${step}`, { to: start?.sentTo })}>
+    <AuthCard title={t('auth.forgotTitle')} subtitle={t(step === 'contact' && !phoneEnabled ? 'auth.forgotEmailContact' : `auth.forgotStep.${step}`, { to: start?.sentTo })}>
       {step === 'contact' && (
         <form className="space-y-4" onSubmit={run(async () => {
           const r = await api.post('/auth/forgot/start', { contactType, contact: contactType === 'phone' ? internationalPhone(contact, phoneCountry) : contact });
           setStart(r);
           setStep('code');
         })}>
-          <div className="flex gap-2">
+          {phoneEnabled && <div className="flex gap-2">
             {['phone', 'email'].map((k) => (
               <label key={k} className={`btn-ghost flex-1 text-base ${contactType === k ? 'border-primary text-primary' : ''}`}>
                 <input type="radio" className="sr-only" checked={contactType === k} onChange={() => { setType(k); setContact(''); }} />
                 {t(`auth.contact.${k}`)}
               </label>
             ))}
-          </div>
-          {contactType === 'phone' ? (
+          </div>}
+          {phoneEnabled && contactType === 'phone' ? (
             <PhoneInput value={contact} onChange={setContact} country={phoneCountry} onCountryChange={setPhoneCountry} />
           ) : (
             <input className="input" type="email" autoComplete="email" value={contact} onChange={(e) => setContact(e.target.value)} required aria-label={t('auth.contact.email')} />
@@ -90,7 +96,7 @@ export default function Forgot() {
           </div>
           <div>
             <label className="label" htmlFor="newpw">{t('auth.newPassword')}</label>
-            <input id="newpw" type="password" className="input" value={pw} onChange={(e) => setPw(e.target.value)} required minLength={6} autoComplete="new-password" />
+            <PasswordInput id="newpw" label={t('auth.newPassword')} value={pw} onChange={(e) => setPw(e.target.value)} required minLength={6} autoComplete="new-password" />
             <p className="mt-1 text-sm text-muted">{t('auth.passwordHint')}</p>
           </div>
           {err && <p className="font-bold text-danger">{err}</p>}

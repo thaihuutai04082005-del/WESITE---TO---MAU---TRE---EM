@@ -15,6 +15,7 @@ import { io as ioc } from 'socket.io-client';
 const { env: testEnv } = await import('../src/config/env.js');
 // Test runs must never send real SMS or email, even when credentials are present.
 Object.assign(testEnv, {
+  phoneOtpEnabled: true, // Exercise optional/legacy phone flows; production defaults to email-only.
   brevo: {},
   twilio: {},
   smtp: {},
@@ -1262,5 +1263,49 @@ test('Theme entitlement metadata is never cached and the lightweight access quer
   for (const response of [full,light]) {
     assert.match(response.headers.get('cache-control'), /private, no-store/);
     assert.match(response.headers.get('vary'), /Authorization/);
+  }
+});
+
+test('Email-only signup and recovery reject SMS, require the email OTP and preserve legacy phone logins', async () => {
+  const legacy = await register('phonelegacy1');
+  const before = (await getDb().prepare('SELECT count(*) AS n FROM otp_codes').get()).n;
+  const oldEnabled = testEnv.phoneOtpEnabled;
+  testEnv.phoneOtpEnabled = false;
+  try {
+    const meta = await api('GET', '/meta');
+    assert.equal(meta.body.auth.phoneOtpEnabled, false);
+    const cap = (await api('GET', '/auth/captcha')).body;
+    const fields = { username:'emailonly1', password:'email12345', captchaId:cap.captchaId, captchaText:_peekCaptcha(cap.captchaId), language:'vi' };
+    const blocked = await api('POST', '/auth/register/start', {...fields, contactType:'phone', contact:legacy.phone});
+    assert.equal(blocked.status, 503);
+    assert.equal(blocked.body.error.code, 'phone_otp_unavailable');
+    for (const contact of [legacy.phone, '0999999999']) {
+      const reset = await api('POST', '/auth/forgot/start', {contactType:'phone', contact});
+      assert.equal(reset.status, 503);
+      assert.equal(reset.body.error.code, 'phone_otp_unavailable');
+    }
+    assert.equal((await getDb().prepare('SELECT count(*) AS n FROM otp_codes').get()).n, before, 'Disabled SMS must not issue a code or reserve a cooldown');
+    assert.equal((await api('POST', '/auth/login', {username:'phonelegacy1',password:'abc12345'})).status, 200);
+    const email = 'parent-email-only@example.invalid';
+    // SMS rejection leaves this CAPTCHA usable for the permitted email method.
+    const sent = await api('POST', '/auth/register/start', {...fields,contactType:'email',contact:email});
+    assert.equal(sent.status, 200);
+    assert.equal(await getDb().prepare('SELECT id FROM users WHERE username = ?').get(fields.username), undefined);
+    const wrong = sent.body.devCode === '000000' ? '111111' : '000000';
+    assert.equal((await api('POST','/auth/register/verify',{registrationId:sent.body.registrationId,code:wrong})).body.error.code, 'otp_wrong');
+    assert.equal((await api('POST','/auth/register/verify',{registrationId:sent.body.registrationId,code:sent.body.devCode})).status, 201);
+    const saved = await getDb().prepare('SELECT guardian_type,guardian_contact FROM users WHERE username = ?').get(fields.username);
+    assert.equal(saved.guardian_type, 'email');
+    assert.equal(saved.guardian_contact, email);
+    assert.equal((await api('POST','/auth/login',{username:fields.username,password:fields.password})).status, 200);
+    const reset = await api('POST','/auth/forgot/start',{contactType:'email',contact:email});
+    assert.equal(reset.status, 200);
+    const verified = await api('POST','/auth/forgot/verify',{resetId:reset.body.resetId,code:reset.body.devCode});
+    assert.equal(verified.status, 200);
+    assert.equal((await api('POST','/auth/forgot/reset',{resetToken:verified.body.resetToken,username:fields.username,newPassword:'changed12345'})).status, 200);
+    assert.equal((await api('POST','/auth/login',{username:fields.username,password:fields.password})).status, 401);
+    assert.equal((await api('POST','/auth/login',{username:fields.username,password:'changed12345'})).status, 200);
+  } finally {
+    testEnv.phoneOtpEnabled = oldEnabled;
   }
 });
