@@ -70,7 +70,7 @@ export async function certificate(req, res) {
           line2: 'Tranh được yêu thích nhất tuần',
           board: BOARD_LABEL.vi[e.board],
           line3: `Tuần ${week} · ${e.total} lượt cảm xúc từ các bạn`,
-          footer: 'Giấy khen do Hội trường triển lãm — Sắc Màu Của Bé trao tặng',
+          footer: 'Giấy khen do Hội trường triển lãm — Bé Tô Màu trao tặng',
         };
   const pdf = await certificatePdf({ ...text, nickname: e.author.nickname, image });
   res.setHeader('Content-Type', 'application/pdf');
