@@ -12,6 +12,13 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, 'dist');
 const assets = await staticAssetPaths(resolve(root, 'public'));
 assertNoAppAssetCollisions(assets);
+const googleVerificationFiles = assets.filter((path) => /^\/google[a-f0-9]+\.html$/.test(path));
+// Pages redirects real .html files to clean URLs. Google needs its exact file URL.
+// Serve an extensionless copy through an explicit 200 rewrite instead.
+for (const path of googleVerificationFiles) {
+  await writeFile(resolve(dist, path.slice(1, -5)), await readFile(resolve(root, 'public', path.slice(1))));
+  await rm(resolve(dist, path.slice(1)));
+}
 const configured = loadEnv('production', root, 'VITE_SITE_URL');
 const origin = siteOrigin(process.env.VITE_SITE_URL || configured.VITE_SITE_URL || undefined);
 const template = (await readFile(resolve(dist, 'index.html'), 'utf8'))
@@ -56,11 +63,14 @@ try {
   const animationRedirects = assets.filter((path) => path.startsWith('/animations/together/'))
     .map((path) => `${path.replace('/animations/together/', '/together/')} ${path} 301`);
   const appUrls = [...APP_ROUTES.filter((path) => !path.includes('*')), ...APP_ROUTES.filter((path) => path.includes('*'))];
-  await writeFile(resolve(dist, '_redirects'), [...legacyUrls, ...animationRedirects, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
+  const verificationUrls = googleVerificationFiles.map((path) => `${path} ${path.slice(0, -5)} 200`);
+  await writeFile(resolve(dist, '_redirects'), [...verificationUrls, ...legacyUrls, ...animationRedirects, ...cleanAppUrls, ...appUrls.map((path) => `${path} ${APP_SHELL_PATH} 200`)].join('\n') + '\n');
   const appHeaders = [...APP_ROUTES, APP_SHELL_PATH].map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, follow`);
   const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
   const previewHeaders = '/picture-previews/*\n  Cache-Control: public, max-age=31536000, immutable';
-  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders].join('\n\n') + '\n');
+  const verificationHeaders = googleVerificationFiles.flatMap((path) => [path, path.slice(0, -5)])
+    .map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, nofollow`);
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, ...verificationHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });
