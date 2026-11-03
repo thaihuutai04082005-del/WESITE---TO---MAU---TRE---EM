@@ -37,6 +37,15 @@ Nếu tạo bằng **New → Web Service** thay vì Blueprint, chọn cùng kho 
 
 ## 2. Nối giao diện Cloudflare
 
+Backend của dự án hiện dùng `https://tinytints-api.onrender.com`. File
+`frontend/.env.production` đã đặt sẵn URL API và Socket.io cho địa chỉ này.
+Cloudflare sẽ dùng các giá trị đó khi build nhánh `main`; không cần nhập lại nếu
+chưa đặt hai biến `VITE_API_URL` và `VITE_SOCKET_URL` trong dashboard.
+
+Nếu đã đặt hai biến trong Cloudflare, kiểm tra chúng khớp địa chỉ bên dưới vì
+biến ở dashboard được ưu tiên hơn file. Khi đổi backend, cập nhật file hoặc
+ghi đè bằng cấu hình Cloudflare theo các bước sau.
+
 Trong **Cloudflare → Workers & Pages → tinytints → Settings → Variables and Secrets**
 (tên mục có thể là Environment variables), thêm cho môi trường **Production**:
 
