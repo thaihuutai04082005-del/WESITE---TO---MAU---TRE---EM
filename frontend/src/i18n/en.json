@@ -531,7 +531,8 @@
     },
     "providerHint": {
       "bank": "Scan the QR code with your Vietnamese banking app or MoMo. This is a one-time payment. We'll remind you before your plan expires.",
-      "paypal": "Renews automatically each month or year, depending on your plan. Cancel anytime."
+      "paypal": "Renews automatically each month or year, depending on your plan. Cancel anytime.",
+      "momo": "One-time payment with your MoMo wallet."
     },
     "perMonthUsd": "/month",
     "perYearUsd": "/year",
@@ -548,7 +549,7 @@
       "copied": "Copied!",
       "copy": "Copy"
     },
-    "redirecting": "Redirecting to PayPal…",
+    "redirecting": "Redirecting to checkout…",
     "manage": {
       "title": "Your plan",
       "active": "{{plan}} · active until {{date}}",
@@ -601,12 +602,16 @@
       "chooseYear": "Choose VIP Yearly"
     },
     "save": "Save 79,000 VND (about 35%)",
-    "saveUsd": "Save {{amount}} (about {{pct}}%)"
+    "saveUsd": "Save {{amount}} (about {{pct}}%)",
+    "unavailable": "Currently unavailable",
+    "noMethods": "Checkout is temporarily unavailable. Please try again later."
   },
   "payment": {
     "pending": "Confirming payment…",
     "paid": "Payment successful!",
-    "failed": "Payment didn't go through"
+    "failed": "Payment didn't go through",
+    "waitingHint": "Confirmation has not arrived yet. Please check again shortly before making another payment.",
+    "retry": "Check again"
   },
   "upgrade": {
     "title": "You're out of pictures for today!",
@@ -957,7 +962,7 @@
     "invalid_thumbnail": "Invalid preview image.",
     "invalid_plan": "Invalid plan.",
     "invalid_provider": "Invalid payment method.",
-    "payment_unavailable": "Payments are unavailable right now. Please ask a parent to try again later.",
+    "payment_unavailable": "This payment method is currently unavailable.",
     "payment_failed": "Payment didn't go through.",
     "payment_not_found": "Payment not found.",
     "mock_disabled": "Test payments are turned off.",

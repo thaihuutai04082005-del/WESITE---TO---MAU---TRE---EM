@@ -4,34 +4,36 @@ import * as User from '../models/user.js';
 import { certificatePdf } from '../services/pdf.js';
 import { badRequest } from '../utils/http.js';
 
-const me = (req) => User.findById(req.user.id);
+const me = async (req) => await User.findById(req.user.id);
 
-export const status = (req, res) => res.json(Ex.status(req.user.id));
-export const mine = (req, res) => res.json({ ...Ex.status(req.user.id), entries: Ex.mine(req.user.id) });
+export const status = async (req, res) => res.json(await Ex.status(req.user.id));
+export const mine = async (req, res) => res.json({ ...(await Ex.status(req.user.id)), entries: await Ex.mine(req.user.id) });
 
-export function submit(req, res) {
-  const entry = Ex.submit(me(req), Number(req.body?.artworkId));
-  res.status(201).json({ entry: { id: entry.id, status: entry.status, roundKey: entry.round_key, board: entry.board }, ...Ex.status(req.user.id) });
+export async function submit(req, res) {
+  const entry = await Ex.submit(await me(req), Number(req.body?.artworkId));
+  res
+    .status(201)
+    .json({ entry: { id: entry.id, status: entry.status, roundKey: entry.round_key, board: entry.board }, ...(await Ex.status(req.user.id)) });
 }
 
-export function withdraw(req, res) {
-  const e = Ex.withdraw(me(req), Number(req.params.id));
-  res.json({ entry: { id: e.id, status: e.status }, ...Ex.status(req.user.id) });
+export async function withdraw(req, res) {
+  const e = await Ex.withdraw(await me(req), Number(req.params.id));
+  res.json({ entry: { id: e.id, status: e.status }, ...(await Ex.status(req.user.id)) });
 }
 
-export const hall = (req, res) => res.json(Ex.hall(req.user.id));
-export const wall = (req, res) => res.json(Ex.wall(req.user.id, Number(req.query.offset) || 0, Number(req.query.limit) || 5));
+export const hall = async (req, res) => res.json(await Ex.hall(req.user.id));
+export const wall = async (req, res) => res.json(await Ex.wall(req.user.id, Number(req.query.offset) || 0, Number(req.query.limit) || 5));
 
-export function react(req, res) {
+export async function react(req, res) {
   const emoji = req.body?.emoji ?? null;
   if (emoji !== null && typeof emoji !== 'string') throw badRequest('invalid_input');
-  res.json(Ex.react(me(req), Number(req.params.id), emoji));
+  res.json(await Ex.react(await me(req), Number(req.params.id), emoji));
 }
 
-export const report = (req, res) => res.json(Ex.report(me(req), Number(req.params.id)));
+export const report = async (req, res) => res.json(await Ex.report(await me(req), Number(req.params.id)));
 
 // Khoe & chia sẻ (Đợt 3)
-export const showcase = (req, res) => res.json(Ex.showcase(Number(req.params.userId), req.user.id));
+export const showcase = async (req, res) => res.json(await Ex.showcase(Number(req.params.userId), req.user.id));
 
 const IMG_RE = /^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/;
 const BOARD_LABEL = {
@@ -40,14 +42,15 @@ const BOARD_LABEL = {
 };
 const dm = (key, days, withYear, lang = 'vi') => {
   const d = new Date(Date.parse(`${key}T00:00:00Z`) + days * 86400000);
-  if (lang === 'en') return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(withYear ? { year: 'numeric' } : {}), timeZone: 'UTC' });
+  if (lang === 'en')
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(withYear ? { year: 'numeric' } : {}), timeZone: 'UTC' });
   const s = `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
   return withYear ? `${s}/${d.getUTCFullYear()}` : s;
 };
 
 /** Giấy khen PDF cho tranh đạt danh hiệu. Ảnh tranh do trình duyệt vẽ từ dữ liệu tô (chỉ bé tự tải cho mình). */
 export async function certificate(req, res) {
-  const e = Ex.awardedEntry(req.user.id, Number(req.params.id));
+  const e = await Ex.awardedEntry(req.user.id, Number(req.params.id));
   const image = req.body?.image;
   if (image != null && (!IMG_RE.test(image) || image.length > 3 * 1024 * 1024)) throw badRequest('invalid_input');
   const lang = req.body?.lang === 'en' ? 'en' : 'vi';
@@ -79,9 +82,9 @@ export async function certificate(req, res) {
 }
 
 // Quản trị
-export const queue = (_req, res) => res.json(Ex.reviewQueue());
-export function approve(req, res) {
+export const queue = async (_req, res) => res.json(await Ex.reviewQueue());
+export async function approve(req, res) {
   const ids = Array.isArray(req.body?.ids) ? req.body.ids : [];
-  res.json(Ex.approve(req.user.id, ids));
+  res.json(await Ex.approve(req.user.id, ids));
 }
-export const reject = (req, res) => res.json(Ex.reject(req.user.id, req.params.id, req.body?.rule));
+export const reject = async (req, res) => res.json(await Ex.reject(req.user.id, req.params.id, req.body?.rule));

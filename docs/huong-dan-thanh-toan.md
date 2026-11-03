@@ -1,67 +1,81 @@
-# Hướng dẫn bật thanh toán thật
+# Thiết lập thanh toán TinyTints
 
-Web có 2 cách trả tiền cho Gói Tháng / Gói Năm:
+Mã hỗ trợ chuyển khoản VietQR qua SePay (VND, trả từng lần), PayPal Subscriptions (USD, tự gia hạn), và cổng MoMo đối tác (VND, trả từng lần). Ví MoMo cá nhân không thay thế bộ khóa MoMo đối tác. Khả năng quét VietQR bằng một ứng dụng ví phụ thuộc ứng dụng và ngân hàng.
 
-| Cách | Tiền tệ | Tự gia hạn? | Tiền về đâu |
-|---|---|---|---|
-| **Quét QR / chuyển khoản** (app ngân hàng hoặc MoMo) | VNĐ | Không — web nhắc trước khi hết hạn 3 ngày | Thẳng vào ACB 35391537 |
-| **PayPal** | USD | Có — tự trừ mỗi kỳ, huỷ lúc nào cũng được | Ví PayPal → rút về ACB 35391537 |
+**Chưa bật nhận tiền trên web hiện tại.** Trước khi sửa biến môi trường hoặc triển khai backend, phải có bản sao dữ liệu online và hoàn tất lưu trữ bền vững. SQLite trên ổ tạm Render Free có thể mất khi instance thay thế. File database trên máy localhost không chứa những thay đổi chỉ có trên web online. Xem [lưu dữ liệu lâu dài](luu-du-lieu-lau-dai.md).
 
-Chưa điền khoá nào thì web chạy chế độ **giả lập** (có nút "Hoàn tất giả lập") để thử.
+## Bắt đầu với chuyển khoản VietQR / SePay
 
-> ⚠️ **Bắt buộc:** web phải được đưa lên mạng với tên miền **https** (ví dụ `https://tinytints.app`).
-> PayPal và SePay cần gọi vào web để báo "đã nhận tiền". Họ không gọi được vào máy tính
-> đang chạy `chay-web.bat` ở nhà.
+1. Mở https://sepay.vn, đăng ký và kiểm tra ngân hàng, loại tài khoản và gói dịch vụ được hỗ trợ. Giá và điều kiện do SePay/ngân hàng quy định; không mặc định miễn phí.
+2. Liên kết tài khoản ngân hàng của chính bạn theo hướng dẫn trong SePay. Xác nhận tên chủ tài khoản và số tài khoản trước khi nhận tiền.
+3. Tạo webhook báo **tiền vào**, URL:
+   `https://tinytints-api.onrender.com/api/payments/sepay/webhook`
+4. Chọn xác thực bằng **API Key** và tự tạo khóa bí mật dài, ngẫu nhiên. Header phía SePay phải là `Authorization: Apikey <khóa>`. Đây là khóa xác thực webhook do bạn đặt; không phải tùy tiện dùng một API token khác của SePay.
+5. Khi dữ liệu đã an toàn, nhập các biến sau trong Render → tinytints-api → Environment:
 
-Bên dưới, `API_PUBLIC_URL` là địa chỉ web đã đưa lên mạng.
-
----
-
-## 1. Quét QR → tiền vào ACB (dùng SePay)
-
-QR đã có sẵn số tài khoản, số tiền và nội dung (dạng `BTMxxxxxx`). SePay đọc biến động số dư ACB và báo cho web. Web khớp mã nội dung rồi mở gói ngay, thường dưới 1 phút.
-
-1. Đăng ký tại **https://sepay.vn**, rồi liên kết tài khoản **ACB 35391537** (SePay hướng dẫn từng bước).
-2. Vào **Tích hợp WebHooks → Thêm webhook**:
-   - **URL:** `API_PUBLIC_URL/api/payments/sepay/webhook`
-   - **Kiểu chứng thực:** `API Key`. Tự đặt một chuỗi bí mật dài, ví dụ `bTm-9f3k...`.
-   - **Sự kiện:** chỉ chọn *Tiền vào*.
-3. Điền vào `backend/.env`:
-   ```
-   SEPAY_API_KEY=<chuỗi bí mật vừa đặt>
-   BANK_ACCOUNT_NAME=<TEN CHU TAI KHOAN IN HOA KHONG DAU>
+   ```dotenv
+   BANK_CODE=<mã ngân hàng, ví dụ ACB hoặc MB>
+   BANK_ACCOUNT_NO=<số tài khoản đã liên kết>
+   BANK_ACCOUNT_NAME=<tên chủ tài khoản>
+   SEPAY_API_KEY=<đúng khóa xác thực webhook>
+   # Chỉ thêm BANK_BIN nếu ngân hàng chưa có trong danh sách mã hỗ trợ.
    ```
 
-Nếu phụ huynh chuyển thiếu tiền, gói **không** mở. Cũng nên kiểm tra lại tài khoản trong trang quản trị.
+Web tạo số tiền và mã nội dung riêng cho từng đơn. Chỉ ghi nhận khi callback đúng khóa, đúng tài khoản nhận, có mã giao dịch hợp lệ và số tiền đủ. Thông báo trùng không cộng thêm gói. Đơn thử nghiệm không nhận callback tiền thật. Không hiển thị QR số tài khoản mẫu khi chưa cấu hình.
 
-## 2. PayPal tự gia hạn (USD)
+## PayPal Business
 
-1. Tạo tài khoản **PayPal Business** tại https://www.paypal.com/vn/business. Liên kết thẻ hoặc tài khoản **ACB 35391537** để rút tiền.
-2. Vào **https://developer.paypal.com → Apps & Credentials**, chọn tab **Live**, bấm **Create App**. Chép **Client ID** và **Secret**.
-3. Trong app vừa tạo, vào **Webhooks → Add Webhook**:
-   - **URL:** `API_PUBLIC_URL/api/payments/paypal/webhook`
-   - **Sự kiện:** chọn `Billing subscription *` (activated, cancelled, suspended, expired) và `Payment sale completed`.
-4. Điền vào `backend/.env`:
+1. Đăng ký PayPal Business, hoàn tất xác minh và điều kiện nhận tiền của PayPal.
+2. Trong https://developer.paypal.com → Apps & Credentials, tạo app **Sandbox** để thử trước. Dùng tài khoản người mua Sandbox riêng.
+3. Tạo webhook trong cùng app, URL:
+   `https://tinytints-api.onrender.com/api/payments/paypal/webhook`
+   Chọn sự kiện kích hoạt/hủy/tạm dừng/hết hạn thuê bao và `PAYMENT.SALE.COMPLETED`. Lưu cả **Webhook ID**.
+4. Biến môi trường cho môi trường thử riêng:
+
+   ```dotenv
+   PAYPAL_CLIENT_ID=<Client ID của app>
+   PAYPAL_CLIENT_SECRET=<Secret của app>
+   PAYPAL_WEBHOOK_ID=<Webhook ID trong cùng app>
+   PAYPAL_API_BASE=https://api-m.sandbox.paypal.com
    ```
-   PAYPAL_CLIENT_ID=<Client ID>
-   PAYPAL_CLIENT_SECRET=<Secret>
-   PAYPAL_API_BASE=https://api-m.paypal.com
-   ```
-   Không cần tạo gói trong PayPal: web tự tạo VIP Tháng ($0.79) và VIP Năm ($5.99) ở lần thanh toán đầu tiên.
 
-Mỗi kỳ PayPal tự trừ tiền và web tự cộng thêm 1 tháng hoặc 1 năm. Phụ huynh bấm **"Huỷ tự gia hạn"** ở trang *Gói* thì vẫn dùng hết kỳ đã trả. Tiền nằm trong ví PayPal; vào PayPal bấm **Rút tiền** để chuyển về ACB.
+5. Sau khi thử thành công và chuẩn bị chạy thật, tạo app/webhook trong **Live**, thay toàn bộ bộ khóa cùng Webhook ID, đổi `PAYPAL_API_BASE=https://api-m.paypal.com`. Production từ chối cấu hình Sandbox.
 
-## 3. Bật chạy thật
+Không bắt buộc đặt `PAYPAL_PLAN_MONTH` / `PAYPAL_PLAN_YEAR`: web tự tạo gói từ giá trong `backend/src/config/constants.js`. Nếu dùng gói tạo sẵn, phải đúng giá, tiền tệ và chu kỳ. Giá mỗi thuê bao được lưu theo đơn tạo ban đầu.
 
-Trong `backend/.env`:
+Web xác thực chữ ký thông báo qua PayPal rồi hỏi lại lịch sử giao dịch; chỉ capture `COMPLETED` đúng số tiền và USD mới mở VIP. Chỉ đồng ý thuê bao hoặc trạng thái `ACTIVE` không đủ chứng minh đã trả tiền. Mỗi mã giao dịch được ghi nhận một lần. Hủy tự gia hạn giữ quyền dùng đến hết kỳ đã cấp. Hoàn tiền/tranh chấp cần đối soát và xử lý quyền sử dụng riêng; chưa có luồng tự động thu hồi quyền sau hoàn tiền.
+
+## MoMo đối tác
+
+Đăng ký và được MoMo duyệt tài khoản merchant trên https://business.momo.vn. Bộ khóa test/live do MoMo cấp phải khớp môi trường. Không dùng số điện thoại ví cá nhân làm partner code.
+
+```dotenv
+MOMO_PARTNER_CODE=<partner code>
+MOMO_ACCESS_KEY=<access key>
+MOMO_SECRET_KEY=<secret key>
+MOMO_ENDPOINT=https://payment.momo.vn/v2/gateway/api/create
 ```
+
+Callback IPN: `https://tinytints-api.onrender.com/api/payments/momo/ipn`. Địa chỉ trở về do web tạo: `https://tinytints.pages.dev/payment/result?paymentId=<mã đơn>`. Backend kiểm tra HMAC, partner, đơn, request ID, số tiền và mã giao dịch; không tin riêng trạng thái trên URL trình duyệt. Môi trường test riêng dùng `https://test-payment.momo.vn/v2/gateway/api/create`; production từ chối endpoint test.
+
+## Địa chỉ và chế độ production
+
+```dotenv
 NODE_ENV=production
 PAYMENT_MOCK=false
-PUBLIC_URL=https://<tên miền web>
-API_PUBLIC_URL=https://<tên miền web>
+PUBLIC_URL=https://tinytints.pages.dev
+API_PUBLIC_URL=https://tinytints-api.onrender.com
+CORS_ORIGINS=https://tinytints.pages.dev
 ```
-Sau đó khởi động lại web. Nên tự mua thử Gói Tháng một lần bằng cả hai cách để chắc chắn tiền về đúng chỗ.
 
-## Giá
+`PUBLIC_URL` là frontend, `API_PUBLIC_URL` là backend để nhận webhook. Không gửi khóa trong chat, đưa vào Git hoặc mã frontend. Chưa đủ cấu hình thì phương thức thanh toán bị khóa. Production không cho hoàn tất giả lập; chỉ môi trường phát triển mới có thể bật `PAYMENT_MOCK=true`.
 
-Giá nằm trong `backend/src/config/constants.js` (mục `PLANS`): VNĐ cho QR, USD cho PayPal. Đổi giá USD thì web tự tạo gói PayPal mới cho người đăng ký sau. Người đang đăng ký vẫn giữ giá cũ.
+## Kiểm tra trước khi nhận tiền
+
+Sau khi có dữ liệu bền vững và cấu hình hợp lệ:
+
+- Thử ở môi trường test riêng: đã trả tiền, chưa trả, sai số tiền, webhook sai chữ ký, webhook trùng, người khác không xem được đơn; lỗi mạng giữ trạng thái chờ để kiểm tra lại.
+- Chạy một giao dịch live có kiểm soát bằng tài khoản người mua hợp lệ. Đối chiếu tiền nhận trong ngân hàng/cổng, payment đã trả và gói của đúng người mua. Thử gửi lại webhook để chắc chắn không gia hạn lần hai.
+- Với PayPal, kiểm tra hủy tự gia hạn và kỳ gia hạn trong Sandbox. Theo dõi webhook lỗi và đối soát lịch sử provider khi có vấn đề. Render Free có thể ngủ, làm xác nhận đến chậm.
+
+Test tự động trong repo giả lập phản hồi từ nhà cung cấp; chưa xác nhận merchant của bạn đã được duyệt hay tiền thật đã về. Việc triển khai và thử live chỉ thực hiện sau khi giải quyết lưu trữ dữ liệu hiện có.

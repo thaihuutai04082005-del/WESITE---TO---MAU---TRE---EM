@@ -1,16 +1,24 @@
 import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 import { getDb, parseJson } from '../config/db.js';
 
-export const findById = (id) => getDb().prepare('SELECT * FROM artworks WHERE id = ?').get(id);
+export const findById = async (id) => await getDb().prepare('SELECT * FROM artworks WHERE id = ?').get(id);
 
-export function create({ userId, pictureId, mode, data, thumbnail = null, status = 'in_progress' }) {
-  const res = getDb()
+export async function create({ userId, pictureId, mode, data, thumbnail = null, status = 'in_progress' }) {
+  const res = await getDb()
     .prepare('INSERT INTO artworks (user_id, picture_id, mode, data, thumbnail, status, completed_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
-    .run(userId, pictureId, mode, JSON.stringify(data || { fills: {}, strokes: [], stickers: [] }), thumbnail, status, status === 'completed' ? new Date().toISOString() : null);
-  return findById(Number(res.lastInsertRowid));
+    .run(
+      userId,
+      pictureId,
+      mode,
+      JSON.stringify(data || { fills: {}, strokes: [], stickers: [] }),
+      thumbnail,
+      status,
+      status === 'completed' ? new Date().toISOString() : null,
+    );
+  return await findById(Number(res.lastInsertRowid));
 }
 
-export function listByUser(userId, { status, mode } = {}) {
+export async function listByUser(userId, { status, mode } = {}) {
   let sql = `SELECT a.id, a.picture_id, a.mode, a.status, a.thumbnail, a.artwork_frame, a.created_at, a.updated_at, a.completed_at,
       p.name_vi, p.name_en, p.slug, p.is_card, p.rarity
     FROM artworks a JOIN pictures p ON p.id = a.picture_id WHERE a.user_id = ?`;
@@ -24,7 +32,11 @@ export function listByUser(userId, { status, mode } = {}) {
     args.push(mode);
   }
   sql += ' ORDER BY a.updated_at DESC LIMIT 500';
-  return getDb().prepare(sql).all(...args).map(toSummary);
+  return (
+    await getDb()
+      .prepare(sql)
+      .all(...args)
+  ).map(toSummary);
 }
 
 export function toSummary(a) {

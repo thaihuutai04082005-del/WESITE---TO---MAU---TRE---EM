@@ -1,3 +1,4 @@
+import { bindSocketHandlers } from '../utils/socketHandlers.js';
 // Tô màu cùng nhau theo thời gian thực (Mục 10.1): 2–4 bé, chỉ vào qua mã phòng riêng, không có danh sách phòng công khai.
 import { COLLAB_MAX_PLAYERS } from '../config/constants.js';
 import * as Picture from '../models/picture.js';
@@ -31,8 +32,7 @@ function stateOf(room) {
         if (op.fill.color) data.fills[op.fill.regionId] = op.fill.color;
         else delete data.fills[op.fill.regionId];
       }
-    }
-    else if (op.type === 'sticker') data.stickers.push(op.sticker);
+    } else if (op.type === 'sticker') data.stickers.push(op.sticker);
     else if (op.type === 'sticker-update') {
       if (data.stickers[op.index]) data.stickers[op.index] = op.sticker;
     } else if (op.type === 'sticker-remove') data.stickers.splice(op.index, 1);
@@ -63,6 +63,7 @@ const CURSOR_COLORS = ['#FF5F7E', '#2B9BF4', '#4CD787', '#FF9F43'];
 
 export function registerCollab(io, socket) {
   const uid = socket.data.userId;
+  const on = bindSocketHandlers(socket, 'collab');
   const reply = (cb, payload) => typeof cb === 'function' && cb(payload);
   const current = () => rooms.get(userRoom.get(uid));
   const channel = (room) => `collab:${room.code}`;
@@ -103,12 +104,12 @@ export function registerCollab(io, socket) {
     io.to(channel(room)).emit('collab:room', publicRoom(room));
   }
 
-  socket.on('collab:create', (p, cb) => {
-    const user = User.findById(uid);
+  on('collab:create', async (p, cb) => {
+    const user = await User.findById(uid);
     if (!user?.nickname) return reply(cb, { error: 'nickname_required' });
-    const picture = Picture.findPicture(Number(p?.pictureId));
+    const picture = await Picture.findPicture(Number(p?.pictureId));
     if (!picture) return reply(cb, { error: 'picture_not_found' });
-    if (!canUsePicture(user, picture)) return reply(cb, { error: 'card_not_owned' });
+    if (!(await canUsePicture(user, picture))) return reply(cb, { error: 'card_not_owned' });
     const old = current();
     if (old) leave(old);
     let code;
@@ -120,10 +121,14 @@ export function registerCollab(io, socket) {
     reply(cb, { room: publicRoom(room), picture: Picture.toClient(picture), data: stateOf(room) });
   });
 
-  socket.on('collab:join', (p, cb) => {
-    const room = rooms.get(String(p?.code || '').trim().toUpperCase());
+  on('collab:join', async (p, cb) => {
+    const room = rooms.get(
+      String(p?.code || '')
+        .trim()
+        .toUpperCase(),
+    );
     if (!room) return reply(cb, { error: 'room_not_found' });
-    if (!User.findById(uid)?.nickname) return reply(cb, { error: 'nickname_required' });
+    if (!(await User.findById(uid))?.nickname) return reply(cb, { error: 'nickname_required' });
     if (!room.players.has(uid) && room.players.size >= COLLAB_MAX_PLAYERS) return reply(cb, { error: 'room_full' });
     const old = current();
     if (old && old !== room) leave(old);
@@ -131,7 +136,7 @@ export function registerCollab(io, socket) {
     reply(cb, { room: publicRoom(room), picture: Picture.toClient(room.picture), data: stateOf(room) });
   });
 
-  socket.on('collab:op', (op) => {
+  on('collab:op', (op) => {
     const room = current();
     if (!room || !op || room.ops.length >= MAX_OPS) return;
     const clean = { id: ++room.seq, by: uid, type: op.type };
@@ -169,7 +174,7 @@ export function registerCollab(io, socket) {
   });
 
   // Undo: bé chỉ hoàn tác được thao tác của chính mình.
-  socket.on('collab:undo', () => {
+  on('collab:undo', () => {
     const room = current();
     if (!room) return;
     for (let i = room.ops.length - 1; i >= 0; i--) {
@@ -181,34 +186,37 @@ export function registerCollab(io, socket) {
     }
   });
 
-  socket.on('collab:cursor', (pos) => {
+  on('collab:cursor', (pos) => {
     const room = current();
     if (!room || !Number.isFinite(pos?.x) || !Number.isFinite(pos?.y)) return;
     socket.to(channel(room)).volatile.emit('collab:cursor', { userId: uid, x: pos.x, y: pos.y, color: room.players.get(uid)?.color });
   });
 
   // Lưu tranh chung vào Lịch sử của mọi bé đang trong phòng.
-  socket.on('collab:save', (payload, cb) => {
+  on('collab:save', async (payload, cb) => {
     const room = current();
     if (!room) return reply(cb, { error: 'room_not_found' });
     const data = stateOf(room);
     if (!Object.keys(data.fills).length && !data.strokes.length) return reply(cb, { error: 'empty' });
-    const thumb = typeof payload?.thumbnail === 'string' && payload.thumbnail.startsWith('data:image/') && payload.thumbnail.length < 900 * 1024 ? payload.thumbnail : null;
+    const thumb =
+      typeof payload?.thumbnail === 'string' && payload.thumbnail.startsWith('data:image/') && payload.thumbnail.length < 900 * 1024
+        ? payload.thumbnail
+        : null;
     for (const memberId of room.players.keys()) {
-      Artwork.create({ userId: memberId, pictureId: room.picture.id, mode: 'collab', data, thumbnail: thumb, status: 'completed' });
-      const events = progression.record(memberId, 'collab_join');
+      await Artwork.create({ userId: memberId, pictureId: room.picture.id, mode: 'collab', data, thumbnail: thumb, status: 'completed' });
+      const events = await progression.record(memberId, 'collab_join');
       io.to(`user:${memberId}`).emit('collab:saved', { by: socket.data.user, events });
     }
     reply(cb, { ok: true });
   });
 
   // Mời một người bạn (đã kết bạn) vào phòng đang ở. Người được mời nhận popup "Tèo mời bạn vào phòng tô tranh cùng".
-  socket.on('collab:invite', async (p, cb) => {
+  on('collab:invite', async (p, cb) => {
     const room = current();
     const to = Number(p?.toUserId);
     if (!room) return reply(cb, { error: 'room_not_found' });
     if (!Number.isInteger(to) || to === uid) return reply(cb, { error: 'invalid_friend' });
-    if (!areFriends(uid, to)) return reply(cb, { error: 'not_friends' });
+    if (!(await areFriends(uid, to))) return reply(cb, { error: 'not_friends' });
     if (room.players.has(to)) return reply(cb, { error: 'already_in_room' });
     if (room.players.size >= COLLAB_MAX_PLAYERS) return reply(cb, { error: 'room_full' });
     const key = `${uid}:${to}`;
@@ -223,22 +231,22 @@ export function registerCollab(io, socket) {
   });
 
   // Người được mời từ chối; tick "chặn" thì người mời không mời lại được trong 5 phút.
-  socket.on('collab:invite-decline', (p, cb) => {
+  on('collab:invite-decline', async (p, cb) => {
     const from = Number(p?.fromUserId);
-    if (!Number.isInteger(from) || !areFriends(uid, from)) return reply(cb, { ok: true });
+    if (!Number.isInteger(from) || !(await areFriends(uid, from))) return reply(cb, { ok: true });
     const block = !!p?.block;
     if (block) inviteBlocks.set(`${from}:${uid}`, Date.now() + INVITE_BLOCK_MS);
     io.to(`user:${from}`).emit('collab:invite-declined', { by: socket.data.user, blocked: block });
     reply(cb, { ok: true });
   });
 
-  socket.on('collab:leave', (_p, cb) => {
+  on('collab:leave', (_p, cb) => {
     const room = current();
     if (room) leave(room);
     reply(cb, { ok: true });
   });
 
-  socket.on('disconnect', () => {
+  on('disconnect', () => {
     const room = current();
     if (room) leave(room);
   });

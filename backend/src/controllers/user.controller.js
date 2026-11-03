@@ -5,12 +5,12 @@ import * as Notifications from '../services/notifications.js';
 import * as Signature from '../services/signature.js';
 import { badRequest, forbidden, str } from '../utils/http.js';
 
-const ownsItem = (userId, slug, type) =>
-  !!getDb()
+const ownsItem = async (userId, slug, type) =>
+  !!(await getDb()
     .prepare('SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = ? AND i.type = ?')
-    .get(userId, slug, type);
+    .get(userId, slug, type));
 
-export function updateMe(req, res) {
+export async function updateMe(req, res) {
   const b = req.body || {};
   const fields = {};
   if (b.nickname !== undefined) {
@@ -24,47 +24,47 @@ export function updateMe(req, res) {
     fields.avatar = b.avatar;
   }
   if (b.avatarFrame !== undefined) {
-    if (b.avatarFrame !== null && !ownsItem(req.user.id, b.avatarFrame, 'avatar_frame')) throw forbidden('item_not_owned');
+    if (b.avatarFrame !== null && !(await ownsItem(req.user.id, b.avatarFrame, 'avatar_frame'))) throw forbidden('item_not_owned');
     fields.avatar_frame = b.avatarFrame;
   }
   if (b.brushSkin !== undefined) {
-    if (b.brushSkin !== null && !ownsItem(req.user.id, b.brushSkin, 'brush_skin')) throw forbidden('item_not_owned');
+    if (b.brushSkin !== null && !(await ownsItem(req.user.id, b.brushSkin, 'brush_skin'))) throw forbidden('item_not_owned');
     fields.brush_skin = b.brushSkin;
   }
   if (b.language !== undefined) {
     if (!['vi', 'en'].includes(b.language)) throw badRequest('invalid_language');
     fields.language = b.language;
   }
-  const user = User.update(req.user.id, fields);
-  res.json({ user: User.selfProfile(user) });
+  const user = await User.update(req.user.id, fields);
+  res.json({ user: await User.selfProfile(user) });
 }
 
-export function notifications(req, res) {
-  res.json({ notifications: Notifications.list(req.user.id), unread: Notifications.unreadCount(req.user.id) });
+export async function notifications(req, res) {
+  res.json({ notifications: await Notifications.list(req.user.id), unread: await Notifications.unreadCount(req.user.id) });
 }
 
-export function readNotifications(req, res) {
+export async function readNotifications(req, res) {
   const ids = req.body?.ids === 'all' ? 'all' : (Array.isArray(req.body?.ids) ? req.body.ids : []).map(Number);
-  Notifications.markRead(req.user.id, ids);
-  res.json({ unread: Notifications.unreadCount(req.user.id) });
+  await Notifications.markRead(req.user.id, ids);
+  res.json({ unread: await Notifications.unreadCount(req.user.id) });
 }
 
 /** Chữ ký mặc định + danh sách mẫu (mẫu wow khoá khi không có gói tháng/năm). */
-function signatureState(user) {
+async function signatureState(user) {
   return {
-    signature: Signature.effectiveSignature(user),
-    premium: Signature.hasPremium(user.id),
+    signature: await Signature.effectiveSignature(user),
+    premium: await Signature.hasPremium(user.id),
     styles: { free: SIGNATURE_STYLES_FREE, premium: SIGNATURE_STYLES_PREMIUM },
     inks: SIGNATURE_INKS,
   };
 }
 
-export function getSignature(req, res) {
-  res.json(signatureState(User.findById(req.user.id)));
+export async function getSignature(req, res) {
+  res.json(await signatureState(await User.findById(req.user.id)));
 }
 
-export function setSignature(req, res) {
-  const content = Signature.prepareDefault(req.user.id, req.body || {});
-  const user = User.update(req.user.id, { signature: JSON.stringify(content) });
-  res.json(signatureState(user));
+export async function setSignature(req, res) {
+  const content = await Signature.prepareDefault(req.user.id, req.body || {});
+  const user = await User.update(req.user.id, { signature: JSON.stringify(content) });
+  res.json(await signatureState(user));
 }

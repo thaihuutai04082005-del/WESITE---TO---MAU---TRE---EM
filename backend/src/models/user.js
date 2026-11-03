@@ -4,69 +4,84 @@ import { rankOf } from '../config/constants.js';
 import { randomCode } from '../utils/ids.js';
 import { isVip } from '../services/quota.js';
 
-export const findById = (id) => getDb().prepare('SELECT * FROM users WHERE id = ?').get(id);
-export const findByUsername = (u) => getDb().prepare('SELECT * FROM users WHERE username = ?').get(u);
-export const findByGoogleSub = (sub) => getDb().prepare('SELECT * FROM users WHERE google_sub = ?').get(sub);
-export const findByFriendCode = (c) => getDb().prepare('SELECT * FROM users WHERE friend_code = ?').get(String(c).toUpperCase());
-export const findByGuardian = (contact) =>
-  getDb().prepare('SELECT id, username, nickname FROM users WHERE guardian_contact = ? AND username IS NOT NULL').all(contact);
+export const findById = async (id) => await getDb().prepare('SELECT * FROM users WHERE id = ?').get(id);
+export const findByUsername = async (u) => await getDb().prepare('SELECT * FROM users WHERE LOWER(username) = LOWER(?)').get(u);
+export const findByGoogleSub = async (sub) => await getDb().prepare('SELECT * FROM users WHERE google_sub = ?').get(sub);
+export const findByFriendCode = async (c) => await getDb().prepare('SELECT * FROM users WHERE friend_code = ?').get(String(c).toUpperCase());
+export const findByGuardian = async (contact) =>
+  await getDb().prepare('SELECT id, username, nickname FROM users WHERE guardian_contact = ? AND username IS NOT NULL').all(contact);
 
-function uniqueFriendCode() {
+async function uniqueFriendCode() {
   for (;;) {
     const code = randomCode(8);
-    if (!findByFriendCode(code)) return code;
+    if (!(await findByFriendCode(code))) return code;
   }
 }
 
-export function create(fields) {
-  const f = { friend_code: uniqueFriendCode(), language: 'en', ...fields }; // mặc định tiếng Anh
+export async function create(fields) {
+  const f = { friend_code: await uniqueFriendCode(), language: 'en', ...fields }; // mặc định tiếng Anh
   const cols = Object.keys(f);
-  const res = getDb()
+  const res = await getDb()
     .prepare(`INSERT INTO users (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`)
     .run(...cols.map((c) => f[c]));
-  return findById(Number(res.lastInsertRowid));
+  return await findById(Number(res.lastInsertRowid));
 }
 
 const UPDATABLE = new Set([
-  'nickname', 'avatar', 'avatar_frame', 'brush_skin', 'language', 'password_hash', 'rank_points', 'gacha_points',
-  'ruby', 'level', 'level_baseline', 'signature', 'login_streak', 'last_login_date', 'google_sub', 'google_email', 'role',
+  'nickname',
+  'avatar',
+  'avatar_frame',
+  'brush_skin',
+  'language',
+  'password_hash',
+  'rank_points',
+  'gacha_points',
+  'ruby',
+  'level',
+  'level_baseline',
+  'signature',
+  'login_streak',
+  'last_login_date',
+  'google_sub',
+  'google_email',
+  'role',
 ]);
 
-export function update(id, fields) {
+export async function update(id, fields) {
   const cols = Object.keys(fields).filter((c) => UPDATABLE.has(c));
-  if (!cols.length) return findById(id);
-  getDb()
+  if (!cols.length) return await findById(id);
+  await getDb()
     .prepare(`UPDATE users SET ${cols.map((c) => `${c} = ?`).join(', ')} WHERE id = ?`)
     .run(...cols.map((c) => fields[c]), id);
-  return findById(id);
+  return await findById(id);
 }
 
-export function addBalances(id, { ruby = 0, rankPoints = 0, gachaPoints = 0 }) {
-  getDb()
+export async function addBalances(id, { ruby = 0, rankPoints = 0, gachaPoints = 0 }) {
+  await getDb()
     .prepare('UPDATE users SET ruby = ruby + ?, rank_points = rank_points + ?, gacha_points = gacha_points + ? WHERE id = ?')
     .run(ruby, rankPoints, gachaPoints, id);
 }
 
 // ---------- Thống kê hoạt động (phục vụ nhiệm vụ) ----------
-export function getStats(userId) {
-  const rows = getDb().prepare('SELECT key, value FROM user_stats WHERE user_id = ?').all(userId);
+export async function getStats(userId) {
+  const rows = await getDb().prepare('SELECT key, value FROM user_stats WHERE user_id = ?').all(userId);
   return Object.fromEntries(rows.map((r) => [r.key, r.value]));
 }
 
-export function incrStat(userId, key, by = 1) {
-  getDb()
+export async function incrStat(userId, key, by = 1) {
+  await getDb()
     .prepare('INSERT INTO user_stats (user_id, key, value) VALUES (?, ?, ?) ON CONFLICT (user_id, key) DO UPDATE SET value = value + excluded.value')
     .run(userId, key, by);
 }
 
-export function setStat(userId, key, value) {
-  getDb()
+export async function setStat(userId, key, value) {
+  await getDb()
     .prepare('INSERT INTO user_stats (user_id, key, value) VALUES (?, ?, ?) ON CONFLICT (user_id, key) DO UPDATE SET value = excluded.value')
     .run(userId, key, value);
 }
 
 /** Thông tin công khai (hiển thị cho bạn bè / phòng đấu). */
-export function publicProfile(u) {
+export async function publicProfile(u) {
   if (!u) return null;
   return {
     id: u.id,
@@ -75,14 +90,14 @@ export function publicProfile(u) {
     avatarFrame: u.avatar_frame,
     rank: rankOf(u.rank_points).key,
     level: u.level,
-    vip: isVip(u.id),
+    vip: await isVip(u.id),
   };
 }
 
 /** Thông tin đầy đủ cho chính chủ tài khoản. */
-export function selfProfile(u) {
+export async function selfProfile(u) {
   return {
-    ...publicProfile(u),
+    ...(await publicProfile(u)),
     username: u.username,
     hasPassword: !!u.password_hash,
     googleLinked: !!u.google_sub,

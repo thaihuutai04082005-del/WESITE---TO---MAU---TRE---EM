@@ -3,8 +3,8 @@ import { getDb, parseJson } from '../config/db.js';
 
 const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`${base}_vi`]);
 
-export function listThemes() {
-  return getDb()
+export async function listThemes() {
+  return await getDb()
     .prepare(
       `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0 AND q.hidden = 0)) AS object_count,
         (SELECT COUNT(*) FROM pictures q JOIN objects o ON o.id = q.object_id WHERE o.theme_id = t.id AND q.is_card = 0 AND q.hidden = 0) AS picture_count,
@@ -15,15 +15,15 @@ export function listThemes() {
     .all();
 }
 
-export const findTheme = (slug) => getDb().prepare('SELECT * FROM themes WHERE slug = ?').get(slug);
+export const findTheme = async (slug) => await getDb().prepare('SELECT * FROM themes WHERE slug = ?').get(slug);
 /** Chủ đề đang mở cho bé duyệt (chủ đề đã ẩn chỉ còn xem lại tranh cũ qua lịch sử / bộ sưu tập). */
-export const findActiveTheme = (slug) => getDb().prepare('SELECT * FROM themes WHERE slug = ? AND active = 1').get(slug);
+export const findActiveTheme = async (slug) => await getDb().prepare('SELECT * FROM themes WHERE slug = ? AND active = 1').get(slug);
 
 /** Điều kiện SQL: tranh p thuộc chủ đề đang mở. */
 export const ACTIVE_PICTURE = 'p.object_id IN (SELECT o.id FROM objects o JOIN themes t ON t.id = o.theme_id WHERE t.active = 1)';
 
-export function listObjects(themeId) {
-  return getDb()
+export async function listObjects(themeId) {
+  return await getDb()
     .prepare(
       `SELECT o.*, (SELECT COUNT(*) FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 AND p.hidden = 0) AS picture_count,
         (SELECT p.id FROM pictures p WHERE p.object_id = o.id AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.sort LIMIT 1) AS cover_id
@@ -33,22 +33,26 @@ export function listObjects(themeId) {
 }
 
 /** Mọi tranh (không phải thẻ) của một chủ đề, xếp theo thứ tự đối tượng rồi tranh — bé chọn thẳng, không qua tầng đối tượng. */
-export function listThemePictures(themeId) {
-  return getDb()
-    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.theme_sort, o.sort, o.id, p.sort, p.id')
+export async function listThemePictures(themeId) {
+  return await getDb()
+    .prepare(
+      'SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.theme_sort, o.sort, o.id, p.sort, p.id',
+    )
     .all(themeId);
 }
 
-export const findObject = (themeId, slug) => getDb().prepare('SELECT * FROM objects WHERE theme_id = ? AND slug = ?').get(themeId, slug);
+export const findObject = async (themeId, slug) => await getDb().prepare('SELECT * FROM objects WHERE theme_id = ? AND slug = ?').get(themeId, slug);
 
-export function listPictures(objectId, { cards = false } = {}) {
-  return getDb()
-    .prepare('SELECT id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, animation, is_card, rarity FROM pictures WHERE object_id = ? AND is_card = ? AND hidden = 0 ORDER BY sort, id')
+export async function listPictures(objectId, { cards = false } = {}) {
+  return await getDb()
+    .prepare(
+      'SELECT id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, animation, is_card, rarity FROM pictures WHERE object_id = ? AND is_card = ? AND hidden = 0 ORDER BY sort, id',
+    )
     .all(objectId, cards ? 1 : 0);
 }
 
-export function findPicture(id) {
-  return getDb()
+export async function findPicture(id) {
+  return await getDb()
     .prepare(
       `SELECT p.*, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
               t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
@@ -57,7 +61,7 @@ export function findPicture(id) {
     .get(id);
 }
 
-export const findPictureBySlug = (slug) => getDb().prepare('SELECT id FROM pictures WHERE slug = ?').get(slug);
+export const findPictureBySlug = async (slug) => await getDb().prepare('SELECT id FROM pictures WHERE slug = ?').get(slug);
 
 export function manifestOf(picture) {
   return parseJson(picture.manifest, { palette: [], regions: [] });
@@ -86,15 +90,19 @@ export function toClient(p, withSvg = true) {
   };
 }
 
-export function cardPool() {
-  const rows = getDb().prepare(`SELECT p.id, p.rarity FROM pictures p WHERE p.is_card = 1 AND p.rarity IS NOT NULL AND ${ACTIVE_PICTURE}`).all();
+export async function cardPool() {
+  const rows = await getDb()
+    .prepare(`SELECT p.id, p.rarity FROM pictures p WHERE p.is_card = 1 AND p.rarity IS NOT NULL AND ${ACTIVE_PICTURE}`)
+    .all();
   const pool = { S: [], A: [], B: [], C: [] };
   for (const r of rows) pool[r.rarity].push(r.id);
   return pool;
 }
 
-export function randomPictureForArena() {
-  return getDb().prepare(`SELECT p.id FROM pictures p WHERE p.is_card = 0 AND p.hidden = 0 AND ${ACTIVE_PICTURE} ORDER BY RANDOM() LIMIT 1`).get();
+export async function randomPictureForArena() {
+  return await getDb()
+    .prepare(`SELECT p.id FROM pictures p WHERE p.is_card = 0 AND p.hidden = 0 AND ${ACTIVE_PICTURE} ORDER BY RANDOM() LIMIT 1`)
+    .get();
 }
 
 export { lang };

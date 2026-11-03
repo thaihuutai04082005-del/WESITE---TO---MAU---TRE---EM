@@ -21,12 +21,12 @@ export function initRealtime(httpServer, { registerHandlers = [] } = {}) {
     cors: { origin: env.corsOrigins, credentials: true },
     maxHttpBufferSize: 5e6,
   });
-  io.use((socket, next) => {
+  io.use(async (socket, next) => {
     try {
       const payload = verifyToken(socket.handshake.auth?.token);
-      const user = User.findById(payload.sub);
+      const user = await User.findById(payload.sub);
       if (!user) return next(new Error('unauthorized'));
-      socket.data.user = User.publicProfile(user);
+      socket.data.user = await User.publicProfile(user);
       socket.data.userId = user.id;
       next();
     } catch {

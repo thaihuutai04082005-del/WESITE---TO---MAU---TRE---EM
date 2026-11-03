@@ -1,3 +1,4 @@
+import { asyncForEach } from '../../backend/src/utils/asyncArray.js';
 // Nạp dữ liệu mẫu: kho tranh (từ assets-library/catalog.json), nhiệm vụ, vật phẩm, tài khoản admin.
 // Chạy lại nhiều lần an toàn (upsert theo slug). Dùng: npm run seed
 import { readFileSync, existsSync } from 'node:fs';
@@ -8,7 +9,7 @@ import { env, REPO_ROOT } from '../../backend/src/config/env.js';
 import { MISSIONS } from './missions.js';
 import { ITEMS } from './items.js';
 
-export function seedPictures(db = getDb()) {
+export async function seedPictures(db = getDb()) {
   const lib = join(REPO_ROOT, 'assets-library');
   const catalogFile = join(lib, 'catalog.json');
   if (!existsSync(catalogFile)) throw new Error('Chưa có catalog.json — chạy "npm run gen:pictures" trước');
@@ -29,122 +30,178 @@ export function seedPictures(db = getDb()) {
   );
   let count = 0;
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
-  tx(() => {
-    catalog.themes.forEach((t, ti) => {
-      const themeId = upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6-8', t.hidden ? 0 : 1).id;
-      t.objects.forEach((o, oi) => {
-        const objectId = upObject.get(themeId, o.slug, o.name.vi, o.name.en, oi).id;
-        o.pictures.forEach((p, pi) => {
+  await tx(async () => {
+    await asyncForEach(catalog.themes, async (t, ti) => {
+      const themeId = (await upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6-8', t.hidden ? 0 : 1)).id;
+      await asyncForEach(t.objects, async (o, oi) => {
+        const objectId = (await upObject.get(themeId, o.slug, o.name.vi, o.name.en, oi)).id;
+        await asyncForEach(o.pictures, async (p, pi) => {
           const svg = readFileSync(join(lib, p.file), 'utf8');
           const manifest = JSON.stringify({ palette: p.palette, regions: p.regions });
-          upPicture.run(objectId, p.slug, p.variant, p.name.vi, p.name.en, p.variantName.vi, p.variantName.en, svg, manifest, p.animation, p.isCard ? 1 : 0, p.rarity, p.cardOrder ?? pi, p.themeSort ?? 1000, p.hidden ? 1 : 0);
+          await upPicture.run(
+            objectId,
+            p.slug,
+            p.variant,
+            p.name.vi,
+            p.name.en,
+            p.variantName.vi,
+            p.variantName.en,
+            svg,
+            manifest,
+            p.animation,
+            p.isCard ? 1 : 0,
+            p.rarity,
+            p.cardOrder ?? pi,
+            p.themeSort ?? 1000,
+            p.hidden ? 1 : 0,
+          );
           count++;
         });
       });
     });
     // Tranh / đối tượng của các chủ đề trong catalog nhưng không còn trong catalog (VD đổi biến thể) → xoá hẳn.
     const themeSlugs = catalog.themes.map((t) => t.slug);
-    const stale = db
-      .prepare(`SELECT p.id, p.slug FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
-      .all(...themeSlugs)
+    const stale = (
+      await db
+        .prepare(
+          `SELECT p.id, p.slug FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`,
+        )
+        .all(...themeSlugs)
+    )
       .filter((r) => !keep.has(r.slug))
       .map((r) => r.id);
-    purgePictures(db, stale);
-    db.prepare(`DELETE FROM objects WHERE theme_id IN (SELECT id FROM themes WHERE slug IN (${themeSlugs.map(() => '?').join(',')})) AND id NOT IN (SELECT object_id FROM pictures)`).run(...themeSlugs);
+    await purgePictures(db, stale);
+    await db
+      .prepare(
+        `DELETE FROM objects WHERE theme_id IN (SELECT id FROM themes WHERE slug IN (${themeSlugs.map(() => '?').join(',')})) AND id NOT IN (SELECT object_id FROM pictures)`,
+      )
+      .run(...themeSlugs);
   });
   return count;
 }
 
 /** Xoá hẳn các tranh cùng dữ liệu gắn với chúng (tranh bé đã tô, thẻ, giao dịch, lịch sử bóc thẻ, phòng Đấu trường). */
-export function purgePictures(db, ids) {
+export async function purgePictures(db, ids) {
   if (!ids.length) return;
   const q = ids.map(() => '?').join(',');
-  db.prepare(`DELETE FROM trades WHERE offer_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q})) OR request_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q}))`).run(...ids, ...ids);
-  for (const table of ['user_cards', 'gacha_pulls', 'arena_rooms', 'artworks']) db.prepare(`DELETE FROM ${table} WHERE picture_id IN (${q})`).run(...ids);
-  db.prepare(`DELETE FROM pictures WHERE id IN (${q})`).run(...ids);
+  await db
+    .prepare(
+      `DELETE FROM trades WHERE offer_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q})) OR request_card_id IN (SELECT id FROM user_cards WHERE picture_id IN (${q}))`,
+    )
+    .run(...ids, ...ids);
+  for (const table of ['user_cards', 'gacha_pulls', 'arena_rooms', 'artworks'])
+    await db.prepare(`DELETE FROM ${table} WHERE picture_id IN (${q})`).run(...ids);
+  await db.prepare(`DELETE FROM pictures WHERE id IN (${q})`).run(...ids);
 }
 
 /** Bộ tranh trong catalog khác dữ liệu đang có (thêm chủ đề / đổi biến thể) → nạp lại kho tranh cho khớp. */
-export function seedPicturesIfNeeded(db = getDb()) {
+export async function seedPicturesIfNeeded(db = getDb()) {
   const catalogFile = join(REPO_ROOT, 'assets-library', 'catalog.json');
   if (!existsSync(catalogFile)) return 0;
   const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
   const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   const themeSlugs = catalog.themes.map((t) => t.slug);
-  const rows = db
-    .prepare(`SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en, o.sort AS osort, p.theme_sort, p.hidden FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`)
+  const rows = await db
+    .prepare(
+      `SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en, o.sort AS osort, p.theme_sort, p.hidden FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`,
+    )
     .all(...themeSlugs);
   const sameSet = rows.length === want.size && rows.every((r) => want.has(r.slug));
   const lib = join(REPO_ROOT, 'assets-library');
   const pics = new Map(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => [p.slug, p]))));
   const objectSort = new Map(catalog.themes.flatMap((t) => t.objects.flatMap((o, oi) => o.pictures.map((p) => [p.slug, oi]))));
   // Tranh vẽ lại hoặc đổi tên (cùng slug) cũng phải nạp lại.
-  const same = sameSet && rows.every((r) => {
-    const p = pics.get(r.slug);
-    // Đổi riêng màu vùng thì svg không đổi (vùng luôn trắng) → phải so cả manifest.
-    // Đổi thứ tự các đối tượng trong chủ đề cũng phải nạp lại.
-    return r.osort === objectSort.get(r.slug) && r.theme_sort === (p.themeSort ?? 1000) && r.hidden === (p.hidden ? 1 : 0) && r.name_vi === p.name.vi && r.name_en === p.name.en && r.svg === readFileSync(join(lib, p.file), 'utf8')
-      && r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions });
-  });
-  const n = same ? 0 : seedPictures(db);
-  syncThemeVisibility(catalog, db);
+  const same =
+    sameSet &&
+    rows.every((r) => {
+      const p = pics.get(r.slug);
+      // Đổi riêng màu vùng thì svg không đổi (vùng luôn trắng) → phải so cả manifest.
+      // Đổi thứ tự các đối tượng trong chủ đề cũng phải nạp lại.
+      return (
+        r.osort === objectSort.get(r.slug) &&
+        r.theme_sort === (p.themeSort ?? 1000) &&
+        r.hidden === (p.hidden ? 1 : 0) &&
+        r.name_vi === p.name.vi &&
+        r.name_en === p.name.en &&
+        r.svg === readFileSync(join(lib, p.file), 'utf8') &&
+        r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions })
+      );
+    });
+  const n = same ? 0 : await seedPictures(db);
+  await syncThemeVisibility(catalog, db);
   return n;
 }
 
 /** Cờ ẩn/hiện chủ đề trong catalog (hidden) phải khớp cột themes.active, kể cả khi tranh không đổi. */
-export function syncThemeVisibility(catalog, db = getDb()) {
+export async function syncThemeVisibility(catalog, db = getDb()) {
   const up = db.prepare('UPDATE themes SET active = ? WHERE slug = ? AND active != ?');
   let changed = 0;
   for (const t of catalog.themes) {
     const want = t.hidden ? 0 : 1;
-    changed += Number(up.run(want, t.slug, want).changes);
+    changed += Number((await up.run(want, t.slug, want)).changes);
   }
   return changed;
 }
 
-export function seedMissions(db = getDb()) {
+export async function seedMissions(db = getDb()) {
   const up = db.prepare(
     `INSERT INTO missions (level, idx, type, target, param, difficulty, ruby, title_vi, title_en) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT (level, idx) DO UPDATE SET type = excluded.type, target = excluded.target, param = excluded.param,
        difficulty = excluded.difficulty, ruby = excluded.ruby, title_vi = excluded.title_vi, title_en = excluded.title_en`,
   );
-  tx(() => MISSIONS.forEach((m) => up.run(m.level, m.idx, m.type, m.target, m.param, m.difficulty, m.ruby, m.title_vi, m.title_en)));
+  await tx(
+    async () =>
+      await asyncForEach(
+        MISSIONS,
+        async (m) => await up.run(m.level, m.idx, m.type, m.target, m.param, m.difficulty, m.ruby, m.title_vi, m.title_en),
+      ),
+  );
   return MISSIONS.length;
 }
 
-export function seedItems(db = getDb()) {
+export async function seedItems(db = getDb()) {
   const up = db.prepare(
     `INSERT INTO items (type, slug, name_vi, name_en, price, limited, rank, sort) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT (slug) DO UPDATE SET type = excluded.type, name_vi = excluded.name_vi, name_en = excluded.name_en,
        price = excluded.price, limited = excluded.limited, rank = excluded.rank, sort = excluded.sort`,
   );
-  tx(() => ITEMS.forEach((it, i) => up.run(it.type, it.slug, it.name_vi, it.name_en, it.price ?? null, it.limited || 0, it.rank || null, i)));
+  await tx(
+    async () =>
+      await asyncForEach(
+        ITEMS,
+        async (it, i) => await up.run(it.type, it.slug, it.name_vi, it.name_en, it.price ?? null, it.limited || 0, it.rank || null, i),
+      ),
+  );
   return ITEMS.length;
 }
 
 export async function seedAdmin(db = getDb()) {
   if (!env.admin.password) return false;
   const hash = await bcrypt.hash(env.admin.password, 10);
-  const existing = db.prepare('SELECT id FROM users WHERE username = ?').get(env.admin.username);
+  const existing = await db.prepare('SELECT id FROM users WHERE username = ?').get(env.admin.username);
   if (existing) {
-    db.prepare("UPDATE users SET role = 'admin', password_hash = ? WHERE id = ?").run(hash, existing.id);
+    await db.prepare("UPDATE users SET role = 'admin', password_hash = ? WHERE id = ?").run(hash, existing.id);
   } else {
-    db.prepare(
-      "INSERT INTO users (username, password_hash, nickname, role, friend_code, avatar_frame) VALUES (?, ?, 'Quản trị viên', 'admin', ?, 'avatar-dong')",
-    ).run(env.admin.username, hash, `ADM${Date.now().toString(36).toUpperCase().slice(-5)}`);
+    await db
+      .prepare(
+        "INSERT INTO users (username, password_hash, nickname, role, friend_code, avatar_frame) VALUES (?, ?, 'Quản trị viên', 'admin', ?, 'avatar-dong')",
+      )
+      .run(env.admin.username, hash, `ADM${Date.now().toString(36).toUpperCase().slice(-5)}`);
   }
   return true;
 }
 
 export async function seedAll() {
-  const pictures = seedPictures();
-  const missions = seedMissions();
-  const items = seedItems();
+  const pictures = await seedPictures();
+  const missions = await seedMissions();
+  const items = await seedItems();
   const admin = await seedAdmin();
   return { pictures, missions, items, admin };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const r = await seedAll();
-  console.log(`Seed xong: ${r.pictures} tranh, ${r.missions} nhiệm vụ, ${r.items} vật phẩm${r.admin ? ', đã tạo/cập nhật admin' : ' (bỏ qua admin — chưa đặt ADMIN_PASSWORD)'}.`);
+  console.log(
+    `Seed xong: ${r.pictures} tranh, ${r.missions} nhiệm vụ, ${r.items} vật phẩm${r.admin ? ', đã tạo/cập nhật admin' : ' (bỏ qua admin — chưa đặt ADMIN_PASSWORD)'}.`,
+  );
 }

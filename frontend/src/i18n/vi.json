@@ -532,7 +532,8 @@
     },
     "providerHint": {
       "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
-      "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào."
+      "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào.",
+      "momo": "Thanh toán một lần bằng ví MoMo."
     },
     "perMonthUsd": "/tháng",
     "perYearUsd": "/năm",
@@ -549,7 +550,7 @@
       "copied": "Đã chép!",
       "copy": "Chép"
     },
-    "redirecting": "Đang chuyển sang PayPal…",
+    "redirecting": "Đang chuyển đến cổng thanh toán…",
     "manage": {
       "title": "Gói của bé",
       "active": "Đang dùng {{plan}} · hạn đến {{date}}",
@@ -602,12 +603,16 @@
       "chooseYear": "Chọn VIP Năm"
     },
     "save": "Tiết kiệm 79.000đ, khoảng 35%",
-    "saveUsd": "Tiết kiệm {{amount}} (khoảng {{pct}}%)"
+    "saveUsd": "Tiết kiệm {{amount}} (khoảng {{pct}}%)",
+    "unavailable": "Chưa khả dụng",
+    "noMethods": "Thanh toán đang tạm ngưng. Vui lòng thử lại sau."
   },
   "payment": {
     "pending": "Đang xác nhận thanh toán…",
     "paid": "Thanh toán thành công!",
-    "failed": "Thanh toán chưa thành công"
+    "failed": "Thanh toán chưa thành công",
+    "waitingHint": "Chưa nhận được xác nhận. Đừng thanh toán lại; hãy kiểm tra trạng thái sau ít phút.",
+    "retry": "Kiểm tra lại"
   },
   "upgrade": {
     "title": "Hết lượt tô rồi!",
@@ -958,7 +963,7 @@
     "invalid_thumbnail": "Ảnh xem trước không hợp lệ.",
     "invalid_plan": "Gói không hợp lệ.",
     "invalid_provider": "Cổng thanh toán không hợp lệ.",
-    "payment_unavailable": "Cổng thanh toán đang bảo trì, bố mẹ thử lại sau nhé.",
+    "payment_unavailable": "Phương thức thanh toán này chưa khả dụng.",
     "payment_failed": "Thanh toán chưa thành công.",
     "payment_not_found": "Không tìm thấy giao dịch.",
     "mock_disabled": "Thanh toán thử đã bị tắt.",

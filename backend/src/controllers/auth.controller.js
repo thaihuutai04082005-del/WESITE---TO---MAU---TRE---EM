@@ -31,18 +31,23 @@ export async function registerStart(req, res) {
   const uname = str(username, { min: 4, max: 20, name: 'username' });
   if (!USERNAME_RE.test(uname)) throw badRequest('invalid_username');
   const pw = checkPassword(password);
-  if (User.findByUsername(uname)) throw conflict('username_taken');
+  if (await User.findByUsername(uname)) throw conflict('username_taken');
   const target = normalizeContact(contactType, contact);
   const passwordHash = await bcrypt.hash(pw, 10);
-  const otp = await issueOtp({ purpose: 'register', type: contactType, target, payload: { username: uname, passwordHash, contactType, language: language === 'vi' ? 'vi' : 'en' } });
+  const otp = await issueOtp({
+    purpose: 'register',
+    type: contactType,
+    target,
+    payload: { username: uname, passwordHash, contactType, language: language === 'vi' ? 'vi' : 'en' },
+  });
   res.json({ registrationId: otp.otpId, sentTo: User.maskContact(target), ...(otp.devCode ? { devCode: otp.devCode } : {}) });
 }
 
-export function registerVerify(req, res) {
+export async function registerVerify(req, res) {
   const { registrationId, code } = req.body || {};
-  const { target, payload } = consumeOtp(registrationId, code, 'register');
-  if (User.findByUsername(payload.username)) throw conflict('username_taken');
-  const user = User.create({
+  const { target, payload } = await consumeOtp(registrationId, code, 'register');
+  if (await User.findByUsername(payload.username)) throw conflict('username_taken');
+  const user = await User.create({
     username: payload.username,
     password_hash: payload.passwordHash,
     guardian_contact: target,
@@ -50,31 +55,31 @@ export function registerVerify(req, res) {
     language: payload.language === 'vi' ? 'vi' : 'en',
     avatar_frame: 'avatar-dong',
   });
-  grantStarterFrame(user.id);
+  await grantStarterFrame(user.id);
   res.status(201).json({ ok: true, username: user.username });
 }
 
 // Bậc Đồng là bậc khởi điểm: ai cũng có Khung Avatar Đồng.
-const grantStarterFrame = (userId) => grantAvatarFrame(userId, 'avatar-dong');
+const grantStarterFrame = async (userId) => await grantAvatarFrame(userId, 'avatar-dong');
 
-function session(user) {
-  const events = touchLogin(user.id, vnDateKey());
-  const fresh = User.findById(user.id);
+async function session(user) {
+  const events = await touchLogin(user.id, vnDateKey());
+  const fresh = await User.findById(user.id);
   return {
     token: signToken(fresh),
-    user: User.selfProfile(fresh),
-    plan: planStatus(fresh.id),
-    unread: unreadCount(fresh.id),
+    user: await User.selfProfile(fresh),
+    plan: await planStatus(fresh.id),
+    unread: await unreadCount(fresh.id),
     events,
   };
 }
 
 export async function login(req, res) {
   const { username, password } = req.body || {};
-  const user = User.findByUsername(String(username || '').trim());
+  const user = await User.findByUsername(String(username || '').trim());
   const ok = user?.password_hash && (await bcrypt.compare(String(password || ''), user.password_hash));
   if (!ok) throw unauthorized('invalid_credentials');
-  res.json(session(user));
+  res.json(await session(user));
 }
 
 /** Xác minh ID token Google qua endpoint tokeninfo và kiểm tra audience. */
@@ -93,29 +98,29 @@ export async function google(req, res) {
   const { credential, confirmAge13 } = req.body || {};
   if (!confirmAge13) throw badRequest('age_confirmation_required');
   const info = await verifyGoogleIdToken(credential);
-  let user = User.findByGoogleSub(info.sub);
+  let user = await User.findByGoogleSub(info.sub);
   if (!user) {
-    user = User.create({ google_sub: info.sub, google_email: info.email || null, avatar_frame: 'avatar-dong' });
-    grantStarterFrame(user.id);
+    user = await User.create({ google_sub: info.sub, google_email: info.email || null, avatar_frame: 'avatar-dong' });
+    await grantStarterFrame(user.id);
   }
-  res.json(session(user));
+  res.json(await session(user));
 }
 
 export async function forgotStart(req, res) {
   const { contactType, contact } = req.body || {};
   const target = normalizeContact(contactType, contact);
-  const accounts = User.findByGuardian(target);
+  const accounts = await User.findByGuardian(target);
   // Luôn trả cùng một thông điệp để không lộ việc liên hệ này có tồn tại hay không.
   if (!accounts.length) return res.json({ resetId: null, sentTo: User.maskContact(target) });
   const otp = await issueOtp({ purpose: 'reset', type: contactType, target });
   res.json({ resetId: otp.otpId, sentTo: User.maskContact(target), ...(otp.devCode ? { devCode: otp.devCode } : {}) });
 }
 
-export function forgotVerify(req, res) {
+export async function forgotVerify(req, res) {
   const { resetId, code } = req.body || {};
   if (!resetId) throw badRequest('otp_invalid');
-  const { target } = consumeOtp(resetId, code, 'reset');
-  const accounts = User.findByGuardian(target);
+  const { target } = await consumeOtp(resetId, code, 'reset');
+  const accounts = await User.findByGuardian(target);
   const resetToken = jwt.sign({ purpose: 'reset', target }, env.jwtSecret, { expiresIn: '15m' });
   res.json({ resetToken, accounts: accounts.map((a) => ({ username: a.username, nickname: a.nickname })) });
 }
@@ -129,13 +134,13 @@ export async function forgotReset(req, res) {
     throw badRequest('reset_token_invalid');
   }
   if (claims.purpose !== 'reset') throw badRequest('reset_token_invalid');
-  const user = User.findByUsername(String(username || ''));
+  const user = await User.findByUsername(String(username || ''));
   if (!user || user.guardian_contact !== claims.target) throw badRequest('reset_token_invalid');
   const pw = checkPassword(newPassword);
-  User.update(user.id, { password_hash: await bcrypt.hash(pw, 10) });
+  await User.update(user.id, { password_hash: await bcrypt.hash(pw, 10) });
   res.json({ ok: true });
 }
 
-export function me(req, res) {
-  res.json(session(req.user));
+export async function me(req, res) {
+  res.json(await session(req.user));
 }

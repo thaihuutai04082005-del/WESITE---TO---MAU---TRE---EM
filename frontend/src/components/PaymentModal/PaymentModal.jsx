@@ -14,6 +14,7 @@ import QRCode from 'qrcode';
 const PROVIDERS = [
   { key: 'bank', badge: 'QR', cls: 'bg-[#0B6FB8]' },
   { key: 'paypal', badge: 'P', cls: 'bg-[#003087]' },
+  { key: 'momo', badge: 'M', cls: 'bg-[#A50064]' },
 ];
 
 function CopyRow({ label, value, strong }) {
@@ -50,11 +51,22 @@ export default function PaymentModal({ open, plan, onClose }) {
   const [payment, setPayment] = useState(null);
   const [busy, setBusy] = useState(false);
   const planInfo = meta?.plans?.[plan];
+  const [methods, setMethods] = useState(null);
+  const available = (key) => !!(methods?.[key]?.configured || methods?.mockAllowed);
 
   useEffect(() => {
     if (open) {
       setStep('choose');
       setPayment(null);
+      setMethods(null);
+      let stopped = false;
+      api.get('/subscription').then((result) => {
+        if (stopped) return;
+        setMethods(result.providers);
+        const preferred = i18n.language === 'en' ? ['paypal', 'bank', 'momo'] : ['bank', 'momo', 'paypal'];
+        setProvider(preferred.find((key) => result.providers?.[key]?.configured || result.providers?.mockAllowed) || '');
+      }).catch(() => { if (!stopped) setMethods({}); });
+      return () => { stopped = true; };
     }
   }, [open, plan]);
 
@@ -86,6 +98,7 @@ export default function PaymentModal({ open, plan, onClose }) {
   const price = (p) => (p === 'paypal' ? `$${planInfo?.priceUsd}` : formatVnd(planInfo?.priceVnd));
 
   async function start() {
+    if (!available(provider) || busy) return;
     setBusy(true);
     try {
       const p = await api.post('/payments', { plan, provider });
@@ -134,20 +147,21 @@ export default function PaymentModal({ open, plan, onClose }) {
       {step === 'choose' && (
         <div className="space-y-3">
           <h3 className="font-display text-lg font-extrabold">{t('plans.chooseMethod')}</h3>
-          {(i18n.language === 'en' ? [...PROVIDERS].reverse() : PROVIDERS).map((p) => ( // tiếng Anh: PayPal (USD) lên đầu
-            <label key={p.key} className={`card flex cursor-pointer items-center gap-3 p-4 ${provider === p.key ? 'ring-4 ring-primary/40' : ''}`}>
-              <input type="radio" name="provider" checked={provider === p.key} onChange={() => setProvider(p.key)} className="h-5 w-5 accent-primary" />
+          {(i18n.language === 'en' ? [PROVIDERS[1], PROVIDERS[0], PROVIDERS[2]] : PROVIDERS).map((p) => ( // tiếng Anh: PayPal (USD) lên đầu
+            <label key={p.key} className={`card flex cursor-pointer items-center gap-3 p-4 ${provider === p.key ? 'ring-4 ring-primary/40' : ''} ${available(p.key) ? '' : 'opacity-50'}`}>
+              <input type="radio" name="provider" disabled={!available(p.key) || busy} checked={provider === p.key} onChange={() => setProvider(p.key)} className="h-5 w-5 accent-primary" />
               <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-display text-sm font-extrabold text-white ${p.cls}`}>{p.badge}</span>
               <span className="flex-1">
                 <span className="flex items-baseline justify-between gap-2">
                   <span className="font-bold">{t(`plans.provider.${p.key}`)}</span>
                   <span className="whitespace-nowrap font-extrabold text-primary-dark">{price(p.key)}</span>
                 </span>
-                <span className="block text-sm text-muted">{t(`plans.providerHint.${p.key}`)}</span>
+                <span className="block text-sm text-muted">{t(available(p.key) ? `plans.providerHint.${p.key}` : 'plans.unavailable')}</span>
               </span>
             </label>
           ))}
-          <button type="button" className="btn-coral w-full" onClick={start} disabled={busy} data-testid="pay-start">
+          {methods && !PROVIDERS.some((p) => available(p.key)) && <p role="status" className="text-sm text-muted">{t('plans.noMethods')}</p>}
+          <button type="button" className="btn-coral w-full" onClick={start} disabled={busy || !available(provider)} data-testid="pay-start">
             {t('plans.payNow')}
           </button>
         </div>

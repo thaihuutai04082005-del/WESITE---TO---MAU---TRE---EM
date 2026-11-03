@@ -12,11 +12,11 @@ function extract(req) {
   return h.startsWith('Bearer ') ? h.slice(7) : null;
 }
 
-export function requireAuth(req, _res, next) {
+export async function requireAuth(req, _res, next) {
   const token = extract(req);
   if (!token) return next(unauthorized());
   try {
-    const user = User.findById(verifyToken(token).sub);
+    const user = await User.findById(verifyToken(token).sub);
     if (!user) return next(unauthorized());
     req.user = user;
     next();
@@ -25,11 +25,11 @@ export function requireAuth(req, _res, next) {
   }
 }
 
-export function optionalAuth(req, _res, next) {
+export async function optionalAuth(req, _res, next) {
   const token = extract(req);
   if (token) {
     try {
-      req.user = User.findById(verifyToken(token).sub) || undefined;
+      req.user = (await User.findById(verifyToken(token).sub)) || undefined;
     } catch {
       /* bỏ qua token hỏng */
     }

@@ -2,6 +2,8 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { DatabaseAdapter } from './databaseAdapter.js';
+import { createPostgresPool, migratePostgres } from './postgres.js';
 import { env, REPO_ROOT } from './env.js';
 
 let db;
@@ -17,8 +19,15 @@ export function openDb(file = env.dbFile) {
 export function migrate(conn) {
   conn.exec('CREATE TABLE IF NOT EXISTS _migrations (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL)');
   const dir = join(REPO_ROOT, 'database', 'migrations');
-  const done = new Set(conn.prepare('SELECT name FROM _migrations').all().map((r) => r.name));
-  for (const name of readdirSync(dir).filter((f) => f.endsWith('.sql')).sort()) {
+  const done = new Set(
+    conn
+      .prepare('SELECT name FROM _migrations')
+      .all()
+      .map((r) => r.name),
+  );
+  for (const name of readdirSync(dir)
+    .filter((f) => f.endsWith('.sql'))
+    .sort()) {
     if (done.has(name)) continue;
     const sql = readFileSync(join(dir, name), 'utf8');
     // Migration dựng lại bảng (đổi CHECK…) ghi "-- @foreign_keys off": tắt khoá ngoại trong lúc chạy
@@ -41,28 +50,27 @@ export function migrate(conn) {
 }
 
 export function getDb() {
-  if (!db) db = openDb();
+  if (!db)
+    db = env.databaseUrl
+      ? new DatabaseAdapter({ pool: createPostgresPool(env.databaseUrl, env.databasePassword) })
+      : new DatabaseAdapter({ sqlite: openDb() });
   return db;
 }
 
 /** Dùng trong test: thay DB mặc định. */
 export function setDb(conn) {
-  db = conn;
+  db = conn instanceof DatabaseAdapter ? conn : new DatabaseAdapter({ sqlite: conn });
 }
 
 /** Chạy fn trong một transaction; tự rollback khi lỗi. */
-export function tx(fn) {
+export async function tx(fn) {
+  return getDb().transaction(fn);
+}
+
+export async function initializeDatabase() {
   const conn = getDb();
-  if (conn.isTransaction) return fn(conn);
-  conn.exec('BEGIN IMMEDIATE');
-  try {
-    const out = fn(conn);
-    conn.exec('COMMIT');
-    return out;
-  } catch (err) {
-    conn.exec('ROLLBACK');
-    throw err;
-  }
+  if (conn.dialect === 'postgres') await migratePostgres(conn.pool);
+  return conn;
 }
 
 export const now = () => new Date().toISOString();

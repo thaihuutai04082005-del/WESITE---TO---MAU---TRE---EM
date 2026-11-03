@@ -11,7 +11,8 @@
     "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
     "start": "node --disable-warning=ExperimentalWarning src/server.js",
     "seed": "node --disable-warning=ExperimentalWarning ../database/seeds/seed.js",
-    "test": "NODE_ENV=test node --disable-warning=ExperimentalWarning --test test/*.test.js"
+    "test": "node test/run.mjs",
+    "test:postgres": "node test/run.mjs --postgres"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -21,9 +22,11 @@
     "jsonwebtoken": "^9.0.3",
     "nodemailer": "^10.0.10",
     "pdfkit": "^0.20.2",
+    "pg": "^8.23.1",
     "socket.io": "^4.8.3"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.14",
     "socket.io-client": "^4.8.3"
   }
 }

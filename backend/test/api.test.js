@@ -1,3 +1,4 @@
+import { asyncMap } from '../src/utils/asyncArray.js';
 // Test tích hợp: chạy server thật (DB trong bộ nhớ) và đi qua các luồng chính.
 process.env.DB_FILE = ':memory:';
 process.env.ARENA_DURATION_SEC = '60';
@@ -7,12 +8,22 @@ process.env.ARENA_SLOTS = '';
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHmac } from 'node:crypto';
 import { createServer } from 'node:http';
 import { io as ioc } from 'socket.io-client';
 
 const { env: testEnv } = await import('../src/config/env.js');
 // Test runs must never send real SMS or email, even when credentials are present.
-Object.assign(testEnv, { brevo: {}, twilio: {}, smtp: {}, sms: {} });
+Object.assign(testEnv, {
+  brevo: {},
+  twilio: {},
+  smtp: {},
+  sms: {},
+  paypal: { base: 'https://api-m.sandbox.paypal.com' },
+  momo: {},
+  sepay: {},
+  bank: { code: 'ACB', accountNo: '35391537', accountName: 'TEST ACCOUNT' },
+});
 const { createApp } = await import('../src/app.js');
 const { seedAll, seedPicturesIfNeeded } = await import('../../database/seeds/seed.js');
 const { initRealtime } = await import('../src/services/realtime.js');
@@ -64,7 +75,13 @@ async function register(username, password = 'abc12345', nickname = username, la
   // Dùng SĐT khác nhau để không bị chặn chống spam OTP.
   const phone = `09${String(10000000 + ++otpSeq).padStart(8, '0')}`;
   const start = await api('POST', '/auth/register/start', {
-    username, password, captchaId: cap.captchaId, captchaText: _peekCaptcha(cap.captchaId), contactType: 'phone', contact: phone, ...(language ? { language } : {}),
+    username,
+    password,
+    captchaId: cap.captchaId,
+    captchaText: _peekCaptcha(cap.captchaId),
+    contactType: 'phone',
+    contact: phone,
+    ...(language ? { language } : {}),
   });
   assert.equal(start.status, 200, JSON.stringify(start.body));
   const verify = await api('POST', '/auth/register/verify', { registrationId: start.body.registrationId, code: start.body.devCode });
@@ -77,15 +94,30 @@ async function register(username, password = 'abc12345', nickname = username, la
   return { token: login.body.token, id: login.body.user.id, phone };
 }
 
-const FULL_FILLS = (picture, color = null) => Object.fromEntries(picture.regions.map((r, i) => [r.id, color || ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF'][i % 5]]));
+const FULL_FILLS = (picture, color = null) =>
+  Object.fromEntries(picture.regions.map((r, i) => [r.id, color || ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF'][i % 5]]));
 
 test('Đăng ký: sai CAPTCHA bị từ chối, mật khẩu yếu bị từ chối', async () => {
   const { body: cap } = await api('GET', '/auth/captcha');
   assert.match(cap.svg, /^<svg/);
-  const bad = await api('POST', '/auth/register/start', { username: 'beso1', password: 'abc12345', captchaId: cap.captchaId, captchaText: 'XXXX', contactType: 'phone', contact: '0912345678' });
+  const bad = await api('POST', '/auth/register/start', {
+    username: 'beso1',
+    password: 'abc12345',
+    captchaId: cap.captchaId,
+    captchaText: 'XXXX',
+    contactType: 'phone',
+    contact: '0912345678',
+  });
   assert.equal(bad.body.error.code, 'captcha_wrong');
   const { body: cap2 } = await api('GET', '/auth/captcha');
-  const weak = await api('POST', '/auth/register/start', { username: 'beso1', password: '123', captchaId: cap2.captchaId, captchaText: _peekCaptcha(cap2.captchaId), contactType: 'phone', contact: '0912345678' });
+  const weak = await api('POST', '/auth/register/start', {
+    username: 'beso1',
+    password: '123',
+    captchaId: cap2.captchaId,
+    captchaText: _peekCaptcha(cap2.captchaId),
+    contactType: 'phone',
+    contact: '0912345678',
+  });
   assert.equal(weak.body.error.code, 'invalid_input');
 });
 
@@ -95,24 +127,42 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(themes.body.themes.length, 25);
   assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
   // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ có 5 chủ đề (Chiến Binh Biến Hình, Công Chúa Phép Thuật, Kiếm Khách Huyền Thoại, Tiên Cá Phép Thuật, Hiệp Sĩ Thẻ Bài).
-  assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '9+', '9+', '9+', '9+', '9+']);
+  assert.deepEqual(
+    themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'),
+    ['3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '9+', '9+', '9+', '9+', '9+'],
+  );
   assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 10);
   // Động Vật (3–5 tuổi): 15 tranh cũ đã ẩn, chỉ hiện tranh mới của Chó Con, Thỏ Con, Gà Con, Vịt Con, Heo Con, Bò Sữa, Cá Vàng, Chim Non, Mèo Con và Bướm Xinh.
   const puppy = await api('GET', '/themes/dong-vat-3-4/objects/cho-con/pictures');
-  assert.deepEqual(puppy.body.pictures.map((p) => p.name.vi), ['Chó Con']);
+  assert.deepEqual(
+    puppy.body.pictures.map((p) => p.name.vi),
+    ['Chó Con'],
+  );
   const flat = await api('GET', '/themes/dong-vat-3-4/pictures');
-  assert.deepEqual(flat.body.pictures.map((p) => p.name.vi), ['Chó Con', 'Mèo Con', 'Thỏ Con', 'Gà Con', 'Vịt Con', 'Heo Con', 'Bò Sữa', 'Cá Vàng', 'Chim Non', 'Bướm Xinh']);
+  assert.deepEqual(
+    flat.body.pictures.map((p) => p.name.vi),
+    ['Chó Con', 'Mèo Con', 'Thỏ Con', 'Gà Con', 'Vịt Con', 'Heo Con', 'Bò Sữa', 'Cá Vàng', 'Chim Non', 'Bướm Xinh'],
+  );
   assert.equal(themes.body.themes.find((t) => t.slug === 'dong-vat-3-4').pictureCount, 10);
   // Hàng 1 của Anh Hùng Siêu Thú: 5 tranh vẽ tay sư tử, hổ, chó, mèo, thỏ; hàng 2: gấu, đại bàng, heo, khỉ, chim cánh cụt.
   const hero = await api('GET', '/themes/anh-hung-sieu-thu/pictures');
-  assert.deepEqual(hero.body.pictures.slice(0, 5).map((p) => p.slug), ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc']);
-  assert.deepEqual(hero.body.pictures.slice(5, 10).map((p) => p.slug), ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia']);
+  assert.deepEqual(
+    hero.body.pictures.slice(0, 5).map((p) => p.slug),
+    ['su-tu--ruc-lua', 'ho--tia-chop', 'cho-sieu-thu--sieu-thong-minh', 'meo-sieu-thu--nhay-sieu-cao', 'tho-sieu-thu--sieu-toc'],
+  );
+  assert.deepEqual(
+    hero.body.pictures.slice(5, 10).map((p) => p.slug),
+    ['gau-sieu-thu--dai-luc', 'dai-bang--xe-gio', 'heo-sieu-thu--sieu-pham-an', 'khi-sieu-thu--day-leo-than-toc', 'canh-cut-sieu-thu--bang-gia'],
+  );
   // Vương Quốc Bánh Kẹo: chỉ hiện 10 tranh vẽ tay, tên theo công thức "bánh/kẹo + chức vụ".
   const sweets = await api('GET', '/themes/vuong-quoc-keo-ngot/pictures');
   assert.equal(sweets.body.pictures.length, 10);
   assert.equal(sweets.body.pictures[0].slug, 'banh-kem--hoang-hau');
   assert.equal(sweets.body.pictures[5].slug, 'banh-quy--linh-gac'); // đầu hàng 2
-  assert.deepEqual(sweets.body.pictures.slice(6).map((p) => p.name.vi), ['Kẹo Dẻo Hiệp Sĩ', 'Macaron Cung Nữ', 'Bánh Gừng Đầu Bếp', 'Socola Tể Tướng']);
+  assert.deepEqual(
+    sweets.body.pictures.slice(6).map((p) => p.name.vi),
+    ['Kẹo Dẻo Hiệp Sĩ', 'Macaron Cung Nữ', 'Bánh Gừng Đầu Bếp', 'Socola Tể Tướng'],
+  );
   const objects = await api('GET', '/themes/anh-hung-sieu-thu/objects');
   assert.equal(objects.body.objects.length, 10);
   // Chủ đề này chỉ hiện đúng 10 tranh vẽ tay; các tranh tạo tự động bị ẩn.
@@ -130,13 +180,36 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   // Gọi lại start cho cùng tranh không tính thêm.
   assert.equal((await api('POST', `/artworks/${a1.body.artwork.id}/start`, null, token)).status, 200);
 
-  const save = await api('PUT', `/artworks/${a1.body.artwork.id}`, {
-    data: { fills: FULL_FILLS(pic), strokes: [{ tool: 'brush', color: '#000000', size: 6, points: [[300, 250], [305, 255]] }], stickers: [{ type: 'star', x: 100, y: 100 }], glitter: [pic.regions[0].id] },
-    thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
-    completed: true,
-  }, token);
+  const save = await api(
+    'PUT',
+    `/artworks/${a1.body.artwork.id}`,
+    {
+      data: {
+        fills: FULL_FILLS(pic),
+        strokes: [
+          {
+            tool: 'brush',
+            color: '#000000',
+            size: 6,
+            points: [
+              [300, 250],
+              [305, 255],
+            ],
+          },
+        ],
+        stickers: [{ type: 'star', x: 100, y: 100 }],
+        glitter: [pic.regions[0].id],
+      },
+      thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      completed: true,
+    },
+    token,
+  );
   assert.equal(save.status, 200, JSON.stringify(save.body));
-  assert.ok(save.body.events.some((e) => e.type === 'mission_complete'), 'hoàn thành nhiệm vụ "Tô xong 1 tranh"');
+  assert.ok(
+    save.body.events.some((e) => e.type === 'mission_complete'),
+    'hoàn thành nhiệm vụ "Tô xong 1 tranh"',
+  );
   // Tranh hoàn thành tự dùng khung gỗ mặc định (miễn phí); chọn khung khác phải sở hữu; bỏ khung = null.
   const aid = a1.body.artwork.id;
   assert.equal(save.body.artwork.frame, 'khung-go');
@@ -176,20 +249,25 @@ test('Tranh dở quá hạn được cảnh báo rồi tự xoá; tranh hoàn th
   const { token, id } = await register('bena02');
   const a = await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, token);
   const old = new Date(Date.now() - 26 * 86400000).toISOString();
-  getDb().prepare('UPDATE artworks SET updated_at = ? WHERE id = ?').run(old, a.body.artwork.id);
-  assert.equal(runCleanup().warned, 1);
+  await getDb().prepare('UPDATE artworks SET updated_at = ? WHERE id = ?').run(old, a.body.artwork.id);
+  assert.equal((await runCleanup()).warned, 1);
   const n = await api('GET', '/users/me/notifications', null, token);
   assert.ok(n.body.notifications.some((x) => x.type === 'draft_expiring'));
-  getDb().prepare('UPDATE artworks SET updated_at = ? WHERE id = ?').run(new Date(Date.now() - 31 * 86400000).toISOString(), a.body.artwork.id);
-  runCleanup();
-  assert.equal(getDb().prepare('SELECT COUNT(*) AS c FROM artworks WHERE user_id = ?').get(id).c, 0);
+  await getDb()
+    .prepare('UPDATE artworks SET updated_at = ? WHERE id = ?')
+    .run(new Date(Date.now() - 31 * 86400000).toISOString(), a.body.artwork.id);
+  await runCleanup();
+  assert.equal((await getDb().prepare('SELECT COUNT(*) AS c FROM artworks WHERE user_id = ?').get(id)).c, 0);
 });
 
 test('Quên mật khẩu qua SĐT phụ huynh', async () => {
   const { phone } = await register('bena03', 'abc12345');
   const start = await api('POST', '/auth/forgot/start', { contactType: 'phone', contact: phone });
   const v = await api('POST', '/auth/forgot/verify', { resetId: start.body.resetId, code: start.body.devCode });
-  assert.deepEqual(v.body.accounts.map((a) => a.username), ['bena03']);
+  assert.deepEqual(
+    v.body.accounts.map((a) => a.username),
+    ['bena03'],
+  );
   const r = await api('POST', '/auth/forgot/reset', { resetToken: v.body.resetToken, username: 'bena03', newPassword: 'moi12345' });
   assert.equal(r.status, 200);
   assert.equal((await api('POST', '/auth/login', { username: 'bena03', password: 'moi12345' })).status, 200);
@@ -207,29 +285,32 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   assert.equal((await api('POST', '/gacha/pull', { count: 1 }, a.token)).body.error.code, 'not_enough_gacha_points');
   assert.equal((await api('POST', '/shop/avatar-vang/buy', null, a.token)).body.error.code, 'item_not_for_sale');
 
-  getDb().prepare('UPDATE users SET gacha_points = 130, ruby = 150 WHERE id = ?').run(a.id);
+  await getDb().prepare('UPDATE users SET gacha_points = 130, ruby = 150 WHERE id = ?').run(a.id);
   const pull = await api('POST', '/gacha/pull', { count: 2 }, a.token);
   assert.equal(pull.body.results.length, 2);
   assert.equal(pull.body.gachaPoints, 30, 'dư 30 điểm giữ lại');
   // Lật đúng thẻ đã chọn trên sân khấu (không ngẫu nhiên); thẻ không có trong game thì từ chối.
   const deck0 = await api('GET', '/gacha/catalog', null, a.token);
-  getDb().prepare('UPDATE users SET gacha_points = 130 WHERE id = ?').run(a.id);
+  await getDb().prepare('UPDATE users SET gacha_points = 130 WHERE id = ?').run(a.id);
   const fixed = await api('POST', '/gacha/pull', { pictureIds: [deck0.body.cards[1].pictureId] }, a.token);
   assert.equal(fixed.body.results[0].picture.id, deck0.body.cards[1].pictureId);
   assert.equal((await api('POST', '/gacha/pull', { pictureIds: [999999] }, a.token)).body.error.code, 'invalid_card');
-  getDb().prepare('UPDATE users SET gacha_points = 30 WHERE id = ?').run(a.id);
+  await getDb().prepare('UPDATE users SET gacha_points = 30 WHERE id = ?').run(a.id);
   assert.equal((await api('POST', '/shop/khung-hoa/buy', null, a.token)).body.ruby, 30);
 
   // Màu họa tiết & bìa truyện: bán trong Shop, bìa chưa mua thì không gắn được vào truyện.
   const shop1 = await api('GET', '/shop', null, a.token);
   assert.ok(shop1.body.items.some((i) => i.type === 'pattern' && i.slug === 'caro' && !i.owned));
   assert.ok(!shop1.body.items.some((i) => i.type === 'brush_skin'), 'skin cọ không còn bán');
-  assert.equal((await api('POST', '/storybooks', { title: 'T', pages: [], coverStyle: 'bia-hong-phan' }, a.token)).body.error.code, 'cover_not_owned');
+  assert.equal(
+    (await api('POST', '/storybooks', { title: 'T', pages: [], coverStyle: 'bia-hong-phan' }, a.token)).body.error.code,
+    'cover_not_owned',
+  );
   assert.equal((await api('POST', '/shop/caro/buy', null, a.token)).body.error.code, 'not_enough_ruby');
   assert.equal((await api('POST', '/shop/bia-hong-phan/buy', null, a.token)).body.ruby, 0);
   const sbOk = await api('POST', '/storybooks', { title: 'T', pages: [], coverStyle: 'bia-hong-phan' }, a.token);
   assert.equal(sbOk.body.storybook.coverStyle, 'bia-hong-phan');
-  getDb().prepare('UPDATE users SET ruby = 30 WHERE id = ?').run(a.id);
+  await getDb().prepare('UPDATE users SET ruby = 30 WHERE id = ?').run(a.id);
 
   // Kết bạn
   const me = await api('GET', '/social/friends', null, b.token);
@@ -263,7 +344,9 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   const other = cards.body.cards[1].id;
   const blocked = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
   assert.equal(blocked.body.error.code, 'trade_daily_limit');
-  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(a.id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  await getDb()
+    .prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)")
+    .run(a.id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   for (let i = 0; i < 2; i++) {
     const t = await api('POST', '/social/trades', { toUserId: b.id, offerCardId: other }, a.token);
     assert.equal(t.status, 201);
@@ -277,21 +360,46 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
 
 test('Flipbook: nhận mọi tranh đã hoàn thành của bé (tô mẫu, sáng tạo), xuất PDF, chia sẻ', async () => {
   const { token } = await register('bena06');
-  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) SELECT id, 'year', ?, ? FROM users WHERE username = 'bena06'").run(new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  await getDb()
+    .prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) SELECT id, 'year', ?, ? FROM users WHERE username = 'bena06'")
+    .run(new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   const ids = [];
   for (const pid of [1, 2]) {
     const a = await api('POST', '/artworks', { pictureId: pid, mode: 'free' }, token);
-    await api('PUT', `/artworks/${a.body.artwork.id}`, { data: { fills: { 'nen-troi': '#FFC94D' } }, thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', completed: true }, token);
+    await api(
+      'PUT',
+      `/artworks/${a.body.artwork.id}`,
+      {
+        data: { fills: { 'nen-troi': '#FFC94D' } },
+        thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+        completed: true,
+      },
+      token,
+    );
     ids.push(a.body.artwork.id);
   }
   const tpl = await api('POST', '/artworks', { pictureId: 3, mode: 'template' }, token);
   const bad = await api('POST', '/storybooks', { title: 'Truyện', pages: [{ artworkId: tpl.body.artwork.id }] }, token);
   assert.equal(bad.body.error.code, 'invalid_page_artwork', 'tranh chưa hoàn thành thì không đóng được');
   // Tranh tô mẫu đã hoàn thành cũng đóng được.
-  await api('PUT', `/artworks/${tpl.body.artwork.id}`, { data: { fills: { 'nen-troi': '#FFC94D' } }, thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', completed: true }, token);
+  await api(
+    'PUT',
+    `/artworks/${tpl.body.artwork.id}`,
+    {
+      data: { fills: { 'nen-troi': '#FFC94D' } },
+      thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+      completed: true,
+    },
+    token,
+  );
   const withTpl = await api('POST', '/storybooks', { title: 'Truyện mẫu', pages: [{ artworkId: tpl.body.artwork.id }] }, token);
   assert.equal(withTpl.status, 201);
-  const book = await api('POST', '/storybooks', { title: 'Mèo Ú đi chơi', pages: ids.map((artworkId, i) => ({ artworkId, caption: `Trang ${i + 1}` })) }, token);
+  const book = await api(
+    'POST',
+    '/storybooks',
+    { title: 'Mèo Ú đi chơi', pages: ids.map((artworkId, i) => ({ artworkId, caption: `Trang ${i + 1}` })) },
+    token,
+  );
   assert.equal(book.body.storybook.pages.length, 2);
   const done = await api('POST', `/storybooks/${book.body.storybook.id}/complete`, null, token);
   assert.equal(done.body.storybook.completed, true);
@@ -300,7 +408,12 @@ test('Flipbook: nhận mọi tranh đã hoàn thành của bé (tô mẫu, sáng
   assert.equal(pub.body.storybook.title, 'Mèo Ú đi chơi');
   const res = await fetch(`${base}/api/storybooks/${book.body.storybook.id}/pdf`, { headers: { Authorization: `Bearer ${token}` } });
   assert.equal(res.headers.get('content-type'), 'application/pdf');
-  assert.equal(Buffer.from(await res.arrayBuffer()).subarray(0, 4).toString(), '%PDF');
+  assert.equal(
+    Buffer.from(await res.arrayBuffer())
+      .subarray(0, 4)
+      .toString(),
+    '%PDF',
+  );
 });
 
 function connect(token) {
@@ -336,7 +449,12 @@ test('Đấu trường: phòng riêng chỉ bạn bè vào, chấm điểm, thư
   for (let i = 0; i < 8; i++) sg.emit('arena:action');
   const resH = once(sh, 'arena:results');
   // Chỉ tô vài vùng nhỏ (bỏ nền trời/đất) để độ phủ < 90% — tránh bị gắn cờ "hoàn thành quá nhanh".
-  const half = Object.fromEntries(pic.regions.filter((r) => r.area > 0 && r.area < 15000).slice(0, 6).map((r, i) => [r.id, ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF', '#FF9F43'][i]]));
+  const half = Object.fromEntries(
+    pic.regions
+      .filter((r) => r.area > 0 && r.area < 15000)
+      .slice(0, 6)
+      .map((r, i) => [r.id, ['#FF5F7E', '#2B9BF4', '#4CD787', '#FFC94D', '#7D5FFF', '#FF9F43'][i]]),
+  );
   await emit(sg, 'arena:submit', { data: { fills: half } });
   await emit(sh, 'arena:submit', { data: { fills: { [pic.regions[pic.regions.length - 1].id]: '#000000' } } });
   const results = await resH;
@@ -353,7 +471,7 @@ test('Đấu trường: phòng riêng chỉ bạn bè vào, chấm điểm, thư
 });
 
 test('Tô cùng nhau: đồng bộ thao tác, tối đa 4 bé, lưu vào lịch sử mọi bé', async () => {
-  const users = await Promise.all(['cung1', 'cung2', 'cung3', 'cung4', 'cung5'].map((u) => register(u)));
+  const users = await Promise.all(await asyncMap(['cung1', 'cung2', 'cung3', 'cung4', 'cung5'], async (u) => await register(u)));
   const socks = await Promise.all(users.map((u) => connect(u.token)));
   const created = await emit(socks[0], 'collab:create', { pictureId: 1 });
   const code = created.room.code;
@@ -384,7 +502,7 @@ test('Tô cùng nhau: tạo phòng xong rời rồi vào lại ngay vẫn còn p
 });
 
 test('Tô cùng nhau: mời bạn bè vào phòng (chỉ bạn đã kết bạn), từ chối + chặn 5 phút', async () => {
-  const [a, b, c] = await Promise.all(['moia', 'moib', 'moic'].map((u) => register(u)));
+  const [a, b, c] = await Promise.all(await asyncMap(['moia', 'moib', 'moic'], async (u) => await register(u)));
   const code = (await api('GET', '/social/friends', null, b.token)).body.myCode;
   await api('POST', '/social/friends', { code }, a.token);
   const inc = await api('GET', '/social/friends', null, b.token);
@@ -419,17 +537,30 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   // Tên thật hay biệt danh đều được; chữ xấu / số điện thoại / mẫu wow khi chưa có gói bị chặn.
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Nguyễn Bé Na', style: 'classic' }, token)).status, 200);
   assert.equal((await api('PUT', '/users/me/signature', { name: 'đ.ị.t', style: 'classic' }, token)).body.error.code, 'signature_bad_word');
-  assert.equal((await api('PUT', '/users/me/signature', { name: 'Na 0912345678', style: 'classic' }, token)).body.error.code, 'signature_private_info');
+  assert.equal(
+    (await api('PUT', '/users/me/signature', { name: 'Na 0912345678', style: 'classic' }, token)).body.error.code,
+    'signature_private_info',
+  );
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Na', style: 'gold' }, token)).body.error.code, 'signature_premium_required');
   // Tự ký bằng tay: chỉ VIP.
-  const hand = [[[10, 10], [40, 30], [80, 12]], [[90, 40], [140, 20]]];
+  const hand = [
+    [
+      [10, 10],
+      [40, 30],
+      [80, 12],
+    ],
+    [
+      [90, 40],
+      [140, 20],
+    ],
+  ];
   assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.error.code, 'signature_premium_required');
 
   const a = await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, token);
   const id = a.body.artwork.id;
   await api('POST', `/artworks/${id}/start`, null, token);
   // Ký lên tranh: vị trí bị kẹp trong tranh, cỡ tối đa 1/4 bề ngang.
-  const put = (signature) => api('PUT', `/artworks/${id}`, { data: { fills: {}, strokes: [], stickers: [], signature } }, token);
+  const put = async (signature) => await api('PUT', `/artworks/${id}`, { data: { fills: {}, strokes: [], stickers: [], signature } }, token);
   assert.equal((await put({ style: 'classic', name: 'Nguyễn Bé Na', x: 9999, y: -50, scale: 3, rot: 90, color: '#ff5f7e' })).status, 200);
   let sig = (await api('GET', `/artworks/${id}`, null, token)).body.artwork.data.signature;
   assert.deepEqual([sig.scale, sig.rot, sig.color], [1, 20, '#FF5F7E']);
@@ -438,12 +569,16 @@ test('Chữ ký: mẫu Free/wow theo gói, lọc chữ xấu, ký lên tranh, h�
   assert.equal((await put({ style: 'classic', name: 'Bạn khác', x: 300, y: 300 })).body.error.code, 'signature_not_default');
 
   // Có gói → dùng mẫu wow → ký lên tranh; hết gói → chữ ký mặc định về mẫu Free, tranh đã ký giữ nguyên.
-  const uid = getDb().prepare("SELECT id FROM users WHERE username = 'bena09'").get().id;
-  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)").run(uid, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  const uid = (await getDb().prepare("SELECT id FROM users WHERE username = 'bena09'").get()).id;
+  await getDb()
+    .prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)")
+    .run(uid, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   assert.equal((await api('PUT', '/users/me/signature', { style: 'hand', hand }, token)).body.signature.style, 'hand', 'VIP được tự ký bằng tay');
   assert.equal((await api('PUT', '/users/me/signature', { name: 'Bé Na', style: 'gold' }, token)).body.signature.style, 'gold');
   assert.equal((await put({ style: 'gold', name: 'Bé Na', x: 480, y: 560, scale: 0.8, rot: -5, color: '#1B2A38' })).status, 200);
-  getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now() - 500).toISOString(), uid);
+  await getDb()
+    .prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?')
+    .run(new Date(Date.now() - 500).toISOString(), uid);
   const after = await api('GET', '/users/me/signature', null, token);
   assert.deepEqual([after.body.premium, after.body.signature.style, after.body.signature.name], [false, 'classic', 'Bé Na']);
   assert.equal((await put({ style: 'gold', name: 'Bé Na', x: 100, y: 560, scale: 0.8, rot: 0 })).status, 200);
@@ -474,12 +609,25 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
     const a = (await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, u.token)).body.artwork;
     await api('POST', `/artworks/${a.id}/start`, null, u.token);
     const r = pic.regions.find((x) => x.area > 2000);
-    const strokes = Array.from({ length: brush }, () => ({ tool: 'brush', color: '#FF0000', size: 4, points: [[r.label[0], r.label[1]], [r.label[0] + 1, r.label[1]]] }));
-    const data = { fills: FULL_FILLS(pic), strokes, stickers: [], ...(signed ? { signature: { ...sig, name: u === A ? 'trienlam1' : 'trienlam2' } } : {}) };
+    const strokes = Array.from({ length: brush }, () => ({
+      tool: 'brush',
+      color: '#FF0000',
+      size: 4,
+      points: [
+        [r.label[0], r.label[1]],
+        [r.label[0] + 1, r.label[1]],
+      ],
+    }));
+    const data = {
+      fills: FULL_FILLS(pic),
+      strokes,
+      stickers: [],
+      ...(signed ? { signature: { ...sig, name: u === A ? 'trienlam1' : 'trienlam2' } } : {}),
+    };
     const s = await api('PUT', `/artworks/${a.id}`, { data, completed: true }, u.token);
     assert.equal(s.status, 200, JSON.stringify(s.body));
     // Lùi mốc bắt đầu tô 2 ngày: vừa không bị "tô vội", vừa trả lại lượt tô Free hôm nay cho bài test.
-    db.prepare('UPDATE usage_log SET used_at = ? WHERE artwork_id = ?').run(new Date(Date.now() - 2 * 86400000).toISOString(), a.id);
+    await db.prepare('UPDATE usage_log SET used_at = ? WHERE artwork_id = ?').run(new Date(Date.now() - 2 * 86400000).toISOString(), a.id);
     return a.id;
   }
 
@@ -493,18 +641,23 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   const st = await api('GET', '/exhibition/mine', null, A.token);
   assert.deepEqual([st.body.schedule.submitOpen, st.body.schedule.nextRound, st.body.limit], [true, '2026-10-05', 1]);
   // VIP (Tháng hoặc Năm) gửi 5 tranh/vòng.
-  const uidB = db.prepare('SELECT id FROM users WHERE username = ?').get('trienlam2').id;
-  for (const [plan, n] of [['month', 5], ['year', 5]]) {
-    db.prepare('INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, ?, ?, ?)').run(uidB, plan, '2026-01-01T00:00:00Z', '2027-01-01T00:00:00Z');
+  const uidB = (await db.prepare('SELECT id FROM users WHERE username = ?').get('trienlam2')).id;
+  for (const [plan, n] of [
+    ['month', 5],
+    ['year', 5],
+  ]) {
+    await db
+      .prepare('INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, ?, ?, ?)')
+      .run(uidB, plan, '2026-01-01T00:00:00Z', '2027-01-01T00:00:00Z');
     assert.equal((await api('GET', '/exhibition/mine', null, B.token)).body.limit, n);
-    db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(uidB);
+    await db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(uidB);
   }
   const noSig = await artwork(A, { signed: false });
   const bad = await api('POST', '/exhibition/entries', { artworkId: noSig }, A.token);
   assert.equal(bad.body.error.code, 'exhibit_rules');
   assert.ok(bad.body.error.failures.includes(1));
   // Chú thích "đủ điều kiện triển lãm": tranh đã ký + tô đủ + chế độ Sáng tạo thì true; thiếu chữ ký thì false.
-  const eligList = (await api("GET", "/artworks?status=completed&eligibility=1", null, A.token)).body.artworks;
+  const eligList = (await api('GET', '/artworks?status=completed&eligibility=1', null, A.token)).body.artworks;
   assert.equal(eligList.find((x) => x.id === a1).exhibitEligible, true);
   assert.equal(eligList.find((x) => x.id === noSig).exhibitEligible, false);
   // Tranh không có nét cọ → tự duyệt; Free chỉ gửi 1 tranh/vòng.
@@ -521,7 +674,7 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   const b1 = await artwork(B, { brush: 6 });
   const e2 = await api('POST', '/exhibition/entries', { artworkId: b1 }, B.token);
   assert.equal(e2.body.entry.status, 'pending');
-  db.prepare("UPDATE users SET role = 'admin' WHERE username = 'trienlam1'").run();
+  await db.prepare("UPDATE users SET role = 'admin' WHERE username = 'trienlam1'").run();
   const q = await api('GET', '/exhibition/review', null, A.token);
   assert.ok(q.body.entries.some((x) => x.id === e2.body.entry.id && x.data.fills));
   assert.equal((await api('GET', '/exhibition/review', null, B.token)).status, 403);
@@ -549,7 +702,7 @@ test('Triển lãm: lịch vòng, gửi tranh, tự duyệt/duyệt tay, cảm x
   assert.deepEqual((await api('GET', `/exhibition/wall?offset=${wallRes.body.total}&limit=5`, null, B.token)).body.entries, []);
   assert.equal((await api('PUT', `/exhibition/entries/${entry.id}/reaction`, { emoji: 'heart' }, A.token)).body.error.code, 'exhibit_own');
   assert.equal((await api('DELETE', `/exhibition/entries/${entry.id}`, null, A.token)).body.error.code, 'exhibit_cannot_withdraw');
-  assert.equal(db.prepare('SELECT round_key FROM exhibition_entries WHERE id = ?').get(e3.body.entry.id).round_key, '2026-10-12');
+  assert.equal((await db.prepare('SELECT round_key FROM exhibition_entries WHERE id = ?').get(e3.body.entry.id)).round_key, '2026-10-12');
   assert.equal((await api('POST', `/exhibition/entries/${entry.id}/report`, null, B.token)).body.ok, true);
 
   // Chủ nhật 20:30: khoá cảm xúc, xét danh hiệu (đồng hạng thì cùng nhận).
@@ -587,36 +740,41 @@ test('Triển lãm: lịch cổng gửi tranh theo giờ VN', async () => {
 test('Rank Cao Thủ: đủ 800 điểm thì thăng bậc, nhận khung Cao Thủ + 300 Ruby', async () => {
   const { awardArena } = await import('../src/services/progression.js');
   const { token, id } = await register('caothu1');
-  getDb().prepare('UPDATE users SET rank_points = 790 WHERE id = ?').run(id);
-  const events = awardArena(id, 10);
+  await getDb().prepare('UPDATE users SET rank_points = 790 WHERE id = ?').run(id);
+  const events = await awardArena(id, 10);
   const up = events.find((e) => e.type === 'rank_up');
   assert.deepEqual([up?.rank, up?.frame, up?.ruby], ['master', 'avatar-cao-thu', 300]);
   const p = await api('GET', '/progression', null, token);
   assert.equal(p.body.rank.key, 'master');
   assert.equal(p.body.rank.next, null);
-  assert.ok(getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id));
+  assert.ok(
+    await getDb().prepare("SELECT 1 FROM user_items ui JOIN items i ON i.id = ui.item_id WHERE ui.user_id = ? AND i.slug = 'avatar-cao-thu'").get(id),
+  );
 });
 
 test('Chủ đề đã ẩn: không hiện ở danh sách, không vào Bóc thẻ, tranh cũ vẫn mở được', async () => {
   const Picture = await import('../src/models/picture.js');
-  const t = getDb().prepare("SELECT id FROM themes WHERE slug = 'anh-hung-sieu-thu'").get();
-  const card = getDb().prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 1 LIMIT 1').get(t.id);
-  getDb().prepare('UPDATE themes SET active = 0 WHERE id = ?').run(t.id);
+  const t = await getDb().prepare("SELECT id FROM themes WHERE slug = 'anh-hung-sieu-thu'").get();
+  const card = await getDb()
+    .prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE o.theme_id = ? AND p.is_card = 1 LIMIT 1')
+    .get(t.id);
+  await getDb().prepare('UPDATE themes SET active = 0 WHERE id = ?').run(t.id);
   try {
     const list = await api('GET', '/themes');
     assert.ok(!list.body.themes.some((x) => x.slug === 'anh-hung-sieu-thu'));
     assert.equal((await api('GET', '/themes/anh-hung-sieu-thu/objects')).status, 404);
-    const pool = Picture.cardPool();
+    const pool = await Picture.cardPool();
     assert.ok(!Object.values(pool).flat().includes(card.id));
-    assert.ok(Picture.findPicture(card.id));
+    assert.ok(await Picture.findPicture(card.id));
   } finally {
-    getDb().prepare('UPDATE themes SET active = 1 WHERE id = ?').run(t.id);
+    await getDb().prepare('UPDATE themes SET active = 1 WHERE id = ?').run(t.id);
   }
 });
 
 test('Thanh toán chuyển khoản QR: tạo mã, SePay báo tiền về thì mở gói (chống trùng, sai khoá, thiếu tiền)', async () => {
   const { env } = await import('../src/config/env.js');
   const u = await register('chuyenkhoan1');
+  env.sepay.apiKey = 'test-sepay-key';
   const p = await api('POST', '/payments', { plan: 'month', provider: 'bank' }, u.token);
   assert.equal(p.status, 201, JSON.stringify(p.body));
   assert.equal(p.body.currency, 'VND');
@@ -630,13 +788,21 @@ test('Thanh toán chuyển khoản QR: tạo mã, SePay báo tiền về thì m�
   assert.ok(qr.includes('540519000') && qr.includes(p.body.bankTransfer.content));
 
   const hook = (body, key) =>
-    fetch(`${base}/api/payments/sepay/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(key ? { Authorization: `Apikey ${key}` } : {}) }, body: JSON.stringify(body) });
+    fetch(`${base}/api/payments/sepay/webhook`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(key ? { Authorization: `Apikey ${key}` } : {}) },
+      body: JSON.stringify({ accountNumber: env.bank.accountNo, ...body }),
+    });
   env.sepay.apiKey = 'test-sepay-key';
   try {
     const content = `MBVCB.123 ${p.body.bankTransfer.content.toLowerCase()} chuyen tien`;
     assert.equal((await hook({ id: 1, transferType: 'in', transferAmount: 19000, content }, 'sai-khoa')).status, 401);
     // Chuyển thiếu tiền → chưa mở gói.
     await hook({ id: 2, transferType: 'in', transferAmount: 10000, content }, 'test-sepay-key');
+    assert.equal((await api('GET', `/payments/${p.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
+    await hook({ id: 2, transferType: 'in', transferAmount: 'invalid', content }, 'test-sepay-key');
+    await hook({ id: 2, transferType: 'in', transferAmount: 19000, content, accountNumber: 'wrong' }, 'test-sepay-key');
+    await hook({ transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key');
     assert.equal((await api('GET', `/payments/${p.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
     // Đủ tiền → mở gói; gửi lại cùng giao dịch không gia hạn thêm.
     assert.equal((await hook({ id: 3, transferType: 'in', transferAmount: 19000, content }, 'test-sepay-key')).status, 200);
@@ -659,6 +825,7 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
   const fake = { status: 'APPROVAL_PENDING', cycles: 0, cancelled: false, created: null };
   env.paypal.clientId = 'cid';
   env.paypal.secret = 'sec';
+  env.paypal.webhookId = 'WH-TEST';
   globalThis.fetch = async (url, init = {}) => {
     const u2 = String(url);
     if (!u2.startsWith(env.paypal.base)) return realFetch(url, init);
@@ -672,7 +839,28 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
       return ok({ id: 'I-TEST1', links: [{ rel: 'approve', href: 'https://paypal.test/approve' }] }, 201);
     }
     if (path === '/v1/billing/subscriptions/I-TEST1') {
-      return ok({ id: 'I-TEST1', status: fake.status, custom_id: fake.created.custom_id, billing_info: { cycle_executions: [{ tenure_type: 'REGULAR', cycles_completed: fake.cycles }] } });
+      return ok({
+        id: 'I-TEST1',
+        status: fake.status,
+        custom_id: fake.customId || fake.created.custom_id,
+        plan_id: fake.created.plan_id,
+        billing_info: { cycle_executions: [{ tenure_type: 'REGULAR', cycles_completed: fake.cycles }] },
+      });
+    }
+    if (path.startsWith('/v1/billing/subscriptions/I-TEST1/transactions?')) {
+      return ok({
+        transactions: Array.from({ length: fake.cycles }, (_, k) => ({
+          id: `SALE-${k + 1}`,
+          status: 'COMPLETED',
+          time: new Date(Date.now() + k).toISOString(),
+          amount_with_breakdown: { gross_amount: { currency_code: fake.currency || 'USD', value: '0.79' } },
+        })),
+      });
+    }
+    if (path === '/v1/notifications/verify-webhook-signature') {
+      assert.equal(JSON.parse(init.body).webhook_id, 'WH-TEST');
+      if (fake.verifyDown) return ok({ message: 'temporary provider outage' }, 503);
+      return ok({ verification_status: fake.badSignature ? 'FAILURE' : 'SUCCESS' });
     }
     if (path === '/v1/billing/subscriptions/I-TEST1/cancel') {
       fake.cancelled = true;
@@ -688,6 +876,17 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     assert.equal(fake.created.plan_id, 'P-MONTH');
     // Chưa đồng ý → vẫn chờ.
     assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).body.payment.status, 'pending');
+    // ACTIVE without a completed charge must not grant VIP.
+    fake.status = 'ACTIVE';
+    assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).body.payment.status, 'pending');
+    assert.equal((await api('GET', '/subscription', null, u.token)).body.plan.plan, 'free');
+    fake.cycles = 1;
+    fake.customId = 'another-checkout';
+    assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).status, 400);
+    fake.customId = null;
+    fake.currency = 'EUR';
+    assert.equal((await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token)).status, 400);
+    fake.currency = null;
     // Đồng ý xong (kỳ 1 đã trừ tiền) → kích hoạt Gói Tháng, tự gia hạn.
     Object.assign(fake, { status: 'ACTIVE', cycles: 1 });
     const c = await api('POST', `/payments/${p.body.paymentId}/paypal/confirm`, null, u.token);
@@ -700,12 +899,29 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     assert.equal((await api('POST', '/payments', { plan: 'year', provider: 'paypal' }, u.token)).body.error.code, 'already_subscribed');
     // Webhook báo trừ tiền kỳ 2 (gửi 2 lần) → gia hạn đúng 1 lần.
     fake.cycles = 2;
-    const wh = { event_type: 'PAYMENT.SALE.COMPLETED', resource: { id: 'SALE-2', billing_agreement_id: 'I-TEST1' } };
+    const wh = { id: 'WH-EVENT-2', event_type: 'PAYMENT.SALE.COMPLETED', resource: { id: 'SALE-2', billing_agreement_id: 'I-TEST1' } };
+    const headers = {
+      'Content-Type': 'application/json',
+      'paypal-auth-algo': 'SHA256withRSA',
+      'paypal-cert-url': 'https://api.paypal.com/cert',
+      'paypal-transmission-id': 'T-1',
+      'paypal-transmission-sig': 'test-signature',
+      'paypal-transmission-time': new Date().toISOString(),
+    };
+    const webhook = (h = headers) => realFetch(`${base}/api/payments/paypal/webhook`, { method: 'POST', headers: h, body: JSON.stringify(wh) });
+    assert.equal((await webhook({ 'Content-Type': 'application/json' })).status, 403);
+    fake.badSignature = true;
+    assert.equal((await webhook()).status, 403);
+    fake.badSignature = false;
+    fake.verifyDown = true;
+    assert.equal((await webhook()).status, 500, 'temporary failures must allow webhook retries');
+    fake.verifyDown = false;
+    assert.equal((await getDb().prepare('SELECT count(*) AS n FROM subscriptions WHERE user_id = ?').get(u.id)).n, 1);
     for (let i = 0; i < 2; i++) {
-      const r = await realFetch(`${base}/api/payments/paypal/webhook`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(wh) });
+      const r = await webhook();
       assert.equal(r.status, 200);
     }
-    const periods = getDb().prepare('SELECT ends_at FROM subscriptions WHERE user_id = ? ORDER BY ends_at').all(u.id);
+    const periods = await getDb().prepare('SELECT ends_at FROM subscriptions WHERE user_id = ? ORDER BY ends_at').all(u.id);
     assert.equal(periods.length, 2, 'kỳ 2 nối tiếp kỳ 1');
     assert.equal(Date.parse(periods[0].ends_at), ends1);
     const ends2 = Date.parse(periods[1].ends_at);
@@ -726,6 +942,7 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
     globalThis.fetch = realFetch;
     env.paypal.clientId = '';
     env.paypal.secret = '';
+    env.paypal.webhookId = '';
   }
 });
 
@@ -734,10 +951,10 @@ test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi cata
   const hidden = ['xu-so-do-choi', 'vuong-quoc-thien-the', 'xuong-nghe-thuat'];
   const ph = hidden.map(() => '?').join(',');
   // Mô phỏng máy đã có dữ liệu từ trước: 3 chủ đề này đang hiện (active = 1).
-  db.prepare(`UPDATE themes SET active = 1 WHERE slug IN (${ph})`).run(...hidden);
+  await db.prepare(`UPDATE themes SET active = 1 WHERE slug IN (${ph})`).run(...hidden);
   const visible = (await api('GET', '/themes')).body.themes.length; // 3 chủ đề ẩn đã bị bật lại → hiện = tổng số chủ đề
-  seedPicturesIfNeeded(db); // đúng thứ tự máy chạy lúc khởi động
-  assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM themes WHERE slug IN (${ph}) AND active = 0`).get(...hidden).n, 3);
+  await seedPicturesIfNeeded(db); // đúng thứ tự máy chạy lúc khởi động
+  assert.equal((await db.prepare(`SELECT COUNT(*) AS n FROM themes WHERE slug IN (${ph}) AND active = 0`).get(...hidden)).n, 3);
   assert.equal((await api('GET', '/themes')).body.themes.length, visible - 3);
   assert.ok(!(await api('GET', '/themes')).body.themes.some((t) => hidden.includes(t.slug)));
 });
@@ -749,12 +966,12 @@ test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog đư
   assert.equal(slugs[8], 'vay-yem--hoa-cuc-trang');
   // Mô phỏng máy cũ: Váy Yếm đứng thứ 5, Sườn Xám thứ 6.
   const set = db.prepare("UPDATE objects SET sort = ? WHERE slug = ? AND theme_id = (SELECT id FROM themes WHERE slug = 'cong-chua-ngan-hoa')");
-  set.run(4, 'vay-yem');
-  set.run(5, 'suon-xam');
-  set.run(6, 'vay-ngan');
+  await set.run(4, 'vay-yem');
+  await set.run(5, 'suon-xam');
+  await set.run(6, 'vay-ngan');
   const old = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
   assert.equal(old[4], 'vay-yem--hoa-cuc-trang');
-  seedPicturesIfNeeded(db);
+  await seedPicturesIfNeeded(db);
   const now = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
   assert.equal(now[4], 'suon-xam--tu-dang');
   assert.equal(now[8], 'vay-yem--hoa-cuc-trang');
@@ -781,8 +998,13 @@ test('Truyện tranh: gói thường 1 cuốn tối đa 10 trang, VIP không gi�
   assert.equal(first.status, 201);
   assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).body.error.code, 'storybook_limit');
   const eleven = Array.from({ length: 11 }, (_, i) => ({ artworkId: i + 1 }));
-  assert.equal((await api('PUT', `/storybooks/${first.body.storybook.id}`, { title: 'Cuốn 1', pages: eleven }, token)).body.error.code, 'storybook_pages_limit');
-  getDb().prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'year', ?, ?)").run(id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  assert.equal(
+    (await api('PUT', `/storybooks/${first.body.storybook.id}`, { title: 'Cuốn 1', pages: eleven }, token)).body.error.code,
+    'storybook_pages_limit',
+  );
+  await getDb()
+    .prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'year', ?, ?)")
+    .run(id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
   assert.equal((await api('POST', '/storybooks', { title: 'Cuốn 2', pages: [] }, token)).status, 201);
 });
 
@@ -794,22 +1016,29 @@ test('Ngôn ngữ: tài khoản mới mặc định tiếng Anh, đăng ký khi 
 test('US phone OTP registration and password reset use the same normalized contact', async () => {
   const { body: cap } = await api('GET', '/auth/captcha');
   const start = await api('POST', '/auth/register/start', {
-    username: 'usphone01', password: 'abc12345', language: 'en',
-    captchaId: cap.captchaId, captchaText: _peekCaptcha(cap.captchaId),
-    contactType: 'phone', contact: '+1 (202) 555-0123',
+    username: 'usphone01',
+    password: 'abc12345',
+    language: 'en',
+    captchaId: cap.captchaId,
+    captchaText: _peekCaptcha(cap.captchaId),
+    contactType: 'phone',
+    contact: '+1 (202) 555-0123',
   });
   assert.equal(start.status, 200, JSON.stringify(start.body));
   assert.ok(start.body.devCode);
   const verify = await api('POST', '/auth/register/verify', { registrationId: start.body.registrationId, code: start.body.devCode });
   assert.equal(verify.status, 201);
-  const user = getDb().prepare('SELECT guardian_contact FROM users WHERE username = ?').get('usphone01');
+  const user = await getDb().prepare('SELECT guardian_contact FROM users WHERE username = ?').get('usphone01');
   assert.equal(user.guardian_contact, '+12025550123');
 
   const { body: cap2 } = await api('GET', '/auth/captcha');
   const throttled = await api('POST', '/auth/register/start', {
-    username: 'usphone02', password: 'abc12345',
-    captchaId: cap2.captchaId, captchaText: _peekCaptcha(cap2.captchaId),
-    contactType: 'phone', contact: '12025550123',
+    username: 'usphone02',
+    password: 'abc12345',
+    captchaId: cap2.captchaId,
+    captchaText: _peekCaptcha(cap2.captchaId),
+    contactType: 'phone',
+    contact: '12025550123',
   });
   assert.equal(throttled.body.error.code, 'otp_too_frequent', 'Formatting must not bypass OTP throttling');
 
@@ -818,8 +1047,127 @@ test('US phone OTP registration and password reset use the same normalized conta
   assert.ok(reset.body.resetId);
   const accounts = await api('POST', '/auth/forgot/verify', { resetId: reset.body.resetId, code: reset.body.devCode });
   assert.equal(accounts.status, 200);
-  assert.deepEqual(accounts.body.accounts.map(a => a.username), ['usphone01']);
+  assert.deepEqual(
+    accounts.body.accounts.map((a) => a.username),
+    ['usphone01'],
+  );
   const changed = await api('POST', '/auth/forgot/reset', { resetToken: accounts.body.resetToken, username: 'usphone01', newPassword: 'newpass123' });
   assert.equal(changed.status, 200);
   assert.equal((await api('POST', '/auth/login', { username: 'usphone01', password: 'newpass123' })).status, 200);
+});
+
+test('MoMo verifies merchant, order, amount and transaction; duplicate callbacks grant VIP once', async () => {
+  const { env } = await import('../src/config/env.js');
+  const u = await register('momopaid1');
+  const outsider = await register('momoother1');
+  const old = env.momo;
+  const realFetch = globalThis.fetch;
+  env.momo = {
+    partnerCode: 'PARTNER',
+    accessKey: 'access-test',
+    secretKey: 'secret-test',
+    endpoint: 'https://test-payment.momo.vn/v2/gateway/api/create',
+  };
+  let checkout;
+  globalThis.fetch = async (url, init) => {
+    if (String(url) !== env.momo.endpoint) return realFetch(url, init);
+    checkout = JSON.parse(init.body);
+    return new Response(JSON.stringify({ resultCode: 0, payUrl: 'https://test-payment.momo.vn/pay' }));
+  };
+  const signed = (body) => {
+    const p = { ...body };
+    const raw = `accessKey=${env.momo.accessKey}&amount=${p.amount}&extraData=${p.extraData ?? ''}&message=${p.message}&orderId=${p.orderId}&orderInfo=${p.orderInfo}&orderType=${p.orderType}&partnerCode=${p.partnerCode}&payType=${p.payType}&requestId=${p.requestId}&responseTime=${p.responseTime}&resultCode=${p.resultCode}&transId=${p.transId}`;
+    p.signature = createHmac('sha256', env.momo.secretKey).update(raw).digest('hex');
+    return p;
+  };
+  try {
+    const order = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, u.token);
+    assert.equal(order.status, 201);
+    assert.equal(order.body.mock, false);
+    const event = {
+      partnerCode: 'PARTNER',
+      amount: 19000,
+      extraData: '',
+      orderId: order.body.paymentId,
+      orderInfo: checkout.orderInfo,
+      requestId: checkout.requestId,
+      orderType: 'momo_wallet',
+      payType: 'qr',
+      message: 'Success',
+      responseTime: Date.now(),
+      resultCode: 0,
+      transId: 123456789,
+    };
+    assert.equal((await api('GET', `/payments/${event.orderId}`, null, outsider.token)).status, 404);
+    assert.equal((await api('POST', '/payments/momo/ipn', { ...signed(event), amount: 1 })).status, 400);
+    assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, partnerCode: 'WRONG' }))).status, 400);
+    for (const change of [{ amount: 1 }, { requestId: 'wrong-request' }, { transId: '' }]) {
+      assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, ...change }))).status, 400);
+    }
+    assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, resultCode: 7000 }))).status, 204);
+    assert.equal((await api('GET', `/payments/${event.orderId}`, null, u.token)).body.payment.status, 'pending');
+    assert.equal((await api('POST', '/payments/momo/ipn', signed(event))).status, 204);
+    const paid = await api('GET', `/payments/${event.orderId}`, null, u.token);
+    assert.equal(paid.body.payment.status, 'paid');
+    assert.equal(paid.body.plan.plan, 'month');
+    assert.equal((await api('POST', '/payments/momo/ipn', signed(event))).status, 204);
+    assert.equal((await api('POST', `/payments/${event.orderId}/momo/return`, signed(event), u.token)).body.plan.endsAt, paid.body.plan.endsAt);
+    const another = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, u.token);
+    const reused = signed({ ...event, orderId: another.body.paymentId, requestId: checkout.requestId });
+    assert.equal((await api('POST', '/payments/momo/ipn', reused)).status, 409);
+    assert.equal((await api('GET', `/payments/${another.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
+  } finally {
+    env.momo = old;
+    globalThis.fetch = realFetch;
+  }
+});
+
+test('Production checkout refuses incomplete setup and test-provider credentials', async () => {
+  const { env } = await import('../src/config/env.js');
+  const u = await register('paymentsetup1');
+  const saved = { isProd: env.isProd, paymentMock: env.paymentMock, paypal: env.paypal, momo: env.momo, bank: env.bank, sepay: env.sepay };
+  try {
+    Object.assign(env, {
+      isProd: true,
+      paymentMock: false,
+      paypal: { clientId: 'test', secret: 'test', webhookId: 'WH', base: 'https://api-m.sandbox.paypal.com' },
+      momo: { partnerCode: 'test', accessKey: 'test', secretKey: 'test', endpoint: 'https://test-payment.momo.vn/v2/gateway/api/create' },
+      bank: { code: 'ACB', accountNo: '', accountName: '' },
+      sepay: { apiKey: 'test-key' },
+    });
+    for (const provider of ['bank', 'paypal', 'momo']) {
+      const result = await api('POST', '/payments', { plan: 'month', provider }, u.token);
+      assert.equal(result.status, 503);
+      assert.equal(result.body.error.code, 'payment_unavailable');
+    }
+    const meta = await api('GET', '/meta');
+    for (const provider of ['bank', 'paypal', 'momo']) assert.equal(meta.body.payments[provider].configured, false);
+    assert.equal((await getDb().prepare('SELECT count(*) AS n FROM payments WHERE user_id = ?').get(u.id)).n, 0);
+  } finally {
+    Object.assign(env, saved);
+  }
+});
+
+test('Concurrent painting starts and duplicate payment callbacks consume or grant only once', async () => {
+  const user = await register('concurrent1');
+  const art = await api('POST', '/artworks', { pictureId: 1, mode: 'free' }, user.token);
+  const starts = await Promise.all([1, 2].map(() => api('POST', `/artworks/${art.body.artwork.id}/start`, null, user.token)));
+  assert.ok(starts.every((response) => response.status === 200));
+  assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM usage_log WHERE artwork_id = ?').get(art.body.artwork.id)).n, 1);
+  const payment = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, user.token);
+  const results = await Promise.all([1, 2].map(() => api('POST', `/payments/${payment.body.paymentId}/mock-complete`, null, user.token)));
+  assert.ok(results.every((response) => response.status === 200));
+  assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM subscriptions WHERE user_id = ?').get(user.id)).n, 1);
+});
+
+test('Concurrent OTP requests honor cooldown and each code is consumed only once', async () => {
+  const { issueOtp, consumeOtp } = await import('../src/services/otp.js');
+  const input = { purpose: 'register', type: 'email', target: 'concurrent@example.invalid' };
+  const issued = await Promise.allSettled([issueOtp(input), issueOtp(input)]);
+  assert.equal(issued.filter((result) => result.status === 'fulfilled').length, 1);
+  assert.equal(issued.find((result) => result.status === 'rejected').reason.code, 'otp_too_frequent');
+  const otp = issued.find((result) => result.status === 'fulfilled').value;
+  const consumed = await Promise.allSettled([consumeOtp(otp.otpId, otp.devCode, input.purpose), consumeOtp(otp.otpId, otp.devCode, input.purpose)]);
+  assert.equal(consumed.filter((result) => result.status === 'fulfilled').length, 1);
+  assert.equal(consumed.find((result) => result.status === 'rejected').reason.code, 'otp_invalid');
 });

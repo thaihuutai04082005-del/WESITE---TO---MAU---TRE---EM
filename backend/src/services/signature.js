@@ -19,10 +19,30 @@ const MAX_HAND_POINTS = 3000;
 export const FALLBACK_STYLE = SIGNATURE_STYLES_FREE[0];
 const ALL_STYLES = new Set([...SIGNATURE_STYLES_FREE, ...SIGNATURE_STYLES_PREMIUM, 'hand']);
 export const isPremiumStyle = (style) => SIGNATURE_STYLES_PREMIUM.includes(style);
-export const hasPremium = (userId) => !!activeSubscription(userId);
+export const hasPremium = async (userId) => !!(await activeSubscription(userId));
 
 // Từ tục (có dấu) + viết tắt phổ biến. So khớp trên chữ thường, bỏ khoảng trắng/dấu câu giữa các chữ cái.
-const BAD_WORDS = ['địt', 'đụ', 'lồn', 'cặc', 'buồi', 'đéo', 'đĩ', 'dcm', 'đcm', 'vcl', 'vkl', 'clgt', 'fuck', 'shit', 'bitch', 'dick', 'pussy', 'porn', 'sex'];
+const BAD_WORDS = [
+  'địt',
+  'đụ',
+  'lồn',
+  'cặc',
+  'buồi',
+  'đéo',
+  'đĩ',
+  'dcm',
+  'đcm',
+  'vcl',
+  'vkl',
+  'clgt',
+  'fuck',
+  'shit',
+  'bitch',
+  'dick',
+  'pussy',
+  'porn',
+  'sex',
+];
 
 /** Kiểm tra tên trên chữ ký: tên thật hay biệt danh đều được, nhưng không chữ xấu / số điện thoại / email / link. */
 export function cleanName(v) {
@@ -41,14 +61,16 @@ const round1 = (n) => Math.round(n * 10) / 10;
 function cleanHand(v) {
   if (!Array.isArray(v) || !v.length || v.length > MAX_HAND_STROKES) throw badRequest('signature_hand_invalid');
   let total = 0;
-  const strokes = v.map((s) => {
-    if (!Array.isArray(s)) throw badRequest('signature_hand_invalid');
-    const pts = s
-      .filter((p) => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))
-      .map(([x, y]) => [round1(Math.min(BOX.w, Math.max(0, x))), round1(Math.min(BOX.h, Math.max(0, y)))]);
-    total += pts.length;
-    return pts;
-  }).filter((s) => s.length);
+  const strokes = v
+    .map((s) => {
+      if (!Array.isArray(s)) throw badRequest('signature_hand_invalid');
+      const pts = s
+        .filter((p) => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))
+        .map(([x, y]) => [round1(Math.min(BOX.w, Math.max(0, x))), round1(Math.min(BOX.h, Math.max(0, y)))]);
+      total += pts.length;
+      return pts;
+    })
+    .filter((s) => s.length);
   if (!strokes.length || total > MAX_HAND_POINTS) throw badRequest('signature_hand_invalid');
   return strokes;
 }
@@ -71,18 +93,18 @@ function cleanContentSafe(v) {
 }
 
 /** Chữ ký mặc định đang dùng được (mẫu wow hết gói → về mẫu Free, giữ nguyên tên). */
-export function effectiveSignature(user) {
+export async function effectiveSignature(user) {
   const stored = parseJson(user?.signature, null);
   if (!stored) return null;
-  if (stored.style === 'hand' && !hasPremium(user.id)) return null; // tự ký bằng tay: chỉ VIP
-  if (isPremiumStyle(stored.style) && !hasPremium(user.id)) return { ...stored, style: FALLBACK_STYLE };
+  if (stored.style === 'hand' && !(await hasPremium(user.id))) return null; // tự ký bằng tay: chỉ VIP
+  if (isPremiumStyle(stored.style) && !(await hasPremium(user.id))) return { ...stored, style: FALLBACK_STYLE };
   return stored;
 }
 
 /** Lưu chữ ký mặc định mới. Mẫu wow và tự ký bằng tay chỉ dành cho VIP. */
-export function prepareDefault(userId, input) {
+export async function prepareDefault(userId, input) {
   const content = cleanContent(input);
-  if ((isPremiumStyle(content.style) || content.style === 'hand') && !hasPremium(userId)) throw forbidden('signature_premium_required');
+  if ((isPremiumStyle(content.style) || content.style === 'hand') && !(await hasPremium(userId))) throw forbidden('signature_premium_required');
   return content;
 }
 
@@ -103,11 +125,11 @@ export function clampPlacement({ x, y, scale, rot }) {
  * hoặc đúng chữ ký đã có trên tranh này (tranh đã ký giữ nguyên chữ ký cũ, kể cả mẫu wow sau khi hết gói).
  * @returns {object|null}
  */
-export function preparePlaced(user, input, previous) {
+export async function preparePlaced(user, input, previous) {
   if (input == null) return null;
   if (typeof input !== 'object') throw badRequest('signature_invalid');
   const content = cleanContent(input);
-  if (!sameContent(content, effectiveSignature(user)) && !sameContent(content, previous)) throw forbidden('signature_not_default');
+  if (!sameContent(content, await effectiveSignature(user)) && !sameContent(content, previous)) throw forbidden('signature_not_default');
   const color = SIGNATURE_INKS.includes(String(input.color).toUpperCase()) ? String(input.color).toUpperCase() : SIGNATURE_INKS[0];
   return { ...content, ...clampPlacement(input), color };
 }

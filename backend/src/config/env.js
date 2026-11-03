@@ -21,6 +21,8 @@ export const env = {
   publicUrl: process.env.PUBLIC_URL || 'http://localhost:5173',
   apiPublicUrl: process.env.API_PUBLIC_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${num(process.env.PORT, 4000)}`,
   corsOrigins: (process.env.CORS_ORIGINS || 'http://localhost:5173').split(',').map((s) => s.trim()),
+  databasePassword: process.env.PGPASSWORD || '',
+  databaseUrl: process.env.NODE_ENV === 'test' ? '' : process.env.DATABASE_URL || '',
   dbFile: process.env.DB_FILE || join(BACKEND_ROOT, 'data', 'app.db'),
   jwtSecret: process.env.JWT_SECRET || 'dev-secret-change-me',
   jwtExpires: process.env.JWT_EXPIRES || '30d',
@@ -59,6 +61,7 @@ export const env = {
   paypal: {
     clientId: process.env.PAYPAL_CLIENT_ID || '',
     secret: process.env.PAYPAL_CLIENT_SECRET || '',
+    webhookId: process.env.PAYPAL_WEBHOOK_ID || '',
     base: process.env.PAYPAL_API_BASE || 'https://api-m.sandbox.paypal.com',
     // Tuỳ chọn: id gói đã tạo sẵn trên PayPal (P-…). Để trống = web tự tạo gói lần đầu.
     planMonth: process.env.PAYPAL_PLAN_MONTH || '',
@@ -69,7 +72,7 @@ export const env = {
     code: process.env.BANK_CODE || 'ACB',
     // Mã BIN NAPAS của ngân hàng (tự suy ra từ BANK_CODE với các ngân hàng phổ biến; ACB = 970416).
     bin: process.env.BANK_BIN || '',
-    accountNo: process.env.BANK_ACCOUNT_NO || '35391537',
+    accountNo: process.env.BANK_ACCOUNT_NO || '',
     accountName: process.env.BANK_ACCOUNT_NAME || '',
   },
   sepay: {

@@ -20,7 +20,10 @@ beforeEach(() => {
   env.exposeDevOtp = false;
   getDb().exec('DELETE FROM otp_codes');
 });
-afterEach(() => { Object.assign(env, original); globalThis.fetch = originalFetch; });
+afterEach(() => {
+  Object.assign(env, original);
+  globalThis.fetch = originalFetch;
+});
 
 function useEmail() {
   env.brevo = { apiKey: 'test-api-key', senderEmail: 'sender@example.com', senderName: 'TinyTints' };
@@ -42,8 +45,8 @@ test('Brevo HTTPS email sends the actual OTP, which can be verified once without
   assert.deepEqual(sent.to, [{ email: 'parent@example.com' }]);
   assert.match(sent.subject, /verification code/);
   const code = sent.textContent.match(/\b\d{6}\b/)[0];
-  assert.equal(consumeOtp(otp.otpId, code, 'register').target, 'parent@example.com');
-  assert.throws(() => consumeOtp(otp.otpId, code, 'register'), { code: 'otp_invalid' });
+  assert.equal((await consumeOtp(otp.otpId, code, 'register')).target, 'parent@example.com');
+  await assert.rejects(async () => await consumeOtp(otp.otpId, code, 'register'), { code: 'otp_invalid' });
 });
 
 test('Vietnamese password reset email and provider rejection/malformed responses', async () => {
@@ -54,11 +57,20 @@ test('Vietnamese password reset email and provider rejection/malformed responses
     assert.match(body.textContent, /123456/);
     return Response.json({ messageId: '<test-message@example.com>' });
   };
-  assert.deepEqual(await sendCode({ type: 'email', target: 'parent@example.com', purpose: 'reset', code: '123456', language: 'vi' }), { delivered: true });
-  for (const response of [Response.json({ message: 'rejected' }, { status: 401 }), Response.json({}), new Response('{bad', { headers: { 'Content-Type': 'application/json' } })]) {
+  assert.deepEqual(await sendCode({ type: 'email', target: 'parent@example.com', purpose: 'reset', code: '123456', language: 'vi' }), {
+    delivered: true,
+  });
+  for (const response of [
+    Response.json({ message: 'rejected' }, { status: 401 }),
+    Response.json({}),
+    new Response('{bad', { headers: { 'Content-Type': 'application/json' } }),
+  ]) {
     globalThis.fetch = async () => response;
-    await assert.rejects(issueOtp({ type: 'email', target: 'parent@example.com', purpose: 'reset' }), { status: 503, code: 'otp_delivery_unavailable' });
-    assert.equal(getDb().prepare('SELECT COUNT(*) AS n FROM otp_codes').get().n, 0);
+    await assert.rejects(issueOtp({ type: 'email', target: 'parent@example.com', purpose: 'reset' }), {
+      status: 503,
+      code: 'otp_delivery_unavailable',
+    });
+    assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM otp_codes').get()).n, 0);
   }
 });
 
@@ -89,16 +101,22 @@ test('Twilio sender-number option and API-level failures never produce fake succ
     return Response.json({ sid: 'SM' + 'd'.repeat(32), status: 'queued' }, { status: 201 });
   };
   assert.deepEqual(await sendCode({ type: 'phone', target: '+12025550123', purpose: 'register', code: '123456' }), { delivered: true });
-  for (const response of [Response.json({ code: 21608 }, { status: 400 }), Response.json({ sid: 'SM' + 'd'.repeat(32), status: 'failed', error_code: 30007 })]) {
+  for (const response of [
+    Response.json({ code: 21608 }, { status: 400 }),
+    Response.json({ sid: 'SM' + 'd'.repeat(32), status: 'failed', error_code: 30007 }),
+  ]) {
     globalThis.fetch = async () => response;
     await assert.rejects(issueOtp({ type: 'phone', target: '+12025550123', purpose: 'register' }), { code: 'otp_delivery_unavailable' });
-    assert.equal(getDb().prepare('SELECT COUNT(*) AS n FROM otp_codes').get().n, 0);
+    assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM otp_codes').get()).n, 0);
   }
 });
 
 test('Partial credentials fail before making a request; no fallback to simulation', async () => {
   let called = false;
-  globalThis.fetch = async () => { called = true; throw new Error('Unexpected network request'); };
+  globalThis.fetch = async () => {
+    called = true;
+    throw new Error('Unexpected network request');
+  };
   env.brevo = { apiKey: 'test-key' };
   await assert.rejects(issueOtp({ type: 'email', target: 'parent@example.com', purpose: 'register' }), { code: 'otp_delivery_unavailable' });
   env.twilio = { accountSid: 'AC' + 'a'.repeat(32) };

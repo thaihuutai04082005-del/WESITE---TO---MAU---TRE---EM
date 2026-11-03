@@ -4,3 +4,5 @@ dist/
 *.log
 backend/data/
 .DS_Store
+# Private database snapshots (contain account information).
+.sqlite-backups/
