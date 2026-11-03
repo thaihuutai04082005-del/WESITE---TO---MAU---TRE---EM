@@ -468,7 +468,7 @@
     "renew": "Gia hạn",
     "current": "Gói hiện tại",
     "included": "Mặc định",
-    "note": "Thanh toán qua MoMo hoặc PayPal. Giá đã gồm thuế.",
+    "note": "Thanh toán qua PayPal hoặc chuyển khoản ngân hàng / quét QR. Giá đã gồm thuế.",
     "payTitle": "Thanh toán {{plan}}",
     "chooseMethod": "Chọn hình thức thanh toán",
     "payNow": "Thanh toán",
@@ -531,7 +531,7 @@
       "limit": "Tô không giới hạn"
     },
     "providerHint": {
-      "bank": "Quét mã bằng app ngân hàng hoặc MoMo. Trả từng lần, web nhắc khi gần hết hạn.",
+      "bank": "Quét mã bằng app ngân hàng. Trả từng lần, web nhắc khi gần hết hạn.",
       "paypal": "Tự động gia hạn mỗi kỳ. Huỷ được bất cứ lúc nào.",
       "momo": "Thanh toán một lần bằng ví MoMo."
     },
@@ -539,7 +539,7 @@
     "perYearUsd": "/năm",
     "qr": {
       "title": "Quét mã để thanh toán",
-      "scan": "Mở app ngân hàng hoặc MoMo → Quét mã QR. Số tiền và nội dung đã điền sẵn.",
+      "scan": "Mở app ngân hàng → Quét mã QR. Số tiền và nội dung đã điền sẵn.",
       "bank": "Ngân hàng",
       "account": "Số tài khoản",
       "holder": "Chủ tài khoản",

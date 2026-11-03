@@ -228,7 +228,7 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(s3.body.error.code, 'quota_exceeded');
 
   // Thanh toán gói Tháng (chế độ giả lập vì chưa cấu hình cổng).
-  const pay = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, token);
+  const pay = await api('POST', '/payments', { plan: 'month', provider: 'bank' }, token);
   assert.equal(pay.body.mock, true);
   assert.equal(pay.body.amount, 19000);
   const done = await api('POST', `/payments/${pay.body.paymentId}/mock-complete`, null, token);
@@ -1056,70 +1056,14 @@ test('US phone OTP registration and password reset use the same normalized conta
   assert.equal((await api('POST', '/auth/login', { username: 'usphone01', password: 'newpass123' })).status, 200);
 });
 
-test('MoMo verifies merchant, order, amount and transaction; duplicate callbacks grant VIP once', async () => {
-  const { env } = await import('../src/config/env.js');
-  const u = await register('momopaid1');
-  const outsider = await register('momoother1');
-  const old = env.momo;
-  const realFetch = globalThis.fetch;
-  env.momo = {
-    partnerCode: 'PARTNER',
-    accessKey: 'access-test',
-    secretKey: 'secret-test',
-    endpoint: 'https://test-payment.momo.vn/v2/gateway/api/create',
-  };
-  let checkout;
-  globalThis.fetch = async (url, init) => {
-    if (String(url) !== env.momo.endpoint) return realFetch(url, init);
-    checkout = JSON.parse(init.body);
-    return new Response(JSON.stringify({ resultCode: 0, payUrl: 'https://test-payment.momo.vn/pay' }));
-  };
-  const signed = (body) => {
-    const p = { ...body };
-    const raw = `accessKey=${env.momo.accessKey}&amount=${p.amount}&extraData=${p.extraData ?? ''}&message=${p.message}&orderId=${p.orderId}&orderInfo=${p.orderInfo}&orderType=${p.orderType}&partnerCode=${p.partnerCode}&payType=${p.payType}&requestId=${p.requestId}&responseTime=${p.responseTime}&resultCode=${p.resultCode}&transId=${p.transId}`;
-    p.signature = createHmac('sha256', env.momo.secretKey).update(raw).digest('hex');
-    return p;
-  };
-  try {
-    const order = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, u.token);
-    assert.equal(order.status, 201);
-    assert.equal(order.body.mock, false);
-    const event = {
-      partnerCode: 'PARTNER',
-      amount: 19000,
-      extraData: '',
-      orderId: order.body.paymentId,
-      orderInfo: checkout.orderInfo,
-      requestId: checkout.requestId,
-      orderType: 'momo_wallet',
-      payType: 'qr',
-      message: 'Success',
-      responseTime: Date.now(),
-      resultCode: 0,
-      transId: 123456789,
-    };
-    assert.equal((await api('GET', `/payments/${event.orderId}`, null, outsider.token)).status, 404);
-    assert.equal((await api('POST', '/payments/momo/ipn', { ...signed(event), amount: 1 })).status, 400);
-    assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, partnerCode: 'WRONG' }))).status, 400);
-    for (const change of [{ amount: 1 }, { requestId: 'wrong-request' }, { transId: '' }]) {
-      assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, ...change }))).status, 400);
-    }
-    assert.equal((await api('POST', '/payments/momo/ipn', signed({ ...event, resultCode: 7000 }))).status, 204);
-    assert.equal((await api('GET', `/payments/${event.orderId}`, null, u.token)).body.payment.status, 'pending');
-    assert.equal((await api('POST', '/payments/momo/ipn', signed(event))).status, 204);
-    const paid = await api('GET', `/payments/${event.orderId}`, null, u.token);
-    assert.equal(paid.body.payment.status, 'paid');
-    assert.equal(paid.body.plan.plan, 'month');
-    assert.equal((await api('POST', '/payments/momo/ipn', signed(event))).status, 204);
-    assert.equal((await api('POST', `/payments/${event.orderId}/momo/return`, signed(event), u.token)).body.plan.endsAt, paid.body.plan.endsAt);
-    const another = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, u.token);
-    const reused = signed({ ...event, orderId: another.body.paymentId, requestId: checkout.requestId });
-    assert.equal((await api('POST', '/payments/momo/ipn', reused)).status, 409);
-    assert.equal((await api('GET', `/payments/${another.body.paymentId}`, null, u.token)).body.payment.status, 'pending');
-  } finally {
-    env.momo = old;
-    globalThis.fetch = realFetch;
-  }
+test('Checkout only offers PayPal and bank transfer and rejects new MoMo payments', async () => {
+  const user = await register('nomomo1');
+  const meta = await api('GET', '/meta');
+  assert.deepEqual(Object.keys(meta.body.payments).sort(), ['bank', 'mockAllowed', 'paypal']);
+  const result = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, user.token);
+  assert.equal(result.status, 400);
+  assert.equal(result.body.error.code, 'invalid_provider');
+  assert.equal((await getDb().prepare('SELECT count(*) AS n FROM payments WHERE user_id = ?').get(user.id)).n, 0);
 });
 
 test('Production checkout refuses incomplete setup and test-provider credentials', async () => {
@@ -1135,13 +1079,13 @@ test('Production checkout refuses incomplete setup and test-provider credentials
       bank: { code: 'ACB', accountNo: '', accountName: '' },
       sepay: { apiKey: 'test-key' },
     });
-    for (const provider of ['bank', 'paypal', 'momo']) {
+    for (const provider of ['bank', 'paypal']) {
       const result = await api('POST', '/payments', { plan: 'month', provider }, u.token);
       assert.equal(result.status, 503);
       assert.equal(result.body.error.code, 'payment_unavailable');
     }
     const meta = await api('GET', '/meta');
-    for (const provider of ['bank', 'paypal', 'momo']) assert.equal(meta.body.payments[provider].configured, false);
+    for (const provider of ['bank', 'paypal']) assert.equal(meta.body.payments[provider].configured, false);
     assert.equal((await getDb().prepare('SELECT count(*) AS n FROM payments WHERE user_id = ?').get(u.id)).n, 0);
   } finally {
     Object.assign(env, saved);
@@ -1154,7 +1098,7 @@ test('Concurrent painting starts and duplicate payment callbacks consume or gran
   const starts = await Promise.all([1, 2].map(() => api('POST', `/artworks/${art.body.artwork.id}/start`, null, user.token)));
   assert.ok(starts.every((response) => response.status === 200));
   assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM usage_log WHERE artwork_id = ?').get(art.body.artwork.id)).n, 1);
-  const payment = await api('POST', '/payments', { plan: 'month', provider: 'momo' }, user.token);
+  const payment = await api('POST', '/payments', { plan: 'month', provider: 'bank' }, user.token);
   const results = await Promise.all([1, 2].map(() => api('POST', `/payments/${payment.body.paymentId}/mock-complete`, null, user.token)));
   assert.ok(results.every((response) => response.status === 200));
   assert.equal((await getDb().prepare('SELECT COUNT(*) AS n FROM subscriptions WHERE user_id = ?').get(user.id)).n, 1);

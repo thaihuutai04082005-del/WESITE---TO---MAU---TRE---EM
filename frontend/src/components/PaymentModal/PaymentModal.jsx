@@ -14,7 +14,6 @@ import QRCode from 'qrcode';
 const PROVIDERS = [
   { key: 'bank', badge: 'QR', cls: 'bg-[#0B6FB8]' },
   { key: 'paypal', badge: 'P', cls: 'bg-[#003087]' },
-  { key: 'momo', badge: 'M', cls: 'bg-[#A50064]' },
 ];
 
 function CopyRow({ label, value, strong }) {
@@ -63,7 +62,7 @@ export default function PaymentModal({ open, plan, onClose }) {
       api.get('/subscription').then((result) => {
         if (stopped) return;
         setMethods(result.providers);
-        const preferred = i18n.language === 'en' ? ['paypal', 'bank', 'momo'] : ['bank', 'momo', 'paypal'];
+        const preferred = i18n.language === 'en' ? ['paypal', 'bank'] : ['bank', 'paypal'];
         setProvider(preferred.find((key) => result.providers?.[key]?.configured || result.providers?.mockAllowed) || '');
       }).catch(() => { if (!stopped) setMethods({}); });
       return () => { stopped = true; };

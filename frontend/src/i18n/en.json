@@ -467,7 +467,7 @@
     "renew": "Renew",
     "current": "Current plan",
     "included": "Included",
-    "note": "Pay with MoMo or PayPal. Taxes included.",
+    "note": "Pay with PayPal or bank transfer / QR. Taxes included.",
     "payTitle": "Pay for {{plan}}",
     "chooseMethod": "Choose a payment method",
     "payNow": "Pay",
@@ -530,7 +530,7 @@
       "limit": "Unlimited coloring"
     },
     "providerHint": {
-      "bank": "Scan the QR code with your Vietnamese banking app or MoMo. This is a one-time payment. We'll remind you before your plan expires.",
+      "bank": "Scan the QR code with your Vietnamese banking app. This is a one-time payment. We'll remind you before your plan expires.",
       "paypal": "Renews automatically each month or year, depending on your plan. Cancel anytime.",
       "momo": "One-time payment with your MoMo wallet."
     },
@@ -538,7 +538,7 @@
     "perYearUsd": "/year",
     "qr": {
       "title": "Scan to pay",
-      "scan": "Open your Vietnamese banking app or MoMo and scan the QR code. The payment amount and transfer note are filled in for you.",
+      "scan": "Open your Vietnamese banking app and scan the QR code. The payment amount and transfer note are filled in for you.",
       "bank": "Bank",
       "account": "Account number",
       "holder": "Account holder",

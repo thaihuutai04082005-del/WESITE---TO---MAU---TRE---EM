@@ -1,7 +1,7 @@
 // Điều phối thanh toán (Mục 6.3):
 //  • PayPal (USD) — thuê bao tự gia hạn như các ứng dụng AI: PayPal tự trừ tiền mỗi kỳ, người dùng huỷ được bất cứ lúc nào.
 //  • Chuyển khoản VietQR (VND) vào tài khoản ngân hàng — quét bằng app ngân hàng hoặc MoMo; SePay báo về khi tiền vào.
-//  • MoMo (cổng chính thức) — giữ lại, chỉ dùng khi đã có mã doanh nghiệp.
+// MoMo chỉ giữ xử lý callback cho giao dịch cũ; không nhận giao dịch mới.
 // Mọi ghi nhận tiền đều idempotent (payments.txn_ref UNIQUE).
 import { getDb, tx } from '../../config/db.js';
 import { env } from '../../config/env.js';
@@ -24,7 +24,6 @@ export function providerStatus() {
   return {
     paypal: { configured: paypal.isConfigured() },
     bank: { configured: bank.isConfigured() },
-    momo: { configured: momo.isConfigured() },
     mockAllowed: env.paymentMock,
   };
 }
@@ -49,7 +48,7 @@ export function bankInfo(payment) {
 
 export async function createPayment(userId, plan, provider) {
   if (!['month', 'year'].includes(plan)) throw badRequest('invalid_plan');
-  if (!providers[provider]) throw badRequest('invalid_provider');
+  if (!['paypal', 'bank'].includes(provider)) throw badRequest('invalid_provider');
   const configured = providers[provider].isConfigured();
   if (!configured && !env.paymentMock) throw new HttpError(503, 'payment_unavailable');
   if (provider === 'paypal' && (await activeRecurring(userId))) throw conflict('already_subscribed');
