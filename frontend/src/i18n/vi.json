@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "TinyTints"
+    "name": "Sắc Màu Của Bé"
   },
   "common": {
     "loading": "Đang tải…",
@@ -332,7 +332,7 @@
     }
   },
   "share": {
-    "brand": "TinyTints",
+    "brand": "Sắc Màu Của Bé",
     "title": "Khoe tranh",
     "hint": "Ảnh có khung, chữ ký và thành tích của bé — gửi ông bà, bố mẹ xem nhé!",
     "download": "Tải ảnh",
