@@ -66,7 +66,7 @@ export default function ModePicker({ picture, onClose }) {
     setBusy(true);
     try {
       const state = useAuth.getState();
-      await assertPictureThemeAllowed(picture, state.plan, state.meta?.plans?.free?.themesPerAge);
+      if (!state.meta?.pictureAccessEnforced) await assertPictureThemeAllowed(picture, state.plan, state.meta?.plans?.free?.themesPerAge);
       const id = await createArtwork(picture.id, mode);
       navigate(`/draw/${id}`);
     } catch (e) {

@@ -7,6 +7,7 @@ import { useUi } from './ui';
 import { publicPage } from '../../../shared/publicRoutes.mjs';
 
 const TOKEN_KEY = 'btm.token';
+let booting = null;
 const readToken = () => {
   try {
     return localStorage.getItem(TOKEN_KEY);
@@ -24,22 +25,14 @@ export const useAuth = create((set, get) => ({
   meta: null,
 
   async boot() {
+    if (booting) return booting;
     // Public content must not wait for a sleeping or unavailable API.
     if (!get().token && publicPage(window.location.pathname)) set({ ready: true });
-    try {
-      const meta = await api.get('/meta');
-      set({ meta });
-    } catch {
-      /* backend chưa chạy → trang vẫn hiển thị, lỗi sẽ báo ở thao tác */
-    }
-    if (get().token) {
-      try {
-        await get().refresh();
-      } catch {
-        get().logout();
-      }
-    }
-    set({ ready: true });
+    booting = Promise.all([
+      api.get('/meta').then((meta) => set({ meta })).catch(() => {}),
+      get().token ? get().refresh().catch(() => get().logout()) : Promise.resolve(),
+    ]).then(() => set({ ready: true })).finally(() => { booting = null; });
+    return booting;
   },
 
   applySession(s, { keepToken = false } = {}) {

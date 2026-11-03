@@ -1,25 +1,23 @@
 // Tải (có cache) tranh theo id — dùng cho thẻ trong bộ sưu tập, trading.
 import { useEffect, useState } from 'react';
 import { api } from '../services/api';
-
-const cache = new Map();
+import { useAuth } from '../store/auth';
 
 export function usePicture(id) {
-  const [pic, setPic] = useState(() => cache.get(id)?.value || null);
+  const token = useAuth((state) => state.token);
+  const [pic, setPic] = useState(null);
   useEffect(() => {
+    setPic(null);
     if (!id) return;
     let alive = true;
-    if (!cache.has(id)) cache.set(id, { promise: api.get(`/pictures/${id}`).then((r) => r.picture) });
-    const entry = cache.get(id);
-    entry.promise
+    api.get(`/pictures/${id}?preview=1`).then((r) => r.picture)
       .then((p) => {
-        entry.value = p;
         if (alive) setPic(p);
       })
-      .catch(() => cache.delete(id));
+      .catch(() => {});
     return () => {
       alive = false;
     };
-  }, [id]);
+  }, [id, token]);
   return pic;
 }

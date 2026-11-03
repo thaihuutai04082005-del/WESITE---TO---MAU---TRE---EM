@@ -25,6 +25,7 @@ export default function ColoringScreen() {
   const user = useAuth((s) => s.user);
   const plan = useAuth((s) => s.plan);
   const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);
+  const serverAccess = useAuth((s) => s.meta?.pictureAccessEnforced === true);
   const setPlan = useAuth((s) => s.setPlan);
   const toast = useUi((s) => s.toast);
   const openUpgrade = useUi((s) => s.openUpgrade);
@@ -40,6 +41,7 @@ export default function ColoringScreen() {
   const starting = useRef(null);
   const initialData = useRef(null);
   const dirty = useRef(false);
+  const accessChecked = useRef('');
   const dataRef = useRef(editor.data);
   dataRef.current = editor.data;
 
@@ -54,8 +56,11 @@ export default function ColoringScreen() {
           else toast(t(`errors.${r.accessError}`), 'error');
           return navigate('/history', { replace: true });
         }
-        await assertPictureThemeAllowed(r.picture, useAuth.getState().plan, useAuth.getState().meta?.plans?.free?.themesPerAge);
+        const state = useAuth.getState();
+        const checkedPlan = state.plan;
+        if (!state.meta?.pictureAccessEnforced) await assertPictureThemeAllowed(r.picture, checkedPlan, state.meta?.plans?.free?.themesPerAge);
         if (!alive) return;
+        accessChecked.current = JSON.stringify([r.picture.id, checkedPlan?.plan, checkedPlan?.endsAt]);
         setArtwork(r.artwork);
         setPicture(r.picture);
         started.current = r.artwork.counted || !['template', 'free'].includes(r.artwork.mode);
@@ -80,16 +85,26 @@ export default function ColoringScreen() {
   useEffect(() => {
     if (!picture) return;
     let alive = true;
-    assertPictureThemeAllowed(picture, plan, freeLimit).then(() => api.get(`/pictures/${picture.id}?access=1`)).catch((error) => {
+    const key = JSON.stringify([picture.id, plan?.plan, plan?.endsAt]);
+    if (accessChecked.current === key) return;
+    const checked = serverAccess ? api.get(`/pictures/${picture.id}?access=1`)
+      : assertPictureThemeAllowed(picture, plan, freeLimit).then(() => api.get(`/pictures/${picture.id}?access=1`));
+    checked.then(() => { if (alive) accessChecked.current = key; }).catch((error) => {
       if (!alive || !['theme_vip_required', 'card_not_owned'].includes(error.code)) return;
       dirty.current = false;
       if (error.code === 'theme_vip_required') openUpgrade(true, 'theme');
       else toast(errorText(t, error), 'error');
       navigate('/history', { replace: true });
     });
+    return () => { alive = false; };
+  }, [picture?.id, plan?.plan, plan?.endsAt, freeLimit, serverAccess]);
+
+  useEffect(() => {
+    if (!picture) return;
+    let alive = true;
     api.get('/users/me/signature').then((state) => alive && setSig(state)).catch(() => {});
     return () => { alive = false; };
-  }, [picture?.id, plan?.plan, plan?.endsAt, freeLimit]);
+  }, [picture?.id, plan?.plan, plan?.endsAt]);
 
   // Báo cho hiệu ứng chuyển màn hình: tranh đã tải xong, sẵn sàng hiện.
   useEffect(() => {

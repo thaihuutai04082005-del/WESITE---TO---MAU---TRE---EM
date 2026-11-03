@@ -525,6 +525,7 @@ function main() {
   for (const theme of THEMES) {
     const dir = join(ROOT, theme.slug);
     if (existsSync(dir)) rmSync(dir, { recursive: true });
+    if (theme.hidden) continue; // Retired themes must not be regenerated or reseeded.
     const tEntry = { slug: theme.slug, name: theme.name, age: '6-8', hidden: !!theme.hidden, objects: [] };
     for (const obj of OBJECTS.filter((o) => o.theme === theme.slug)) {
       const oEntry = { slug: obj.slug, name: obj.name, pictures: [] };
@@ -532,9 +533,11 @@ function main() {
       // Lớp 3: mỗi đối tượng có 5 biến thể riêng (object-variants.mjs); thẻ vẫn theo chủ đề.
       const own = OBJECT_VARIANTS[obj.slug] || tv.variants;
       // Thẻ: chỉ tạo thẻ vẽ tay có trong CARD_ART (bỏ thẻ do bộ tạo tranh vẽ).
-      const cards = tv.cards.filter((v) => CARD_ART.some((a) => a.object === obj.slug && a.rarity === v.rarity));
+      const cards = tv.cards.filter((v) => !v.hidden && CARD_ART.some((a) => !a.hidden && a.object === obj.slug && a.rarity === v.rarity));
       const variants = [...own.map((v) => [v, false]), ...cards.map((v) => [v, true])];
       for (const [[variant, isCard], k] of variants.map((v, i) => [v, i])) {
+        const first = isCard ? -1 : (THEME_FIRST[theme.slug] || []).indexOf(`${obj.slug}--${variant.slug}`);
+        if (variant.hidden || (!isCard && ((first < 0 && THEME_ONLY_FIRST.includes(theme.slug)) || HIDDEN_PICTURES.includes(`${obj.slug}--${variant.slug}`)))) continue;
         const artIdx = isCard ? CARD_ART.findIndex((a) => a.object === obj.slug && a.rarity === variant.rarity) : -1;
         const vArt = !isCard && VARIANT_ART[`${obj.slug}--${variant.slug}`];
         const { svg, meta } =
@@ -542,10 +545,7 @@ function main() {
           : vArt ? buildArtPicture(theme, obj, variant, vArt, false)
           : buildPicture(theme, obj, variant, isCard, k);
         if (artIdx >= 0) meta.cardOrder = artIdx + 1; // thứ tự hiện trên trang Bóc thẻ = thứ tự chủ web gửi
-        const first = isCard ? -1 : (THEME_FIRST[theme.slug] || []).indexOf(`${obj.slug}--${variant.slug}`);
         if (first >= 0) meta.themeSort = first; // đứng đầu trang chọn tranh của chủ đề
-        if (!isCard && first < 0 && THEME_ONLY_FIRST.includes(theme.slug)) meta.hidden = true; // chủ đề chỉ giữ các tranh vẽ tay
-        if (!isCard && HIDDEN_PICTURES.includes(`${obj.slug}--${variant.slug}`)) meta.hidden = true;
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
         writeFileSync(out, svg);
@@ -555,7 +555,7 @@ function main() {
     }
     // Thẻ vẽ tay của con vật không thuộc 6 đối tượng chủ đề: đối tượng riêng chỉ có thẻ (không hiện ở trang chọn đối tượng).
     for (const [i, a] of CARD_ART.entries()) {
-      if (a.theme !== theme.slug || OBJECTS.some((o) => o.slug === a.object)) continue;
+      if (a.hidden || a.theme !== theme.slug || OBJECTS.some((o) => o.slug === a.object)) continue;
       const obj = { slug: a.object, name: a.objectName, theme: theme.slug };
       const variant = { slug: a.slug, name: a.name, rarity: a.rarity };
       const { svg, meta } = buildArtPicture(theme, obj, variant, a.file);
@@ -565,16 +565,17 @@ function main() {
       writeFileSync(out, svg);
       tEntry.objects.push({ slug: obj.slug, name: obj.name, cardOnly: true, pictures: [meta] });
     }
+    tEntry.objects = tEntry.objects.filter((object) => object.pictures.length);
     catalog.themes.push(tEntry);
   }
   // Chủ đề theo độ tuổi (tranh vẽ tay, không có thẻ): xếp trước các chủ đề kết hợp.
-  const ageThemes = ART_THEMES.map((theme) => {
+  const ageThemes = ART_THEMES.filter((theme) => !theme.hidden).map((theme) => {
     const dir = join(ROOT, theme.slug);
     if (existsSync(dir)) rmSync(dir, { recursive: true });
     const objects = theme.objects.map((obj) => ({
       slug: obj.slug,
       name: obj.name,
-      pictures: obj.pictures.map((p) => {
+      pictures: obj.pictures.filter((p) => !p.hidden).map((p) => {
         const { svg, meta } = buildArtPicture(theme, obj, p, p.file, false);
         const out = join(ROOT, meta.file);
         mkdirSync(dirname(out), { recursive: true });
@@ -586,8 +587,14 @@ function main() {
   });
   catalog.themes.unshift(...ageThemes.filter((t) => !t.after));
   for (const t of ageThemes.filter((t) => t.after)) {
-    const i = catalog.themes.findIndex((x) => x.slug === t.after);
-    if (i < 0) throw new Error(`Không thấy chủ đề "${t.after}" để xếp sau`);
+    let i = catalog.themes.findIndex((x) => x.slug === t.after);
+    if (i < 0) {
+      // Keep the same visible ordering when an old insertion anchor has been retired.
+      const anchor = THEMES.findIndex((theme) => theme.slug === t.after);
+      if (anchor < 0) throw new Error(`Không thấy chủ đề "${t.after}" để xếp sau`);
+      const previous = new Set(THEMES.slice(0, anchor).map((theme) => theme.slug));
+      for (let j = 0; j < catalog.themes.length; j++) if (previous.has(catalog.themes[j].slug)) i = j;
+    }
     delete t.after;
     catalog.themes.splice(i + 1, 0, t);
   }

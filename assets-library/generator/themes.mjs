@@ -380,8 +380,8 @@ export const THEME_FIRST = {
     'cam-the-thao--vuot-rao', 'xoai-the-thao--tennis', 'le-the-thao--ban-cung', 'dua-nau--quyen-anh'],
 };
 
-/** Chủ đề chỉ hiện các tranh trong THEME_FIRST; tranh còn lại bị ẩn (vẫn giữ trong kho để xem lại tranh đã tô). */
-/** Tranh bị ẩn riêng lẻ (vẫn giữ trong kho để xem lại tranh đã tô). */
+/** Only listed normal pictures are retained; cards keep their separate CARD_ART membership. */
+/** Explicitly retired pictures are omitted from generated files and the catalog. */
 export const HIDDEN_PICTURES = ['duc-long--phi-cong'];
 export const THEME_ONLY_FIRST = ['anh-hung-sieu-thu', 'vuong-quoc-keo-ngot', 'doi-xe-vu-tru', 'thi-tran-khung-long', 'the-thao-trai-cay', 'khu-rung-cay-than', 'vuong-quoc-lau-dai', 'thanh-pho-nha-biet-bay'];
 
@@ -633,11 +633,6 @@ export const ART_THEMES = [
         name: { vi: 'Chó Con', en: 'Puppy' },
         pictures: [
           { slug: 'ben-nha-cun', name: { vi: 'Chó Con', en: 'Puppy' }, file: 'cho-con--ben-nha-cun' },
-          { slug: 'ngoi-ngoan', name: { vi: 'Ngồi ngoan', en: 'Sitting nicely' }, file: 'cho-con--ngoi-ngoan', hidden: true },
-          { slug: 'vay-duoi', name: { vi: 'Vẫy đuôi', en: 'Wagging its tail' }, file: 'cho-con--vay-duoi', hidden: true },
-          { slug: 'choi-bong', name: { vi: 'Chơi bóng', en: 'Playing ball' }, file: 'cho-con--choi-bong', hidden: true },
-          { slug: 'an-thuc-an', name: { vi: 'Ăn thức ăn', en: 'Eating its food' }, file: 'cho-con--an-thuc-an', hidden: true },
-          { slug: 'nam-nghi', name: { vi: 'Nằm nghỉ', en: 'Resting' }, file: 'cho-con--nam-nghi', hidden: true },
         ],
       },
       {
@@ -645,11 +640,6 @@ export const ART_THEMES = [
         name: { vi: 'Mèo Con', en: 'Kitten' },
         pictures: [
           { slug: 'meo-con', name: { vi: 'Mèo Con', en: 'Kitten' }, file: 'meo-con--meo-con' },
-          { slug: 'ngoi-xinh', name: { vi: 'Ngồi xinh', en: 'Sitting pretty' }, file: 'meo-con--ngoi-xinh', hidden: true },
-          { slug: 'choi-cuon-len', name: { vi: 'Chơi cuộn len', en: 'Playing with yarn' }, file: 'meo-con--choi-cuon-len', hidden: true },
-          { slug: 'uong-sua', name: { vi: 'Uống sữa', en: 'Drinking milk' }, file: 'meo-con--uong-sua', hidden: true },
-          { slug: 'rua-mat', name: { vi: 'Rửa mặt', en: 'Washing its face' }, file: 'meo-con--rua-mat', hidden: true },
-          { slug: 'nam-ngu', name: { vi: 'Nằm ngủ', en: 'Sleeping' }, file: 'meo-con--nam-ngu', hidden: true },
         ],
       },
       {
@@ -657,11 +647,6 @@ export const ART_THEMES = [
         name: { vi: 'Thỏ Con', en: 'Bunny' },
         pictures: [
           { slug: 'tho-con', name: { vi: 'Thỏ Con', en: 'Bunny' }, file: 'tho-con--tho-con' },
-          { slug: 'ngoi-ngoan', name: { vi: 'Ngồi ngoan', en: 'Sitting nicely' }, file: 'tho-con--ngoi-ngoan', hidden: true },
-          { slug: 'an-ca-rot', name: { vi: 'Ăn cà rốt', en: 'Eating a carrot' }, file: 'tho-con--an-ca-rot', hidden: true },
-          { slug: 'nhay-vui', name: { vi: 'Nhảy vui', en: 'Happy hopping' }, file: 'tho-con--nhay-vui', hidden: true },
-          { slug: 'ngui-hoa', name: { vi: 'Ngửi hoa', en: 'Smelling a flower' }, file: 'tho-con--ngui-hoa', hidden: true },
-          { slug: 'nam-nghi', name: { vi: 'Nằm nghỉ', en: 'Resting' }, file: 'tho-con--nam-nghi', hidden: true },
         ],
       },
       {

@@ -1,6 +1,5 @@
 // Truy vấn nội dung tranh theo 3 tầng: Chủ đề → Đối tượng → Biến thể.
 import { getDb, parseJson } from '../config/db.js';
-import { picturePreviewPaths } from '../../../shared/picturePreview.mjs';
 
 const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`${base}_vi`]);
 
@@ -63,15 +62,21 @@ export async function findPicture(id) {
 }
 
 /** One database trip for a whole selection grid, including each picture's theme metadata. */
-export async function findPictures(ids) {
+export async function findPictures(ids, { preview = false } = {}) {
   const unique = [...new Set(ids.filter((id) => id != null))];
   if (!unique.length) return new Map();
   const rows = await getDb().prepare(
-    `SELECT p.*, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
+    `SELECT ${preview ? 'p.id, p.slug, p.name_vi, p.name_en, p.variant_name_vi, p.variant_name_en, p.animation, p.is_card, p.rarity, p.preview' : 'p.*'}, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
             t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
      FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
      WHERE p.id IN (${unique.map(() => '?').join(',')})`,
   ).all(...unique);
+  // Legacy/custom records can lack prebuilt previews; keep them usable as full SVGs.
+  if (preview) {
+    const missing = rows.filter((row) => !row.preview).map((row) => row.id);
+    const full = missing.length ? await findPictures(missing) : new Map();
+    for (let i = 0; i < rows.length; i++) if (full.has(rows[i].id)) rows[i] = full.get(rows[i].id);
+  }
   return new Map(rows.map((row) => [row.id, row]));
 }
 
@@ -106,12 +111,13 @@ export function toClient(p, withSvg = true) {
 
 /** Lists need names and small static images; SVG/regions are fetched only for the editor. */
 export function toPreview(p) {
-  return { ...toClient(p, false), preview: picturePreviewPaths(p, manifestOf(p).regions) };
+  const preview = parseJson(p.preview);
+  return preview ? { ...toClient(p, false), preview } : toClient(p);
 }
 
 export async function cardPool() {
   const rows = await getDb()
-    .prepare(`SELECT p.id, p.rarity FROM pictures p WHERE p.is_card = 1 AND p.rarity IS NOT NULL AND ${ACTIVE_PICTURE}`)
+    .prepare(`SELECT p.id, p.rarity FROM pictures p WHERE p.is_card = 1 AND p.hidden = 0 AND p.rarity IS NOT NULL AND ${ACTIVE_PICTURE}`)
     .all();
   const pool = { S: [], A: [], B: [], C: [] };
   for (const r of rows) pool[r.rarity].push(r.id);

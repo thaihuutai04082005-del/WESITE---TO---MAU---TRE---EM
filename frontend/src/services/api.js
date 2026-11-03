@@ -3,6 +3,8 @@ const BASE = import.meta.env?.VITE_API_URL || '/api';
 
 let tokenGetter = () => null;
 let onUnauthorized = () => {};
+// Share only requests that are still running. Permission results are never cached.
+const inFlightGets = new Map();
 
 export function configureApi({ getToken, unauthorized }) {
   tokenGetter = getToken;
@@ -18,8 +20,19 @@ export class ApiError extends Error {
   }
 }
 
-export async function request(method, path, body, { raw = false } = {}) {
+export function request(method, path, body, { raw = false } = {}) {
   const token = tokenGetter();
+  if (method !== 'GET' || raw) return fetchRequest(method, path, body, raw, token);
+  const key = JSON.stringify([token, path]);
+  if (inFlightGets.has(key)) return inFlightGets.get(key);
+  const pending = fetchRequest(method, path, body, raw, token).finally(() => {
+    if (inFlightGets.get(key) === pending) inFlightGets.delete(key);
+  });
+  inFlightGets.set(key, pending);
+  return pending;
+}
+
+async function fetchRequest(method, path, body, raw, token) {
   let res;
   try {
     res = await fetch(`${BASE}${path}`, {
@@ -49,7 +62,7 @@ export async function request(method, path, body, { raw = false } = {}) {
   }
   if (!res.ok) {
     const code = data?.error?.code || 'server_error';
-    if (res.status === 401 && token) onUnauthorized();
+    if (res.status === 401 && token && tokenGetter() === token) onUnauthorized();
     throw new ApiError(res.status, code, data?.error);
   }
   return data;

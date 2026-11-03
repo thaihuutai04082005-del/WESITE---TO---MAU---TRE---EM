@@ -1,5 +1,5 @@
 // Khung trang: thanh điều hướng (desktop) + thanh dưới (mobile), chuyển ngôn ngữ, thông báo, popup phần thưởng.
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
@@ -173,7 +173,9 @@ export default function Layout() {
       </header>
 
       <main className={fullBleed ? '' : ''}>
-        <Outlet />
+        <Suspense fallback={<div className="page text-center text-muted" role="status">{t('common.loading')}</div>}>
+          <Outlet />
+        </Suspense>
       </main>
 
       {user && (

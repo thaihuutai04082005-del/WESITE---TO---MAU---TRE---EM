@@ -67,7 +67,7 @@ export default function Gacha() {
     setBusy(true);
     try {
       const ids = deck.cards.slice(count === 1 ? slot : 0, count === 1 ? slot + 1 : count).map((c) => c.pictureId);
-      const r = await api.post('/gacha/pull', { pictureIds: ids });
+      const r = await api.post('/gacha/pull', { pictureIds: ids, preview: true });
       const m = {};
       r.results.forEach((res, k) => {
         m[count === 1 ? slot : k] = res;

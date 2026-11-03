@@ -57,6 +57,7 @@ export function createApp() {
       googleClientId: env.googleClientId || null,
       auth: { phoneOtpEnabled: env.phoneOtpEnabled },
       picturePreviews: true,
+      pictureAccessEnforced: true,
     }),
   );
 

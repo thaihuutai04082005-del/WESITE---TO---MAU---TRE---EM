@@ -11,7 +11,7 @@ import { env } from '../config/env.js';
 export async function info(req, res) {
   const u = await User.findById(req.user.id);
   const total = await getDb()
-    .prepare(`SELECT p.rarity, COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND ${Picture.ACTIVE_PICTURE} GROUP BY p.rarity`)
+    .prepare(`SELECT p.rarity, COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND p.hidden = 0 AND ${Picture.ACTIVE_PICTURE} GROUP BY p.rarity`)
     .all();
   res.json({
     gachaPoints: u.gacha_points,
@@ -43,7 +43,7 @@ export async function pull(req, res) {
       const cardId = await Card.add(u.id, pictureId, 'gacha');
       await getDb().prepare('INSERT INTO gacha_pulls (user_id, picture_id, rarity) VALUES (?, ?, ?)').run(u.id, pictureId, rarity);
       const p = await Picture.findPicture(pictureId);
-      out.push({ cardId, rarity, picture: Picture.toClient(p) });
+      out.push({ cardId, rarity, picture: req.body?.preview === true ? Picture.toPreview(p) : Picture.toClient(p) });
     }
     await getDb()
       .prepare('UPDATE users SET gacha_points = gacha_points - ? WHERE id = ?')
@@ -56,7 +56,7 @@ export async function pull(req, res) {
 
 export async function collection(req, res) {
   const cards = await Card.listByUser(req.user.id);
-  const total = (await getDb().prepare(`SELECT COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND ${Picture.ACTIVE_PICTURE}`).get()).c;
+  const total = (await getDb().prepare(`SELECT COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND p.hidden = 0 AND ${Picture.ACTIVE_PICTURE}`).get()).c;
   const distinct = new Set(cards.map((c) => c.pictureId)).size;
   res.json({ cards, distinct, total });
 }
@@ -80,7 +80,7 @@ export async function catalog(req, res) {
     .prepare(
       `SELECT p.id, p.rarity, p.name_vi, p.name_en, t.slug AS theme, t.name_vi AS theme_vi, t.name_en AS theme_en
        FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
-       WHERE p.is_card = 1 AND t.active = 1
+       WHERE p.is_card = 1 AND p.hidden = 0 AND t.active = 1
        ORDER BY p.sort, p.id`, // thẻ vẽ tay: sort = thứ tự chủ web gửi
     )
     .all();
@@ -97,8 +97,8 @@ export async function catalog(req, res) {
 /** Ảnh 1 thẻ để xem: thẻ đã có, hoặc mọi thẻ khi đang bật xem trước (GACHA_PREVIEW). Chỉ để xem, không mở khoá tô. */
 export async function catalogPicture(req, res) {
   const p = await Picture.findPicture(Number(req.params.id));
-  if (!p || !p.is_card) throw notFound();
+  if (!p || !p.is_card || p.hidden || !await Picture.findActiveTheme(p.theme_slug)) throw notFound();
   const own = await getDb().prepare('SELECT 1 FROM user_cards WHERE user_id = ? AND picture_id = ?').get(req.user.id, p.id);
   if (!own && !env.gachaPreview && req.user.role !== 'admin') throw forbidden('card_not_owned');
-  res.json({ picture: Picture.toClient(p) });
+  res.json({ picture: req.query.preview === '1' ? Picture.toPreview(p) : Picture.toClient(p) });
 }

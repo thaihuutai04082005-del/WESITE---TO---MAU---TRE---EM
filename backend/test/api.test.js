@@ -947,17 +947,48 @@ test('PayPal tự gia hạn: đồng ý → kích hoạt, mỗi kỳ trừ tiề
   }
 });
 
-test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi catalog đánh dấu hidden, dù tranh không đổi', async () => {
+test('Startup removes retired normal pictures and hidden cards without changing visible IDs, cards or saved art', async () => {
   const db = getDb();
-  const hidden = ['xu-so-do-choi', 'vuong-quoc-thien-the', 'xuong-nghe-thuat'];
-  const ph = hidden.map(() => '?').join(',');
-  // Mô phỏng máy đã có dữ liệu từ trước: 3 chủ đề này đang hiện (active = 1).
-  await db.prepare(`UPDATE themes SET active = 1 WHERE slug IN (${ph})`).run(...hidden);
-  const visible = (await api('GET', '/themes')).body.themes.length; // 3 chủ đề ẩn đã bị bật lại → hiện = tổng số chủ đề
-  await seedPicturesIfNeeded(db); // đúng thứ tự máy chạy lúc khởi động
-  assert.equal((await db.prepare(`SELECT COUNT(*) AS n FROM themes WHERE slug IN (${ph}) AND active = 0`).get(...hidden)).n, 3);
-  assert.equal((await api('GET', '/themes')).body.themes.length, visible - 3);
-  assert.ok(!(await api('GET', '/themes')).body.themes.some((t) => hidden.includes(t.slug)));
+  const { readFileSync } = await import('node:fs');
+  const retired = JSON.parse(readFileSync(new URL('../../assets-library/retired-pictures.json', import.meta.url), 'utf8'));
+  const before = (await db.prepare('SELECT id,slug FROM pictures ORDER BY id').all()).map((p) => [p.id,p.slug]);
+  const user = await register('cleanupcheck1');
+  const saved = await api('POST','/artworks',{pictureId:1,mode:'free'},user.token);
+  const insertOldPicture = async (objectId, slug, hidden, card = false) => {
+    await db.prepare(`INSERT INTO pictures (object_id,slug,variant_slug,name_vi,name_en,variant_name_vi,variant_name_en,svg,manifest,animation,is_card,rarity,hidden)
+      SELECT ?,?,variant_slug,name_vi,name_en,variant_name_vi,variant_name_en,svg,manifest,animation,?,?,? FROM pictures WHERE id = 1`)
+      .run(objectId,slug,card ? 1 : 0,card ? 'S' : null,hidden);
+    return (await db.prepare('SELECT id FROM pictures WHERE slug = ?').get(slug)).id;
+  };
+  let removedArt;
+  for (const [index, slug] of retired.themes.entries()) {
+    // Old installations may even have re-enabled a theme since it was retired.
+    const theme = await db.prepare('INSERT INTO themes (slug,name_vi,name_en,active) VALUES (?,?,?,1) RETURNING id').get(slug,slug,slug);
+    const object = await db.prepare('INSERT INTO objects (theme_id,slug,name_vi,name_en) VALUES (?,?,?,?) RETURNING id').get(theme.id,'old','old','old');
+    const picture = await insertOldPicture(object.id,retired.pictures[index],0);
+    removedArt = await db.prepare("INSERT INTO artworks (user_id,picture_id,mode) VALUES (?,?,'free') RETURNING id").get(user.id,picture);
+  }
+  const object = await db.prepare('SELECT object_id FROM pictures WHERE id = 1').get();
+  const hiddenCard = await insertOldPicture(object.object_id,'old-hidden-card-for-cleanup',1,true);
+  const ownedHidden = await db.prepare("INSERT INTO user_cards (user_id,picture_id,source) VALUES (?,?,'gacha') RETURNING id").get(user.id,hiddenCard);
+  const liveCard = await db.prepare('SELECT id FROM pictures WHERE is_card = 1 AND hidden = 0 LIMIT 1').get();
+  const ownedLive = await db.prepare("INSERT INTO user_cards (user_id,picture_id,source) VALUES (?,?,'gacha') RETURNING id").get(user.id,liveCard.id);
+  await db.prepare('INSERT INTO trades (from_user,to_user,offer_card_id,request_card_id) VALUES (?,?,?,?)').run(user.id,user.id,ownedHidden.id,ownedLive.id);
+  const book = await db.prepare("INSERT INTO storybooks (user_id,title) VALUES (?,'Preserved book') RETURNING id").get(user.id);
+  await db.prepare('INSERT INTO storybook_pages (storybook_id,artwork_id,position) VALUES (?,?,?)').run(book.id,removedArt.id,0);
+  await db.prepare('INSERT INTO storybook_pages (storybook_id,artwork_id,position) VALUES (?,?,?)').run(book.id,saved.body.artwork.id,1);
+  assert.ok(!(await api('GET','/gacha/catalog',null,user.token)).body.cards.some((p) => p.pictureId === hiddenCard));
+  const Picture = await import('../src/models/picture.js');
+  assert.ok(!(await Picture.cardPool()).S.includes(hiddenCard));
+  await seedPicturesIfNeeded(db);
+  assert.deepEqual((await db.prepare('SELECT id,slug FROM pictures ORDER BY id').all()).map((p) => [p.id,p.slug]),before);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM themes WHERE slug IN (?,?,?)').get(...retired.themes)).n,0);
+  assert.equal(await db.prepare('SELECT id FROM artworks WHERE id = ?').get(removedArt.id),undefined);
+  assert.equal(await db.prepare('SELECT id FROM user_cards WHERE id = ?').get(ownedHidden.id),undefined);
+  assert.ok(await db.prepare('SELECT id FROM user_cards WHERE id = ?').get(ownedLive.id));
+  assert.equal((await api('GET',`/artworks/${saved.body.artwork.id}`,null,user.token)).status,200);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM storybook_pages WHERE storybook_id = ?').get(book.id)).n,1);
+  assert.equal(await seedPicturesIfNeeded(db),0,'Repeating startup must not regenerate retired pictures');
 });
 
 test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog được xếp lại theo catalog', async () => {
@@ -1312,6 +1343,39 @@ test('Selection grids use a bounded number of database requests regardless of th
     assert.equal(pictures.status,200);
     assert.ok(queries <= 4, `Picture grid needed ${queries} queries`);
   } finally { db.prepare = prepare; }
+});
+
+test('Preview database queries and repeat startup checks never read SVG or region blobs', async () => {
+  const db = getDb();
+  const Picture = await import('../src/models/picture.js');
+  const grid = await Picture.findPictures([1], { preview: true });
+  assert.equal(grid.get(1).svg,undefined);
+  assert.equal(grid.get(1).manifest,undefined);
+  assert.ok(grid.get(1).preview);
+  const prepare = db.prepare, queries = [];
+  db.prepare = function (sql) { queries.push(sql); return prepare.call(this,sql); };
+  try { assert.equal(await seedPicturesIfNeeded(db),0); }
+  finally { db.prepare = prepare; }
+  assert.ok(!queries.some((sql) => /SELECT[^;]*\bp\.(svg|manifest)\b/i.test(sql)));
+});
+
+test('Card preview responses stay small and still require ownership independently of VIP', async () => {
+  const Picture = await import('../src/models/picture.js');
+  const user = await register('cardpreview2');
+  const deck = await api('GET','/gacha/catalog',null,user.token);
+  const id = deck.body.cards[0].pictureId;
+  assert.equal((await api('GET',`/pictures/${id}?preview=1`,null,user.token)).body.error.code,'card_not_owned');
+  await getDb().prepare('UPDATE users SET gacha_points = 50 WHERE id = ?').run(user.id);
+  const pull = await api('POST','/gacha/pull',{pictureIds:[id],preview:true},user.token);
+  assert.equal(pull.status,200);
+  assert.ok(pull.body.results[0].picture.preview);
+  assert.equal(pull.body.results[0].picture.svg,undefined);
+  const owned = await api('GET',`/pictures/${id}?preview=1`,null,user.token);
+  assert.equal(owned.status,200);
+  assert.equal(owned.body.picture.preview.color,Picture.toPreview(await Picture.findPicture(id)).preview.color);
+  const full = await api('GET',`/pictures/${id}`,null,user.token);
+  assert.match(full.body.picture.svg,/^<svg/);
+  assert.ok(full.body.picture.regions.length);
 });
 
 test('Email-only signup and recovery reject SMS, require the email OTP and preserve legacy phone logins', async () => {

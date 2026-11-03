@@ -6,7 +6,7 @@ import { api } from '../../services/api';
 import PictureView from '../../components/PictureView/PictureView';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
-import { PlanBadge } from '../Payment/Plans';
+import { PlanBadge } from '../../components/PlanBadge';
 import ModeGuide from '../../components/ModeGuide';
 import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
 import HelloBear from '../../components/HelloBear';

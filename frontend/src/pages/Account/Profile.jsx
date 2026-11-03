@@ -11,7 +11,7 @@ import FrameSelector from '../../components/FrameSelector/FrameSelector';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
 import AvatarPicker from './AvatarPicker';
-import { PlanBadge } from '../Payment/Plans';
+import { PlanBadge } from '../../components/PlanBadge';
 import SignaturePreview from '../../components/SignaturePreview';
 import { Showcase } from '../../components/Share';
 

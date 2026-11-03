@@ -8,12 +8,39 @@ import { getDb, tx } from '../../backend/src/config/db.js';
 import { env, REPO_ROOT } from '../../backend/src/config/env.js';
 import { MISSIONS } from './missions.js';
 import { ITEMS } from './items.js';
+import { createHash } from 'node:crypto';
+import { picturePreviewPaths } from '../../shared/picturePreview.mjs';
+
+function libraryCatalog() {
+  const catalog = JSON.parse(readFileSync(join(REPO_ROOT, 'assets-library', 'catalog.json'), 'utf8'));
+  catalog.themes = catalog.themes.filter((t) => !t.hidden).map((t) => ({ ...t,
+    objects: t.objects.map((o) => ({ ...o, pictures: o.pictures.filter((p) => !p.hidden) })).filter((o) => o.pictures.length),
+  }));
+  return catalog;
+}
+const assetHash = (svg, manifest) => createHash('sha256').update(svg).update('\0').update(manifest).digest('hex');
+
+/** Delete only retired/hidden library entries, never VIP locks or visible cards. */
+async function purgeRetiredPictures(db, catalog) {
+  const retired = JSON.parse(readFileSync(join(REPO_ROOT, 'assets-library', 'retired-pictures.json'), 'utf8'));
+  const keep = catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug)));
+  const removed = await db.prepare(
+    `SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
+     WHERE p.slug NOT IN (${keep.map(() => '?').join(',')})
+       AND (p.hidden = 1 OR t.active = 0 OR p.slug IN (${retired.pictures.map(() => '?').join(',')}))`,
+  ).all(...keep, ...retired.pictures);
+  await purgePictures(db, removed.map((p) => p.id));
+  await db.prepare('DELETE FROM objects WHERE NOT EXISTS (SELECT 1 FROM pictures p WHERE p.object_id = objects.id)').run();
+  await db.prepare(`DELETE FROM themes WHERE (active = 0 OR slug IN (${retired.themes.map(() => '?').join(',')}))
+    AND NOT EXISTS (SELECT 1 FROM objects o WHERE o.theme_id = themes.id)`).run(...retired.themes);
+  return removed.length;
+}
 
 export async function seedPictures(db = getDb()) {
   const lib = join(REPO_ROOT, 'assets-library');
   const catalogFile = join(lib, 'catalog.json');
   if (!existsSync(catalogFile)) throw new Error('Chưa có catalog.json — chạy "npm run gen:pictures" trước');
-  const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
+  const catalog = libraryCatalog();
   const upTheme = db.prepare(
     'INSERT INTO themes (slug, name_vi, name_en, sort, age_group, active) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT (slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort, age_group = excluded.age_group, active = excluded.active RETURNING id',
   );
@@ -21,16 +48,18 @@ export async function seedPictures(db = getDb()) {
     'INSERT INTO objects (theme_id, slug, name_vi, name_en, sort) VALUES (?, ?, ?, ?, ?) ON CONFLICT (theme_id, slug) DO UPDATE SET name_vi = excluded.name_vi, name_en = excluded.name_en, sort = excluded.sort RETURNING id',
   );
   const upPicture = db.prepare(
-    `INSERT INTO pictures (object_id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, svg, manifest, animation, is_card, rarity, sort, theme_sort, hidden)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `INSERT INTO pictures (object_id, slug, variant_slug, name_vi, name_en, variant_name_vi, variant_name_en, svg, manifest, animation, is_card, rarity, sort, theme_sort, hidden, preview, asset_hash)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT (slug) DO UPDATE SET object_id = excluded.object_id, variant_slug = excluded.variant_slug, name_vi = excluded.name_vi,
        name_en = excluded.name_en, variant_name_vi = excluded.variant_name_vi, variant_name_en = excluded.variant_name_en,
        svg = excluded.svg, manifest = excluded.manifest, animation = excluded.animation, is_card = excluded.is_card,
-       rarity = excluded.rarity, sort = excluded.sort, theme_sort = excluded.theme_sort, hidden = excluded.hidden`,
+       rarity = excluded.rarity, sort = excluded.sort, theme_sort = excluded.theme_sort, hidden = excluded.hidden,
+       preview = excluded.preview, asset_hash = excluded.asset_hash`,
   );
   let count = 0;
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   await tx(async () => {
+    await purgeRetiredPictures(db, catalog);
     await asyncForEach(catalog.themes, async (t, ti) => {
       const themeId = (await upTheme.get(t.slug, t.name.vi, t.name.en, ti, t.age || '6-8', t.hidden ? 0 : 1)).id;
       await asyncForEach(t.objects, async (o, oi) => {
@@ -54,6 +83,8 @@ export async function seedPictures(db = getDb()) {
             p.cardOrder ?? pi,
             p.themeSort ?? 1000,
             p.hidden ? 1 : 0,
+            JSON.stringify(picturePreviewPaths({ slug: p.slug, svg }, p.regions)),
+            assetHash(svg, manifest),
           );
           count++;
         });
@@ -98,12 +129,13 @@ export async function purgePictures(db, ids) {
 export async function seedPicturesIfNeeded(db = getDb()) {
   const catalogFile = join(REPO_ROOT, 'assets-library', 'catalog.json');
   if (!existsSync(catalogFile)) return 0;
-  const catalog = JSON.parse(readFileSync(catalogFile, 'utf8'));
+  const catalog = libraryCatalog();
+  await tx(() => purgeRetiredPictures(db, catalog));
   const want = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
   const themeSlugs = catalog.themes.map((t) => t.slug);
   const rows = await db
     .prepare(
-      `SELECT p.slug, p.svg, p.manifest, p.name_vi, p.name_en, o.sort AS osort, p.theme_sort, p.hidden FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`,
+      `SELECT p.slug, p.asset_hash, p.preview, p.name_vi, p.name_en, o.sort AS osort, p.theme_sort, p.hidden FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE t.slug IN (${themeSlugs.map(() => '?').join(',')})`,
     )
     .all(...themeSlugs);
   const sameSet = rows.length === want.size && rows.every((r) => want.has(r.slug));
@@ -123,8 +155,8 @@ export async function seedPicturesIfNeeded(db = getDb()) {
         r.hidden === (p.hidden ? 1 : 0) &&
         r.name_vi === p.name.vi &&
         r.name_en === p.name.en &&
-        r.svg === readFileSync(join(lib, p.file), 'utf8') &&
-        r.manifest === JSON.stringify({ palette: p.palette, regions: p.regions })
+        r.preview &&
+        r.asset_hash === assetHash(readFileSync(join(lib, p.file), 'utf8'), JSON.stringify({ palette: p.palette, regions: p.regions }))
       );
     });
   const n = same ? 0 : await seedPictures(db);

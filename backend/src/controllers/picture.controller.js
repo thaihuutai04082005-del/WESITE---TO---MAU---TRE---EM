@@ -7,7 +7,7 @@ import { themeAccess, canAccessTheme, assertThemeAccess } from '../services/quot
 export async function themes(req, res) {
   const access = await themeAccess(req.user?.id);
   const rows = await Picture.listThemes();
-  const covers = req.query.access === '1' ? new Map() : await Picture.findPictures(rows.map((theme) => theme.cover_id));
+  const covers = req.query.access === '1' ? new Map() : await Picture.findPictures(rows.map((theme) => theme.cover_id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
   const list = rows.map((t) => ({
     id: t.id,
@@ -27,7 +27,7 @@ export async function objects(req, res) {
   if (!theme) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
   const rows = await Picture.listObjects(theme.id);
-  const covers = await Picture.findPictures(rows.map((object) => object.cover_id));
+  const covers = await Picture.findPictures(rows.map((object) => object.cover_id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
   const list = rows.map((o) => ({
     id: o.id,
@@ -45,7 +45,7 @@ export async function pictures(req, res) {
   if (!obj) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
   const rows = await Picture.listPictures(obj.id);
-  const pictures = await Picture.findPictures(rows.map((p) => p.id));
+  const pictures = await Picture.findPictures(rows.map((p) => p.id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
   const list = rows.map((p) => client(pictures.get(p.id)));
   res.json({
@@ -61,7 +61,7 @@ export async function themePictures(req, res) {
   if (!theme) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
   const rows = await Picture.listThemePictures(theme.id);
-  const pictures = await Picture.findPictures(rows.map((p) => p.id));
+  const pictures = await Picture.findPictures(rows.map((p) => p.id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
   const list = rows.map((p) => client(pictures.get(p.id)));
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
@@ -83,5 +83,5 @@ export async function picture(req, res) {
   if (!p) throw notFound();
   await assertCanUsePicture(req.user, p);
   if (req.query.access === '1') return res.json({ allowed: true });
-  res.json({ picture: Picture.toClient(p) });
+  res.json({ picture: req.query.preview === '1' ? Picture.toPreview(p) : Picture.toClient(p) });
 }

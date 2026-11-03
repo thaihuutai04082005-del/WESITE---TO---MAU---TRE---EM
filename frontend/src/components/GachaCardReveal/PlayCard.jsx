@@ -5,26 +5,25 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import PictureView from '../PictureView/PictureView';
 import { RarityBadge, RARITY_COLOR } from './GachaCardReveal';
+import { useAuth } from '../../store/auth';
 
-const cache = new Map();
 /** Tranh của thẻ để xem (thẻ đã có, hoặc mọi thẻ khi máy chủ bật xem trước). */
 export function useCardPreview(id, enabled = true) {
-  const [pic, setPic] = useState(() => cache.get(id)?.value || null);
+  const token = useAuth((state) => state.token);
+  const [pic, setPic] = useState(null);
   useEffect(() => {
+    setPic(null);
     if (!id || !enabled) return undefined;
     let alive = true;
-    if (!cache.has(id)) cache.set(id, { promise: api.get(`/gacha/catalog/${id}/picture`).then((r) => r.picture) });
-    const entry = cache.get(id);
-    entry.promise
+    api.get(`/gacha/catalog/${id}/picture?preview=1`).then((r) => r.picture)
       .then((p) => {
-        entry.value = p;
         if (alive) setPic(p);
       })
-      .catch(() => cache.delete(id));
+      .catch(() => {});
     return () => {
       alive = false;
     };
-  }, [id, enabled]);
+  }, [id, enabled, token]);
   return pic;
 }
 

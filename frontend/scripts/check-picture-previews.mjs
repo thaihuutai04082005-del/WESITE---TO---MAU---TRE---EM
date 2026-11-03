@@ -8,7 +8,7 @@ const dist = new URL('../dist/', import.meta.url);
 const catalog = JSON.parse(await readFile(new URL('catalog.json', library), 'utf8'));
 let pictures = 0, bytes = 0;
 for (const theme of catalog.themes.filter((item) => !item.hidden)) {
-  for (const picture of theme.objects.flatMap((object) => object.pictures).filter((item) => !item.hidden && !item.isCard)) {
+  for (const picture of theme.objects.flatMap((object) => object.pictures).filter((item) => !item.hidden)) {
     const svg = await readFile(new URL(picture.file, library), 'utf8');
     for (const path of Object.values(picturePreviewPaths({ ...picture, svg }, picture.regions))) {
       const file = new URL(path.slice(1), dist);

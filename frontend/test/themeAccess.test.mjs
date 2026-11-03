@@ -54,22 +54,13 @@ test('Deep-link and editor guards enforce Free even when an old API reports ever
   await assert.rejects(assertThemeAllowed('3-5-0', free), { code: 'backend_unavailable' });
 });
 
-test('Preview APIs load access and pictures concurrently, while old APIs check permission first', async () => {
-  for (const previewApi of [true, false]) {
-    const calls = [];
-    let allow;
-    globalThis.fetch = (url) => {
-      calls.push(url);
-      return url.endsWith('/themes?access=1')
-        ? new Promise((resolve) => { allow = () => resolve(Response.json({ themes })); })
-        : Promise.resolve(Response.json({ pictures: [{ id: 1 }] }));
-    };
-    const loading = loadThemePictures('3-5-0', { plan: 'free', vip: false }, 5, { previewApi });
-    assert.equal(calls.length, previewApi ? 2 : 1);
-    allow();
-    assert.deepEqual(await loading, { pictures: [{ id: 1 }] });
-    assert.match(calls[1], /\/themes\/3-5-0\/pictures\?preview=1$/);
-  }
+test('Current preview APIs enforce access in one fresh request, including when content was prefetched', async () => {
+  const calls = [];
+  globalThis.fetch = async (url) => { calls.push(url); return Response.json({ pictures: [{ id: 1 }] }); };
+  assert.deepEqual(await loadThemePictures('3-5-0', { plan: 'free', vip: false }, 5, { previewApi: true, prefetched: { pictures: [{ id: 99 }] } }), { pictures: [{ id: 1 }] });
+  assert.deepEqual(calls, ['/api/themes/3-5-0/pictures?preview=1']);
+  globalThis.fetch = async () => Response.json({ error: { code: 'theme_vip_required' } }, { status: 403 });
+  await assert.rejects(loadThemePictures('3-5-8', { plan: 'free', vip: false }, 5, { previewApi: true }), { code: 'theme_vip_required' });
 });
 
 test('A warm preview still needs fresh access and cannot open a locked theme on a legacy API', async () => {

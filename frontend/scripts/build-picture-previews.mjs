@@ -10,7 +10,7 @@ const output = fileURLToPath(new URL('../public/picture-previews/', import.meta.
 const catalog = JSON.parse(await readFile(resolve(library, 'catalog.json'), 'utf8'));
 const pictures = catalog.themes.filter((theme) => !theme.hidden)
   .flatMap((theme) => theme.objects.flatMap((object) => object.pictures))
-  .filter((picture) => !picture.hidden && !picture.isCard);
+  .filter((picture) => !picture.hidden);
 await mkdir(output, { recursive: true });
 const expected = new Set();
 let created = 0;
