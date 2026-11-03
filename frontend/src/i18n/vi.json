@@ -492,7 +492,7 @@
       "perks": [
         {
           "i": "🔒",
-          "t": "5 chủ đề theo độ tuổi"
+          "t": "5 chủ đề ở mỗi nhóm tuổi"
         },
         {
           "i": "🎮",
@@ -615,6 +615,8 @@
     "retry": "Kiểm tra lại"
   },
   "upgrade": {
+    "themeTitle": "Mở toàn bộ chủ đề với VIP",
+    "themeLocked": "Gói Thường mở 5 chủ đề ở mỗi nhóm tuổi. Bé hãy nhờ phụ huynh xem gói VIP để mở toàn bộ chủ đề.",
     "title": "Hết lượt tô rồi!",
     "freeUsed": "Gói Thường được tô 2 tranh mỗi ngày. Bé quay lại vào ngày mai, hoặc nhờ bố mẹ nâng cấp VIP để tô không giới hạn nhé.",
     "cta": "Xem các gói",
@@ -958,6 +960,7 @@
     "quota_exceeded": "Bé đã hết lượt tô.",
     "artwork_not_found": "Không tìm thấy tranh.",
     "picture_not_found": "Không tìm thấy tranh.",
+    "theme_vip_required": "Chủ đề này cần gói VIP còn hiệu lực.",
     "card_not_owned": "Bé chưa có thẻ này.",
     "invalid_mode": "Chế độ tô không hợp lệ.",
     "invalid_thumbnail": "Ảnh xem trước không hợp lệ.",

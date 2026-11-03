@@ -154,7 +154,7 @@ export default function Shop() {
     const cur = Math.min(page, pages - 1);
     const shown = list.slice(cur * per, cur * per + per);
     const tabs = [
-      ['pattern', <img key="p" src="/tools/pattern.webp" alt="" className="sh-tab-img" draggable={false} />, t('shop.patterns')],
+      ['pattern', <Icon key="p" name="palette" size={28} />, t('shop.patterns')],
       ['artwork_frame', '🖼️', t('shop.tabFrames')],
       ['storybook_cover', '📖', t('shop.covers')],
     ];
@@ -176,7 +176,7 @@ export default function Shop() {
             {tabs.map(([k, icon, label]) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} className={`sh-tab${tab === k ? ' sh-tab-on' : ''}`} onClick={() => { setTab(k); setPage(0); }} data-testid={`shop-tab-${k}`}>
                 <span className="sh-tab-icon" aria-hidden="true">{icon}</span>
-                <span>{label}</span>
+                <span className="sh-tab-label">{label}</span>
               </button>
             ))}
           </div>

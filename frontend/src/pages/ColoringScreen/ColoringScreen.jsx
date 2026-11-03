@@ -22,6 +22,7 @@ export default function ColoringScreen() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const user = useAuth((s) => s.user);
+  const plan = useAuth((s) => s.plan);
   const setPlan = useAuth((s) => s.setPlan);
   const toast = useUi((s) => s.toast);
   const openUpgrade = useUi((s) => s.openUpgrade);
@@ -46,6 +47,11 @@ export default function ColoringScreen() {
       .get(`/artworks/${id}`)
       .then((r) => {
         if (!alive) return;
+        if (r.accessError) {
+          if (r.accessError === 'theme_vip_required') openUpgrade(true, 'theme');
+          else toast(t(`errors.${r.accessError}`), 'error');
+          return navigate('/history', { replace: true });
+        }
         setArtwork(r.artwork);
         setPicture(r.picture);
         started.current = r.artwork.counted || !['template', 'free'].includes(r.artwork.mode);
@@ -56,16 +62,25 @@ export default function ColoringScreen() {
         toast(errorText(t, e), 'error');
         navigate('/history');
       });
-    // Chữ ký mặc định cho nút "Chữ ký" trong bộ công cụ.
-    api
-      .get('/users/me/signature')
-      .then((r) => alive && setSig(r))
-      .catch(() => {});
     return () => {
       alive = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  useEffect(() => {
+    if (!picture) return;
+    let alive = true;
+    api.get(`/pictures/${picture.id}?access=1`).catch((error) => {
+      if (!alive || !['theme_vip_required', 'card_not_owned'].includes(error.code)) return;
+      dirty.current = false;
+      if (error.code === 'theme_vip_required') openUpgrade(true, 'theme');
+      else toast(errorText(t, error), 'error');
+      navigate('/history', { replace: true });
+    });
+    api.get('/users/me/signature').then((state) => alive && setSig(state)).catch(() => {});
+    return () => { alive = false; };
+  }, [picture?.id, plan?.plan, plan?.endsAt]);
 
   // Báo cho hiệu ứng chuyển màn hình: tranh đã tải xong, sẵn sàng hiện.
   useEffect(() => {
@@ -85,6 +100,7 @@ export default function ColoringScreen() {
       } catch (e) {
         setSaving('error');
         if (e.code === 'quota_exceeded') openUpgrade(true);
+        if (e.code === 'theme_vip_required') openUpgrade(true, 'theme');
         throw e;
       }
     },
@@ -124,7 +140,8 @@ export default function ColoringScreen() {
         if (e.code === 'quota_exceeded') {
           if (e.data?.plan) setPlan(e.data.plan);
           openUpgrade(true);
-        } else toast(errorText(t, e), 'error');
+        } else if (e.code === 'theme_vip_required') openUpgrade(true, 'theme');
+        else toast(errorText(t, e), 'error');
       })
       .finally(() => {
         starting.current = null;
@@ -147,6 +164,7 @@ export default function ColoringScreen() {
           if (e.data?.plan) setPlan(e.data.plan);
           return openUpgrade(true);
         }
+        if (e.code === 'theme_vip_required') return openUpgrade(true, 'theme');
         return toast(errorText(t, e), 'error');
       }
     }

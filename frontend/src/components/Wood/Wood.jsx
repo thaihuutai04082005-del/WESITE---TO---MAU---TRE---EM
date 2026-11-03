@@ -177,16 +177,17 @@ export function WoodTabs({ tabs, value, onChange }) {
 }
 
 /** Thẻ tranh màu trắng: ảnh, tên, số tranh và nút mũi tên xanh nhạt. */
-export function PicFrame({ to, onClick, picture, title, subtitle, testId }) {
+export function PicFrame({ to, onClick, picture, title, subtitle, testId, locked = false }) {
   const body = (
     <>
-      <div className="wood-paper">
+      <div className="wood-paper relative">
         {picture ? <PictureView picture={picture} title={title} thumb /> : <div className="aspect-square" />}
+        {locked && <span className="absolute inset-0 flex items-center justify-center rounded-xl bg-white/60"><span className="flex items-center gap-2 rounded-full bg-white px-3 py-2 font-extrabold text-primary-dark"><Icon name="lock" size={22} />VIP</span></span>}
       </div>
       <div className="wood-label" title={title}>{title}</div>
       <div className="wood-foot">
         <span className="wood-sub">{subtitle && (<><Icon name="user" size={16} /> {subtitle}</>)}</span>
-        <span className="wood-go" aria-hidden="true"><Icon name="chevronRight" size={20} strokeWidth={3} /></span>
+        <span className="wood-go" aria-hidden="true"><Icon name={locked ? 'lock' : 'chevronRight'} size={20} strokeWidth={3} /></span>
       </div>
     </>
   );

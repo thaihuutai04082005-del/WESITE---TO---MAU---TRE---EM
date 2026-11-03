@@ -5,19 +5,31 @@ import { api } from '../services/api';
 import Modal from './Modal/Modal';
 import ThemeCard from './ThemeCard/ThemeCard';
 import Icon from './Icon';
+import { useUi } from '../store/ui';
 
 export default function PicturePicker({ onPick, onClose }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
+  const openUpgrade = useUi((s) => s.openUpgrade);
   const [theme, setTheme] = useState(null);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (!theme) api.get('/themes').then((r) => setItems(r.themes.map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover }))));
-    else api.get(`/themes/${theme}/pictures`).then((r) => setItems(r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x }))));
+    let active = true;
+    setItems([]);
+    const request = !theme
+      ? api.get('/themes').then((r) => r.themes.map((x) => ({ key: x.slug, title: x.name[lang], picture: x.cover, locked: x.locked })))
+      : api.get(`/themes/${theme}/pictures`).then((r) => r.pictures.map((x) => ({ key: x.id, title: x.name[lang], picture: x })));
+    request.then((items) => active && setItems(items)).catch((error) => {
+      if (!active) return;
+      if (error.code === 'theme_vip_required') { onClose?.(); openUpgrade(true, 'theme'); }
+      else setTheme(null);
+    });
+    return () => { active = false; };
   }, [theme, lang]);
 
   const pick = (it) => {
+    if (it.locked) { onClose?.(); openUpgrade(true, 'theme'); return; }
     if (!theme) setTheme(it.key);
     else onPick(it.picture);
   };
@@ -34,7 +46,7 @@ export default function PicturePicker({ onPick, onClose }) {
         <h2 className="font-display text-2xl font-extrabold">{!theme ? t('select.themes') : t('select.pictures')}</h2>
       </div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {items.map((it) => <ThemeCard key={it.key} onClick={() => pick(it)} picture={it.picture} title={it.title} testId={`pick-${it.key}`} />)}
+        {items.map((it) => <ThemeCard key={it.key} onClick={() => pick(it)} picture={it.picture} title={`${it.locked ? '🔒 VIP · ' : ''}${it.title}`} testId={`pick-${it.key}`} />)}
       </div>
     </Modal>
   );

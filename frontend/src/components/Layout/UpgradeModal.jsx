@@ -7,14 +7,15 @@ import Modal from '../Modal/Modal';
 export default function UpgradeModal() {
   const { t } = useTranslation();
   const open = useUi((s) => s.upgradeOpen);
+  const reason = useUi((s) => s.upgradeReason);
   const setOpen = useUi((s) => s.openUpgrade);
   const navigate = useNavigate();
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <div className="flex flex-col items-center gap-3 text-center" data-testid="upgrade-modal">
         <img src="/avatars/meo.svg" alt="" className="h-24 w-24 rounded-full" />
-        <h2 className="font-display text-2xl font-extrabold">{t('upgrade.title')}</h2>
-        <p className="text-muted">{t('upgrade.freeUsed')}</p>
+        <h2 className="font-display text-2xl font-extrabold">{t(reason === 'theme' ? 'upgrade.themeTitle' : 'upgrade.title')}</h2>
+        <p className="text-muted">{t(reason === 'theme' ? 'upgrade.themeLocked' : 'upgrade.freeUsed')}</p>
         <button
           type="button"
           className="btn-coral w-full"

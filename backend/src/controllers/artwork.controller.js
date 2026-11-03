@@ -8,7 +8,7 @@ import * as User from '../models/user.js';
 import * as Exhibition from '../services/exhibition.js';
 import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
-import { canUsePicture } from './picture.controller.js';
+import { assertCanUsePicture, pictureAccessError } from './picture.controller.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
 import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 
@@ -63,7 +63,7 @@ export async function create(req, res) {
   if (!['template', 'free'].includes(mode)) throw badRequest('invalid_mode');
   const p = await Picture.findPicture(Number(pictureId));
   if (!p) throw notFound('picture_not_found');
-  if (!(await canUsePicture(req.user, p))) throw forbidden('card_not_owned');
+  await assertCanUsePicture(req.user, p);
   const a = await Artwork.create({ userId: req.user.id, pictureId: p.id, mode });
   res.status(201).json({
     artwork: { ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en }), data: Artwork.dataOf(a) },
@@ -75,6 +75,7 @@ export async function get(req, res) {
   const a = await own(req);
   const p = await Picture.findPicture(a.picture_id);
   res.json({
+    accessError: await pictureAccessError(req.user, p),
     artwork: {
       ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en, is_card: p.is_card, rarity: p.rarity }),
       data: Artwork.dataOf(a),
@@ -97,6 +98,7 @@ export async function save(req, res) {
   await Exhibition.assertEditable(a.id);
   const p = await Picture.findPicture(a.picture_id);
   const data = sanitizeArtworkData(Picture.manifestOf(p), req.body?.data);
+  await assertCanUsePicture(req.user, p);
   // Chữ ký là lớp riêng (không phải nét cọ) nên nằm ngoài dữ liệu chấm điểm.
   const signature = await Signature.preparePlaced(await User.findById(req.user.id), req.body?.data?.signature, Artwork.dataOf(a).signature);
   if (signature) data.signature = signature;

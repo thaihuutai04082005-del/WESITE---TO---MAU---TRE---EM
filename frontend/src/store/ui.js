@@ -7,6 +7,7 @@ export const useUi = create((set, get) => ({
   toasts: [],
   events: [],
   upgradeOpen: false,
+  upgradeReason: 'quota',
 
   toast(message, kind = 'info') {
     const id = ++seq;
@@ -20,7 +21,7 @@ export const useUi = create((set, get) => ({
   shiftEvent() {
     set({ events: get().events.slice(1) });
   },
-  openUpgrade(open = true) {
-    set({ upgradeOpen: open });
+  openUpgrade(open = true, reason = 'quota') {
+    set({ upgradeOpen: open, upgradeReason: reason });
   },
 }));

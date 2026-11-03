@@ -7,17 +7,28 @@ import { PicFrame, WoodBack, WoodBoard, WoodScene, WoodSign, WOOD_GRID, useFitRo
 import ModePicker from '../../components/ModePicker';
 import { takePrefetchedTheme } from '../../lib/prefetch';
 import { pageReady } from '../../lib/transitionBus';
+import { useAuth } from '../../store/auth';
+import { useUi } from '../../store/ui';
 
 export default function ObjectSelector() {
   const { theme } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const plan = useAuth((s) => s.plan);
+  const openUpgrade = useUi((s) => s.openUpgrade);
   const [data, setData] = useState(() => takePrefetchedTheme(theme)); // có sẵn nếu vừa được làm sẵn lúc chạy hiệu ứng
   const [picked, setPicked] = useState(null);
   useEffect(() => {
-    if (data?.theme?.slug === theme) return;
-    api.get(`/themes/${theme}/pictures`).then(setData).catch(() => navigate('/color', { replace: true })); // chủ đề đã ẩn/không có → quay lại trang chọn
-  }, [theme]);
+    let alive = true;
+    setData(null);
+    setPicked(null);
+    api.get(`/themes/${theme}/pictures`).then((r) => alive && setData(r)).catch((error) => {
+      if (!alive) return;
+      if (error.code === 'theme_vip_required') openUpgrade(true, 'theme');
+      navigate('/color', { replace: true });
+    });
+    return () => { alive = false; };
+  }, [theme, plan?.plan, plan?.endsAt]);
   useEffect(() => {
     if (data) requestAnimationFrame(pageReady);
   }, [data]);

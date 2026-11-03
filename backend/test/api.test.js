@@ -961,7 +961,10 @@ test('Cơ sở dữ liệu cũ (chủ đề đang hiện) được ẩn khi cata
 
 test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog được xếp lại theo catalog', async () => {
   const db = getDb();
-  const slugs = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  const viewer = await register('ordercheck1');
+  await db.prepare("INSERT INTO subscriptions (user_id, plan, starts_at, ends_at) VALUES (?, 'month', ?, ?)")
+    .run(viewer.id, new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  const slugs = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures', null, viewer.token)).body.pictures.map((p) => p.slug);
   assert.equal(slugs[4], 'suon-xam--tu-dang');
   assert.equal(slugs[8], 'vay-yem--hoa-cuc-trang');
   // Mô phỏng máy cũ: Váy Yếm đứng thứ 5, Sườn Xám thứ 6.
@@ -969,10 +972,10 @@ test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog đư
   await set.run(4, 'vay-yem');
   await set.run(5, 'suon-xam');
   await set.run(6, 'vay-ngan');
-  const old = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  const old = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures', null, viewer.token)).body.pictures.map((p) => p.slug);
   assert.equal(old[4], 'vay-yem--hoa-cuc-trang');
   await seedPicturesIfNeeded(db);
-  const now = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures')).body.pictures.map((p) => p.slug);
+  const now = (await api('GET', '/themes/cong-chua-ngan-hoa/pictures', null, viewer.token)).body.pictures.map((p) => p.slug);
   assert.equal(now[4], 'suon-xam--tu-dang');
   assert.equal(now[8], 'vay-yem--hoa-cuc-trang');
 });
@@ -1114,4 +1117,137 @@ test('Concurrent OTP requests honor cooldown and each code is consumed only once
   const consumed = await Promise.allSettled([consumeOtp(otp.otpId, otp.devCode, input.purpose), consumeOtp(otp.otpId, otp.devCode, input.purpose)]);
   assert.equal(consumed.filter((result) => result.status === 'fulfilled').length, 1);
   assert.equal(consumed.find((result) => result.status === 'rejected').reason.code, 'otp_invalid');
+});
+
+test('Free theme limits apply to every API, VIP month/year unlock them and expiry immediately revokes access', async () => {
+  const Picture = await import('../src/models/picture.js');
+  const { PLANS } = await import('../src/config/constants.js');
+  for (const kind of ['month', 'year']) {
+    const user = await register(`rights${kind}`);
+    const initial = (await api('GET', '/themes', null, user.token)).body.themes;
+    for (const age of new Set(initial.map(t => t.age))) {
+      const group = initial.filter(t => t.age === age);
+      assert.equal(group.filter(t => !t.locked).length, Math.min(PLANS.free.themesPerAge, group.length));
+      assert.ok(group.slice(PLANS.free.themesPerAge).every(t => t.locked));
+    }
+    const theme = initial.find(t => t.locked);
+    assert.ok(theme, 'The library must contain themes outside the Free allowance');
+    const p = await Picture.findPicture((await Picture.listThemePictures(theme.id))[0].id);
+    const paths = [`/themes/${theme.slug}/pictures`, `/themes/${theme.slug}/objects`,
+      `/themes/${theme.slug}/objects/${p.object_slug}/pictures`, `/pictures/${p.id}`];
+    for (const path of paths) {
+      const blocked = await api('GET', path, null, user.token);
+      assert.equal(blocked.status, 403, path);
+      assert.equal(blocked.body.error.code, 'theme_vip_required');
+    }
+    assert.equal((await api('GET', paths[0])).status, 403, 'Removing the token cannot bypass Free limits');
+    const forged = await api('POST', '/artworks', {pictureId:p.id, mode:'free', vip:true, plan:'year', role:'admin'}, user.token);
+    assert.equal(forged.body.error.code, 'theme_vip_required');
+    assert.equal((await getDb().prepare('SELECT count(*) AS n FROM artworks WHERE user_id = ?').get(user.id)).n, 0);
+    // An unpaid order never grants VIP.
+    const order = await api('POST', '/payments', {plan:kind, provider:'bank'}, user.token);
+    assert.equal(order.status, 201);
+    assert.equal((await api('GET', '/auth/me', null, user.token)).body.plan.vip, false);
+    assert.equal((await api('GET', paths[0], null, user.token)).status, 403);
+    await api('POST', `/payments/${order.body.paymentId}/mock-complete`, null, user.token);
+    const paid = (await api('GET', '/auth/me', null, user.token)).body;
+    assert.equal(paid.plan.plan, kind);
+    assert.equal(paid.plan.vip, true);
+    assert.equal(paid.user.vip, true);
+    assert.equal(paid.plan.limit, null);
+    assert.ok((await api('GET', '/themes', null, user.token)).body.themes.every(t => !t.locked));
+    for (const path of paths) assert.equal((await api('GET', path, null, user.token)).status, 200, path);
+    assert.equal((await api('GET', '/users/me/signature', null, user.token)).body.premium, true);
+    assert.equal((await api('GET', '/social/trades', null, user.token)).body.dailyLimit, 5);
+    const created = await api('POST', '/artworks', {pictureId:p.id, mode:'free'}, user.token);
+    assert.equal(created.status, 201);
+    const artworkId = created.body.artwork.id;
+    assert.equal((await api('POST', `/artworks/${artworkId}/start`, null, user.token)).status, 200);
+    // Leave a counted draft open, then expire the subscription on the server.
+    await getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now()-1000).toISOString(), user.id);
+    const expired = (await api('GET', '/auth/me', null, user.token)).body;
+    assert.equal(expired.plan.plan, 'free');
+    assert.equal(expired.user.vip, false);
+    assert.equal(expired.plan.limit, 2);
+    for (const path of paths) assert.equal((await api('GET', path, null, user.token)).status, 403, path);
+    assert.equal((await api('POST', `/artworks/${artworkId}/start`, null, user.token)).body.error.code, 'theme_vip_required');
+    assert.equal((await api('PUT', `/artworks/${artworkId}`, {data:{fills:{}}}, user.token)).body.error.code, 'theme_vip_required');
+    const oldArt = await api('GET', `/artworks/${artworkId}`, null, user.token);
+    assert.equal(oldArt.status, 200, 'Existing art remains viewable');
+    assert.equal(oldArt.body.accessError, 'theme_vip_required');
+    assert.equal((await api('GET', `/pictures/${p.id}?access=1`, null, user.token)).status, 403);
+    assert.equal((await api('GET', '/users/me/signature', null, user.token)).body.premium, false);
+    assert.equal((await api('GET', '/social/trades', null, user.token)).body.dailyLimit, 1);
+    assert.equal((await api('PUT', '/users/me/signature', {name:'Tester',style:'gold'}, user.token)).body.error.code, 'signature_premium_required');
+    // A future, not-yet-active subscription is still Free today.
+    await getDb().prepare('INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,?,?,?)')
+      .run(user.id,kind,new Date(Date.now()+86400000).toISOString(),new Date(Date.now()+32*86400000).toISOString());
+    assert.equal((await api('GET', paths[0], null, user.token)).status, 403);
+    // VIP does not grant rare cards; earned cards remain usable by Free accounts.
+    const card = await getDb().prepare('SELECT id FROM pictures WHERE is_card = 1 LIMIT 1').get();
+    assert.equal((await api('GET', `/pictures/${card.id}`, null, user.token)).body.error.code, 'card_not_owned');
+    await getDb().prepare("INSERT INTO user_cards (user_id,picture_id,source) VALUES (?,?,'gacha')").run(user.id, card.id);
+    assert.equal((await api('GET', `/pictures/${card.id}`, null, user.token)).status, 200);
+  }
+});
+
+test('VIP theme access cannot be bypassed through collaborative room creation, joining or an expired open room', async () => {
+  const Picture = await import('../src/models/picture.js');
+  const host = await register('rightsroomhost');
+  const guest = await register('rightsroomguest');
+  const theme = (await api('GET', '/themes', null, host.token)).body.themes.find(t => t.locked);
+  const p = await Picture.findPicture((await Picture.listThemePictures(theme.id))[0].id);
+  const sh = await connect(host.token), sg = await connect(guest.token);
+  try {
+    assert.equal((await emit(sh, 'collab:create', {pictureId:p.id})).error, 'theme_vip_required');
+    const grant = async (id) => getDb().prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'month',?,?)")
+      .run(id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+    await grant(host.id);
+    const room = await emit(sh, 'collab:create', {pictureId:p.id});
+    assert.ok(room.room);
+    assert.equal((await emit(sg, 'collab:join', {code:room.room.code})).error, 'theme_vip_required');
+    await grant(guest.id);
+    assert.ok((await emit(sg, 'collab:join', {code:room.room.code})).room);
+    const op = once(sg, 'collab:op');
+    sh.emit('collab:op', {type:'fill', regionId:room.picture.regions[0].id, color:'#FF5F7E'});
+    await op;
+    await getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now()-1000).toISOString(),host.id);
+    const denied = once(sh, 'collab:access-denied');
+    sh.emit('collab:op', {type:'fill', regionId:room.picture.regions[0].id, color:'#000000'});
+    assert.equal((await denied).error,'theme_vip_required');
+    assert.equal((await emit(sh, 'collab:save', {})).error,'theme_vip_required');
+    assert.equal((await emit(sg, 'collab:save', {})).ok,true);
+    assert.equal((await api('GET','/artworks?mode=collab',null,host.token)).body.artworks.length,0);
+    assert.equal((await api('GET','/artworks?mode=collab',null,guest.token)).body.artworks.length,1);
+  } finally {sh.close();sg.close();}
+});
+
+test('Free and expired VIP obey storybook, signature and exhibition benefits while owned Ruby items remain available', async () => {
+  const Ex = await import('../src/services/exhibition.js');
+  const user = await register('benefitaudit1');
+  const first = await api('POST','/storybooks',{title:'First book',pages:[]},user.token);
+  assert.equal(first.status,201);
+  assert.equal((await api('POST','/storybooks',{title:'Extra book',pages:[]},user.token)).body.error.code,'storybook_limit');
+  assert.equal((await Ex.status(user.id)).limit,1);
+  await getDb().prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'year',?,?)")
+    .run(user.id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+  assert.equal((await Ex.status(user.id)).limit,5);
+  assert.equal((await api('PUT','/users/me/signature',{name:'Tester',style:'gold'},user.token)).status,200);
+  const picture = (await api('POST','/artworks',{pictureId:1,mode:'free'},user.token)).body.artwork;
+  assert.equal((await api('PUT',`/artworks/${picture.id}`,{data:{fills:{bg:'#FF5F7E'}},completed:true},user.token)).status,200);
+  const pages=Array.from({length:11},()=>({artworkId:picture.id}));
+  assert.equal((await api('PUT',`/storybooks/${first.body.storybook.id}`,{pages},user.token)).status,200);
+  assert.equal((await api('POST','/storybooks',{title:'Extra book',pages:[]},user.token)).status,201);
+  await getDb().prepare('UPDATE subscriptions SET ends_at = ? WHERE user_id = ?').run(new Date(Date.now()-1000).toISOString(),user.id);
+  assert.equal((await Ex.status(user.id)).limit,1);
+  assert.equal((await api('POST','/storybooks',{title:'After expiry',pages:[]},user.token)).body.error.code,'storybook_limit');
+  assert.equal((await api('PUT',`/storybooks/${first.body.storybook.id}`,{pages},user.token)).body.error.code,'storybook_pages_limit');
+  const signature=(await api('GET','/users/me/signature',null,user.token)).body;
+  assert.equal(signature.premium,false);
+  assert.equal(signature.signature.style,'classic');
+  assert.equal((await api('GET',`/storybooks/${first.body.storybook.id}`,null,user.token)).body.storybook.pages.length,11,'Purchased-era books remain readable');
+  const item=(await api('GET','/shop',null,user.token)).body.items.find(item=>item.type==='pattern'&&item.price>0);
+  await getDb().prepare('UPDATE users SET ruby = ? WHERE id = ?').run(item.price,user.id);
+  assert.equal((await api('POST',`/shop/${item.slug}/buy`,null,user.token)).status,200,'Ruby shop purchases are a Free benefit too');
+  assert.ok((await api('GET','/shop',null,user.token)).body.items.find(i=>i.slug===item.slug).owned);
 });

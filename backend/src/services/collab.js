@@ -6,7 +6,7 @@ import * as Artwork from '../models/artwork.js';
 import * as User from '../models/user.js';
 import { sanitizeArtworkData } from './scoringEngine.js';
 import * as progression from './progression.js';
-import { canUsePicture } from '../controllers/picture.controller.js';
+import { pictureAccessError } from '../controllers/picture.controller.js';
 import { areFriends } from '../controllers/social.controller.js';
 import { randomCode } from '../utils/ids.js';
 
@@ -109,7 +109,8 @@ export function registerCollab(io, socket) {
     if (!user?.nickname) return reply(cb, { error: 'nickname_required' });
     const picture = await Picture.findPicture(Number(p?.pictureId));
     if (!picture) return reply(cb, { error: 'picture_not_found' });
-    if (!(await canUsePicture(user, picture))) return reply(cb, { error: 'card_not_owned' });
+    const error = await pictureAccessError(user, picture);
+    if (error) return reply(cb, { error });
     const old = current();
     if (old) leave(old);
     let code;
@@ -128,7 +129,10 @@ export function registerCollab(io, socket) {
         .toUpperCase(),
     );
     if (!room) return reply(cb, { error: 'room_not_found' });
-    if (!(await User.findById(uid))?.nickname) return reply(cb, { error: 'nickname_required' });
+    const user = await User.findById(uid);
+    if (!user?.nickname) return reply(cb, { error: 'nickname_required' });
+    const error = await pictureAccessError(user, room.picture);
+    if (error) return reply(cb, { error });
     if (!room.players.has(uid) && room.players.size >= COLLAB_MAX_PLAYERS) return reply(cb, { error: 'room_full' });
     const old = current();
     if (old && old !== room) leave(old);
@@ -136,9 +140,11 @@ export function registerCollab(io, socket) {
     reply(cb, { room: publicRoom(room), picture: Picture.toClient(room.picture), data: stateOf(room) });
   });
 
-  on('collab:op', (op) => {
+  on('collab:op', async (op) => {
     const room = current();
     if (!room || !op || room.ops.length >= MAX_OPS) return;
+    const error = await pictureAccessError(await User.findById(uid), room.picture);
+    if (error) return socket.emit('collab:access-denied', { error });
     const clean = { id: ++room.seq, by: uid, type: op.type };
     const ids = room.manifest.regions;
     if (op.type === 'fill' || op.type === 'glitter') {
@@ -174,9 +180,11 @@ export function registerCollab(io, socket) {
   });
 
   // Undo: bé chỉ hoàn tác được thao tác của chính mình.
-  on('collab:undo', () => {
+  on('collab:undo', async () => {
     const room = current();
     if (!room) return;
+    const error = await pictureAccessError(await User.findById(uid), room.picture);
+    if (error) return socket.emit('collab:access-denied', { error });
     for (let i = room.ops.length - 1; i >= 0; i--) {
       if (room.ops[i].by === uid) {
         room.ops.splice(i, 1);
@@ -196,6 +204,8 @@ export function registerCollab(io, socket) {
   on('collab:save', async (payload, cb) => {
     const room = current();
     if (!room) return reply(cb, { error: 'room_not_found' });
+    const error = await pictureAccessError(await User.findById(uid), room.picture);
+    if (error) return reply(cb, { error });
     const data = stateOf(room);
     if (!Object.keys(data.fills).length && !data.strokes.length) return reply(cb, { error: 'empty' });
     const thumb =
@@ -203,6 +213,7 @@ export function registerCollab(io, socket) {
         ? payload.thumbnail
         : null;
     for (const memberId of room.players.keys()) {
+      if (await pictureAccessError(await User.findById(memberId), room.picture)) continue;
       await Artwork.create({ userId: memberId, pictureId: room.picture.id, mode: 'collab', data, thumbnail: thumb, status: 'completed' });
       const events = await progression.record(memberId, 'collab_join');
       io.to(`user:${memberId}`).emit('collab:saved', { by: socket.data.user, events });

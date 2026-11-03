@@ -119,6 +119,12 @@ export default function TogetherRoom() {
       pushEvents(e.events);
     };
     const onDeclined = (e) => toast(t('together.inviteDeclined', { name: e.by.nickname }), 'info');
+    const onAccessDenied = ({ error }) => {
+      toast(t(`errors.${error}`, { defaultValue: t('errors.server_error') }), 'error');
+      if (error === 'theme_vip_required') useUi.getState().openUpgrade(true, 'theme');
+      navigate('/together', { replace: true });
+    };
+    socket.on('collab:access-denied', onAccessDenied);
     socket.on('collab:invite-declined', onDeclined);
     socket.on('collab:room', onRoom);
     socket.on('collab:op', onOp);
@@ -127,6 +133,7 @@ export default function TogetherRoom() {
     socket.on('collab:saved', onSaved);
     return () => {
       alive = false;
+      socket.off('collab:access-denied', onAccessDenied);
       socket.off('collab:invite-declined', onDeclined);
       socket.off('collab:room', onRoom);
       socket.off('collab:op', onOp);

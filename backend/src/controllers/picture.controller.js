@@ -3,13 +3,16 @@ import { asyncMap } from '../utils/asyncArray.js';
 import { getDb } from '../config/db.js';
 import * as Picture from '../models/picture.js';
 import { forbidden, notFound } from '../utils/http.js';
+import { themeAccess, canAccessTheme, assertThemeAccess } from '../services/quota.js';
 
-export async function themes(_req, res) {
+export async function themes(req, res) {
+  const access = await themeAccess(req.user?.id);
   const list = await asyncMap(await Picture.listThemes(), async (t) => ({
     id: t.id,
     slug: t.slug,
     name: { vi: t.name_vi, en: t.name_en },
     age: t.age_group,
+    locked: !access.vip && !access.allowedIds.has(t.id),
     objectCount: t.object_count,
     pictureCount: t.picture_count,
     cover: t.cover_id ? Picture.toClient(await Picture.findPicture(t.cover_id)) : null,
@@ -20,6 +23,7 @@ export async function themes(_req, res) {
 export async function objects(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
+  await assertThemeAccess(req.user?.id, theme.id);
   const list = await asyncMap(await Picture.listObjects(theme.id), async (o) => ({
     id: o.id,
     slug: o.slug,
@@ -34,6 +38,7 @@ export async function pictures(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   const obj = theme && (await Picture.findObject(theme.id, req.params.object));
   if (!obj) throw notFound();
+  await assertThemeAccess(req.user?.id, theme.id);
   const list = await asyncMap(await Picture.listPictures(obj.id), async (p) => Picture.toClient(await Picture.findPicture(p.id)));
   res.json({
     theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } },
@@ -46,19 +51,26 @@ export async function pictures(req, res) {
 export async function themePictures(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
+  await assertThemeAccess(req.user?.id, theme.id);
   const list = await asyncMap(await Picture.listThemePictures(theme.id), async (p) => Picture.toClient(await Picture.findPicture(p.id)));
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
 }
 
-export async function canUsePicture(user, picture) {
-  if (!picture.is_card) return true;
-  if (user?.role === 'admin') return true;
-  return !!(await getDb().prepare('SELECT 1 FROM user_cards WHERE user_id = ? AND picture_id = ?').get(user?.id, picture.id));
+export async function pictureAccessError(user, picture) {
+  if (!picture.is_card) return await canAccessTheme(user?.id, picture.theme_id) ? null : 'theme_vip_required';
+  if (user?.role === 'admin') return null;
+  return await getDb().prepare('SELECT 1 FROM user_cards WHERE user_id = ? AND picture_id = ?').get(user?.id, picture.id) ? null : 'card_not_owned';
+}
+
+export async function assertCanUsePicture(user, picture) {
+  const error = await pictureAccessError(user, picture);
+  if (error) throw forbidden(error);
 }
 
 export async function picture(req, res) {
   const p = await Picture.findPicture(Number(req.params.id));
   if (!p) throw notFound();
-  if (!(await canUsePicture(req.user, p))) throw forbidden('card_not_owned');
+  await assertCanUsePicture(req.user, p);
+  if (req.query.access === '1') return res.json({ allowed: true });
   res.json({ picture: Picture.toClient(p) });
 }

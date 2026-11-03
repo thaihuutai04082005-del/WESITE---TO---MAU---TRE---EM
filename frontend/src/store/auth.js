@@ -65,7 +65,14 @@ export const useAuth = create((set, get) => ({
     set({ user });
   },
   setPlan(plan) {
-    set({ plan });
+    set((state) => ({ plan, user: state.user ? { ...state.user, vip: !!plan?.vip } : null }));
+  },
+
+  async syncPlan() {
+    const token = get().token;
+    if (!token) return;
+    const result = await api.get('/subscription');
+    if (get().token === token) get().setPlan(result.plan);
   },
   setUnread(unread) {
     set({ unread });

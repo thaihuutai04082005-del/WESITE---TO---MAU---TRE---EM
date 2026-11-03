@@ -2,7 +2,7 @@
 import { getDb, tx } from '../config/db.js';
 import { PLANS } from '../config/constants.js';
 import { vnDayStart, addDays } from '../utils/time.js';
-import { HttpError } from '../utils/http.js';
+import { HttpError, forbidden } from '../utils/http.js';
 
 export async function activeSubscription(userId, at = new Date()) {
   const iso = at.toISOString();
@@ -18,6 +18,29 @@ const usedSince = async (userId, fromIso) =>
   (await getDb().prepare('SELECT COUNT(*) AS c FROM usage_log WHERE user_id = ? AND used_at >= ?').get(userId, fromIso)).c;
 
 export const isVip = async (userId) => !!(await activeSubscription(userId));
+
+/** Free opens the first five active themes in each age group, using the library's display order. */
+export async function themeAccess(userId, at = new Date()) {
+  if (userId && await activeSubscription(userId, at)) return { vip: true, allowedIds: null };
+  const rows = await getDb().prepare('SELECT id, age_group FROM themes WHERE active = 1 ORDER BY sort, id').all();
+  const counts = new Map();
+  const allowedIds = new Set();
+  for (const row of rows) {
+    const used = counts.get(row.age_group) || 0;
+    if (used < PLANS.free.themesPerAge) allowedIds.add(row.id);
+    counts.set(row.age_group, used + 1);
+  }
+  return { vip: false, allowedIds };
+}
+
+export async function canAccessTheme(userId, themeId) {
+  const access = await themeAccess(userId);
+  return access.vip || access.allowedIds.has(themeId);
+}
+
+export async function assertThemeAccess(userId, themeId) {
+  if (!await canAccessTheme(userId, themeId)) throw forbidden('theme_vip_required');
+}
 
 export async function planStatus(userId, at = new Date()) {
   const sub = await activeSubscription(userId, at);
@@ -54,6 +77,9 @@ export async function consume(userId, artwork) {
   return tx(async () => {
     const fresh = await getDb().prepare('SELECT counted FROM artworks WHERE id = ? AND user_id = ?').get(artwork.id, userId);
     if (!fresh) throw new HttpError(404, 'artwork_not_found');
+    // Recheck even already-counted drafts: an expired subscription cannot keep editing VIP themes.
+    const picture = await getDb().prepare('SELECT p.is_card, o.theme_id FROM pictures p JOIN objects o ON o.id = p.object_id WHERE p.id = ?').get(artwork.picture_id);
+    if (picture && !picture.is_card) await assertThemeAccess(userId, picture.theme_id);
     if (fresh.counted || !COUNTED_MODES.has(artwork.mode)) return await planStatus(userId);
     const status = await planStatus(userId);
     if (status.remaining !== null && status.remaining <= 0) {

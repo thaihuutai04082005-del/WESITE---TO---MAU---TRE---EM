@@ -52,6 +52,7 @@ export default function ModePicker({ picture, onClose }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const toast = useUi((s) => s.toast);
+  const openUpgrade = useUi((s) => s.openUpgrade);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && onClose?.();
@@ -65,7 +66,8 @@ export default function ModePicker({ picture, onClose }) {
       const id = await createArtwork(picture.id, mode);
       navigate(`/draw/${id}`);
     } catch (e) {
-      toast(errorText(t, e), 'error');
+      if (e.code === 'theme_vip_required') { onClose?.(); openUpgrade(true, 'theme'); }
+      else toast(errorText(t, e), 'error');
       setBusy(false);
     }
   };

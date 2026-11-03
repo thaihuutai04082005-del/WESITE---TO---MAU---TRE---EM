@@ -491,7 +491,7 @@
       "perks": [
         {
           "i": "🔒",
-          "t": "5 themes for your child's age"
+          "t": "5 themes in each age group"
         },
         {
           "i": "🎮",
@@ -614,6 +614,8 @@
     "retry": "Check again"
   },
   "upgrade": {
+    "themeTitle": "Unlock every theme with VIP",
+    "themeLocked": "The Standard plan opens 5 themes in each age group. Ask a parent about VIP to unlock every theme.",
     "title": "You're out of pictures for today!",
     "freeUsed": "The Standard plan includes 2 pictures a day. Come back tomorrow, or ask a parent to upgrade to VIP for unlimited coloring.",
     "cta": "See plans",
@@ -957,6 +959,7 @@
     "quota_exceeded": "You've used all your pictures for today.",
     "artwork_not_found": "Picture not found.",
     "picture_not_found": "Picture not found.",
+    "theme_vip_required": "This theme requires an active VIP plan.",
     "card_not_owned": "You don't own this card yet.",
     "invalid_mode": "Invalid coloring mode.",
     "invalid_thumbnail": "Invalid preview image.",

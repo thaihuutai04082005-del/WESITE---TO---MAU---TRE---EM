@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
 import { pageReady } from '../../lib/transitionBus';
 import { usePicture } from '../../hooks/usePicture';
+import { useAuth } from '../../store/auth';
+import { useUi } from '../../store/ui';
 import ModePicker from '../../components/ModePicker';
 import Icon from '../../components/Icon';
 import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
@@ -72,12 +74,16 @@ function CardsBoard() {
 
 export default function ThemeSelector() {
   const { t, i18n } = useTranslation();
+  const plan = useAuth((s) => s.plan);
+  const openUpgrade = useUi((s) => s.openUpgrade);
   const [params] = useSearchParams();
   const [themes, setThemes] = useState(null);
   const [age, setAge] = useState(() => (AGE_GROUPS.includes(params.get('age')) ? params.get('age') : loadAge()));
   useEffect(() => {
-    api.get('/themes').then((r) => setThemes(r.themes)).catch(() => setThemes([]));
-  }, []);
+    let alive = true;
+    api.get('/themes').then((r) => alive && setThemes(r.themes)).catch(() => alive && setThemes([]));
+    return () => { alive = false; };
+  }, [plan?.plan, plan?.endsAt]);
   useEffect(() => {
     if (themes) requestAnimationFrame(pageReady); // báo cho hiệu ứng chuyển màn hình: trang đã sẵn sàng
   }, [themes]);
@@ -115,7 +121,9 @@ export default function ThemeSelector() {
             {list.map((th) => (
               <PicFrame
                 key={th.slug}
-                to={`/color/${th.slug}`}
+                to={th.locked ? undefined : `/color/${th.slug}`}
+                onClick={() => openUpgrade(true, 'theme')}
+                locked={th.locked}
                 picture={th.cover}
                 title={th.name[i18n.language]}
                 subtitle={t('select.pictureCount', { n: th.pictureCount })}

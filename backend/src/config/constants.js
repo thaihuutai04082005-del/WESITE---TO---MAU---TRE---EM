@@ -1,7 +1,7 @@
 // Luật chơi & thông số kinh doanh — một nguồn duy nhất, frontend đọc qua GET /api/meta.
 
 export const PLANS = {
-  free: { key: 'free', priceVnd: 0, limit: { per: 'day', count: 2 } },
+  free: { key: 'free', priceVnd: 0, limit: { per: 'day', count: 2 }, themesPerAge: 5 },
   month: { key: 'month', priceVnd: 19000, priceUsd: 0.79, days: 30, limit: null },
   year: { key: 'year', priceVnd: 149000, priceUsd: 5.99, days: 365, limit: null },
 };

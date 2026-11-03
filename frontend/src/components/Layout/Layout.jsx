@@ -52,6 +52,8 @@ export default function Layout() {
   const { t, i18n } = useTranslation();
   const user = useAuth((s) => s.user);
   const token = useAuth((s) => s.token);
+  const plan = useAuth((s) => s.plan);
+  const syncPlan = useAuth((s) => s.syncPlan);
   const setUnread = useAuth((s) => s.setUnread);
   const toast = useUi((s) => s.toast);
   const [menu, setMenu] = useState(false);
@@ -62,6 +64,23 @@ export default function Layout() {
 
   // Nhạc nền: bắt đầu khi bé chạm vào trang lần đầu.
   useEffect(() => initMusic(), []);
+
+  // Refresh server-owned benefits after expiry, purchases in another tab, or returning to the web.
+  useEffect(() => {
+    if (!token || !user?.id) return;
+    const sync = () => { if (!document.hidden) syncPlan().catch(() => {}); };
+    const interval = setInterval(sync, 60000);
+    const expires = plan?.endsAt && Date.parse(plan.endsAt);
+    const expiry = expires ? setTimeout(sync, Math.min(2147483647, Math.max(1000, expires - Date.now() + 1000))) : null;
+    document.addEventListener('visibilitychange', sync);
+    window.addEventListener('focus', sync);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(expiry);
+      document.removeEventListener('visibilitychange', sync);
+      window.removeEventListener('focus', sync);
+    };
+  }, [token, user?.id, plan?.endsAt, syncPlan]);
 
   // Thông báo realtime (lời mời kết bạn, đề nghị đổi thẻ, gói được kích hoạt…).
   useEffect(() => {
