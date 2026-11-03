@@ -25,7 +25,7 @@
     "history": "History",
     "arena": "Arena",
     "missions": "Missions",
-    "gacha": "Cards",
+    "gacha": "Card Packs",
     "shop": "Shop",
     "friends": "Friends",
     "together": "Color together",
@@ -209,7 +209,7 @@
     "artworks": "Themed pictures",
     "noArtworks": "No finished pictures yet. Color a lovely one!",
     "noCardArtworks": "No finished rare card pictures yet. Head to the Rare card pictures tab on the picture page to color one!",
-    "toGacha": "Go to Cards"
+    "toGacha": "Go to Card Packs"
   },
   "exhibition": {
     "title": "Exhibition hall",
@@ -488,7 +488,7 @@
         },
         {
           "i": "🎮",
-          "t": "Arena, Cards, Color together"
+          "t": "Arena, Card Packs, Color together"
         },
         {
           "i": "📖",
@@ -565,7 +565,7 @@
         },
         {
           "i": "🎮",
-          "t": "Arena, Cards, Color together"
+          "t": "Arena, Card Packs, Color together"
         },
         {
           "i": "🏛️",
