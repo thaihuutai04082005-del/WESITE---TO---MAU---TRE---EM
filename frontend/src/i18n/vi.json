@@ -914,6 +914,7 @@
     "plan_expiring": "Gói của bé sẽ hết hạn vào {{date}}. Gia hạn để tiếp tục tô thoải mái nhé!"
   },
   "errors": {
+    "otp_delivery_unavailable": "Hiện chưa gửi được mã xác minh. Bạn vui lòng thử lại sau nhé.",
     "backend_unavailable": "Chưa thể kết nối dịch vụ. Bạn vui lòng thử lại sau nhé.",
     "invite_blocked": "Bạn ấy đang bận, mời lại sau nhé.",
     "friend_offline": "Bạn ấy đang không trực tuyến.",

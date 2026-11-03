@@ -34,6 +34,10 @@ Bấm đúp **`chay-web.bat`**. Mỗi lần chạy, file này tự làm các vi�
 
 Lần đầu chạy, nó tạo sẵn biểu tượng **Web To Mau** ngoài Desktop để lần sau bấm luôn.
 
+### Đưa backend lên online
+
+Xem [hướng dẫn Render + Cloudflare Pages](docs/dua-backend-len-render.md). File `render.yaml` chuẩn bị sẵn backend chạy thử miễn phí; cần lưu trữ bền vững trước khi dùng dữ liệu thật hoặc nhận thanh toán.
+
 ### Production
 
 ```bash

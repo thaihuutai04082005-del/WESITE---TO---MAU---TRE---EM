@@ -53,6 +53,6 @@ export async function sendCode({ type, target, code, purpose }) {
     if (!res.ok) throw new Error(`SMS lỗi HTTP ${res.status}`);
     return { delivered: true };
   }
-  if (!env.isTest) console.log(`[OTP dev] ${purpose} → ${target}: ${code}`);
+  if (!env.isProd && !env.isTest && env.exposeDevOtp) console.log(`[OTP dev] ${purpose} → ${target}: ${code}`);
   return { delivered: false };
 }

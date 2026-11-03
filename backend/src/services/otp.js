@@ -3,7 +3,7 @@ import { createHash, timingSafeEqual } from 'node:crypto';
 import { getDb, parseJson } from '../config/db.js';
 import { env } from '../config/env.js';
 import { numericCode, uuid } from '../utils/ids.js';
-import { badRequest } from '../utils/http.js';
+import { badRequest, HttpError } from '../utils/http.js';
 import { sendCode } from './messaging.js';
 import { normalizePhone } from '../../../shared/phone.mjs';
 
@@ -45,8 +45,16 @@ export async function issueOtp({ purpose, type, target, payload = {} }) {
     JSON.stringify(payload),
     new Date(Date.now() + TTL_MS).toISOString(),
   );
-  const { delivered } = await sendCode({ type, target, code, purpose });
-  return { otpId: id, ...(!delivered && env.exposeDevOtp ? { devCode: code } : {}) };
+  try {
+    const { delivered } = await sendCode({ type, target, code, purpose });
+    if (!delivered && (env.isProd || !env.exposeDevOtp)) throw new HttpError(503, 'otp_delivery_unavailable');
+    return { otpId: id, ...(!delivered && !env.isProd && env.exposeDevOtp ? { devCode: code } : {}) };
+  } catch (err) {
+    // A code that was never sent must not block the next attempt for 45 seconds.
+    db.prepare('DELETE FROM otp_codes WHERE id = ?').run(id);
+    if (err instanceof HttpError) throw err;
+    throw new HttpError(503, 'otp_delivery_unavailable');
+  }
 }
 
 /** Kiểm tra OTP; đúng thì đánh dấu đã dùng và trả payload. */

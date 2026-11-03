@@ -913,6 +913,7 @@
     "plan_expiring": "Your plan ends on {{date}}. Renew to keep coloring without limits!"
   },
   "errors": {
+    "otp_delivery_unavailable": "We can’t send a verification code right now. Please try again later.",
     "backend_unavailable": "The service is temporarily unavailable. Please try again shortly.",
     "invite_blocked": "Your friend is busy right now. Try again in a bit.",
     "friend_offline": "Your friend is offline.",

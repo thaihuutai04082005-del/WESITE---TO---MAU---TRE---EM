@@ -10,27 +10,42 @@ import PhoneInput from '../../components/PhoneInput';
 import { internationalPhone } from '../../../../shared/phone.mjs';
 
 export function Captcha({ value, onChange, onId, refreshKey }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [cap, setCap] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const load = useCallback(async () => {
-    const c = await api.get('/auth/captcha');
-    setCap(c);
-    onId(c.captchaId);
+    setLoading(true);
+    setError('');
+    setCap(null);
+    onId('');
     onChange('');
-  }, [onId, onChange]);
+    try {
+      const c = await api.get('/auth/captcha');
+      if (!c.captchaId || typeof c.svg !== 'string' || !c.svg.startsWith('<svg')) throw { code: 'backend_unavailable' };
+      setCap(c);
+      onId(c.captchaId);
+    } catch (err) {
+      setError(errorText(t, err));
+    } finally {
+      setLoading(false);
+    }
+  }, [onId, onChange, t]);
   useEffect(() => {
-    load().catch(() => {});
+    load();
   }, [load, refreshKey]);
   return (
     <div>
       <label className="label" htmlFor="captcha">{t('auth.captcha')}</label>
       <div className="flex items-center gap-2">
+        {loading && <span role="status" className="text-sm text-muted">{t('common.loading')}</span>}
         {cap && <img src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(cap.svg)}`} alt={t('auth.captcha')} className="h-14 rounded-xl" data-testid="captcha-img" />}
-        <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => load()} aria-label={t('auth.captchaRefresh')}>
+        <button type="button" className="btn-ghost min-h-11 px-3" onClick={() => load()} disabled={loading} aria-label={t('auth.captchaRefresh')}>
           <Icon name="redo" size={20} />
         </button>
       </div>
-      <input id="captcha" className="input mt-2 uppercase" value={value} onChange={(e) => onChange(e.target.value)} maxLength={6} required autoComplete="off" />
+      {error && <p className="mt-2 text-sm font-bold text-danger" role="alert" data-testid="captcha-error">{error}</p>}
+      <input id="captcha" className="input mt-2 uppercase" value={value} onChange={(e) => onChange(e.target.value)} maxLength={6} required disabled={!cap || loading} autoComplete="off" />
     </div>
   );
 }
@@ -141,7 +156,7 @@ export default function Register() {
           )}
         </fieldset>
         {err && <p className="font-bold text-danger" role="alert">{err}</p>}
-        <button type="submit" className="btn-primary w-full" disabled={busy} data-testid="register-submit">
+        <button type="submit" className="btn-primary w-full" disabled={busy || !captchaId} data-testid="register-submit">
           {t('auth.register')}
         </button>
         <p className="text-center text-sm font-bold">

@@ -19,13 +19,13 @@ export const env = {
   isTest: process.env.NODE_ENV === 'test',
   port: num(process.env.PORT, 4000),
   publicUrl: process.env.PUBLIC_URL || 'http://localhost:5173',
-  apiPublicUrl: process.env.API_PUBLIC_URL || `http://localhost:${num(process.env.PORT, 4000)}`,
+  apiPublicUrl: process.env.API_PUBLIC_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${num(process.env.PORT, 4000)}`,
   corsOrigins: (process.env.CORS_ORIGINS || 'http://localhost:5173').split(',').map((s) => s.trim()),
   dbFile: process.env.DB_FILE || join(BACKEND_ROOT, 'data', 'app.db'),
   jwtSecret: process.env.JWT_SECRET || 'dev-secret-change-me',
   jwtExpires: process.env.JWT_EXPIRES || '30d',
   // Trả mã OTP trong response khi chưa cấu hình SMTP/SMS (chỉ môi trường dev).
-  exposeDevOtp: bool(process.env.EXPOSE_DEV_OTP, !isProd),
+  exposeDevOtp: !isProd && bool(process.env.EXPOSE_DEV_OTP, true),
   // Trang Bóc thẻ: lật sẵn (xem trước) toàn bộ thẻ trong lúc đang hoàn thiện bộ thẻ. Đặt GACHA_PREVIEW=false để ẩn thẻ chưa có.
   gachaPreview: bool(process.env.GACHA_PREVIEW, true),
   smtp: {
@@ -71,7 +71,7 @@ export const env = {
     endpoint: process.env.MOMO_ENDPOINT || 'https://test-payment.momo.vn/v2/gateway/api/create',
   },
   // Cho phép hoàn tất thanh toán giả lập khi cổng chưa cấu hình (KHÔNG bật ở production).
-  paymentMock: bool(process.env.PAYMENT_MOCK, !isProd),
+  paymentMock: !isProd && bool(process.env.PAYMENT_MOCK, true),
   arena: {
     durationSec: num(process.env.ARENA_DURATION_SEC, 600),
     lobbyWaitSec: num(process.env.ARENA_LOBBY_WAIT_SEC, 60),
