@@ -1,7 +1,7 @@
 # Chuyển dữ liệu khỏi ổ tạm
 
-Hiện `DB_FILE=/tmp/tinytints/app.db` trên Render Free. Không thay đổi/redeploy dịch
-vụ trước khi quyết định có phải giữ nguyên dữ liệu đang có hay không. Công cụ
+Cấu hình Render cũ dùng `DB_FILE=/tmp/tinytints/app.db` trên Render Free. Không thay đổi/redeploy dịch
+vụ trước khi bảo vệ dữ liệu đang có và xác định đúng nguồn chuyển. Công cụ
 trong kho và máy Codex không truy cập được database đang chạy trong Render.
 
 ## Sao lưu trước khi chuyển
@@ -26,11 +26,13 @@ cho database đang nằm trên ổ tạm của phiên bản cũ.
 ## Lựa chọn lưu trữ
 
 - Ít thay đổi mã nhất: dịch vụ Render trả phí có persistent disk. Mount disk
-  tại `/var/data`, đặt `DB_FILE=/var/data/tinytints/app.db`. Chỉ chọn/nâng cấp gói
+  tại `/var/data`, đặt `SQLITE_PERSISTENT_DIR=/var/data` và
+  `DB_FILE=/var/data/tinytints/app.db`. Thư mục phải là disk đã thực sự gắn;
+  biến môi trường không tự tạo disk. Chỉ chọn/nâng cấp gói
   khi đã chấp nhận chi phí và có phương án giữ dữ liệu hiện tại.
 - Nếu giữ miễn phí: chuyển sang một dịch vụ database bên ngoài. Ứng dụng hiện
-  dùng truy vấn SQLite đồng bộ và transaction ở nhiều nơi; việc chuyển database
-  cần sửa/test ứng dụng, không chỉ thay URL kết nối.
+  đã hỗ trợ PostgreSQL, có thể dùng Supabase Free theo hạn mức. Việc chuyển cần
+  đúng bản sao nguồn, nhập/đối chiếu và thử đăng nhập, không chỉ thay URL kết nối.
 
 ## Khôi phục và nghiệm thu
 
@@ -50,7 +52,9 @@ lâu dài. Sao lưu riêng ra ngoài máy chủ, theo dõi dung lượng và th�
 ## PostgreSQL / Supabase: mã đã hỗ trợ, chưa chuyển production
 
 Backend dùng `DATABASE_URL` khi biến này có giá trị. Nếu để trống, SQLite vẫn dùng
-`DB_FILE`. Việc kiểm tra kết nối không tự khởi động app, tạo tài khoản hoặc seed dữ
+`DB_FILE` ở localhost. Bản sửa chặn SQLite trên Render production trừ khi đã khai
+báo persistent disk thật bằng `SQLITE_PERSISTENT_DIR` và `DB_FILE` ở trong disk.
+Không dùng khai báo disk giả để vượt chốt chặn. Việc kiểm tra kết nối không tự khởi động app, tạo tài khoản hoặc seed dữ
 liệu. Không được coi việc tạo project Supabase là đã sao lưu database Render.
 
 ### 1. Chuẩn bị trên bản sao dự án ở máy cá nhân
@@ -141,6 +145,12 @@ Sau chuyển, kiểm tra lần nữa khi restart/redeploy. Giữ bản sao SQLit
 đối chiếu riêng để đối soát; không cho backend cũ ghi tiếp rồi đổi qua lại tùy ý.
 Supabase Free có hạn mức và có thể tạm ngưng khi ít sử dụng; phải có bản sao lưu
 riêng và thử khôi phục, không xem database bên ngoài là thay thế cho backup.
+
+Log khởi động mới có dạng `[database] engine=postgres accounts=N pictures=M` trước
+khi seed. Đây chỉ là số lượng, không chứa tên tài khoản, password hash hoặc URI.
+Đối chiếu số tài khoản với nguồn trước chuyển; không coi log seed hoặc HTTP health
+thành công là bằng chứng đã giữ dữ liệu. Lỗi kết nối PostgreSQL phải được sửa trên
+database đó; ứng dụng không tự fallback sang SQLite khi PostgreSQL bị lỗi.
 
 ### Phạm vi kiểm thử
 

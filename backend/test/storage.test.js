@@ -5,6 +5,27 @@ import { mkdtempSync, rmSync, writeFileSync, existsSync, statSync } from 'node:f
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { snapshotDatabase } from '../../scripts/sqlite-backup.mjs';
+import { assertDatabaseStorage } from '../src/config/storage.js';
+import { REPO_ROOT } from '../src/config/env.js';
+
+test('Hosted production requires PostgreSQL or an explicitly declared persistent SQLite disk', () => {
+  const render = { RENDER_EXTERNAL_URL: 'https://test-api.onrender.com' };
+  const config = { isProd: true, databaseUrl: '', dbFile: '/tmp/tinytints/app.db', sqlitePersistentDir: '' };
+  const rejected = (overrides) => assert.throws(() => assertDatabaseStorage({ ...config, ...overrides }, render), /Persistent database required/);
+  rejected({});
+  rejected({ dbFile: ':memory:' });
+  rejected({ dbFile: join(REPO_ROOT, 'backend/data/app.db') });
+  rejected({ sqlitePersistentDir: '/tmp', dbFile: '/tmp/tinytints/app.db' });
+  rejected({ sqlitePersistentDir: REPO_ROOT, dbFile: join(REPO_ROOT, 'data/app.db') });
+  rejected({ sqlitePersistentDir: '/', dbFile: '/app.db' });
+  rejected({ sqlitePersistentDir: '/var/data', dbFile: '/var/data-other/app.db' });
+  rejected({ sqlitePersistentDir: '/var/data', dbFile: '/var/data/../tmp/app.db' });
+  rejected({ sqlitePersistentDir: '/var/data', dbFile: 'relative/app.db' });
+  assert.doesNotThrow(() => assertDatabaseStorage({ ...config, databaseUrl: 'postgresql://test:fake@db.example.invalid/app' }, render));
+  assert.doesNotThrow(() => assertDatabaseStorage({ ...config, sqlitePersistentDir: '/var/data', dbFile: '/var/data/tinytints/app.db' }, render));
+  assert.doesNotThrow(() => assertDatabaseStorage(config, {}));
+  assert.doesNotThrow(() => assertDatabaseStorage({ ...config, isProd: false }, render));
+});
 
 test('Backup and restore preserve committed WAL data, account IDs and artwork relations', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'tinytints-storage-'));

@@ -1,6 +1,6 @@
-# Backend demo: Render Free + Cloudflare Pages frontend.
-# The Free filesystem is ephemeral. Move SQLite to a persistent disk on a paid
-# service (or migrate the database) before keeping real user data or payments.
+# Render Free + Cloudflare Pages, with an external PostgreSQL database.
+# For existing data, import a verified backup before switching. For an explicitly
+# fresh start, use an empty app database. Deployments never reset user tables.
 services:
   - type: web
     name: tinytints-api
@@ -8,6 +8,16 @@ services:
     plan: free
     branch: main
     autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - backend/**
+        - database/**
+        - assets-library/**
+        - shared/**
+        - scripts/**
+        - package.json
+        - package-lock.json
+        - render.yaml
     buildCommand: npm ci --omit=dev --workspace=backend --include-workspace-root
     startCommand: npm start
     healthCheckPath: /api/health
@@ -22,8 +32,8 @@ services:
         value: https://tinytints.pages.dev
       - key: CORS_ORIGINS
         value: https://tinytints.pages.dev
-      - key: DB_FILE
-        value: /tmp/tinytints/app.db
+      - key: DATABASE_URL
+        sync: false
       - key: EXPOSE_DEV_OTP
         value: "false"
       - key: PAYMENT_MOCK

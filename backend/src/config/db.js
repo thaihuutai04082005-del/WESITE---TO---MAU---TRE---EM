@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { DatabaseAdapter } from './databaseAdapter.js';
 import { createPostgresPool, migratePostgres } from './postgres.js';
 import { env, REPO_ROOT } from './env.js';
+import { assertDatabaseStorage } from './storage.js';
 
 let db;
 
@@ -50,10 +51,12 @@ export function migrate(conn) {
 }
 
 export function getDb() {
-  if (!db)
+  if (!db) {
+    assertDatabaseStorage(env);
     db = env.databaseUrl
       ? new DatabaseAdapter({ pool: createPostgresPool(env.databaseUrl, env.databasePassword) })
       : new DatabaseAdapter({ sqlite: openDb() });
+  }
   return db;
 }
 

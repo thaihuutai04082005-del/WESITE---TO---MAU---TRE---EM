@@ -1,8 +1,17 @@
-# Chạy thử backend trên Render và nối Cloudflare Pages
+# Chạy backend trên Render và nối Cloudflare Pages
 
 Frontend hiện tại: https://tinytints.pages.dev. Backend cần Node.js 24, Socket.io
-và SQLite. `render.yaml` trong kho đã cấu hình backend để triển khai bằng Blueprint.
+và database bền vững. Blueprint Free dùng PostgreSQL bên ngoài qua `DATABASE_URL`;
+không lưu tài khoản vào filesystem của Render Free.
 Không cần mua tên miền: Render cấp một địa chỉ HTTPS `*.onrender.com`.
+
+**Dịch vụ đang chạy SQLite trên `/tmp`: chuẩn bị database bền vững trước khi
+triển khai chốt chặn mới.** Nếu cần giữ tài khoản, bảo vệ database online và chuyển
+theo [hướng dẫn giữ dữ liệu](luu-du-lieu-lau-dai.md). Nếu đã quyết định bỏ dữ liệu
+thử cũ, dùng [quy trình bắt đầu lại với Supabase](bat-dau-lai-voi-supabase.md),
+không cần gửi/import SQLite. Đổi URL sang database mới không tự khôi phục tài khoản
+ở instance cũ. Xem thêm
+[kiểm tra sự cố đăng nhập sau triển khai](kiem-tra-tai-khoan-sau-trien-khai.md).
 
 ## 1. Tạo backend miễn phí
 
@@ -10,7 +19,10 @@ Không cần mua tên miền: Render cấp một địa chỉ HTTPS `*.onrender.
 2. Chọn **New → Blueprint**, liên kết kho
    `thaihuutai04082005-del/WESITE---TO---MAU---TRE---EM`, nhánh `main`.
 3. Render đọc file `render.yaml`. Kiểm tra dịch vụ `tinytints-api` có plan **Free**,
-   rồi chọn **Deploy Blueprint**. Không chọn gói trả phí nếu chỉ muốn chạy thử.
+   điền `DATABASE_URL` bằng URI PostgreSQL riêng đã kiểm tra, rồi chọn **Deploy
+   Blueprint**. Có thể dùng Supabase Free theo hạn mức của nhà cung cấp. Nếu URI
+   còn `[YOUR-PASSWORD]`, thêm `PGPASSWORD` riêng trong Environment trước khi chạy.
+   Chưa triển khai nếu vẫn cần xuất/nhập dữ liệu cũ.
 4. Đợi dịch vụ báo **Live**. Sao chép URL HTTPS được Render cấp ở trang dịch vụ.
    Không tự đoán URL theo tên: Render có thể thêm hậu tố nếu tên đã được dùng.
 5. Mở `<URL-backend>/api/health`: phải trả `{"ok":true}`.
@@ -19,7 +31,10 @@ Không cần mua tên miền: Render cấp một địa chỉ HTTPS `*.onrender.
 Render tự cài phụ thuộc backend từ lockfile và chạy `npm start`, dùng cổng `PORT`
 do Render cấp. Khóa `JWT_SECRET` được Render tạo, không đưa vào Git hoặc chat.
 `API_PUBLIC_URL` mặc định lấy `RENDER_EXTERNAL_URL`, do đó dùng đúng URL được cấp.
-Các lần cập nhật `main` sẽ tự triển khai lại backend.
+Các lần cập nhật backend, database, thư viện tranh, shared, scripts hoặc cấu hình
+trên `main` sẽ tự triển khai lại backend. `buildFilter` trong Blueprint bỏ qua
+thay đổi chỉ ở frontend/SEO. Nếu tạo Web Service thủ công, đặt tương tự tại
+**Settings → Build & Deploy → Build Filters**; sửa YAML không tự đổi dịch vụ thủ công.
 
 Nếu tạo bằng **New → Web Service** thay vì Blueprint, chọn cùng kho và điền:
 
@@ -85,13 +100,20 @@ thật. Cấu hình hiện tại cho phép origin production, không tự cho m�
 - Render Free hạn chế kết nối SMTP; khi chuẩn bị OTP thật nên dùng API HTTPS cho
   SMS/email hoặc chuyển sang hosting cho phép SMTP. Đừng tắt kiểm tra TLS.
 
-## 4. Giới hạn quan trọng của gói Free
+## 4. Lưu trữ trên gói Free
 
-Đây là môi trường **chạy thử**, chưa phải nơi giữ dữ liệu khách hàng hay thu tiền.
-SQLite đang ở `/tmp/tinytints/app.db` trên filesystem tạm; có thể bị xóa khi deploy,
-restart hoặc thay máy. Web có thể ngủ khi ít truy cập, lần gọi đầu sẽ chậm.
+Filesystem của Render Free là ổ tạm. Cấu hình cũ `DB_FILE=/tmp/tinytints/app.db`
+có thể mất dữ liệu khi deploy, restart hoặc thay máy, trong khi web vẫn tự nạp
+tranh và trông như đang hoạt động. Chỉ đổi thành `backend/data/app.db` cũng không
+giải quyết được vì đường dẫn đó vẫn nằm trên filesystem tạm của Render.
 
-Trước khi dùng thật, chuyển sang dịch vụ có persistent disk, đổi `DB_FILE` sang
-đường dẫn trên disk đó, sao lưu/khôi phục thử database và xác minh webhook, SMS
-trực tiếp với nhà cung cấp. Không lưu tranh/tài khoản quan trọng trên Free rồi
-cho rằng dữ liệu sẽ tồn tại lâu dài.
+Bản sửa yêu cầu `DATABASE_URL` trên Render production, hoặc một persistent disk
+thực sự đã gắn trên gói trả phí với `SQLITE_PERSISTENT_DIR` là mount của disk và
+`DB_FILE` nằm bên trong. Thiếu cấu hình này, backend dừng trước khi mở/tạo SQLite,
+thay vì tiếp tục bằng database rỗng. Không đưa bản sửa lên dịch vụ cũ trước khi
+hoàn tất cấu hình lưu trữ (và bảo vệ dữ liệu nếu còn cần giữ).
+
+Database bên ngoài tách dữ liệu khỏi các lần triển khai backend; vẫn cần sao lưu
+riêng và kiểm tra phục hồi. Render Free có thể ngủ khi ít truy cập, lần gọi đầu sẽ
+chậm. Database Free cũng có hạn mức riêng. Kiểm tra đăng nhập, dữ liệu cũ và thử
+restart/redeploy sau chuyển, rồi mới kết luận đã giữ dữ liệu qua triển khai.

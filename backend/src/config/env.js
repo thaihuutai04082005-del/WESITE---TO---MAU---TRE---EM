@@ -24,6 +24,7 @@ export const env = {
   databasePassword: process.env.PGPASSWORD || '',
   databaseUrl: process.env.NODE_ENV === 'test' ? '' : process.env.DATABASE_URL || '',
   dbFile: process.env.DB_FILE || join(BACKEND_ROOT, 'data', 'app.db'),
+  sqlitePersistentDir: process.env.SQLITE_PERSISTENT_DIR || '',
   jwtSecret: process.env.JWT_SECRET || 'dev-secret-change-me',
   jwtExpires: process.env.JWT_EXPIRES || '30d',
   // Trả mã OTP trong response khi chưa cấu hình SMTP/SMS (chỉ môi trường dev).
