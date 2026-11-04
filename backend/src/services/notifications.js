@@ -9,6 +9,20 @@ export async function notify(userId, type, data = {}) {
   return n;
 }
 
+/** Persist one activity's notifications together, then emit only after its transaction commits. */
+export async function notifyMany(userId, entries) {
+  if (!entries.length) return;
+  const rows = await getDb().prepare(`INSERT INTO notifications (user_id,type,data) VALUES
+    ${entries.map(() => '(?,?,?)').join(',')} RETURNING id,type,data`)
+    .all(...entries.flatMap(entry => [userId, entry.type, JSON.stringify(entry.data)]));
+  const createdAt = new Date().toISOString();
+  getDb().afterCommit(() => {
+    for (const row of rows.sort((a,b) => a.id-b.id)) emitToUser(userId, 'notification', {
+      id:row.id, type:row.type, data:parseJson(row.data, {}), read:false, createdAt,
+    });
+  });
+}
+
 export async function list(userId, limit = 50) {
   return (await getDb().prepare('SELECT * FROM notifications WHERE user_id = ? ORDER BY id DESC LIMIT ?').all(userId, limit)).map((n) => ({
     id: n.id,

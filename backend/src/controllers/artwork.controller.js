@@ -1,5 +1,5 @@
 // Tô màu & Lịch sử tô (Mục 3, 6.2, 7).
-import { getDb } from '../config/db.js';
+import { getDb, tx } from '../config/db.js';
 import * as Artwork from '../models/artwork.js';
 import * as Picture from '../models/picture.js';
 import { sanitizeArtworkData } from '../services/scoringEngine.js';
@@ -8,7 +8,7 @@ import * as User from '../models/user.js';
 import * as Exhibition from '../services/exhibition.js';
 import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
-import { assertCanUsePicture } from './picture.controller.js';
+import { recordArtworkCompletion } from '../services/artworkProgression.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
 import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 
@@ -25,8 +25,12 @@ const hasContent = (d) => Object.keys(d.fills).length > 0 || d.strokes.length > 
 
 export async function list(req, res) {
   const { status, mode, eligibility, progress } = req.query;
-  const rows = await Artwork.listRowsByUser(req.user.id, { status:status || undefined, mode:mode || undefined, withData:!!(eligibility || progress) });
-  const artworks = rows.map(Artwork.toSummary);
+  const thumbnails = req.query.thumbnails !== '0';
+  const initialThumbnails = Math.max(0, Math.min(4, Math.trunc(Number(req.query.initialThumbnails) || 0)));
+  const rows = await Artwork.listRowsByUser(req.user.id, { status:status || undefined, mode:mode || undefined,
+    withData:eligibility ? true : progress ? 'drafts' : false, thumbnails, initialThumbnails });
+  const artworks = rows.map(row => ({ ...Artwork.toSummary(row),
+    ...(!thumbnails ? { thumbnail:row.thumbnail || undefined, hasThumbnail:!!row.has_thumbnail } : {}) }));
   const raw = new Map(rows.map(row => [row.id, row]));
   const candidates = rows.filter(row => eligibility && row.status === 'completed' && row.mode === 'free');
   const picturesNeeded = rows.filter(row => (progress && row.status === 'in_progress') || (eligibility && row.status === 'completed' && row.mode === 'free'));
@@ -62,6 +66,17 @@ export async function list(req, res) {
     }
   }
   res.json({ artworks });
+}
+
+/** History fetches only visible thumbnails, without transferring every saved PNG in its metadata. */
+export async function thumbnail(req, res) {
+  const id = Number(req.params.id);
+  if (!Number.isSafeInteger(id) || id < 1) throw notFound('artwork_not_found');
+  const row = await getDb().prepare('SELECT thumbnail FROM artworks WHERE id=? AND user_id=?')
+    .get(id, req.user.id);
+  const match = row?.thumbnail?.match(/^data:(image\/(?:png|jpeg));base64,([A-Za-z0-9+/=]+)$/);
+  if (!match) throw notFound('artwork_not_found');
+  res.type(match[1]).send(Buffer.from(match[2], 'base64'));
 }
 
 export async function create(req, res) {
@@ -107,39 +122,33 @@ export async function start(req, res) {
 }
 
 export async function save(req, res) {
-  const a = await own(req);
-  // Tranh đã gửi triển lãm: chữ ký và nội dung bị khoá.
-  await Exhibition.assertEditable(a.id);
-  const p = await Picture.findPicture(a.picture_id);
-  const data = sanitizeArtworkData(Picture.manifestOf(p), req.body?.data);
-  await assertCanUsePicture(req.user, p);
-  // Chữ ký là lớp riêng (không phải nét cọ) nên nằm ngoài dữ liệu chấm điểm.
-  const signature = await Signature.preparePlaced(await User.findById(req.user.id), req.body?.data?.signature, Artwork.dataOf(a).signature);
-  if (signature) data.signature = signature;
-  if (hasContent(data) && COUNTED_MODES.has(a.mode)) await consume(req.user.id, a);
-  const thumb = req.body?.thumbnail;
-  if (thumb != null && (!THUMB_RE.test(thumb) || thumb.length > MAX_THUMB)) throw badRequest('invalid_thumbnail');
+  const result = await tx(async () => {
+    const a = await own(req);
+    // Tranh đã gửi triển lãm: chữ ký và nội dung bị khoá.
+    await Exhibition.assertEditable(a.id);
+    const p = await Picture.findPictureForUser(a.picture_id, req.user);
+    if (!p.can_use) throw forbidden(p.is_card ? 'card_not_owned' : 'theme_vip_required');
+    const data = sanitizeArtworkData(Picture.manifestOf(p), req.body?.data);
+    // Chữ ký là lớp riêng (không phải nét cọ) nên nằm ngoài dữ liệu chấm điểm.
+    const signature = req.body?.data?.signature == null ? null
+      : await Signature.preparePlaced(await User.findById(req.user.id), req.body.data.signature, Artwork.dataOf(a).signature);
+    if (signature) data.signature = signature;
+    if (hasContent(data) && COUNTED_MODES.has(a.mode) && !a.counted) await consume(req.user.id, a);
+    const thumb = req.body?.thumbnail;
+    if (thumb != null && (!THUMB_RE.test(thumb) || thumb.length > MAX_THUMB)) throw badRequest('invalid_thumbnail');
 
-  const completing = req.body?.completed === true && a.status !== 'completed';
-  const nowIso = new Date().toISOString();
-  await getDb()
-    .prepare(
-      'UPDATE artworks SET data = ?, thumbnail = COALESCE(?, thumbnail), updated_at = ?, warned_at = NULL, status = ?, completed_at = COALESCE(completed_at, ?) WHERE id = ?',
-    )
-    .run(JSON.stringify(data), thumb ?? null, nowIso, completing ? 'completed' : a.status, completing ? nowIso : null, a.id);
+    const completing = req.body?.completed === true && a.status !== 'completed';
+    const nowIso = new Date().toISOString();
+    const fresh = await getDb()
+      .prepare(
+        'UPDATE artworks SET data = ?, thumbnail = COALESCE(?, thumbnail), updated_at = ?, warned_at = NULL, status = ?, completed_at = COALESCE(completed_at, ?) WHERE id = ? RETURNING *',
+      )
+      .get(JSON.stringify(data), thumb ?? null, nowIso, completing ? 'completed' : a.status, completing ? nowIso : null, a.id);
 
-  const events = [];
-  if (completing) {
-    const uid = req.user.id;
-    events.push(...(await progression.markThemeTried(uid, p.theme_id)));
-    if (a.mode === 'free') events.push(...(await progression.record(uid, 'complete_free')));
-    if (a.mode === 'template') events.push(...(await progression.record(uid, 'complete_template')));
-    if (data.glitter.length) events.push(...(await progression.record(uid, 'sparkle_use')));
-    if (data.strokes.some((s) => s.tool === 'brush') && data.stickers.length) events.push(...(await progression.record(uid, 'brush_sticker')));
-    events.push(...(await progression.record(uid, 'complete_any')));
-  }
-  const fresh = await Artwork.findById(a.id);
-  res.json({ artwork: { ...Artwork.toSummary({ ...fresh, name_vi: p.name_vi, name_en: p.name_en }) }, events, plan: await planStatus(req.user.id) });
+    const events = completing ? await recordArtworkCompletion(req.user.id, { themeId:p.theme_id, mode:a.mode, data }) : [];
+    return { artwork: { ...Artwork.toSummary({ ...fresh, name_vi: p.name_vi, name_en: p.name_en }) }, events, plan: await planStatus(req.user.id) };
+  });
+  res.json(result);
 }
 
 export async function remove(req, res) {

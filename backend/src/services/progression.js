@@ -28,14 +28,14 @@ const missionsOfLevel = async (level) => await getDb().prepare('SELECT * FROM mi
 const completedSet = async (userId) =>
   new Set((await getDb().prepare('SELECT mission_id FROM user_missions WHERE user_id = ?').all(userId)).map((r) => r.mission_id));
 
-export async function missionProgress(user, mission, stats, baseline) {
+export async function missionProgress(user, mission, stats, baseline, activeThemeCount) {
   const t = mission.type;
   let value;
   if (COUNTER_TYPES.has(t)) value = (stats[t] || 0) - (baseline[t] || 0);
   else if (t === 'login_streak') value = user.login_streak;
   else if (t === 'new_theme') {
     const tried = stats.themes_tried || 0;
-    value = tried >= (await totalThemes()) ? mission.target : tried - (baseline.themes_tried || 0);
+    value = tried >= (activeThemeCount ?? await totalThemes()) ? mission.target : tried - (baseline.themes_tried || 0);
   } else if (t === 'rank_at_least') value = rankIndex(rankOf(user.rank_points).key) >= rankIndex(mission.param) ? 1 : 0;
   else value = 0;
   return Math.max(0, Math.min(mission.target, value));

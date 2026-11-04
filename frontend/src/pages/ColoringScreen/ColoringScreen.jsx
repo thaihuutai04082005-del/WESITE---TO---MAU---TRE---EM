@@ -16,6 +16,10 @@ import RevealModal from '../../components/RevealModal';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
 import { takeCreatedEditor } from '../../lib/createdEditor';
+import { loadHistory } from '../../lib/coloringScreens';
+import { preloadImages } from '../../lib/preloadImages';
+import { HOME_IMAGES, HISTORY_IMAGES } from '../../lib/uiImages';
+import { invalidateHistory } from '../../lib/historyCache';
 
 const AUTOSAVE_MS = 1500;
 
@@ -35,6 +39,8 @@ export default function ColoringScreen() {
   const [artwork, setArtwork] = useState(null);
   const [picture, setPicture] = useState(null);
   const [saving, setSaving] = useState('saved');
+  const [finishing, setFinishing] = useState(false);
+  const completing = useRef(false);
   const [reveal, setReveal] = useState(false);
   const [pendingEvents, setPendingEvents] = useState([]);
   const [sig, setSig] = useState(null);
@@ -45,6 +51,11 @@ export default function ColoringScreen() {
   const accessChecked = useRef('');
   const dataRef = useRef(editor.data);
   dataRef.current = editor.data;
+  useEffect(() => {
+    if (!picture) return;
+    loadHistory().catch(() => {});
+    preloadImages([...HOME_IMAGES,...HISTORY_IMAGES], { retain:true, priority:true });
+  }, [picture?.id]);
 
   useEffect(() => {
     let alive = true;
@@ -119,6 +130,7 @@ export default function ColoringScreen() {
       setSaving('saving');
       try {
         const r = await api.put(`/artworks/${id}`, { data: dataRef.current, ...extra });
+        invalidateHistory();
         dirty.current = false;
         setSaving('saved');
         if (r.plan) setPlan(r.plan);
@@ -135,10 +147,10 @@ export default function ColoringScreen() {
 
   // Tự lưu sau mỗi thay đổi.
   useEffect(() => {
-    if (!artwork || !dirty.current) return;
+    if (!artwork || !dirty.current || finishing) return;
     const h = setTimeout(() => save().catch(() => {}), AUTOSAVE_MS);
     return () => clearTimeout(h);
-  }, [editor.data, artwork, save]);
+  }, [editor.data, artwork, save, finishing]);
 
   // Rời trang: lưu nốt thay đổi.
   useEffect(
@@ -175,33 +187,41 @@ export default function ColoringScreen() {
   }, [id, editor, setPlan, openUpgrade, toast, t]);
 
   async function complete() {
-    if (starting.current) await starting.current;
-    if (!started.current) {
-      // Chưa tính lượt (chưa có thao tác nào được ghi nhận): không phải hết lượt → chỉ nhắc bé tô trước,
-      // hoặc tính lượt ngay nếu đã có nét/màu. Chỉ khi server báo hết lượt mới mời nâng cấp.
-      const d = dataRef.current;
-      if (!Object.keys(d.fills).length && !d.strokes.length && !d.stickers.length) return toast(t('coloring.paintFirst'), 'error');
-      try {
-        const r = await api.post(`/artworks/${id}/start`);
-        started.current = true;
-        setPlan(r.plan);
-      } catch (e) {
-        if (e.code === 'quota_exceeded') {
-          if (e.data?.plan) setPlan(e.data.plan);
-          return openUpgrade(true);
-        }
-        if (e.code === 'theme_vip_required') return openUpgrade(true, 'theme');
-        return toast(errorText(t, e), 'error');
-      }
-    }
+    if (completing.current) return;
+    completing.current = true;
+    setFinishing(true);
     try {
-      const thumbnail = await renderThumbnail(picture, dataRef.current);
-      const r = await save({ thumbnail, completed: true });
-      setArtwork((a) => ({ ...a, status: 'completed' }));
-      setPendingEvents(r?.events || []);
-      setReveal(true);
-    } catch (e) {
-      toast(errorText(t, e), 'error');
+      if (starting.current) await starting.current;
+      if (!started.current) {
+        // Chưa tính lượt (chưa có thao tác nào được ghi nhận): không phải hết lượt → chỉ nhắc bé tô trước,
+        // hoặc tính lượt ngay nếu đã có nét/màu. Chỉ khi server báo hết lượt mới mời nâng cấp.
+        const d = dataRef.current;
+        if (!Object.keys(d.fills).length && !d.strokes.length && !d.stickers.length) return toast(t('coloring.paintFirst'), 'error');
+        try {
+          const r = await api.post(`/artworks/${id}/start`);
+          started.current = true;
+          setPlan(r.plan);
+        } catch (e) {
+          if (e.code === 'quota_exceeded') {
+            if (e.data?.plan) setPlan(e.data.plan);
+            return openUpgrade(true);
+          }
+          if (e.code === 'theme_vip_required') return openUpgrade(true, 'theme');
+          return toast(errorText(t, e), 'error');
+        }
+      }
+      try {
+        const thumbnail = await renderThumbnail(picture, dataRef.current);
+        const r = await save({ thumbnail, completed: true });
+        setArtwork((a) => ({ ...a, status: 'completed' }));
+        setPendingEvents(r?.events || []);
+        setReveal(true);
+      } catch (e) {
+        toast(errorText(t, e), 'error');
+      }
+    } finally {
+      completing.current = false;
+      setFinishing(false);
     }
   }
 
@@ -237,7 +257,7 @@ export default function ColoringScreen() {
         brushSkin={user?.brushSkin}
         userKey={String(user?.id || 'guest')}
         onAction={onAction}
-        readOnly={locked}
+        readOnly={locked || finishing}
         signature={sig ? sig.signature : undefined}
         signatureInks={sig?.inks}
         onUndo={() => {
@@ -274,10 +294,10 @@ export default function ColoringScreen() {
             </p>
           ) : (
           <>
-            <button type="button" className="btn-ghost" onClick={saveAndExit} data-testid="save-exit">
+            <button type="button" className="btn-ghost" onClick={saveAndExit} disabled={finishing} data-testid="save-exit">
               <Icon name="save" /> {t('coloring.saveExit')}
             </button>
-            <button type="button" className="btn-coral" onClick={complete} data-testid="complete">
+            <button type="button" className="btn-coral" onClick={complete} disabled={finishing} data-testid="complete">
               <Icon name="check" /> {t('coloring.complete')}
             </button>
           </>

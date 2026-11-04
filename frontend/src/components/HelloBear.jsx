@@ -6,8 +6,9 @@
  */
 const W = 640;
 const H = 751;
+import { uiImage } from '../lib/uiImages';
 
-const Layer = ({ src }) => <img src={src} alt="" className="hb-img" draggable={false} decoding="async" />;
+const Layer = ({ src }) => <img src={uiImage(src)} alt="" className="hb-img" draggable={false} decoding="sync" fetchPriority="high" />;
 
 export default function HelloBear({ className = '' }) {
   return (

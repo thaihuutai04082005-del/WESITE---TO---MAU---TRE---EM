@@ -20,7 +20,7 @@ export function PlanBadge({ plan }) {
     <Link
       to="/plans"
       data-testid="plan-badge"
-      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 px-5 py-2.5 font-bold transition hover:bg-white ${plan.remaining === 0 ? 'border-coral/40 bg-coral/10 text-coral' : 'border-[#CFE6FA] bg-white/70 text-primary-dark'}`}
+      className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 border-[#CFE6FA] bg-white/70 px-5 py-2.5 font-bold text-primary-dark transition hover:bg-white"
     >
       <Icon name="star" size={18} /> {text}
     </Link>

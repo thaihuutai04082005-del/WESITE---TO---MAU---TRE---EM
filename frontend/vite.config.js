@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { fileURLToPath } from 'node:url';
+import { uiImagesPlugin } from './scripts/ui-images.mjs';
 
 const API = process.env.VITE_API_PROXY || 'http://localhost:4000';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [uiImagesPlugin(fileURLToPath(new URL('.', import.meta.url))), react(), tailwindcss()],
   server: {
     port: 5173,
     proxy: {

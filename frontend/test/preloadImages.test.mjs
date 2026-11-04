@@ -62,3 +62,22 @@ test('Interactive data loading pauses background warmup, then every queued image
   assert.deepEqual(images.map(i=>i.src),['rainbow','together','arena']);
   assert.equal(decoded,3,'Pausing changes scheduling, not effect resources or their decoding');
 });
+
+test('Return-page images can precede unused effects and keep their decoded images for the next visit', async () => {
+  const source = (await readFile(new URL('../src/lib/preloadImages.js',import.meta.url),'utf8')).replace(/export function/g,'function');
+  const idle=[], images=[];
+  class Image { constructor(){ images.push(this); } decode(){ return Promise.resolve(); } }
+  const context=vm.createContext({Image,window:{requestIdleCallback:fn=>idle.push(fn)},setTimeout});
+  vm.runInContext(source,context);
+  context.preloadImages(['effect','home']);
+  context.preloadImages(['home','history'],{priority:true,retain:true});
+  idle.shift()();
+  assert.deepEqual(images.map(image=>image.src),['home','history']);
+  images[0].onload(); images[1].onload();
+  for(let i=0;i<8;i++) await Promise.resolve();
+  assert.equal(vm.runInContext("retained.get('home')",context),images[0]);
+  context.preloadImages(['home','history'],{priority:true,retain:true});
+  idle.shift()();
+  assert.deepEqual(images.map(image=>image.src),['home','history','effect']);
+  images[2].onload();
+});

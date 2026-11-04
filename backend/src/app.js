@@ -61,6 +61,7 @@ export function createApp() {
       picturePreviews: true,
       pictureAccessEnforced: true,
       artworkEditorBootstrap: true,
+      artworkThumbnailFiles: true,
     }),
   );
 

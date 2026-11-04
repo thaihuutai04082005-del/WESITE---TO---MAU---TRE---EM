@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-04",
+  "baselineCommit": "507343550f81213265695193510dd23f7a1764e2",
+  "production": false,
+  "environment": {
+    "database": "Local PostgreSQL via PGlite; synthetic fixtures; 100 ms added per SQL query",
+    "browser": "Chromium desktop 1280x900; CPU 4x slowdown; network latency 60 ms, download 1000000 B/s, upload 500000 B/s",
+    "sampleCountPerScenarioPerVersion": 1,
+    "limitations": "Controlled local samples, not production or multi-run statistics. Google Fonts blocked in browser measurement. Production web/API not reachable under session network policy. Render Free cold start unchanged."
+  },
+  "completionApi": [
+    {
+      "mode": "template",
+      "style": "plain",
+      "before": {
+        "ms": 5000,
+        "queries": 49
+      },
+      "after": {
+        "ms": 1506,
+        "queries": 18
+      },
+      "eventsUnchanged": true
+    },
+    {
+      "mode": "free",
+      "style": "plain",
+      "before": {
+        "ms": 3364,
+        "queries": 33
+      },
+      "after": {
+        "ms": 1187,
+        "queries": 15
+      },
+      "eventsUnchanged": true
+    },
+    {
+      "mode": "free",
+      "style": "effects",
+      "before": {
+        "ms": 4988,
+        "queries": 49
+      },
+      "after": {
+        "ms": 1130,
+        "queries": 15
+      },
+      "eventsUnchanged": true
+    }
+  ],
+  "completionBrowser": [
+    {
+      "kind": "simple",
+      "mode": "template",
+      "beforeMs": 5220,
+      "afterMs": 2340
+    },
+    {
+      "kind": "largest",
+      "mode": "free",
+      "beforeMs": 7045,
+      "afterMs": 3601
+    }
+  ],
+  "historyDisplay": {
+    "historyItems": 21,
+    "originalMetadataBytes": 7341365,
+    "newMetadataBytes": 1722783,
+    "inlineThumbnails": 4,
+    "thumbnailRequests": 14,
+    "cachedImagesVisibleBeforeFreshMetadata": true
+  },
+  "homeDisplay": {
+    "bearLayersDecoded": 7,
+    "modeImagesDecoded": 6,
+    "blueBadgeAtZeroRemaining": true,
+    "imageNetworkBytesOnReturnAfterGarbageCollection": 0,
+    "imageBytesUnchanged": true
+  }
+}

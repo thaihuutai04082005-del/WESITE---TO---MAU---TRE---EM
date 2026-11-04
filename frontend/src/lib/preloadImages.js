@@ -3,6 +3,8 @@
 const done = new Set();
 const pending = new Set();
 const queue = [];
+const retain = new Set();
+const retained = new Map();
 const CONCURRENCY = 2;
 let active = 0;
 let scheduled = false;
@@ -46,7 +48,10 @@ function schedule() {
         img.onerror = reject;
       });
       img.src = src;
-      loaded.then(() => img.decode?.()).then(() => done.add(src)).catch(() => {
+      loaded.then(() => img.decode?.()).then(() => {
+        done.add(src);
+        if (retain.has(src)) retained.set(src, img);
+      }).catch(() => {
         // Do not mark failures done: a later visit can try again.
       }).finally(() => {
         img.onload = null;
@@ -61,11 +66,22 @@ function schedule() {
   else setTimeout(run, 800);
 }
 
-export function preloadImages(urls) {
+export function preloadImages(urls, options = {}) {
+  const added = [];
   for (const src of urls) {
+    if (options.retain) {
+      retain.add(src);
+      if (!retained.has(src)) done.delete(src);
+    }
+    if (options.priority && pending.has(src)) {
+      const index = queue.indexOf(src);
+      if (index >= 0) { queue.splice(index,1); added.push(src); }
+    }
     if (done.has(src) || pending.has(src)) continue;
     pending.add(src);
-    queue.push(src);
+    added.push(src);
   }
+  if (options.priority) queue.unshift(...added);
+  else queue.push(...added);
   schedule();
 }

@@ -12,6 +12,8 @@ import { RankMedal, RANK_STYLE } from '../../components/RankBadge';
 import HelloBear from '../../components/HelloBear';
 import { HomeIntro, PublicDetails } from '../../seo/PublicContent';
 import { publicPage } from '../../../../shared/publicRoutes.mjs';
+import { uiImage, HOME_IMAGES } from '../../lib/uiImages';
+import { preloadImages } from '../../lib/preloadImages';
 import { ColorArt, TrophyArt, TogetherArt, GachaArt, BookArt, MissionArt, SunCloud } from '../../components/Illustrations';
 
 // 5 tranh ở trang giới thiệu, theo thứ tự ô: chó (ô lớn), Chiến Binh Siêu Tốc, Tiên Cá Hải Lam, Xe Đua Phản Lực, búp bê.
@@ -64,7 +66,7 @@ function Landing() {
   );
 }
 
-const HOME_BG = 'url(/home-bg.webp)';
+const HOME_BG = `url(${uiImage('/home-bg.webp')})`;
 
 const HOME_CARDS = [
   { to: '/color', key: 'color', icon: 'palette', Art: ColorArt, bg: 'linear-gradient(135deg,#DDEFFF 0%,#B7DCFF 100%)', accent: '#2B9BF4' },
@@ -115,6 +117,7 @@ function HomeCard({ card, onInfo }) {
 }
 
 function Dashboard() {
+  useEffect(() => { preloadImages(HOME_IMAGES, { retain:true, priority:true }); }, []);
   const { t } = useTranslation();
   const user = useAuth((s) => s.user);
   const plan = useAuth((s) => s.plan);

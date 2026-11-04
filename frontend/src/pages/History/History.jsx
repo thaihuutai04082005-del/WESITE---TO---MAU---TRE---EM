@@ -1,5 +1,5 @@
 // Lịch sử tô (Mục 7): lưu cả tranh đang dở. Mỗi tranh: Xem (tải về, gắn Khung Artwork, in) hoặc Chỉnh sửa.
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../../services/api';
@@ -10,6 +10,11 @@ import Modal from '../../components/Modal/Modal';
 import Canvas from '../../components/Canvas/Canvas';
 import FrameSelector from '../../components/FrameSelector/FrameSelector';
 import Icon from '../../components/Icon';
+import HistoryThumbnail from '../../components/HistoryThumbnail';
+import { useAuth } from '../../store/auth';
+import { historySnapshot, loadHistoryItems, invalidateHistory } from '../../lib/historyCache';
+import { uiImage, HISTORY_IMAGES } from '../../lib/uiImages';
+import { preloadImages } from '../../lib/preloadImages';
 
 const FILTERS = ['all', 'in_progress', 'completed'];
 
@@ -129,18 +134,31 @@ function Detail({ id, onClose, onDeleted }) {
 export default function History() {
   const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState('all');
-  const [items, setItems] = useState(null);
+  const token = useAuth(state => state.token);
+  const files = useAuth(state => state.meta?.artworkThumbnailFiles === true);
+  const key = JSON.stringify([token, filter, files]);
+  const [loaded, setLoaded] = useState(() => ({ key, items:historySnapshot(token, filter, files) }));
+  const [error, setError] = useState(false);
   const [open, setOpen] = useState(null);
+  const sequence = useRef(0);
+  const items = loaded.key === key ? loaded.items : historySnapshot(token, filter, files);
 
-  const load = () => api.get(`/artworks?progress=1${filter === 'all' ? '' : `&status=${filter}`}`).then((r) => setItems(r.artworks));
+  const load = useCallback(() => {
+    const request = ++sequence.current;
+    setError(false);
+    return loadHistoryItems(token, filter, files).then(artworks => {
+      if (request === sequence.current && useAuth.getState().token === token) setLoaded({ key, items:artworks });
+    }).catch(() => { if (request === sequence.current) setError(true); });
+  }, [token, filter, files, key]);
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+    return () => { sequence.current++; };
+  }, [load]);
+  useEffect(() => { preloadImages(HISTORY_IMAGES, { retain:true, priority:true }); }, []);
 
   const filterIcon = { all: 'collection', in_progress: 'hourglass', completed: 'check' };
   return (
-    <div className="hs-stage">
+    <div className="hs-stage" style={{ backgroundImage:`url(${uiImage('/history/bg.webp')})` }}>
       <div className="page hs-page">
         <header className="hs-head">
           <div>
@@ -148,7 +166,7 @@ export default function History() {
               <Icon name="history" size={48} strokeWidth={2.6} /> {t('history.title')}
             </h1>
           </div>
-          <img src="/history/deco.webp" alt="" className="hs-deco" draggable={false} />
+          <img src={uiImage('/history/deco.webp')} alt="" className="hs-deco" draggable={false} />
         </header>
         <section className="hs-panel">
           <div className="hs-filters">
@@ -158,6 +176,12 @@ export default function History() {
               </button>
             ))}
           </div>
+          {error && <button type="button" className="btn-ghost" onClick={load}>{t('common.tryAgain')}</button>}
+          {!items && !error && <div className="hs-grid" role="status" aria-label={t('common.loading')}>
+            {Array.from({ length:6 }, (_,index) => <div key={index} className="hs-card" aria-hidden="true">
+              <div className="hs-thumb animate-pulse bg-sky-50" /><div className="h-5 rounded bg-sky-50" />
+            </div>)}
+          </div>}
           {items && items.length === 0 && (
             <div className="hs-empty">
               <p className="mb-3 text-lg text-muted">{t('history.empty')}</p>
@@ -168,7 +192,7 @@ export default function History() {
             {(items || []).map((a) => (
               <button key={a.id} type="button" onClick={() => setOpen(a.id)} className="hs-card" data-testid={`history-item-${a.id}`}>
                 <div className="hs-thumb">
-                  {a.thumbnail ? <img src={a.thumbnail} alt="" /> : <div className="hs-nothumb">{t('history.noPreview')}</div>}
+                  <HistoryThumbnail key={`${token}:${a.id}`} artwork={a} />
                   <span className={`hs-badge ${a.status === 'completed' ? 'hs-badge-done' : ''}`}>
                     <Icon name={a.status === 'completed' ? 'check' : 'hourglass'} size={18} strokeWidth={2.6} /> {t(`history.status.${a.status}`)}{a.status === 'in_progress' && a.progress > 0 ? ` · ${a.progress}%` : ''}
                   </span>
@@ -182,7 +206,7 @@ export default function History() {
           </div>
         </section>
       </div>
-      {open && <Detail id={open} onClose={() => setOpen(null)} onDeleted={() => { setOpen(null); load(); }} />}
+      {open && <Detail id={open} onClose={() => setOpen(null)} onDeleted={() => { setOpen(null); invalidateHistory(); load(); }} />}
     </div>
   );
 }

@@ -23,6 +23,9 @@ import StoryTransition from './StoryTransition';
 import TogetherTransition from './TogetherTransition';
 import MissionTransition from './MissionTransition';
 import ExhibitTransition from './ExhibitTransition';
+import { loadHistory } from '../../lib/coloringScreens';
+import { HISTORY_IMAGES } from '../../lib/uiImages';
+import { preloadImages } from '../../lib/preloadImages';
 
 // Mỗi mục một biểu tượng đúng nghĩa + màu riêng (khớp màu thẻ ở trang chính).
 export const NAV = [
@@ -59,6 +62,10 @@ export default function Layout() {
   const [menu, setMenu] = useState(false);
   const loc = useLocation();
   const navigate = useNavigate();
+  const warmHistory = () => {
+    loadHistory().catch(() => {});
+    preloadImages(HISTORY_IMAGES, { retain:true, priority:true });
+  };
 
   useEffect(() => setMenu(false), [loc.pathname]);
 
@@ -125,6 +132,8 @@ export default function Layout() {
                   title={t(`nav.${n.key}`)}
                   className={({ isActive }) => (n.key === 'collection' ? `nav-pill shrink-0${isActive ? ' nav-pill-on' : ''}` : `flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3 font-bold transition xl:px-4 ${isActive ? 'bg-primary-light text-primary-dark' : 'text-ink/80 hover:bg-primary-light/60'}`)}
                   data-testid={`nav-${n.key}`}
+                  onPointerEnter={n.key === 'history' ? warmHistory : undefined}
+                  onFocus={n.key === 'history' ? warmHistory : undefined}
                   data-fly-target={n.key}
                 >
                   {n.key === 'collection' ? (
@@ -181,7 +190,7 @@ export default function Layout() {
       {user && (
         <nav className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
           {navOf(MOBILE_MAIN).map((n) => (
-            <NavLink key={n.to} to={n.to} end={n.end} data-fly-target={n.key} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
+            <NavLink key={n.to} to={n.to} end={n.end} data-fly-target={n.key} onFocus={n.key === 'history' ? warmHistory : undefined} onTouchStart={n.key === 'history' ? warmHistory : undefined} className={({ isActive }) => `flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-bold ${isActive ? 'text-primary' : 'text-muted'}`}>
               <Icon name={n.icon} />
               {t(`nav.${n.key}`)}
             </NavLink>

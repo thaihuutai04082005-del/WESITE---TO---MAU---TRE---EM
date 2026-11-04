@@ -1813,3 +1813,88 @@ test('Public preview identity still uses current subscriptions, rejects forged t
   assert.deepEqual((await api('GET','/themes?preview=1',null,user.token)).body,free);
   assert.equal((await api('GET','/pictures/1',null,user.token)).status,401,'Private/editor routes still read the current user');
 });
+
+test('Batched artwork rewards preserve sequential evaluations, notification order and level baselines across all twenty levels', async () => {
+  const User = await import('../src/models/user.js');
+  const old = await import('../src/services/progression.js');
+  const { recordArtworkCompletion } = await import('../src/services/artworkProgression.js');
+  const db = getDb(), missions = await db.prepare('SELECT * FROM missions ORDER BY level,idx').all();
+  const counters = ['complete_any','complete_free','complete_template','download','sparkle_use','brush_sticker','friend_add','arena_join','collab_join','shop_buy','flipbook_complete'];
+  const data = { glitter:['r1'], strokes:[{tool:'brush'}], stickers:[{type:'star'}] };
+  for (let level=1; level<=20; level++) for (const mode of ['template','free']) {
+    const pair = [];
+    for (const side of ['old','batch']) {
+      const user = await User.create({ username:`reward_${level}_${mode}_${side}`, password_hash:'test-only', level, login_streak:50, rank_points:10000 });
+      for (const key of counters) await User.setStat(user.id, key, 99);
+      await User.setStat(user.id, 'themes_tried', 0);
+      const done = missions.filter(mission => mission.level === level).slice(0,2);
+      for (const mission of done) await db.prepare('INSERT INTO user_missions (user_id,mission_id,completed_at) VALUES (?,?,?)').run(user.id, mission.id, new Date().toISOString());
+      pair.push(user);
+    }
+    const [legacy, batch] = pair;
+    const expected = [
+      ...await old.markThemeTried(legacy.id,1),
+      ...await old.record(legacy.id,mode === 'free' ? 'complete_free' : 'complete_template'),
+      ...await old.record(legacy.id,'sparkle_use'), ...await old.record(legacy.id,'brush_sticker'),
+      ...await old.record(legacy.id,'complete_any'),
+    ];
+    assert.deepEqual(await recordArtworkCompletion(batch.id,{themeId:1,mode,data}), expected, `${level}/${mode} events`);
+    assert.deepEqual(await User.getStats(batch.id),await User.getStats(legacy.id), `${level}/${mode} counters`);
+    const before = await User.findById(legacy.id), after = await User.findById(batch.id);
+    assert.deepEqual([after.level,after.ruby,JSON.parse(after.level_baseline)],[before.level,before.ruby,JSON.parse(before.level_baseline)], `${level}/${mode} baseline/rewards`);
+    const notifications = async id => (await db.prepare('SELECT type,data FROM notifications WHERE user_id=? ORDER BY id').all(id)).map(row=>[row.type,JSON.parse(row.data)]);
+    assert.deepEqual(await notifications(batch.id),await notifications(legacy.id));
+    const completed = async id => (await db.prepare('SELECT mission_id FROM user_missions WHERE user_id=? ORDER BY mission_id').all(id)).map(row=>row.mission_id);
+    assert.deepEqual(await completed(batch.id),await completed(legacy.id));
+  }
+});
+
+test('Completion persists before responding, counts/rewards only once under concurrent saves, and rolls back failed rewards', async () => {
+  const user = await register('finishatomic1'), db = getDb();
+  const created = (await api('POST','/artworks',{pictureId:1,mode:'template'},user.token)).body.artwork;
+  await api('POST',`/artworks/${created.id}/start`,{},user.token);
+  const data = {fills:{bg:'#FF5F7E'}};
+  const first = await measuredRequest('PUT',`/artworks/${created.id}`,{data,completed:true},user.token,18);
+  assert.equal(first.body.artwork.status,'completed');
+  assert.equal(first.body.plan.used,1);
+  const again = await Promise.all([1,2].map(()=>api('PUT',`/artworks/${created.id}`,{data,completed:true},user.token)));
+  assert.ok(again.every(response=>response.status===200 && response.body.events.length===0));
+  assert.equal((await db.prepare("SELECT value FROM user_stats WHERE user_id=? AND key='complete_any'").get(user.id)).value,1);
+  const next = (await api('POST','/artworks',{pictureId:1,mode:'free'},user.token)).body.artwork;
+  await api('POST',`/artworks/${next.id}/start`,{},user.token);
+  const original = db.query;
+  db.query = async function(sql,...args) {
+    if (/INSERT INTO user_stats/i.test(sql)) throw new Error('Simulated completion write failure');
+    return original.call(this,sql,...args);
+  };
+  try { assert.equal((await api('PUT',`/artworks/${next.id}`,{data,completed:true},user.token)).status,500); }
+  finally { db.query = original; }
+  assert.equal((await db.prepare('SELECT status FROM artworks WHERE id=?').get(next.id)).status,'in_progress');
+  assert.equal((await db.prepare("SELECT value FROM user_stats WHERE user_id=? AND key='complete_any'").get(user.id)).value,1);
+  const concurrent = await Promise.all([1,2].map(()=>api('PUT',`/artworks/${next.id}`,{data,completed:true},user.token)));
+  assert.ok(concurrent.every(response=>response.status===200));
+  assert.equal((await db.prepare("SELECT value FROM user_stats WHERE user_id=? AND key='complete_any'").get(user.id)).value,2,'Two first-completion requests must award this artwork only once');
+});
+
+test('Lightweight history omits PNG/data payloads, retains progress and serves exact thumbnails only to their owner', async () => {
+  const user = await register('historyfiles1'), other = await register('historyfiles2'), db = getDb();
+  const png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+  const row = await db.prepare("INSERT INTO artworks (user_id,picture_id,mode,status,data,thumbnail) VALUES (?,1,'free','in_progress',?,?) RETURNING id")
+    .get(user.id,JSON.stringify({fills:{bg:'#FF5F7E'},strokes:[],stickers:[]}),png);
+  const done = await db.prepare("INSERT INTO artworks (user_id,picture_id,mode,status,data,thumbnail) VALUES (?,1,'free','completed',?,?) RETURNING id")
+    .get(user.id,JSON.stringify({fills:{bg:'#FF5F7E'},strokes:[{points:Array.from({length:1000},()=>[123,456])}],stickers:[]}),png);
+  const full = await api('GET','/artworks?progress=1',null,user.token);
+  const light = await measuredGet('/artworks?progress=1&thumbnails=0',user.token,3);
+  assert.deepEqual(light.body.artworks,full.body.artworks.map(({thumbnail,...artwork})=>({...artwork,hasThumbnail:true})));
+  const initial = await api('GET','/artworks?progress=1&thumbnails=0&initialThumbnails=1',null,user.token);
+  assert.equal(initial.body.artworks.filter(artwork=>artwork.thumbnail).length,1,'A small history can show its first image without another round trip');
+  assert.ok(initial.body.artworks.every(artwork=>artwork.hasThumbnail));
+  assert.ok(!light.readRows.find(value=>value.id===done.id&&value.picture_id)?.data,'Completed artwork geometry is unnecessary for history progress');
+  const read = token => fetch(`${base}/api/artworks/${row.id}/thumbnail`,{headers:token?{authorization:`Bearer ${token}`}:{}});
+  const file = await read(user.token);
+  assert.equal(file.status,200); assert.equal(file.headers.get('content-type'),'image/png');
+  assert.match(file.headers.get('cache-control'),/private, no-store/);
+  assert.deepEqual(Buffer.from(await file.arrayBuffer()),Buffer.from(png.split(',')[1],'base64'));
+  assert.equal((await read(other.token)).status,404); assert.equal((await read()).status,401);
+  assert.equal((await api('GET',`/artworks/${row.id}`,null,user.token)).body.artwork.thumbnail,png);
+});

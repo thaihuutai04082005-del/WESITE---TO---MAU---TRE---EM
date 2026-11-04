@@ -72,11 +72,12 @@ try {
   const appHeaders = [...APP_ROUTES, APP_SHELL_PATH].map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, follow`);
   const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
   const previewHeaders = '/picture-previews/*\n  Cache-Control: public, max-age=31536000, immutable';
+  const uiImageHeaders = '/ui-images/*\n  Cache-Control: public, max-age=31536000, immutable';
   const verificationHeaders = googleVerificationFiles.flatMap((path) => [path, path.slice(0, -5)])
     .map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, nofollow`);
   const sitemapHeaders = ['/sitemap.xml', '/sitemap-pages.xml'].map((path) => `${path}\n  Content-Type: application/xml; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate`);
   const robotsHeaders = '/robots.txt\n  Content-Type: text/plain; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate';
-  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, ...verificationHeaders, ...sitemapHeaders, robotsHeaders].join('\n\n') + '\n');
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, uiImageHeaders, ...verificationHeaders, ...sitemapHeaders, robotsHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });

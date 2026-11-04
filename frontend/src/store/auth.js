@@ -6,6 +6,7 @@ import i18n from '../i18n';
 import { useUi } from './ui';
 import { publicPage } from '../../../shared/publicRoutes.mjs';
 import { clearCreatedEditor } from '../lib/createdEditor';
+import { clearHistoryCache } from '../lib/historyCache';
 
 const TOKEN_KEY = 'btm.token';
 let booting = null;
@@ -81,6 +82,7 @@ export const useAuth = create((set, get) => ({
 
   logout() {
     clearCreatedEditor();
+    clearHistoryCache();
     try {
       localStorage.removeItem(TOKEN_KEY);
     } catch {

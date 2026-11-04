@@ -17,11 +17,14 @@ export async function create({ userId, pictureId, mode, data, thumbnail = null, 
     );
 }
 
-export async function listRowsByUser(userId, { status, mode, withData = false } = {}) {
-  let sql = `SELECT a.id, a.picture_id, a.mode, a.status, a.thumbnail, a.artwork_frame, a.created_at, a.updated_at, a.completed_at,
-      ${withData ? 'a.data, a.user_id,' : ''} p.name_vi, p.name_en, p.slug, p.is_card, p.rarity
+export async function listRowsByUser(userId, { status, mode, withData = false, thumbnails = true, initialThumbnails = 0 } = {}) {
+  let sql = `SELECT a.id, a.picture_id, a.mode, a.status,
+      ${thumbnails ? 'a.thumbnail' : `${initialThumbnails ? 'CASE WHEN ROW_NUMBER() OVER (ORDER BY a.updated_at DESC,a.id DESC)<=? THEN a.thumbnail ELSE NULL END' : 'NULL'} AS thumbnail,
+        CASE WHEN a.thumbnail IS NULL OR a.thumbnail='' THEN 0 ELSE 1 END AS has_thumbnail`},
+      a.artwork_frame, a.created_at, a.updated_at, a.completed_at,
+      ${withData ? `${withData === 'drafts' ? "CASE WHEN a.status='in_progress' THEN a.data ELSE NULL END" : 'a.data'} AS data, a.user_id,` : ''} p.name_vi, p.name_en, p.slug, p.is_card, p.rarity
     FROM artworks a JOIN pictures p ON p.id = a.picture_id WHERE a.user_id = ?`;
-  const args = [userId];
+  const args = !thumbnails && initialThumbnails ? [initialThumbnails,userId] : [userId];
   if (status) {
     sql += ' AND a.status = ?';
     args.push(status);
@@ -30,7 +33,7 @@ export async function listRowsByUser(userId, { status, mode, withData = false } 
     sql += ' AND a.mode = ?';
     args.push(mode);
   }
-  sql += ' ORDER BY a.updated_at DESC LIMIT 500';
+  sql += ' ORDER BY a.updated_at DESC,a.id DESC LIMIT 500';
   return getDb().prepare(sql).all(...args);
 }
 

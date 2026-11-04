@@ -15,6 +15,7 @@ r.get('/pictures/:id', requireAuth, pic.picture);
 r.get('/artworks', requireAuth, art.list);
 r.post('/artworks', requireAuth, requireNickname, art.create);
 r.get('/artworks/:id', requireAuth, art.get);
+r.get('/artworks/:id/thumbnail', requireAuth, art.thumbnail);
 r.post('/artworks/:id/start', requireAuth, art.start);
 r.put('/artworks/:id', requireAuth, art.save);
 r.delete('/artworks/:id', requireAuth, art.remove);

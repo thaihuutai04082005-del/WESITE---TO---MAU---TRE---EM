@@ -1,4 +1,5 @@
 // Hình minh hoạ cho các thẻ ở trang chính — vẽ bằng SVG, ghép với linh vật lấy từ kho tranh (/mascots).
+import { uiImage } from '../lib/uiImages';
 const INK = '#1B2A38';
 
 function Crayon({ x, y, rot, color, scale = 1 }) {
@@ -15,7 +16,7 @@ function Crayon({ x, y, rot, color, scale = 1 }) {
 export function ColorArt() {
   return (
     <svg viewBox="0 0 200 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/tomau.webp" x="4" y="2" width="192" height="146" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/tomau.webp')} x="4" y="2" width="192" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -24,7 +25,7 @@ export function ColorArt() {
 export function TrophyArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/daututruong.webp" x="26" y="2" width="168" height="146" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/daututruong.webp')} x="26" y="2" width="168" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -33,7 +34,7 @@ export function TrophyArt() {
 export function TogetherArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/tocungnhau.webp" x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/tocungnhau.webp')} x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -42,7 +43,7 @@ export function TogetherArt() {
 export function GachaArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/bocthe.webp" x="22" y="2" width="176" height="146" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/bocthe.webp')} x="22" y="2" width="176" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -51,7 +52,7 @@ export function GachaArt() {
 export function BookArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/truyentranh.webp" x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/truyentranh.webp')} x="0" y="0" width="220" height="150" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
@@ -60,7 +61,7 @@ export function BookArt() {
 export function MissionArt() {
   return (
     <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-      <image href="/mascots/nhiemvu.webp" x="24" y="2" width="172" height="146" preserveAspectRatio="xMidYMid meet" />
+      <image href={uiImage('/mascots/nhiemvu.webp')} x="24" y="2" width="172" height="146" preserveAspectRatio="xMidYMid meet" />
     </svg>
   );
 }
