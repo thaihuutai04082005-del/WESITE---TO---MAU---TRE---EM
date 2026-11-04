@@ -18,9 +18,9 @@ export async function create({ userId, pictureId, mode, data, thumbnail = null, 
   return await findById(Number(res.lastInsertRowid));
 }
 
-export async function listByUser(userId, { status, mode } = {}) {
+export async function listRowsByUser(userId, { status, mode, withData = false } = {}) {
   let sql = `SELECT a.id, a.picture_id, a.mode, a.status, a.thumbnail, a.artwork_frame, a.created_at, a.updated_at, a.completed_at,
-      p.name_vi, p.name_en, p.slug, p.is_card, p.rarity
+      ${withData ? 'a.data, a.user_id,' : ''} p.name_vi, p.name_en, p.slug, p.is_card, p.rarity
     FROM artworks a JOIN pictures p ON p.id = a.picture_id WHERE a.user_id = ?`;
   const args = [userId];
   if (status) {
@@ -32,11 +32,11 @@ export async function listByUser(userId, { status, mode } = {}) {
     args.push(mode);
   }
   sql += ' ORDER BY a.updated_at DESC LIMIT 500';
-  return (
-    await getDb()
-      .prepare(sql)
-      .all(...args)
-  ).map(toSummary);
+  return getDb().prepare(sql).all(...args);
+}
+
+export async function listByUser(userId, options) {
+  return (await listRowsByUser(userId, options)).map(toSummary);
 }
 
 export function toSummary(a) {

@@ -28,3 +28,17 @@ export async function add(userId, pictureId, source) {
   const r = await getDb().prepare('INSERT INTO user_cards (user_id, picture_id, source) VALUES (?, ?, ?)').run(userId, pictureId, source);
   return Number(r.lastInsertRowid);
 }
+
+/** A multi-card reveal stays in its caller's transaction and keeps one ID per copy. */
+export async function addMany(userId, pictureIds, source) {
+  if (!pictureIds.length) return [];
+  const rows = await getDb().prepare(`INSERT INTO user_cards (user_id, picture_id, source)
+    VALUES ${pictureIds.map(() => '(?, ?, ?)').join(',')}
+    RETURNING id, picture_id`).all(...pictureIds.flatMap(id => [userId, id, source]));
+  const copies = new Map();
+  for (const row of rows.sort((a, b) => a.id - b.id)) {
+    if (!copies.has(row.picture_id)) copies.set(row.picture_id, []);
+    copies.get(row.picture_id).push(row.id);
+  }
+  return pictureIds.map(id => copies.get(id).shift());
+}

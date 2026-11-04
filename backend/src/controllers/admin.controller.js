@@ -1,4 +1,3 @@
-import { asyncMap } from '../utils/asyncArray.js';
 // Công cụ quản trị nội dung (Mục 12): thêm chủ đề/đối tượng, tải tranh SVG mới kèm manifest vùng tô
 // (admin-cms tự tính bbox/đa giác/vị trí số trong trình duyệt) — không cần sửa code khi thêm tranh.
 import { getDb } from '../config/db.js';
@@ -13,19 +12,23 @@ const slug = (v, name) => {
 };
 
 export async function tree(_req, res) {
-  const themes = await getDb().prepare('SELECT * FROM themes ORDER BY sort, id').all();
-  const out = await asyncMap(themes, async (t) => ({
+  const db = getDb();
+  const [themes, objects, pictures] = await Promise.all([
+    db.prepare('SELECT id,slug,name_vi,name_en FROM themes ORDER BY sort,id').all(),
+    db.prepare('SELECT id,theme_id,slug,name_vi,name_en FROM objects ORDER BY sort,id').all(),
+    db.prepare('SELECT object_id,id,slug,variant_slug,name_vi,name_en,is_card,rarity FROM pictures ORDER BY is_card,sort,id').all(),
+  ]);
+  const byObject = new Map(objects.map(o => [o.id, []]));
+  for (const { object_id, ...picture } of pictures) byObject.get(object_id)?.push(picture);
+  const byTheme = new Map(themes.map(t => [t.id, []]));
+  for (const o of objects) byTheme.get(o.theme_id)?.push({
+    id: o.id, slug: o.slug, name: { vi: o.name_vi, en: o.name_en }, pictures: byObject.get(o.id),
+  });
+  const out = themes.map(t => ({
     id: t.id,
     slug: t.slug,
     name: { vi: t.name_vi, en: t.name_en },
-    objects: await asyncMap(await getDb().prepare('SELECT * FROM objects WHERE theme_id = ? ORDER BY sort, id').all(t.id), async (o) => ({
-      id: o.id,
-      slug: o.slug,
-      name: { vi: o.name_vi, en: o.name_en },
-      pictures: await getDb()
-        .prepare('SELECT id, slug, variant_slug, name_vi, name_en, is_card, rarity FROM pictures WHERE object_id = ? ORDER BY is_card, sort, id')
-        .all(o.id),
-    })),
+    objects: byTheme.get(t.id),
   }));
   res.json({ themes: out });
 }

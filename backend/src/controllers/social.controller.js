@@ -1,4 +1,3 @@
-import { asyncMap } from '../utils/asyncArray.js';
 // Mục 10.3: kết bạn chỉ qua mã mời riêng; tặng/đổi thẻ giới hạn 3 lượt/ngày, xác nhận 2 chiều.
 import { getDb, tx } from '../config/db.js';
 import { TRADE_LIMITS } from '../config/constants.js';
@@ -22,10 +21,11 @@ export async function areFriends(a, b) {
 export async function friends(req, res) {
   const me = req.user.id;
   const rows = await getDb().prepare('SELECT * FROM friendships WHERE requester_id = ? OR addressee_id = ? ORDER BY created_at DESC').all(me, me);
+  const profiles = await User.publicProfiles(rows.map(f => f.requester_id === me ? f.addressee_id : f.requester_id));
   const out = { friends: [], incoming: [], outgoing: [], myCode: req.user.friend_code };
   for (const f of rows) {
     const otherId = f.requester_id === me ? f.addressee_id : f.requester_id;
-    const entry = { friendshipId: f.id, user: await User.publicProfile(await User.findById(otherId)), since: f.created_at };
+    const entry = { friendshipId: f.id, user: profiles.get(otherId) || null, since: f.created_at };
     if (f.status === 'accepted') out.friends.push(entry);
     else if (f.addressee_id === me) out.incoming.push(entry);
     else out.outgoing.push(entry);
@@ -100,7 +100,7 @@ const tradesToday = async (userId) =>
       .get(userId, vnDayStart())
   ).c;
 
-async function tradeView(t) {
+async function tradeView(t, prepared) {
   const card = async (id) => {
     if (!id) return null;
     const c = await getDb()
@@ -112,10 +112,10 @@ async function tradeView(t) {
   };
   return {
     id: t.id,
-    from: await User.publicProfile(await User.findById(t.from_user)),
-    to: await User.publicProfile(await User.findById(t.to_user)),
-    offer: await card(t.offer_card_id),
-    request: await card(t.request_card_id),
+    from: prepared ? prepared.profiles.get(t.from_user) || null : await User.publicProfile(await User.findById(t.from_user)),
+    to: prepared ? prepared.profiles.get(t.to_user) || null : await User.publicProfile(await User.findById(t.to_user)),
+    offer: prepared ? (t.offer_card_id ? prepared.cards.get(t.offer_card_id) : null) : await card(t.offer_card_id),
+    request: prepared ? (t.request_card_id ? prepared.cards.get(t.request_card_id) : null) : await card(t.request_card_id),
     kind: t.request_card_id ? 'exchange' : 'gift',
     status: t.status,
     createdAt: t.created_at,
@@ -127,7 +127,15 @@ export async function trades(req, res) {
   const rows = await getDb()
     .prepare('SELECT * FROM trades WHERE from_user = ? OR to_user = ? ORDER BY id DESC LIMIT 100')
     .all(req.user.id, req.user.id);
-  res.json({ trades: await asyncMap(rows, tradeView), usedToday: await tradesToday(req.user.id), dailyLimit: await tradeLimit(req.user.id) });
+  const cardIds = [...new Set(rows.flatMap(t => [t.offer_card_id, t.request_card_id]).filter(id => id != null))];
+  const [profiles, cardRows, usedToday, dailyLimit] = await Promise.all([
+    User.publicProfiles(rows.flatMap(t => [t.from_user, t.to_user])),
+    cardIds.length ? getDb().prepare(`SELECT uc.id,uc.picture_id,p.rarity,p.name_vi,p.name_en
+      FROM user_cards uc JOIN pictures p ON p.id=uc.picture_id WHERE uc.id IN (${cardIds.map(() => '?').join(',')})`).all(...cardIds) : [],
+    tradesToday(req.user.id), tradeLimit(req.user.id),
+  ]);
+  const cards = new Map(cardRows.map(c => [c.id, { id:c.id, pictureId:c.picture_id, rarity:c.rarity, name:{vi:c.name_vi,en:c.name_en} }]));
+  res.json({ trades: await Promise.all(rows.map(t => tradeView(t, { profiles, cards }))), usedToday, dailyLimit });
 }
 
 const isLocked = async (cardId) =>

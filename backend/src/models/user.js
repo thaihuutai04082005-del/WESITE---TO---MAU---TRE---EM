@@ -81,7 +81,7 @@ export async function setStat(userId, key, value) {
 }
 
 /** Thông tin công khai (hiển thị cho bạn bè / phòng đấu). */
-export async function publicProfile(u) {
+export async function publicProfile(u, { vip } = {}) {
   if (!u) return null;
   return {
     id: u.id,
@@ -90,14 +90,14 @@ export async function publicProfile(u) {
     avatarFrame: u.avatar_frame,
     rank: rankOf(u.rank_points).key,
     level: u.level,
-    vip: await isVip(u.id),
+    vip: vip === undefined ? await isVip(u.id) : vip,
   };
 }
 
 /** Thông tin đầy đủ cho chính chủ tài khoản. */
-export async function selfProfile(u) {
+export async function selfProfile(u, options) {
   return {
-    ...(await publicProfile(u)),
+    ...(await publicProfile(u, options)),
     username: u.username,
     hasPassword: !!u.password_hash,
     googleLinked: !!u.google_sub,
@@ -115,6 +115,17 @@ export async function selfProfile(u) {
     levelBaseline: parseJson(u.level_baseline, {}),
     createdAt: u.created_at,
   };
+}
+
+/** Fresh public profiles and VIP status for a list, never an account/session cache. */
+export async function publicProfiles(ids) {
+  const unique = [...new Set(ids.filter(id => id != null))];
+  if (!unique.length) return new Map();
+  const iso = new Date().toISOString();
+  const rows = await getDb().prepare(`SELECT u.id, u.username, u.nickname, u.avatar, u.avatar_frame, u.rank_points, u.level,
+    EXISTS (SELECT 1 FROM subscriptions s WHERE s.user_id=u.id AND s.starts_at <= ? AND s.ends_at > ?) AS profile_vip
+    FROM users u WHERE u.id IN (${unique.map(() => '?').join(',')})`).all(iso, iso, ...unique);
+  return new Map(await Promise.all(rows.map(async row => [row.id, await publicProfile(row, { vip: !!row.profile_vip })])));
 }
 
 export function maskContact(c) {

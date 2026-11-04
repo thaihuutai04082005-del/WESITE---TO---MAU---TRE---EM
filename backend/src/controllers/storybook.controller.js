@@ -24,6 +24,11 @@ async function pagesOf(bookId) {
 }
 
 async function view(b, withPages = true) {
+  const [pageCount, cover, pages] = await Promise.all([
+    b.page_count !== undefined ? b.page_count : getDb().prepare('SELECT COUNT(*) AS c FROM storybook_pages WHERE storybook_id = ?').get(b.id).then(row => row.c),
+    b.first_thumbnail !== undefined ? b.first_thumbnail : getDb().prepare('SELECT a.thumbnail FROM storybook_pages sp JOIN artworks a ON a.id=sp.artwork_id WHERE sp.storybook_id=? ORDER BY sp.position LIMIT 1').get(b.id).then(row => row?.thumbnail),
+    withPages ? pagesOf(b.id) : undefined,
+  ]);
   return {
     id: b.id,
     title: b.title,
@@ -32,16 +37,9 @@ async function view(b, withPages = true) {
     shareToken: b.share_token,
     createdAt: b.created_at,
     updatedAt: b.updated_at,
-    pageCount: (await getDb().prepare('SELECT COUNT(*) AS c FROM storybook_pages WHERE storybook_id = ?').get(b.id)).c,
-    cover:
-      (
-        await getDb()
-          .prepare(
-            'SELECT a.thumbnail FROM storybook_pages sp JOIN artworks a ON a.id = sp.artwork_id WHERE sp.storybook_id = ? ORDER BY sp.position LIMIT 1',
-          )
-          .get(b.id)
-      )?.thumbnail || null,
-    ...(withPages ? { pages: await pagesOf(b.id) } : {}),
+    pageCount,
+    cover: cover || null,
+    ...(withPages ? { pages } : {}),
   };
 }
 
@@ -80,7 +78,10 @@ async function writePages(bookId, pages) {
 }
 
 export async function list(req, res) {
-  const books = await getDb().prepare('SELECT * FROM storybooks WHERE user_id = ? ORDER BY updated_at DESC').all(req.user.id);
+  const books = await getDb().prepare(`SELECT b.*,
+    (SELECT COUNT(*) FROM storybook_pages sp WHERE sp.storybook_id=b.id) AS page_count,
+    (SELECT a.thumbnail FROM storybook_pages sp JOIN artworks a ON a.id=sp.artwork_id WHERE sp.storybook_id=b.id ORDER BY sp.position LIMIT 1) AS first_thumbnail
+    FROM storybooks b WHERE b.user_id=? ORDER BY b.updated_at DESC`).all(req.user.id);
   res.json({ storybooks: await asyncMap(books, async (b) => await view(b, false)) });
 }
 

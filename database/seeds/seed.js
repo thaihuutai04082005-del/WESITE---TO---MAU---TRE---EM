@@ -54,7 +54,7 @@ export async function seedPictures(db = getDb()) {
        name_en = excluded.name_en, variant_name_vi = excluded.variant_name_vi, variant_name_en = excluded.variant_name_en,
        svg = excluded.svg, manifest = excluded.manifest, animation = excluded.animation, is_card = excluded.is_card,
        rarity = excluded.rarity, sort = excluded.sort, theme_sort = excluded.theme_sort, hidden = excluded.hidden,
-       preview = excluded.preview, asset_hash = excluded.asset_hash`,
+       preview = excluded.preview, asset_hash = excluded.asset_hash RETURNING id`,
   );
   let count = 0;
   const keep = new Set(catalog.themes.flatMap((t) => t.objects.flatMap((o) => o.pictures.map((p) => p.slug))));
@@ -166,11 +166,12 @@ export async function seedPicturesIfNeeded(db = getDb()) {
 
 /** Cờ ẩn/hiện chủ đề trong catalog (hidden) phải khớp cột themes.active, kể cả khi tranh không đổi. */
 export async function syncThemeVisibility(catalog, db = getDb()) {
-  const up = db.prepare('UPDATE themes SET active = ? WHERE slug = ? AND active != ?');
   let changed = 0;
-  for (const t of catalog.themes) {
-    const want = t.hidden ? 0 : 1;
-    changed += Number((await up.run(want, t.slug, want)).changes);
+  for (const want of [0, 1]) {
+    const slugs = catalog.themes.filter(t => (t.hidden ? 0 : 1) === want).map(t => t.slug);
+    if (!slugs.length) continue;
+    changed += Number((await db.prepare(`UPDATE themes SET active=?
+      WHERE slug IN (${slugs.map(() => '?').join(',')}) AND active!=? RETURNING id`).run(want, ...slugs, want)).changes);
   }
   return changed;
 }

@@ -9,7 +9,8 @@ process.env.ARENA_SLOTS = '';
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
-import { createServer } from 'node:http';
+import { createServer, get as httpGet } from 'node:http';
+import { gunzipSync, brotliDecompressSync } from 'node:zlib';
 import { io as ioc } from 'socket.io-client';
 
 const { env: testEnv } = await import('../src/config/env.js');
@@ -1420,4 +1421,245 @@ test('Email-only signup and recovery reject SMS, require the email OTP and prese
   } finally {
     testEnv.phoneOtpEnabled = oldEnabled;
   }
+});
+
+async function measuredGet(path, token, budget) {
+  const db = getDb(), query = db.query;
+  let calls = 0;
+  const readRows = [];
+  db.query = async function (...args) {
+    calls++;
+    const result = await query.apply(this, args);
+    if (Array.isArray(result)) readRows.push(...result);
+    return result;
+  };
+  let response;
+  try { response = await api('GET', path, null, token); }
+  finally { db.query = query; }
+  assert.equal(response.status, 200, JSON.stringify(response.body));
+  assert.ok(calls <= budget, `${path} needed ${calls} database calls (budget ${budget})`);
+  return { ...response, readRows };
+}
+
+test('History and collection load many saved artworks with bounded reads, unchanged progress, data and exhibition eligibility', async () => {
+  const user = await register('loadartworks1');
+  const db = getDb();
+  const picture = (await api('GET', '/pictures/1', null, user.token)).body.picture;
+  const filled = FULL_FILLS(picture);
+  const earlier = new Date(Date.now() - 2 * 86400000).toISOString();
+  const finished = new Date(Date.now() - 3600000).toISOString();
+  const completed = [], drafts = [];
+  for (let i = 0; i < 24; i++) {
+    const done = i < 12;
+    const data = { fills: done ? filled : i === 12 ? {} : { [picture.regions[0].id]: '#FF0000' }, strokes: [], stickers: [] };
+    if (done && i !== 1) data.signature = { name: 'Saved signature', style: 'classic', x: 500, y: 560, scale: 0.8, rot: 0 };
+    const row = await db.prepare(`INSERT INTO artworks (user_id,picture_id,mode,status,data,thumbnail,created_at,updated_at,completed_at)
+      VALUES (?,1,'free',?,?,?,?,?,?) RETURNING id`).get(user.id, done ? 'completed' : 'in_progress', JSON.stringify(data), 'saved-thumbnail', earlier, finished, done ? finished : null);
+    (done ? completed : drafts).push(row.id);
+  }
+  await db.prepare(`INSERT INTO exhibition_entries (artwork_id,user_id,round_key,board,status)
+    VALUES (?,?,'2099-01-05','free','pending')`).run(completed[0], user.id);
+  const history = await measuredGet('/artworks?progress=1', user.token, 3);
+  assert.equal(history.body.artworks.length, 24);
+  assert.equal(history.body.artworks.find(a => a.id === drafts[0]).progress, 0);
+  assert.ok(history.body.artworks.filter(a => drafts.slice(1).includes(a.id)).every(a => a.progress > 0 && a.progress < 100));
+  const collection = await measuredGet('/artworks?status=completed&eligibility=1', user.token, 5);
+  assert.equal(collection.body.artworks.length, 12);
+  assert.equal(collection.body.artworks.find(a => a.id === completed[0]).exhibitEligible, false, 'Already submitted artwork stays ineligible');
+  assert.equal(collection.body.artworks.find(a => a.id === completed[1]).exhibitEligible, false, 'A missing signature stays ineligible');
+  assert.ok(collection.body.artworks.filter(a => completed.slice(2).includes(a.id)).every(a => a.exhibitEligible));
+  assert.ok(!history.readRows.some(row => row.svg), 'History should not download SVG artwork from the database');
+  assert.ok(!collection.readRows.some(row => row.svg), 'Eligibility checks need geometry, not SVG artwork');
+  assert.ok(collection.body.artworks.every(a => a.data === undefined && a.svg === undefined && a.manifest === undefined));
+  const reopened = await api('GET', `/artworks/${completed[2]}`, null, user.token);
+  assert.deepEqual(reopened.body.artwork.data.fills, filled);
+  assert.equal(reopened.body.artwork.data.signature.name, 'Saved signature');
+  assert.match(reopened.body.picture.svg, /^<svg/);
+  assert.equal((await api('POST', '/auth/login', { username: 'loadartworks1', password: 'abc12345' })).status, 200);
+  for (let i = 0; i < 12; i++) {
+    const book = await db.prepare('INSERT INTO storybooks (user_id,title) VALUES (?,?) RETURNING id').get(user.id, `Saved book ${i}`);
+    await db.prepare("INSERT INTO storybook_pages (storybook_id,artwork_id,position,caption) VALUES (?,?,0,'Saved caption')").run(book.id, completed[i]);
+  }
+  const books = await measuredGet('/storybooks', user.token, 2);
+  assert.equal(books.body.storybooks.length, 12);
+  assert.ok(books.body.storybooks.every(b => b.pageCount === 1 && b.cover === 'saved-thumbnail' && b.pages === undefined));
+  const book = await api('GET', `/storybooks/${books.body.storybooks[0].id}`, null, user.token);
+  assert.equal(book.body.storybook.pages[0].caption, 'Saved caption');
+});
+
+test('Batched friend and trade lists preserve direction, status, card ownership and fresh public VIP profiles', async () => {
+  const user = await register('loadsocial1');
+  const db = getDb();
+  const Picture = await import('../src/models/picture.js');
+  const Card = await import('../src/models/card.js');
+  const cardPicture = Object.values(await Picture.cardPool()).flat()[0];
+  const ownCard = await Card.add(user.id, cardPicture, 'gacha');
+  const people = [], tradeIds = [];
+  for (let i = 0; i < 12; i++) {
+    const person = await db.prepare('INSERT INTO users (username,nickname,password_hash,guardian_contact,friend_code) VALUES (?,?,?,?,?) RETURNING id')
+      .get(`loadfriend${i}`, `Friend ${i}`, 'private-hash', 'private@example.invalid', `LOAD${i}`);
+    people.push(person.id);
+    const incoming = i % 3 === 0;
+    await db.prepare('INSERT INTO friendships (requester_id,addressee_id,status) VALUES (?,?,?)')
+      .run(incoming ? person.id : user.id, incoming ? user.id : person.id, i % 3 === 2 ? 'accepted' : 'pending');
+    const otherCard = await Card.add(person.id, cardPicture, 'gacha');
+    const trade = await db.prepare('INSERT INTO trades (from_user,to_user,offer_card_id,request_card_id,status) VALUES (?,?,?,?,?) RETURNING id')
+      .get(i % 2 ? person.id : user.id, i % 2 ? user.id : person.id, i % 2 ? otherCard : ownCard, i % 2 ? ownCard : null, i < 2 ? 'pending' : 'declined');
+    tradeIds.push(trade.id);
+  }
+  await db.prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'month',?,?)")
+    .run(people[0], new Date(Date.now() - 1000).toISOString(), new Date(Date.now() + 86400000).toISOString());
+  const friends = await measuredGet('/social/friends', user.token, 3);
+  assert.deepEqual(['friends','incoming','outgoing'].map(key => friends.body[key].length), [4,4,4]);
+  assert.equal(friends.body.incoming.find(f => f.user.id === people[0]).user.vip, true);
+  assert.ok([...friends.body.friends,...friends.body.incoming,...friends.body.outgoing].every(f => f.user.password_hash === undefined && f.user.guardian_contact === undefined));
+  const trades = await measuredGet('/social/trades', user.token, 6);
+  assert.deepEqual(trades.body.trades.map(t => t.id), tradeIds.slice().reverse());
+  assert.equal(trades.body.usedToday, 1);
+  assert.equal(trades.body.dailyLimit, 1);
+  assert.equal(trades.body.trades.at(-1).offer.id, ownCard);
+  assert.equal(trades.body.trades.at(-1).kind, 'gift');
+  assert.equal(trades.body.trades.at(-2).request.id, ownCard);
+  assert.equal(trades.body.trades.at(-2).kind, 'exchange');
+  assert.equal(trades.body.trades.at(-1).to.vip, true);
+  await db.prepare('UPDATE subscriptions SET ends_at=? WHERE user_id=?').run(new Date(Date.now() - 1).toISOString(), people[0]);
+  assert.equal((await api('GET', '/social/trades', null, user.token)).body.trades.at(-1).to.vip, false);
+});
+
+test('Multi-card reveals keep every duplicate copy and roll back invalid or overdrawn pulls', async () => {
+  const user = await register('loadgacha1');
+  const db = getDb();
+  const catalog = (await api('GET', '/gacha/catalog', null, user.token)).body.cards;
+  const choices = [catalog[1].pictureId, catalog[0].pictureId, catalog[1].pictureId, ...catalog.slice(2,6).map(c => c.pictureId)];
+  await db.prepare('UPDATE users SET gacha_points=350 WHERE id=?').run(user.id);
+  const before = await db.prepare('SELECT COUNT(*) AS c FROM user_cards WHERE user_id=?').get(user.id);
+  const invalid = await api('POST', '/gacha/pull', { pictureIds: [...choices.slice(0,6),999999], preview: true }, user.token);
+  assert.equal(invalid.body.error.code, 'invalid_card');
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM user_cards WHERE user_id=?').get(user.id)).c, before.c);
+  assert.equal((await db.prepare('SELECT gacha_points FROM users WHERE id=?').get(user.id)).gacha_points, 350);
+  const result = await api('POST', '/gacha/pull', { pictureIds: choices, preview: true }, user.token);
+  assert.equal(result.status, 200);
+  assert.deepEqual(result.body.results.map(r => r.picture.id), choices);
+  assert.equal(new Set(result.body.results.map(r => r.cardId)).size, 7);
+  assert.equal(result.body.gachaPoints, 0);
+  for (const card of result.body.results) {
+    const saved = await db.prepare('SELECT user_id,picture_id FROM user_cards WHERE id=?').get(card.cardId);
+    assert.equal(saved.user_id, user.id);
+    assert.equal(saved.picture_id, card.picture.id);
+    assert.ok(card.picture.preview && !card.picture.svg);
+  }
+  const cards = await measuredGet('/gacha/cards?preview=1', user.token, 4);
+  assert.equal(cards.body.cards.length, 7);
+  assert.equal(cards.body.distinct, 6);
+  assert.equal(Object.keys(cards.body.pictures).length, 6, 'Duplicate copies share preview metadata without losing a card');
+  assert.ok(cards.body.cards.every(c => {
+    const picture = cards.body.pictures[c.pictureId];
+    return picture.id === c.pictureId && picture.preview && !picture.svg;
+  }));
+  assert.ok(!cards.readRows.some(row => row.svg || row.manifest), 'Owned-card previews must not read editor blobs');
+  assert.ok((await api('GET', '/gacha/cards', null, user.token)).body.cards.every(c => c.picture === undefined), 'Legacy collection responses remain compatible');
+  await db.prepare('UPDATE users SET gacha_points=350 WHERE id=?').run(user.id);
+  const simultaneous = await Promise.all([0,1].map(() => api('POST', '/gacha/pull', { pictureIds: choices, preview: true }, user.token)));
+  assert.deepEqual(simultaneous.map(r => r.status).sort(), [200,400]);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM user_cards WHERE user_id=?').get(user.id)).c, 14);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM gacha_pulls WHERE user_id=?').get(user.id)).c, 14);
+  assert.equal((await db.prepare('SELECT gacha_points FROM users WHERE id=?').get(user.id)).gacha_points, 0);
+});
+
+test('HTTP compression preserves the complete picture payload and private/no-store headers', async () => {
+  const user = await register('loadhttp1');
+  const request = encoding => new Promise((resolve, reject) => {
+    httpGet(`${base}/api/pictures/1`, { headers: { 'Accept-Encoding': encoding, Authorization: `Bearer ${user.token}` } }, res => {
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('error', reject);
+      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, bytes: Buffer.concat(chunks) }));
+    }).on('error', reject);
+  });
+  const plain = await request('identity');
+  assert.equal(plain.status, 200);
+  for (const [encoding, decompress] of [['gzip',gunzipSync], ['br',brotliDecompressSync]]) {
+    const compressed = await request(encoding);
+    assert.equal(compressed.status, 200);
+    assert.equal(compressed.headers['content-encoding'], encoding);
+    assert.deepEqual(decompress(compressed.bytes), plain.bytes);
+    assert.ok(compressed.bytes.length < plain.bytes.length, 'Compression should reduce the transmitted picture bytes');
+    assert.match(compressed.headers['cache-control'], /private, no-store/);
+    assert.match(compressed.headers.vary, /Authorization/);
+    assert.match(compressed.headers.vary, /Accept-Encoding/);
+  }
+});
+
+test('Exhibition pagination reads only the displayed artworks and preserves winners, live reactions, hidden entries and showcase flags', async () => {
+  const Ex = await import('../src/services/exhibition.js');
+  const owner = await register('loadexhibit1');
+  const viewer = await register('loadexhibit2');
+  const db = getDb();
+  Ex.setClockForTest('2037-03-04T02:00:00.000Z');
+  try {
+    await Ex.wall(viewer.id); // Complete any older rounds before preparing this isolated display round.
+    const current = Ex.schedule().current, previous = Ex.shiftKey(current, -1);
+    await db.prepare('INSERT INTO exhibition_rounds (round_key,judged_at) VALUES (?,?)').run(previous, Ex.now().toISOString());
+    const entries = [], artworks = [];
+    for (let i = 0; i < 13; i++) {
+      const art = await db.prepare("INSERT INTO artworks (user_id,picture_id,mode,status,data) VALUES (?,1,'free','completed',?) RETURNING id")
+        .get(owner.id, JSON.stringify({ fills: {}, strokes: [], stickers: [], fixture: `Saved artwork ${i}` }));
+      artworks.push(art.id);
+      const entry = await db.prepare(`INSERT INTO exhibition_entries (artwork_id,user_id,round_key,board,status,award,hidden,final_reactions)
+        VALUES (?,?,?,'free','approved',?,?,?) RETURNING id`)
+        .get(art.id, owner.id, i < 2 ? previous : current, i < 2 ? 1 : 0, i === 12 ? 1 : 0, i < 2 ? JSON.stringify({ heart: 7 }) : null);
+      entries.push(entry.id);
+      await db.prepare("INSERT INTO exhibition_reactions (entry_id,user_id,emoji) VALUES (?,?,'star')").run(entry.id, viewer.id);
+    }
+    const first = await measuredGet('/exhibition/wall?offset=0&limit=5', viewer.token, 12);
+    assert.equal(first.body.total, 12);
+    assert.equal(first.body.entries.length, 5);
+    assert.equal(first.readRows.filter(row => row.data && row.artwork_id).length, 5, 'The database must not return artwork blobs outside this page');
+    assert.deepEqual(new Set(first.body.entries.slice(0,2).map(e => e.id)), new Set(entries.slice(0,2)));
+    assert.ok(first.body.entries.slice(0,2).every(e => e.final && e.total === 7 && e.mine === 'star'));
+    assert.deepEqual(first.body.entries.slice(2).map(e => e.id), entries.slice(9,12).reverse());
+    assert.ok(first.body.entries.slice(2).every(e => !e.final && e.reactions.star === 1 && e.total === 1 && e.mine === 'star'));
+    assert.ok(first.body.entries.every(e => e.data.fixture && first.body.pictures[e.pictureId].svg));
+    const crossing = await api('GET', '/exhibition/wall?offset=1&limit=5', null, viewer.token);
+    assert.deepEqual(crossing.body.entries.slice(0,4).map(e => e.id), first.body.entries.slice(1).map(e => e.id));
+    const tail = await api('GET', '/exhibition/wall?offset=10&limit=5', null, viewer.token);
+    assert.deepEqual(tail.body.entries.map(e => e.id), entries.slice(2,4).reverse());
+    assert.ok(![...first.body.entries,...crossing.body.entries,...tail.body.entries].some(e => e.id === entries[12]));
+    assert.deepEqual((await api('GET', '/exhibition/wall?offset=12&limit=5', null, viewer.token)).body.entries, []);
+    const mine = await api('GET', '/exhibition/mine', null, owner.token);
+    assert.equal(mine.body.entries[artworks[0]].reactions.heart, 7);
+    assert.equal(mine.body.entries[artworks[2]].reactions.star, 1);
+    assert.equal(mine.body.entries[artworks[2]].data, undefined);
+    const showcase = await api('GET', `/exhibition/showcase/${owner.id}`, null, owner.token);
+    assert.equal(showcase.body.entries.length, 12);
+    assert.ok(showcase.body.entries.filter(e => entries.slice(0,2).includes(e.id)).every(e => !e.onShow));
+    assert.ok(showcase.body.entries.filter(e => entries.slice(2,12).includes(e.id)).every(e => e.onShow));
+    assert.equal((await api('GET', `/exhibition/showcase/${owner.id}`, null, viewer.token)).status, 403);
+  } finally {
+    Ex.setClockForTest(null);
+  }
+});
+
+test('The admin library tree keeps every theme/object/picture and empty groups with bounded reads and unchanged admin access', async () => {
+  const user = await register('loadadmin1');
+  assert.equal((await api('GET', '/admin/tree', null, user.token)).status, 403);
+  const db = getDb();
+  await db.prepare("UPDATE users SET role='admin' WHERE id=?").run(user.id);
+  const empty = await db.prepare("INSERT INTO themes (slug,name_vi,name_en,sort) VALUES ('load-empty','Trống','Empty',10000) RETURNING id").get();
+  const group = await db.prepare("INSERT INTO themes (slug,name_vi,name_en,sort) VALUES ('load-empty-object','Nhóm trống','Empty group',10001) RETURNING id").get();
+  await db.prepare("INSERT INTO objects (theme_id,slug,name_vi,name_en) VALUES (?,'empty-object','Trống','Empty')").run(group.id);
+  const response = await measuredGet('/admin/tree', user.token, 4);
+  assert.deepEqual(response.body.themes.find(t => t.id === empty.id).objects, []);
+  assert.deepEqual(response.body.themes.find(t => t.id === group.id).objects[0].pictures, []);
+  assert.equal(response.body.themes.flatMap(t => t.objects).length, (await db.prepare('SELECT COUNT(*) AS c FROM objects').get()).c);
+  assert.equal(response.body.themes.flatMap(t => t.objects.flatMap(o => o.pictures)).length, (await db.prepare('SELECT COUNT(*) AS c FROM pictures').get()).c);
+  assert.ok(!response.readRows.some(row => row.svg || row.manifest));
+  const Picture = await import('../src/models/picture.js');
+  const { syncThemeVisibility } = await import('../../database/seeds/seed.js');
+  const before = await db.prepare('SELECT COUNT(*) AS c FROM artworks').get();
+  assert.equal(await syncThemeVisibility({ themes: [{ slug:'load-empty',hidden:true }, { slug:'load-empty-object',hidden:false }] }), 1);
+  assert.equal((await Picture.findTheme('load-empty')).active, 0);
+  assert.equal((await Picture.findTheme('load-empty-object')).active, 1);
+  assert.equal(await syncThemeVisibility({ themes: [{ slug:'load-empty',hidden:false }, { slug:'load-empty-object',hidden:false }] }), 1);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM artworks').get()).c, before.c);
 });

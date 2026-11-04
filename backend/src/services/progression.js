@@ -132,12 +132,13 @@ export async function touchLogin(userId, todayKey) {
   return await evaluate(userId);
 }
 
-export async function view(userId, lang = 'vi') {
-  const user = await User.findById(userId);
-  const stats = await User.getStats(userId);
+export async function view(userId, lang = 'vi', currentUser) {
+  const user = currentUser?.id === userId ? currentUser : await User.findById(userId);
+  const [stats, done, levelMissions] = await Promise.all([
+    User.getStats(userId), completedSet(userId), missionsOfLevel(user.level),
+  ]);
   const baseline = parseJson(user.level_baseline, {});
-  const done = await completedSet(userId);
-  const missions = await asyncMap(await missionsOfLevel(user.level), async (m) => ({
+  const missions = await asyncMap(levelMissions, async (m) => ({
     id: m.id,
     title: lang === 'en' ? m.title_en : m.title_vi,
     titles: { vi: m.title_vi, en: m.title_en },

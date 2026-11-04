@@ -29,9 +29,9 @@ function loadAge() {
 }
 
 /** Thẻ đã bóc: bấm vào để chọn chế độ rồi tô. Tô xong tranh mới vào Bộ sưu tập (tab Tranh thẻ hiếm). */
-function CardFrame({ card, onPick }) {
+function CardFrame({ card, picture, onPick }) {
   const { i18n } = useTranslation();
-  const pic = usePicture(card.pictureId);
+  const pic = usePicture(card.pictureId, picture);
   const title = card.name[i18n.language];
   return (
     <div className="relative">
@@ -43,14 +43,23 @@ function CardFrame({ card, onPick }) {
 
 function CardsBoard() {
   const { t } = useTranslation();
-  const [col, setCol] = useState(null);
+  const token = useAuth(s => s.token);
+  const [loaded, setLoaded] = useState(null);
+  const col = loaded && loaded.token === token ? loaded.collection : null;
   const [picked, setPicked] = useState(null);
   const gridRef = useRef(null);
   useFitRows(gridRef, [col]);
   useEffect(() => {
-    api.get('/gacha/cards').then(setCol).catch(() => setCol({ cards: [] }));
-  }, []);
-  const cards = col ? Object.values(col.cards.reduce((acc, c) => ({ ...acc, [c.pictureId]: acc[c.pictureId] || c }), {})) : [];
+    let alive = true;
+    setPicked(null);
+    api.get('/gacha/cards?preview=1')
+      .then(collection => alive && setLoaded({ token, collection }))
+      .catch(() => alive && setLoaded({ token, collection: { cards: [] } }));
+    return () => { alive = false; };
+  }, [token]);
+  const unique = new Map();
+  for (const card of col?.cards || []) if (!unique.has(card.pictureId)) unique.set(card.pictureId, card);
+  const cards = [...unique.values()];
   return (
     <div>
       <div className="mb-3 flex justify-end">
@@ -65,7 +74,7 @@ function CardsBoard() {
       )}
       <div ref={gridRef} className={WOOD_GRID}>
         {cards.map((c) => (
-          <CardFrame key={c.pictureId} card={c} onPick={setPicked} />
+          <CardFrame key={c.pictureId} card={c} picture={col?.pictures?.[c.pictureId]} onPick={setPicked} />
         ))}
       </div>
       {picked && <ModePicker picture={picked} onClose={() => setPicked(null)} />}

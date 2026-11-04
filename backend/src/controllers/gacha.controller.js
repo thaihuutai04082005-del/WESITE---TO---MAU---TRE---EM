@@ -31,7 +31,7 @@ export async function pull(req, res) {
     const u = await User.findById(req.user.id);
     if (u.gacha_points < GACHA_COST * count) throw badRequest('not_enough_gacha_points');
     const pool = await Picture.cardPool();
-    const out = [];
+    const choices = [];
     for (let i = 0; i < count; i++) {
       let rarity;
       let pictureId;
@@ -40,25 +40,37 @@ export async function pull(req, res) {
         rarity = ['S', 'A', 'B', 'C'].find((r) => pool[r].includes(pictureId));
         if (!rarity) throw badRequest('invalid_card');
       } else ({ rarity, pictureId } = pullCard(pool));
-      const cardId = await Card.add(u.id, pictureId, 'gacha');
-      await getDb().prepare('INSERT INTO gacha_pulls (user_id, picture_id, rarity) VALUES (?, ?, ?)').run(u.id, pictureId, rarity);
-      const p = await Picture.findPicture(pictureId);
-      out.push({ cardId, rarity, picture: req.body?.preview === true ? Picture.toPreview(p) : Picture.toClient(p) });
+      choices.push({ pictureId, rarity });
     }
+    const pictureIds = choices.map(choice => choice.pictureId);
+    const cardIds = await Card.addMany(u.id, pictureIds, 'gacha');
+    await getDb().prepare(`INSERT INTO gacha_pulls (user_id, picture_id, rarity)
+      VALUES ${choices.map(() => '(?, ?, ?)').join(',')} RETURNING id`)
+      .run(...choices.flatMap(choice => [u.id, choice.pictureId, choice.rarity]));
+    const pictures = await Picture.findPictures(pictureIds, { preview: req.body?.preview === true });
     await getDb()
       .prepare('UPDATE users SET gacha_points = gacha_points - ? WHERE id = ?')
       .run(GACHA_COST * count, u.id);
-    return out;
+    return choices.map(({ pictureId, rarity }, i) => ({
+      cardId: cardIds[i], rarity,
+      picture: req.body?.preview === true ? Picture.toPreview(pictures.get(pictureId)) : Picture.toClient(pictures.get(pictureId)),
+    }));
   });
   const u = await User.findById(req.user.id);
   res.json({ results, gachaPoints: u.gacha_points, pullsAvailable: Math.floor(u.gacha_points / GACHA_COST) });
 }
 
 export async function collection(req, res) {
-  const cards = await Card.listByUser(req.user.id);
-  const total = (await getDb().prepare(`SELECT COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND p.hidden = 0 AND ${Picture.ACTIVE_PICTURE}`).get()).c;
+  const [cards, { c: total }] = await Promise.all([
+    Card.listByUser(req.user.id),
+    getDb().prepare(`SELECT COUNT(*) AS c FROM pictures p WHERE p.is_card = 1 AND p.hidden = 0 AND ${Picture.ACTIVE_PICTURE}`).get(),
+  ]);
+  const pictures = req.query.preview === '1'
+    ? Object.fromEntries([...(await Picture.findPictures(cards.map(card => card.pictureId), { preview: true }))]
+      .map(([id, picture]) => [id, Picture.toPreview(picture)]))
+    : undefined;
   const distinct = new Set(cards.map((c) => c.pictureId)).size;
-  res.json({ cards, distinct, total });
+  res.json({ cards, distinct, total, ...(pictures ? { pictures } : {}) });
 }
 
 /** Xem trước tranh của 1 thẻ mình sở hữu (để hiển thị trong bộ sưu tập). */
@@ -96,7 +108,7 @@ export async function catalog(req, res) {
 
 /** Ảnh 1 thẻ để xem: thẻ đã có, hoặc mọi thẻ khi đang bật xem trước (GACHA_PREVIEW). Chỉ để xem, không mở khoá tô. */
 export async function catalogPicture(req, res) {
-  const p = await Picture.findPicture(Number(req.params.id));
+  const p = await Picture.findPicture(Number(req.params.id), { preview: req.query.preview === '1' });
   if (!p || !p.is_card || p.hidden || !await Picture.findActiveTheme(p.theme_slug)) throw notFound();
   const own = await getDb().prepare('SELECT 1 FROM user_cards WHERE user_id = ? AND picture_id = ?').get(req.user.id, p.id);
   if (!own && !env.gachaPreview && req.user.role !== 'admin') throw forbidden('card_not_owned');

@@ -1,5 +1,8 @@
 # Dọn tranh ẩn và giảm thời gian tải
 
+Bản tối ưu tiếp theo sau khi chuyển sang Supabase được ghi riêng tại
+[Giảm thời gian tải dữ liệu](toi-uu-tai-du-lieu-supabase.md).
+
 Chỉ các tranh được đánh dấu ẩn trong catalog hoặc thuộc ba chủ đề đã ẩn được
 loại khỏi kho: 320 tranh, 379 file SVG/nguồn, 30.424.369 byte. Danh sách slug
 đã loại nằm trong `assets-library/retired-pictures.json` để xử lý máy chủ cũ.

@@ -25,15 +25,21 @@ const hasContent = (d) => Object.keys(d.fills).length > 0 || d.strokes.length > 
 
 export async function list(req, res) {
   const { status, mode, eligibility, progress } = req.query;
-  const artworks = await Artwork.listByUser(req.user.id, { status: status || undefined, mode: mode || undefined });
+  const rows = await Artwork.listRowsByUser(req.user.id, { status:status || undefined, mode:mode || undefined, withData:!!(eligibility || progress) });
+  const artworks = rows.map(Artwork.toSummary);
+  const raw = new Map(rows.map(row => [row.id, row]));
+  const candidates = rows.filter(row => eligibility && row.status === 'completed' && row.mode === 'free');
+  const picturesNeeded = rows.filter(row => (progress && row.status === 'in_progress') || (eligibility && row.status === 'completed' && row.mode === 'free'));
+  const pictures = await Picture.findManifests(picturesNeeded.map(row => row.picture_id));
+  const checks = await Exhibition.prepareArtworkChecks(candidates, pictures);
   // Tranh hoàn thành đã đủ điều kiện gửi triển lãm (máy tự kiểm các điều 1, 2, 3, 4, 8) → bé thấy chú thích "Đủ điều kiện triển lãm".
   // Chỉ tính khi có ?eligibility=1 (trang Bộ sưu tập) vì phải đọc dữ liệu từng tranh.
   for (const a of eligibility ? artworks : []) {
     a.exhibitEligible = false;
     if (a.status !== 'completed' || a.mode !== 'free') continue;
     try {
-      const row = await Artwork.findById(a.id);
-      a.exhibitEligible = !!row && (await Exhibition.checkArtwork(row)).failures.length === 0;
+      const row = raw.get(a.id);
+      a.exhibitEligible = !!row && (await Exhibition.checkArtwork(row, checks.get(a.id))).failures.length === 0;
     } catch {
       /* tranh lỗi dữ liệu: coi như chưa đủ điều kiện */
     }
@@ -44,8 +50,8 @@ export async function list(req, res) {
       if (a.status !== 'in_progress') continue;
       a.progress = 0;
       try {
-        const row = await Artwork.findById(a.id);
-        const total = Picture.manifestOf(await Picture.findPicture(a.pictureId)).regions.length;
+        const row = raw.get(a.id);
+        const total = Picture.manifestOf(pictures.get(a.pictureId)).regions.length;
         const d = Artwork.dataOf(row);
         const filled = Object.keys(d.fills).length;
         if (total && filled) a.progress = Math.max(1, Math.min(99, Math.round((filled / total) * 100)));
@@ -61,7 +67,7 @@ export async function list(req, res) {
 export async function create(req, res) {
   const { pictureId, mode } = req.body || {};
   if (!['template', 'free'].includes(mode)) throw badRequest('invalid_mode');
-  const p = await Picture.findPicture(Number(pictureId));
+  const p = await Picture.findPicture(Number(pictureId), { metadataOnly:true });
   if (!p) throw notFound('picture_not_found');
   await assertCanUsePicture(req.user, p);
   const a = await Artwork.create({ userId: req.user.id, pictureId: p.id, mode });
@@ -73,14 +79,16 @@ export async function create(req, res) {
 
 export async function get(req, res) {
   const a = await own(req);
-  const p = await Picture.findPicture(a.picture_id);
+  const [p, exhibited] = await Promise.all([
+    Picture.findPicture(a.picture_id), Exhibition.activeEntryFor(a.id),
+  ]);
   res.json({
     accessError: await pictureAccessError(req.user, p),
     artwork: {
       ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en, is_card: p.is_card, rarity: p.rarity }),
       data: Artwork.dataOf(a),
       counted: !!a.counted,
-      exhibited: !!(await Exhibition.activeEntryFor(a.id)),
+      exhibited: !!exhibited,
     },
     picture: Picture.toClient(p),
   });

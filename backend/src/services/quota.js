@@ -15,21 +15,26 @@ export async function activeSubscription(userId, at = new Date()) {
     .get(userId, iso, iso);
 }
 
-const usedSince = async (userId, fromIso) =>
-  (await getDb().prepare('SELECT COUNT(*) AS c FROM usage_log WHERE user_id = ? AND used_at >= ?').get(userId, fromIso)).c;
-
 export const isVip = async (userId) => !!(await activeSubscription(userId));
 
 /** Free opens the first five active themes in each age group, using the library's display order. */
-export async function themeAccess(userId, at = new Date()) {
+export async function themeAccess(userId, at = new Date(), themes = null) {
   if (userId && await activeSubscription(userId, at)) return { vip: true, allowedIds: null };
-  const rows = await getDb().prepare('SELECT id, age_group FROM themes WHERE active = 1 ORDER BY sort, id').all();
+  const rows = themes ?? await getDb().prepare('SELECT id, age_group FROM themes WHERE active = 1 ORDER BY sort, id').all();
   return { vip: false, allowedIds: freeThemeIds(rows, PLANS.free.themesPerAge) };
 }
 
 export async function canAccessTheme(userId, themeId) {
-  const access = await themeAccess(userId);
-  return access.vip || access.allowedIds.has(themeId);
+  const iso = new Date().toISOString();
+  // The same per-age display order as freeThemeIds, without a second network trip.
+  const row = await getDb().prepare(`SELECT (
+    EXISTS (SELECT 1 FROM subscriptions WHERE user_id = ? AND starts_at <= ? AND ends_at > ?)
+    OR EXISTS (SELECT 1 FROM (
+      SELECT id, ROW_NUMBER() OVER (PARTITION BY COALESCE(age_group, '6-8') ORDER BY sort, id) AS position
+      FROM themes WHERE active = 1
+    ) allowed WHERE id = ? AND position <= ?)
+  ) AS allowed`).get(userId ?? null, iso, iso, themeId, PLANS.free.themesPerAge);
+  return !!row.allowed;
 }
 
 export async function assertThemeAccess(userId, themeId) {
@@ -37,10 +42,16 @@ export async function assertThemeAccess(userId, themeId) {
 }
 
 export async function planStatus(userId, at = new Date()) {
-  const sub = await activeSubscription(userId, at);
-  if (!sub) {
-    const from = vnDayStart(at);
-    const used = await usedSince(userId, from);
+  const iso = at.toISOString();
+  const from = vnDayStart(at);
+  const row = await getDb().prepare(`SELECT s.plan, s.starts_at, s.ends_at,
+    (SELECT COUNT(*) FROM usage_log WHERE user_id = ? AND used_at >= COALESCE(s.starts_at, ?)) AS used
+    FROM (SELECT 1 AS singleton) base LEFT JOIN (
+      SELECT plan, starts_at, ends_at FROM subscriptions WHERE user_id = ? AND starts_at <= ? AND ends_at > ?
+      ORDER BY CASE plan WHEN 'year' THEN 0 ELSE 1 END, ends_at DESC LIMIT 1
+    ) s ON 1 = 1`).get(userId, from, userId, iso, iso);
+  if (!row.plan) {
+    const used = row.used;
     return {
       plan: 'free',
       vip: false,
@@ -53,13 +64,13 @@ export async function planStatus(userId, at = new Date()) {
   }
   // VIP (Tháng hoặc Năm): tô không giới hạn.
   return {
-    plan: sub.plan,
+    plan: row.plan,
     vip: true,
     limit: null,
-    used: await usedSince(userId, sub.starts_at),
+    used: row.used,
     remaining: null,
     resetsAt: null,
-    endsAt: sub.ends_at,
+    endsAt: row.ends_at,
   };
 }
 

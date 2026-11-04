@@ -1,0 +1,294 @@
+{
+  "date": "2026-11-04",
+  "baselineCommit": "ecbd2e9",
+  "environment": "Local PostgreSQL/PGlite with fake data; NOT production Render/Supabase",
+  "simulatedDatabaseRoundTripMs": 60,
+  "fixture": {
+    "pictures": 232,
+    "completedArtworks": 12,
+    "draftArtworks": 12,
+    "friends": 12,
+    "trades": 12,
+    "storybooks": 12
+  },
+  "httpBytes": "Decoded response bytes, not compressed wire bytes",
+  "measurements": [
+    {
+      "name": "meta",
+      "before": {
+        "status": 200,
+        "queries": 0,
+        "ms": 43,
+        "dbBytes": 0,
+        "httpBytes": 1530
+      },
+      "after": {
+        "status": 200,
+        "queries": 0,
+        "ms": 38,
+        "dbBytes": 0,
+        "httpBytes": 1530
+      }
+    },
+    {
+      "name": "session",
+      "before": {
+        "status": 200,
+        "queries": 7,
+        "ms": 446,
+        "dbBytes": 1405,
+        "httpBytes": 724
+      },
+      "after": {
+        "status": 200,
+        "queries": 4,
+        "ms": 133,
+        "dbBytes": 987,
+        "httpBytes": 724
+      }
+    },
+    {
+      "name": "themes",
+      "before": {
+        "status": 200,
+        "queries": 5,
+        "ms": 360,
+        "dbBytes": 21014,
+        "httpBytes": 18235
+      },
+      "after": {
+        "status": 200,
+        "queries": 4,
+        "ms": 238,
+        "dbBytes": 24373,
+        "httpBytes": 18235
+      }
+    },
+    {
+      "name": "theme pictures",
+      "before": {
+        "status": 200,
+        "queries": 6,
+        "ms": 375,
+        "dbBytes": 6821,
+        "httpBytes": 5113
+      },
+      "after": {
+        "status": 200,
+        "queries": 4,
+        "ms": 192,
+        "dbBytes": 7629,
+        "httpBytes": 5113
+      }
+    },
+    {
+      "name": "progression",
+      "before": {
+        "status": 200,
+        "queries": 6,
+        "ms": 374,
+        "dbBytes": 1459,
+        "httpBytes": 1254
+      },
+      "after": {
+        "status": 200,
+        "queries": 5,
+        "ms": 192,
+        "dbBytes": 998,
+        "httpBytes": 1254
+      }
+    },
+    {
+      "name": "card preview",
+      "before": {
+        "status": 200,
+        "queries": 3,
+        "ms": 264,
+        "dbBytes": 333364,
+        "httpBytes": 628
+      },
+      "after": {
+        "status": 200,
+        "queries": 3,
+        "ms": 189,
+        "dbBytes": 1307,
+        "httpBytes": 628
+      }
+    },
+    {
+      "name": "gacha catalog picture",
+      "before": {
+        "status": 200,
+        "queries": 4,
+        "ms": 257,
+        "dbBytes": 333505,
+        "httpBytes": 628
+      },
+      "after": {
+        "status": 200,
+        "queries": 4,
+        "ms": 250,
+        "dbBytes": 1448,
+        "httpBytes": 628
+      }
+    },
+    {
+      "name": "gacha",
+      "before": {
+        "status": 200,
+        "queries": 3,
+        "ms": 193,
+        "dbBytes": 965,
+        "httpBytes": 190
+      },
+      "after": {
+        "status": 200,
+        "queries": 3,
+        "ms": 187,
+        "dbBytes": 965,
+        "httpBytes": 190
+      }
+    },
+    {
+      "name": "history",
+      "before": {
+        "status": 200,
+        "queries": 26,
+        "ms": 1632,
+        "dbBytes": 2313393,
+        "httpBytes": 6329
+      },
+      "after": {
+        "status": 200,
+        "queries": 3,
+        "ms": 192,
+        "dbBytes": 43695,
+        "httpBytes": 6329
+      }
+    },
+    {
+      "name": "collection",
+      "before": {
+        "status": 200,
+        "queries": 50,
+        "ms": 3114,
+        "dbBytes": 2320452,
+        "httpBytes": 3401
+      },
+      "after": {
+        "status": 200,
+        "queries": 5,
+        "ms": 252,
+        "dbBytes": 39139,
+        "httpBytes": 3401
+      }
+    },
+    {
+      "name": "saved artwork",
+      "before": {
+        "status": 200,
+        "queries": 6,
+        "ms": 376,
+        "dbBytes": 194178,
+        "httpBytes": 173308
+      },
+      "after": {
+        "status": 200,
+        "queries": 5,
+        "ms": 257,
+        "dbBytes": 193507,
+        "httpBytes": 173308
+      }
+    },
+    {
+      "name": "friends",
+      "before": {
+        "status": 200,
+        "queries": 26,
+        "ms": 1605,
+        "dbBytes": 7131,
+        "httpBytes": 2041
+      },
+      "after": {
+        "status": 200,
+        "queries": 3,
+        "ms": 189,
+        "dbBytes": 3388,
+        "httpBytes": 2041
+      }
+    },
+    {
+      "name": "trades",
+      "before": {
+        "status": 200,
+        "queries": 64,
+        "ms": 3970,
+        "dbBytes": 16760,
+        "httpBytes": 5660
+      },
+      "after": {
+        "status": 200,
+        "queries": 6,
+        "ms": 194,
+        "dbBytes": 2740,
+        "httpBytes": 5660
+      }
+    },
+    {
+      "name": "storybooks",
+      "before": {
+        "status": 200,
+        "queries": 26,
+        "ms": 1604,
+        "dbBytes": 2855,
+        "httpBytes": 2241
+      },
+      "after": {
+        "status": 200,
+        "queries": 2,
+        "ms": 129,
+        "dbBytes": 2963,
+        "httpBytes": 2241
+      }
+    },
+    {
+      "name": "shop",
+      "before": {
+        "status": 200,
+        "queries": 3,
+        "ms": 188,
+        "dbBytes": 5259,
+        "httpBytes": 4239
+      },
+      "after": {
+        "status": 200,
+        "queries": 3,
+        "ms": 188,
+        "dbBytes": 5259,
+        "httpBytes": 4239
+      }
+    },
+    {
+      "name": "exhibition",
+      "before": {
+        "status": 200,
+        "queries": 8,
+        "ms": 494,
+        "dbBytes": 475,
+        "httpBytes": 366
+      },
+      "after": {
+        "status": 200,
+        "queries": 8,
+        "ms": 492,
+        "dbBytes": 475,
+        "httpBytes": 366
+      }
+    }
+  ],
+  "compressionExample": {
+    "decodedBytes": 172230,
+    "gzipWireBytes": 116229,
+    "brotliWireBytes": 114858
+  }
+}

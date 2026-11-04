@@ -100,9 +100,9 @@ async function startedAt(artwork) {
  * Kiểm tra nội quy phần máy tự làm (điều 1, 2, 3, 4, 8). Điều 5 (lem) đã bỏ vì tô tay có khóa vùng.
  * @returns {{ board: string|null, failures: number[] }}
  */
-export async function checkArtwork(artwork) {
-  const picture = await Picture.findPicture(artwork.picture_id);
-  const manifest = Picture.manifestOf(picture);
+export async function checkArtwork(artwork, prepared) {
+  const picture = prepared ? prepared.picture : await Picture.findPicture(artwork.picture_id);
+  const manifest = prepared ? prepared.manifest : Picture.manifestOf(picture);
   const data = parseJson(artwork.data, {});
   const failures = [];
   const board = boardOf(artwork);
@@ -110,11 +110,31 @@ export async function checkArtwork(artwork) {
   const coverage = coverageScore(manifest, data.fills || {});
   if (artwork.status !== 'completed' || coverage < EXHIBITION.minCoverage) failures.push(2);
   if (!board) failures.push(3);
-  if (await activeEntryFor(artwork.id)) failures.push(4);
+  if (prepared ? prepared.activeEntry : await activeEntryFor(artwork.id)) failures.push(4);
   const filled = Object.keys(data.fills || {}).length;
-  const elapsed = Date.parse(artwork.completed_at || artwork.updated_at) - (await startedAt(artwork));
+  const elapsed = Date.parse(artwork.completed_at || artwork.updated_at) - (prepared ? prepared.startedAt : await startedAt(artwork));
   if (elapsed < Math.max(EXHIBITION.minMs, filled * EXHIBITION.msPerRegion)) failures.push(8);
   return { board, failures, picture, data };
+}
+
+/** Build the same checks for a whole owned-artwork list with bounded database reads. */
+export async function prepareArtworkChecks(artworks, pictures) {
+  if (!artworks.length) return new Map();
+  const ids = artworks.map(a => a.id);
+  const marks = ids.map(() => '?').join(',');
+  const [active, usage, source] = await Promise.all([
+    getDb().prepare(`SELECT DISTINCT artwork_id FROM exhibition_entries WHERE artwork_id IN (${marks}) AND status IN ${ACTIVE}`).all(...ids),
+    getDb().prepare(`SELECT artwork_id,MIN(used_at) AS t FROM usage_log WHERE artwork_id IN (${marks}) GROUP BY artwork_id`).all(...ids),
+    pictures || Picture.findManifests(artworks.map(a => a.picture_id)),
+  ]);
+  const submitted = new Set(active.map(row => row.artwork_id));
+  const times = new Map(usage.map(row => [row.artwork_id, row.t]));
+  const manifests = new Map();
+  for (const [id, picture] of source) {
+    try { manifests.set(id, Picture.manifestOf(picture)); } catch { /* Each broken artwork remains ineligible. */ }
+  }
+  return new Map(artworks.map(a => [a.id, { picture:source.get(a.picture_id), manifest:manifests.get(a.picture_id),
+    activeEntry:submitted.has(a.id), startedAt:Date.parse(times.get(a.id) || a.created_at) }]));
 }
 
 const perRound = async (userId) => EXHIBITION.perRound[(await activeSubscription(userId))?.plan] ?? EXHIBITION.perRound.free;
@@ -313,13 +333,15 @@ export async function scheduleExhibition(intervalMs = 5 * 60 * 1000) {
 // ---------------- Đọc dữ liệu cho giao diện ----------------
 export const findEntry = async (id) => await getDb().prepare('SELECT * FROM exhibition_entries WHERE id = ?').get(id);
 
-const ENTRY_SQL = `SELECT e.*, a.data, a.picture_id, u.nickname, u.username, u.avatar, u.avatar_frame, p.name_vi, p.name_en, p.rarity, p.is_card
+const entrySql = withData => `SELECT e.*, ${withData ? 'a.data,' : ''} a.picture_id, u.nickname, u.username, u.avatar, u.avatar_frame, p.name_vi, p.name_en, p.rarity, p.is_card
   FROM exhibition_entries e JOIN artworks a ON a.id = e.artwork_id JOIN users u ON u.id = e.user_id JOIN pictures p ON p.id = a.picture_id`;
+const ENTRY_SQL = entrySql(true);
+const ENTRY_SQL_LIGHT = entrySql(false);
 
-async function toClient(row, viewerId, { withData = true } = {}) {
-  const counts = row.final_reactions ? parseJson(row.final_reactions, {}) : await reactionCounts(row.id);
+async function toClient(row, viewerId, { withData = true, prepared } = {}) {
+  const counts = row.final_reactions ? parseJson(row.final_reactions, {}) : prepared ? prepared.counts.get(row.id) : await reactionCounts(row.id);
   const mine = viewerId
-    ? (await getDb().prepare('SELECT emoji FROM exhibition_reactions WHERE entry_id = ? AND user_id = ?').get(row.id, viewerId))?.emoji || null
+    ? prepared ? prepared.mine.get(row.id) || null : (await getDb().prepare('SELECT emoji FROM exhibition_reactions WHERE entry_id = ? AND user_id = ?').get(row.id, viewerId))?.emoji || null
     : null;
   return {
     id: row.id,
@@ -342,11 +364,27 @@ async function toClient(row, viewerId, { withData = true } = {}) {
   };
 }
 
+async function clientsFor(rows, viewerId, options = {}) {
+  if (!rows.length) return [];
+  const liveIds = rows.filter(row => !row.final_reactions).map(row => row.id);
+  const ids = rows.map(row => row.id);
+  const [grouped, mineRows] = await Promise.all([
+    liveIds.length ? getDb().prepare(`SELECT entry_id,emoji,COUNT(*) AS c FROM exhibition_reactions
+      WHERE entry_id IN (${liveIds.map(() => '?').join(',')}) GROUP BY entry_id,emoji`).all(...liveIds) : [],
+    viewerId ? getDb().prepare(`SELECT entry_id,emoji FROM exhibition_reactions WHERE user_id=?
+      AND entry_id IN (${ids.map(() => '?').join(',')})`).all(viewerId,...ids) : [],
+  ]);
+  const counts = new Map(liveIds.map(id => [id,Object.fromEntries(EXHIBITION.reactions.map(key => [key,0]))]));
+  for (const row of grouped) counts.get(row.entry_id)[row.emoji] = row.c;
+  const prepared = { counts, mine:new Map(mineRows.map(row => [row.entry_id,row.emoji])) };
+  return Promise.all(rows.map(row => toClient(row,viewerId,{...options,prepared})));
+}
+
 /** SVG các tranh (gom trùng) để trình duyệt tự vẽ lại tranh từ dữ liệu tô — không tin ảnh gửi lên. */
 async function picturesFor(rows) {
   const out = {};
-  for (const id of new Set(rows.map((r) => r.picture_id))) {
-    const p = await Picture.findPicture(id);
+  const pictures = await Picture.findSvgs(rows.map(row => row.picture_id));
+  for (const [id,p] of pictures) {
     out[id] = { id, svg: p.svg };
   }
   return out;
@@ -367,7 +405,7 @@ export async function hall(viewerId) {
     schedule: s,
     counts,
     lastRound: last?.round_key || null,
-    winners: await asyncMap(winners, async (r) => await toClient(r, viewerId)),
+    winners: await clientsFor(winners, viewerId),
     pictures: await picturesFor(winners),
   };
 }
@@ -380,31 +418,46 @@ export async function wall(viewerId, offset = 0, limit = 5) {
   await maintain();
   const s = schedule();
   const db = getDb();
-  const last = await db.prepare('SELECT round_key FROM exhibition_rounds ORDER BY round_key DESC LIMIT 1').get();
-  const winners =
-    last && last.round_key !== s.current
-      ? await db.prepare(`${ENTRY_SQL} WHERE e.round_key = ? AND e.award = 1 AND e.hidden = 0 ORDER BY e.board`).all(last.round_key)
-      : [];
-  const current = await db.prepare(`${ENTRY_SQL} WHERE e.round_key = ? AND e.status = 'approved' AND e.hidden = 0 ORDER BY e.id DESC`).all(s.current);
-  const rows = [...winners, ...current];
   const start = Math.max(0, Math.floor(offset) || 0);
   const size = Math.min(10, Math.max(1, Math.floor(limit) || 5));
-  const page = rows.slice(start, start + size);
+  const last = await db.prepare('SELECT round_key FROM exhibition_rounds ORDER BY round_key DESC LIMIT 1').get();
+  const previous = last?.round_key !== s.current ? last?.round_key ?? null : null;
+  // Page in SQL: do not download every submitted artwork just to display five of them.
+  const [count, page] = await Promise.all([
+    db.prepare(`SELECT
+      (SELECT COUNT(*) FROM exhibition_entries WHERE round_key=? AND award=1 AND hidden=0) +
+      (SELECT COUNT(*) FROM exhibition_entries WHERE round_key=? AND status='approved' AND hidden=0) AS c`).get(previous, s.current),
+    db.prepare(`${ENTRY_SQL}
+      WHERE (e.round_key=? AND e.award=1 AND e.hidden=0)
+         OR (e.round_key=? AND e.status='approved' AND e.hidden=0)
+      ORDER BY CASE WHEN e.round_key=? THEN 0 ELSE 1 END,
+        CASE WHEN e.round_key=? THEN e.board ELSE NULL END,
+        CASE WHEN e.round_key=? THEN e.id ELSE NULL END,
+        CASE WHEN e.round_key=? THEN e.id ELSE NULL END DESC
+      LIMIT ? OFFSET ?`).all(previous, s.current, previous, previous, previous, s.current, size, start),
+  ]);
+  const [entries, pictures] = await Promise.all([clientsFor(page, viewerId), picturesFor(page)]);
   return {
     schedule: s,
-    total: rows.length,
+    total: count.c,
     offset: start,
-    entries: await asyncMap(page, async (r) => ({ ...(await toClient(r, viewerId)), final: r.round_key !== s.current })),
-    pictures: await picturesFor(page),
+    entries: entries.map((entry, index) => ({ ...entry, final: page[index].round_key !== s.current })),
+    pictures,
   };
 }
 
 /** Các lần gửi của chính bé (mới nhất theo từng tranh). */
 export async function mine(userId) {
   await maintain();
-  const rows = await getDb().prepare(`${ENTRY_SQL} WHERE e.user_id = ? ORDER BY e.id DESC LIMIT 300`).all(userId);
+  const rows = await getDb().prepare(`${ENTRY_SQL_LIGHT} WHERE e.user_id = ? ORDER BY e.id DESC LIMIT 300`).all(userId);
   const byArtwork = {};
-  for (const r of rows) byArtwork[r.artwork_id] ||= await toClient(r, userId, { withData: false });
+  const seen = new Set();
+  const latest = rows.filter(row => {
+    if (seen.has(row.artwork_id)) return false;
+    seen.add(row.artwork_id);
+    return true;
+  });
+  for (const entry of await clientsFor(latest,userId,{withData:false})) byArtwork[entry.artworkId] = entry;
   return byArtwork;
 }
 
@@ -414,7 +467,7 @@ export async function reviewQueue() {
   const rows = await getDb()
     .prepare(`${ENTRY_SQL} WHERE e.status = 'pending' OR (e.status = 'approved' AND e.hidden = 1) ORDER BY e.submitted_at`)
     .all();
-  return { entries: await asyncMap(rows, async (r) => await toClient(r, null)), pictures: await picturesFor(rows) };
+  return { entries: await clientsFor(rows, null), pictures: await picturesFor(rows) };
 }
 
 async function nameOf(entryId) {
@@ -482,14 +535,14 @@ export async function showcase(ownerId, viewerId) {
   return {
     owner: { id: u.id, nickname: u.nickname || u.username || 'Bé', avatar: u.avatar, avatarFrame: u.avatar_frame },
     current: s.current,
-    entries: await asyncMap(rows, async (r) => ({ ...(await toClient(r, viewerId)), onShow: r.round_key === s.current })),
+    entries: (await clientsFor(rows, viewerId)).map((entry, index) => ({ ...entry, onShow: rows[index].round_key === s.current })),
     pictures: await picturesFor(rows),
   };
 }
 
 /** Dữ liệu cho giấy khen: chỉ tranh của chính bé, đã nhận danh hiệu. */
 export async function awardedEntry(userId, entryId) {
-  const row = await getDb().prepare(`${ENTRY_SQL} WHERE e.id = ?`).get(entryId);
+  const row = await getDb().prepare(`${ENTRY_SQL_LIGHT} WHERE e.id = ?`).get(entryId);
   if (!row || row.user_id !== userId) throw notFound('entry_not_found');
   if (!row.award) throw forbidden('no_award');
   return await toClient(row, userId, { withData: false });

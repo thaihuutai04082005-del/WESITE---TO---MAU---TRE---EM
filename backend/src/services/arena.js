@@ -1,5 +1,4 @@
 import { bindSocketHandlers } from '../utils/socketHandlers.js';
-import { asyncMap } from '../utils/asyncArray.js';
 // Đấu trường sáng tạo (Mục 9) — phòng 10 thí sinh, chỉ chế độ Sáng tạo, chấm tự động theo rubric.
 // Hai cách vào: Ghép ngẫu nhiên (cùng nhóm trình độ, trong khung giờ công khai) hoặc Phòng riêng mời bạn bè.
 import { getDb } from '../config/db.js';
@@ -387,23 +386,22 @@ export function registerArena(ioInstance, socket) {
 // ---------------- REST: thông tin & bảng xếp hạng tuần ----------------
 
 export async function weeklyLeaderboard(week = isoWeek(), limit = 20) {
-  return await asyncMap(
-    await getDb()
+  const rows = await getDb()
       .prepare(
         `SELECT e.user_id, SUM(e.reward) AS points, SUM(CASE WHEN e.place = 1 THEN 1 ELSE 0 END) AS wins, COUNT(*) AS games
        FROM arena_entries e JOIN arena_rooms r ON r.id = e.room_id
        WHERE r.week = ? AND r.status = 'finished' AND e.data IS NOT NULL
        GROUP BY e.user_id HAVING SUM(e.reward) > 0 ORDER BY points DESC, wins DESC LIMIT ?`,
       )
-      .all(week, limit),
-    async (r, i) => ({
+      .all(week, limit);
+  const profiles = await User.publicProfiles(rows.map(row => row.user_id));
+  return rows.map((r, i) => ({
       place: i + 1,
-      user: await User.publicProfile(await User.findById(r.user_id)),
+      user: profiles.get(r.user_id) || null,
       points: r.points,
       wins: r.wins,
       games: r.games,
-    }),
-  );
+    }));
 }
 
 export async function history(userId, limit = 20) {
@@ -434,12 +432,13 @@ export async function roomResult(roomId) {
   const room = await getDb().prepare('SELECT * FROM arena_rooms WHERE id = ?').get(roomId);
   if (!room) return null;
   const entries = await getDb().prepare('SELECT * FROM arena_entries WHERE room_id = ? ORDER BY COALESCE(place, 99), total DESC').all(roomId);
+  const profiles = await User.publicProfiles(entries.map(entry => entry.user_id));
   return {
     roomId,
     status: room.status,
     startedAt: room.started_at,
-    board: await asyncMap(entries, async (e) => ({
-      user: await User.publicProfile(await User.findById(e.user_id)),
+    board: entries.map(e => ({
+      user: profiles.get(e.user_id) || null,
       total: e.total,
       scores: e.scores ? JSON.parse(e.scores) : null,
       place: e.place,

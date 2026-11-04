@@ -64,13 +64,16 @@ export async function registerVerify(req, res) {
 const grantStarterFrame = async (userId) => await grantAvatarFrame(userId, 'avatar-dong');
 
 async function session(user) {
-  const events = await touchLogin(user.id, vnDateKey());
-  const fresh = await User.findById(user.id);
+  const today = vnDateKey();
+  const events = user.last_login_date === today ? [] : await touchLogin(user.id, today);
+  const [fresh, plan, unread] = await Promise.all([
+    User.findById(user.id), planStatus(user.id), unreadCount(user.id),
+  ]);
   return {
     token: signToken(fresh),
-    user: await User.selfProfile(fresh),
-    plan: await planStatus(fresh.id),
-    unread: await unreadCount(fresh.id),
+    user: await User.selfProfile(fresh, { vip: plan.vip }),
+    plan,
+    unread,
     events,
   };
 }

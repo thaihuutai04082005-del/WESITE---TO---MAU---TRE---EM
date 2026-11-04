@@ -2,6 +2,10 @@
 import { getDb, parseJson } from '../config/db.js';
 
 const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`${base}_vi`]);
+const LIGHT_COLUMNS = 'p.id, p.object_id, p.slug, p.variant_slug, p.name_vi, p.name_en, p.variant_name_vi, p.variant_name_en, p.animation, p.is_card, p.rarity, p.sort, p.theme_sort, p.hidden, p.preview, p.asset_hash';
+const PICTURE_JOINS = `FROM pictures p JOIN objects o ON o.id=p.object_id JOIN themes t ON t.id=o.theme_id`;
+const PICTURE_LABELS = `o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
+  t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en`;
 
 export async function listThemes() {
   return await getDb()
@@ -51,33 +55,58 @@ export async function listPictures(objectId, { cards = false } = {}) {
     .all(objectId, cards ? 1 : 0);
 }
 
-export async function findPicture(id) {
-  return await getDb()
-    .prepare(
-      `SELECT p.*, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
-              t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
-       FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE p.id = ?`,
-    )
-    .get(id);
+export async function findPicture(id, options) {
+  const rows = await findPictures([id], options);
+  return rows.get(id) || rows.get(Number(id));
 }
 
 /** One database trip for a whole selection grid, including each picture's theme metadata. */
-export async function findPictures(ids, { preview = false } = {}) {
+export async function findPictures(ids, { preview = false, metadataOnly = false } = {}) {
   const unique = [...new Set(ids.filter((id) => id != null))];
   if (!unique.length) return new Map();
   const rows = await getDb().prepare(
-    `SELECT ${preview ? 'p.id, p.slug, p.name_vi, p.name_en, p.variant_name_vi, p.variant_name_en, p.animation, p.is_card, p.rarity, p.preview' : 'p.*'}, o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
-            t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
-     FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id
+    `SELECT ${preview || metadataOnly ? LIGHT_COLUMNS : 'p.*'}, ${PICTURE_LABELS}
+     ${PICTURE_JOINS}
      WHERE p.id IN (${unique.map(() => '?').join(',')})`,
   ).all(...unique);
   // Legacy/custom records can lack prebuilt previews; keep them usable as full SVGs.
-  if (preview) {
-    const missing = rows.filter((row) => !row.preview).map((row) => row.id);
-    const full = missing.length ? await findPictures(missing) : new Map();
-    for (let i = 0; i < rows.length; i++) if (full.has(rows[i].id)) rows[i] = full.get(rows[i].id);
-  }
+  if (preview && !metadataOnly) await fillMissingPreviews(rows);
   return new Map(rows.map((row) => [row.id, row]));
+}
+
+async function fillMissingPreviews(rows) {
+  const missing = rows.filter(row => !row.preview).map(row => row.id);
+  const full = missing.length ? await findPictures(missing) : new Map();
+  for (let i = 0; i < rows.length; i++) if (full.has(rows[i].id)) rows[i] = full.get(rows[i].id);
+  return rows;
+}
+
+export async function themePicturePreviews(themeId) {
+  const rows = await getDb().prepare(`SELECT ${LIGHT_COLUMNS}, ${PICTURE_LABELS} ${PICTURE_JOINS}
+    WHERE o.theme_id=? AND p.is_card=0 AND p.hidden=0
+    ORDER BY p.theme_sort,o.sort,o.id,p.sort,p.id`).all(themeId);
+  return fillMissingPreviews(rows);
+}
+
+export async function objectPicturePreviews(objectId) {
+  const rows = await getDb().prepare(`SELECT ${LIGHT_COLUMNS}, ${PICTURE_LABELS} ${PICTURE_JOINS}
+    WHERE p.object_id=? AND p.is_card=0 AND p.hidden=0 ORDER BY p.sort,p.id`).all(objectId);
+  return fillMissingPreviews(rows);
+}
+
+/** Checks and history need geometry, but not SVG artwork or repeated copies per saved image. */
+export async function findManifests(ids) {
+  const unique = [...new Set(ids.filter(id => id != null))];
+  if (!unique.length) return new Map();
+  const rows = await getDb().prepare(`SELECT id,manifest FROM pictures WHERE id IN (${unique.map(() => '?').join(',')})`).all(...unique);
+  return new Map(rows.map(row => [row.id, row]));
+}
+
+export async function findSvgs(ids) {
+  const unique = [...new Set(ids.filter(id => id != null))];
+  if (!unique.length) return new Map();
+  const rows = await getDb().prepare(`SELECT id,svg FROM pictures WHERE id IN (${unique.map(() => '?').join(',')})`).all(...unique);
+  return new Map(rows.map(row => [row.id, row]));
 }
 
 export const findPictureBySlug = async (slug) => await getDb().prepare('SELECT id FROM pictures WHERE slug = ?').get(slug);

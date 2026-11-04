@@ -5,9 +5,11 @@ import { forbidden, notFound } from '../utils/http.js';
 import { themeAccess, canAccessTheme, assertThemeAccess } from '../services/quota.js';
 
 export async function themes(req, res) {
-  const access = await themeAccess(req.user?.id);
   const rows = await Picture.listThemes();
-  const covers = req.query.access === '1' ? new Map() : await Picture.findPictures(rows.map((theme) => theme.cover_id), { preview: req.query.preview === '1' });
+  const [access, covers] = await Promise.all([
+    themeAccess(req.user?.id, new Date(), rows),
+    req.query.access === '1' ? new Map() : Picture.findPictures(rows.map(theme => theme.cover_id), { preview: req.query.preview === '1' }),
+  ]);
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
   const list = rows.map((t) => ({
     id: t.id,
@@ -44,10 +46,14 @@ export async function pictures(req, res) {
   const obj = theme && (await Picture.findObject(theme.id, req.params.object));
   if (!obj) throw notFound();
   await assertThemeAccess(req.user?.id, theme.id);
-  const rows = await Picture.listPictures(obj.id);
-  const pictures = await Picture.findPictures(rows.map((p) => p.id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
-  const list = rows.map((p) => client(pictures.get(p.id)));
+  let list;
+  if (req.query.preview === '1') list = (await Picture.objectPicturePreviews(obj.id)).map(p => client(p));
+  else {
+    const rows = await Picture.listPictures(obj.id);
+    const pictures = await Picture.findPictures(rows.map(p => p.id));
+    list = rows.map(p => client(pictures.get(p.id)));
+  }
   res.json({
     theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } },
     object: { slug: obj.slug, name: { vi: obj.name_vi, en: obj.name_en } },
@@ -59,11 +65,17 @@ export async function pictures(req, res) {
 export async function themePictures(req, res) {
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
-  await assertThemeAccess(req.user?.id, theme.id);
-  const rows = await Picture.listThemePictures(theme.id);
-  const pictures = await Picture.findPictures(rows.map((p) => p.id), { preview: req.query.preview === '1' });
   const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
-  const list = rows.map((p) => client(pictures.get(p.id)));
+  let list;
+  if (req.query.preview === '1') {
+    const [, rows] = await Promise.all([assertThemeAccess(req.user?.id, theme.id), Picture.themePicturePreviews(theme.id)]);
+    list = rows.map(p => client(p));
+  } else {
+    await assertThemeAccess(req.user?.id, theme.id);
+    const rows = await Picture.listThemePictures(theme.id);
+    const pictures = await Picture.findPictures(rows.map(p => p.id));
+    list = rows.map(p => client(pictures.get(p.id)));
+  }
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
 }
 
@@ -79,7 +91,9 @@ export async function assertCanUsePicture(user, picture) {
 }
 
 export async function picture(req, res) {
-  const p = await Picture.findPicture(Number(req.params.id));
+  const p = await Picture.findPicture(Number(req.params.id), {
+    preview: req.query.preview === '1', metadataOnly: req.query.access === '1',
+  });
   if (!p) throw notFound();
   await assertCanUsePicture(req.user, p);
   if (req.query.access === '1') return res.json({ allowed: true });
