@@ -4,9 +4,9 @@ import { getDb, parseJson } from '../config/db.js';
 export const findById = async (id) => await getDb().prepare('SELECT * FROM artworks WHERE id = ?').get(id);
 
 export async function create({ userId, pictureId, mode, data, thumbnail = null, status = 'in_progress' }) {
-  const res = await getDb()
-    .prepare('INSERT INTO artworks (user_id, picture_id, mode, data, thumbnail, status, completed_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
-    .run(
+  return getDb()
+    .prepare('INSERT INTO artworks (user_id, picture_id, mode, data, thumbnail, status, completed_at) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *')
+    .get(
       userId,
       pictureId,
       mode,
@@ -15,7 +15,6 @@ export async function create({ userId, pictureId, mode, data, thumbnail = null, 
       status,
       status === 'completed' ? new Date().toISOString() : null,
     );
-  return await findById(Number(res.lastInsertRowid));
 }
 
 export async function listRowsByUser(userId, { status, mode, withData = false } = {}) {

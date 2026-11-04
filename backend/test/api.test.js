@@ -1423,7 +1423,7 @@ test('Email-only signup and recovery reject SMS, require the email OTP and prese
   }
 });
 
-async function measuredGet(path, token, budget) {
+async function measuredRequest(method, path, body, token, budget) {
   const db = getDb(), query = db.query;
   let calls = 0;
   const readRows = [];
@@ -1434,12 +1434,14 @@ async function measuredGet(path, token, budget) {
     return result;
   };
   let response;
-  try { response = await api('GET', path, null, token); }
+  try { response = await api(method, path, body, token); }
   finally { db.query = query; }
-  assert.equal(response.status, 200, JSON.stringify(response.body));
+  assert.equal(response.status, method === 'POST' ? 201 : 200, JSON.stringify(response.body));
   assert.ok(calls <= budget, `${path} needed ${calls} database calls (budget ${budget})`);
   return { ...response, readRows };
 }
+
+const measuredGet = (path, token, budget) => measuredRequest('GET', path, null, token, budget);
 
 test('History and collection load many saved artworks with bounded reads, unchanged progress, data and exhibition eligibility', async () => {
   const user = await register('loadartworks1');
@@ -1662,4 +1664,152 @@ test('The admin library tree keeps every theme/object/picture and empty groups w
   assert.equal((await Picture.findTheme('load-empty-object')).active, 1);
   assert.equal(await syncThemeVisibility({ themes: [{ slug:'load-empty',hidden:false }, { slug:'load-empty-object',hidden:false }] }), 1);
   assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM artworks').get()).c, before.c);
+});
+
+test('Theme and picture previews use one content query while preserving locks, ordering, hidden pictures and legacy SVG fallback', async () => {
+  const user = await register('fastthemes1');
+  const db = getDb();
+  const preview = await measuredGet('/themes?preview=1', user.token, 1);
+  const metadata = await api('GET', '/themes?access=1', null, user.token);
+  assert.deepEqual(preview.body.themes.map(({cover,...theme}) => theme), metadata.body.themes.map(({cover,...theme}) => theme));
+  const theme = preview.body.themes.find(t => !t.locked && t.cover);
+  const grid = await measuredGet(`/themes/${theme.slug}/pictures?preview=1`, user.token, 1);
+  const original = await api('GET', `/themes/${theme.slug}/pictures`, null, user.token);
+  assert.deepEqual(grid.body.pictures.map(p => [p.id,p.name,p.theme,p.object]), original.body.pictures.map(p => [p.id,p.name,p.theme,p.object]));
+  const picture = await db.prepare('SELECT id,preview FROM pictures WHERE id=?').get(theme.cover.id);
+  try {
+    await db.prepare('UPDATE pictures SET preview=NULL WHERE id=?').run(picture.id);
+    const legacy = await api('GET', '/themes?preview=1', null, user.token);
+    const cover = legacy.body.themes.find(t => t.id === theme.id).cover;
+    assert.match(cover.svg, /^<svg/);
+    assert.ok(cover.regions.length);
+    assert.equal(legacy.body.themes.find(t => t.id === theme.id).pictureCount, theme.pictureCount);
+    const fallback = await api('GET', `/themes/${theme.slug}/pictures?preview=1`, null, user.token);
+    assert.match(fallback.body.pictures.find(p => p.id === picture.id).svg, /^<svg/);
+    await db.prepare('UPDATE pictures SET hidden=1 WHERE id=?').run(picture.id);
+    assert.ok(!(await api('GET', `/themes/${theme.slug}/pictures?preview=1`, null, user.token)).body.pictures.some(p => p.id === picture.id));
+    await db.prepare('UPDATE themes SET active=0 WHERE id=?').run(theme.id);
+    assert.equal((await api('GET', `/themes/${theme.slug}/pictures?preview=1`, null, user.token)).status, 404);
+  } finally {
+    await db.prepare('UPDATE pictures SET preview=?,hidden=0 WHERE id=?').run(picture.preview, picture.id);
+    await db.prepare('UPDATE themes SET active=1 WHERE id=?').run(theme.id);
+  }
+  const locked = preview.body.themes.find(t => t.locked && t.pictureCount);
+  assert.equal((await api('GET', `/themes/${locked.slug}/pictures?preview=1`, null, user.token)).status, 403);
+  await db.prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'month',?,?)")
+    .run(user.id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+  assert.equal((await api('GET', `/themes/${locked.slug}/pictures?preview=1`, null, user.token)).status, 200);
+  assert.ok((await api('GET', '/themes?preview=1', null, user.token)).body.themes.every(t => !t.locked));
+  const empty = await db.prepare("INSERT INTO themes (slug,name_vi,name_en) VALUES ('fast-empty','Trống','Empty') RETURNING id").get();
+  assert.deepEqual((await api('GET', '/themes/fast-empty/pictures?preview=1', null, user.token)).body.pictures, []);
+  assert.equal((await api('GET', '/themes/missing-fast-theme/pictures?preview=1', null, user.token)).status, 404);
+  assert.ok(empty.id);
+});
+
+test('Creating an editor returns the same complete view as reopening it without consuming a coloring turn or weakening ownership', async () => {
+  const user = await register('fasteditor1');
+  const db = getDb();
+  assert.equal((await api('GET','/meta')).body.artworkEditorBootstrap, true);
+  for (const mode of ['template','free']) {
+    const created = await measuredRequest('POST', '/artworks', {pictureId:1,mode,editor:true}, user.token, 4);
+    assert.equal(created.body.plan.used, 0);
+    assert.equal(created.body.artwork.counted, false);
+    assert.equal(created.body.artwork.exhibited, false);
+    const reopened = await api('GET', `/artworks/${created.body.artwork.id}`, null, user.token);
+    assert.deepEqual(reopened.body.artwork, created.body.artwork);
+    assert.deepEqual(reopened.body.picture, created.body.picture);
+    assert.equal(reopened.body.accessError, null);
+    assert.match(created.body.picture.svg, /^<svg/);
+    assert.ok(created.body.picture.regions.length);
+  }
+  const legacy = await api('POST', '/artworks', {pictureId:1,mode:'free'}, user.token);
+  assert.equal(legacy.status, 201);
+  assert.equal(legacy.body.picture, undefined);
+  const themes = (await api('GET','/themes?preview=1',null,user.token)).body.themes;
+  const locked = themes.find(t=>t.locked&&t.pictureCount);
+  const picture = await db.prepare('SELECT p.id FROM pictures p JOIN objects o ON o.id=p.object_id WHERE o.theme_id=? AND p.is_card=0 AND p.hidden=0 LIMIT 1').get(locked.id);
+  const card = (await api('GET','/gacha/catalog',null,user.token)).body.cards[0];
+  const before = (await db.prepare('SELECT COUNT(*) AS c FROM artworks WHERE user_id=?').get(user.id)).c;
+  assert.equal((await api('POST','/artworks',{pictureId:picture.id,mode:'free',editor:true},user.token)).body.error.code,'theme_vip_required');
+  assert.equal((await api('POST','/artworks',{pictureId:card.pictureId,mode:'free',editor:true},user.token)).body.error.code,'card_not_owned');
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM artworks WHERE user_id=?').get(user.id)).c,before);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS c FROM usage_log WHERE user_id=?').get(user.id)).c,0);
+  const Card = await import('../src/models/card.js');
+  await Card.add(user.id,card.pictureId,'gacha');
+  const owned = await api('POST','/artworks',{pictureId:card.pictureId,mode:'free',editor:true},user.token);
+  assert.equal(owned.status,201);
+  assert.equal(owned.body.artwork.isCard,true);
+  assert.equal(owned.body.artwork.rarity,card.rarity);
+  const open = await api('GET',`/artworks/${owned.body.artwork.id}`,null,user.token);
+  assert.deepEqual(open.body.artwork,owned.body.artwork);
+});
+
+test('Editor bootstrap does not keep editing rights after VIP expiry or a card transfer, and saved data remains readable', async () => {
+  const user = await register('fastrevocation1');
+  const other = await register('fastrevocation2');
+  const db = getDb();
+  const locked = (await api('GET','/themes?preview=1',null,user.token)).body.themes.find(t=>t.locked&&t.pictureCount);
+  await db.prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'year',?,?)")
+    .run(user.id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+  const picture = (await api('GET',`/themes/${locked.slug}/pictures?preview=1`,null,user.token)).body.pictures[0];
+  const created = await api('POST','/artworks',{pictureId:picture.id,mode:'template',editor:true},user.token);
+  assert.equal(created.status,201);
+  await db.prepare('UPDATE subscriptions SET ends_at=? WHERE user_id=?').run(new Date(Date.now()-1000).toISOString(),user.id);
+  const saved = await api('GET',`/artworks/${created.body.artwork.id}`,null,user.token);
+  assert.equal(saved.status,200);
+  assert.equal(saved.body.accessError,'theme_vip_required');
+  assert.equal((await api('POST',`/artworks/${created.body.artwork.id}/start`,null,user.token)).body.error.code,'theme_vip_required');
+  assert.equal((await api('PUT',`/artworks/${created.body.artwork.id}`,{data:{fills:{}}},user.token)).body.error.code,'theme_vip_required');
+  const Card = await import('../src/models/card.js');
+  const cardPicture = (await api('GET','/gacha/catalog',null,user.token)).body.cards[0].pictureId;
+  const cardId = await Card.add(user.id,cardPicture,'gacha');
+  const cardArt = await api('POST','/artworks',{pictureId:cardPicture,mode:'free',editor:true},user.token);
+  assert.equal(cardArt.status,201);
+  await db.prepare('UPDATE user_cards SET user_id=? WHERE id=?').run(other.id,cardId);
+  const transferred = await api('GET',`/artworks/${cardArt.body.artwork.id}`,null,user.token);
+  assert.equal(transferred.status,200);
+  assert.equal(transferred.body.accessError,'card_not_owned');
+  assert.equal((await api('PUT',`/artworks/${cardArt.body.artwork.id}`,{data:{fills:{}}},user.token)).body.error.code,'card_not_owned');
+  assert.equal((await api('GET',`/artworks/${cardArt.body.artwork.id}`,null,other.token)).status,404);
+});
+
+test('CORS preflight policy can be reused while real requests still require fresh authentication', async () => {
+  const origin = testEnv.corsOrigins[0];
+  const preflight = await fetch(base+'/api/artworks', {method:'OPTIONS',headers:{
+    Origin:origin, 'Access-Control-Request-Method':'POST', 'Access-Control-Request-Headers':'authorization,content-type',
+  }});
+  assert.equal(preflight.status,204);
+  assert.equal(preflight.headers.get('access-control-allow-origin'),origin);
+  assert.equal(preflight.headers.get('access-control-max-age'),'600');
+  assert.match(preflight.headers.get('access-control-allow-headers'),/authorization/i);
+  assert.equal((await api('POST','/artworks',{pictureId:1,mode:'free',editor:true})).status,401);
+  const metadata = await api('GET','/themes?preview=1');
+  assert.match(metadata.headers.get('cache-control'),/private, no-store/);
+  assert.match(metadata.headers.get('vary'),/Authorization/);
+});
+
+test('Public preview identity still uses current subscriptions, rejects forged tokens and treats deleted accounts as anonymous', async () => {
+  const user = await register('previewidentity1');
+  const db = getDb();
+  const free = (await api('GET','/themes?preview=1')).body;
+  const locked = free.themes.find(t=>t.locked&&t.pictureCount);
+  await db.prepare("INSERT INTO subscriptions (user_id,plan,starts_at,ends_at) VALUES (?,'year',?,?)")
+    .run(user.id,new Date(Date.now()-1000).toISOString(),new Date(Date.now()+86400000).toISOString());
+  const all = await measuredGet('/themes?preview=1',user.token,1);
+  assert.ok(all.body.themes.every(t=>!t.locked));
+  assert.equal((await api('GET',`/themes/${locked.slug}/pictures?preview=1`,null,user.token)).status,200);
+  const jwt = (await import('jsonwebtoken')).default;
+  const unsigned = jwt.sign({sub:user.id},'wrong-signing-key');
+  assert.deepEqual((await api('GET','/themes?preview=1',null,unsigned)).body,free);
+  assert.equal((await api('GET',`/themes/${locked.slug}/pictures?preview=1`,null,unsigned)).status,403);
+  for (const sub of ['not-an-integer',true,[user.id]]) {
+    const invalidId = jwt.sign({sub},testEnv.jwtSecret);
+    assert.deepEqual((await api('GET','/themes?preview=1',null,invalidId)).body,free);
+  }
+  await db.prepare('UPDATE subscriptions SET ends_at=? WHERE user_id=?').run(new Date(Date.now()-1000).toISOString(),user.id);
+  assert.deepEqual((await api('GET','/themes?preview=1',null,user.token)).body,free);
+  await db.prepare('UPDATE subscriptions SET ends_at=? WHERE user_id=?').run(new Date(Date.now()+86400000).toISOString(),user.id);
+  await db.prepare('DELETE FROM users WHERE id=?').run(user.id);
+  assert.deepEqual((await api('GET','/themes?preview=1',null,user.token)).body,free);
+  assert.equal((await api('GET','/pictures/1',null,user.token)).status,401,'Private/editor routes still read the current user');
 });

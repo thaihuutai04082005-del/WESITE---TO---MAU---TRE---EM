@@ -8,6 +8,7 @@ import { usePicture } from '../../hooks/usePicture';
 import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { resolveThemeAccess } from '../../../../shared/themeAccess.mjs';
+import { loadObjectSelector } from '../../lib/coloringScreens';
 import ModePicker from '../../components/ModePicker';
 import Icon from '../../components/Icon';
 import { RarityBadge } from '../../components/GachaCardReveal/GachaCardReveal';
@@ -83,6 +84,7 @@ function CardsBoard() {
 }
 
 export default function ThemeSelector() {
+  useEffect(() => { loadObjectSelector().catch(() => {}); }, []);
   const { t, i18n } = useTranslation();
   const plan = useAuth((s) => s.plan);
   const freeLimit = useAuth((s) => s.meta?.plans?.free?.themesPerAge);

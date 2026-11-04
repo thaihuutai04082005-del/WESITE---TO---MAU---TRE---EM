@@ -4,6 +4,7 @@ import { PLANS } from '../config/constants.js';
 import { vnDayStart, addDays } from '../utils/time.js';
 import { HttpError, forbidden } from '../utils/http.js';
 import { freeThemeIds } from '../../../shared/themeAccess.mjs';
+import { themeAllowedSql } from './themeAccessSql.js';
 
 export async function activeSubscription(userId, at = new Date()) {
   const iso = at.toISOString();
@@ -27,13 +28,8 @@ export async function themeAccess(userId, at = new Date(), themes = null) {
 export async function canAccessTheme(userId, themeId) {
   const iso = new Date().toISOString();
   // The same per-age display order as freeThemeIds, without a second network trip.
-  const row = await getDb().prepare(`SELECT (
-    EXISTS (SELECT 1 FROM subscriptions WHERE user_id = ? AND starts_at <= ? AND ends_at > ?)
-    OR EXISTS (SELECT 1 FROM (
-      SELECT id, ROW_NUMBER() OVER (PARTITION BY COALESCE(age_group, '6-8') ORDER BY sort, id) AS position
-      FROM themes WHERE active = 1
-    ) allowed WHERE id = ? AND position <= ?)
-  ) AS allowed`).get(userId ?? null, iso, iso, themeId, PLANS.free.themesPerAge);
+  const row = await getDb().prepare(`SELECT ${themeAllowedSql('?')} AS allowed`)
+    .get(userId ?? null, iso, iso, themeId, PLANS.free.themesPerAge);
   return !!row.allowed;
 }
 

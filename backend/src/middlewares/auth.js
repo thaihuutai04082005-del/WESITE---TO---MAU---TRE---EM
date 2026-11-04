@@ -37,6 +37,22 @@ export async function optionalAuth(req, _res, next) {
   next();
 }
 
+/** Public previews need a signed ID; their content query checks current account/subscription rights. */
+export function optionalPreviewAuth(req, res, next) {
+  if (req.query.preview !== '1' || req.query.access === '1') return optionalAuth(req, res, next);
+  const token = extract(req);
+  if (token) {
+    try {
+      const sub = verifyToken(token).sub;
+      const id = typeof sub === 'number' || (typeof sub === 'string' && /^\d+$/.test(sub)) ? Number(sub) : NaN;
+      if (Number.isSafeInteger(id) && id > 0) req.user = { id };
+    } catch {
+      // The endpoint is public: expired or invalid tokens receive anonymous previews.
+    }
+  }
+  next();
+}
+
 export function requireAdmin(req, _res, next) {
   if (req.user?.role !== 'admin') return next(forbidden('admin_only'));
   next();

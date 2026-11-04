@@ -27,7 +27,7 @@ export function createApp() {
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', 1);
-  app.use(cors({ origin: env.corsOrigins, credentials: true }));
+  app.use(cors({ origin: env.corsOrigins, credentials: true, maxAge: 600 }));
   app.use(compression({ threshold: 1024, level: 4 }));
   app.use(express.json({ limit: '8mb' }));
   app.use(express.urlencoded({ extended: false }));
@@ -60,6 +60,7 @@ export function createApp() {
       auth: { phoneOtpEnabled: env.phoneOtpEnabled },
       picturePreviews: true,
       pictureAccessEnforced: true,
+      artworkEditorBootstrap: true,
     }),
   );
 

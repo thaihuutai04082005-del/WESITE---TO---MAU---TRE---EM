@@ -9,8 +9,10 @@ import { pageReady } from '../../lib/transitionBus';
 import { useAuth } from '../../store/auth';
 import { useUi } from '../../store/ui';
 import { loadThemePictures } from '../../lib/themeAccess';
+import { loadColoringScreen } from '../../lib/coloringScreens';
 
 export default function ObjectSelector() {
+  useEffect(() => { loadColoringScreen().catch(() => {}); }, []);
   const { theme } = useParams();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();

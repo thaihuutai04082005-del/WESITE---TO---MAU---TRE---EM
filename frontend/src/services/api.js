@@ -1,4 +1,5 @@
 // Gọi API tới backend. Lỗi trả về dạng ApiError { status, code, data } — frontend dịch theo `code`.
+import { pauseImagePreloads } from '../lib/preloadImages.js';
 const BASE = import.meta.env?.VITE_API_URL || '/api';
 
 let tokenGetter = () => null;
@@ -33,6 +34,12 @@ export function request(method, path, body, { raw = false } = {}) {
 }
 
 async function fetchRequest(method, path, body, raw, token) {
+  const resume = pauseImagePreloads();
+  try { return await performFetch(method, path, body, raw, token); }
+  finally { resume(); }
+}
+
+async function performFetch(method, path, body, raw, token) {
   let res;
   try {
     res = await fetch(`${BASE}${path}`, {

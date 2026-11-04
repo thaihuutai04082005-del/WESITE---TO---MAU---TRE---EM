@@ -5,6 +5,7 @@ import { closeSocket } from '../services/socket';
 import i18n from '../i18n';
 import { useUi } from './ui';
 import { publicPage } from '../../../shared/publicRoutes.mjs';
+import { clearCreatedEditor } from '../lib/createdEditor';
 
 const TOKEN_KEY = 'btm.token';
 let booting = null;
@@ -79,6 +80,7 @@ export const useAuth = create((set, get) => ({
   },
 
   logout() {
+    clearCreatedEditor();
     try {
       localStorage.removeItem(TOKEN_KEY);
     } catch {

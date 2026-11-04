@@ -1,5 +1,8 @@
 # Giảm thời gian tải sau khi chuyển sang Supabase
 
+Lần kiểm tra tiếp theo cho bước chọn tranh và mở màn tô nằm tại
+[`tang-toc-mo-tranh.md`](tang-toc-mo-tranh.md).
+
 Ngày kiểm tra: 04/11/2026. Phạm vi là truy vấn database, số request và dung
 lượng truyền. Không thay đổi hình vẽ, hiệu ứng, thời lượng animation, luật
 gói dịch vụ, số lượt, cách chấm điểm hay tài khoản đang dùng.

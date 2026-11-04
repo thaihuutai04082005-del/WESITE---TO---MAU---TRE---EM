@@ -6,12 +6,34 @@ const queue = [];
 const CONCURRENCY = 2;
 let active = 0;
 let scheduled = false;
+let foreground = 0;
+let quietUntil = 0;
+
+/** Give API results and their visible pictures priority over warming unused effects. */
+export function pauseImagePreloads() {
+  foreground++;
+  let released = false;
+  return () => {
+    if (released) return;
+    released = true;
+    foreground--;
+    quietUntil = Date.now() + 500;
+    schedule();
+  };
+}
 
 function schedule() {
-  if (scheduled || !queue.length || active >= CONCURRENCY) return;
+  if (scheduled || !queue.length || active >= CONCURRENCY || foreground) return;
+  const wait = quietUntil - Date.now();
+  if (wait > 0) {
+    scheduled = true;
+    setTimeout(() => { scheduled = false; schedule(); }, wait);
+    return;
+  }
   scheduled = true;
   const run = () => {
     scheduled = false;
+    if (foreground || Date.now() < quietUntil) { schedule(); return; }
     while (queue.length && active < CONCURRENCY) {
       const src = queue.shift();
       active++;

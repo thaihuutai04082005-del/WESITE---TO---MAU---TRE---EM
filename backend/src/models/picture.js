@@ -1,5 +1,7 @@
 // Truy vấn nội dung tranh theo 3 tầng: Chủ đề → Đối tượng → Biến thể.
 import { getDb, parseJson } from '../config/db.js';
+import { PLANS } from '../config/constants.js';
+import { themeAllowedSql } from '../services/themeAccessSql.js';
 
 const lang = (row, l, base = 'name') => (l === 'en' ? row[`${base}_en`] : row[`${base}_vi`]);
 const LIGHT_COLUMNS = 'p.id, p.object_id, p.slug, p.variant_slug, p.name_vi, p.name_en, p.variant_name_vi, p.variant_name_en, p.animation, p.is_card, p.rarity, p.sort, p.theme_sort, p.hidden, p.preview, p.asset_hash';
@@ -7,16 +9,47 @@ const PICTURE_JOINS = `FROM pictures p JOIN objects o ON o.id=p.object_id JOIN t
 const PICTURE_LABELS = `o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
   t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en`;
 
-export async function listThemes() {
-  return await getDb()
-    .prepare(
-      `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0 AND q.hidden = 0)) AS object_count,
+const THEMES_SQL = `SELECT t.*, (SELECT COUNT(*) FROM objects o WHERE o.theme_id = t.id AND EXISTS (SELECT 1 FROM pictures q WHERE q.object_id = o.id AND q.is_card = 0 AND q.hidden = 0)) AS object_count,
         (SELECT COUNT(*) FROM pictures q JOIN objects o ON o.id = q.object_id WHERE o.theme_id = t.id AND q.is_card = 0 AND q.hidden = 0) AS picture_count,
         (SELECT p.id FROM pictures p JOIN objects o ON o.id = p.object_id
           WHERE o.theme_id = t.id AND p.is_card = 0 AND p.hidden = 0 ORDER BY p.theme_sort, o.sort, p.sort LIMIT 1) AS cover_id
-       FROM themes t WHERE t.active = 1 ORDER BY t.sort, t.id`,
-    )
-    .all();
+       FROM themes t WHERE t.active = 1 ORDER BY t.sort, t.id`;
+
+export async function listThemes() {
+  return getDb().prepare(THEMES_SQL).all();
+}
+
+/** Metadata, covers and current locks in one database round trip. */
+export async function listThemePreviews(userId) {
+  const iso = new Date().toISOString();
+  const rows = await getDb().prepare(`WITH library AS (${THEMES_SQL})
+    SELECT ${LIGHT_COLUMNS}, ${PICTURE_LABELS}, t.age_group, t.object_count, t.picture_count,
+      ${themeAllowedSql('t.id')} AS can_use
+    FROM library t LEFT JOIN pictures p ON p.id=t.cover_id LEFT JOIN objects o ON o.id=p.object_id
+    ORDER BY t.sort,t.id`).all(userId ?? null, iso, iso, PLANS.free.themesPerAge);
+  const pictures = await fillMissingPreviews(rows.filter(row => row.id != null));
+  const covers = new Map(pictures.map(picture => [picture.theme_id, picture]));
+  return rows.map(row => ({ id: row.theme_id, slug: row.theme_slug,
+    name_vi: row.theme_name_vi, name_en: row.theme_name_en, age_group: row.age_group,
+    object_count: row.object_count, picture_count: row.picture_count,
+    allowed: !!row.can_use, cover: covers.get(row.theme_id) || null }));
+}
+
+/** One fresh permission check and only the requested theme's preview metadata. */
+export async function themePreviewBundle(slug, userId) {
+  const iso = new Date().toISOString();
+  const rows = await getDb().prepare(`WITH selected_theme AS (
+      SELECT t.*, ${themeAllowedSql('t.id')} AS can_use FROM themes t WHERE t.slug=? AND t.active=1
+    ) SELECT ${LIGHT_COLUMNS}, ${PICTURE_LABELS}, t.can_use
+    FROM selected_theme t LEFT JOIN objects o ON o.theme_id=t.id AND t.can_use
+    LEFT JOIN pictures p ON p.object_id=o.id AND p.is_card=0 AND p.hidden=0
+    ORDER BY p.theme_sort,o.sort,o.id,p.sort,p.id`)
+    .all(userId ?? null, iso, iso, PLANS.free.themesPerAge, slug);
+  if (!rows.length) return null;
+  const row = rows[0];
+  return { theme: { slug: row.theme_slug, name: { vi: row.theme_name_vi, en: row.theme_name_en } },
+    allowed: !!row.can_use,
+    pictures: row.can_use ? await fillMissingPreviews(rows.filter(picture => picture.id != null)) : [] };
 }
 
 export const findTheme = async (slug) => await getDb().prepare('SELECT * FROM themes WHERE slug = ?').get(slug);
@@ -58,6 +91,17 @@ export async function listPictures(objectId, { cards = false } = {}) {
 export async function findPicture(id, options) {
   const rows = await findPictures([id], options);
   return rows.get(id) || rows.get(Number(id));
+}
+
+/** The access flag belongs to this query result only; room/session checks still query fresh rights. */
+export async function findPictureForUser(id, user, { metadataOnly = false } = {}) {
+  const iso = new Date().toISOString();
+  return getDb().prepare(`SELECT ${metadataOnly ? LIGHT_COLUMNS : 'p.*'}, ${PICTURE_LABELS},
+    CASE WHEN p.is_card=1 THEN (?=1 OR EXISTS (SELECT 1 FROM user_cards WHERE user_id=? AND picture_id=p.id))
+      ELSE ${themeAllowedSql('t.id')} END AS can_use
+    ${PICTURE_JOINS} WHERE p.id=?`)
+    .get(user?.role === 'admin' ? 1 : 0, user?.id ?? null,
+      user?.id ?? null, iso, iso, PLANS.free.themesPerAge, id);
 }
 
 /** One database trip for a whole selection grid, including each picture's theme metadata. */

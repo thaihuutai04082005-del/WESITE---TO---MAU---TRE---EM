@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-04",
+  "baselineCommit": "d7db1780ccd8818757dc5d9db75baa52ee080f90",
+  "baselineTreeSameAs": "400b2a457d550a8d387748df52fb68d47d812b14",
+  "environment": {
+    "production": false,
+    "database": "Local PostgreSQL via PGlite; isolated synthetic fixtures; 232 pictures",
+    "addedDelayPerSqlQueryMs": 300,
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "personalColoring": {
+      "browser": "Chromium",
+      "cpuSlowdown": 4,
+      "networkLatencyMs": 60,
+      "downloadBytesPerSecond": 1000000,
+      "uploadBytesPerSecond": 500000
+    },
+    "togetherPicker": {
+      "cpuAndNetworkThrottle": false,
+      "includesAutomationOverhead": true
+    },
+    "sampleCountPerScenarioPerVersion": 1,
+    "readyDefinition": "Grid previews decoded; or editor SVG and embedded images decoded; then two animation frames",
+    "limitations": "Controlled local samples, not production or multi-run statistics. Production origins inaccessible under session network policy. Render Free cold start unchanged."
+  },
+  "largestPicture": {
+    "id": 104,
+    "slug": "chien-binh-cuu-hoa--chien-binh-cuu-hoa",
+    "bytes": 892164,
+    "theme": "chien-binh-bien-hinh-9"
+  },
+  "queryCounts": [
+    {
+      "request": "GET /themes?preview=1, authenticated",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "request": "GET /themes/:slug/pictures?preview=1, authenticated",
+      "before": 4,
+      "after": 1
+    },
+    {
+      "flow": "Create and open new editor",
+      "before": {
+        "POST /artworks": 6,
+        "GET /artworks/:id": 5,
+        "total": 11
+      },
+      "after": {
+        "POST /artworks with editor=true": 4,
+        "GET /artworks/:id": 0,
+        "total": 4
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "kind": "simple",
+      "theme": "dong-vat-3-4",
+      "mode": "template",
+      "themeToGridMs": {
+        "before": 1642,
+        "after": 1038
+      },
+      "modeClickToEditorMs": {
+        "before": 4009,
+        "after": 1585
+      }
+    },
+    {
+      "kind": "simple",
+      "theme": "dong-vat-3-4",
+      "mode": "free",
+      "themeToGridMs": {
+        "before": 1673,
+        "after": 1019
+      },
+      "modeClickToEditorMs": {
+        "before": 4000,
+        "after": 1456
+      }
+    },
+    {
+      "kind": "largest",
+      "theme": "chien-binh-bien-hinh-9",
+      "mode": "template",
+      "themeToGridMs": {
+        "before": 1490,
+        "after": 901
+      },
+      "modeClickToEditorMs": {
+        "before": 4500,
+        "after": 2421
+      }
+    },
+    {
+      "kind": "largest",
+      "theme": "chien-binh-bien-hinh-9",
+      "mode": "free",
+      "themeToGridMs": {
+        "before": 1441,
+        "after": 949
+      },
+      "modeClickToEditorMs": {
+        "before": 4210,
+        "after": 1953
+      }
+    },
+    {
+      "kind": "together picker",
+      "themeToGridMs": {
+        "before": 963,
+        "after": 367
+      },
+      "backToThemesMs": {
+        "before": 1347,
+        "after": 875
+      }
+    }
+  ]
+}

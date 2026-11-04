@@ -5,6 +5,13 @@ import { forbidden, notFound } from '../utils/http.js';
 import { themeAccess, canAccessTheme, assertThemeAccess } from '../services/quota.js';
 
 export async function themes(req, res) {
+  if (req.query.preview === '1' && req.query.access !== '1') {
+    const rows = await Picture.listThemePreviews(req.user?.id);
+    return res.json({ themes: rows.map(t => ({ id: t.id, slug: t.slug,
+      name: { vi: t.name_vi, en: t.name_en }, age: t.age_group,
+      objectCount: t.object_count, pictureCount: t.picture_count, locked: !t.allowed,
+      cover: t.cover ? Picture.toPreview(t.cover) : null })) });
+  }
   const rows = await Picture.listThemes();
   const [access, covers] = await Promise.all([
     themeAccess(req.user?.id, new Date(), rows),
@@ -63,19 +70,18 @@ export async function pictures(req, res) {
 
 /** Tranh của cả chủ đề (2 tầng: Chủ đề → Tranh). */
 export async function themePictures(req, res) {
+  if (req.query.preview === '1') {
+    const result = await Picture.themePreviewBundle(req.params.theme, req.user?.id);
+    if (!result) throw notFound();
+    if (!result.allowed) throw forbidden('theme_vip_required');
+    return res.json({ theme: result.theme, pictures: result.pictures.map(p => Picture.toPreview(p)) });
+  }
   const theme = await Picture.findActiveTheme(req.params.theme);
   if (!theme) throw notFound();
-  const client = req.query.preview === '1' ? Picture.toPreview : Picture.toClient;
-  let list;
-  if (req.query.preview === '1') {
-    const [, rows] = await Promise.all([assertThemeAccess(req.user?.id, theme.id), Picture.themePicturePreviews(theme.id)]);
-    list = rows.map(p => client(p));
-  } else {
-    await assertThemeAccess(req.user?.id, theme.id);
-    const rows = await Picture.listThemePictures(theme.id);
-    const pictures = await Picture.findPictures(rows.map(p => p.id));
-    list = rows.map(p => client(pictures.get(p.id)));
-  }
+  await assertThemeAccess(req.user?.id, theme.id);
+  const rows = await Picture.listThemePictures(theme.id);
+  const pictures = await Picture.findPictures(rows.map(p => p.id));
+  const list = rows.map(p => Picture.toClient(pictures.get(p.id)));
   res.json({ theme: { slug: theme.slug, name: { vi: theme.name_vi, en: theme.name_en } }, pictures: list });
 }
 

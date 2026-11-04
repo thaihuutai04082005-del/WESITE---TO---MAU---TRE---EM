@@ -2,12 +2,12 @@
 import { Router } from 'express';
 import * as pic from '../controllers/picture.controller.js';
 import * as art from '../controllers/artwork.controller.js';
-import { requireAuth, requireNickname, optionalAuth } from '../middlewares/auth.js';
+import { requireAuth, requireNickname, optionalAuth, optionalPreviewAuth } from '../middlewares/auth.js';
 
 const r = Router();
 
-r.get('/themes', optionalAuth, pic.themes);
-r.get('/themes/:theme/pictures', optionalAuth, pic.themePictures);
+r.get('/themes', optionalPreviewAuth, pic.themes);
+r.get('/themes/:theme/pictures', optionalPreviewAuth, pic.themePictures);
 r.get('/themes/:theme/objects', optionalAuth, pic.objects);
 r.get('/themes/:theme/objects/:object/pictures', optionalAuth, pic.pictures);
 r.get('/pictures/:id', requireAuth, pic.picture);

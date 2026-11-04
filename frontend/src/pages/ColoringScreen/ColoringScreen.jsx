@@ -15,6 +15,7 @@ import ColoringWorkspace from '../../components/ColoringWorkspace';
 import RevealModal from '../../components/RevealModal';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon';
+import { takeCreatedEditor } from '../../lib/createdEditor';
 
 const AUTOSAVE_MS = 1500;
 
@@ -47,8 +48,9 @@ export default function ColoringScreen() {
 
   useEffect(() => {
     let alive = true;
-    api
-      .get(`/artworks/${id}`)
+    const created = takeCreatedEditor(id, useAuth.getState().token);
+    const load = created ? Promise.resolve(created) : api.get(`/artworks/${id}`);
+    load
       .then(async (r) => {
         if (!alive) return;
         if (r.accessError) {

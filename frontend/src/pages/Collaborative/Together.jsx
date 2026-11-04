@@ -8,6 +8,7 @@ import { useUi } from '../../store/ui';
 import PicturePicker from '../../components/PicturePicker';
 import Icon from '../../components/Icon';
 import { TogetherArt } from '../../components/Illustrations';
+import { loadTogetherRoom } from '../../lib/coloringScreens';
 
 function IconBubble({ name, bg, size = 52 }) {
   return (
@@ -38,6 +39,7 @@ export default function Together() {
   const navigate = useNavigate();
   const [picking, setPicking] = useState(false);
   const [code, setCode] = useState('');
+  useEffect(() => { if (picking) loadTogetherRoom().catch(() => {}); }, [picking]);
 
   // Báo cho hiệu ứng chuyển màn hình (TogetherTransition) biết trang đã sẵn sàng.
   useEffect(() => {

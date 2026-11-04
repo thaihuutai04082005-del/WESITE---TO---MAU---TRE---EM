@@ -8,7 +8,7 @@ import * as User from '../models/user.js';
 import * as Exhibition from '../services/exhibition.js';
 import { consume, planStatus, COUNTED_MODES } from '../services/quota.js';
 import * as progression from '../services/progression.js';
-import { assertCanUsePicture, pictureAccessError } from './picture.controller.js';
+import { assertCanUsePicture } from './picture.controller.js';
 import { badRequest, forbidden, notFound } from '../utils/http.js';
 import { DEFAULT_ARTWORK_FRAME } from '../config/constants.js';
 
@@ -66,24 +66,30 @@ export async function list(req, res) {
 
 export async function create(req, res) {
   const { pictureId, mode } = req.body || {};
+  const editor = req.body?.editor === true;
   if (!['template', 'free'].includes(mode)) throw badRequest('invalid_mode');
-  const p = await Picture.findPicture(Number(pictureId), { metadataOnly:true });
+  const p = await Picture.findPictureForUser(Number(pictureId), req.user, { metadataOnly: !editor });
   if (!p) throw notFound('picture_not_found');
-  await assertCanUsePicture(req.user, p);
-  const a = await Artwork.create({ userId: req.user.id, pictureId: p.id, mode });
+  if (!p.can_use) throw forbidden(p.is_card ? 'card_not_owned' : 'theme_vip_required');
+  const [a, plan] = await Promise.all([
+    Artwork.create({ userId: req.user.id, pictureId: p.id, mode }), planStatus(req.user.id),
+  ]);
   res.status(201).json({
-    artwork: { ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en }), data: Artwork.dataOf(a) },
-    plan: await planStatus(req.user.id),
+    artwork: { ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en,
+      ...(editor ? { is_card: p.is_card, rarity: p.rarity } : {}) }), data: Artwork.dataOf(a),
+      ...(editor ? { counted: !!a.counted, exhibited: false } : {}) },
+    plan,
+    ...(editor ? { picture: Picture.toClient(p), accessError: null } : {}),
   });
 }
 
 export async function get(req, res) {
   const a = await own(req);
   const [p, exhibited] = await Promise.all([
-    Picture.findPicture(a.picture_id), Exhibition.activeEntryFor(a.id),
+    Picture.findPictureForUser(a.picture_id, req.user), Exhibition.activeEntryFor(a.id),
   ]);
   res.json({
-    accessError: await pictureAccessError(req.user, p),
+    accessError: p.can_use ? null : p.is_card ? 'card_not_owned' : 'theme_vip_required',
     artwork: {
       ...Artwork.toSummary({ ...a, name_vi: p.name_vi, name_en: p.name_en, is_card: p.is_card, rarity: p.rarity }),
       data: Artwork.dataOf(a),

@@ -8,6 +8,8 @@ import { errorText } from '../lib/format';
 import { useUi } from '../store/ui';
 import { useAuth } from '../store/auth';
 import { assertPictureThemeAllowed } from '../lib/themeAccess';
+import { rememberCreatedEditor } from '../lib/createdEditor';
+import { loadColoringScreen } from '../lib/coloringScreens';
 
 const WORD_COLORS = ['#2F9BF5', '#FFB01A', '#F0504F', '#33C45A'];
 
@@ -56,6 +58,7 @@ export default function ModePicker({ picture, onClose }) {
   const toast = useUi((s) => s.toast);
   const openUpgrade = useUi((s) => s.openUpgrade);
   const [busy, setBusy] = useState(false);
+  useEffect(() => { if (picture?.id) loadColoringScreen().catch(() => {}); }, [picture?.id]);
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && onClose?.();
     window.addEventListener('keydown', onKey);
@@ -67,8 +70,10 @@ export default function ModePicker({ picture, onClose }) {
     try {
       const state = useAuth.getState();
       if (!state.meta?.pictureAccessEnforced) await assertPictureThemeAllowed(picture, state.plan, state.meta?.plans?.free?.themesPerAge);
-      const id = await createArtwork(picture.id, mode);
-      navigate(`/draw/${id}`);
+      const result = await createArtwork(picture.id, mode, { editor: state.meta?.artworkEditorBootstrap === true });
+      if (useAuth.getState().token !== state.token) return;
+      rememberCreatedEditor(result, state.token);
+      navigate(`/draw/${result.artwork.id}`);
     } catch (e) {
       if (e.code === 'theme_vip_required') { onClose?.(); openUpgrade(true, 'theme'); }
       else toast(errorText(t, e), 'error');
