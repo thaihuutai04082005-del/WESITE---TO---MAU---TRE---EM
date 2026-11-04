@@ -51,6 +51,41 @@ không phải cách lưu hoặc khôi phục tài khoản. Không chia sẻ giá
 Không bật lại SQLite tạm để che lỗi kết nối. Nếu PostgreSQL từ chối mật khẩu hoặc
 TLS, sửa kết nối đó; ứng dụng không fallback sang một database SQLite mới.
 
+## Khi Render báo SELF_SIGNED_CERT_IN_CHAIN
+
+Ảnh triển khai `9cca2fc` do chủ dịch vụ gửi xác nhận backend đã thử kết nối
+PostgreSQL nhưng dừng ở bước kiểm tra chứng chỉ. Lỗi TLS xảy ra trước xác thực
+database, nên chưa chứng minh mật khẩu đúng hoặc sai. Có thể giữ `[YOUR-PASSWORD]`
+trong `DATABASE_URL` khi `PGPASSWORD` chứa mật khẩu database thật; mã đã thay thế
+placeholder và mã hóa ký tự đặc biệt trước khi kết nối.
+
+1. Supabase → **Database → Settings → SSL Configuration → Download certificate**:
+   tải chứng chỉ CA của đúng project. Không thay đổi hoặc tắt SSL enforcement.
+2. Mở chứng chỉ bằng Notepad. File PEM có dòng `-----BEGIN CERTIFICATE-----` và
+   `-----END CERTIFICATE-----`. Sao chép toàn bộ, giữ nguyên các dòng bao quanh.
+   Nếu tải được định dạng nhị phân, cần chuyển sang PEM; không dán dữ liệu lỗi vào
+   cấu hình hoặc lấy chứng chỉ từ một nguồn không xác minh.
+3. Render → **Environment → Secret Files → Add Secret File**. Đặt filename là
+   `supabase-ca.crt`, contents là toàn bộ chứng chỉ đã tải. Đây là CA công khai,
+   không phải private key hoặc mật khẩu database.
+4. Thêm Environment Variable `NODE_EXTRA_CA_CERTS` với value
+   `/etc/secrets/supabase-ca.crt`. Biến phải có trong môi trường lúc Node khởi động;
+   chỉ đặt qua `dotenv.config()` sau khi tiến trình đã chạy là không đủ.
+5. **Save, rebuild and deploy**, rồi kiểm tra lại. `rejectUnauthorized` và kiểm
+   tra hostname vẫn bật. Không dùng `NODE_TLS_REJECT_UNAUTHORIZED=0`,
+   `rejectUnauthorized:false` hoặc chế độ no-verify để bỏ qua lỗi.
+
+Đường dẫn phải khớp filename Secret File. Chỉ thêm một CA do đúng nhà cung cấp
+cung cấp; thay CA khi nhà cung cấp xoay chứng chỉ. Cấu hình này dùng được với
+backend hiện có, không cần đổi code hoặc chia sẻ URI/password qua chat.
+
+Đã kiểm thử Node 24 với cấu hình TLS của `postgresOptions`: không có CA thì từ
+chối chain tự ký, thêm CA bằng `NODE_EXTRA_CA_CERTS` thì kết nối thành công, sai
+hostname vẫn bị từ chối. Đây là TLS fixture trên localhost, chưa thay thế việc
+xác minh kết nối với project Supabase thật.
+
+Nguồn: [hướng dẫn SSL của Supabase](https://supabase.com/docs/guides/platform/ssl-enforcement).
+
 ## Triển khai và kiểm tra tài khoản mới
 
 1. Sau khi kết nối PostgreSQL đã hoạt động, triển khai mã đã có chốt chặn lưu trữ

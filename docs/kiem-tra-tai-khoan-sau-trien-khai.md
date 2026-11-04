@@ -7,9 +7,10 @@ gửi tiếp bản sao/chia archive. Chỉ triển khai lưu trữ bền vững 
 từ nay. Không chạy import SQLite, không xóa database hoặc project bên ngoài.
 
 Đã xác nhận mở được project Supabase dành cho TinyTints và Table Editor chưa có
-bảng nào. Có thể khởi tạo schema/nội dung ứng dụng mới tại đó. Còn cần cấu hình
-`DATABASE_URL` và `PGPASSWORD` trong Render, rồi kiểm tra thực tế sau triển khai;
-workspace không có thông tin kết nối hoặc quyền quản trị Render/Supabase.
+bảng nào trước khi chuyển. Chủ dịch vụ đã thêm cấu hình kết nối vào Render và
+khắc phục lỗi CA; ảnh mới nhất xác nhận deploy `9cca2fc` **Live**. Còn cần đối
+chiếu bảng ở Supabase, triển khai chốt chặn và thử tài khoản thực tế qua redeploy.
+Workspace không có thông tin kết nối hoặc quyền quản trị Render/Supabase.
 Quy trình áp dụng hiện tại: [bắt đầu lại với Supabase](bat-dau-lai-voi-supabase.md).
 
 Giao diện Render của chủ dịch vụ chỉ thấy **Save, rebuild and deploy**. Lệnh đẩy
@@ -19,6 +20,21 @@ lưu biến Supabase bằng giao diện Render trước (backend hiện tại đ
 PostgreSQL), xác nhận **Live** và bảng `users` xuất hiện ở Supabase, rồi mới đưa
 chốt chặn lên. Không dùng thao tác khác để vượt việc từ chối đẩy mã ở trạng thái
 cấu hình chưa xác nhận.
+
+Ảnh Render tiếp theo do chủ dịch vụ gửi cho thấy đã lưu cấu hình và deploy lại
+`9cca2fc`, nhưng `initializeDatabase`/`migratePostgres` thất bại với
+`SELF_SIGNED_CERT_IN_CHAIN`. Đây là bằng chứng đường PostgreSQL đã được chọn;
+chưa xác minh thành công mật khẩu hoặc tạo bảng ở thời điểm đó. Sau khi cấu hình
+CA từ đúng project Supabase, Secret File trên Render và `NODE_EXTRA_CA_CERTS`, ảnh
+tiếp theo xác nhận deploy **succeeded / Live** với seed 232 tranh, 60 nhiệm vụ,
+25 vật phẩm và API lắng nghe cổng 10000. Chưa push các commit chuẩn bị; đang đối
+chiếu bảng `users`/`pictures` ở Supabase trước khi thử lại push dựa trên bằng chứng mới.
+
+Chủ dịch vụ sau đó xác nhận **đã có cả hai bảng `users` và `pictures`** ở Supabase.
+Kết hợp với ảnh Render **Live** sau cấu hình CA, đã có bằng chứng mới rằng
+PostgreSQL được cấu hình và hoạt động, thay cho trạng thái chưa xác nhận khi
+lệnh push trước bị từ chối. Có thể thử lại push bản đã kiểm thử dựa trên điều
+kiện mới này; không dùng nhánh hoặc thao tác khác để vượt lần từ chối trước.
 
 ## Bằng chứng và giới hạn của lần kiểm tra 04/11/2026
 
