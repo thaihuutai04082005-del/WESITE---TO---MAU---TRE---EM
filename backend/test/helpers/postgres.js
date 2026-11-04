@@ -4,8 +4,8 @@ import { migratePostgres } from '../../src/config/postgres.js';
 
 // PGlite runs real PostgreSQL in-process. Serialize access to emulate a leased
 // session; the hosted driver uses pg.Pool with separate client connections.
-export async function postgresFixture() {
-  const engine = await PGlite.create();
+export async function postgresFixture(dataDir) {
+  const engine = await PGlite.create(dataDir);
   let tail = Promise.resolve();
   const acquire = async () => {
     const previous = tail;

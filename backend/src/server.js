@@ -13,7 +13,11 @@ import { seedAll, seedPicturesIfNeeded } from '../../database/seeds/seed.js';
 
 await initializeDatabase();
 const db = getDb();
-if ((await db.prepare('SELECT COUNT(*) AS c FROM pictures').get()).c === 0) {
+const accounts = (await db.prepare('SELECT COUNT(*) AS c FROM users').get()).c;
+const pictures = (await db.prepare('SELECT COUNT(*) AS c FROM pictures').get()).c;
+// Counts make an unexpectedly empty database visible without logging any account or secret.
+console.log(`[database] engine=${db.dialect} accounts=${accounts} pictures=${pictures}`);
+if (pictures === 0) {
   const r = await seedAll();
   console.log(`[seed] Khởi tạo dữ liệu lần đầu: ${r.pictures} tranh, ${r.missions} nhiệm vụ, ${r.items} vật phẩm`);
 } else {
