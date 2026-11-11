@@ -2,6 +2,7 @@ import { lazy, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './store/auth';
+import ServerWaking from './components/Layout/ServerWaking';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
 import { loadObjectSelector, loadColoringScreen, loadTogetherRoom, loadHistory } from './lib/coloringScreens';
@@ -72,8 +73,9 @@ export default function App() {
     // Keep the readable HTML visible while the app initializes (including slow APIs).
     if (document.getElementById('seo-content')) return null;
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen flex-col items-center justify-center">
         <img src="/favicon.svg" alt="" className="h-20 w-20 animate-bounce" />
+        <ServerWaking inline />
       </div>
     );
   }

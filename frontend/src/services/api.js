@@ -33,10 +33,33 @@ export function request(method, path, body, { raw = false } = {}) {
   return pending;
 }
 
+// Yêu cầu chờ quá lâu (thường do máy chủ gói Free đang thức dậy) → báo cho giao diện hiện lời nhắn "đang khởi động".
+const SLOW_MS = 4000;
+let slowCount = 0;
+const slowListeners = new Set();
+export const isServerSlow = () => slowCount > 0;
+export function subscribeServerSlow(fn) {
+  slowListeners.add(fn);
+  return () => slowListeners.delete(fn);
+}
+const setSlow = (delta) => {
+  slowCount += delta;
+  slowListeners.forEach((fn) => fn(slowCount > 0));
+};
+
 async function fetchRequest(method, path, body, raw, token) {
   const resume = pauseImagePreloads();
+  let slow = false;
+  const timer = setTimeout(() => {
+    slow = true;
+    setSlow(1);
+  }, SLOW_MS);
   try { return await performFetch(method, path, body, raw, token); }
-  finally { resume(); }
+  finally {
+    clearTimeout(timer);
+    if (slow) setSlow(-1);
+    resume();
+  }
 }
 
 async function performFetch(method, path, body, raw, token) {

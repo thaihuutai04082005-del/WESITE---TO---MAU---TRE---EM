@@ -3,6 +3,7 @@
     "name": "Bé Tô Màu"
   },
   "common": {
+    "serverWaking": "Máy chủ đang thức dậy, bé chờ một chút nhé…",
     "tryAgain": "Thử lại",
     "loading": "Đang tải…",
     "back": "Quay lại",

@@ -10,6 +10,22 @@
     <meta name="description" content="Color online with TinyTints: guided and creative coloring for kids, shared pictures and storybooks. Start with a free account." data-seo />
     <meta name="robots" content="noindex, follow" data-seo />
     <!-- seo:end -->
+    <script>
+      // Đánh thức máy chủ API ngay khi trang bắt đầu tải (gói Render Free ngủ khi vắng khách, thức dậy mất vài chục giây):
+      // gửi một yêu cầu nhỏ trước khi trình duyệt tải xong mã của web, để máy chủ khởi động song song.
+      (function () {
+        var api = '%VITE_API_URL%';
+        if (!/^https?:\/\//.test(api)) return;
+        try {
+          var l = document.createElement('link');
+          l.rel = 'preconnect';
+          l.href = new URL(api).origin;
+          l.crossOrigin = 'anonymous';
+          document.head.appendChild(l);
+          fetch(api + '/health', { mode: 'no-cors', cache: 'no-store' }).catch(function () {});
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
