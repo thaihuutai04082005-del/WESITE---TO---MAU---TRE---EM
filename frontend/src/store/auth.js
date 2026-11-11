@@ -9,6 +9,24 @@ import { clearCreatedEditor } from '../lib/createdEditor';
 import { clearHistoryCache } from '../lib/historyCache';
 
 const TOKEN_KEY = 'btm.token';
+// Hồ sơ lần trước (chỉ để HIỆN giao diện ngay khi mở web; quyền luôn do máy chủ kiểm tra ở từng request).
+const SESSION_KEY = 'btm.session';
+const readSession = (token) => {
+  try {
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    return s && s.token === token && s.user ? s : null;
+  } catch {
+    return null;
+  }
+};
+const writeSession = (value) => {
+  try {
+    if (value) localStorage.setItem(SESSION_KEY, JSON.stringify(value));
+    else localStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* chế độ riêng tư */
+  }
+};
 let booting = null;
 const readToken = () => {
   try {
@@ -30,9 +48,20 @@ export const useAuth = create((set, get) => ({
     if (booting) return booting;
     // Public content must not wait for a sleeping or unavailable API.
     if (!get().token && publicPage(window.location.pathname)) set({ ready: true });
+    // Đã đăng nhập từ trước: hiện ngay giao diện theo hồ sơ lần trước, làm mới ở nền — không bắt bé chờ máy chủ thức dậy.
+    const cached = get().token ? readSession(get().token) : null;
+    if (cached) {
+      set({ user: cached.user, plan: cached.plan ?? null, unread: cached.unread ?? 0, ready: true });
+      if (cached.user.language && cached.user.language !== i18n.language) i18n.changeLanguage(cached.user.language);
+    }
     booting = Promise.all([
       api.get('/meta').then((meta) => set({ meta })).catch(() => {}),
-      get().token ? get().refresh().catch(() => get().logout()) : Promise.resolve(),
+      get().token
+        ? get().refresh().catch((err) => {
+            // Mạng/máy chủ tạm lỗi mà đã có hồ sơ cũ thì giữ nguyên; token hỏng/hết hạn (401) thì đăng xuất.
+            if (!cached || err?.status === 401) get().logout();
+          })
+        : Promise.resolve(),
     ]).then(() => set({ ready: true })).finally(() => { booting = null; });
     return booting;
   },
@@ -88,9 +117,17 @@ export const useAuth = create((set, get) => ({
     } catch {
       /* bỏ qua */
     }
+    writeSession(null);
     closeSocket();
     set({ token: null, user: null, plan: null, unread: 0 });
   },
 }));
+
+// Lưu hồ sơ mới nhất mỗi khi đổi (đổi tên, ảnh đại diện, gói…) để lần mở web sau hiện đúng ngay.
+useAuth.subscribe((st, prev) => {
+  if (st.token && st.user && (st.user !== prev.user || st.plan !== prev.plan || st.token !== prev.token)) {
+    writeSession({ token: st.token, user: st.user, plan: st.plan, unread: st.unread });
+  }
+});
 
 configureApi({ getToken: () => useAuth.getState().token, unauthorized: () => useAuth.getState().logout() });

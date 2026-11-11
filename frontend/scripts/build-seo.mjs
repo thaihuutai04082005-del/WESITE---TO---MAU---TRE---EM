@@ -12,6 +12,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, 'dist');
 const assets = await staticAssetPaths(resolve(root, 'public'));
 assertNoAppAssetCollisions(assets);
+// Thư mục hình/âm thanh/phông trong public (trừ thư mục đã có header riêng).
+const STATIC_DIRS = [...new Set(assets.map((path) => path.split('/')[1]).filter((dir) => assets.some((path) => path.startsWith(`/${dir}/`))))]
+  .filter((dir) => !['picture-previews', 'ui-images', 'assets'].includes(dir));
 const googleVerificationFiles = assets.filter((path) => /^\/google[a-f0-9]+\.html$/.test(path));
 // Pages redirects real .html files to clean URLs. Google needs its exact file URL.
 // Serve an extensionless copy through an explicit 200 rewrite instead.
@@ -73,11 +76,16 @@ try {
   const otherHeaders = [...LEGACY_APP_PATHS, '/404.html', '/admin/*', '/api/*'].map((path) => `${path}\n  X-Robots-Tag: noindex, follow`);
   const previewHeaders = '/picture-previews/*\n  Cache-Control: public, max-age=31536000, immutable';
   const uiImageHeaders = '/ui-images/*\n  Cache-Control: public, max-age=31536000, immutable';
+  // Mã JS/CSS do Vite đặt tên theo mã băm nội dung: đổi nội dung là đổi tên, nên trình duyệt được nhớ mãi
+  // (mặc định Cloudflare bắt hỏi lại máy chủ từng file mỗi lần mở web).
+  const assetHeaders = '/assets/*\n  Cache-Control: public, max-age=31536000, immutable';
+  // Phông chữ, âm thanh, hình trang trí hiếm khi đổi: dùng bản đã nhớ ngay, kiểm tra bản mới ở nền.
+  const staticHeaders = STATIC_DIRS.map((dir) => `/${dir}/*\n  Cache-Control: public, max-age=86400, stale-while-revalidate=604800`);
   const verificationHeaders = googleVerificationFiles.flatMap((path) => [path, path.slice(0, -5)])
     .map((path) => `${path}\n  Content-Type: text/html; charset=utf-8\n  X-Robots-Tag: noindex, nofollow`);
   const sitemapHeaders = ['/sitemap.xml', '/sitemap-pages.xml'].map((path) => `${path}\n  Content-Type: application/xml; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate`);
   const robotsHeaders = '/robots.txt\n  Content-Type: text/plain; charset=utf-8\n  Cache-Control: public, max-age=0, must-revalidate';
-  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, uiImageHeaders, ...verificationHeaders, ...sitemapHeaders, robotsHeaders].join('\n\n') + '\n');
+  await writeFile(resolve(dist, '_headers'), [...appHeaders, ...otherHeaders, previewHeaders, uiImageHeaders, assetHeaders, ...staticHeaders, ...verificationHeaders, ...sitemapHeaders, robotsHeaders].join('\n\n') + '\n');
   console.log(`SEO: generated ${PUBLIC_ROUTES.length} readable public pages, sitemap.xml, robots.txt and Cloudflare routing for ${origin}`);
 } finally {
   await rm(temporary, { recursive: true, force: true });

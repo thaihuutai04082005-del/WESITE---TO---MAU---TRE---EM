@@ -9,6 +9,7 @@ import Avatar from '../Avatar/Avatar';
 import { formatDateTime } from '../../lib/format';
 import Icon from '../Icon';
 import Toasts from './Toasts';
+import ServerWaking from './ServerWaking';
 import EventPopup from './EventPopup';
 import CollabInvitePopup from './CollabInvitePopup';
 import UpgradeModal from './UpgradeModal';
@@ -224,6 +225,7 @@ export default function Layout() {
       )}
 
       <Toasts />
+      <ServerWaking />
       <EventPopup />
       <CollabInvitePopup />
       <UpgradeModal />

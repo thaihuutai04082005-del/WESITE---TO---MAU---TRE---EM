@@ -3,6 +3,7 @@
     "name": "TinyTints"
   },
   "common": {
+    "serverWaking": "Waking up the server — just a moment…",
     "tryAgain": "Try again",
     "loading": "Loading…",
     "back": "Back",
