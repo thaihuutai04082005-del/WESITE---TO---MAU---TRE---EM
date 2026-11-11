@@ -44,8 +44,12 @@ export async function warmTheme(slug, budgetMs = 1600) {
     themes.set(slug, data);
     for (const p of data.pictures || []) {
       if (performance.now() - t0 > budgetMs) break;
-      await makeThumb(p).catch(() => {});
-      await new Promise((r) => setTimeout(r, 0));
+      if (p.thumb) {
+        // ảnh nhỏ server dựng sẵn: chỉ cần tải trước vào bộ nhớ đệm của trình duyệt
+        const img = new Image();
+        img.src = p.thumb;
+        await img.decode().catch(() => {});
+      } else await makeThumb(p).catch(() => {});
     }
   } catch {
     /* không làm sẵn được thì trang tự tải như bình thường */

@@ -58,7 +58,7 @@ function getMusic() {
   if (!music) {
     music = new Audio(MUSIC_URL);
     music.loop = true;
-    music.preload = 'auto';
+    music.preload = 'none'; // nhạc (2MB) phát kiểu vừa tải vừa nghe, không tải trước để khỏi tranh mạng với trang
     music.addEventListener('playing', notify);
     music.addEventListener('pause', notify);
   }
@@ -102,8 +102,17 @@ function pauseMusic() {
 
 /** Gọi một lần khi mở web: thử phát nhạc ngay; nếu trình duyệt chưa cho thì phát ở lần chạm đầu tiên. Tạm dừng khi rời tab. */
 export function initMusic() {
-  started = true; // thử phát ngay khi mở web
-  playMusic();
+  // Thử phát khi trang đã tải xong (không giành đường truyền với ảnh, mã của trang lúc vừa mở web).
+  let tryTimer = null;
+  const tryAutoplay = () => {
+    tryTimer = setTimeout(() => {
+      if (music && !music.paused) return;
+      started = true;
+      playMusic();
+    }, 800);
+  };
+  if (document.readyState === 'complete') tryAutoplay();
+  else window.addEventListener('load', tryAutoplay, { once: true });
   preloadTing();
   const unlock = () => {
     started = true;
@@ -117,6 +126,8 @@ export function initMusic() {
     window.removeEventListener('pointerdown', unlock);
     window.removeEventListener('keydown', unlock);
     document.removeEventListener('visibilitychange', onVisibility);
+    window.removeEventListener('load', tryAutoplay);
+    clearTimeout(tryTimer);
     clearInterval(fadeTimer);
     music?.pause();
     started = false;

@@ -9,6 +9,7 @@ import { registerCollab } from './services/collab.js';
 import { scheduleCleanup } from './services/lifecycle.js';
 import { scheduleExhibition } from './services/exhibition.js';
 import { scheduleBilling } from './services/payments/index.js';
+import { warmThumbs } from './services/thumbs.js';
 import { seedAll, seedPicturesIfNeeded } from '../../database/seeds/seed.js';
 
 const db = getDb();
@@ -28,4 +29,5 @@ scheduleBilling();
 
 server.listen(env.port, () => {
   console.log(`API đang chạy tại http://localhost:${env.port}`);
+  setTimeout(() => warmThumbs().catch(() => {}), 3000); // dựng sẵn ảnh nhỏ của tranh ở chế độ nền
 });

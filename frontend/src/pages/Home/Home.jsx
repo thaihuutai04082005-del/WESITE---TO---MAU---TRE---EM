@@ -20,12 +20,37 @@ const landingThemes = (themes) => {
   return picked.length === LANDING_SLUGS.length ? picked : themes.slice(0, 5);
 };
 
+/** Tranh đầy đủ (để chạy hiệu ứng nhân vật) chỉ tải khi trang đã rảnh và mạng không yếu — trước đó hiện ảnh nhỏ cho nhanh. */
+function useAnimatedCovers(themes) {
+  const [full, setFull] = useState({});
+  useEffect(() => {
+    const conn = navigator.connection;
+    if (!themes.length || conn?.saveData || /2g|3g/.test(conn?.effectiveType || '')) return undefined;
+    let alive = true;
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
+    const id = setTimeout(() => {
+      idle(() => {
+        for (const th of themes) {
+          if (!th.cover) continue;
+          api.get(`/pictures/${th.cover.id}`).then((r) => alive && setFull((f) => ({ ...f, [th.slug]: r.picture }))).catch(() => {});
+        }
+      });
+    }, 1500);
+    return () => {
+      alive = false;
+      clearTimeout(id);
+    };
+  }, [themes]);
+  return full;
+}
+
 function Landing() {
   const { t } = useTranslation();
   const [themes, setThemes] = useState([]);
   useEffect(() => {
-    api.get('/themes').then((r) => setThemes(r.themes)).catch(() => {});
+    api.get('/themes').then((r) => setThemes(landingThemes(r.themes))).catch(() => {});
   }, []);
+  const full = useAnimatedCovers(themes);
   const features = ['creative', 'arena', 'gacha', 'together', 'storybook', 'safe'];
   return (
     <div className="bg-[#BFE8FF] bg-cover bg-fixed bg-center bg-no-repeat" style={{ backgroundImage: HOME_BG }}>
@@ -44,9 +69,9 @@ function Landing() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
-          {landingThemes(themes).map((th, i) => (
+          {themes.map((th, i) => (
             <div key={th.slug} className={`card overflow-hidden p-1 ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>
-              <PictureView picture={th.cover} reveal className="rounded-2xl" />
+              <PictureView picture={full[th.slug] || th.cover} reveal className="rounded-2xl" />
             </div>
           ))}
         </div>

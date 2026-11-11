@@ -1,6 +1,7 @@
 // Ứng dụng Express: gom các route REST dưới /api.
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { env, REPO_ROOT } from './config/env.js';
@@ -25,6 +26,7 @@ export function createApp() {
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', 1);
+  app.use(compression()); // nén gzip mọi phản hồi văn bản (JSON, JS, CSS, SVG) → tải nhanh hơn nhiều lần
   app.use(cors({ origin: env.corsOrigins, credentials: true }));
   app.use(express.json({ limit: '8mb' }));
   app.use(express.urlencoded({ extended: false }));
@@ -73,8 +75,10 @@ export function createApp() {
   // Production: phục vụ luôn bản build của frontend (SPA).
   const dist = join(REPO_ROOT, 'frontend', 'dist');
   if (existsSync(dist)) {
-    app.use(express.static(dist, { index: false, maxAge: '1h' }));
-    app.get(/^\/(?!api|socket\.io|admin).*/, (_req, res) => res.sendFile(join(dist, 'index.html')));
+    // File trong /assets có mã băm trong tên (đổi nội dung là đổi tên) → cho trình duyệt nhớ mãi; file khác nhớ 1 ngày.
+    app.use('/assets', express.static(join(dist, 'assets'), { index: false, maxAge: '1y', immutable: true, fallthrough: false }));
+    app.use(express.static(dist, { index: false, maxAge: '1d' }));
+    app.get(/^\/(?!api|socket\.io|admin).*/, (_req, res) => res.sendFile(join(dist, 'index.html'), { cacheControl: false, headers: { 'Cache-Control': 'no-cache' } }));
   }
 
   app.use(errorHandler);

@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import * as pic from '../controllers/picture.controller.js';
 import * as art from '../controllers/artwork.controller.js';
-import { requireAuth, requireNickname } from '../middlewares/auth.js';
+import { optionalAuth, requireAuth, requireNickname } from '../middlewares/auth.js';
 
 const r = Router();
 
@@ -10,7 +10,9 @@ r.get('/themes', pic.themes);
 r.get('/themes/:theme/pictures', pic.themePictures);
 r.get('/themes/:theme/objects', pic.objects);
 r.get('/themes/:theme/objects/:object/pictures', pic.pictures);
-r.get('/pictures/:id', requireAuth, pic.picture);
+r.get('/pictures/:id/thumb.webp', pic.thumb);
+r.get('/pictures/:id/thumb-blank.webp', pic.thumb);
+r.get('/pictures/:id', optionalAuth, pic.picture); // tranh thường ai cũng xem được (trang giới thiệu); thẻ vẫn phải sở hữu
 
 r.get('/artworks', requireAuth, art.list);
 r.post('/artworks', requireAuth, requireNickname, art.create);

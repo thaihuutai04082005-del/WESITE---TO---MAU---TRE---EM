@@ -57,6 +57,19 @@ export function findPicture(id) {
     .get(id);
 }
 
+/** Như findPicture nhưng không đọc SVG/manifest (nặng) — dùng cho danh sách, ảnh lấy từ thumbUrl. */
+export function findPictureLite(id) {
+  return getDb()
+    .prepare(
+      `SELECT p.id, p.slug, p.name_vi, p.name_en, p.variant_name_vi, p.variant_name_en, p.animation, p.is_card, p.rarity,
+              length(p.svg) AS svg_len, length(p.manifest) AS manifest_len,
+              o.slug AS object_slug, o.name_vi AS object_name_vi, o.name_en AS object_name_en,
+              t.slug AS theme_slug, t.id AS theme_id, t.name_vi AS theme_name_vi, t.name_en AS theme_name_en
+       FROM pictures p JOIN objects o ON o.id = p.object_id JOIN themes t ON t.id = o.theme_id WHERE p.id = ?`,
+    )
+    .get(id);
+}
+
 export const findPictureBySlug = (slug) => getDb().prepare('SELECT id FROM pictures WHERE slug = ?').get(slug);
 
 export function manifestOf(picture) {

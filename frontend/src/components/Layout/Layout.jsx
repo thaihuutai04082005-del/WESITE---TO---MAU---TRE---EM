@@ -1,5 +1,5 @@
 // Khung trang: thanh điều hướng (desktop) + thanh dưới (mobile), chuyển ngôn ngữ, thông báo, popup phần thưởng.
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
@@ -47,6 +47,15 @@ const DESKTOP_MAIN = MAIN_NAV;
 const navOf = (keys) => keys.map((k) => NAV.find((n) => n.key === k)).filter(Boolean);
 // Các sự kiện này đã có popup phần thưởng riêng → không hiện thêm toast.
 const POPUP_TYPES = new Set(['mission_complete', 'level_up', 'rank_up']);
+
+/** Chờ tải mã của trang (chỉ thấy khi mạng chậm và trang chưa được tải sẵn). */
+function PageLoading() {
+  return (
+    <div className="flex min-h-[50vh] items-center justify-center" aria-busy="true">
+      <img src="/favicon.svg" alt="" className="h-14 w-14 animate-bounce" />
+    </div>
+  );
+}
 
 export default function Layout() {
   const { t, i18n } = useTranslation();
@@ -154,7 +163,9 @@ export default function Layout() {
       </header>
 
       <main className={fullBleed ? '' : ''}>
-        <Outlet />
+        <Suspense fallback={<PageLoading />}>
+          <Outlet />
+        </Suspense>
       </main>
 
       {user && (

@@ -5,14 +5,18 @@ import { thumbOf } from '../../lib/prefetch';
 
 /** `thumb`: ở danh sách tranh, nếu đã có ảnh nhỏ làm sẵn thì dùng ảnh đó (nhẹ) thay vì dựng cả SVG. */
 function PictureView({ picture, data = null, reveal = false, className = '', title, numbers = false, doneIds = null, thumb = false }) {
-  const thumbUrl = thumb && !data && !numbers && !reveal ? thumbOf(picture?.slug) : null;
+  // Ảnh nhỏ server dựng sẵn (danh sách tranh không còn gửi SVG nặng): tranh mẫu → thumb, tranh trắng chưa tô → thumbBlank.
+  const blankData = data && !Object.keys(data.fills || {}).length && !data.strokes?.length && !data.stickers?.length;
+  const serverThumb = !numbers && !picture?.svg ? (!data ? picture?.thumb : blankData ? picture?.thumbBlank : null) : null;
+  const thumbUrl = serverThumb || (thumb && !data && !numbers && !reveal ? thumbOf(picture?.slug) : null);
   const html = useMemo(() => {
     if (!picture?.svg || thumbUrl) return '';
     if (!data) return referenceSvgHtml(picture); // tranh mẫu: có nhớ đệm, dùng lại khi đã làm sẵn
     return coloredSvgString(picture.svg, data, { withStickers: !!data?.stickers?.length });
   }, [picture, data, thumbUrl]);
   const labels = useMemo(() => (numbers && picture?.regions ? picture.regions.filter((r) => r.area > 60 && r.number != null) : []), [numbers, picture]);
-  if (thumbUrl) return <img src={thumbUrl} alt={title || ''} className={`aspect-square w-full object-cover ${className}`} draggable={false} />;
+  if (thumbUrl)
+    return <img src={thumbUrl} alt={title || ''} width="480" height="480" loading="lazy" decoding="async" className={`aspect-square w-full object-cover ${className}`} draggable={false} />;
   const view = (
     <div
       className={`picture-svg no-pointer aspect-square overflow-hidden ${reveal ? 'reveal' : ''} ${className}`}

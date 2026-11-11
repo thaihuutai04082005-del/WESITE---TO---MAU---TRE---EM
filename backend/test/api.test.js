@@ -90,7 +90,15 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   const { token } = await register('bena01');
   const themes = await api('GET', '/themes');
   assert.equal(themes.body.themes.length, 25);
-  assert.ok(themes.body.themes[0].cover.svg.startsWith('<svg'));
+  // Danh sách không kèm SVG nặng, chỉ có ảnh nhỏ (WebP dựng trên server, nhớ lâu dài nhờ ?v= theo nội dung).
+  const cover = themes.body.themes[0].cover;
+  assert.equal(cover.svg, undefined);
+  assert.match(cover.thumb, /^\/api\/pictures\/\d+\/thumb\.webp\?v=[0-9a-f]{10}$/);
+  const thumbRes = await fetch(`${base}${cover.thumb}`);
+  assert.equal(thumbRes.status, 200);
+  assert.equal(thumbRes.headers.get('content-type'), 'image/webp');
+  assert.match(thumbRes.headers.get('cache-control'), /immutable/);
+  assert.ok((await thumbRes.arrayBuffer()).byteLength > 1000);
   // Chủ đề theo nhóm tuổi: tranh vẽ tay cho bé 3–5 tuổi đứng đầu, 12 chủ đề kết hợp dành cho bé 6–8 tuổi, nhóm 9+ có 5 chủ đề (Chiến Binh Biến Hình, Công Chúa Phép Thuật, Kiếm Khách Huyền Thoại, Tiên Cá Phép Thuật, Hiệp Sĩ Thẻ Bài).
   assert.deepEqual(themes.body.themes.map((t) => t.age).filter((a) => a !== '6-8'), ['3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '3-5', '9+', '9+', '9+', '9+', '9+']);
   assert.equal(themes.body.themes.filter((t) => t.age === '6-8').length, 10);
@@ -117,7 +125,8 @@ test('Luồng tô màu + giới hạn gói Free + nâng cấp + nhiệm vụ', a
   assert.equal(themes.body.themes.find((t) => t.slug === 'anh-hung-sieu-thu').pictureCount, 10);
   const pics = await api('GET', `/themes/anh-hung-sieu-thu/objects/su-tu/pictures`);
   assert.equal(pics.body.pictures.length, 1);
-  const pic = pics.body.pictures[0];
+  assert.equal(pics.body.pictures[0].svg, undefined); // danh sách gọn; SVG + vùng màu lấy theo từng tranh
+  const pic = (await api('GET', `/pictures/${pics.body.pictures[0].id}`)).body.picture;
 
   // Mở tranh chưa tô → chưa tính lượt.
   const a1 = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
@@ -241,6 +250,8 @@ test('Shop, Gacha, kết bạn qua mã mời, tặng/đổi thẻ 2 chiều', as
   // Thẻ = tranh hiếm mở khoá để tô: A tô được, B chưa có thẻ thì không.
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, a.token)).status, 200);
   assert.equal((await api('GET', `/pictures/${pictureId}`, null, b.token)).status, 403);
+  assert.equal((await api('GET', `/pictures/${pictureId}`)).status, 403, 'chưa đăng nhập cũng không xem được thẻ');
+  assert.equal((await fetch(`${base}/api/pictures/${pictureId}/thumb.webp`)).status, 404, 'thẻ không có ảnh nhỏ công khai');
   // Bộ thẻ trên trang Bóc thẻ: thấy đủ mọi thẻ và xem trước được ảnh (chế độ xem trước), nhưng vẫn không tô được.
   const deck = await api('GET', '/gacha/catalog', null, b.token);
   assert.equal(deck.body.total, deck.body.cards.length);
@@ -759,7 +770,8 @@ test('Cơ sở dữ liệu cũ có thứ tự đối tượng khác catalog đư
 
 test('Lịch sử: tranh đang dở trả về % đã tô (?progress=1)', async () => {
   const { token } = await register('lichsu1');
-  const pic = (await api('GET', '/themes/anh-hung-sieu-thu/objects/su-tu/pictures')).body.pictures[0];
+  const first = (await api('GET', '/themes/anh-hung-sieu-thu/objects/su-tu/pictures')).body.pictures[0];
+  const pic = (await api('GET', `/pictures/${first.id}`)).body.picture;
   const a = await api('POST', '/artworks', { pictureId: pic.id, mode: 'free' }, token);
   const id = a.body.artwork.id;
   const one = { [pic.regions[0].id]: '#FF5F7E' };

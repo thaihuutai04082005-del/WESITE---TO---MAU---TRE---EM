@@ -1,13 +1,14 @@
 // Bảng giá 2 gói: Thường và VIP (VIP trả theo tháng hoặc năm, cùng quyền lợi).
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../store/auth';
 import { formatVnd, formatDate } from '../../lib/format';
-import PaymentModal from '../../components/PaymentModal/PaymentModal';
 import Icon from '../../components/Icon';
 import { api } from '../../services/api';
 import { useUi } from '../../store/ui';
+
+const PaymentModal = lazy(() => import('../../components/PaymentModal/PaymentModal')); // kèm thư viện mã QR, chỉ tải khi bé bấm mua
 
 /** Chữ trên nhãn gói (Gói Tháng · còn 97/100 lượt…). */
 function planBadgeText(plan, t, lang) {
@@ -233,7 +234,11 @@ export default function Plans() {
       <p className="mx-auto mt-8 flex max-w-xl items-start justify-center gap-2 text-center text-sm text-muted">
         <Icon name="lock" size={16} className="mt-0.5 shrink-0" /> {t('plans.note')}
       </p>
-      <PaymentModal open={!!buy} plan={buy} onClose={() => setBuy(null)} />
+      {buy && (
+        <Suspense fallback={null}>
+          <PaymentModal open plan={buy} onClose={() => setBuy(null)} />
+        </Suspense>
+      )}
     </div>
   );
 }
